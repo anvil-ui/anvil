@@ -61,7 +61,13 @@ public class Render {
 		}};
 	}
 
+	private static boolean isRendering = false;
+
 	public static void render(Renderable r) {
+		if (isRendering) {
+			return; // Don't render recursively
+		}
+		isRendering = true;
 		Node oldValue = mounts.get(r);
 
 		Node virt = r.view();
@@ -81,6 +87,7 @@ public class Render {
 			r.getRootView().removeAllViews();
 			r.getRootView().addView(v); // Old view has been changed
 		}
+		isRendering = false;
 	}
 
 	// Render all mounted views
