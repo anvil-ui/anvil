@@ -54,10 +54,12 @@ public class Gen {
 				}
 			}
 		}
+		printListeners();
 		printSetters();
 	}
 
 	Map<Pair<String, Class>, List<Method>> setters = new HashMap<Pair<String, Class>, List<Method>>();
+	Map<Pair<String, Class>, List<Method>> listeners = new HashMap<Pair<String, Class>, List<Method>>();
 
 	private void processClass(Class cls) {
 		for (Method m : cls.getDeclaredMethods()) {
@@ -65,7 +67,13 @@ public class Gen {
 				continue;
 			}
 			if (m.getName().matches("^setOn.*Listener$")) {
-				//System.out.println("// EVENT " + m);
+				String name = m.getName();
+				name = name.substring(5, name.length() - 8);
+				Pair<String, Class> pair = new Pair<String, Class>(name, m.getParameterTypes()[0]);
+				if (listeners.get(pair) == null) {
+					listeners.put(pair, new ArrayList<Method>());
+				}
+				listeners.get(pair).add(m);
 			} else if (m.getName().startsWith("set") && m.getParameterCount() == 1) {
 				String name = Character.toLowerCase(m.getName().charAt(3)) + m.getName().substring(4);
 				Pair<String, Class> pair = new Pair<String, Class>(name, m.getParameterTypes()[0]);
@@ -77,13 +85,58 @@ public class Gen {
 		}
 	}
 
+	private void printListeners() {
+		for (Map.Entry<Pair<String, Class>, List<Method>> e : listeners.entrySet()) {
+			String name = e.getKey().first;
+			Class listenerClass = e.getKey().second;
+			List<Method> methods = e.getValue();
+			System.out.println("  public static Node on" + name + 
+					"(final " + listenerClass.getCanonicalName() + " listener) {");
+			System.out.println("    return new Node(new SimpleSetter(listener) {");
+			System.out.println("      public void set(View v) {");
+			for (Method m : methods) {
+				String className = m.getDeclaringClass().getCanonicalName();
+				System.out.println("        if (v instanceof " + className + ")");
+				System.out.println("          (("  + className + ") v)." + m.getName() + 
+						"(new " + listenerClass.getCanonicalName() + "() {");
+				for (Method lm : listenerClass.getDeclaredMethods()) {
+					String args = "";
+					String vars = "";
+					Class[] params = lm.getParameterTypes();
+					for (int i = 0; i < params.length; i++) {
+						args = args + (i != 0 ? ", " : "") +
+							params[i].getCanonicalName() + " a" + i;
+						vars = vars + (i != 0 ? ", " : "") + "a" + i;
+					}
+					String returnClass = lm.getReturnType().getCanonicalName();
+					System.out.println("            public " + returnClass + " " +
+							lm.getName() + "(" + args + ") {");
+					if (returnClass != "void") {
+						System.out.println("              " + returnClass +
+								" r = listener." + lm.getName() + "(" + vars + ");");
+						System.out.println("              render();");
+						System.out.println("              return r;");
+					} else {
+						System.out.println("              listener." + lm.getName() + "(" + vars + ");");
+						System.out.println("              render();");
+					}
+					System.out.println("            }");
+				}
+				System.out.println("        });");
+			}
+			System.out.println("      }");
+			System.out.println("    });");
+			System.out.println("  }");
+		}
+	}
+
 	private void printSetters() throws IOException {
 		for (Map.Entry<Pair<String, Class>, List<Method>> e : setters.entrySet()) {
 			String name = e.getKey().first;
 			Class paramType = e.getKey().second;
 			List<Method> methods = e.getValue();
 			System.out.println("  public static Node " + name + 
-					"(final " + paramType.getCanonicalName() + " val) { ");
+					"(final " + paramType.getCanonicalName() + " val) {");
 			System.out.println("    return new Node(new SimpleSetter(val) {");
 			System.out.println("      public void set(View v) {");
 			for (Method m : methods) {
