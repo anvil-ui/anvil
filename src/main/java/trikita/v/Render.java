@@ -183,7 +183,6 @@ public class Render {
 			if (oldNode == null || oldNode.viewClass == null || node.viewClass != oldNode.viewClass) {
 				isNewView = true;
 				v = (View) node.viewClass.getConstructor(Context.class).newInstance(c);
-				System.out.println("New view" + v);
 			} else {
 				v = oldView;
 			}
@@ -195,7 +194,6 @@ public class Render {
 					(oldNode == null || oldNode.attrs.size() <= i ?  null : oldNode.attrs.get(i));
 				if (subnode.setter != null) {
 					if (isNewView || oldSubNode == null || subnode.setter.equals(oldSubNode.setter) == false) {
-						System.out.println("Updating prop #" + i + " of " + v);
 						subnode.setter.set(v);
 					}
 				} else {
@@ -209,7 +207,6 @@ public class Render {
 						if (vg.getChildCount() > viewIndex) {
 							vg.removeViewAt(viewIndex);
 						}
-						System.out.println("New subview" + subview);
 						vg.addView(subview, viewIndex);
 					}
 					viewIndex++;
@@ -218,7 +215,6 @@ public class Render {
 			// Some views could be removed since last render
 			if (v instanceof ViewGroup) {
 				ViewGroup vg = (ViewGroup) v;
-				System.out.println("VG" + viewIndex + " " + vg.getChildCount());
 				if (viewIndex != 0 && vg.getChildCount() >= viewIndex) {
 					vg.removeViews(viewIndex-1, vg.getChildCount() - viewIndex);
 				}
