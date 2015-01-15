@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import static trikita.v.Render.*;
+import static trikita.v.Props4.*;
 
 public class ExampleActivity extends Activity implements Renderable {
 
