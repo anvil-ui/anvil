@@ -2,10 +2,161 @@
 package trikita.anvil.v21;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static trikita.anvil.Render.*;
+import android.widget.FrameLayout;
+import android.widget.TableRow;
 
 public class Props {
+	//
+	// Syntax sugar
+	//
+	
+	// weight constants
+	public final static int FILL = ViewGroup.LayoutParams.FILL_PARENT;
+	public final static int MATCH = ViewGroup.LayoutParams.MATCH_PARENT;
+	public final static int WRAP = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+	// gravity constants
+	public final static int TOP = 0x30;
+	public final static int BOTTOM = 0x50;
+	public final static int LEFT = 0x03;
+	public final static int RIGHT = 0x05;
+	public final static int CENTER_VERTICAL = 0x10;
+	public final static int GROW_VERTICAL = 0x70;
+	public final static int CENTER_HORIZONTAL = 0x01;
+	public final static int GROW_HORIZONTAL = 0x07;
+	public final static int CENTER = CENTER_VERTICAL|CENTER_HORIZONTAL;
+	public final static int GROW = GROW_VERTICAL|GROW_HORIZONTAL;
+	public final static int CLIP_VERTICAL = 0x80;
+	public final static int CLIP_HORIZONTAL = 0x08;
+	public final static int START = 0x00800003;
+	public final static int END = 0x00800005;
+
+	public static class LayoutNode extends Node implements AttributeSetter {
+		int width;
+		int height;
+		float weight;
+		int gravity;
+		int column;
+		int span;
+		int[] margin = new int[4];
+		
+		public LayoutNode(int width, int height) {
+			super((AttributeSetter) null);
+			this.setter = this;
+			this.width = width;
+			this.height = height;
+		}
+
+		public LayoutNode weight(float w) {
+			this.weight = w;
+			return this;
+		}
+
+		public LayoutNode margin(int m) {
+			return margin(m, m, m, m);
+		}
+
+		public LayoutNode margin(int horizontal, int vertical) {
+			return margin(horizontal, vertical, horizontal, vertical);
+		}
+
+		public LayoutNode margin(int l, int t, int r, int b) {
+			this.margin[0] = l;
+			this.margin[1] = t;
+			this.margin[2] = r;
+			this.margin[3] = b;
+			return this;
+		}
+
+		public LayoutNode gravity(int g) {
+			this.gravity = g;
+			return this;
+		}
+
+		public LayoutNode column(int column) {
+			this.column = column;
+			return this;
+		}
+
+		public LayoutNode span(int span) {
+			this.span = span;
+			return this;
+		}
+
+		public void set(View v) {
+			ViewGroup.LayoutParams p = v.getLayoutParams();
+			p.width = width;
+			p.height = height;
+			if (p instanceof ViewGroup.MarginLayoutParams) {
+				((ViewGroup.MarginLayoutParams) p).leftMargin = this.margin[0];
+				((ViewGroup.MarginLayoutParams) p).topMargin = this.margin[1];
+				((ViewGroup.MarginLayoutParams) p).rightMargin = this.margin[2];
+				((ViewGroup.MarginLayoutParams) p).bottomMargin = this.margin[3];
+			}
+			if (p instanceof LinearLayout.LayoutParams) {
+				((LinearLayout.LayoutParams) p).weight = this.weight;
+				((LinearLayout.LayoutParams) p).gravity = this.gravity;
+			}
+			if (p instanceof FrameLayout.LayoutParams) {
+				((FrameLayout.LayoutParams) p).gravity = this.gravity;
+			}
+			if (p instanceof TableRow.LayoutParams) {
+				((TableRow.LayoutParams) p).column = this.column;
+				((TableRow.LayoutParams) p).span = this.span;
+			}
+			v.setLayoutParams(p);
+		}
+
+		public int hashCode() {
+			return this.width + this.height + Float.floatToIntBits(this.weight) +
+				this.gravity + this.column + this.span +
+				this.margin[0] + this.margin[1] + this.margin[2] + this.margin[3];
+		}
+
+		public boolean equals(Object obj) {
+			if (getClass() == obj.getClass()) {
+				LayoutNode n = (LayoutNode) obj;
+				return this.width == n.width && this.height == n.height &&
+					this.weight == n.weight && this.gravity == n.gravity &&
+					this.column == n.column && this.span == n.span;
+			}
+			return false;
+		}
+	}
+
+	public static LayoutNode layout(int w, int h) {
+		return new LayoutNode(w, h);
+	}
+
+	public static Node padding(int p) {
+		return padding(p, p, p, p);
+	}
+
+	public static Node padding(int horizontal, int vertical) {
+		return padding(horizontal, vertical, horizontal, vertical);
+	}
+
+	public static Node padding(final int left, final int top, final int right, final int bottom) {
+		final List<Integer> params = new ArrayList<Integer>() {{
+			add(top); add(right); add(bottom); add(left);
+		}};
+		return new Node(new SimpleSetter(params) {
+			public void set(View v) {
+				v.setPadding(params.get(0), params.get(1), params.get(2), params.get(3));
+			}
+		});
+	}
+
+	//
+	// Generated bindings
+	//
   public static Node accessibilityDelegate(final android.view.View.AccessibilityDelegate arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
@@ -346,7 +497,7 @@ public class Props {
       }
     });
   }
-  public static Node buttonDrawable(final android.graphics.drawable.Drawable arg) {
+  public static Node buttonDrawable(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.CompoundButton) {
@@ -355,7 +506,7 @@ public class Props {
       }
     });
   }
-  public static Node buttonDrawable(final int arg) {
+  public static Node buttonDrawable(final android.graphics.drawable.Drawable arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.CompoundButton) {
@@ -574,7 +725,7 @@ public class Props {
       }
     });
   }
-  public static Node colorFilter(final android.graphics.ColorFilter arg) {
+  public static Node colorFilter(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.ImageView) {
@@ -583,7 +734,7 @@ public class Props {
       }
     });
   }
-  public static Node colorFilter(final int arg) {
+  public static Node colorFilter(final android.graphics.ColorFilter arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.ImageView) {
@@ -796,15 +947,6 @@ public class Props {
       }
     });
   }
-  public static Node dividerDrawable(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
-        if (v instanceof android.widget.TabWidget) {
-          ((android.widget.TabWidget) v).setDividerDrawable(arg);
-        }
-      }
-    });
-  }
   public static Node dividerDrawable(final android.graphics.drawable.Drawable arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
@@ -813,6 +955,15 @@ public class Props {
         }
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setDividerDrawable(arg);
+        }
+      }
+    });
+  }
+  public static Node dividerDrawable(final int arg) {
+    return new Node(new SimpleSetter(arg) {
+      public void set(View v) {
+        if (v instanceof android.widget.TabWidget) {
+          ((android.widget.TabWidget) v).setDividerDrawable(arg);
         }
       }
     });
@@ -1600,7 +1751,7 @@ public class Props {
       }
     });
   }
-  public static Node hint(final int arg) {
+  public static Node hint(final java.lang.CharSequence arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.TextView) {
@@ -1609,7 +1760,7 @@ public class Props {
       }
     });
   }
-  public static Node hint(final java.lang.CharSequence arg) {
+  public static Node hint(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.TextView) {
@@ -2160,7 +2311,7 @@ public class Props {
       }
     });
   }
-  public static Node leftStripDrawable(final android.graphics.drawable.Drawable arg) {
+  public static Node leftStripDrawable(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.TabWidget) {
@@ -2169,7 +2320,7 @@ public class Props {
       }
     });
   }
-  public static Node leftStripDrawable(final int arg) {
+  public static Node leftStripDrawable(final android.graphics.drawable.Drawable arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.TabWidget) {
@@ -2205,7 +2356,7 @@ public class Props {
       }
     });
   }
-  public static Node linkTextColor(final android.content.res.ColorStateList arg) {
+  public static Node linkTextColor(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.TextView) {
@@ -2214,7 +2365,7 @@ public class Props {
       }
     });
   }
-  public static Node linkTextColor(final int arg) {
+  public static Node linkTextColor(final android.content.res.ColorStateList arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.TextView) {
@@ -2259,7 +2410,7 @@ public class Props {
       }
     });
   }
-  public static Node logoDescription(final int arg) {
+  public static Node logoDescription(final java.lang.CharSequence arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.Toolbar) {
@@ -2268,7 +2419,7 @@ public class Props {
       }
     });
   }
-  public static Node logoDescription(final java.lang.CharSequence arg) {
+  public static Node logoDescription(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.Toolbar) {
@@ -2544,7 +2695,7 @@ public class Props {
       }
     });
   }
-  public static Node navigationContentDescription(final int arg) {
+  public static Node navigationContentDescription(final java.lang.CharSequence arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.Toolbar) {
@@ -2553,7 +2704,7 @@ public class Props {
       }
     });
   }
-  public static Node navigationContentDescription(final java.lang.CharSequence arg) {
+  public static Node navigationContentDescription(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.Toolbar) {
@@ -3222,12 +3373,8 @@ public class Props {
       public void set(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setOnKeyboardActionListener(new android.inputmethodservice.KeyboardView.OnKeyboardActionListener() {
-            public void swipeRight() {
-              arg.swipeRight();
-              render();
-            }
-            public void swipeLeft() {
-              arg.swipeLeft();
+            public void onKey(int a0, int[] a1) {
+              arg.onKey(a0, a1);
               render();
             }
             public void swipeUp() {
@@ -3236,6 +3383,14 @@ public class Props {
             }
             public void swipeDown() {
               arg.swipeDown();
+              render();
+            }
+            public void swipeLeft() {
+              arg.swipeLeft();
+              render();
+            }
+            public void swipeRight() {
+              arg.swipeRight();
               render();
             }
             public void onPress(int a0) {
@@ -3248,10 +3403,6 @@ public class Props {
             }
             public void onText(java.lang.CharSequence a0) {
               arg.onText(a0);
-              render();
-            }
-            public void onKey(int a0, int[] a1) {
-              arg.onKey(a0, a1);
               render();
             }
          });
@@ -3380,12 +3531,12 @@ public class Props {
       public void set(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setOnScrollListener(new android.widget.AbsListView.OnScrollListener() {
-            public void onScroll(android.widget.AbsListView a0, int a1, int a2, int a3) {
-              arg.onScroll(a0, a1, a2, a3);
-              render();
-            }
             public void onScrollStateChanged(android.widget.AbsListView a0, int a1) {
               arg.onScrollStateChanged(a0, a1);
+              render();
+            }
+            public void onScroll(android.widget.AbsListView a0, int a1, int a2, int a3) {
+              arg.onScroll(a0, a1, a2, a3);
               render();
             }
          });
@@ -3430,12 +3581,12 @@ public class Props {
               arg.onProgressChanged(a0, a1, a2);
               render();
             }
-            public void onStartTrackingTouch(android.widget.SeekBar a0) {
-              arg.onStartTrackingTouch(a0);
-              render();
-            }
             public void onStopTrackingTouch(android.widget.SeekBar a0) {
               arg.onStopTrackingTouch(a0);
+              render();
+            }
+            public void onStartTrackingTouch(android.widget.SeekBar a0) {
+              arg.onStartTrackingTouch(a0);
               render();
             }
          });
@@ -3448,13 +3599,13 @@ public class Props {
       public void set(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnSuggestionListener(new android.widget.SearchView.OnSuggestionListener() {
-            public boolean onSuggestionClick(int a0) {
-              boolean r = arg.onSuggestionClick(a0);
+            public boolean onSuggestionSelect(int a0) {
+              boolean r = arg.onSuggestionSelect(a0);
               render();
               return r;
             }
-            public boolean onSuggestionSelect(int a0) {
-              boolean r = arg.onSuggestionSelect(a0);
+            public boolean onSuggestionClick(int a0) {
+              boolean r = arg.onSuggestionClick(a0);
               render();
               return r;
             }
@@ -4318,7 +4469,7 @@ public class Props {
       }
     });
   }
-  public static Node selector(final android.graphics.drawable.Drawable arg) {
+  public static Node selector(final int arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.AbsListView) {
@@ -4327,7 +4478,7 @@ public class Props {
       }
     });
   }
-  public static Node selector(final int arg) {
+  public static Node selector(final android.graphics.drawable.Drawable arg) {
     return new Node(new SimpleSetter(arg) {
       public void set(View v) {
         if (v instanceof android.widget.AbsListView) {
@@ -5372,5 +5523,3 @@ public class Props {
     });
   }
 }
-
-
