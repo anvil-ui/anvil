@@ -4,9 +4,11 @@ buildscript {
 	}
 	dependencies {
 		classpath 'com.android.tools.build:gradle:1.0.0'
+		classpath 'me.tatarka:gradle-retrolambda:2.5.+'
 	}
 }
 apply plugin: 'android'
+apply plugin: 'retrolambda'
 
 android {
 	compileSdkVersion 'android-21'
@@ -19,14 +21,22 @@ android {
 		}
 	}
 
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+
 	defaultConfig {
 		minSdkVersion 4
 		targetSdkVersion 21
 	}
 }
 
+repositories {
+	mavenCentral()
+}
+
 dependencies {
 	compile project('..:library')
 }
-
 
