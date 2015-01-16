@@ -6,18 +6,34 @@ buildscript {
 		classpath 'com.android.tools.build:gradle:1.0.0'
 	}
 }
-apply plugin: 'android'
+
+apply plugin: 'android-library'
 
 android {
 	compileSdkVersion 'android-21'
 	buildToolsVersion '21.1.2'
 
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_7
+		targetCompatibility JavaVersion.VERSION_1_7
+	}
+
 	defaultConfig {
-		minSdkVersion 10
+		versionCode 1
+		versionName "0.0.1"
+		minSdkVersion 4
 		targetSdkVersion 21
 	}
 }
 
+//
+// Publishing
+//
+apply from: 'maven-push.gradle'
+
+//
+// Code generation for property setters
+//
 task generateProps(type: GeneratorTask)
 
 class GeneratorTask extends DefaultTask {

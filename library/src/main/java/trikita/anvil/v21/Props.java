@@ -3,7 +3,7 @@ package trikita.anvil.v21;
 
 import android.view.View;
 
-import static trikita.v.Render.*;
+import static trikita.anvil.Render.*;
 
 public class Props {
   public static Node accessibilityDelegate(final android.view.View.AccessibilityDelegate arg) {

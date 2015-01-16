@@ -1,4 +1,4 @@
-package trikita.v;
+package trikita.anvil;
 
 import android.content.Context;
 import android.view.*;
@@ -9,12 +9,12 @@ import java.util.*;
 
 public class Render {
 
-	interface Renderable {
+	public interface Renderable {
 		Node view();
 		ViewGroup getRootView();
 	}
 
-	interface AttributeSetter {
+	public interface AttributeSetter {
 		void set(View v);
 	}
 

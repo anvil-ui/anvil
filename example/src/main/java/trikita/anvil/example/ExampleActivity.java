@@ -1,4 +1,4 @@
-package trikita.v;
+package trikita.anvil.example;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import static trikita.v.Render.*;
+import static trikita.anvil.Render.*;
 import static trikita.anvil.v10.Props.*;
 
 public class ExampleActivity extends Activity implements Renderable {
