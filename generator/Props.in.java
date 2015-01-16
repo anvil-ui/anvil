@@ -1,11 +1,9 @@
-package trikita.v;
+package
 
 import android.view.View;
 
 import static trikita.v.Render.*;
 
-public class Props4 {
-
-//////
-
+public class Props {
 }
+

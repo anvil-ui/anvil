@@ -9,6 +9,7 @@ import java.net.URLClassLoader;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.NoSuchElementException;
 
 public class Gen {
 
@@ -143,8 +144,12 @@ public class Gen {
 				String className = m.getDeclaringClass().getCanonicalName();
 				File f = new File(className + "__" + m.getName() + "__" + paramType.getCanonicalName());
 				if (f.exists()) {
-					String text = new Scanner(f).useDelimiter("\\A").next();
-					System.out.println("        " + text.replace("\n", "\n        "));
+					try {
+						String text = new Scanner(f).useDelimiter("\\A").next();
+						System.out.println("        " + text.replace("\n", "\n        "));
+					} catch (NoSuchElementException ex) {
+						// Ignore if text file is empty
+					}
 				} else {
 					System.out.println("        if (v instanceof " + className + ")");
 					System.out.println("          (("  + className + ") v)." + m.getName() + "(val);");
