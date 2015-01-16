@@ -1,17 +1,14 @@
 package trikita.anvil;
 
 import android.content.Context;
-import android.view.*;
-import android.widget.*;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import android.util.TypedValue;
-import android.util.DisplayMetrics;
-import android.widget.LinearLayout;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TableRow;
 
 public class Render {
 
@@ -70,41 +67,45 @@ public class Render {
 	//
 	// Helpers for android attributes and dimensions
 	//
-	public static TypedValue attr(Renderable r, int attr) {
+	public static TypedValue attr(int attr) {
 		TypedValue tv = new TypedValue();
-		r.getRootView().getContext().getTheme().resolveAttribute(attr, tv, true);
+		currentRenderer.getRootView().getContext().getTheme().resolveAttribute(attr, tv, true);
 		return tv;
 	}
 
-	public static int attrPx(Renderable r, int attr) {
-		TypedValue tv = attr(r, attr);
-		return Math.round(r.getRootView().getResources().getDimension(tv.resourceId));
+	public static int attrPx(int attr) {
+		TypedValue tv = attr(attr);
+		return Math.round(getResources().getDimension(tv.resourceId));
 	}
 
-	public static float dp(Renderable r, float value) {
-		DisplayMetrics dm = r.getRootView().getResources().getDisplayMetrics();
+	public static float dip(float value) {
+		DisplayMetrics dm = getResources().getDisplayMetrics();
     return value * (dm.xdpi / DisplayMetrics.DENSITY_DEFAULT);
 	}
 
-	public static int dp(Renderable r, int value) {
-		DisplayMetrics dm = r.getRootView().getResources().getDisplayMetrics();
+	public static int dip(int value) {
+		DisplayMetrics dm = getResources().getDisplayMetrics();
     return Math.round(value * (dm.xdpi / DisplayMetrics.DENSITY_DEFAULT));
 	}
 
-	private static boolean isRendering = false;
+	private static Resources getResources() {
+		return currentRenderer.getRootView().getResources();
+	}
+
+	private static Renderable currentRenderer = null;
 
 	public static void render(Renderable r) {
-		if (isRendering) {
+		if (currentRenderer != null) {
 			return; // Don't render recursively
 		}
-		isRendering = true;
+		currentRenderer = r;
 		Node oldValue = mounts.get(r);
 		Node virt = r.view();
 		mounts.put(r, virt);
 
 		inflateNode(r.getRootView().getContext(), virt, oldValue, r.getRootView(), 0);
 
-		isRendering = false;
+		currentRenderer = null;
 	}
 
 	// Render all mounted views
