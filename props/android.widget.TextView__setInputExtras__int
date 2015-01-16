@@ -1,6 +1,6 @@
 try {
 	if (v instanceof android.widget.TextView)
-		((android.widget.TextView) v).setInputExtras(val);
+		((android.widget.TextView) v).setInputExtras(arg);
 } catch (org.xmlpull.v1.XmlPullParserException e) {
 	e.printStackTrace();
 } catch (java.io.IOException e) {
