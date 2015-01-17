@@ -6,6 +6,8 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -128,7 +130,7 @@ public class Render {
 		ViewNode virt = r.view();
 		mounts.put(r, virt);
 
-		inflateNode(r.getRootView().getContext(), virt, oldValue, r.getRootView(), 0, null);
+		inflateNode(r.getRootView().getContext(), virt, oldValue, new ParentMount(r.getRootView(), 0));
 		stopRendering();
 	}
 
@@ -139,32 +141,44 @@ public class Render {
 		}
 	}
 
-	public static View inflateNode(Context c, ViewNode node, ViewNode oldNode,
-			ViewGroup parent, int index, ViewGroup.LayoutParams defaultParams) {
+	// Mount is a placeholder for android view
+	public interface Mount {
+		public View get();
+		public void set(View v);
+	}
+
+	// A real mount point in a parent view at certain index
+	public static class ParentMount implements Mount {
+		ViewGroup parent;
+		int index;
+		public ParentMount(ViewGroup parent, int index) {
+			this.parent = parent;
+			this.index = index;
+		}
+		public void set(View v) {
+			if (index < parent.getChildCount()) {
+				parent.removeViewAt(index);
+			}
+			parent.addView(v, index);
+		}
+		public View get() {
+			if (index < parent.getChildCount()) {
+				return parent.getChildAt(index);
+			} else {
+				return null;
+			}
+		}
+	}
+
+	public static View inflateNode(Context c, ViewNode node, ViewNode oldNode, Mount mount) {
 		boolean isNewView = false;
 		try {
-			View oldView = null;
-			if (index >= 0) {
-				if (index < parent.getChildCount()) {
-					oldView = parent.getChildAt(index);
-				}
-			}
+			View v = mount.get();
 			// Reuse view or create a new one
-			View v;
-			if (oldNode == null || oldNode.viewClass == null || node.viewClass != oldNode.viewClass) {
-				isNewView = true;
+			if (v == null || oldNode == null || oldNode.viewClass == null ||
+					node.viewClass != oldNode.viewClass) {
 				v = (View) node.viewClass.getConstructor(Context.class).newInstance(c);
-				if (defaultParams != null) { // negative index means don't add to parent
-					v.setLayoutParams(defaultParams);
-				}
-				if (index >= 0) {
-					if (oldView != null) {
-						parent.removeViewAt(index); // replace old view
-					}
-					parent.addView(v, index);
-				}
-			} else {
-				v = oldView;
+				mount.set(v);
 			}
 
 			int viewIndex = 0;
@@ -172,7 +186,7 @@ public class Render {
 				ViewNode subnode = node.children.get(i);
 				ViewNode oldSubNode =
 					(oldNode == null || oldNode.children.size() <= i ?  null : oldNode.children.get(i));
-				inflateNode(c, subnode, oldSubNode, (ViewGroup) v, viewIndex, null);
+				inflateNode(c, subnode, oldSubNode, new ParentMount((ViewGroup) v, viewIndex));
 				viewIndex++;
 			}
 
@@ -200,6 +214,90 @@ public class Render {
 			throw new RuntimeException(e);
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	//
+	// In RenderableAdapter one must override getCount(), getItem() and itemView(pos)
+	//
+	public abstract static class RenderableAdapter extends BaseAdapter implements Renderable {
+		private Map<View, ViewNode> activeViews = new WeakHashMap<View, ViewNode>();
+		private ViewGroup mCurrentParentView;
+
+		public long getItemId(int pos) {
+			return pos; // just a most common implementation
+		}
+		public ViewGroup getRootView() {
+			return mCurrentParentView; // parent view for currently rendered item
+		}
+		public ViewNode view() {
+			return null; // Just to match the interface
+		}
+
+		public abstract ViewNode itemView(int pos);
+
+		public View getView(int pos, View v, ViewGroup parent) {
+			ViewNode m = activeViews.get(v);
+			startRendering(this);
+			mCurrentParentView = parent;
+			ViewNode n = itemView(pos);
+			mCurrentParentView = null;
+			ViewGroup.LayoutParams params =
+				new AbsListView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+						ViewGroup.LayoutParams.WRAP_CONTENT);
+			View oldView = v;
+			v = inflateNode(parent.getContext(), n, m, new AdapterMount(v, params));
+			activeViews.put(v, n);
+			stopRendering();
+			return v;
+		}
+	}
+
+	public abstract static class RenderableArrayAdapter<T> extends RenderableAdapter {
+		private List<T> items;
+
+		public RenderableArrayAdapter(T[] items) {
+			this.items = Arrays.asList(items);
+		}
+
+		public RenderableArrayAdapter(List<T> items) {
+			this.items = items;
+		}
+
+		public int getCount() {
+			return items.size();
+		}
+
+		public T getItem(int pos) {
+			return items.get(pos);
+		}
+
+		public ViewNode itemView(int pos) {
+			return itemView(pos, getItem(pos));
+		}
+
+		public abstract ViewNode itemView(int pos, T value);
+	}
+
+	// A mount point inside the adapter view.
+	// Views can't be added to the adapter view, so we need to define their
+	// layoutparams without adding
+	public static class AdapterMount implements Mount {
+		ViewGroup.LayoutParams params;
+		View view;
+		public AdapterMount(View v, ViewGroup.LayoutParams params) {
+			this.params = params;
+			this.view = v;
+		}
+		public void set(View v) {
+			System.out.println("Set " + v);
+			if (this.view != v && this.params != null) {
+				this.view = v;
+				this.view.setLayoutParams(this.params);
+			}
+		}
+		public View get() {
+			return this.view;
 		}
 	}
 }
