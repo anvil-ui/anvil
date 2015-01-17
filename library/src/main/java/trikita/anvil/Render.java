@@ -290,7 +290,6 @@ public class Render {
 			this.view = v;
 		}
 		public void set(View v) {
-			System.out.println("Set " + v);
 			if (this.view != v && this.params != null) {
 				this.view = v;
 				this.view.setLayoutParams(this.params);
