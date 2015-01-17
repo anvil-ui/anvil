@@ -38,7 +38,7 @@ public class Props {
 	public final static int START = 0x00800003;
 	public final static int END = 0x00800005;
 
-	public static class LayoutNode extends Node implements AttributeSetter {
+	public static class LayoutNode implements AttrNode {
 		int width;
 		int height;
 		float weight;
@@ -48,8 +48,6 @@ public class Props {
 		int[] margin = new int[4];
 		
 		public LayoutNode(int width, int height) {
-			super((AttributeSetter) null);
-			this.setter = this;
 			this.width = width;
 			this.height = height;
 		}
@@ -90,7 +88,7 @@ public class Props {
 			return this;
 		}
 
-		public void set(View v) {
+		public void apply(View v) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
 			p.width = width;
 			p.height = height;
@@ -135,67 +133,67 @@ public class Props {
 		return new LayoutNode(w, h);
 	}
 
-	public static Node padding(int p) {
+	public static AttrNode padding(int p) {
 		return padding(p, p, p, p);
 	}
 
-	public static Node padding(int horizontal, int vertical) {
+	public static AttrNode padding(int horizontal, int vertical) {
 		return padding(horizontal, vertical, horizontal, vertical);
 	}
 
-	public static Node padding(final int left, final int top, final int right, final int bottom) {
+	public static AttrNode padding(final int left, final int top, final int right, final int bottom) {
 		final List<Integer> params = new ArrayList<Integer>() {{
 			add(top); add(right); add(bottom); add(left);
 		}};
-		return new Node(new SimpleSetter(params) {
-			public void set(View v) {
+		return new SimpleAttrNode(params) {
+			public void apply(View v) {
 				v.setPadding(params.get(0), params.get(1), params.get(2), params.get(3));
 			}
-		});
+		};
 	}
 
 	//
 	// Generated bindings
 	//
-  public static Node accessibilityDelegate(final android.view.View.AccessibilityDelegate arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode accessibilityDelegate(final android.view.View.AccessibilityDelegate arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setAccessibilityDelegate(arg);
         }
       }
-    });
+    };
   }
-  public static Node accessibilityLiveRegion(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode accessibilityLiveRegion(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setAccessibilityLiveRegion(arg);
         }
       }
-    });
+    };
   }
-  public static Node activated(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode activated(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setActivated(arg);
         }
       }
-    });
+    };
   }
-  public static Node activity(final android.app.Activity arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode activity(final android.app.Activity arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.app.FragmentBreadCrumbs) {
           ((android.app.FragmentBreadCrumbs) v).setActivity(arg);
         }
       }
-    });
+    };
   }
-  public static Node adapter(final android.widget.Adapter arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode adapter(final android.widget.Adapter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterViewFlipper) {
           ((android.widget.AdapterViewFlipper) v).setAdapter(arg);
         }
@@ -206,11 +204,11 @@ public class Props {
           ((android.widget.AdapterViewAnimator) v).setAdapter(arg);
         }
       }
-    });
+    };
   }
-  public static Node adapter(final android.widget.ListAdapter arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode adapter(final android.widget.ListAdapter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setAdapter(arg);
         }
@@ -228,11 +226,11 @@ public class Props {
           ((android.widget.ListView) v).setAdapter(arg);
         }
       }
-    });
+    };
   }
-  public static Node adapter(final android.widget.SpinnerAdapter arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode adapter(final android.widget.SpinnerAdapter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setAdapter(arg);
         }
@@ -240,92 +238,92 @@ public class Props {
           ((android.widget.AbsSpinner) v).setAdapter(arg);
         }
       }
-    });
+    };
   }
-  public static Node adapter(final android.widget.ExpandableListAdapter arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode adapter(final android.widget.ExpandableListAdapter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setAdapter(arg);
         }
       }
-    });
+    };
   }
-  public static Node addStatesFromChildren(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode addStatesFromChildren(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setAddStatesFromChildren(arg);
         }
       }
-    });
+    };
   }
-  public static Node adjustViewBounds(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode adjustViewBounds(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setAdjustViewBounds(arg);
         }
       }
-    });
+    };
   }
-  public static Node alignmentMode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode alignmentMode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridLayout) {
           ((android.widget.GridLayout) v).setAlignmentMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node allCaps(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode allCaps(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setAllCaps(arg);
         }
       }
-    });
+    };
   }
-  public static Node alpha(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode alpha(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setAlpha(arg);
         }
       }
-    });
+    };
   }
-  public static Node alpha(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode alpha(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setAlpha(arg);
         }
       }
-    });
+    };
   }
-  public static Node alwaysDrawnWithCacheEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode alwaysDrawnWithCacheEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setAlwaysDrawnWithCacheEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node anchorView(final android.view.View arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode anchorView(final android.view.View arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.MediaController) {
           ((android.widget.MediaController) v).setAnchorView(arg);
         }
       }
-    });
+    };
   }
-  public static Node animateFirstView(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode animateFirstView(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ViewAnimator) {
           ((android.widget.ViewAnimator) v).setAnimateFirstView(arg);
         }
@@ -333,47 +331,47 @@ public class Props {
           ((android.widget.AdapterViewAnimator) v).setAnimateFirstView(arg);
         }
       }
-    });
+    };
   }
-  public static Node animation(final android.view.animation.Animation arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode animation(final android.view.animation.Animation arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setAnimation(arg);
         }
       }
-    });
+    };
   }
-  public static Node animationCacheEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode animationCacheEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setAnimationCacheEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node animationDuration(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode animationDuration(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Gallery) {
           ((android.widget.Gallery) v).setAnimationDuration(arg);
         }
       }
-    });
+    };
   }
-  public static Node autoLinkMask(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode autoLinkMask(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setAutoLinkMask(arg);
         }
       }
-    });
+    };
   }
-  public static Node autoStart(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode autoStart(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterViewFlipper) {
           ((android.widget.AdapterViewFlipper) v).setAutoStart(arg);
         }
@@ -381,20 +379,20 @@ public class Props {
           ((android.widget.ViewFlipper) v).setAutoStart(arg);
         }
       }
-    });
+    };
   }
-  public static Node background(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode background(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setBackground(arg);
         }
       }
-    });
+    };
   }
-  public static Node backgroundColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode backgroundColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setBackgroundColor(arg);
         }
@@ -402,11 +400,11 @@ public class Props {
           ((android.webkit.WebView) v).setBackgroundColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node backgroundDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode backgroundDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ToggleButton) {
           ((android.widget.ToggleButton) v).setBackgroundDrawable(arg);
         }
@@ -414,128 +412,128 @@ public class Props {
           ((android.view.View) v).setBackgroundDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node backgroundResource(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode backgroundResource(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setBackgroundResource(arg);
         }
       }
-    });
+    };
   }
-  public static Node backgroundTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode backgroundTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setBackgroundTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node backgroundTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode backgroundTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setBackgroundTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node base(final long arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode base(final long arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Chronometer) {
           ((android.widget.Chronometer) v).setBase(arg);
         }
       }
-    });
+    };
   }
-  public static Node baseline(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode baseline(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setBaseline(arg);
         }
       }
-    });
+    };
   }
-  public static Node baselineAlignBottom(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode baselineAlignBottom(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setBaselineAlignBottom(arg);
         }
       }
-    });
+    };
   }
-  public static Node baselineAligned(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode baselineAligned(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setBaselineAligned(arg);
         }
       }
-    });
+    };
   }
-  public static Node baselineAlignedChildIndex(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode baselineAlignedChildIndex(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setBaselineAlignedChildIndex(arg);
         }
       }
-    });
+    };
   }
-  public static Node bottom(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode bottom(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setBottom(arg);
         }
       }
-    });
+    };
   }
-  public static Node buttonDrawable(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode buttonDrawable(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CompoundButton) {
           ((android.widget.CompoundButton) v).setButtonDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node buttonDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode buttonDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CompoundButton) {
           ((android.widget.CompoundButton) v).setButtonDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node buttonTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode buttonTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CompoundButton) {
           ((android.widget.CompoundButton) v).setButtonTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node buttonTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode buttonTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CompoundButton) {
           ((android.widget.CompoundButton) v).setButtonTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node cacheColorHint(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode cacheColorHint(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setCacheColorHint(arg);
         }
@@ -543,101 +541,101 @@ public class Props {
           ((android.widget.ListView) v).setCacheColorHint(arg);
         }
       }
-    });
+    };
   }
-  public static Node calendarViewShown(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode calendarViewShown(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.DatePicker) {
           ((android.widget.DatePicker) v).setCalendarViewShown(arg);
         }
       }
-    });
+    };
   }
-  public static Node callback(final android.media.tv.TvView.TvInputCallback arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode callback(final android.media.tv.TvView.TvInputCallback arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.media.tv.TvView) {
           ((android.media.tv.TvView) v).setCallback(arg);
         }
       }
-    });
+    };
   }
-  public static Node callbackDuringFling(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode callbackDuringFling(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Gallery) {
           ((android.widget.Gallery) v).setCallbackDuringFling(arg);
         }
       }
-    });
+    };
   }
-  public static Node cameraDistance(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode cameraDistance(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setCameraDistance(arg);
         }
       }
-    });
+    };
   }
-  public static Node captionEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode captionEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.media.tv.TvView) {
           ((android.media.tv.TvView) v).setCaptionEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node certificate(final android.net.http.SslCertificate arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode certificate(final android.net.http.SslCertificate arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setCertificate(arg);
         }
       }
-    });
+    };
   }
-  public static Node checkMarkDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode checkMarkDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CheckedTextView) {
           ((android.widget.CheckedTextView) v).setCheckMarkDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node checkMarkDrawable(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode checkMarkDrawable(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CheckedTextView) {
           ((android.widget.CheckedTextView) v).setCheckMarkDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node checkMarkTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode checkMarkTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CheckedTextView) {
           ((android.widget.CheckedTextView) v).setCheckMarkTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node checkMarkTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode checkMarkTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CheckedTextView) {
           ((android.widget.CheckedTextView) v).setCheckMarkTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node checked(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode checked(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ToggleButton) {
           ((android.widget.ToggleButton) v).setChecked(arg);
         }
@@ -651,182 +649,182 @@ public class Props {
           ((android.widget.CheckedTextView) v).setChecked(arg);
         }
       }
-    });
+    };
   }
-  public static Node childDivider(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode childDivider(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setChildDivider(arg);
         }
       }
-    });
+    };
   }
-  public static Node childIndicator(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode childIndicator(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setChildIndicator(arg);
         }
       }
-    });
+    };
   }
-  public static Node choiceMode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode choiceMode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setChoiceMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node clickable(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode clickable(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setClickable(arg);
         }
       }
-    });
+    };
   }
-  public static Node clipBounds(final android.graphics.Rect arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode clipBounds(final android.graphics.Rect arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setClipBounds(arg);
         }
       }
-    });
+    };
   }
-  public static Node clipChildren(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode clipChildren(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setClipChildren(arg);
         }
       }
-    });
+    };
   }
-  public static Node clipToOutline(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode clipToOutline(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setClipToOutline(arg);
         }
       }
-    });
+    };
   }
-  public static Node clipToPadding(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode clipToPadding(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setClipToPadding(arg);
         }
       }
-    });
+    };
   }
-  public static Node colorFilter(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode colorFilter(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setColorFilter(arg);
         }
       }
-    });
+    };
   }
-  public static Node colorFilter(final android.graphics.ColorFilter arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode colorFilter(final android.graphics.ColorFilter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setColorFilter(arg);
         }
       }
-    });
+    };
   }
-  public static Node columnCount(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode columnCount(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridLayout) {
           ((android.widget.GridLayout) v).setColumnCount(arg);
         }
       }
-    });
+    };
   }
-  public static Node columnOrderPreserved(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode columnOrderPreserved(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridLayout) {
           ((android.widget.GridLayout) v).setColumnOrderPreserved(arg);
         }
       }
-    });
+    };
   }
-  public static Node columnWidth(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode columnWidth(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridView) {
           ((android.widget.GridView) v).setColumnWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node completionHint(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode completionHint(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setCompletionHint(arg);
         }
       }
-    });
+    };
   }
-  public static Node compoundDrawablePadding(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode compoundDrawablePadding(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setCompoundDrawablePadding(arg);
         }
       }
-    });
+    };
   }
-  public static Node contentDescription(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode contentDescription(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setContentDescription(arg);
         }
       }
-    });
+    };
   }
-  public static Node cropToPadding(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode cropToPadding(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setCropToPadding(arg);
         }
       }
-    });
+    };
   }
-  public static Node currentHour(final java.lang.Integer arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode currentHour(final java.lang.Integer arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TimePicker) {
           ((android.widget.TimePicker) v).setCurrentHour(arg);
         }
       }
-    });
+    };
   }
-  public static Node currentMinute(final java.lang.Integer arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode currentMinute(final java.lang.Integer arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TimePicker) {
           ((android.widget.TimePicker) v).setCurrentMinute(arg);
         }
       }
-    });
+    };
   }
-  public static Node currentTab(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode currentTab(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setCurrentTab(arg);
         }
@@ -834,92 +832,92 @@ public class Props {
           ((android.widget.TabHost) v).setCurrentTab(arg);
         }
       }
-    });
+    };
   }
-  public static Node currentTabByTag(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode currentTabByTag(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabHost) {
           ((android.widget.TabHost) v).setCurrentTabByTag(arg);
         }
       }
-    });
+    };
   }
-  public static Node currentText(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode currentText(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextSwitcher) {
           ((android.widget.TextSwitcher) v).setCurrentText(arg);
         }
       }
-    });
+    };
   }
-  public static Node cursorVisible(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode cursorVisible(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setCursorVisible(arg);
         }
       }
-    });
+    };
   }
-  public static Node customSelectionActionModeCallback(final android.view.ActionMode.Callback arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode customSelectionActionModeCallback(final android.view.ActionMode.Callback arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setCustomSelectionActionModeCallback(arg);
         }
       }
-    });
+    };
   }
-  public static Node date(final long arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode date(final long arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setDate(arg);
         }
       }
-    });
+    };
   }
-  public static Node dateTextAppearance(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dateTextAppearance(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setDateTextAppearance(arg);
         }
       }
-    });
+    };
   }
-  public static Node debugFlags(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode debugFlags(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setDebugFlags(arg);
         }
       }
-    });
+    };
   }
-  public static Node descendantFocusability(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode descendantFocusability(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setDescendantFocusability(arg);
         }
       }
-    });
+    };
   }
-  public static Node digitsWatcher(final android.text.TextWatcher arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode digitsWatcher(final android.text.TextWatcher arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.DialerFilter) {
           ((android.widget.DialerFilter) v).setDigitsWatcher(arg);
         }
       }
-    });
+    };
   }
-  public static Node displayedChild(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode displayedChild(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ViewAnimator) {
           ((android.widget.ViewAnimator) v).setDisplayedChild(arg);
         }
@@ -927,29 +925,29 @@ public class Props {
           ((android.widget.AdapterViewAnimator) v).setDisplayedChild(arg);
         }
       }
-    });
+    };
   }
-  public static Node displayedValues(final java.lang.String[] arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode displayedValues(final java.lang.String[] arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setDisplayedValues(arg);
         }
       }
-    });
+    };
   }
-  public static Node divider(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode divider(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ListView) {
           ((android.widget.ListView) v).setDivider(arg);
         }
       }
-    });
+    };
   }
-  public static Node dividerDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dividerDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setDividerDrawable(arg);
         }
@@ -957,119 +955,119 @@ public class Props {
           ((android.widget.LinearLayout) v).setDividerDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node dividerDrawable(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dividerDrawable(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setDividerDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node dividerHeight(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dividerHeight(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ListView) {
           ((android.widget.ListView) v).setDividerHeight(arg);
         }
       }
-    });
+    };
   }
-  public static Node dividerPadding(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dividerPadding(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setDividerPadding(arg);
         }
       }
-    });
+    };
   }
-  public static Node downloadListener(final android.webkit.DownloadListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode downloadListener(final android.webkit.DownloadListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setDownloadListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node drawSelectorOnTop(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode drawSelectorOnTop(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setDrawSelectorOnTop(arg);
         }
       }
-    });
+    };
   }
-  public static Node drawingCacheBackgroundColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode drawingCacheBackgroundColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setDrawingCacheBackgroundColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node drawingCacheEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode drawingCacheEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setDrawingCacheEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node drawingCacheQuality(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode drawingCacheQuality(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setDrawingCacheQuality(arg);
         }
       }
-    });
+    };
   }
-  public static Node dropDownAnchor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dropDownAnchor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setDropDownAnchor(arg);
         }
       }
-    });
+    };
   }
-  public static Node dropDownBackgroundDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dropDownBackgroundDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setDropDownBackgroundDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node dropDownBackgroundResource(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dropDownBackgroundResource(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setDropDownBackgroundResource(arg);
         }
       }
-    });
+    };
   }
-  public static Node dropDownHeight(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dropDownHeight(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setDropDownHeight(arg);
         }
       }
-    });
+    };
   }
-  public static Node dropDownHorizontalOffset(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dropDownHorizontalOffset(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setDropDownHorizontalOffset(arg);
         }
@@ -1077,11 +1075,11 @@ public class Props {
           ((android.widget.AutoCompleteTextView) v).setDropDownHorizontalOffset(arg);
         }
       }
-    });
+    };
   }
-  public static Node dropDownVerticalOffset(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dropDownVerticalOffset(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setDropDownVerticalOffset(arg);
         }
@@ -1089,11 +1087,11 @@ public class Props {
           ((android.widget.AutoCompleteTextView) v).setDropDownVerticalOffset(arg);
         }
       }
-    });
+    };
   }
-  public static Node dropDownWidth(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode dropDownWidth(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setDropDownWidth(arg);
         }
@@ -1101,92 +1099,92 @@ public class Props {
           ((android.widget.AutoCompleteTextView) v).setDropDownWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node duplicateParentStateEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode duplicateParentStateEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setDuplicateParentStateEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node eGLConfigChooser(final android.opengl.GLSurfaceView.EGLConfigChooser arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode eGLConfigChooser(final android.opengl.GLSurfaceView.EGLConfigChooser arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setEGLConfigChooser(arg);
         }
       }
-    });
+    };
   }
-  public static Node eGLConfigChooser(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode eGLConfigChooser(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setEGLConfigChooser(arg);
         }
       }
-    });
+    };
   }
-  public static Node eGLContextClientVersion(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode eGLContextClientVersion(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setEGLContextClientVersion(arg);
         }
       }
-    });
+    };
   }
-  public static Node eGLContextFactory(final android.opengl.GLSurfaceView.EGLContextFactory arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode eGLContextFactory(final android.opengl.GLSurfaceView.EGLContextFactory arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setEGLContextFactory(arg);
         }
       }
-    });
+    };
   }
-  public static Node eGLWindowSurfaceFactory(final android.opengl.GLSurfaceView.EGLWindowSurfaceFactory arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode eGLWindowSurfaceFactory(final android.opengl.GLSurfaceView.EGLWindowSurfaceFactory arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setEGLWindowSurfaceFactory(arg);
         }
       }
-    });
+    };
   }
-  public static Node editableFactory(final android.text.Editable.Factory arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode editableFactory(final android.text.Editable.Factory arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setEditableFactory(arg);
         }
       }
-    });
+    };
   }
-  public static Node elegantTextHeight(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode elegantTextHeight(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setElegantTextHeight(arg);
         }
       }
-    });
+    };
   }
-  public static Node elevation(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode elevation(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setElevation(arg);
         }
       }
-    });
+    };
   }
-  public static Node ellipsize(final android.text.TextUtils.TruncateAt arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode ellipsize(final android.text.TextUtils.TruncateAt arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.EditText) {
           ((android.widget.EditText) v).setEllipsize(arg);
         }
@@ -1194,29 +1192,29 @@ public class Props {
           ((android.widget.TextView) v).setEllipsize(arg);
         }
       }
-    });
+    };
   }
-  public static Node emptyView(final android.view.View arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode emptyView(final android.view.View arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setEmptyView(arg);
         }
       }
-    });
+    };
   }
-  public static Node ems(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode ems(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setEms(arg);
         }
       }
-    });
+    };
   }
-  public static Node enabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode enabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setEnabled(arg);
         }
@@ -1248,47 +1246,47 @@ public class Props {
           ((android.view.View) v).setEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node error(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode error(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setError(arg);
         }
       }
-    });
+    };
   }
-  public static Node eventsInterceptionEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode eventsInterceptionEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setEventsInterceptionEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node excludeMimes(final java.lang.String[] arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode excludeMimes(final java.lang.String[] arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.QuickContactBadge) {
           ((android.widget.QuickContactBadge) v).setExcludeMimes(arg);
         }
       }
-    });
+    };
   }
-  public static Node extendedSettingsClickListener(final android.view.View.OnClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode extendedSettingsClickListener(final android.view.View.OnClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.app.MediaRouteButton) {
           ((android.app.MediaRouteButton) v).setExtendedSettingsClickListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node extractedText(final android.view.inputmethod.ExtractedText arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode extractedText(final android.view.inputmethod.ExtractedText arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setExtractedText(arg);
         }
@@ -1296,74 +1294,74 @@ public class Props {
           ((android.inputmethodservice.ExtractEditText) v).setExtractedText(arg);
         }
       }
-    });
+    };
   }
-  public static Node factory(final android.widget.ViewSwitcher.ViewFactory arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode factory(final android.widget.ViewSwitcher.ViewFactory arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ViewSwitcher) {
           ((android.widget.ViewSwitcher) v).setFactory(arg);
         }
       }
-    });
+    };
   }
-  public static Node fadeEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fadeEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setFadeEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node fadeOffset(final long arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fadeOffset(final long arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setFadeOffset(arg);
         }
       }
-    });
+    };
   }
-  public static Node fadingEdgeLength(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fadingEdgeLength(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setFadingEdgeLength(arg);
         }
       }
-    });
+    };
   }
-  public static Node fastScrollAlwaysVisible(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fastScrollAlwaysVisible(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setFastScrollAlwaysVisible(arg);
         }
       }
-    });
+    };
   }
-  public static Node fastScrollEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fastScrollEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setFastScrollEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node fastScrollStyle(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fastScrollStyle(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setFastScrollStyle(arg);
         }
       }
-    });
+    };
   }
-  public static Node fillViewport(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fillViewport(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.HorizontalScrollView) {
           ((android.widget.HorizontalScrollView) v).setFillViewport(arg);
         }
@@ -1371,56 +1369,56 @@ public class Props {
           ((android.widget.ScrollView) v).setFillViewport(arg);
         }
       }
-    });
+    };
   }
-  public static Node filterText(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode filterText(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setFilterText(arg);
         }
       }
-    });
+    };
   }
-  public static Node filterTouchesWhenObscured(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode filterTouchesWhenObscured(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setFilterTouchesWhenObscured(arg);
         }
       }
-    });
+    };
   }
-  public static Node filterWatcher(final android.text.TextWatcher arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode filterWatcher(final android.text.TextWatcher arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.DialerFilter) {
           ((android.widget.DialerFilter) v).setFilterWatcher(arg);
         }
       }
-    });
+    };
   }
-  public static Node filters(final android.text.InputFilter[] arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode filters(final android.text.InputFilter[] arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setFilters(arg);
         }
       }
-    });
+    };
   }
-  public static Node findListener(final android.webkit.WebView.FindListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode findListener(final android.webkit.WebView.FindListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setFindListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node firstDayOfWeek(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode firstDayOfWeek(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setFirstDayOfWeek(arg);
         }
@@ -1428,20 +1426,20 @@ public class Props {
           ((android.widget.DatePicker) v).setFirstDayOfWeek(arg);
         }
       }
-    });
+    };
   }
-  public static Node fitsSystemWindows(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fitsSystemWindows(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setFitsSystemWindows(arg);
         }
       }
-    });
+    };
   }
-  public static Node flipInterval(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode flipInterval(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterViewFlipper) {
           ((android.widget.AdapterViewFlipper) v).setFlipInterval(arg);
         }
@@ -1449,11 +1447,11 @@ public class Props {
           ((android.widget.ViewFlipper) v).setFlipInterval(arg);
         }
       }
-    });
+    };
   }
-  public static Node focusable(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode focusable(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setFocusable(arg);
         }
@@ -1461,11 +1459,11 @@ public class Props {
           ((android.view.View) v).setFocusable(arg);
         }
       }
-    });
+    };
   }
-  public static Node focusableInTouchMode(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode focusableInTouchMode(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setFocusableInTouchMode(arg);
         }
@@ -1473,209 +1471,209 @@ public class Props {
           ((android.view.View) v).setFocusableInTouchMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node focusedMonthDateColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode focusedMonthDateColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setFocusedMonthDateColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node fontFeatureSettings(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode fontFeatureSettings(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setFontFeatureSettings(arg);
         }
       }
-    });
+    };
   }
-  public static Node footerDividersEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode footerDividersEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ListView) {
           ((android.widget.ListView) v).setFooterDividersEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node foreground(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode foreground(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.FrameLayout) {
           ((android.widget.FrameLayout) v).setForeground(arg);
         }
       }
-    });
+    };
   }
-  public static Node foregroundGravity(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode foregroundGravity(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.FrameLayout) {
           ((android.widget.FrameLayout) v).setForegroundGravity(arg);
         }
       }
-    });
+    };
   }
-  public static Node foregroundTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode foregroundTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.FrameLayout) {
           ((android.widget.FrameLayout) v).setForegroundTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node foregroundTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode foregroundTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.FrameLayout) {
           ((android.widget.FrameLayout) v).setForegroundTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node format(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode format(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Chronometer) {
           ((android.widget.Chronometer) v).setFormat(arg);
         }
       }
-    });
+    };
   }
-  public static Node format12Hour(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode format12Hour(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextClock) {
           ((android.widget.TextClock) v).setFormat12Hour(arg);
         }
       }
-    });
+    };
   }
-  public static Node format24Hour(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode format24Hour(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextClock) {
           ((android.widget.TextClock) v).setFormat24Hour(arg);
         }
       }
-    });
+    };
   }
-  public static Node formatter(final android.widget.NumberPicker.Formatter arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode formatter(final android.widget.NumberPicker.Formatter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setFormatter(arg);
         }
       }
-    });
+    };
   }
-  public static Node freezesText(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode freezesText(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setFreezesText(arg);
         }
       }
-    });
+    };
   }
-  public static Node friction(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode friction(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setFriction(arg);
         }
       }
-    });
+    };
   }
-  public static Node gLWrapper(final android.opengl.GLSurfaceView.GLWrapper arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gLWrapper(final android.opengl.GLSurfaceView.GLWrapper arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setGLWrapper(arg);
         }
       }
-    });
+    };
   }
-  public static Node gesture(final android.gesture.Gesture arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gesture(final android.gesture.Gesture arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGesture(arg);
         }
       }
-    });
+    };
   }
-  public static Node gestureColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gestureColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGestureColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node gestureStrokeAngleThreshold(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gestureStrokeAngleThreshold(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGestureStrokeAngleThreshold(arg);
         }
       }
-    });
+    };
   }
-  public static Node gestureStrokeLengthThreshold(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gestureStrokeLengthThreshold(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGestureStrokeLengthThreshold(arg);
         }
       }
-    });
+    };
   }
-  public static Node gestureStrokeSquarenessTreshold(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gestureStrokeSquarenessTreshold(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGestureStrokeSquarenessTreshold(arg);
         }
       }
-    });
+    };
   }
-  public static Node gestureStrokeType(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gestureStrokeType(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGestureStrokeType(arg);
         }
       }
-    });
+    };
   }
-  public static Node gestureStrokeWidth(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gestureStrokeWidth(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGestureStrokeWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node gestureVisible(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gestureVisible(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setGestureVisible(arg);
         }
       }
-    });
+    };
   }
-  public static Node gravity(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode gravity(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Gallery) {
           ((android.widget.Gallery) v).setGravity(arg);
         }
@@ -1695,110 +1693,110 @@ public class Props {
           ((android.widget.LinearLayout) v).setGravity(arg);
         }
       }
-    });
+    };
   }
-  public static Node groupIndicator(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode groupIndicator(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setGroupIndicator(arg);
         }
       }
-    });
+    };
   }
-  public static Node hapticFeedbackEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode hapticFeedbackEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setHapticFeedbackEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node hasTransientState(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode hasTransientState(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setHasTransientState(arg);
         }
       }
-    });
+    };
   }
-  public static Node headerDividersEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode headerDividersEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ListView) {
           ((android.widget.ListView) v).setHeaderDividersEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node height(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode height(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setHeight(arg);
         }
       }
-    });
+    };
   }
-  public static Node highlightColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode highlightColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setHighlightColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node hint(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode hint(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setHint(arg);
         }
       }
-    });
+    };
   }
-  public static Node hint(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode hint(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setHint(arg);
         }
       }
-    });
+    };
   }
-  public static Node hintTextColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode hintTextColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setHintTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node hintTextColor(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode hintTextColor(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setHintTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node horizontalFadingEdgeEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode horizontalFadingEdgeEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setHorizontalFadingEdgeEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node horizontalGravity(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode horizontalGravity(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RelativeLayout) {
           ((android.widget.RelativeLayout) v).setHorizontalGravity(arg);
         }
@@ -1806,110 +1804,110 @@ public class Props {
           ((android.widget.LinearLayout) v).setHorizontalGravity(arg);
         }
       }
-    });
+    };
   }
-  public static Node horizontalScrollBarEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode horizontalScrollBarEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setHorizontalScrollBarEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node horizontalScrollbarOverlay(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode horizontalScrollbarOverlay(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setHorizontalScrollbarOverlay(arg);
         }
       }
-    });
+    };
   }
-  public static Node horizontalSpacing(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode horizontalSpacing(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridView) {
           ((android.widget.GridView) v).setHorizontalSpacing(arg);
         }
       }
-    });
+    };
   }
-  public static Node horizontallyScrolling(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode horizontallyScrolling(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setHorizontallyScrolling(arg);
         }
       }
-    });
+    };
   }
-  public static Node hovered(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode hovered(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setHovered(arg);
         }
       }
-    });
+    };
   }
-  public static Node iconified(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode iconified(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setIconified(arg);
         }
       }
-    });
+    };
   }
-  public static Node iconifiedByDefault(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode iconifiedByDefault(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setIconifiedByDefault(arg);
         }
       }
-    });
+    };
   }
-  public static Node id(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode id(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setId(arg);
         }
       }
-    });
+    };
   }
-  public static Node ignoreGravity(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode ignoreGravity(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RelativeLayout) {
           ((android.widget.RelativeLayout) v).setIgnoreGravity(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageAlpha(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageAlpha(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageAlpha(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageBitmap(final android.graphics.Bitmap arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageBitmap(final android.graphics.Bitmap arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageBitmap(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageDrawable(arg);
         }
@@ -1917,29 +1915,29 @@ public class Props {
           ((android.widget.ImageSwitcher) v).setImageDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageLevel(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageLevel(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageLevel(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageMatrix(final android.graphics.Matrix arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageMatrix(final android.graphics.Matrix arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageMatrix(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageResource(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageResource(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageResource(arg);
         }
@@ -1947,29 +1945,29 @@ public class Props {
           ((android.widget.ImageSwitcher) v).setImageResource(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node imageURI(final android.net.Uri arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imageURI(final android.net.Uri arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setImageURI(arg);
         }
@@ -1977,11 +1975,11 @@ public class Props {
           ((android.widget.ImageSwitcher) v).setImageURI(arg);
         }
       }
-    });
+    };
   }
-  public static Node imeOptions(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode imeOptions(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setImeOptions(arg);
         }
@@ -1989,110 +1987,110 @@ public class Props {
           ((android.widget.TextView) v).setImeOptions(arg);
         }
       }
-    });
+    };
   }
-  public static Node importantForAccessibility(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode importantForAccessibility(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setImportantForAccessibility(arg);
         }
       }
-    });
+    };
   }
-  public static Node inAnimation(final android.view.animation.Animation arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode inAnimation(final android.view.animation.Animation arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ViewAnimator) {
           ((android.widget.ViewAnimator) v).setInAnimation(arg);
         }
       }
-    });
+    };
   }
-  public static Node inAnimation(final android.animation.ObjectAnimator arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode inAnimation(final android.animation.ObjectAnimator arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterViewAnimator) {
           ((android.widget.AdapterViewAnimator) v).setInAnimation(arg);
         }
       }
-    });
+    };
   }
-  public static Node includeFontPadding(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode includeFontPadding(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setIncludeFontPadding(arg);
         }
       }
-    });
+    };
   }
-  public static Node indeterminate(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode indeterminate(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setIndeterminate(arg);
         }
       }
-    });
+    };
   }
-  public static Node indeterminateDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode indeterminateDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setIndeterminateDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node indeterminateDrawableTiled(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode indeterminateDrawableTiled(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setIndeterminateDrawableTiled(arg);
         }
       }
-    });
+    };
   }
-  public static Node indeterminateTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode indeterminateTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setIndeterminateTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node indeterminateTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode indeterminateTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setIndeterminateTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node inflatedId(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode inflatedId(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewStub) {
           ((android.view.ViewStub) v).setInflatedId(arg);
         }
       }
-    });
+    };
   }
-  public static Node initialScale(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode initialScale(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setInitialScale(arg);
         }
       }
-    });
+    };
   }
-  public static Node inputExtras(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode inputExtras(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         try {
         	if (v instanceof android.widget.TextView)
         		((android.widget.TextView) v).setInputExtras(arg);
@@ -2102,11 +2100,11 @@ public class Props {
         	e.printStackTrace();
         }
       }
-    });
+    };
   }
-  public static Node inputType(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode inputType(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setInputType(arg);
         }
@@ -2114,110 +2112,110 @@ public class Props {
           ((android.widget.TextView) v).setInputType(arg);
         }
       }
-    });
+    };
   }
-  public static Node interpolator(final android.view.animation.Interpolator arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode interpolator(final android.view.animation.Interpolator arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setInterpolator(arg);
         }
       }
-    });
+    };
   }
-  public static Node is24HourView(final java.lang.Boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode is24HourView(final java.lang.Boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TimePicker) {
           ((android.widget.TimePicker) v).setIs24HourView(arg);
         }
       }
-    });
+    };
   }
-  public static Node isIndicator(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode isIndicator(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RatingBar) {
           ((android.widget.RatingBar) v).setIsIndicator(arg);
         }
       }
-    });
+    };
   }
-  public static Node isZoomInEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode isZoomInEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ZoomControls) {
           ((android.widget.ZoomControls) v).setIsZoomInEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node isZoomOutEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode isZoomOutEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ZoomControls) {
           ((android.widget.ZoomControls) v).setIsZoomOutEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node itemsCanFocus(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode itemsCanFocus(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ListView) {
           ((android.widget.ListView) v).setItemsCanFocus(arg);
         }
       }
-    });
+    };
   }
-  public static Node keepScreenOn(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode keepScreenOn(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setKeepScreenOn(arg);
         }
       }
-    });
+    };
   }
-  public static Node keyListener(final android.text.method.KeyListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode keyListener(final android.text.method.KeyListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setKeyListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node keyProgressIncrement(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode keyProgressIncrement(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsSeekBar) {
           ((android.widget.AbsSeekBar) v).setKeyProgressIncrement(arg);
         }
       }
-    });
+    };
   }
-  public static Node keyboard(final android.inputmethodservice.Keyboard arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode keyboard(final android.inputmethodservice.Keyboard arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setKeyboard(arg);
         }
       }
-    });
+    };
   }
-  public static Node labelFor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode labelFor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setLabelFor(arg);
         }
       }
-    });
+    };
   }
-  public static Node layerPaint(final android.graphics.Paint arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layerPaint(final android.graphics.Paint arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setLayerPaint(arg);
         }
@@ -2225,56 +2223,56 @@ public class Props {
           ((android.view.TextureView) v).setLayerPaint(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutAnimation(final android.view.animation.LayoutAnimationController arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutAnimation(final android.view.animation.LayoutAnimationController arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setLayoutAnimation(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutAnimationListener(final android.view.animation.Animation.AnimationListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutAnimationListener(final android.view.animation.Animation.AnimationListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setLayoutAnimationListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutDirection(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutDirection(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setLayoutDirection(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutInflater(final android.view.LayoutInflater arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutInflater(final android.view.LayoutInflater arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewStub) {
           ((android.view.ViewStub) v).setLayoutInflater(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutMode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutMode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setLayoutMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutParams(final android.view.ViewGroup.LayoutParams arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutParams(final android.view.ViewGroup.LayoutParams arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setLayoutParams(arg);
         }
@@ -2282,182 +2280,182 @@ public class Props {
           ((android.webkit.WebView) v).setLayoutParams(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutResource(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutResource(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewStub) {
           ((android.view.ViewStub) v).setLayoutResource(arg);
         }
       }
-    });
+    };
   }
-  public static Node layoutTransition(final android.animation.LayoutTransition arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode layoutTransition(final android.animation.LayoutTransition arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setLayoutTransition(arg);
         }
       }
-    });
+    };
   }
-  public static Node left(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode left(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setLeft(arg);
         }
       }
-    });
+    };
   }
-  public static Node leftStripDrawable(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode leftStripDrawable(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setLeftStripDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node leftStripDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode leftStripDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setLeftStripDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node letterSpacing(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode letterSpacing(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setLetterSpacing(arg);
         }
       }
-    });
+    };
   }
-  public static Node lettersWatcher(final android.text.TextWatcher arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode lettersWatcher(final android.text.TextWatcher arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.DialerFilter) {
           ((android.widget.DialerFilter) v).setLettersWatcher(arg);
         }
       }
-    });
+    };
   }
-  public static Node lines(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode lines(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setLines(arg);
         }
       }
-    });
+    };
   }
-  public static Node linkTextColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode linkTextColor(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setLinkTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node linkTextColor(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode linkTextColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setLinkTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node linksClickable(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode linksClickable(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setLinksClickable(arg);
         }
       }
-    });
+    };
   }
-  public static Node listSelection(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode listSelection(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setListSelection(arg);
         }
       }
-    });
+    };
   }
-  public static Node logo(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode logo(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setLogo(arg);
         }
       }
-    });
+    };
   }
-  public static Node logo(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode logo(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setLogo(arg);
         }
       }
-    });
+    };
   }
-  public static Node logoDescription(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode logoDescription(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setLogoDescription(arg);
         }
       }
-    });
+    };
   }
-  public static Node logoDescription(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode logoDescription(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setLogoDescription(arg);
         }
       }
-    });
+    };
   }
-  public static Node longClickable(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode longClickable(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setLongClickable(arg);
         }
       }
-    });
+    };
   }
-  public static Node mapTrackballToArrowKeys(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode mapTrackballToArrowKeys(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setMapTrackballToArrowKeys(arg);
         }
       }
-    });
+    };
   }
-  public static Node marqueeRepeatLimit(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode marqueeRepeatLimit(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMarqueeRepeatLimit(arg);
         }
       }
-    });
+    };
   }
-  public static Node max(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode max(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setMax(arg);
         }
@@ -2468,11 +2466,11 @@ public class Props {
           ((android.widget.AbsSeekBar) v).setMax(arg);
         }
       }
-    });
+    };
   }
-  public static Node maxDate(final long arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode maxDate(final long arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setMaxDate(arg);
         }
@@ -2480,20 +2478,20 @@ public class Props {
           ((android.widget.DatePicker) v).setMaxDate(arg);
         }
       }
-    });
+    };
   }
-  public static Node maxEms(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode maxEms(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMaxEms(arg);
         }
       }
-    });
+    };
   }
-  public static Node maxHeight(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode maxHeight(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setMaxHeight(arg);
         }
@@ -2501,38 +2499,38 @@ public class Props {
           ((android.widget.TextView) v).setMaxHeight(arg);
         }
       }
-    });
+    };
   }
-  public static Node maxLines(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode maxLines(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMaxLines(arg);
         }
       }
-    });
+    };
   }
-  public static Node maxValue(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode maxValue(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setMaxValue(arg);
         }
       }
-    });
+    };
   }
-  public static Node maxVisible(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode maxVisible(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.app.FragmentBreadCrumbs) {
           ((android.app.FragmentBreadCrumbs) v).setMaxVisible(arg);
         }
       }
-    });
+    };
   }
-  public static Node maxWidth(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode maxWidth(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setMaxWidth(arg);
         }
@@ -2543,47 +2541,47 @@ public class Props {
           ((android.widget.TextView) v).setMaxWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node measureAllChildren(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode measureAllChildren(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.FrameLayout) {
           ((android.widget.FrameLayout) v).setMeasureAllChildren(arg);
         }
       }
-    });
+    };
   }
-  public static Node measureWithLargestChildEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode measureWithLargestChildEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setMeasureWithLargestChildEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node mediaController(final android.widget.MediaController arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode mediaController(final android.widget.MediaController arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.VideoView) {
           ((android.widget.VideoView) v).setMediaController(arg);
         }
       }
-    });
+    };
   }
-  public static Node mediaPlayer(final android.widget.MediaController.MediaPlayerControl arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode mediaPlayer(final android.widget.MediaController.MediaPlayerControl arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.MediaController) {
           ((android.widget.MediaController) v).setMediaPlayer(arg);
         }
       }
-    });
+    };
   }
-  public static Node minDate(final long arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minDate(final long arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setMinDate(arg);
         }
@@ -2591,74 +2589,74 @@ public class Props {
           ((android.widget.DatePicker) v).setMinDate(arg);
         }
       }
-    });
+    };
   }
-  public static Node minEms(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minEms(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMinEms(arg);
         }
       }
-    });
+    };
   }
-  public static Node minHeight(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minHeight(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMinHeight(arg);
         }
       }
-    });
+    };
   }
-  public static Node minLines(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minLines(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMinLines(arg);
         }
       }
-    });
+    };
   }
-  public static Node minValue(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minValue(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setMinValue(arg);
         }
       }
-    });
+    };
   }
-  public static Node minWidth(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minWidth(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMinWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node minimumHeight(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minimumHeight(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setMinimumHeight(arg);
         }
       }
-    });
+    };
   }
-  public static Node minimumWidth(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode minimumWidth(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setMinimumWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node mode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode mode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.DialerFilter) {
           ((android.widget.DialerFilter) v).setMode(arg);
         }
@@ -2666,164 +2664,164 @@ public class Props {
           ((android.widget.QuickContactBadge) v).setMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node motionEventSplittingEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode motionEventSplittingEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setMotionEventSplittingEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node movementMethod(final android.text.method.MovementMethod arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode movementMethod(final android.text.method.MovementMethod arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setMovementMethod(arg);
         }
       }
-    });
+    };
   }
-  public static Node multiChoiceModeListener(final android.widget.AbsListView.MultiChoiceModeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode multiChoiceModeListener(final android.widget.AbsListView.MultiChoiceModeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setMultiChoiceModeListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node navigationContentDescription(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode navigationContentDescription(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setNavigationContentDescription(arg);
         }
       }
-    });
+    };
   }
-  public static Node navigationContentDescription(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode navigationContentDescription(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setNavigationContentDescription(arg);
         }
       }
-    });
+    };
   }
-  public static Node navigationIcon(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode navigationIcon(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setNavigationIcon(arg);
         }
       }
-    });
+    };
   }
-  public static Node navigationIcon(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode navigationIcon(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setNavigationIcon(arg);
         }
       }
-    });
+    };
   }
-  public static Node navigationOnClickListener(final android.view.View.OnClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode navigationOnClickListener(final android.view.View.OnClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setNavigationOnClickListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node nestedScrollingEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode nestedScrollingEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setNestedScrollingEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node networkAvailable(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode networkAvailable(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setNetworkAvailable(arg);
         }
       }
-    });
+    };
   }
-  public static Node nextFocusDownId(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode nextFocusDownId(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setNextFocusDownId(arg);
         }
       }
-    });
+    };
   }
-  public static Node nextFocusForwardId(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode nextFocusForwardId(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setNextFocusForwardId(arg);
         }
       }
-    });
+    };
   }
-  public static Node nextFocusLeftId(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode nextFocusLeftId(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setNextFocusLeftId(arg);
         }
       }
-    });
+    };
   }
-  public static Node nextFocusRightId(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode nextFocusRightId(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setNextFocusRightId(arg);
         }
       }
-    });
+    };
   }
-  public static Node nextFocusUpId(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode nextFocusUpId(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setNextFocusUpId(arg);
         }
       }
-    });
+    };
   }
-  public static Node numColumns(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode numColumns(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridView) {
           ((android.widget.GridView) v).setNumColumns(arg);
         }
       }
-    });
+    };
   }
-  public static Node numStars(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode numStars(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RatingBar) {
           ((android.widget.RatingBar) v).setNumStars(arg);
         }
       }
-    });
+    };
   }
-  public static Node onApplyWindowInsets(final android.view.View.OnApplyWindowInsetsListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onApplyWindowInsets(final android.view.View.OnApplyWindowInsetsListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnApplyWindowInsetsListener(new android.view.View.OnApplyWindowInsetsListener() {
             public android.view.WindowInsets onApplyWindowInsets(android.view.View a0, android.view.WindowInsets a1) {
@@ -2834,11 +2832,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onBreadCrumbClick(final android.app.FragmentBreadCrumbs.OnBreadCrumbClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onBreadCrumbClick(final android.app.FragmentBreadCrumbs.OnBreadCrumbClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.app.FragmentBreadCrumbs) {
           ((android.app.FragmentBreadCrumbs) v).setOnBreadCrumbClickListener(new android.app.FragmentBreadCrumbs.OnBreadCrumbClickListener() {
             public boolean onBreadCrumbClick(android.app.FragmentManager.BackStackEntry a0, int a1) {
@@ -2849,11 +2847,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onCheckedChange(final android.widget.RadioGroup.OnCheckedChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onCheckedChange(final android.widget.RadioGroup.OnCheckedChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RadioGroup) {
           ((android.widget.RadioGroup) v).setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(android.widget.RadioGroup a0, int a1) {
@@ -2863,11 +2861,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onCheckedChange(final android.widget.CompoundButton.OnCheckedChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onCheckedChange(final android.widget.CompoundButton.OnCheckedChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CompoundButton) {
           ((android.widget.CompoundButton) v).setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(android.widget.CompoundButton a0, boolean a1) {
@@ -2877,11 +2875,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onChildClick(final android.widget.ExpandableListView.OnChildClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onChildClick(final android.widget.ExpandableListView.OnChildClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setOnChildClickListener(new android.widget.ExpandableListView.OnChildClickListener() {
             public boolean onChildClick(android.widget.ExpandableListView a0, android.view.View a1, int a2, int a3, long a4) {
@@ -2892,11 +2890,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onChronometerTick(final android.widget.Chronometer.OnChronometerTickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onChronometerTick(final android.widget.Chronometer.OnChronometerTickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Chronometer) {
           ((android.widget.Chronometer) v).setOnChronometerTickListener(new android.widget.Chronometer.OnChronometerTickListener() {
             public void onChronometerTick(android.widget.Chronometer a0) {
@@ -2906,11 +2904,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onClick(final android.view.View.OnClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onClick(final android.view.View.OnClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setOnClickListener(new android.view.View.OnClickListener() {
             public void onClick(android.view.View a0) {
@@ -2936,11 +2934,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onClose(final android.widget.SearchView.OnCloseListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onClose(final android.widget.SearchView.OnCloseListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnCloseListener(new android.widget.SearchView.OnCloseListener() {
             public boolean onClose() {
@@ -2951,11 +2949,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onCompletion(final android.media.MediaPlayer.OnCompletionListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onCompletion(final android.media.MediaPlayer.OnCompletionListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.VideoView) {
           ((android.widget.VideoView) v).setOnCompletionListener(new android.media.MediaPlayer.OnCompletionListener() {
             public void onCompletion(android.media.MediaPlayer a0) {
@@ -2965,11 +2963,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onCreateContextMenu(final android.view.View.OnCreateContextMenuListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onCreateContextMenu(final android.view.View.OnCreateContextMenuListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnCreateContextMenuListener(new android.view.View.OnCreateContextMenuListener() {
             public void onCreateContextMenu(android.view.ContextMenu a0, android.view.View a1, android.view.ContextMenu.ContextMenuInfo a2) {
@@ -2979,11 +2977,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onDateChange(final android.widget.CalendarView.OnDateChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onDateChange(final android.widget.CalendarView.OnDateChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setOnDateChangeListener(new android.widget.CalendarView.OnDateChangeListener() {
             public void onSelectedDayChange(android.widget.CalendarView a0, int a1, int a2, int a3) {
@@ -2993,11 +2991,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onDismiss(final android.widget.AutoCompleteTextView.OnDismissListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onDismiss(final android.widget.AutoCompleteTextView.OnDismissListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setOnDismissListener(new android.widget.AutoCompleteTextView.OnDismissListener() {
             public void onDismiss() {
@@ -3007,11 +3005,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onDrag(final android.view.View.OnDragListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onDrag(final android.view.View.OnDragListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnDragListener(new android.view.View.OnDragListener() {
             public boolean onDrag(android.view.View a0, android.view.DragEvent a1) {
@@ -3022,11 +3020,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onDrawerClose(final android.widget.SlidingDrawer.OnDrawerCloseListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onDrawerClose(final android.widget.SlidingDrawer.OnDrawerCloseListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SlidingDrawer) {
           ((android.widget.SlidingDrawer) v).setOnDrawerCloseListener(new android.widget.SlidingDrawer.OnDrawerCloseListener() {
             public void onDrawerClosed() {
@@ -3036,11 +3034,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onDrawerOpen(final android.widget.SlidingDrawer.OnDrawerOpenListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onDrawerOpen(final android.widget.SlidingDrawer.OnDrawerOpenListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SlidingDrawer) {
           ((android.widget.SlidingDrawer) v).setOnDrawerOpenListener(new android.widget.SlidingDrawer.OnDrawerOpenListener() {
             public void onDrawerOpened() {
@@ -3050,29 +3048,29 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onDrawerScroll(final android.widget.SlidingDrawer.OnDrawerScrollListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onDrawerScroll(final android.widget.SlidingDrawer.OnDrawerScrollListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SlidingDrawer) {
           ((android.widget.SlidingDrawer) v).setOnDrawerScrollListener(new android.widget.SlidingDrawer.OnDrawerScrollListener() {
-            public void onScrollStarted() {
-              arg.onScrollStarted();
-              render();
-            }
             public void onScrollEnded() {
               arg.onScrollEnded();
+              render();
+            }
+            public void onScrollStarted() {
+              arg.onScrollStarted();
               render();
             }
          });
         }
       }
-    });
+    };
   }
-  public static Node onEditorAction(final android.widget.TextView.OnEditorActionListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onEditorAction(final android.widget.TextView.OnEditorActionListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setOnEditorActionListener(new android.widget.TextView.OnEditorActionListener() {
             public boolean onEditorAction(android.widget.TextView a0, int a1, android.view.KeyEvent a2) {
@@ -3083,11 +3081,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onError(final android.media.MediaPlayer.OnErrorListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onError(final android.media.MediaPlayer.OnErrorListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.VideoView) {
           ((android.widget.VideoView) v).setOnErrorListener(new android.media.MediaPlayer.OnErrorListener() {
             public boolean onError(android.media.MediaPlayer a0, int a1, int a2) {
@@ -3098,11 +3096,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onFocusChange(final android.view.View.OnFocusChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onFocusChange(final android.view.View.OnFocusChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
             public void onFocusChange(android.view.View a0, boolean a1) {
@@ -3112,11 +3110,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onGenericMotion(final android.view.View.OnGenericMotionListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onGenericMotion(final android.view.View.OnGenericMotionListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnGenericMotionListener(new android.view.View.OnGenericMotionListener() {
             public boolean onGenericMotion(android.view.View a0, android.view.MotionEvent a1) {
@@ -3127,11 +3125,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onGroupClick(final android.widget.ExpandableListView.OnGroupClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onGroupClick(final android.widget.ExpandableListView.OnGroupClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setOnGroupClickListener(new android.widget.ExpandableListView.OnGroupClickListener() {
             public boolean onGroupClick(android.widget.ExpandableListView a0, android.view.View a1, int a2, long a3) {
@@ -3142,11 +3140,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onGroupCollapse(final android.widget.ExpandableListView.OnGroupCollapseListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onGroupCollapse(final android.widget.ExpandableListView.OnGroupCollapseListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setOnGroupCollapseListener(new android.widget.ExpandableListView.OnGroupCollapseListener() {
             public void onGroupCollapse(int a0) {
@@ -3156,11 +3154,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onGroupExpand(final android.widget.ExpandableListView.OnGroupExpandListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onGroupExpand(final android.widget.ExpandableListView.OnGroupExpandListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setOnGroupExpandListener(new android.widget.ExpandableListView.OnGroupExpandListener() {
             public void onGroupExpand(int a0) {
@@ -3170,11 +3168,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onHierarchyChange(final android.view.ViewGroup.OnHierarchyChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onHierarchyChange(final android.view.ViewGroup.OnHierarchyChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RadioGroup) {
           ((android.widget.RadioGroup) v).setOnHierarchyChangeListener(new android.view.ViewGroup.OnHierarchyChangeListener() {
             public void onChildViewAdded(android.view.View a0, android.view.View a1) {
@@ -3224,11 +3222,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onHover(final android.view.View.OnHoverListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onHover(final android.view.View.OnHoverListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnHoverListener(new android.view.View.OnHoverListener() {
             public boolean onHover(android.view.View a0, android.view.MotionEvent a1) {
@@ -3239,11 +3237,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onInflate(final android.view.ViewStub.OnInflateListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onInflate(final android.view.ViewStub.OnInflateListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewStub) {
           ((android.view.ViewStub) v).setOnInflateListener(new android.view.ViewStub.OnInflateListener() {
             public void onInflate(android.view.ViewStub a0, android.view.View a1) {
@@ -3253,11 +3251,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onInfo(final android.media.MediaPlayer.OnInfoListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onInfo(final android.media.MediaPlayer.OnInfoListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.VideoView) {
           ((android.widget.VideoView) v).setOnInfoListener(new android.media.MediaPlayer.OnInfoListener() {
             public boolean onInfo(android.media.MediaPlayer a0, int a1, int a2) {
@@ -3268,11 +3266,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onItemClick(final android.widget.AdapterView.OnItemClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onItemClick(final android.widget.AdapterView.OnItemClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             public void onItemClick(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
@@ -3306,11 +3304,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onItemLongClick(final android.widget.AdapterView.OnItemLongClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onItemLongClick(final android.widget.AdapterView.OnItemLongClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setOnItemLongClickListener(new android.widget.AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
@@ -3321,41 +3319,41 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onItemSelected(final android.widget.AdapterView.OnItemSelectedListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onItemSelected(final android.widget.AdapterView.OnItemSelectedListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
-              arg.onItemSelected(a0, a1, a2, a3);
-              render();
-            }
             public void onNothingSelected(android.widget.AdapterView a0) {
               arg.onNothingSelected(a0);
+              render();
+            }
+            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
               render();
             }
          });
         }
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
-              arg.onItemSelected(a0, a1, a2, a3);
-              render();
-            }
             public void onNothingSelected(android.widget.AdapterView a0) {
               arg.onNothingSelected(a0);
+              render();
+            }
+            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
               render();
             }
          });
         }
       }
-    });
+    };
   }
-  public static Node onKey(final android.view.View.OnKeyListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onKey(final android.view.View.OnKeyListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnKeyListener(new android.view.View.OnKeyListener() {
             public boolean onKey(android.view.View a0, int a1, android.view.KeyEvent a2) {
@@ -3366,35 +3364,15 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onKeyboardAction(final android.inputmethodservice.KeyboardView.OnKeyboardActionListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onKeyboardAction(final android.inputmethodservice.KeyboardView.OnKeyboardActionListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setOnKeyboardActionListener(new android.inputmethodservice.KeyboardView.OnKeyboardActionListener() {
             public void onKey(int a0, int[] a1) {
               arg.onKey(a0, a1);
-              render();
-            }
-            public void swipeUp() {
-              arg.swipeUp();
-              render();
-            }
-            public void swipeDown() {
-              arg.swipeDown();
-              render();
-            }
-            public void swipeLeft() {
-              arg.swipeLeft();
-              render();
-            }
-            public void swipeRight() {
-              arg.swipeRight();
-              render();
-            }
-            public void onPress(int a0) {
-              arg.onPress(a0);
               render();
             }
             public void onRelease(int a0) {
@@ -3405,14 +3383,34 @@ public class Props {
               arg.onText(a0);
               render();
             }
+            public void onPress(int a0) {
+              arg.onPress(a0);
+              render();
+            }
+            public void swipeRight() {
+              arg.swipeRight();
+              render();
+            }
+            public void swipeLeft() {
+              arg.swipeLeft();
+              render();
+            }
+            public void swipeUp() {
+              arg.swipeUp();
+              render();
+            }
+            public void swipeDown() {
+              arg.swipeDown();
+              render();
+            }
          });
         }
       }
-    });
+    };
   }
-  public static Node onLongClick(final android.view.View.OnLongClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onLongClick(final android.view.View.OnLongClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnLongClickListener(new android.view.View.OnLongClickListener() {
             public boolean onLongClick(android.view.View a0) {
@@ -3423,20 +3421,20 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onLongPressUpdateInterval(final long arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onLongPressUpdateInterval(final long arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setOnLongPressUpdateInterval(arg);
         }
       }
-    });
+    };
   }
-  public static Node onMenuItemClick(final android.widget.Toolbar.OnMenuItemClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onMenuItemClick(final android.widget.Toolbar.OnMenuItemClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setOnMenuItemClickListener(new android.widget.Toolbar.OnMenuItemClickListener() {
             public boolean onMenuItemClick(android.view.MenuItem a0) {
@@ -3447,11 +3445,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onMenuItemClick(final android.widget.ActionMenuView.OnMenuItemClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onMenuItemClick(final android.widget.ActionMenuView.OnMenuItemClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ActionMenuView) {
           ((android.widget.ActionMenuView) v).setOnMenuItemClickListener(new android.widget.ActionMenuView.OnMenuItemClickListener() {
             public boolean onMenuItemClick(android.view.MenuItem a0) {
@@ -3462,11 +3460,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onPrepared(final android.media.MediaPlayer.OnPreparedListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onPrepared(final android.media.MediaPlayer.OnPreparedListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.VideoView) {
           ((android.widget.VideoView) v).setOnPreparedListener(new android.media.MediaPlayer.OnPreparedListener() {
             public void onPrepared(android.media.MediaPlayer a0) {
@@ -3476,11 +3474,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onQueryText(final android.widget.SearchView.OnQueryTextListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onQueryText(final android.widget.SearchView.OnQueryTextListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             public boolean onQueryTextSubmit(java.lang.String a0) {
@@ -3496,11 +3494,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onQueryTextFocusChange(final android.view.View.OnFocusChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onQueryTextFocusChange(final android.view.View.OnFocusChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnQueryTextFocusChangeListener(new android.view.View.OnFocusChangeListener() {
             public void onFocusChange(android.view.View a0, boolean a1) {
@@ -3510,11 +3508,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onRatingBarChange(final android.widget.RatingBar.OnRatingBarChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onRatingBarChange(final android.widget.RatingBar.OnRatingBarChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RatingBar) {
           ((android.widget.RatingBar) v).setOnRatingBarChangeListener(new android.widget.RatingBar.OnRatingBarChangeListener() {
             public void onRatingChanged(android.widget.RatingBar a0, float a1, boolean a2) {
@@ -3524,29 +3522,29 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onScroll(final android.widget.AbsListView.OnScrollListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onScroll(final android.widget.AbsListView.OnScrollListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setOnScrollListener(new android.widget.AbsListView.OnScrollListener() {
-            public void onScrollStateChanged(android.widget.AbsListView a0, int a1) {
-              arg.onScrollStateChanged(a0, a1);
-              render();
-            }
             public void onScroll(android.widget.AbsListView a0, int a1, int a2, int a3) {
               arg.onScroll(a0, a1, a2, a3);
+              render();
+            }
+            public void onScrollStateChanged(android.widget.AbsListView a0, int a1) {
+              arg.onScrollStateChanged(a0, a1);
               render();
             }
          });
         }
       }
-    });
+    };
   }
-  public static Node onScroll(final android.widget.NumberPicker.OnScrollListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onScroll(final android.widget.NumberPicker.OnScrollListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setOnScrollListener(new android.widget.NumberPicker.OnScrollListener() {
             public void onScrollStateChange(android.widget.NumberPicker a0, int a1) {
@@ -3556,11 +3554,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onSearchClick(final android.view.View.OnClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onSearchClick(final android.view.View.OnClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnSearchClickListener(new android.view.View.OnClickListener() {
             public void onClick(android.view.View a0) {
@@ -3570,13 +3568,17 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onSeekBarChange(final android.widget.SeekBar.OnSeekBarChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onSeekBarChange(final android.widget.SeekBar.OnSeekBarChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SeekBar) {
           ((android.widget.SeekBar) v).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
+            public void onStartTrackingTouch(android.widget.SeekBar a0) {
+              arg.onStartTrackingTouch(a0);
+              render();
+            }
             public void onProgressChanged(android.widget.SeekBar a0, int a1, boolean a2) {
               arg.onProgressChanged(a0, a1, a2);
               render();
@@ -3585,18 +3587,14 @@ public class Props {
               arg.onStopTrackingTouch(a0);
               render();
             }
-            public void onStartTrackingTouch(android.widget.SeekBar a0) {
-              arg.onStartTrackingTouch(a0);
-              render();
-            }
          });
         }
       }
-    });
+    };
   }
-  public static Node onSuggestion(final android.widget.SearchView.OnSuggestionListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onSuggestion(final android.widget.SearchView.OnSuggestionListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnSuggestionListener(new android.widget.SearchView.OnSuggestionListener() {
             public boolean onSuggestionSelect(int a0) {
@@ -3612,11 +3610,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onSystemUiVisibilityChange(final android.view.View.OnSystemUiVisibilityChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onSystemUiVisibilityChange(final android.view.View.OnSystemUiVisibilityChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnSystemUiVisibilityChangeListener(new android.view.View.OnSystemUiVisibilityChangeListener() {
             public void onSystemUiVisibilityChange(int a0) {
@@ -3626,11 +3624,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onTabChanged(final android.widget.TabHost.OnTabChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onTabChanged(final android.widget.TabHost.OnTabChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabHost) {
           ((android.widget.TabHost) v).setOnTabChangedListener(new android.widget.TabHost.OnTabChangeListener() {
             public void onTabChanged(java.lang.String a0) {
@@ -3640,11 +3638,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onTimeChanged(final android.widget.TimePicker.OnTimeChangedListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onTimeChanged(final android.widget.TimePicker.OnTimeChangedListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TimePicker) {
           ((android.widget.TimePicker) v).setOnTimeChangedListener(new android.widget.TimePicker.OnTimeChangedListener() {
             public void onTimeChanged(android.widget.TimePicker a0, int a1, int a2) {
@@ -3654,11 +3652,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onTouch(final android.view.View.OnTouchListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onTouch(final android.view.View.OnTouchListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOnTouchListener(new android.view.View.OnTouchListener() {
             public boolean onTouch(android.view.View a0, android.view.MotionEvent a1) {
@@ -3669,11 +3667,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onUnhandledInputEvent(final android.media.tv.TvView.OnUnhandledInputEventListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onUnhandledInputEvent(final android.media.tv.TvView.OnUnhandledInputEventListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.media.tv.TvView) {
           ((android.media.tv.TvView) v).setOnUnhandledInputEventListener(new android.media.tv.TvView.OnUnhandledInputEventListener() {
             public boolean onUnhandledInputEvent(android.view.InputEvent a0) {
@@ -3684,11 +3682,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onValueChanged(final android.widget.NumberPicker.OnValueChangeListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onValueChanged(final android.widget.NumberPicker.OnValueChangeListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setOnValueChangedListener(new android.widget.NumberPicker.OnValueChangeListener() {
             public void onValueChange(android.widget.NumberPicker a0, int a1, int a2) {
@@ -3698,11 +3696,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onZoomInClick(final android.view.View.OnClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onZoomInClick(final android.view.View.OnClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ZoomControls) {
           ((android.widget.ZoomControls) v).setOnZoomInClickListener(new android.view.View.OnClickListener() {
             public void onClick(android.view.View a0) {
@@ -3712,11 +3710,11 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node onZoomOutClick(final android.view.View.OnClickListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode onZoomOutClick(final android.view.View.OnClickListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ZoomControls) {
           ((android.widget.ZoomControls) v).setOnZoomOutClickListener(new android.view.View.OnClickListener() {
             public void onClick(android.view.View a0) {
@@ -3726,20 +3724,20 @@ public class Props {
          });
         }
       }
-    });
+    };
   }
-  public static Node opaque(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode opaque(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.TextureView) {
           ((android.view.TextureView) v).setOpaque(arg);
         }
       }
-    });
+    };
   }
-  public static Node orientation(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode orientation(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setOrientation(arg);
         }
@@ -3750,38 +3748,38 @@ public class Props {
           ((android.widget.LinearLayout) v).setOrientation(arg);
         }
       }
-    });
+    };
   }
-  public static Node outAnimation(final android.view.animation.Animation arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode outAnimation(final android.view.animation.Animation arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ViewAnimator) {
           ((android.widget.ViewAnimator) v).setOutAnimation(arg);
         }
       }
-    });
+    };
   }
-  public static Node outAnimation(final android.animation.ObjectAnimator arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode outAnimation(final android.animation.ObjectAnimator arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AdapterViewAnimator) {
           ((android.widget.AdapterViewAnimator) v).setOutAnimation(arg);
         }
       }
-    });
+    };
   }
-  public static Node outlineProvider(final android.view.ViewOutlineProvider arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode outlineProvider(final android.view.ViewOutlineProvider arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setOutlineProvider(arg);
         }
       }
-    });
+    };
   }
-  public static Node overScrollMode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode overScrollMode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setOverScrollMode(arg);
         }
@@ -3798,110 +3796,110 @@ public class Props {
           ((android.webkit.WebView) v).setOverScrollMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node overlay(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode overlay(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.QuickContactBadge) {
           ((android.widget.QuickContactBadge) v).setOverlay(arg);
         }
       }
-    });
+    };
   }
-  public static Node overscrollFooter(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode overscrollFooter(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ListView) {
           ((android.widget.ListView) v).setOverscrollFooter(arg);
         }
       }
-    });
+    };
   }
-  public static Node overscrollHeader(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode overscrollHeader(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ListView) {
           ((android.widget.ListView) v).setOverscrollHeader(arg);
         }
       }
-    });
+    };
   }
-  public static Node paintFlags(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode paintFlags(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setPaintFlags(arg);
         }
       }
-    });
+    };
   }
-  public static Node persistentDrawingCache(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode persistentDrawingCache(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setPersistentDrawingCache(arg);
         }
       }
-    });
+    };
   }
-  public static Node pictureListener(final android.webkit.WebView.PictureListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode pictureListener(final android.webkit.WebView.PictureListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setPictureListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node pivotX(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode pivotX(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setPivotX(arg);
         }
       }
-    });
+    };
   }
-  public static Node pivotY(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode pivotY(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setPivotY(arg);
         }
       }
-    });
+    };
   }
-  public static Node popupBackgroundDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode popupBackgroundDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setPopupBackgroundDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node popupBackgroundResource(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode popupBackgroundResource(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setPopupBackgroundResource(arg);
         }
       }
-    });
+    };
   }
-  public static Node popupParent(final android.view.View arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode popupParent(final android.view.View arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setPopupParent(arg);
         }
       }
-    });
+    };
   }
-  public static Node popupTheme(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode popupTheme(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setPopupTheme(arg);
         }
@@ -3909,182 +3907,182 @@ public class Props {
           ((android.widget.ActionMenuView) v).setPopupTheme(arg);
         }
       }
-    });
+    };
   }
-  public static Node preserveEGLContextOnPause(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode preserveEGLContextOnPause(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setPreserveEGLContextOnPause(arg);
         }
       }
-    });
+    };
   }
-  public static Node pressed(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode pressed(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setPressed(arg);
         }
       }
-    });
+    };
   }
-  public static Node previewEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode previewEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setPreviewEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node privateImeOptions(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode privateImeOptions(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setPrivateImeOptions(arg);
         }
       }
-    });
+    };
   }
-  public static Node progress(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode progress(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setProgress(arg);
         }
       }
-    });
+    };
   }
-  public static Node progressBackgroundTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode progressBackgroundTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setProgressBackgroundTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node progressBackgroundTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode progressBackgroundTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setProgressBackgroundTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node progressDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode progressDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setProgressDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node progressDrawableTiled(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode progressDrawableTiled(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setProgressDrawableTiled(arg);
         }
       }
-    });
+    };
   }
-  public static Node progressTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode progressTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setProgressTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node progressTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode progressTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setProgressTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node prompt(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode prompt(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setPrompt(arg);
         }
       }
-    });
+    };
   }
-  public static Node promptId(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode promptId(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Spinner) {
           ((android.widget.Spinner) v).setPromptId(arg);
         }
       }
-    });
+    };
   }
-  public static Node proximityCorrectionEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode proximityCorrectionEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setProximityCorrectionEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node queryHint(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode queryHint(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setQueryHint(arg);
         }
       }
-    });
+    };
   }
-  public static Node queryRefinementEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode queryRefinementEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setQueryRefinementEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node rating(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rating(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RatingBar) {
           ((android.widget.RatingBar) v).setRating(arg);
         }
       }
-    });
+    };
   }
-  public static Node rawInputType(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rawInputType(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setRawInputType(arg);
         }
       }
-    });
+    };
   }
-  public static Node recyclerListener(final android.widget.AbsListView.RecyclerListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode recyclerListener(final android.widget.AbsListView.RecyclerListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setRecyclerListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node remoteViewsAdapter(final android.content.Intent arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode remoteViewsAdapter(final android.content.Intent arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setRemoteViewsAdapter(arg);
         }
@@ -4098,182 +4096,182 @@ public class Props {
           ((android.widget.ListView) v).setRemoteViewsAdapter(arg);
         }
       }
-    });
+    };
   }
-  public static Node renderMode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode renderMode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setRenderMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node renderer(final android.opengl.GLSurfaceView.Renderer arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode renderer(final android.opengl.GLSurfaceView.Renderer arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.opengl.GLSurfaceView) {
           ((android.opengl.GLSurfaceView) v).setRenderer(arg);
         }
       }
-    });
+    };
   }
-  public static Node right(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode right(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setRight(arg);
         }
       }
-    });
+    };
   }
-  public static Node rightStripDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rightStripDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setRightStripDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node rightStripDrawable(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rightStripDrawable(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setRightStripDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node rotation(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rotation(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setRotation(arg);
         }
       }
-    });
+    };
   }
-  public static Node rotationX(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rotationX(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setRotationX(arg);
         }
       }
-    });
+    };
   }
-  public static Node rotationY(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rotationY(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setRotationY(arg);
         }
       }
-    });
+    };
   }
-  public static Node routeTypes(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode routeTypes(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.app.MediaRouteButton) {
           ((android.app.MediaRouteButton) v).setRouteTypes(arg);
         }
       }
-    });
+    };
   }
-  public static Node rowCount(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rowCount(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridLayout) {
           ((android.widget.GridLayout) v).setRowCount(arg);
         }
       }
-    });
+    };
   }
-  public static Node rowOrderPreserved(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode rowOrderPreserved(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridLayout) {
           ((android.widget.GridLayout) v).setRowOrderPreserved(arg);
         }
       }
-    });
+    };
   }
-  public static Node saveEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode saveEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setSaveEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node saveFromParentEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode saveFromParentEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setSaveFromParentEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node scaleType(final android.widget.ImageView.ScaleType arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scaleType(final android.widget.ImageView.ScaleType arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setScaleType(arg);
         }
       }
-    });
+    };
   }
-  public static Node scaleX(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scaleX(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScaleX(arg);
         }
       }
-    });
+    };
   }
-  public static Node scaleY(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scaleY(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScaleY(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollBarDefaultDelayBeforeFade(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollBarDefaultDelayBeforeFade(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScrollBarDefaultDelayBeforeFade(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollBarFadeDuration(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollBarFadeDuration(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScrollBarFadeDuration(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollBarSize(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollBarSize(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScrollBarSize(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollBarStyle(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollBarStyle(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setScrollBarStyle(arg);
         }
@@ -4284,119 +4282,119 @@ public class Props {
           ((android.webkit.WebView) v).setScrollBarStyle(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollContainer(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollContainer(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScrollContainer(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollX(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollX(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScrollX(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollY(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollY(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScrollY(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollbarFadingEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollbarFadingEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setScrollbarFadingEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node scroller(final android.widget.Scroller arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scroller(final android.widget.Scroller arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setScroller(arg);
         }
       }
-    });
+    };
   }
-  public static Node scrollingCacheEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode scrollingCacheEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setScrollingCacheEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node searchableInfo(final android.app.SearchableInfo arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode searchableInfo(final android.app.SearchableInfo arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setSearchableInfo(arg);
         }
       }
-    });
+    };
   }
-  public static Node secondaryProgress(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode secondaryProgress(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setSecondaryProgress(arg);
         }
       }
-    });
+    };
   }
-  public static Node secondaryProgressTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode secondaryProgressTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setSecondaryProgressTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node secondaryProgressTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode secondaryProgressTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setSecondaryProgressTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node secure(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode secure(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.SurfaceView) {
           ((android.view.SurfaceView) v).setSecure(arg);
         }
       }
-    });
+    };
   }
-  public static Node selectAllOnFocus(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selectAllOnFocus(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setSelectAllOnFocus(arg);
         }
       }
-    });
+    };
   }
-  public static Node selected(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selected(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
           ((android.widget.ImageView) v).setSelected(arg);
         }
@@ -4407,47 +4405,47 @@ public class Props {
           ((android.view.View) v).setSelected(arg);
         }
       }
-    });
+    };
   }
-  public static Node selectedDateVerticalBar(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selectedDateVerticalBar(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setSelectedDateVerticalBar(arg);
         }
       }
-    });
+    };
   }
-  public static Node selectedDateVerticalBar(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selectedDateVerticalBar(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setSelectedDateVerticalBar(arg);
         }
       }
-    });
+    };
   }
-  public static Node selectedGroup(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selectedGroup(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ExpandableListView) {
           ((android.widget.ExpandableListView) v).setSelectedGroup(arg);
         }
       }
-    });
+    };
   }
-  public static Node selectedWeekBackgroundColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selectedWeekBackgroundColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setSelectedWeekBackgroundColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node selection(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selection(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.EditText) {
           ((android.widget.EditText) v).setSelection(arg);
         }
@@ -4467,110 +4465,110 @@ public class Props {
           ((android.widget.ListView) v).setSelection(arg);
         }
       }
-    });
+    };
   }
-  public static Node selector(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selector(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setSelector(arg);
         }
       }
-    });
+    };
   }
-  public static Node selector(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode selector(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setSelector(arg);
         }
       }
-    });
+    };
   }
-  public static Node shifted(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode shifted(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setShifted(arg);
         }
       }
-    });
+    };
   }
-  public static Node showDividers(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode showDividers(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setShowDividers(arg);
         }
       }
-    });
+    };
   }
-  public static Node showSoftInputOnFocus(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode showSoftInputOnFocus(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setShowSoftInputOnFocus(arg);
         }
       }
-    });
+    };
   }
-  public static Node showText(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode showText(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setShowText(arg);
         }
       }
-    });
+    };
   }
-  public static Node showWeekNumber(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode showWeekNumber(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setShowWeekNumber(arg);
         }
       }
-    });
+    };
   }
-  public static Node shownWeekCount(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode shownWeekCount(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setShownWeekCount(arg);
         }
       }
-    });
+    };
   }
-  public static Node shrinkAllColumns(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode shrinkAllColumns(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TableLayout) {
           ((android.widget.TableLayout) v).setShrinkAllColumns(arg);
         }
       }
-    });
+    };
   }
-  public static Node singleLine(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode singleLine(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setSingleLine(arg);
         }
       }
-    });
+    };
   }
-  public static Node smoothScrollbarEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode smoothScrollbarEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setSmoothScrollbarEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node smoothScrollingEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode smoothScrollingEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.HorizontalScrollView) {
           ((android.widget.HorizontalScrollView) v).setSmoothScrollingEnabled(arg);
         }
@@ -4578,47 +4576,47 @@ public class Props {
           ((android.widget.ScrollView) v).setSmoothScrollingEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node soundEffectsEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode soundEffectsEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setSoundEffectsEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node spacing(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode spacing(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Gallery) {
           ((android.widget.Gallery) v).setSpacing(arg);
         }
       }
-    });
+    };
   }
-  public static Node spannableFactory(final android.text.Spannable.Factory arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode spannableFactory(final android.text.Spannable.Factory arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setSpannableFactory(arg);
         }
       }
-    });
+    };
   }
-  public static Node spinnersShown(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode spinnersShown(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.DatePicker) {
           ((android.widget.DatePicker) v).setSpinnersShown(arg);
         }
       }
-    });
+    };
   }
-  public static Node splitTrack(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode splitTrack(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setSplitTrack(arg);
         }
@@ -4626,182 +4624,182 @@ public class Props {
           ((android.widget.AbsSeekBar) v).setSplitTrack(arg);
         }
       }
-    });
+    };
   }
-  public static Node stackFromBottom(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode stackFromBottom(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setStackFromBottom(arg);
         }
       }
-    });
+    };
   }
-  public static Node stateListAnimator(final android.animation.StateListAnimator arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode stateListAnimator(final android.animation.StateListAnimator arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setStateListAnimator(arg);
         }
       }
-    });
+    };
   }
-  public static Node stepSize(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode stepSize(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RatingBar) {
           ((android.widget.RatingBar) v).setStepSize(arg);
         }
       }
-    });
+    };
   }
-  public static Node streamVolume(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode streamVolume(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.media.tv.TvView) {
           ((android.media.tv.TvView) v).setStreamVolume(arg);
         }
       }
-    });
+    };
   }
-  public static Node stretchAllColumns(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode stretchAllColumns(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TableLayout) {
           ((android.widget.TableLayout) v).setStretchAllColumns(arg);
         }
       }
-    });
+    };
   }
-  public static Node stretchMode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode stretchMode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridView) {
           ((android.widget.GridView) v).setStretchMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node stripEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode stripEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
           ((android.widget.TabWidget) v).setStripEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node submitButtonEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode submitButtonEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setSubmitButtonEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node subtitle(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode subtitle(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setSubtitle(arg);
         }
       }
-    });
+    };
   }
-  public static Node subtitle(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode subtitle(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setSubtitle(arg);
         }
       }
-    });
+    };
   }
-  public static Node subtitleTextColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode subtitleTextColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setSubtitleTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node suggestionsAdapter(final android.widget.CursorAdapter arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode suggestionsAdapter(final android.widget.CursorAdapter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setSuggestionsAdapter(arg);
         }
       }
-    });
+    };
   }
-  public static Node surfaceTexture(final android.graphics.SurfaceTexture arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode surfaceTexture(final android.graphics.SurfaceTexture arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.TextureView) {
           ((android.view.TextureView) v).setSurfaceTexture(arg);
         }
       }
-    });
+    };
   }
-  public static Node surfaceTextureListener(final android.view.TextureView.SurfaceTextureListener arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode surfaceTextureListener(final android.view.TextureView.SurfaceTextureListener arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.TextureView) {
           ((android.view.TextureView) v).setSurfaceTextureListener(arg);
         }
       }
-    });
+    };
   }
-  public static Node switchMinWidth(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode switchMinWidth(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setSwitchMinWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node switchPadding(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode switchPadding(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setSwitchPadding(arg);
         }
       }
-    });
+    };
   }
-  public static Node switchTypeface(final android.graphics.Typeface arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode switchTypeface(final android.graphics.Typeface arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setSwitchTypeface(arg);
         }
       }
-    });
+    };
   }
-  public static Node systemUiVisibility(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode systemUiVisibility(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setSystemUiVisibility(arg);
         }
       }
-    });
+    };
   }
-  public static Node tag(final java.lang.Object arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode tag(final java.lang.Object arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTag(arg);
         }
       }
-    });
+    };
   }
-  public static Node text(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode text(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextSwitcher) {
           ((android.widget.TextSwitcher) v).setText(arg);
         }
@@ -4809,92 +4807,92 @@ public class Props {
           ((android.widget.TextView) v).setText(arg);
         }
       }
-    });
+    };
   }
-  public static Node text(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode text(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setText(arg);
         }
       }
-    });
+    };
   }
-  public static Node textAlignment(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textAlignment(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTextAlignment(arg);
         }
       }
-    });
+    };
   }
-  public static Node textColor(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textColor(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node textColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node textDirection(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textDirection(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTextDirection(arg);
         }
       }
-    });
+    };
   }
-  public static Node textFilterEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textFilterEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setTextFilterEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node textIsSelectable(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textIsSelectable(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTextIsSelectable(arg);
         }
       }
-    });
+    };
   }
-  public static Node textKeepState(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textKeepState(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTextKeepState(arg);
         }
       }
-    });
+    };
   }
-  public static Node textLocale(final java.util.Locale arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textLocale(final java.util.Locale arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTextLocale(arg);
         }
       }
-    });
+    };
   }
-  public static Node textOff(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textOff(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ToggleButton) {
           ((android.widget.ToggleButton) v).setTextOff(arg);
         }
@@ -4902,11 +4900,11 @@ public class Props {
           ((android.widget.Switch) v).setTextOff(arg);
         }
       }
-    });
+    };
   }
-  public static Node textOn(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textOn(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ToggleButton) {
           ((android.widget.ToggleButton) v).setTextOn(arg);
         }
@@ -4914,362 +4912,362 @@ public class Props {
           ((android.widget.Switch) v).setTextOn(arg);
         }
       }
-    });
+    };
   }
-  public static Node textScaleX(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textScaleX(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTextScaleX(arg);
         }
       }
-    });
+    };
   }
-  public static Node textSize(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode textSize(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTextSize(arg);
         }
       }
-    });
+    };
   }
-  public static Node threshold(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode threshold(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setThreshold(arg);
         }
       }
-    });
+    };
   }
-  public static Node thumb(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode thumb(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsSeekBar) {
           ((android.widget.AbsSeekBar) v).setThumb(arg);
         }
       }
-    });
+    };
   }
-  public static Node thumbDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode thumbDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setThumbDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node thumbOffset(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode thumbOffset(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsSeekBar) {
           ((android.widget.AbsSeekBar) v).setThumbOffset(arg);
         }
       }
-    });
+    };
   }
-  public static Node thumbResource(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode thumbResource(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setThumbResource(arg);
         }
       }
-    });
+    };
   }
-  public static Node thumbTextPadding(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode thumbTextPadding(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setThumbTextPadding(arg);
         }
       }
-    });
+    };
   }
-  public static Node thumbTintList(final android.content.res.ColorStateList arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode thumbTintList(final android.content.res.ColorStateList arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsSeekBar) {
           ((android.widget.AbsSeekBar) v).setThumbTintList(arg);
         }
       }
-    });
+    };
   }
-  public static Node thumbTintMode(final android.graphics.PorterDuff.Mode arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode thumbTintMode(final android.graphics.PorterDuff.Mode arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsSeekBar) {
           ((android.widget.AbsSeekBar) v).setThumbTintMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node timeZone(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode timeZone(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextClock) {
           ((android.widget.TextClock) v).setTimeZone(arg);
         }
       }
-    });
+    };
   }
-  public static Node title(final java.lang.CharSequence arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode title(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setTitle(arg);
         }
       }
-    });
+    };
   }
-  public static Node title(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode title(final java.lang.CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setTitle(arg);
         }
       }
-    });
+    };
   }
-  public static Node titleTextColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode titleTextColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Toolbar) {
           ((android.widget.Toolbar) v).setTitleTextColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node tokenizer(final android.widget.MultiAutoCompleteTextView.Tokenizer arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode tokenizer(final android.widget.MultiAutoCompleteTextView.Tokenizer arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.MultiAutoCompleteTextView) {
           ((android.widget.MultiAutoCompleteTextView) v).setTokenizer(arg);
         }
       }
-    });
+    };
   }
-  public static Node top(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode top(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTop(arg);
         }
       }
-    });
+    };
   }
-  public static Node touchDelegate(final android.view.TouchDelegate arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode touchDelegate(final android.view.TouchDelegate arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTouchDelegate(arg);
         }
       }
-    });
+    };
   }
-  public static Node touchscreenBlocksFocus(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode touchscreenBlocksFocus(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setTouchscreenBlocksFocus(arg);
         }
       }
-    });
+    };
   }
-  public static Node trackDrawable(final android.graphics.drawable.Drawable arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode trackDrawable(final android.graphics.drawable.Drawable arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setTrackDrawable(arg);
         }
       }
-    });
+    };
   }
-  public static Node trackResource(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode trackResource(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Switch) {
           ((android.widget.Switch) v).setTrackResource(arg);
         }
       }
-    });
+    };
   }
-  public static Node transcriptMode(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode transcriptMode(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setTranscriptMode(arg);
         }
       }
-    });
+    };
   }
-  public static Node transform(final android.graphics.Matrix arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode transform(final android.graphics.Matrix arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.TextureView) {
           ((android.view.TextureView) v).setTransform(arg);
         }
       }
-    });
+    };
   }
-  public static Node transformationMethod(final android.text.method.TransformationMethod arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode transformationMethod(final android.text.method.TransformationMethod arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTransformationMethod(arg);
         }
       }
-    });
+    };
   }
-  public static Node transitionGroup(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode transitionGroup(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setTransitionGroup(arg);
         }
       }
-    });
+    };
   }
-  public static Node transitionName(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode transitionName(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTransitionName(arg);
         }
       }
-    });
+    };
   }
-  public static Node translationX(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode translationX(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTranslationX(arg);
         }
       }
-    });
+    };
   }
-  public static Node translationY(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode translationY(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTranslationY(arg);
         }
       }
-    });
+    };
   }
-  public static Node translationZ(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode translationZ(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setTranslationZ(arg);
         }
       }
-    });
+    };
   }
-  public static Node typeface(final android.graphics.Typeface arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode typeface(final android.graphics.Typeface arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setTypeface(arg);
         }
       }
-    });
+    };
   }
-  public static Node uncertainGestureColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode uncertainGestureColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.gesture.GestureOverlayView) {
           ((android.gesture.GestureOverlayView) v).setUncertainGestureColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node unfocusedMonthDateColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode unfocusedMonthDateColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setUnfocusedMonthDateColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node unselectedAlpha(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode unselectedAlpha(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.Gallery) {
           ((android.widget.Gallery) v).setUnselectedAlpha(arg);
         }
       }
-    });
+    };
   }
-  public static Node up(final android.app.LocalActivityManager arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode up(final android.app.LocalActivityManager arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TabHost) {
           ((android.widget.TabHost) v).setup(arg);
         }
       }
-    });
+    };
   }
-  public static Node useDefaultMargins(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode useDefaultMargins(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridLayout) {
           ((android.widget.GridLayout) v).setUseDefaultMargins(arg);
         }
       }
-    });
+    };
   }
-  public static Node validator(final android.widget.AutoCompleteTextView.Validator arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode validator(final android.widget.AutoCompleteTextView.Validator arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setValidator(arg);
         }
       }
-    });
+    };
   }
-  public static Node value(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode value(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setValue(arg);
         }
       }
-    });
+    };
   }
-  public static Node velocityScale(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode velocityScale(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setVelocityScale(arg);
         }
       }
-    });
+    };
   }
-  public static Node verticalCorrection(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode verticalCorrection(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setVerticalCorrection(arg);
         }
       }
-    });
+    };
   }
-  public static Node verticalFadingEdgeEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode verticalFadingEdgeEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setVerticalFadingEdgeEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node verticalGravity(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode verticalGravity(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.RelativeLayout) {
           ((android.widget.RelativeLayout) v).setVerticalGravity(arg);
         }
@@ -5277,29 +5275,29 @@ public class Props {
           ((android.widget.LinearLayout) v).setVerticalGravity(arg);
         }
       }
-    });
+    };
   }
-  public static Node verticalScrollBarEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode verticalScrollBarEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setVerticalScrollBarEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node verticalScrollbarOverlay(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode verticalScrollbarOverlay(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setVerticalScrollbarOverlay(arg);
         }
       }
-    });
+    };
   }
-  public static Node verticalScrollbarPosition(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode verticalScrollbarPosition(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setVerticalScrollbarPosition(arg);
         }
@@ -5307,38 +5305,38 @@ public class Props {
           ((android.view.View) v).setVerticalScrollbarPosition(arg);
         }
       }
-    });
+    };
   }
-  public static Node verticalSpacing(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode verticalSpacing(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.GridView) {
           ((android.widget.GridView) v).setVerticalSpacing(arg);
         }
       }
-    });
+    };
   }
-  public static Node videoPath(final java.lang.String arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode videoPath(final java.lang.String arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.VideoView) {
           ((android.widget.VideoView) v).setVideoPath(arg);
         }
       }
-    });
+    };
   }
-  public static Node videoURI(final android.net.Uri arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode videoURI(final android.net.Uri arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.VideoView) {
           ((android.widget.VideoView) v).setVideoURI(arg);
         }
       }
-    });
+    };
   }
-  public static Node visibility(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode visibility(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ProgressBar) {
           ((android.widget.ProgressBar) v).setVisibility(arg);
         }
@@ -5364,155 +5362,155 @@ public class Props {
           ((android.app.MediaRouteButton) v).setVisibility(arg);
         }
       }
-    });
+    };
   }
-  public static Node webChromeClient(final android.webkit.WebChromeClient arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode webChromeClient(final android.webkit.WebChromeClient arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setWebChromeClient(arg);
         }
       }
-    });
+    };
   }
-  public static Node webContentsDebuggingEnabled(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode webContentsDebuggingEnabled(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setWebContentsDebuggingEnabled(arg);
         }
       }
-    });
+    };
   }
-  public static Node webViewClient(final android.webkit.WebViewClient arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode webViewClient(final android.webkit.WebViewClient arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.webkit.WebView) {
           ((android.webkit.WebView) v).setWebViewClient(arg);
         }
       }
-    });
+    };
   }
-  public static Node weekDayTextAppearance(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode weekDayTextAppearance(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setWeekDayTextAppearance(arg);
         }
       }
-    });
+    };
   }
-  public static Node weekNumberColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode weekNumberColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setWeekNumberColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node weekSeparatorLineColor(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode weekSeparatorLineColor(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.CalendarView) {
           ((android.widget.CalendarView) v).setWeekSeparatorLineColor(arg);
         }
       }
-    });
+    };
   }
-  public static Node weightSum(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode weightSum(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setWeightSum(arg);
         }
       }
-    });
+    };
   }
-  public static Node width(final int arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode width(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.TextView) {
           ((android.widget.TextView) v).setWidth(arg);
         }
       }
-    });
+    };
   }
-  public static Node willNotCacheDrawing(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode willNotCacheDrawing(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setWillNotCacheDrawing(arg);
         }
       }
-    });
+    };
   }
-  public static Node willNotDraw(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode willNotDraw(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setWillNotDraw(arg);
         }
       }
-    });
+    };
   }
-  public static Node wrapSelectorWheel(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode wrapSelectorWheel(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.NumberPicker) {
           ((android.widget.NumberPicker) v).setWrapSelectorWheel(arg);
         }
       }
-    });
+    };
   }
-  public static Node x(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode x(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setX(arg);
         }
       }
-    });
+    };
   }
-  public static Node y(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode y(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setY(arg);
         }
       }
-    });
+    };
   }
-  public static Node z(final float arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode z(final float arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.View) {
           ((android.view.View) v).setZ(arg);
         }
       }
-    });
+    };
   }
-  public static Node zOrderMediaOverlay(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode zOrderMediaOverlay(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.SurfaceView) {
           ((android.view.SurfaceView) v).setZOrderMediaOverlay(arg);
         }
       }
-    });
+    };
   }
-  public static Node zOrderOnTop(final boolean arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode zOrderOnTop(final boolean arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.view.SurfaceView) {
           ((android.view.SurfaceView) v).setZOrderOnTop(arg);
         }
       }
-    });
+    };
   }
-  public static Node zoomSpeed(final long arg) {
-    return new Node(new SimpleSetter(arg) {
-      public void set(View v) {
+  public static AttrNode zoomSpeed(final long arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
         if (v instanceof android.widget.ZoomControls) {
           ((android.widget.ZoomControls) v).setZoomSpeed(arg);
         }
@@ -5520,6 +5518,6 @@ public class Props {
           ((android.widget.ZoomButton) v).setZoomSpeed(arg);
         }
       }
-    });
+    };
   }
 }

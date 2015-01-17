@@ -37,7 +37,7 @@ public class Props {
 	public final static int START = 0x00800003;
 	public final static int END = 0x00800005;
 
-	public static class LayoutNode extends Node implements AttributeSetter {
+	public static class LayoutNode implements AttrNode {
 		int width;
 		int height;
 		float weight;
@@ -47,8 +47,6 @@ public class Props {
 		int[] margin = new int[4];
 		
 		public LayoutNode(int width, int height) {
-			super((AttributeSetter) null);
-			this.setter = this;
 			this.width = width;
 			this.height = height;
 		}
@@ -89,7 +87,7 @@ public class Props {
 			return this;
 		}
 
-		public void set(View v) {
+		public void apply(View v) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
 			p.width = width;
 			p.height = height;
@@ -134,23 +132,23 @@ public class Props {
 		return new LayoutNode(w, h);
 	}
 
-	public static Node padding(int p) {
+	public static AttrNode padding(int p) {
 		return padding(p, p, p, p);
 	}
 
-	public static Node padding(int horizontal, int vertical) {
+	public static AttrNode padding(int horizontal, int vertical) {
 		return padding(horizontal, vertical, horizontal, vertical);
 	}
 
-	public static Node padding(final int left, final int top, final int right, final int bottom) {
+	public static AttrNode padding(final int left, final int top, final int right, final int bottom) {
 		final List<Integer> params = new ArrayList<Integer>() {{
 			add(top); add(right); add(bottom); add(left);
 		}};
-		return new Node(new SimpleSetter(params) {
-			public void set(View v) {
+		return new SimpleAttrNode(params) {
+			public void apply(View v) {
 				v.setPadding(params.get(0), params.get(1), params.get(2), params.get(3));
 			}
-		});
+		};
 	}
 
 	//

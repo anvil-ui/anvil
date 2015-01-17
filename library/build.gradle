@@ -108,12 +108,12 @@ class GeneratorTask extends DefaultTask {
 				output = output + gen(param)
 			}
 			if (output.length() > 0) {
-				s += ("  public static Node ${name}(final ${param.getCanonicalName()} arg) {\n")
-				s += ("    return new Node(new SimpleSetter(arg) {\n")
-				s += ("      public void set(View v) {\n")
+				s += ("  public static AttrNode ${name}(final ${param.getCanonicalName()} arg) {\n")
+				s += ("    return new SimpleAttrNode(arg) {\n")
+				s += ("      public void apply(View v) {\n")
 				s += ("        ${output.replace("\n", "\n        ").replaceAll(/\s*$/, '')}\n")
 				s += ("      }\n")
-				s += ("    });\n")
+				s += ("    };\n")
 				s += ("  }\n")
 			}
 		}
