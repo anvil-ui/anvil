@@ -16,4 +16,7 @@ This approach uses no hacks, no code generation or reflection. This also
 behaves like in reactive programming - if a variable referred in the layout is
 changed - the UI will be adjusted automatically (in most common cases).
 
-For more details see my blog post - http://zserge.com/blog/android-mvx.html
+For more details see my blog posts:
+
+- http://zserge.com/blog/android-mvx.html
+- http://zserge.com/blog/anvil-1.html
