@@ -37,7 +37,10 @@ apply from: 'maven-push.gradle'
 task generateProps(type: GeneratorTask)
 
 class GeneratorTask extends DefaultTask {
-	def apiLevels = [4, 10, 15, 21]
+	// Most practical API versions according to Android Dashboards:
+	// - newer then API level 10 (GB 2.3.3, 99.6% of devices)
+	// - newer than API level 15 (ICS 4.0.3, 91.8% of devices)
+	def apiLevels = [10, 15]
 	def propsDir = "props"
 
 	@TaskAction
