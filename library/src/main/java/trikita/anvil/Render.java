@@ -1,13 +1,17 @@
 package trikita.anvil;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -85,6 +89,10 @@ public class Render {
 	//
 	private static Deque<Renderable> renderStack = new ArrayDeque<Renderable>();
 
+	public static boolean isPortait() {
+		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+	}
+
 	public static TypedValue attr(int attr) {
 		TypedValue tv = new TypedValue();
 		renderStack.peek().getRootView().getContext().getTheme().resolveAttribute(attr, tv, true);
@@ -97,13 +105,12 @@ public class Render {
 	}
 
 	public static float dip(float value) {
-		DisplayMetrics dm = getResources().getDisplayMetrics();
-    return value * (dm.xdpi / DisplayMetrics.DENSITY_DEFAULT);
+		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value,
+				getResources().getDisplayMetrics());
 	}
 
 	public static int dip(int value) {
-		DisplayMetrics dm = getResources().getDisplayMetrics();
-    return Math.round(value * (dm.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+		return Math.round(dip((float) value));
 	}
 
 	private static Resources getResources() {
@@ -122,6 +129,13 @@ public class Render {
 		renderStack.pop();
 	}
 
+
+	private static boolean skipNextRender = false;
+
+	public static void skipRender() {
+		skipNextRender = true;
+	}
+
 	public static void render(Renderable r) {
 		if (!startRendering(r)) {
 			return; // Don't render same renderer recursively
@@ -136,6 +150,10 @@ public class Render {
 
 	// Render all mounted views
 	public static void render() {
+		if (skipNextRender) {
+			skipNextRender = false;
+			return;
+		}
 		for (Renderable r: mounts.keySet()) {
 			render(r);
 		}
@@ -217,6 +235,57 @@ public class Render {
 		}
 	}
 
+	public abstract static class RenderableView extends FrameLayout implements Renderable {
+
+		// View must have a non-zero ID to make onSaveInstanceState() and
+		// onRestoreInstanceState() called
+		public final static int DEFAULT_RENDERABLE_ID = 0xaccede;
+
+		// We can't do render(this) here because it would call overridden methods
+		public RenderableView(Context c) {
+			super(c);
+			setId(DEFAULT_RENDERABLE_ID);
+		}
+
+		private boolean isRendered = false;
+		// Seems to be a good place to start rendering our view
+		public void onMeasure(int wspec, int hspec) {
+			if (isRendered == false) {
+				render(this);
+				isRendered = true;
+			}
+			super.onMeasure(wspec, hspec);
+		}
+
+		public ViewGroup getRootView() {
+			return this;
+		}
+
+		public void onLoad(Bundle b) {}
+		public void onSave(Bundle b) {}
+
+		@Override
+		public Parcelable onSaveInstanceState() {
+			System.out.println("onSaveInstanceState");
+			Bundle b = new Bundle();
+			b.putParcelable("instanceState", super.onSaveInstanceState());
+			onSave(b);
+			return b;
+		}
+
+		@Override
+		public void onRestoreInstanceState(Parcelable p) {
+			System.out.println("onRestoreInstanceState");
+			if (p instanceof Bundle) {
+				Bundle b = (Bundle) p;
+				onLoad(b);
+				super.onRestoreInstanceState(b.getParcelable("instanceState"));
+			} else {
+				super.onRestoreInstanceState(p);
+			}
+		}
+	}
+
 	//
 	// In RenderableAdapter one must override getCount(), getItem() and itemView(pos)
 	//
@@ -282,7 +351,7 @@ public class Render {
 	// A mount point inside the adapter view.
 	// Views can't be added to the adapter view, so we need to define their
 	// layoutparams without adding
-	public static class AdapterMount implements Mount {
+	private static class AdapterMount implements Mount {
 		ViewGroup.LayoutParams params;
 		View view;
 		public AdapterMount(View v, ViewGroup.LayoutParams params) {
