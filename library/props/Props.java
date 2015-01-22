@@ -1,15 +1,16 @@
 package trikita.anvil;
 
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static trikita.anvil.Render.*;
-import android.widget.FrameLayout;
-import android.widget.TableRow;
 
 public class Props {
 	//
@@ -122,13 +123,15 @@ public class Props {
 				LayoutNode n = (LayoutNode) obj;
 				return this.width == n.width && this.height == n.height &&
 					this.weight == n.weight && this.gravity == n.gravity &&
-					this.column == n.column && this.span == n.span;
+					this.column == n.column && this.span == n.span &&
+					this.margin[0] == n.margin[0] && this.margin[1] == n.margin[1] &&
+					this.margin[2] == n.margin[2] && this.margin[3] == n.margin[3];
 			}
 			return false;
 		}
 	}
 
-	public static LayoutNode layout(int w, int h) {
+	public static LayoutNode size(int w, int h) {
 		return new LayoutNode(w, h);
 	}
 
@@ -147,6 +150,17 @@ public class Props {
 		return new SimpleAttrNode(params) {
 			public void apply(View v) {
 				v.setPadding(params.get(0), params.get(1), params.get(2), params.get(3));
+			}
+		};
+	}
+
+	public static AttrNode typeface(final String font) {
+		return new SimpleAttrNode(font) {
+			public void apply(View v) {
+				if (v instanceof android.widget.TextView) {
+					((android.widget.TextView) v)
+						.setTypeface(Typeface.createFromAsset(v.getContext().getAssets(), font));
+				}
 			}
 		};
 	}
