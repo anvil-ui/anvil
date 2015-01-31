@@ -51,6 +51,7 @@ public class Render {
 		void apply(View v);
 	}
 
+
 	// Map of active renderables and their actual view nodes
 	private static Map<Renderable, ViewNode> mounts = new WeakHashMap<Renderable, ViewNode>();
 
@@ -82,6 +83,48 @@ public class Render {
 					((this.value == null && ((SimpleAttrNode) obj).value == null)
 					|| this.value.equals(((SimpleAttrNode) obj).value)));
 		}
+	}
+
+	// Helper for multiple attributes (normally static) combined into one
+	public static class MultiNode implements AttrNode {
+		private AttrNode[] nodes;
+		private int hash;
+
+		public MultiNode(AttrNode... nodes) {
+			this.nodes = nodes;
+			for (AttrNode n : nodes) {
+				hash ^= n.hashCode();
+			}
+		}
+
+		public void apply(View v) {
+			for (AttrNode n : nodes) {
+				n.apply(v);
+			}
+		}
+
+		public int hashCode() {
+			return hash;
+		}
+
+		public boolean equals(Object obj) {
+			if (obj instanceof MultiNode) {
+				MultiNode m = (MultiNode) obj;
+				if (this.nodes.length == m.nodes.length) {
+					for (int i = 0; i < this.nodes.length; i++) {
+						if (this.nodes[i].equals(m.nodes[i]) == false) {
+							return false;
+						}
+					}
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	public static AttrNode attrs(AttrNode ...nodes) {
+		return new MultiNode(nodes);
 	}
 
 	//
