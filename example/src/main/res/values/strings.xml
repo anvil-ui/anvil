@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ExampleActivity</string>
+	<string name="app_name">Anvil Example</string>
+
+	<string name="create">NEW</string>
+	<string name="resume">GO ON</string>
+	<string name="done">DONE</string>
+	<string name="start">START</string>
+	<string name="again">AGAIN</string>
+	<string name="failed">FAILED</string>
+
+	<string name="task_name_hint">Task name</string>
+	<string name="set_time">SET TIME</string>
+	<string name="set_time_title">Set time</string>
+
+	<string name="list_group_completed">COMPELTED</string>
+	<string name="list_group_failed">FAILED</string>
 </resources>
