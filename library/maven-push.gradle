@@ -45,9 +45,9 @@ afterEvaluate { project ->
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                pom.groupId = GROUP
-                pom.artifactId = POM_ARTIFACT_ID
-                pom.version = VERSION_NAME
+                pom.groupId = hasProperty('GROUP') ? GROUP : ""
+                pom.artifactId = hasProperty('POM_ARTIFACT_ID') ? POM_ARTIFACT_ID : ""
+                pom.version = hasProperty('VERSION_NAME') ? VERSION_NAME : ""
 
                 repository(url: getReleaseRepositoryUrl()) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
@@ -57,29 +57,29 @@ afterEvaluate { project ->
                 }
 
                 pom.project {
-                    name POM_NAME
-                    packaging POM_PACKAGING
-                    description POM_DESCRIPTION
-                    url POM_URL
+                    name hasProperty('POM_NAME') ? POM_NAME : ""
+                    packaging hasProperty('POM_PACKAGING') ? POM_PACKAGING : ''
+                    description hasProperty('POM_DESCRIPTION') ? POM_DESCRIPTION : ''
+                    url hasProperty('POM_URL') ? POM_URL : ''
 
                     scm {
-                        url POM_SCM_URL
-                        connection POM_SCM_CONNECTION
-                        developerConnection POM_SCM_DEV_CONNECTION
+                        url hasProperty('POM_SCM_URL') ? POM_SCM_URL : ''
+                        connection hasProperty('POM_SCM_CONNECTION') ? POM_SCM_CONNECTION : ''
+                        developerConnection hasProperty('POM_SCM_DEV_CONNECTION') ? POM_SCM_DEV_CONNECTION : ''
                     }
 
                     licenses {
                         license {
-                            name POM_LICENCE_NAME
-                            url POM_LICENCE_URL
-                            distribution POM_LICENCE_DIST
+                            name hasProperty('POM_LICENCE_NAME') ? POM_LICENCE_NAME : ''
+                            url hasProperty('POM_LICENCE_URL') ? POM_LICENCE_URL : ''
+                            distribution hasProperty('POM_LICENCE_DIST') ? POM_LICENCE_DIST : ''
                         }
                     }
 
                     developers {
                         developer {
-                            id POM_DEVELOPER_ID
-                            name POM_DEVELOPER_NAME
+                            id hasProperty('POM_DEVELOPER_ID') ? POM_DEVELOPER_ID : ''
+                            name hasProperty('POM_DEVELOPER_NAME') ? POM_DEVELOPER_NAME : ''
                         }
                     }
                 }
@@ -91,15 +91,6 @@ afterEvaluate { project ->
         required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
     }
-
-    //task androidJavadocs(type: Javadoc) {
-        //source = android.sourceSets.main.allJava
-    //}
-
-    //task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        //classifier = 'javadoc'
-        //from androidJavadocs.destinationDir
-    //}
 
     task androidSourcesJar(type: Jar) {
         classifier = 'sources'
