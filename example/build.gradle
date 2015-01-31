@@ -5,10 +5,13 @@ buildscript {
 	dependencies {
 		classpath 'com.android.tools.build:gradle:1.0.0'
 		classpath 'me.tatarka:gradle-retrolambda:2.5.+'
+		classpath 'org.robolectric:robolectric-gradle-plugin:0.14.+'
 	}
 }
+
 apply plugin: 'android'
-apply plugin: 'retrolambda'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'robolectric'
 
 android {
 	compileSdkVersion 'android-21'
@@ -21,14 +24,18 @@ android {
 		}
 	}
 
+	lintOptions {
+		abortOnError false
+	}
+
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
 	}
 
 	defaultConfig {
-		minSdkVersion 4
-		targetSdkVersion 21
+		minSdkVersion 10
+		targetSdkVersion 18 // It can be 21, but Robolectric doesn't support it yet
 	}
 }
 
@@ -38,5 +45,6 @@ repositories {
 
 dependencies {
 	compile project('..:library')
+	androidTestCompile 'junit:junit:4.+'
+	androidTestCompile 'org.robolectric:robolectric:2.+'
 }
-
