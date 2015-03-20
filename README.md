@@ -1,5 +1,7 @@
 # Declarative layouts in Java
 
+[![Join the chat at https://gitter.im/zserge/android-virtual-layout](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zserge/android-virtual-layout?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Using this approach you can declare your layouts like:
 
 	v(LinearLayout.class,
