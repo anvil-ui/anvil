@@ -1472,6 +1472,7 @@ public class Props {
       }
     };
   }
+
   public static AttrNode groupIndicator(final android.graphics.drawable.Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {

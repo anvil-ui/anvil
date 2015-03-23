@@ -44,6 +44,18 @@ public class Render {
 		public ViewNode(Class<? extends View> c) {
 			this.viewClass = c;
 		}
+
+		public ViewNode add(Collection<ViewNode> c) {
+			this.children.addAll(c);
+			return this;
+		}
+
+		public ViewNode add(ViewNode ...c) {
+			for (ViewNode n : c) {
+				this.children.add(n);
+			}
+			return this;
+		}
 	}
 
 	// Attributes can be used with both views and viewgroups
@@ -132,7 +144,7 @@ public class Render {
 	//
 	private static Deque<Renderable> renderStack = new ArrayDeque<Renderable>();
 
-	public static boolean isPortait() {
+	public static boolean isPortrait() {
 		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 	}
 
