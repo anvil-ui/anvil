@@ -266,8 +266,8 @@ public class Render {
 			// Some views could be removed since last render
 			if (v instanceof ViewGroup) {
 				ViewGroup vg = (ViewGroup) v;
-				if (viewIndex != 0 && vg.getChildCount() >= viewIndex) {
-					vg.removeViews(viewIndex-1, vg.getChildCount() - viewIndex);
+				if (viewIndex != 0 && vg.getChildCount() > viewIndex) {
+					vg.removeViews(viewIndex, vg.getChildCount() - viewIndex);
 				}
 			}
 			for (int i = 0; i < node.attrs.size(); i++) {
@@ -321,7 +321,6 @@ public class Render {
 
 		@Override
 		public Parcelable onSaveInstanceState() {
-			System.out.println("onSaveInstanceState");
 			Bundle b = new Bundle();
 			b.putParcelable("instanceState", super.onSaveInstanceState());
 			onSave(b);
@@ -330,7 +329,6 @@ public class Render {
 
 		@Override
 		public void onRestoreInstanceState(Parcelable p) {
-			System.out.println("onRestoreInstanceState");
 			if (p instanceof Bundle) {
 				Bundle b = (Bundle) p;
 				onLoad(b);
