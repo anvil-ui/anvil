@@ -146,7 +146,7 @@ public class Props {
 
 	public static AttrNode padding(final int left, final int top, final int right, final int bottom) {
 		final List<Integer> params = new ArrayList<Integer>() {{
-			add(top); add(right); add(bottom); add(left);
+			add(left); add(top); add(right); add(bottom);
 		}};
 		return new SimpleAttrNode(params) {
 			public void apply(View v) {
@@ -473,7 +473,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode buttonDrawable(final int arg) {
+  public static AttrNode buttonDrawable(final android.graphics.drawable.Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.CompoundButton) {
@@ -482,7 +482,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode buttonDrawable(final android.graphics.drawable.Drawable arg) {
+  public static AttrNode buttonDrawable(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.CompoundButton) {
@@ -833,15 +833,6 @@ public class Props {
       }
     };
   }
-  public static AttrNode dividerDrawable(final int arg) {
-    return new SimpleAttrNode(arg) {
-      public void apply(View v) {
-        if (v instanceof android.widget.TabWidget) {
-          ((android.widget.TabWidget) v).setDividerDrawable(arg);
-        }
-      }
-    };
-  }
   public static AttrNode dividerDrawable(final android.graphics.drawable.Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
@@ -850,6 +841,15 @@ public class Props {
         }
         if (v instanceof android.widget.LinearLayout) {
           ((android.widget.LinearLayout) v).setDividerDrawable(arg);
+        }
+      }
+    };
+  }
+  public static AttrNode dividerDrawable(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
+        if (v instanceof android.widget.TabWidget) {
+          ((android.widget.TabWidget) v).setDividerDrawable(arg);
         }
       }
     };
@@ -1472,7 +1472,6 @@ public class Props {
       }
     };
   }
-
   public static AttrNode groupIndicator(final android.graphics.drawable.Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
@@ -1518,7 +1517,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode hint(final java.lang.CharSequence arg) {
+  public static AttrNode hint(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -1527,7 +1526,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode hint(final int arg) {
+  public static AttrNode hint(final java.lang.CharSequence arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -2003,7 +2002,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode linkTextColor(final android.content.res.ColorStateList arg) {
+  public static AttrNode linkTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -2012,7 +2011,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode linkTextColor(final int arg) {
+  public static AttrNode linkTextColor(final android.content.res.ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -2841,24 +2840,24 @@ public class Props {
       public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
-              arg.onItemSelected(a0, a1, a2, a3);
-              render();
-            }
             public void onNothingSelected(android.widget.AdapterView a0) {
               arg.onNothingSelected(a0);
+              render();
+            }
+            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
               render();
             }
          });
         }
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
-              arg.onItemSelected(a0, a1, a2, a3);
-              render();
-            }
             public void onNothingSelected(android.widget.AdapterView a0) {
               arg.onNothingSelected(a0);
+              render();
+            }
+            public void onItemSelected(android.widget.AdapterView a0, android.view.View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
               render();
             }
          });
@@ -2886,16 +2885,8 @@ public class Props {
       public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setOnKeyboardActionListener(new android.inputmethodservice.KeyboardView.OnKeyboardActionListener() {
-            public void onPress(int a0) {
-              arg.onPress(a0);
-              render();
-            }
-            public void onRelease(int a0) {
-              arg.onRelease(a0);
-              render();
-            }
-            public void onText(java.lang.CharSequence a0) {
-              arg.onText(a0);
+            public void onKey(int a0, int[] a1) {
+              arg.onKey(a0, a1);
               render();
             }
             public void swipeRight() {
@@ -2914,8 +2905,16 @@ public class Props {
               arg.swipeDown();
               render();
             }
-            public void onKey(int a0, int[] a1) {
-              arg.onKey(a0, a1);
+            public void onPress(int a0) {
+              arg.onPress(a0);
+              render();
+            }
+            public void onRelease(int a0) {
+              arg.onRelease(a0);
+              render();
+            }
+            public void onText(java.lang.CharSequence a0) {
+              arg.onText(a0);
               render();
             }
          });
@@ -3082,13 +3081,13 @@ public class Props {
       public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnSuggestionListener(new android.widget.SearchView.OnSuggestionListener() {
-            public boolean onSuggestionSelect(int a0) {
-              boolean r = arg.onSuggestionSelect(a0);
+            public boolean onSuggestionClick(int a0) {
+              boolean r = arg.onSuggestionClick(a0);
               render();
               return r;
             }
-            public boolean onSuggestionClick(int a0) {
-              boolean r = arg.onSuggestionClick(a0);
+            public boolean onSuggestionSelect(int a0) {
+              boolean r = arg.onSuggestionSelect(a0);
               render();
               return r;
             }
@@ -3970,15 +3969,6 @@ public class Props {
       }
     };
   }
-  public static AttrNode text(final int arg) {
-    return new SimpleAttrNode(arg) {
-      public void apply(View v) {
-        if (v instanceof android.widget.TextView) {
-          ((android.widget.TextView) v).setText(arg);
-        }
-      }
-    };
-  }
   public static AttrNode text(final java.lang.CharSequence arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
@@ -3991,7 +3981,16 @@ public class Props {
       }
     };
   }
-  public static AttrNode textColor(final int arg) {
+  public static AttrNode text(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
+        if (v instanceof android.widget.TextView) {
+          ((android.widget.TextView) v).setText(arg);
+        }
+      }
+    };
+  }
+  public static AttrNode textColor(final android.content.res.ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -4000,7 +3999,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode textColor(final android.content.res.ColorStateList arg) {
+  public static AttrNode textColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {

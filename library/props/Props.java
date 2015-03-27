@@ -145,7 +145,7 @@ public class Props {
 
 	public static AttrNode padding(final int left, final int top, final int right, final int bottom) {
 		final List<Integer> params = new ArrayList<Integer>() {{
-			add(top); add(right); add(bottom); add(left);
+			add(left); add(top); add(right); add(bottom);
 		}};
 		return new SimpleAttrNode(params) {
 			public void apply(View v) {
