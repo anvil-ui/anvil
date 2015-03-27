@@ -4,13 +4,17 @@
 
 Using this approach you can declare your layouts like:
 
+```java
 	v(LinearLayout.class,
 		orientation(LinearLayout.VERTICAL),
+
 		v(TextView.class,
-			text("Hello")),
+			text(someText)),
+
 		v(Button.class,
 			text("Click me"),
 			onClick(myListener)));
+```
 
 You can use variables, expression and all the power of Java language.
 
