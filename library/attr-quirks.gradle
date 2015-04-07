@@ -1,0 +1,34 @@
+def nop = {builder -> builder}
+
+ext.QUIRKS = [
+	// This requires lots of type checks, skipping this factory method for now
+	"android.widget.AutoCompleteTextView" : [
+		"setAdapter": nop
+	],
+
+	// Exception must be checked in this attribute setter
+	"android.widget.TextView": [
+		"setInputExtras": { b ->
+			b.addCode(""
+					+ "try {\n"
+					+ "	if (v instanceof android.widget.TextView)\n"
+					+ "		((android.widget.TextView) v).setInputExtras(arg);\n"
+					+ "} catch (org.xmlpull.v1.XmlPullParserException e) {\n"
+					+ "	e.printStackTrace();\n"
+					+ "} catch (java.io.IOException e) {\n"
+					+ "	e.printStackTrace();\n"
+					+ "}\n")
+			return b
+		}
+	],
+
+	// This will remove the whole builder, so no factory method will be generated
+	"android.renderscript.RSSurfaceView": [
+		"setRenderScriptGL": { b -> null }
+	],
+
+	// This will remove the whole builder, so no factory method will be generated
+	"android.renderscript.RSTextureView": [
+		"setRenderScriptGL": { b -> null }
+	],
+]
