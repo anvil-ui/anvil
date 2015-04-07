@@ -11,7 +11,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import static trikita.anvil.Render.*;
-import static trikita.anvil.v10.Props.*;
+import static trikita.anvil.v10.Attrs.*;
 
 //
 // Main actiivty. Acts a placeholder for two content screens (using views instead of

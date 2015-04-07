@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static trikita.anvil.Render.*;
-import static trikita.anvil.v10.Props.*;
+import static trikita.anvil.v10.Attrs.*;
 import android.graphics.Color;
 
 //
@@ -57,7 +57,7 @@ public class StartView extends RenderableView {
 
 	@Override
 	public ViewNode view() {
-		return isPortait() ? portraitView() : landscapeView();
+		return isPortrait() ? portraitView() : landscapeView();
 	}
 
 	private ViewNode landscapeView() {

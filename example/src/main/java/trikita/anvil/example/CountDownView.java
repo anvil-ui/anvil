@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static trikita.anvil.Render.*;
-import static trikita.anvil.v10.Props.*;
+import static trikita.anvil.v10.Attrs.*;
 import android.graphics.Color;
 
 //
@@ -186,7 +186,7 @@ public class CountDownView extends RenderableView {
 								size(FILL, WRAP),
 								gravity(CENTER),
 								textColor(Color.WHITE),
-								textSize(isPortait() ? 42 : 36),
+								textSize(isPortrait() ? 42 : 36),
 								singleLine(true),
 								focusable(mCurrentTask.isNew() || mCurrentTask.isPaused()),
 								focusableInTouchMode(mCurrentTask.isNew() || mCurrentTask.isPaused()),
@@ -201,7 +201,7 @@ public class CountDownView extends RenderableView {
 								size(FILL, WRAP),
 								gravity(CENTER),
 								textColor(Color.WHITE),
-								textSize(isPortait() ? 67 : 42),
+								textSize(isPortrait() ? 67 : 42),
 								clickable(mCurrentTask.isNew() || mCurrentTask.isPaused()),
 								onClick(mTimeClicked),
 								typeface("RobotoCondensed-Bold.ttf"),
