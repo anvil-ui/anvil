@@ -91,6 +91,9 @@ theme class, or use them from XML resources as before.
 
 Sorry, it's still in progress. You may check the example in the repo for find out how more complex apps are supposed to be written.
 
+Also, here is a [full list of available generators to bind data and listeners
+to your views](./library/ATTRS.md)
+
 Also, for more details see my blog posts about Anvil:
 
 - http://zserge.com/blog/android-mvx.html
