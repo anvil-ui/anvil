@@ -90,9 +90,10 @@ class AttrsGeneratorTask extends DefaultTask {
 				.addModifiers(Modifier.FINAL)
 				.build();
 			def factory = MethodSpec.methodBuilder(it.key.method)
-				 .addParameter(param)
-				 .returns(ClassName.get("trikita.anvil", "Render", "AttrNode"))
-				 .addStatement("return \$L", attr.build())
+				.addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+				.addParameter(param)
+				.returns(ClassName.get("trikita.anvil", "Render", "AttrNode"))
+				.addStatement("return \$L", attr.build())
 			builder.addMethod(factory.build())
 		}
 	}
