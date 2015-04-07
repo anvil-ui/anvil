@@ -1,4 +1,0 @@
-// Here setAdapter expects <? extends ListAdapter,Filterable>
-// if (v instanceof android.widget.AutoCompleteTextView)
-//   if (arg instanceof android.widget.ListAdapter && arg instanceof android.widget.Filterable)
-//     ???
