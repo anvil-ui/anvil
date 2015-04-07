@@ -509,7 +509,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode colorFilter(final int arg) {
+  public static AttrNode colorFilter(final android.graphics.ColorFilter arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
@@ -518,7 +518,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode colorFilter(final android.graphics.ColorFilter arg) {
+  public static AttrNode colorFilter(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.ImageView) {
@@ -1292,7 +1292,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode hintTextColor(final int arg) {
+  public static AttrNode hintTextColor(final android.content.res.ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -1301,7 +1301,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode hintTextColor(final android.content.res.ColorStateList arg) {
+  public static AttrNode hintTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -1663,7 +1663,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode leftStripDrawable(final int arg) {
+  public static AttrNode leftStripDrawable(final android.graphics.drawable.Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
@@ -1672,7 +1672,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode leftStripDrawable(final android.graphics.drawable.Drawable arg) {
+  public static AttrNode leftStripDrawable(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
@@ -1699,7 +1699,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode linkTextColor(final android.content.res.ColorStateList arg) {
+  public static AttrNode linkTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -1708,7 +1708,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode linkTextColor(final int arg) {
+  public static AttrNode linkTextColor(final android.content.res.ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -2407,6 +2407,10 @@ public class Props {
               arg.onKey(a0, a1);
               render();
             }
+            public void onText(java.lang.CharSequence a0) {
+              arg.onText(a0);
+              render();
+            }
             public void swipeRight() {
               arg.swipeRight();
               render();
@@ -2429,10 +2433,6 @@ public class Props {
             }
             public void onRelease(int a0) {
               arg.onRelease(a0);
-              render();
-            }
-            public void onText(java.lang.CharSequence a0) {
-              arg.onText(a0);
               render();
             }
          });
@@ -2807,7 +2807,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode rightStripDrawable(final android.graphics.drawable.Drawable arg) {
+  public static AttrNode rightStripDrawable(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
@@ -2816,7 +2816,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode rightStripDrawable(final int arg) {
+  public static AttrNode rightStripDrawable(final android.graphics.drawable.Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TabWidget) {
@@ -2954,7 +2954,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode selector(final int arg) {
+  public static AttrNode selector(final android.graphics.drawable.Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
@@ -2963,7 +2963,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode selector(final android.graphics.drawable.Drawable arg) {
+  public static AttrNode selector(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
@@ -3101,15 +3101,6 @@ public class Props {
       }
     };
   }
-  public static AttrNode text(final int arg) {
-    return new SimpleAttrNode(arg) {
-      public void apply(View v) {
-        if (v instanceof android.widget.TextView) {
-          ((android.widget.TextView) v).setText(arg);
-        }
-      }
-    };
-  }
   public static AttrNode text(final java.lang.CharSequence arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
@@ -3122,7 +3113,16 @@ public class Props {
       }
     };
   }
-  public static AttrNode textColor(final android.content.res.ColorStateList arg) {
+  public static AttrNode text(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
+        if (v instanceof android.widget.TextView) {
+          ((android.widget.TextView) v).setText(arg);
+        }
+      }
+    };
+  }
+  public static AttrNode textColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
@@ -3131,7 +3131,7 @@ public class Props {
       }
     };
   }
-  public static AttrNode textColor(final int arg) {
+  public static AttrNode textColor(final android.content.res.ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof android.widget.TextView) {
