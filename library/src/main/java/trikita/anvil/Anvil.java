@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class Render {
+public class Anvil {
 
 	public interface Renderable {
 		ViewNode view();
