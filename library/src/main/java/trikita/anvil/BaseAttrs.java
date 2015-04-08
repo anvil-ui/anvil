@@ -10,7 +10,7 @@ import android.widget.TableRow;
 import java.util.ArrayList;
 import java.util.List;
 
-import static trikita.anvil.Render.*;
+import static trikita.anvil.Anvil.*;
 
 public class BaseAttrs {
 	//
