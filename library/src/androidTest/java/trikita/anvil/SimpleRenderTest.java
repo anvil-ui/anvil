@@ -2,15 +2,14 @@ package trikita.anvil;
 
 import android.content.Context;
 import android.test.AndroidTestCase;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import static junit.framework.Assert.*;
 
-import static trikita.anvil.Anvil.*;
 import static trikita.anvil.v10.Attrs.*;
-import android.view.View;
 
 public class SimpleRenderTest extends AndroidTestCase {
 
@@ -27,7 +26,7 @@ public class SimpleRenderTest extends AndroidTestCase {
 						text("Hello"));
 			}
 		};
-		render(renderable);
+		Anvil.render(renderable);
 		// rootView has one child and the child is a text view and its text is "Hello"
 		assertEquals(1, rootView.getChildCount());
 		View childView = rootView.getChildAt(0);
@@ -49,7 +48,7 @@ public class SimpleRenderTest extends AndroidTestCase {
 						text(sb.toString()));
 			}
 		};
-		render(renderable);
+		Anvil.render(renderable);
 
 		// rootView has one child and the child is a text view and its text is "Hello"
 		assertEquals(1, rootView.getChildCount());
@@ -59,7 +58,7 @@ public class SimpleRenderTest extends AndroidTestCase {
 
 		// now child view should remain the same and the text should be changed
 		sb.replace(0, sb.length(), "World");
-		render(renderable);
+		Anvil.render(renderable);
 		assertEquals(1, rootView.getChildCount());
 		assertEquals(rootView.getChildAt(0), childView);
 		assertEquals("World", ((TextView) childView).getText());
