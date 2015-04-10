@@ -1,6 +1,7 @@
 package trikita.anvil.example;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
@@ -13,9 +14,9 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static trikita.anvil.Render.*;
+import trikita.anvil.RenderableView;
+import trikita.anvil.RenderableAdapter;
 import static trikita.anvil.v10.Attrs.*;
-import android.graphics.Color;
 
 //
 // A screen with a big black button to start new task (or to resume the current

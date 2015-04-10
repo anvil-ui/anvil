@@ -10,7 +10,6 @@ import android.view.View;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-import static trikita.anvil.Render.*;
 import static trikita.anvil.v10.Attrs.*;
 
 //

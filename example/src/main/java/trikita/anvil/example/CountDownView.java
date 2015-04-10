@@ -2,6 +2,7 @@ package trikita.anvil.example;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -10,9 +11,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import static trikita.anvil.Render.*;
+import trikita.anvil.Anvil;
+import trikita.anvil.RenderableView;
 import static trikita.anvil.v10.Attrs.*;
-import android.graphics.Color;
 
 //
 // A screen with some kind of an actionbar, a button to start/finish the task.
@@ -33,7 +34,7 @@ public class CountDownView extends RenderableView {
 	// Infinite periodic timer to update UI every second
 	private CountDownTimer mTimer = new CountDownTimer(24*60*60*1000, 1000) {
 		public void onTick(long millis) {
-			render(CountDownView.this);
+			Anvil.render(CountDownView.this);
 		}
 		public void onFinish() {
 			// restart timer once it's finished to make it infinite
@@ -63,7 +64,7 @@ public class CountDownView extends RenderableView {
 		TimePickerDialog picker = new TimePickerDialog(v.getContext(), (p, hour, minute) -> {
 			mCurrentTask.setDuration((hour * 60 + minute ) * 60 * 1000);
 			mTimeIsSet = true;
-			render(this);
+			Anvil.render(this);
 		}, (int) mCurrentTask.getRemainder()/60/60/1000,
 		(int) (mCurrentTask.getRemainder()/60/1000)%60, true);
 		picker.setTitle(R.string.set_time_title);

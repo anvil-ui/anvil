@@ -9,7 +9,7 @@ import android.view.View;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-import static trikita.anvil.Render.*;
+import trikita.anvil.Anvil;
 
 //
 // Custom backstack implementation to use views instead of
@@ -60,7 +60,7 @@ public class Backstack {
 			View v = createView(backstack.peek());
 			listener.setContentView(v);
 		}
-		render();
+		Anvil.render();
 		return true;
 	}
 
