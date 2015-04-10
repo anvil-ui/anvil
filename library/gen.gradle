@@ -84,7 +84,7 @@ class AttrsGeneratorTask extends DefaultTask {
 
 		methods.sort { it.key.method }.each {
 			def attr = TypeSpec.anonymousClassBuilder("arg")
-				.superclass(ClassName.get("trikita.anvil", "Anvil", "SimpleAttrNode"))
+				.superclass(ClassName.get("trikita.anvil", "SimpleAttrNode"))
 				.addMethod(it.value.build())
 			def param = ParameterSpec.builder(it.key.cls, "arg")
 				.addModifiers(Modifier.FINAL)
@@ -92,7 +92,7 @@ class AttrsGeneratorTask extends DefaultTask {
 			def factory = MethodSpec.methodBuilder(it.key.method)
 				.addModifiers(Modifier.PUBLIC, Modifier.STATIC)
 				.addParameter(param)
-				.returns(ClassName.get("trikita.anvil", "Anvil", "AttrNode"))
+				.returns(ClassName.get("trikita.anvil", "Nodes", "AttrNode"))
 				.addStatement("return \$L", attr.build())
 			builder.addMethod(factory.build())
 		}
@@ -149,12 +149,12 @@ class AttrsGeneratorTask extends DefaultTask {
 			if (lm.getReturnType().equals(Void.TYPE)) {
 				methodBuilder
 					.addStatement("arg.\$L(${args})", lm.getName())
-					.addStatement("Anvil.render()")
+					.addStatement("\$T.render()", ClassName.get("trikita.anvil", "Anvil"))
 			} else {
 				methodBuilder
 					.addStatement("\$T r = arg.\$L(${args})",
 						lm.getReturnType(), lm.getName())
-					.addStatement("Anvil.render()")
+					.addStatement("\$T.render()", ClassName.get("trikita.anvil", "Anvil"))
 					.addStatement("return r")
 			}
 
