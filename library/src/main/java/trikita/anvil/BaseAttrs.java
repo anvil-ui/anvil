@@ -8,13 +8,119 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import android.util.TypedValue;
+import android.content.res.Resources;
+import android.content.res.Configuration;
 
-import static trikita.anvil.Anvil.*;
+/**
+ * This is a utility class with some handy attribute generators. It servers as
+ * a base class for the generated {@code Attrs} classes for various API levels.
+ */
+public class BaseAttrs extends Nodes {
 
-public class BaseAttrs {
+	/**
+	 * <p>
+	 * Returns a compound attribute node. Helpful for common widget style
+	 * definitions, e.g:
+	 * </p>
+	 * <pre>
+	 * {@code
+	 * public AttrNode headerTextStyle() {
+	 *   return attrs(
+	 *     textColor(Color.BLACK),
+	 *     textSize(24),
+	 *     gravity(CENTER)
+	 *   );
+	 * }
+	 * ...
+	 * v(TextView.class,
+	 *   headerTextStyle(),
+	 *   text("Hello"));
+	 * }
+	 * </pre>
+	 * <p>
+	 * This is useful for constant nodes. For the attributes that change a lot
+	 * better use chaining view node API ({@code addAttrs})
+	 * </p>
+	 * @param nodes list of attribute nodes
+	 * @return a compound node for the given attributes list
+	 */
+	public static AttrNode attrs(final AttrNode ...nodes) {
+		return new SimpleAttrNode(new ArrayList<AttrNode>(Arrays.asList(nodes))) {
+			public void apply(View v) {
+				for (AttrNode n : nodes) {
+					n.apply(v);
+				}
+			}
+		};
+	}
+
 	//
-	// Syntax sugar
+	// Some helpers for view resources
+	//
+	
+	/**
+	 * Returns resources associated with the component currently being rendered
+	 * @return current component resources
+	 */
+	public static Resources R() {
+		return Anvil.getCurrentRenderable().getRootView().getResources();
+	}
+	
+	/** 
+	 * Returns current screen orientation
+	 * @return true if screen is in portrait orientation, false otherwise
+	 */
+	public static boolean isPortrait() {
+		return R().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+	}
+
+	/** 
+	 * Converts dip to pixels for the current screen density
+	 * @param value density-independent value
+	 * @return value in pixels for the given density-independent value
+	 */
+	public static float dip(float value) {
+		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value,
+				R().getDisplayMetrics());
+	}
+
+	/**
+	 * Converts dip to pixels for the current screen settings. Useful to avoid
+	 * casts from float to int in some methods
+	 * @param value density-independent value
+	 * @return value in pixels for the given density-independent value
+	 */
+	public static int dip(int value) {
+		return Math.round(dip((float) value));
+	}
+
+	/**
+	 * Returns attribute value in pixels
+	 * @param attr attribute ID
+	 * @return attribute value in pixels
+	 */
+	public static int attrPx(int attr) {
+		TypedValue tv = attr(attr);
+		return Math.round(R().getDimension(tv.resourceId));
+	}
+
+	/**
+	 * Returns attribute value as a TypedValue
+	 * @param attr attribute ID
+	 * @return attribute value as a TypedValue
+	 */
+	public static TypedValue attr(int attr) {
+		TypedValue tv = new TypedValue();
+		Anvil.getCurrentRenderable().getRootView()
+			.getContext().getTheme().resolveAttribute(attr, tv, true);
+		return tv;
+	}
+
+	//
+	// Shortcuts for common constants
 	//
 	
 	// weight constants
@@ -38,6 +144,7 @@ public class BaseAttrs {
 	public final static int START = 0x00800003;
 	public final static int END = 0x00800005;
 
+	/** Attribute node that adjusts the LayoutParams of the view */
 	public static class LayoutNode implements AttrNode {
 		int width;
 		int height;
@@ -131,18 +238,43 @@ public class BaseAttrs {
 		}
 	}
 
+	/**
+	 * Creates a new LayoutParam generator chain
+	 * @param w width
+	 * @param h height
+	 * @return layout node
+	 */
 	public static LayoutNode size(int w, int h) {
 		return new LayoutNode(w, h);
 	}
 
+	/**
+	 * A helper for padding when each side padding is the same
+	 * @param p padding
+	 * @return padding node
+	 */
 	public static AttrNode padding(int p) {
 		return padding(p, p, p, p);
 	}
 
+	/**
+	 * A helper for padding when padding is the same for each dimension
+	 * @param horizontal horizontal padding
+	 * @param vertical vertical padding
+	 * @return padding node
+	 */
 	public static AttrNode padding(int horizontal, int vertical) {
 		return padding(horizontal, vertical, horizontal, vertical);
 	}
 
+	/**
+	 * A generic helper for padding
+	 * @param left left padding
+	 * @param top top padding
+	 * @param right right padding
+	 * @param bottom bottom padding
+	 * @return padding node
+	 */
 	public static AttrNode padding(final int left, final int top, final int right, final int bottom) {
 		final List<Integer> params = new ArrayList<Integer>() {{
 			add(left); add(top); add(right); add(bottom);
@@ -154,6 +286,11 @@ public class BaseAttrs {
 		};
 	}
 
+	/**
+	 * A helper for settings custom font from the assets
+	 * @param font font path inside the assets directory
+	 * @return typeface attribute node
+	 */
 	public static AttrNode typeface(final String font) {
 		return new SimpleAttrNode(font) {
 			public void apply(View v) {
@@ -164,8 +301,4 @@ public class BaseAttrs {
 			}
 		};
 	}
-
-	//
-	// Generated bindings
-	//
 }
