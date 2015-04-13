@@ -13,6 +13,10 @@ import java.util.List;
 import android.util.TypedValue;
 import android.content.res.Resources;
 import android.content.res.Configuration;
+import android.widget.TextView;
+import android.text.TextWatcher;
+import android.text.Editable;
+import java.lang.ref.WeakReference;
 
 /**
  * This is a utility class with some handy attribute generators. It servers as
@@ -301,4 +305,78 @@ public class BaseAttrs extends Nodes {
 			}
 		};
 	}
+
+	private static class TextWatchAttr extends SimpleAttrNode<TextWatcher> {
+		private WeakReference<TextView> viewRef;
+
+		public TextWatchAttr(TextWatcher value) {
+			super(value);
+		}
+
+		public int hashCode() {
+			return super.hashCode();
+		}
+
+		public boolean equals(Object obj) {
+			boolean res = super.equals(obj);
+			// We know that if the view has the same class, but different value - 
+			// apply() will be called for the new value holder.
+			// Which means it's a good place to cleanup the previous value holder
+			if (!res && obj instanceof TextWatchAttr) {
+				((TextWatchAttr) obj).cleanup();
+			}
+			return res;
+		}
+
+		@Override
+		public void apply(View v) {
+			if (v instanceof TextView) {
+				this.viewRef = new WeakReference<>((TextView) v);
+				((TextView) v).addTextChangedListener(this.value);
+			}
+		}
+
+		private void cleanup() {
+			TextView v = this.viewRef.get();
+			if (v != null) {
+				v.removeTextChangedListener(this.value);
+			}
+		}
+	}
+
+	/**
+	 * A helper to listen to TextView changes
+	 * @param w Text watcher
+	 * @return text watcher attribute node
+	 */
+	public static AttrNode onTextChanged(final TextWatcher w) {
+		return new TextWatchAttr(w);
+	}
+
+	/**
+	 * A simplified TextWatcher interface when you only need to know the text
+	 * being entered
+	 */
+	public static interface SimpleTextWatcher {
+		public void onTextChanged(String s);
+	}
+
+	/**
+	 * A helper to listen to TextView changes with simplified interface
+	 * @param w Simple text watcher with one method (handy for Java 8)
+	 * @return text watcher attribute node
+	 */
+	public static AttrNode onTextChanged(final SimpleTextWatcher w) {
+		return onTextChanged(new TextWatcher() {
+			@Override
+			public void	afterTextChanged(Editable s) {
+				w.onTextChanged(s.toString());
+			}
+			@Override
+			public void	beforeTextChanged(CharSequence s, int from, int n, int after) {}
+			@Override
+			public void	onTextChanged(CharSequence s, int from, int before, int count) {}
+		});
+	}
+
 }

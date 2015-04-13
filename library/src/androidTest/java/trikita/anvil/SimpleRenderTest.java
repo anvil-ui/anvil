@@ -13,7 +13,7 @@ import static trikita.anvil.v10.Attrs.*;
 
 public class SimpleRenderTest extends AndroidTestCase {
 
-	void testSimpleRender() {
+	public void testSimpleRender() {
 		Context c = getContext();
 		final ViewGroup rootView = new FrameLayout(c);
 		Renderable renderable = new Renderable() {
@@ -34,7 +34,7 @@ public class SimpleRenderTest extends AndroidTestCase {
 		assertEquals("Hello", ((TextView) childView).getText());
 	}
 
-	void textSimpleDiffRender() {
+	public void textSimpleDiffRender() {
 		Context c = getContext();
 		final ViewGroup rootView = new FrameLayout(c);
 		final StringBuilder sb = new StringBuilder("Hello");
