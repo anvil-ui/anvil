@@ -1,5 +1,7 @@
 # Minimalistic library for reactive Android UI
 
+[![Join the chat at https://gitter.im/zserge/anvil](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zserge/anvil?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Join the chat at https://gitter.im/zserge/android-virtual-layout](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zserge/android-virtual-layout?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Anvil is a tiny library to simplify android UI development. The name stands for
