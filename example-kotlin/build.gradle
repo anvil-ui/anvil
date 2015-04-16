@@ -1,0 +1,35 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:1.0.+'
+		classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:+'
+	}
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile project('..:library')
+	compile 'org.jetbrains.kotlin:kotlin-stdlib:+'
+}
+
+
+android {
+	compileSdkVersion 'android-21'
+	buildToolsVersion '21.1.2'
+
+	sourceSets {
+		main.java.srcDirs += 'src/main/kotlin'
+	}
+}
+
+task run(type: Exec, dependsOn: ':installDebug') {
+	commandLine 'adb', 'shell', 'am', 'start', '-n', 'trikita.example/.MainActivity'
+}
