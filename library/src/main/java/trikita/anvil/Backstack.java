@@ -27,7 +27,7 @@ public class Backstack {
 	Context context;
 	ArrayDeque<Bundle> backstack = new ArrayDeque<>();
 
-	interface Listener {
+	public interface Listener {
 		void setContentView(View toView);
 	}
 
