@@ -75,4 +75,24 @@ public class BackstackTest extends AndroidTestCase {
 		backstack.back();
 		assertEquals(((ViewWithState) viewHolder[0]).state, 1);
 	}
+
+	public void testViewModifySave() {
+		Bundle b = new Bundle();
+		final View[] viewHolder = new View[1];
+		Backstack.Listener listener = new Backstack.Listener() {
+			public void setContentView(View v) {
+				viewHolder[0] = v;
+			}
+		};
+
+		Backstack backstack = new Backstack(getContext(), listener);
+		ViewWithState v = new ViewWithState(getContext()).withState(1);
+		backstack.navigate(v);
+		v.state = 5;
+		backstack.save(b);
+
+		backstack = new Backstack(getContext(), listener);
+		backstack.load(b);
+		assertEquals(((ViewWithState) viewHolder[0]).state, 5);
+	}
 }
