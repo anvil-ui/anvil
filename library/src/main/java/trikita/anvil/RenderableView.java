@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.util.SparseArray;
+import android.os.Parcel;
 
 /**
  * A most common renderable implementation - a reactive view group that updates
@@ -22,6 +24,7 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 	public RenderableView(Context c) {
 		super(c);
 		setId(DEFAULT_RENDERABLE_ID);
+		Anvil.render(this);
 	}
 
 	// Seems to be a good place to start rendering our view
@@ -46,21 +49,85 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 
 	@Override
 	public Parcelable onSaveInstanceState() {
+		Parcelable superState = super.onSaveInstanceState();
 		Bundle b = new Bundle();
-		b.putParcelable("instanceState", super.onSaveInstanceState());
 		onSave(b);
-		return b;
+		SavedState ss = new SavedState(superState, b);
+		ss.childrenStates = new SparseArray();
+		for (int i = 0; i < getChildCount(); i++) {
+			getChildAt(i).saveHierarchyState(ss.childrenStates);
+		}
+		return ss;
 	}
 
 	@Override
-	public void onRestoreInstanceState(Parcelable p) {
-		if (p instanceof Bundle) {
-			Bundle b = (Bundle) p;
-			onLoad(b);
-			super.onRestoreInstanceState(b.getParcelable("instanceState"));
-		} else {
-			super.onRestoreInstanceState(p);
+	public void onRestoreInstanceState(Parcelable state) {
+		SavedState ss = (SavedState) state;
+		onLoad(ss.getBundle());
+		Anvil.render(this);
+		super.onRestoreInstanceState(ss.getSuperState());
+		for (int i = 0; i < getChildCount(); i++) {
+			getChildAt(i).restoreHierarchyState(ss.childrenStates);
 		}
+	}
+
+	@Override
+	protected void dispatchSaveInstanceState(SparseArray<Parcelable> container) {
+		dispatchFreezeSelfOnly(container);
+	}
+
+	@Override
+	protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
+		dispatchThawSelfOnly(container);
+	}
+
+	static class SavedState extends BaseSavedState {
+		SparseArray childrenStates;
+		Bundle bundle;
+
+		SavedState(Parcelable superState, Bundle b) {
+			super(superState);
+			this.bundle = b;
+		}
+
+		public Bundle getBundle() {
+			return this.bundle;
+		}
+
+		public String toString() {
+			return "(" + this.bundle.toString() + ";" +
+				this.childrenStates.toString() + ")";
+		}
+
+		private SavedState(Parcel in, ClassLoader classLoader) {
+			super(in);
+			this.bundle = in.readBundle();
+			childrenStates = in.readSparseArray(classLoader);
+		}
+
+		@Override
+		public void writeToParcel(Parcel out, int flags) {
+			super.writeToParcel(out, flags);
+			out.writeBundle(this.bundle);
+			out.writeSparseArray(childrenStates);
+		}
+
+		public static final ClassLoaderCreator<SavedState> CREATOR
+			= new ClassLoaderCreator<SavedState>() {
+				@Override
+				public SavedState createFromParcel(Parcel source, ClassLoader loader) {
+					return new SavedState(source, loader);
+				}
+
+				@Override
+				public SavedState createFromParcel(Parcel source) {
+					return createFromParcel(null);
+				}
+
+				public SavedState[] newArray(int size) {
+					return new SavedState[size];
+				}
+			};
 	}
 }
 
