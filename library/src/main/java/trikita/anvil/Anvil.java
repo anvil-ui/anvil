@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import static trikita.anvil.Nodes.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -108,7 +110,11 @@ public final class Anvil {
 			skipNextRender = false;
 			return;
 		}
-		for (Renderable r: mounts.keySet()) {
+		// We need to copy the keyset, otherwise a concurrent modification may
+		// happen if Renderables are nested
+		Set<Renderable> set = new HashSet<Renderable>();
+		set.addAll(mounts.keySet());
+		for (Renderable r: set) {
 			render(r);
 		}
 	}
