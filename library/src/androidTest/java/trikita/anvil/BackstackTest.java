@@ -9,11 +9,14 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import static trikita.anvil.v10.Attrs.*;
 import static junit.framework.Assert.*;
 
 public class BackstackTest extends AndroidTestCase {
 
+	//
 	// A simple view class that should keep its state
+	//
 	public static class ViewWithState extends View {
 		public int state = 0;
 		public ViewWithState(Context c) {
@@ -39,6 +42,40 @@ public class BackstackTest extends AndroidTestCase {
 			Bundle b = (Bundle) p;
 			this.state = b.getInt("state");
 			super.onRestoreInstanceState(b.getParcelable("instanceState"));
+		}
+	}
+
+	//
+	// A renderable wrapper for a simple class
+	//
+	public static class WrapperView extends RenderableView {
+		public int state = 0;
+		public WrapperView(Context c) {
+			super(c);
+		}
+
+		public WrapperView withState(int state) {
+			this.state = state;
+			return this;
+		}
+
+		@Override
+		public Parcelable onSaveInstanceState() {
+			Bundle b = new Bundle();
+			b.putParcelable("instanceState", super.onSaveInstanceState());
+			b.putInt("state", state);
+			return b;
+		}
+
+		@Override
+		public void onRestoreInstanceState(Parcelable p) {
+			Bundle b = (Bundle) p;
+			this.state = b.getInt("state");
+			super.onRestoreInstanceState(b.getParcelable("instanceState"));
+		}
+
+		public ViewNode view() {
+			return v(ViewWithState.class, id(12345));
 		}
 	}
 
@@ -94,5 +131,32 @@ public class BackstackTest extends AndroidTestCase {
 		backstack = new Backstack(getContext(), listener);
 		backstack.load(b);
 		assertEquals(((ViewWithState) viewHolder[0]).state, 5);
+	}
+
+	public void testNestedViews() {
+		Bundle b = new Bundle();
+		final View[] viewHolder = new View[1];
+		Backstack.Listener listener = new Backstack.Listener() {
+			public void setContentView(View v) {
+				viewHolder[0] = v;
+			}
+		};
+		Backstack backstack = new Backstack(getContext(), listener);
+		WrapperView w = new WrapperView(getContext()).withState(1);
+		Anvil.render(w);
+		backstack.navigate(w);
+		w.state = 123;
+		ViewWithState v = (ViewWithState) w.getChildAt(0);
+		v.state = 42;
+		backstack.save(b);
+
+		backstack = new Backstack(getContext(), listener);
+		backstack.load(b);
+
+		w = (WrapperView) viewHolder[0];
+		assertEquals(w.state, 123);
+
+		v = (ViewWithState) w.getChildAt(0);
+		assertEquals(v.state, 42);
 	}
 }
