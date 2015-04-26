@@ -38,7 +38,11 @@ public class Backstack {
 	}
 
 	public void navigate(View v) {
-		currentView = v;
+		if (currentView != null) {
+			SparseArray<Parcelable> state = new SparseArray<>();
+			currentView.saveHierarchyState(state);
+			backstack.peek().putSparseParcelableArray(KEY_STATE, state);
+		}
 		Bundle b = new Bundle();
 		b.putString(KEY_CLASSNAME, v.getClass().getName());
 		SparseArray<Parcelable> state = new SparseArray<>();
@@ -46,6 +50,7 @@ public class Backstack {
 		b.putSparseParcelableArray(KEY_STATE, state);
 		backstack.push(b);
 		listener.setContentView(v);
+		currentView = v;
 	}
 
 	public int size() {
