@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.util.SparseArray;
 import android.os.Parcel;
+import android.os.Build;
 
 /**
  * A most common renderable implementation - a reactive view group that updates
@@ -112,22 +113,77 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 			out.writeSparseArray(childrenStates);
 		}
 
-		public static final ClassLoaderCreator<SavedState> CREATOR
-			= new ClassLoaderCreator<SavedState>() {
-				@Override
-				public SavedState createFromParcel(Parcel source, ClassLoader loader) {
-					return new SavedState(source, loader);
-				}
+		public interface ParcelableCompatCreatorCallbacks<T> {
+			public T createFromParcel(Parcel p, ClassLoader loader);
+			public T createFromParcel(Parcel p);
+			public T[] newArray(int size);
+		}
 
-				@Override
-				public SavedState createFromParcel(Parcel source) {
-					return createFromParcel(null);
-				}
+		static class CompatCreator<T> implements Parcelable.Creator<T> {
+			final ParcelableCompatCreatorCallbacks<T> mCallbacks;
 
-				public SavedState[] newArray(int size) {
-					return new SavedState[size];
-				}
-			};
+			public CompatCreator(ParcelableCompatCreatorCallbacks<T> callbacks) {
+				mCallbacks = callbacks;
+			}
+
+			@Override
+			public T createFromParcel(Parcel source) {
+				return mCallbacks.createFromParcel(source, null);
+			}
+
+			@Override
+			public T[] newArray(int size) {
+				return mCallbacks.newArray(size);
+			}
+		}
+
+		static class ParcelableCompatCreatorFactory {
+			static <T> Parcelable.Creator<T> instantiate(ParcelableCompatCreatorCallbacks<T> cb) {
+				return new ParcelableClassLoaderCreator(cb);
+			}
+		}
+
+		public static <T> Parcelable.Creator<T> newCreator(ParcelableCompatCreatorCallbacks<T> cb) {
+			if (Build.VERSION.SDK_INT >= 13) {
+				ParcelableCompatCreatorFactory.instantiate(cb);
+			}
+			return new CompatCreator<T>(cb);
+		}
+
+		public static class ParcelableClassLoaderCreator<T> implements Parcelable.ClassLoaderCreator<T> {
+			private final ParcelableCompatCreatorCallbacks<T> mCallbacks;
+
+			public ParcelableClassLoaderCreator(ParcelableCompatCreatorCallbacks<T> cb) {
+				mCallbacks = cb;
+			}
+
+			public T createFromParcel(Parcel p) {
+				return mCallbacks.createFromParcel(p, null);
+			}
+
+			public T createFromParcel(Parcel p, ClassLoader loader) {
+				return mCallbacks.createFromParcel(p, loader);
+			}
+
+			public T[] newArray(int size) {
+				return mCallbacks.newArray(size);
+			}
+		}
+
+		public static final Parcelable.Creator<SavedState> CREATOR =
+				newCreator(new ParcelableCompatCreatorCallbacks() {
+			public SavedState createFromParcel(Parcel p, ClassLoader loader) {
+				return new SavedState(p, loader);
+			}
+
+			public SavedState createFromParcel(Parcel p) {
+				return createFromParcel(null);
+			}
+
+			public SavedState[] newArray(int size) {
+				return new SavedState[size];
+			}
+		});
 	}
 }
 
