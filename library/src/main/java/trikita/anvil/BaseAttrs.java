@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -129,20 +130,20 @@ public class BaseAttrs extends Nodes {
 	public final static int WRAP = ViewGroup.LayoutParams.WRAP_CONTENT;
 
 	// gravity constants
-	public final static int TOP = 0x30;
-	public final static int BOTTOM = 0x50;
-	public final static int LEFT = 0x03;
-	public final static int RIGHT = 0x05;
-	public final static int CENTER_VERTICAL = 0x10;
-	public final static int GROW_VERTICAL = 0x70;
-	public final static int CENTER_HORIZONTAL = 0x01;
-	public final static int GROW_HORIZONTAL = 0x07;
+	public final static int TOP = Gravity.TOP;
+	public final static int BOTTOM = Gravity.BOTTOM;
+	public final static int LEFT = Gravity.LEFT;
+	public final static int RIGHT = Gravity.RIGHT;
+	public final static int CENTER_VERTICAL = Gravity.CENTER_VERTICAL;
+	public final static int GROW_VERTICAL = Gravity.FILL_VERTICAL;
+	public final static int CENTER_HORIZONTAL = Gravity.CENTER_HORIZONTAL;
+	public final static int GROW_HORIZONTAL = Gravity.FILL_HORIZONTAL;
 	public final static int CENTER = CENTER_VERTICAL|CENTER_HORIZONTAL;
 	public final static int GROW = GROW_VERTICAL|GROW_HORIZONTAL;
-	public final static int CLIP_VERTICAL = 0x80;
-	public final static int CLIP_HORIZONTAL = 0x08;
-	public final static int START = 0x00800003;
-	public final static int END = 0x00800005;
+	public final static int CLIP_VERTICAL = Gravity.CLIP_VERTICAL;
+	public final static int CLIP_HORIZONTAL = Gravity.CLIP_HORIZONTAL;
+	public final static int START = Gravity.START;
+	public final static int END = Gravity.END;
 
 	/**
 	 * Creates a new LayoutParam generator chain
