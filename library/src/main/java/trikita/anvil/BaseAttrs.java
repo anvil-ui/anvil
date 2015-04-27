@@ -1,24 +1,22 @@
 package trikita.anvil;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import android.util.TypedValue;
-import android.content.res.Resources;
-import android.content.res.Configuration;
-import android.widget.TextView;
-import android.text.TextWatcher;
-import android.text.Editable;
-import java.lang.ref.WeakReference;
-import android.widget.RelativeLayout;
-import android.util.Pair;
 
 /**
  * This is a utility class with some handy attribute generators. It servers as
@@ -125,10 +123,6 @@ public class BaseAttrs extends Nodes {
 		return tv;
 	}
 
-	//
-	// Shortcuts for common constants
-	//
-	
 	// weight constants
 	public final static int FILL = ViewGroup.LayoutParams.FILL_PARENT;
 	public final static int MATCH = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -149,148 +143,6 @@ public class BaseAttrs extends Nodes {
 	public final static int CLIP_HORIZONTAL = 0x08;
 	public final static int START = 0x00800003;
 	public final static int END = 0x00800005;
-
-	// relative layout constants
-	public final static int ALIGN_BASELINE = RelativeLayout.ALIGN_BASELINE;
-	public final static int ALIGN_BOTTOM = RelativeLayout.ALIGN_BOTTOM;
-	public final static int ALIGN_END = RelativeLayout.ALIGN_END;
-	public final static int ALIGN_LEFT = RelativeLayout.ALIGN_LEFT;
-	public final static int ALIGN_PARENT_BOTTOM = RelativeLayout.ALIGN_PARENT_BOTTOM;
-	public final static int ALIGN_PARENT_END = RelativeLayout.ALIGN_PARENT_END;
-	public final static int ALIGN_PARENT_LEFT = RelativeLayout.ALIGN_PARENT_LEFT;
-	public final static int ALIGN_PARENT_RIGHT = RelativeLayout.ALIGN_PARENT_RIGHT;
-	public final static int ALIGN_PARENT_START = RelativeLayout.ALIGN_PARENT_START;
-	public final static int ALIGN_PARENT_TOP = RelativeLayout.ALIGN_PARENT_TOP;
-	public final static int ALIGN_RIGHT = RelativeLayout.ALIGN_RIGHT;
-	public final static int ALIGN_START = RelativeLayout.ALIGN_START;
-	public final static int ALIGN_TOP = RelativeLayout.ALIGN_TOP;
-	public final static int ALIGN_CENTER_HORIZONTAL = RelativeLayout.CENTER_HORIZONTAL;
-	public final static int ALIGN_CENTER_IN_PARENT = RelativeLayout.CENTER_IN_PARENT;
-	public final static int ALIGN_CENTER_VERTICAL = RelativeLayout.CENTER_VERTICAL;
-	public final static int ABOVE = RelativeLayout.ABOVE;
-	public final static int BELOW = RelativeLayout.BELOW;
-	public final static int END_OF = RelativeLayout.END_OF;
-	public final static int LEFT_OF = RelativeLayout.LEFT_OF;
-	public final static int RIGHT_OF = RelativeLayout.RIGHT_OF;
-	public final static int START_OF = RelativeLayout.START_OF;
-	public final static int TRUE = RelativeLayout.TRUE;
-
-	/** Attribute node that adjusts the LayoutParams of the view */
-	public static class LayoutNode implements AttrNode {
-		int width;
-		int height;
-		float weight;
-		int gravity;
-		int column;
-		int span;
-		int[] margin = new int[4];
-		List<Pair<Integer,Integer>> rules = new ArrayList<>();
-
-		public LayoutNode() {
-			this(Integer.MIN_VALUE, Integer.MIN_VALUE);
-		}
-		
-		public LayoutNode(int width, int height) {
-			this.width = width;
-			this.height = height;
-		}
-
-		public LayoutNode weight(float w) {
-			this.weight = w;
-			return this;
-		}
-
-		public LayoutNode margin(int m) {
-			return margin(m, m, m, m);
-		}
-
-		public LayoutNode margin(int horizontal, int vertical) {
-			return margin(horizontal, vertical, horizontal, vertical);
-		}
-
-		public LayoutNode margin(int l, int t, int r, int b) {
-			this.margin[0] = l;
-			this.margin[1] = t;
-			this.margin[2] = r;
-			this.margin[3] = b;
-			return this;
-		}
-
-		public LayoutNode gravity(int g) {
-			this.gravity = g;
-			return this;
-		}
-
-		public LayoutNode column(int column) {
-			this.column = column;
-			return this;
-		}
-
-		public LayoutNode span(int span) {
-			this.span = span;
-			return this;
-		}
-
-		public LayoutNode align(int verb) {
-			return this.align(verb, -1);
-		}
-
-		public LayoutNode align(int verb, int anchor) {
-			this.rules.add(new Pair<>(verb, anchor));
-			return this;
-		}
-
-		public void apply(View v) {
-			ViewGroup.LayoutParams p = v.getLayoutParams();
-			if (width != Integer.MIN_VALUE) {
-				p.width = width;
-			}
-			if (height != Integer.MIN_VALUE) {
-				p.height = height;
-			}
-			if (p instanceof ViewGroup.MarginLayoutParams) {
-				((ViewGroup.MarginLayoutParams) p).leftMargin = this.margin[0];
-				((ViewGroup.MarginLayoutParams) p).topMargin = this.margin[1];
-				((ViewGroup.MarginLayoutParams) p).rightMargin = this.margin[2];
-				((ViewGroup.MarginLayoutParams) p).bottomMargin = this.margin[3];
-			}
-			if (p instanceof LinearLayout.LayoutParams) {
-				((LinearLayout.LayoutParams) p).weight = this.weight;
-				((LinearLayout.LayoutParams) p).gravity = this.gravity;
-			}
-			if (p instanceof FrameLayout.LayoutParams) {
-				((FrameLayout.LayoutParams) p).gravity = this.gravity;
-			}
-			if (p instanceof TableRow.LayoutParams) {
-				((TableRow.LayoutParams) p).column = this.column;
-				((TableRow.LayoutParams) p).span = this.span;
-			}
-			if (p instanceof RelativeLayout.LayoutParams) {
-				for (Pair<Integer, Integer> rule : rules) {
-					((RelativeLayout.LayoutParams) p).addRule(rule.first, rule.second);
-				}
-			}
-			v.setLayoutParams(p);
-		}
-
-		public int hashCode() {
-			return this.width + this.height + Float.floatToIntBits(this.weight) +
-				this.gravity + this.column + this.span +
-				this.margin[0] + this.margin[1] + this.margin[2] + this.margin[3];
-		}
-
-		public boolean equals(Object obj) {
-			if (getClass() == obj.getClass()) {
-				LayoutNode n = (LayoutNode) obj;
-				return this.width == n.width && this.height == n.height &&
-					this.weight == n.weight && this.gravity == n.gravity &&
-					this.column == n.column && this.span == n.span &&
-					this.margin[0] == n.margin[0] && this.margin[1] == n.margin[1] &&
-					this.margin[2] == n.margin[2] && this.margin[3] == n.margin[3];
-			}
-			return false;
-		}
-	}
 
 	/**
 	 * Creates a new LayoutParam generator chain
@@ -436,5 +288,4 @@ public class BaseAttrs extends Nodes {
 			public void	onTextChanged(CharSequence s, int from, int before, int count) {}
 		});
 	}
-
 }
