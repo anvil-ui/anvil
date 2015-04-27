@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.text.TextWatcher;
 import android.text.Editable;
 import java.lang.ref.WeakReference;
+import android.widget.RelativeLayout;
+import android.util.Pair;
 
 /**
  * This is a utility class with some handy attribute generators. It servers as
@@ -148,6 +150,31 @@ public class BaseAttrs extends Nodes {
 	public final static int START = 0x00800003;
 	public final static int END = 0x00800005;
 
+	// relative layout constants
+	public final static int ALIGN_BASELINE = RelativeLayout.ALIGN_BASELINE;
+	public final static int ALIGN_BOTTOM = RelativeLayout.ALIGN_BOTTOM;
+	public final static int ALIGN_END = RelativeLayout.ALIGN_END;
+	public final static int ALIGN_LEFT = RelativeLayout.ALIGN_LEFT;
+	public final static int ALIGN_PARENT_BOTTOM = RelativeLayout.ALIGN_PARENT_BOTTOM;
+	public final static int ALIGN_PARENT_END = RelativeLayout.ALIGN_PARENT_END;
+	public final static int ALIGN_PARENT_LEFT = RelativeLayout.ALIGN_PARENT_LEFT;
+	public final static int ALIGN_PARENT_RIGHT = RelativeLayout.ALIGN_PARENT_RIGHT;
+	public final static int ALIGN_PARENT_START = RelativeLayout.ALIGN_PARENT_START;
+	public final static int ALIGN_PARENT_TOP = RelativeLayout.ALIGN_PARENT_TOP;
+	public final static int ALIGN_RIGHT = RelativeLayout.ALIGN_RIGHT;
+	public final static int ALIGN_START = RelativeLayout.ALIGN_START;
+	public final static int ALIGN_TOP = RelativeLayout.ALIGN_TOP;
+	public final static int ALIGN_CENTER_HORIZONTAL = RelativeLayout.CENTER_HORIZONTAL;
+	public final static int ALIGN_CENTER_IN_PARENT = RelativeLayout.CENTER_IN_PARENT;
+	public final static int ALIGN_CENTER_VERTICAL = RelativeLayout.CENTER_VERTICAL;
+	public final static int ABOVE = RelativeLayout.ABOVE;
+	public final static int BELOW = RelativeLayout.BELOW;
+	public final static int END_OF = RelativeLayout.END_OF;
+	public final static int LEFT_OF = RelativeLayout.LEFT_OF;
+	public final static int RIGHT_OF = RelativeLayout.RIGHT_OF;
+	public final static int START_OF = RelativeLayout.START_OF;
+	public final static int TRUE = RelativeLayout.TRUE;
+
 	/** Attribute node that adjusts the LayoutParams of the view */
 	public static class LayoutNode implements AttrNode {
 		int width;
@@ -157,6 +184,11 @@ public class BaseAttrs extends Nodes {
 		int column;
 		int span;
 		int[] margin = new int[4];
+		List<Pair<Integer,Integer>> rules = new ArrayList<>();
+
+		public LayoutNode() {
+			this(Integer.MIN_VALUE, Integer.MIN_VALUE);
+		}
 		
 		public LayoutNode(int width, int height) {
 			this.width = width;
@@ -199,10 +231,23 @@ public class BaseAttrs extends Nodes {
 			return this;
 		}
 
+		public LayoutNode align(int verb) {
+			return this.align(verb, -1);
+		}
+
+		public LayoutNode align(int verb, int anchor) {
+			this.rules.add(new Pair<>(verb, anchor));
+			return this;
+		}
+
 		public void apply(View v) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
-			p.width = width;
-			p.height = height;
+			if (width != Integer.MIN_VALUE) {
+				p.width = width;
+			}
+			if (height != Integer.MIN_VALUE) {
+				p.height = height;
+			}
 			if (p instanceof ViewGroup.MarginLayoutParams) {
 				((ViewGroup.MarginLayoutParams) p).leftMargin = this.margin[0];
 				((ViewGroup.MarginLayoutParams) p).topMargin = this.margin[1];
@@ -219,6 +264,11 @@ public class BaseAttrs extends Nodes {
 			if (p instanceof TableRow.LayoutParams) {
 				((TableRow.LayoutParams) p).column = this.column;
 				((TableRow.LayoutParams) p).span = this.span;
+			}
+			if (p instanceof RelativeLayout.LayoutParams) {
+				for (Pair<Integer, Integer> rule : rules) {
+					((RelativeLayout.LayoutParams) p).addRule(rule.first, rule.second);
+				}
 			}
 			v.setLayoutParams(p);
 		}
@@ -250,6 +300,14 @@ public class BaseAttrs extends Nodes {
 	 */
 	public static LayoutNode size(int w, int h) {
 		return new LayoutNode(w, h);
+	}
+
+	/**
+	 * Creates a new LayoutParam generator chain with default width/height
+	 * @return layout node
+	 */
+	public static LayoutNode size() {
+		return new LayoutNode();
 	}
 
 	/**
