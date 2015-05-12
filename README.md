@@ -89,14 +89,22 @@ theme class, or use them from XML resources as before.
 
 ## Documentation
 
-Sorry, it's still in progress. You may check the example in the repo for find out how more complex apps are supposed to be written.
+A user-friendly documentation is still in progress, but feel free to help with it - let me know what questions you have about Anvil, what articles about it your would like to read, what issues you met when you first started using Anvil.
 
-Also, here is a [full list of available generators to bind data and listeners
-to your views](./library/ATTRS.md)
+JavaDocs can be found [here][1]
+
+For the full list of available generators to bind data and listenters check these classes:
+
+* [API level 10 (Android 2.3)][2]
+* [API level 15 (Android 4.0)][3]
 
 Also, for more details see my blog posts about Anvil:
 
 - http://zserge.com/blog/android-mvx.html
 - http://zserge.com/blog/anvil-1.html
+- http://zserge.com/blog/anvil-2.html
+- http://zserge.com/blog/anvil-kotlin.html
 
-
+1: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/index.html).
+3: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/trikita/anvil/v10/Attrs.html
+3: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/trikita/anvil/v15/Attrs.html
