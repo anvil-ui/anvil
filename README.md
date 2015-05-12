@@ -105,6 +105,6 @@ Also, for more details see my blog posts about Anvil:
 - http://zserge.com/blog/anvil-2.html
 - http://zserge.com/blog/anvil-kotlin.html
 
-[1]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/index.html).
+[1]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/index.html
 [2]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/trikita/anvil/v10/Attrs.html
 [3]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/trikita/anvil/v15/Attrs.html
