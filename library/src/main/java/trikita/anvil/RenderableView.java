@@ -25,7 +25,6 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 	public RenderableView(Context c) {
 		super(c);
 		setId(DEFAULT_RENDERABLE_ID);
-		Anvil.render(this);
 	}
 
 	// Seems to be a good place to start rendering our view
