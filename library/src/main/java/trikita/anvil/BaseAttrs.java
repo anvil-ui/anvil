@@ -217,10 +217,15 @@ public class BaseAttrs extends Nodes {
 		};
 	}
 
-	private static class TextWatchAttr extends SimpleAttrNode<TextWatcher> {
-		private WeakReference<TextView> viewRef;
+	/**
+	 * An attribute node that has some actions to be performed when old value is
+	 * replaced by the new value. Useful to clean up the listeners added by
+	 * "addXYZListener" instead of "setXYZListener" calls.
+	 */
+	public static abstract class CleansableAttrNode<T> extends SimpleAttrNode<T> {
+		private WeakReference<View> viewRef;
 
-		public TextWatchAttr(TextWatcher value) {
+		public CleansableAttrNode(T value) {
 			super(value);
 		}
 
@@ -233,24 +238,45 @@ public class BaseAttrs extends Nodes {
 			// We know that if the view has the same class, but different value - 
 			// apply() will be called for the new value holder.
 			// Which means it's a good place to cleanup the previous value holder
-			if (!res && obj instanceof TextWatchAttr) {
-				((TextWatchAttr) obj).cleanup();
+			if (!res && obj != null && this.getClass().isAssignableFrom(obj.getClass())) {
+				((CleansableAttrNode<T>) obj).cleanup();
 			}
 			return res;
 		}
 
 		@Override
 		public void apply(View v) {
+			this.viewRef = new WeakReference<>(v);
+		}
+
+		public abstract void cleanup(View v);
+
+		private void cleanup() {
+			View v = this.viewRef.get();
+			if (v != null) {
+				this.cleanup(v);
+			}
+		}
+	}
+
+	private static class TextWatchAttr extends CleansableAttrNode<TextWatcher> {
+
+		public TextWatchAttr(TextWatcher value) {
+			super(value);
+		}
+
+		@Override
+		public void apply(View v) {
+			super.apply(v);
 			if (v instanceof TextView) {
-				this.viewRef = new WeakReference<>((TextView) v);
 				((TextView) v).addTextChangedListener(this.value);
 			}
 		}
 
-		private void cleanup() {
-			TextView v = this.viewRef.get();
-			if (v != null) {
-				v.removeTextChangedListener(this.value);
+		@Override
+		public void cleanup(View v) {
+			if (v instanceof TextView) {
+				((TextView) v).removeTextChangedListener(this.value);
 			}
 		}
 	}
