@@ -524,7 +524,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode checkMarkDrawable(final int arg) {
+  public static Nodes.AttrNode checkMarkDrawable(final Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof CheckedTextView) {
@@ -534,7 +534,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode checkMarkDrawable(final Drawable arg) {
+  public static Nodes.AttrNode checkMarkDrawable(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof CheckedTextView) {
@@ -623,7 +623,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode colorFilter(final ColorFilter arg) {
+  public static Nodes.AttrNode colorFilter(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof ImageView) {
@@ -633,7 +633,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode colorFilter(final int arg) {
+  public static Nodes.AttrNode colorFilter(final ColorFilter arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof ImageView) {
@@ -1022,7 +1022,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode eGLConfigChooser(final GLSurfaceView.EGLConfigChooser arg) {
+  public static Nodes.AttrNode eGLConfigChooser(final boolean arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof GLSurfaceView) {
@@ -1032,7 +1032,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode eGLConfigChooser(final boolean arg) {
+  public static Nodes.AttrNode eGLConfigChooser(final GLSurfaceView.EGLConfigChooser arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof GLSurfaceView) {
@@ -2138,7 +2138,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode linkTextColor(final ColorStateList arg) {
+  public static Nodes.AttrNode linkTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -2148,7 +2148,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode linkTextColor(final int arg) {
+  public static Nodes.AttrNode linkTextColor(final ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -2772,13 +2772,13 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.SlidingDrawer) {
           ((android.widget.SlidingDrawer) v).setOnDrawerScrollListener(new SlidingDrawer.OnDrawerScrollListener() {
-            public void onScrollEnded() {
-              arg.onScrollEnded();
+            public void onScrollStarted() {
+              arg.onScrollStarted();
               Anvil.render();
             }
 
-            public void onScrollStarted() {
-              arg.onScrollStarted();
+            public void onScrollEnded() {
+              arg.onScrollEnded();
               Anvil.render();
             }
           });
@@ -2901,52 +2901,52 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.TableRow) {
           ((android.widget.TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
               Anvil.render();
             }
 
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
               Anvil.render();
             }
           });
         }
         if (v instanceof android.widget.RadioGroup) {
           ((android.widget.RadioGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
               Anvil.render();
             }
 
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
               Anvil.render();
             }
           });
         }
         if (v instanceof android.widget.TableLayout) {
           ((android.widget.TableLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
               Anvil.render();
             }
 
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
               Anvil.render();
             }
           });
         }
         if (v instanceof android.view.ViewGroup) {
           ((android.view.ViewGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
               Anvil.render();
             }
 
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
               Anvil.render();
             }
           });
@@ -3095,13 +3095,8 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.inputmethodservice.KeyboardView) {
           ((android.inputmethodservice.KeyboardView) v).setOnKeyboardActionListener(new KeyboardView.OnKeyboardActionListener() {
-            public void onPress(int a0) {
-              arg.onPress(a0);
-              Anvil.render();
-            }
-
-            public void onRelease(int a0) {
-              arg.onRelease(a0);
+            public void onKey(int a0, int[] a1) {
+              arg.onKey(a0, a1);
               Anvil.render();
             }
 
@@ -3130,8 +3125,13 @@ public class Attrs extends V15Attrs {
               Anvil.render();
             }
 
-            public void onKey(int a0, int[] a1) {
-              arg.onKey(a0, a1);
+            public void onPress(int a0) {
+              arg.onPress(a0);
+              Anvil.render();
+            }
+
+            public void onRelease(int a0) {
+              arg.onRelease(a0);
               Anvil.render();
             }
           });
@@ -3253,13 +3253,13 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setOnScrollListener(new AbsListView.OnScrollListener() {
-            public void onScrollStateChanged(AbsListView a0, int a1) {
-              arg.onScrollStateChanged(a0, a1);
+            public void onScroll(AbsListView a0, int a1, int a2, int a3) {
+              arg.onScroll(a0, a1, a2, a3);
               Anvil.render();
             }
 
-            public void onScroll(AbsListView a0, int a1, int a2, int a3) {
-              arg.onScroll(a0, a1, a2, a3);
+            public void onScrollStateChanged(AbsListView a0, int a1) {
+              arg.onScrollStateChanged(a0, a1);
               Anvil.render();
             }
           });
@@ -3773,7 +3773,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode rightStripDrawable(final Drawable arg) {
+  public static Nodes.AttrNode rightStripDrawable(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TabWidget) {
@@ -3783,7 +3783,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode rightStripDrawable(final int arg) {
+  public static Nodes.AttrNode rightStripDrawable(final Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TabWidget) {

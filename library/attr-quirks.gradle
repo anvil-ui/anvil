@@ -22,13 +22,19 @@ ext.QUIRKS = [
 		}
 	],
 
+	"android.widget.Switch": [
+		"__viewAlias": "SwitchView"
+	],
+
 	// This will remove the whole builder, so no factory method will be generated
 	"android.renderscript.RSSurfaceView": [
+		"__viewAlias": false,
 		"setRenderScriptGL": { b -> null }
 	],
 
 	// This will remove the whole builder, so no factory method will be generated
 	"android.renderscript.RSTextureView": [
+		"__viewAlias": false,
 		"setRenderScriptGL": { b -> null }
 	],
 ]
