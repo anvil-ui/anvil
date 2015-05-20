@@ -1,9 +1,23 @@
-def nop = {builder -> builder}
+def nop = {builder -> null}
 
 ext.QUIRKS = [
 	// This requires lots of type checks, skipping this factory method for now
 	"android.widget.AutoCompleteTextView" : [
 		"setAdapter": nop
+	],
+
+	// Block setAdapter(ListAdapter) and setAdapter(SpinnerAdapter), leave only parent setAdapter(Adapter) instead
+	"android.widget.ListView" : [
+		"setAdapter": nop
+	],
+	"android.widget.GridView" : [
+		"setAdapter": nop
+	],
+	"android.widget.AbsSpinner" : [
+		"setAdapter": nop
+	],
+	"android.widget.ExpandableListView" : [
+		"setAdapter:android.widget.ListAdapter": nop
 	],
 
 	// Exception must be checked in this attribute setter

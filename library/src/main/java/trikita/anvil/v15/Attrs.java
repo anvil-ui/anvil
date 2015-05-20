@@ -167,31 +167,9 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode adapter(final ListAdapter arg) {
-    return new SimpleAttrNode(arg) {
-      public void apply(View v) {
-        if (v instanceof ListView) {
-          ((ListView) v).setAdapter(arg);
-        }
-        if (v instanceof ExpandableListView) {
-          ((ExpandableListView) v).setAdapter(arg);
-        }
-        if (v instanceof GridView) {
-          ((GridView) v).setAdapter(arg);
-        }
-        if (v instanceof AbsListView) {
-          ((AbsListView) v).setAdapter(arg);
-        }
-      }
-    };
-  }
-
   public static Nodes.AttrNode adapter(final SpinnerAdapter arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof AbsSpinner) {
-          ((AbsSpinner) v).setAdapter(arg);
-        }
         if (v instanceof Spinner) {
           ((Spinner) v).setAdapter(arg);
         }
@@ -204,6 +182,16 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof ExpandableListView) {
           ((ExpandableListView) v).setAdapter(arg);
+        }
+      }
+    };
+  }
+
+  public static Nodes.AttrNode adapter(final ListAdapter arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
+        if (v instanceof AbsListView) {
+          ((AbsListView) v).setAdapter(arg);
         }
       }
     };
@@ -451,7 +439,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode buttonDrawable(final Drawable arg) {
+  public static Nodes.AttrNode buttonDrawable(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof CompoundButton) {
@@ -461,7 +449,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode buttonDrawable(final int arg) {
+  public static Nodes.AttrNode buttonDrawable(final Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof CompoundButton) {
@@ -623,7 +611,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode colorFilter(final int arg) {
+  public static Nodes.AttrNode colorFilter(final ColorFilter arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof ImageView) {
@@ -633,7 +621,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode colorFilter(final ColorFilter arg) {
+  public static Nodes.AttrNode colorFilter(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof ImageView) {
@@ -1022,7 +1010,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode eGLConfigChooser(final boolean arg) {
+  public static Nodes.AttrNode eGLConfigChooser(final GLSurfaceView.EGLConfigChooser arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof GLSurfaceView) {
@@ -1032,7 +1020,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode eGLConfigChooser(final GLSurfaceView.EGLConfigChooser arg) {
+  public static Nodes.AttrNode eGLConfigChooser(final boolean arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof GLSurfaceView) {
@@ -1602,16 +1590,6 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode hint(final CharSequence arg) {
-    return new SimpleAttrNode(arg) {
-      public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setHint(arg);
-        }
-      }
-    };
-  }
-
   public static Nodes.AttrNode hint(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
@@ -1622,7 +1600,17 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode hintTextColor(final ColorStateList arg) {
+  public static Nodes.AttrNode hint(final CharSequence arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
+        if (v instanceof TextView) {
+          ((TextView) v).setHint(arg);
+        }
+      }
+    };
+  }
+
+  public static Nodes.AttrNode hintTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -1632,7 +1620,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode hintTextColor(final int arg) {
+  public static Nodes.AttrNode hintTextColor(final ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -2138,7 +2126,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode linkTextColor(final int arg) {
+  public static Nodes.AttrNode linkTextColor(final ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -2148,7 +2136,7 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode linkTextColor(final ColorStateList arg) {
+  public static Nodes.AttrNode linkTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -3046,26 +3034,26 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.AutoCompleteTextView) {
           ((android.widget.AutoCompleteTextView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onNothingSelected(AdapterView a0) {
-              arg.onNothingSelected(a0);
+            public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
               Anvil.render();
             }
 
-            public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemSelected(a0, a1, a2, a3);
+            public void onNothingSelected(AdapterView a0) {
+              arg.onNothingSelected(a0);
               Anvil.render();
             }
           });
         }
         if (v instanceof android.widget.AdapterView) {
           ((android.widget.AdapterView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onNothingSelected(AdapterView a0) {
-              arg.onNothingSelected(a0);
+            public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
               Anvil.render();
             }
 
-            public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemSelected(a0, a1, a2, a3);
+            public void onNothingSelected(AdapterView a0) {
+              arg.onNothingSelected(a0);
               Anvil.render();
             }
           });
@@ -3253,13 +3241,13 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setOnScrollListener(new AbsListView.OnScrollListener() {
-            public void onScroll(AbsListView a0, int a1, int a2, int a3) {
-              arg.onScroll(a0, a1, a2, a3);
+            public void onScrollStateChanged(AbsListView a0, int a1) {
+              arg.onScrollStateChanged(a0, a1);
               Anvil.render();
             }
 
-            public void onScrollStateChanged(AbsListView a0, int a1) {
-              arg.onScrollStateChanged(a0, a1);
+            public void onScroll(AbsListView a0, int a1, int a2, int a3) {
+              arg.onScroll(a0, a1, a2, a3);
               Anvil.render();
             }
           });
@@ -3288,6 +3276,11 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.SeekBar) {
           ((android.widget.SeekBar) v).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
+              arg.onProgressChanged(a0, a1, a2);
+              Anvil.render();
+            }
+
             public void onStartTrackingTouch(SeekBar a0) {
               arg.onStartTrackingTouch(a0);
               Anvil.render();
@@ -3295,11 +3288,6 @@ public class Attrs extends V15Attrs {
 
             public void onStopTrackingTouch(SeekBar a0) {
               arg.onStopTrackingTouch(a0);
-              Anvil.render();
-            }
-
-            public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
-              arg.onProgressChanged(a0, a1, a2);
               Anvil.render();
             }
           });
@@ -3313,14 +3301,14 @@ public class Attrs extends V15Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.SearchView) {
           ((android.widget.SearchView) v).setOnSuggestionListener(new SearchView.OnSuggestionListener() {
-            public boolean onSuggestionClick(int a0) {
-              boolean r = arg.onSuggestionClick(a0);
+            public boolean onSuggestionSelect(int a0) {
+              boolean r = arg.onSuggestionSelect(a0);
               Anvil.render();
               return r;
             }
 
-            public boolean onSuggestionSelect(int a0) {
-              boolean r = arg.onSuggestionSelect(a0);
+            public boolean onSuggestionClick(int a0) {
+              boolean r = arg.onSuggestionClick(a0);
               Anvil.render();
               return r;
             }
@@ -4290,16 +4278,6 @@ public class Attrs extends V15Attrs {
     };
   }
 
-  public static Nodes.AttrNode text(final int arg) {
-    return new SimpleAttrNode(arg) {
-      public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setText(arg);
-        }
-      }
-    };
-  }
-
   public static Nodes.AttrNode text(final CharSequence arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
@@ -4308,6 +4286,16 @@ public class Attrs extends V15Attrs {
         }
         if (v instanceof TextSwitcher) {
           ((TextSwitcher) v).setText(arg);
+        }
+      }
+    };
+  }
+
+  public static Nodes.AttrNode text(final int arg) {
+    return new SimpleAttrNode(arg) {
+      public void apply(View v) {
+        if (v instanceof TextView) {
+          ((TextView) v).setText(arg);
         }
       }
     };
