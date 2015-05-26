@@ -7,6 +7,9 @@ ext.QUIRKS = [
 	],
 
 	// Block setAdapter(ListAdapter) and setAdapter(SpinnerAdapter), leave only parent setAdapter(Adapter) instead
+	"android.widget.AbsListView" : [
+		"setAdapter": nop
+	],
 	"android.widget.ListView" : [
 		"setAdapter": nop
 	],
@@ -14,6 +17,9 @@ ext.QUIRKS = [
 		"setAdapter": nop
 	],
 	"android.widget.AbsSpinner" : [
+		"setAdapter": nop
+	],
+	"android.widget.Spinner" : [
 		"setAdapter": nop
 	],
 	"android.widget.ExpandableListView" : [

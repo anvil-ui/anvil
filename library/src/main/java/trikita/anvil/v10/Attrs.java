@@ -446,7 +446,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode colorFilter(final int arg) {
+  public static Nodes.AttrNode colorFilter(final ColorFilter arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof ImageView) {
@@ -456,7 +456,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode colorFilter(final ColorFilter arg) {
+  public static Nodes.AttrNode colorFilter(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof ImageView) {
@@ -1311,7 +1311,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode hintTextColor(final int arg) {
+  public static Nodes.AttrNode hintTextColor(final ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -1321,7 +1321,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode hintTextColor(final ColorStateList arg) {
+  public static Nodes.AttrNode hintTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -1721,7 +1721,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode leftStripDrawable(final int arg) {
+  public static Nodes.AttrNode leftStripDrawable(final Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TabWidget) {
@@ -1731,7 +1731,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode leftStripDrawable(final Drawable arg) {
+  public static Nodes.AttrNode leftStripDrawable(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TabWidget) {
@@ -1761,7 +1761,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode linkTextColor(final ColorStateList arg) {
+  public static Nodes.AttrNode linkTextColor(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -1771,7 +1771,7 @@ public class Attrs extends V10Attrs {
     };
   }
 
-  public static Nodes.AttrNode linkTextColor(final int arg) {
+  public static Nodes.AttrNode linkTextColor(final ColorStateList arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
         if (v instanceof TextView) {
@@ -2529,11 +2529,6 @@ public class Attrs extends V10Attrs {
               Anvil.render();
             }
 
-            public void onText(CharSequence a0) {
-              arg.onText(a0);
-              Anvil.render();
-            }
-
             public void swipeRight() {
               arg.swipeRight();
               Anvil.render();
@@ -2561,6 +2556,11 @@ public class Attrs extends V10Attrs {
 
             public void onRelease(int a0) {
               arg.onRelease(a0);
+              Anvil.render();
+            }
+
+            public void onText(CharSequence a0) {
+              arg.onText(a0);
               Anvil.render();
             }
           });
@@ -2620,13 +2620,13 @@ public class Attrs extends V10Attrs {
       public void apply(View v) {
         if (v instanceof android.widget.AbsListView) {
           ((android.widget.AbsListView) v).setOnScrollListener(new AbsListView.OnScrollListener() {
-            public void onScrollStateChanged(AbsListView a0, int a1) {
-              arg.onScrollStateChanged(a0, a1);
+            public void onScroll(AbsListView a0, int a1, int a2, int a3) {
+              arg.onScroll(a0, a1, a2, a3);
               Anvil.render();
             }
 
-            public void onScroll(AbsListView a0, int a1, int a2, int a3) {
-              arg.onScroll(a0, a1, a2, a3);
+            public void onScrollStateChanged(AbsListView a0, int a1) {
+              arg.onScrollStateChanged(a0, a1);
               Anvil.render();
             }
           });
@@ -2645,13 +2645,13 @@ public class Attrs extends V10Attrs {
               Anvil.render();
             }
 
-            public void onStartTrackingTouch(SeekBar a0) {
-              arg.onStartTrackingTouch(a0);
+            public void onStopTrackingTouch(SeekBar a0) {
+              arg.onStopTrackingTouch(a0);
               Anvil.render();
             }
 
-            public void onStopTrackingTouch(SeekBar a0) {
-              arg.onStopTrackingTouch(a0);
+            public void onStartTrackingTouch(SeekBar a0) {
+              arg.onStartTrackingTouch(a0);
               Anvil.render();
             }
           });
