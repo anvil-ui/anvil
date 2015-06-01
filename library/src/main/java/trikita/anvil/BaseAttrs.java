@@ -217,6 +217,18 @@ public class BaseAttrs extends Nodes {
 		};
 	}
 
+	public static AttrNode ref(final RefSet refs, final String name) {
+		final List<Object> params = new ArrayList<Object>() {{
+			add(refs); add(name);
+		}};
+
+		return new SimpleAttrNode(params) {
+			public void apply(View v) {
+				refs.set(name, v);
+			}
+		};
+	}
+
 	/**
 	 * An attribute node that has some actions to be performed when old value is
 	 * replaced by the new value. Useful to clean up the listeners added by
