@@ -24,6 +24,7 @@ public abstract class RenderableAdapter extends BaseAdapter implements Renderabl
 	}
 
 	public Nodes.ViewNode view() {
+		notifyDataSetChanged(); // force item renderables to render
 		return null; // Just to match the interface
 	}
 
