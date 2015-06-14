@@ -203,7 +203,7 @@ public class BaseAttrs extends Nodes {
 	}
 
 	/**
-	 * A helper for settings custom font from the assets
+	 * A helper for setting a custom font from the assets
 	 * @param font font path inside the assets directory
 	 * @return typeface attribute node
 	 */
@@ -213,6 +213,28 @@ public class BaseAttrs extends Nodes {
 				if (v instanceof android.widget.TextView) {
 					((android.widget.TextView) v)
 						.setTypeface(Typeface.createFromAsset(v.getContext().getAssets(), font));
+				}
+			}
+		};
+	}
+
+	/**
+	 * A helper for setting a shadow layer to the TextView
+	 * @param radius blur radius
+	 * @param dx x axis offset
+	 * @param dy y axis offset
+	 * @param color shadow color
+	 */
+	public static AttrNode shadowLayer(final float radius, final float dx,
+			final float dy, final int color) {
+		final List<Number> params = new ArrayList<>() {{
+			add(radius); add(dx); add(dy); add(color);
+		}};
+
+		return new SimpleAttrNode(params) {
+			public void apply(View v) {
+				if (v instanceof TextView) {
+					((TextView) v).setShadowLayer(radius, dx, dy, color);
 				}
 			}
 		};
@@ -332,6 +354,9 @@ public class BaseAttrs extends Nodes {
 	 * that are not configurable via Anvil helpers. You may keep a reference to
 	 * your View instance and reuse it later. Configuration step is helpful for
 	 * TextureViews, SurfaceViews etc.
+	 * @param listener config listener
+	 * @return attribute node that calls config listener whenever the real view
+	 * is created
 	 */
 	public static AttrNode config(final ConfigListener listener) {
 		return new SimpleAttrNode(listener) {
@@ -347,5 +372,4 @@ public class BaseAttrs extends Nodes {
 			}
 		};
 	}
-
 }
