@@ -9,6 +9,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
@@ -315,4 +316,36 @@ public class BaseAttrs extends Nodes {
 			public void	onTextChanged(CharSequence s, int from, int before, int count) {}
 		});
 	}
+
+	/**
+	 * A callback interface to be executed whenever a real view is constructed
+	 * from the virtual layout and is attached to the parent view group, so that
+	 * the real view can be manually configured.
+	 */
+	public interface ConfigListener {
+		public void onConfig(View v);
+	}
+
+	/**
+	 * A helper to register a listener where you can configure your real view
+	 * after it's added to the layout. It can be used to modify view properties
+	 * that are not configurable via Anvil helpers. You may keep a reference to
+	 * your View instance and reuse it later. Configuration step is helpful for
+	 * TextureViews, SurfaceViews etc.
+	 */
+	public static AttrNode config(final ConfigListener listener) {
+		return new SimpleAttrNode(listener) {
+			public void apply(final View v) {
+				final ViewTreeObserver obs = ((ViewGroup) v.getParent()).getViewTreeObserver();
+				obs.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+					@Override
+					public void onGlobalLayout() {
+						listener.onConfig(v);
+						obs.removeGlobalOnLayoutListener(this);
+					}
+				});
+			}
+		};
+	}
+
 }
