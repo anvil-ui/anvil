@@ -227,7 +227,7 @@ public class BaseAttrs extends Nodes {
 	 */
 	public static AttrNode shadowLayer(final float radius, final float dx,
 			final float dy, final int color) {
-		final List<Number> params = new ArrayList<>() {{
+		final List<Number> params = new ArrayList<Number>() {{
 			add(radius); add(dx); add(dy); add(color);
 		}};
 
