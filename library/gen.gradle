@@ -235,7 +235,6 @@ class AttrsGeneratorTask extends DefaultTask {
 		def className = m.getDeclaringClass().getCanonicalName();
 		if (project.QUIRKS[className]) {
 			def argClass = m.getParameterTypes()[0].getCanonicalName();
-			println("${className}${m.getName()}:${argClass}")
 			if (project.QUIRKS[className]["${m.getName()}:${argClass}"]) {
 				return project.QUIRKS[className]["${m.getName()}:${argClass}"](builder)
 			}
