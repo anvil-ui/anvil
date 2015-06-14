@@ -13,6 +13,8 @@ import java.util.WeakHashMap;
 import static trikita.anvil.Nodes.*;
 import java.util.HashSet;
 import java.util.Set;
+import android.os.Looper;
+import android.os.Handler;
 
 /**
  * <p>
@@ -104,8 +106,20 @@ public final class Anvil {
 		stopRendering();
 	}
 
-	/** Perform rendering of all active renderables */
+	/**
+	 * Perform rendering of all active renderables. This function is
+	 * guaranteed to be executed on the UI thread.
+	 */
 	public static void render() {
+		if (Looper.myLooper() != Looper.getMainLooper()) {
+			// Anvil.render() is called on a non-UI thread, use handler
+			new Handler(Looper.getMainLooper()).post(new Runnable() {
+				public void run() {
+					Anvil.render();
+				}
+			});
+			return;
+		}
 		if (skipNextRender) {
 			skipNextRender = false;
 			return;
