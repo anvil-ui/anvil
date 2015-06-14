@@ -252,4 +252,21 @@ public final class Anvil {
 			throw new RuntimeException(e);
 		}
 	}
+
+	/**
+	 * A default state factory. Calls Android.render() on every state change.
+	 */
+	private static State.Factory stateFactory =
+		new State.Factory(new State.Listener() {
+			public void onStateChanged(State state) {
+				Anvil.render();
+			}
+		});
+
+	/**
+	 * A helper for making new State objects
+	 */
+	public static State newState(boolean on) {
+		return stateFactory.newState(on);
+	}
 }
