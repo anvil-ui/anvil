@@ -1,20 +1,20 @@
 package trikita.anvil;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.WeakHashMap;
 
 import static trikita.anvil.Nodes.*;
-import java.util.HashSet;
-import java.util.Set;
-import android.os.Looper;
-import android.os.Handler;
 
 /**
  * <p>
