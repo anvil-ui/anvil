@@ -1,17 +1,19 @@
 buildscript {
 	repositories {
-		mavenCentral()
+		jcenter()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:1.0.0'
+		classpath 'com.android.tools.build:gradle:1.3.+'
+		classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
 	}
 }
 
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 android {
-	compileSdkVersion 'android-21'
-	buildToolsVersion '21.1.2'
+	compileSdkVersion 'android-22'
+	buildToolsVersion '23.0.0 rc2'
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -19,9 +21,7 @@ android {
 	}
 
 	defaultConfig {
-		versionCode 1
-		versionName "0.0.1"
-		minSdkVersion 4
+		minSdkVersion 10
 		targetSdkVersion 21
 	}
 
@@ -33,7 +33,7 @@ android {
 //
 // Publishing
 //
-apply from: 'maven-push.gradle'
+apply from: 'publish.gradle'
 
 //
 // Code generation for property setters
