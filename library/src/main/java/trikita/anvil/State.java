@@ -1,8 +1,9 @@
 package trikita.anvil;
 
-import java.util.TimerTask;
+import android.os.Handler;
+import android.os.Looper;
+
 import java.util.ArrayDeque;
-import java.util.Timer;
 
 /**
  * State is a micro FSM (finite state machine) with only two states - on and off.
@@ -35,7 +36,7 @@ public class State {
 	 */
 	public static class Factory {
 		private Listener mListener;
-		private Timer mTimer = new Timer();
+		private Handler mHandler = new Handler(Looper.getMainLooper());
 
 		/** Create a new factory with the given listener */
 		public Factory(Listener listener) {
@@ -47,8 +48,12 @@ public class State {
 			return new State(this, on ? ON : OFF);
 		}
 
-		void post(TimerTask task, long delay) {
-			mTimer.schedule(task, delay);
+		void post(Runnable r, long delay) {
+			mHandler.postDelayed(r, delay);
+		}
+
+		void cancel(Runnable r) {
+			mHandler.removeCallbacks(r);
 		}
 
 		void notifyListener(State state) {
@@ -87,8 +92,10 @@ public class State {
 	public final static int TURNING_OFF = 3;
 
 	private int mState = OFF;
+	private int mPrevState = OFF;
 	private Factory mFactory;
-	private TimerTask mTimerTask;
+	private Runnable mDelayedRunnable;
+
 	/** A queue of pending transitions */
 	private ArrayDeque<StateChange> mQueue = new ArrayDeque<StateChange>();
 
@@ -109,10 +116,10 @@ public class State {
 
 	/**
 	 * Enqueues a new state transition to the given value with the callback to
-	 * be executed before the transition.
+	 * be executed after the transition.
 	 */
-	public State set(boolean value, long delay, Runnable before) {
-		return set(value, delay, before, null);
+	public State set(boolean value, long delay, Runnable after) {
+		return set(value, delay, null, after);
 	}
 
 	/**
@@ -145,7 +152,7 @@ public class State {
 
 	/** Fetches the next transition from the queue and applies it */
 	private void update() {
-		if (mTimerTask != null) {
+		if (mDelayedRunnable != null) {
 			return;
 		}
 		final StateChange change = mQueue.poll();
@@ -166,26 +173,22 @@ public class State {
 			if (change.before != null) {
 				change.before.run();
 			}
-			mTimerTask = new TimerTask() {
-				private int mPrevState = mState;
-
+			mDelayedRunnable = new Runnable() {
 				public void run() {
 					mState = change.state ? ON : OFF;
 					mFactory.notifyListener(State.this);
-					mTimerTask = null;
+					mDelayedRunnable = null;
 					if (change.after != null) {
 						change.after.run();
 					}
 					update();
 				}
-
-				public boolean cancel() {
-					mState = mPrevState;
-					return super.cancel();
-				}
 			};
+
+			mPrevState = mState;
 			mState = change.state ? TURNING_ON : TURNING_OFF;
-			mFactory.post(mTimerTask, change.delay);
+			mFactory.post(mDelayedRunnable, change.delay);
+			mFactory.notifyListener(this);
 		}
 	}
 
@@ -194,14 +197,15 @@ public class State {
 	 * callbacks will be called anyway
 	 */
 	public State force() {
-		if (mTimerTask != null) {
+		if (mDelayedRunnable != null) {
 			// Replace the queue, so that recursive update() calls would do nothing
 			ArrayDeque<StateChange> pending = new ArrayDeque<>(mQueue);
 			mQueue.clear();
 
 			// Cancel the task, but apply the state change anyway
-			mTimerTask.cancel();
-			mTimerTask.run();
+			mFactory.cancel(mDelayedRunnable);
+			mDelayedRunnable.run();
+			mDelayedRunnable = null;
 
 			// For each pending transition - apply it immediatelly
 			StateChange change;
@@ -224,9 +228,11 @@ public class State {
 	 * be called.
 	 */
 	public State cancel() {
-		if (mTimerTask != null) {
+		if (mDelayedRunnable != null) {
 			// Cancel current task
-			mTimerTask.cancel();
+			mState = mPrevState;
+			mFactory.cancel(mDelayedRunnable);
+			mDelayedRunnable = null;
 			while (mQueue.poll() != null);
 		}
 		return this;

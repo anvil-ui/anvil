@@ -93,10 +93,10 @@ public class StateTest extends AndroidTestCase {
 		a.force();
 		assertEquals(a.get(), State.ON);
 
-		final int count[] = {0, 0, 0, 0, 0, 0};
+		final int count[] = {0, 0, 0, 0, 0, 0, 0};
 		State.Factory factory = new State.Factory(new State.Listener() {
 			public void onStateChanged(State s) {
-				System.out.println("called with state " + s);
+				System.out.println("called with state " + s.get());
 				count[0] = count[0] + 1;
 				count[count[0]] = s.get();
 			}
@@ -110,12 +110,13 @@ public class StateTest extends AndroidTestCase {
 		a.force();
 		assertEquals(a.get(), State.OFF);
 
-		assertEquals(count[0], 5); // callback fired 5 times
-		assertEquals(count[1], State.ON);
-		assertEquals(count[2], State.OFF);
-		assertEquals(count[3], State.ON);
+		assertEquals(count[0], 6); // callback fired 6 times with one transition state
+		assertEquals(count[1], State.TURNING_ON);
+		assertEquals(count[2], State.ON);
+		assertEquals(count[3], State.OFF);
 		assertEquals(count[4], State.ON);
-		assertEquals(count[5], State.OFF);
+		assertEquals(count[5], State.ON);
+		assertEquals(count[6], State.OFF);
 	}
 
 	public void testStateRender() {
