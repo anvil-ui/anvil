@@ -53,10 +53,6 @@ public final class Anim {
 			}
 		}
 
-		public int hashCode() {
-			return anim.hashCode();
-		}
-
 		public boolean equals(Object obj) {
 			if (getClass() != obj.getClass()) {
 				return false;
@@ -68,6 +64,9 @@ public final class Anim {
 				}
 				return false;
 			}
+			// propagate animation object so it would be cancelled if the next node
+			// will be different
+			this.anim = n.anim;
 			return true;
 		}
 
