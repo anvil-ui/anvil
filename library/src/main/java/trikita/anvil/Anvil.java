@@ -236,7 +236,7 @@ public final class Anvil {
 			for (int i = 0; i < node.attrs.size(); i++) {
 				AttrNode subnode = node.attrs.get(i);
 				AttrNode oldSubNode = 
-					(oldNode == null || oldNode.attrs.size() <= i ?  null : oldNode.attrs.get(i));
+					(oldNode == null || oldNode.attrs.size() <= i ? null : oldNode.attrs.get(i));
 				if (isNewView || oldSubNode == null || subnode.equals(oldSubNode) == false) {
 					subnode.apply(v);
 				}
@@ -254,7 +254,7 @@ public final class Anvil {
 	}
 
 	/**
-	 * A default state factory. Calls Android.render() on every state change.
+	 * A default state factory. Calls Anvil.render() on every state change.
 	 */
 	private static State.Factory stateFactory =
 		new State.Factory(new State.Listener() {
