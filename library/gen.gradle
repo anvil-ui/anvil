@@ -14,6 +14,11 @@ apply from: 'attr-quirks.gradle'
 
 task generateAttrs(type: AttrsGeneratorTask)
 
+class BuilderLock {
+	def locked = false
+}
+MethodSpec.Builder.mixin BuilderLock
+
 class AttrsGeneratorTask extends DefaultTask {
 
 	// Most practical API versions according to Android Dashboards:
@@ -217,10 +222,19 @@ class AttrsGeneratorTask extends DefaultTask {
 			listener.addMethod(methodBuilder.build())
 		}
 
-		builder
-			.beginControlFlow("if (v instanceof ${className})")
-			.addStatement("((${className}) v).${m.getName()}(\$L)", listener.build())
-			.endControlFlow();
+		if (className == "android.view.View") {
+			builder = MethodSpec.methodBuilder("apply")
+				.addModifiers(Modifier.PUBLIC)
+				.addParameter(ClassName.get("android.view", "View"), "v")
+				.addStatement("v.${m.getName()}(\$L)", listener.build())
+			builder.locked = true;
+		} else if (!builder.locked) {
+			builder
+				.beginControlFlow("if (v instanceof \$T)", m.getDeclaringClass())
+				.addStatement("((\$T) v).${m.getName()}(\$L)", m.getDeclaringClass(),
+					listener.build())
+				.endControlFlow();
+		}
 
 		return builder
 	}
@@ -242,10 +256,19 @@ class AttrsGeneratorTask extends DefaultTask {
 				return project.QUIRKS[className][m.getName()](builder)
 			}
 		}
-		builder
-			.beginControlFlow("if (v instanceof \$T)", m.getDeclaringClass())
-			.addStatement("((\$T) v).${m.getName()}(arg)", m.getDeclaringClass())
-			.endControlFlow();
+
+		if (m.getDeclaringClass().getCanonicalName() == "android.view.View") {
+			builder = MethodSpec.methodBuilder("apply")
+				.addModifiers(Modifier.PUBLIC)
+				.addParameter(ClassName.get("android.view", "View"), "v")
+				.addStatement("v.${m.getName()}(arg)")
+			builder.locked = true
+		} else if (!builder.locked) {
+			builder
+				.beginControlFlow("if (v instanceof \$T)", m.getDeclaringClass())
+				.addStatement("((\$T) v).${m.getName()}(arg)", m.getDeclaringClass())
+				.endControlFlow();
+		}
 
 		return builder
 	}
