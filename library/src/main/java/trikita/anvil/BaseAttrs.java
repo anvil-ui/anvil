@@ -219,6 +219,19 @@ public class BaseAttrs extends Nodes {
 	}
 
 	/**
+	 * A helper for toggling view visibility
+	 * @param visible view visibility flag
+	 * @return visibility attribute node
+	 */
+	public static AttrNode visibility(final boolean visible) {
+		return new SimpleAttrNode(visible) {
+			public void apply(View v) {
+				v.setVisibility(visible ? View.VISIBLE : View.GONE);
+			}
+		};
+	}
+
+	/**
 	 * A helper for setting a shadow layer to the TextView
 	 * @param radius blur radius
 	 * @param dx x axis offset
