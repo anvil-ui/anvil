@@ -163,7 +163,7 @@ class AttrsGeneratorTask extends DefaultTask {
 	}
 
 	def finalizeAttrs(builder, methods) {
-		methods.sort { it.key.method }.each {
+		methods.sort { it.key.method + " " + it.key.cls.getName() }.each {
 			def attr = TypeSpec.anonymousClassBuilder("arg")
 				.superclass(ClassName.get("trikita.anvil", "SimpleAttrNode"))
 				.addMethod(it.value.build())
@@ -191,7 +191,7 @@ class AttrsGeneratorTask extends DefaultTask {
 
 		def listener = TypeSpec.anonymousClassBuilder("")
 			.addSuperinterface(listenerClass)
-		listenerClass.getDeclaredMethods().each { lm ->
+		listenerClass.getDeclaredMethods().sort {it.getName()}.each { lm ->
 			def methodBuilder = MethodSpec.methodBuilder(lm.getName())
 				.addModifiers(Modifier.PUBLIC)
 				.returns(lm.getReturnType())
