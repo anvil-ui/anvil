@@ -6,7 +6,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'com.squareup:javapoet:1.0.0'
+		classpath 'com.squareup:javapoet:1.1.0'
 	}
 }
 
@@ -22,8 +22,8 @@ MethodSpec.Builder.mixin BuilderLock
 class AttrsGeneratorTask extends DefaultTask {
 
 	// Most practical API versions according to Android Dashboards:
-	// - newer then API level 10 (GB 2.3.3, 99.6% of devices)
-	// - newer than API level 15 (ICS 4.0.3, 92.7% of devices)
+	// - newer then API level 10 (GB 2.3.3, 99.7% of devices)
+	// - newer than API level 15 (ICS 4.0.3, 94.1% of devices)
 
 	def apiLevels = [10, 15]
 
@@ -79,7 +79,7 @@ class AttrsGeneratorTask extends DefaultTask {
 		def viewClass = loader.loadClass("android.view.View")
 		def viewGroupClass = loader.loadClass("android.view.ViewGroup")
 
-    for (e in Collections.list(jar.entries())) {
+    for (e in Collections.list(jar.entries()).sort{it.getName()}) {
 			if (e.getName().endsWith(".class")) {
 				def className = e.getName().replace(".class", "").replace("/", ".")
 				if (className.contains('$')) {
@@ -96,7 +96,7 @@ class AttrsGeneratorTask extends DefaultTask {
 
 	def forEachMethod(c, cb) {
 		def builder, key, name
-		for (m in c.getDeclaredMethods()) {
+		for (m in c.getDeclaredMethods().sort{it.getName()}) {
 			if (!java.lang.reflect.Modifier.isPublic(m.getModifiers()) || m.isSynthetic() || m.isBridge()) {
 				continue
 			}

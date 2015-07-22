@@ -149,14 +149,14 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode adapter(final Adapter arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof AdapterViewFlipper) {
-          ((AdapterViewFlipper) v).setAdapter(arg);
+        if (v instanceof AdapterView) {
+          ((AdapterView) v).setAdapter(arg);
         }
         if (v instanceof AdapterViewAnimator) {
           ((AdapterViewAnimator) v).setAdapter(arg);
         }
-        if (v instanceof AdapterView) {
-          ((AdapterView) v).setAdapter(arg);
+        if (v instanceof AdapterViewFlipper) {
+          ((AdapterViewFlipper) v).setAdapter(arg);
         }
       }
     };
@@ -419,11 +419,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode cacheColorHint(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof ListView) {
-          ((ListView) v).setCacheColorHint(arg);
-        }
         if (v instanceof AbsListView) {
           ((AbsListView) v).setCacheColorHint(arg);
+        }
+        if (v instanceof ListView) {
+          ((ListView) v).setCacheColorHint(arg);
         }
       }
     };
@@ -490,17 +490,17 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode checked(final boolean arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof Switch) {
-          ((Switch) v).setChecked(arg);
-        }
         if (v instanceof CheckedTextView) {
           ((CheckedTextView) v).setChecked(arg);
         }
-        if (v instanceof ToggleButton) {
-          ((ToggleButton) v).setChecked(arg);
-        }
         if (v instanceof CompoundButton) {
           ((CompoundButton) v).setChecked(arg);
+        }
+        if (v instanceof Switch) {
+          ((Switch) v).setChecked(arg);
+        }
+        if (v instanceof ToggleButton) {
+          ((ToggleButton) v).setChecked(arg);
         }
       }
     };
@@ -665,11 +665,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode currentTab(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TabWidget) {
-          ((TabWidget) v).setCurrentTab(arg);
-        }
         if (v instanceof TabHost) {
           ((TabHost) v).setCurrentTab(arg);
+        }
+        if (v instanceof TabWidget) {
+          ((TabWidget) v).setCurrentTab(arg);
         }
       }
     };
@@ -791,11 +791,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode dividerDrawable(final Drawable arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TabWidget) {
-          ((TabWidget) v).setDividerDrawable(arg);
-        }
         if (v instanceof LinearLayout) {
           ((LinearLayout) v).setDividerDrawable(arg);
+        }
+        if (v instanceof TabWidget) {
+          ((TabWidget) v).setDividerDrawable(arg);
         }
       }
     };
@@ -1016,11 +1016,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode ellipsize(final TextUtils.TruncateAt arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setEllipsize(arg);
-        }
         if (v instanceof EditText) {
           ((EditText) v).setEllipsize(arg);
+        }
+        if (v instanceof TextView) {
+          ((TextView) v).setEllipsize(arg);
         }
       }
     };
@@ -1087,11 +1087,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode extractedText(final ExtractedText arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setExtractedText(arg);
-        }
         if (v instanceof ExtractEditText) {
           ((ExtractEditText) v).setExtractedText(arg);
+        }
+        if (v instanceof TextView) {
+          ((TextView) v).setExtractedText(arg);
         }
       }
     };
@@ -1416,23 +1416,23 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode gravity(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setGravity(arg);
-        }
         if (v instanceof Gallery) {
           ((Gallery) v).setGravity(arg);
-        }
-        if (v instanceof Spinner) {
-          ((Spinner) v).setGravity(arg);
-        }
-        if (v instanceof RelativeLayout) {
-          ((RelativeLayout) v).setGravity(arg);
         }
         if (v instanceof GridView) {
           ((GridView) v).setGravity(arg);
         }
         if (v instanceof LinearLayout) {
           ((LinearLayout) v).setGravity(arg);
+        }
+        if (v instanceof RelativeLayout) {
+          ((RelativeLayout) v).setGravity(arg);
+        }
+        if (v instanceof Spinner) {
+          ((Spinner) v).setGravity(arg);
+        }
+        if (v instanceof TextView) {
+          ((TextView) v).setGravity(arg);
         }
       }
     };
@@ -1537,11 +1537,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode horizontalGravity(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof RelativeLayout) {
-          ((RelativeLayout) v).setHorizontalGravity(arg);
-        }
         if (v instanceof LinearLayout) {
           ((LinearLayout) v).setHorizontalGravity(arg);
+        }
+        if (v instanceof RelativeLayout) {
+          ((RelativeLayout) v).setHorizontalGravity(arg);
         }
       }
     };
@@ -1703,11 +1703,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode imeOptions(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setImeOptions(arg);
-        }
         if (v instanceof SearchView) {
           ((SearchView) v).setImeOptions(arg);
+        }
+        if (v instanceof TextView) {
+          ((TextView) v).setImeOptions(arg);
         }
       }
     };
@@ -1801,11 +1801,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode inputType(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setInputType(arg);
-        }
         if (v instanceof SearchView) {
           ((SearchView) v).setInputType(arg);
+        }
+        if (v instanceof TextView) {
+          ((TextView) v).setInputType(arg);
         }
       }
     };
@@ -2076,14 +2076,14 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode max(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
+        if (v instanceof AbsSeekBar) {
+          ((AbsSeekBar) v).setMax(arg);
+        }
         if (v instanceof ProgressBar) {
           ((ProgressBar) v).setMax(arg);
         }
         if (v instanceof RatingBar) {
           ((RatingBar) v).setMax(arg);
-        }
-        if (v instanceof AbsSeekBar) {
-          ((AbsSeekBar) v).setMax(arg);
         }
       }
     };
@@ -2115,11 +2115,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode maxHeight(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setMaxHeight(arg);
-        }
         if (v instanceof ImageView) {
           ((ImageView) v).setMaxHeight(arg);
+        }
+        if (v instanceof TextView) {
+          ((TextView) v).setMaxHeight(arg);
         }
       }
     };
@@ -2158,14 +2158,14 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode maxWidth(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setMaxWidth(arg);
+        if (v instanceof ImageView) {
+          ((ImageView) v).setMaxWidth(arg);
         }
         if (v instanceof SearchView) {
           ((SearchView) v).setMaxWidth(arg);
         }
-        if (v instanceof ImageView) {
-          ((ImageView) v).setMaxWidth(arg);
+        if (v instanceof TextView) {
+          ((TextView) v).setMaxWidth(arg);
         }
       }
     };
@@ -2724,8 +2724,8 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode onHierarchyChange(final ViewGroup.OnHierarchyChangeListener arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TableRow) {
-          ((TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+        if (v instanceof ViewGroup) {
+          ((ViewGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
             public void onChildViewAdded(View a0, View a1) {
               arg.onChildViewAdded(a0, a1);
               Anvil.render();
@@ -2763,8 +2763,8 @@ public class Attrs extends V15Attrs {
             }
           });
         }
-        if (v instanceof ViewGroup) {
-          ((ViewGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+        if (v instanceof TableRow) {
+          ((TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
             public void onChildViewAdded(View a0, View a1) {
               arg.onChildViewAdded(a0, a1);
               Anvil.render();
@@ -2812,16 +2812,16 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode onItemClick(final AdapterView.OnItemClickListener arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof AutoCompleteTextView) {
-          ((AutoCompleteTextView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        if (v instanceof AdapterView) {
+          ((AdapterView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
               arg.onItemClick(a0, a1, a2, a3);
               Anvil.render();
             }
           });
         }
-        if (v instanceof Spinner) {
-          ((Spinner) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        if (v instanceof AutoCompleteTextView) {
+          ((AutoCompleteTextView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
               arg.onItemClick(a0, a1, a2, a3);
               Anvil.render();
@@ -2836,8 +2836,8 @@ public class Attrs extends V15Attrs {
             }
           });
         }
-        if (v instanceof AdapterView) {
-          ((AdapterView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        if (v instanceof Spinner) {
+          ((Spinner) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
               arg.onItemClick(a0, a1, a2, a3);
               Anvil.render();
@@ -2867,8 +2867,8 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode onItemSelected(final AdapterView.OnItemSelectedListener arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof AutoCompleteTextView) {
-          ((AutoCompleteTextView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        if (v instanceof AdapterView) {
+          ((AdapterView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
               arg.onItemSelected(a0, a1, a2, a3);
               Anvil.render();
@@ -2880,8 +2880,8 @@ public class Attrs extends V15Attrs {
             }
           });
         }
-        if (v instanceof AdapterView) {
-          ((AdapterView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        if (v instanceof AutoCompleteTextView) {
+          ((AutoCompleteTextView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
               arg.onItemSelected(a0, a1, a2, a3);
               Anvil.render();
@@ -3264,14 +3264,14 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode orientation(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
+        if (v instanceof GestureOverlayView) {
+          ((GestureOverlayView) v).setOrientation(arg);
+        }
         if (v instanceof GridLayout) {
           ((GridLayout) v).setOrientation(arg);
         }
         if (v instanceof LinearLayout) {
           ((LinearLayout) v).setOrientation(arg);
-        }
-        if (v instanceof GestureOverlayView) {
-          ((GestureOverlayView) v).setOrientation(arg);
         }
       }
     };
@@ -3522,8 +3522,8 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode remoteViewsAdapter(final Intent arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof ListView) {
-          ((ListView) v).setRemoteViewsAdapter(arg);
+        if (v instanceof AbsListView) {
+          ((AbsListView) v).setRemoteViewsAdapter(arg);
         }
         if (v instanceof AdapterViewAnimator) {
           ((AdapterViewAnimator) v).setRemoteViewsAdapter(arg);
@@ -3531,8 +3531,8 @@ public class Attrs extends V15Attrs {
         if (v instanceof GridView) {
           ((GridView) v).setRemoteViewsAdapter(arg);
         }
-        if (v instanceof AbsListView) {
-          ((AbsListView) v).setRemoteViewsAdapter(arg);
+        if (v instanceof ListView) {
+          ((ListView) v).setRemoteViewsAdapter(arg);
         }
       }
     };
@@ -3783,23 +3783,23 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode selection(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof EditText) {
-          ((EditText) v).setSelection(arg);
-        }
-        if (v instanceof ListView) {
-          ((ListView) v).setSelection(arg);
-        }
         if (v instanceof AbsSpinner) {
           ((AbsSpinner) v).setSelection(arg);
+        }
+        if (v instanceof AdapterView) {
+          ((AdapterView) v).setSelection(arg);
         }
         if (v instanceof AdapterViewAnimator) {
           ((AdapterViewAnimator) v).setSelection(arg);
         }
+        if (v instanceof EditText) {
+          ((EditText) v).setSelection(arg);
+        }
         if (v instanceof GridView) {
           ((GridView) v).setSelection(arg);
         }
-        if (v instanceof AdapterView) {
-          ((AdapterView) v).setSelection(arg);
+        if (v instanceof ListView) {
+          ((ListView) v).setSelection(arg);
         }
       }
     };
@@ -4055,11 +4055,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode text(final CharSequence arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof TextView) {
-          ((TextView) v).setText(arg);
-        }
         if (v instanceof TextSwitcher) {
           ((TextSwitcher) v).setText(arg);
+        }
+        if (v instanceof TextView) {
+          ((TextView) v).setText(arg);
         }
       }
     };
@@ -4364,11 +4364,11 @@ public class Attrs extends V15Attrs {
   public static Nodes.AttrNode verticalGravity(final int arg) {
     return new SimpleAttrNode(arg) {
       public void apply(View v) {
-        if (v instanceof RelativeLayout) {
-          ((RelativeLayout) v).setVerticalGravity(arg);
-        }
         if (v instanceof LinearLayout) {
           ((LinearLayout) v).setVerticalGravity(arg);
+        }
+        if (v instanceof RelativeLayout) {
+          ((RelativeLayout) v).setVerticalGravity(arg);
         }
       }
     };
