@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -227,6 +228,21 @@ public class BaseAttrs extends Nodes {
 		return new SimpleAttrNode(visible) {
 			public void apply(View v) {
 				v.setVisibility(visible ? View.VISIBLE : View.GONE);
+			}
+		};
+	}
+
+	/**
+	 * A helper for setting custom tags to the view
+	 * @param tag tag ID
+	 * @param value tag object value
+	 * @return tag attribute node
+	 */
+	public static AttrNode tag(final int id, final Object value) {
+		final Pair<Integer, Object> tagPair = new Pair<>(id, value);
+		return new SimpleAttrNode(tagPair) {
+			public void apply(View v) {
+				v.setTag(id, value);
 			}
 		};
 	}
