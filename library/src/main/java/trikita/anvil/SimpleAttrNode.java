@@ -18,7 +18,7 @@ public abstract class SimpleAttrNode<T> implements Nodes.AttrNode {
 
 	@Override
 	public boolean equals(Object obj) {
-		return getClass() == obj.getClass() &&
+		return obj != null && getClass() == obj.getClass() &&
 			(this.value == null
 			 && ((SimpleAttrNode) obj).value == null
 			 || this.value.equals(((SimpleAttrNode) obj).value));
