@@ -22,12 +22,26 @@ android {
 
 	defaultConfig {
 		minSdkVersion 10
-		targetSdkVersion 21
+		targetSdkVersion 22
+		useJack true
 	}
 
 	lintOptions {
 		abortOnError false
 	}
+
+	testOptions {
+		unitTests.returnDefaultValues = true
+	}
+}
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	testCompile 'junit:junit:4.12+'
+	testCompile "org.mockito:mockito-core:1.+"
 }
 
 //
