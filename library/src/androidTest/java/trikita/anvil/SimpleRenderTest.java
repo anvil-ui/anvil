@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import static junit.framework.Assert.*;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 import static trikita.anvil.v10.Attrs.*;
 
 public class SimpleRenderTest extends AndroidTestCase {
 
+	@Test
 	public void testSimpleRender() {
 		Context c = getContext();
 		final ViewGroup rootView = new FrameLayout(c);
@@ -34,6 +37,7 @@ public class SimpleRenderTest extends AndroidTestCase {
 		assertEquals("Hello", ((TextView) childView).getText());
 	}
 
+	@Test
 	public void textSimpleDiffRender() {
 		Context c = getContext();
 		final ViewGroup rootView = new FrameLayout(c);

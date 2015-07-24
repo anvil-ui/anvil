@@ -7,12 +7,16 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import static junit.framework.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 import static trikita.anvil.v10.Attrs.*;
 
 public class TextWatcherTest extends AndroidTestCase {
 
+	@Test
 	public void testSimpleTextWatcher() {
 		final ViewGroup rootView = new FrameLayout(getContext());
 		final StringBuilder sb = new StringBuilder("");

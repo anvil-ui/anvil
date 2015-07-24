@@ -1,7 +1,8 @@
 package trikita.anvil;
 
 import android.test.AndroidTestCase;
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 import trikita.anvil.State;
 import java.util.ArrayDeque;
 

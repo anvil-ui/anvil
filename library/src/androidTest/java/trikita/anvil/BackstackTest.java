@@ -9,8 +9,12 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.runner.RunWith;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 import static trikita.anvil.v10.Attrs.*;
-import static junit.framework.Assert.*;
 
 public class BackstackTest extends AndroidTestCase {
 
@@ -79,8 +83,10 @@ public class BackstackTest extends AndroidTestCase {
 		}
 	}
 
+	@Test
 	public void testSingleViewBackstack() {
 		final List<View> views = new ArrayList<>();
+
 		Backstack backstack = new Backstack(getContext(), new Backstack.Listener() {
 			public void setContentView(View v) {
 				views.add(v);
@@ -92,6 +98,7 @@ public class BackstackTest extends AndroidTestCase {
 		assertEquals(backstack.back(), false);
 	}
 
+	@Test
 	public void testViewSaveRestore() {
 		Bundle b = new Bundle();
 		final View[] viewHolder = new View[1];
@@ -113,6 +120,7 @@ public class BackstackTest extends AndroidTestCase {
 		assertEquals(((ViewWithState) viewHolder[0]).state, 1);
 	}
 
+	@Test
 	public void testViewModifySave() {
 		Bundle b = new Bundle();
 		final View[] viewHolder = new View[1];
@@ -133,6 +141,7 @@ public class BackstackTest extends AndroidTestCase {
 		assertEquals(((ViewWithState) viewHolder[0]).state, 5);
 	}
 
+	@Test
 	public void testNestedViews() {
 		Bundle b = new Bundle();
 		final View[] viewHolder = new View[1];
