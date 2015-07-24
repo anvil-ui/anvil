@@ -13,7 +13,7 @@ apply plugin: 'com.android.library'
 
 android {
 	compileSdkVersion 'android-22'
-	buildToolsVersion '23.0.0 rc2'
+	buildToolsVersion '22.0.1'
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -23,7 +23,6 @@ android {
 	defaultConfig {
 		minSdkVersion 10
 		targetSdkVersion 22
-		useJack true
 	}
 
 	lintOptions {
@@ -40,6 +39,7 @@ repositories {
 }
 
 dependencies {
+	androidTestCompile 'junit:junit:4.12+'
 	testCompile 'junit:junit:4.12+'
 	testCompile "org.mockito:mockito-core:1.+"
 }
