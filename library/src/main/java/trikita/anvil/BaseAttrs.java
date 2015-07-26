@@ -398,6 +398,7 @@ public class BaseAttrs extends Nodes {
 					public void onGlobalLayout() {
 						listener.onConfig(v);
 						observer(v).removeGlobalOnLayoutListener(this);
+						Anvil.render();
 					}
 				});
 			}
