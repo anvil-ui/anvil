@@ -1,6 +1,6 @@
 def GROUPID = 'co.trikita'
 def ARTIFACT = 'anvil'
-def VERSION = '0.0.8'
+def VERSION = '0.0.9'
 def DESCRIPTION = 'Lightweight reactive UI library for Android'
 def WEBURL = 'https://github.com/zserge/anvil'
 def SCMURL = 'https://github.com/zserge/anvil.git'
@@ -96,3 +96,6 @@ bintray {
 	}
 }
 
+tasks.withType(Javadoc) {
+	options.addStringOption('Xdoclint:none', '-quiet')
+}
