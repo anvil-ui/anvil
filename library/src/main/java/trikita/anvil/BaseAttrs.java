@@ -389,13 +389,15 @@ public class BaseAttrs extends Nodes {
 	 */
 	public static AttrNode config(final ConfigListener listener) {
 		return new SimpleAttrNode(listener) {
+			private ViewTreeObserver observer(View v) {
+				return ((ViewGroup) v.getParent()).getViewTreeObserver();
+			}
 			public void apply(final View v) {
-				final ViewTreeObserver obs = ((ViewGroup) v.getParent()).getViewTreeObserver();
-				obs.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				observer(v).addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
 						listener.onConfig(v);
-						obs.removeGlobalOnLayoutListener(this);
+						observer(v).removeGlobalOnLayoutListener(this);
 					}
 				});
 			}
