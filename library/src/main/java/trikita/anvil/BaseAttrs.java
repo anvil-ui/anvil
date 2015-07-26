@@ -234,7 +234,7 @@ public class BaseAttrs extends Nodes {
 
 	/**
 	 * A helper for setting custom tags to the view
-	 * @param tag tag ID
+	 * @param id tag ID
 	 * @param value tag object value
 	 * @return tag attribute node
 	 */
