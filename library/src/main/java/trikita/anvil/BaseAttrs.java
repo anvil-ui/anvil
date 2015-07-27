@@ -58,7 +58,9 @@ public class BaseAttrs extends Nodes {
 		return new SimpleAttrNode(new ArrayList<AttrNode>(Arrays.asList(nodes))) {
 			public void apply(View v) {
 				for (AttrNode n : nodes) {
-					n.apply(v);
+					if (n != null) {
+						n.apply(v);
+					}
 				}
 			}
 		};
