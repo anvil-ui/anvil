@@ -270,93 +270,42 @@ public class BaseAttrs extends Nodes {
 	}
 
 	/**
-	 * An attribute node that has some actions to be performed when old value is
-	 * replaced by the new value. Useful to clean up the listeners added by
-	 * "addXYZListener" instead of "setXYZListener" calls.
-	 */
-	public static abstract class CleansableAttrNode<T> extends SimpleAttrNode<T> {
-		private WeakReference<View> viewRef;
-
-		public CleansableAttrNode(T value) {
-			super(value);
-		}
-
-		public int hashCode() {
-			return super.hashCode();
-		}
-
-		public boolean equals(Object obj) {
-			boolean res = super.equals(obj);
-			// We know that if the view has the same class, but different value - 
-			// apply() will be called for the new value holder.
-			// Which means it's a good place to cleanup the previous value holder
-			if (!res && obj != null && this.getClass().isAssignableFrom(obj.getClass())) {
-				((CleansableAttrNode<T>) obj).cleanup();
-			}
-			return res;
-		}
-
-		@Override
-		public void apply(View v) {
-			this.viewRef = new WeakReference<>(v);
-		}
-
-		public abstract void cleanup(View v);
-
-		private void cleanup() {
-			View v = this.viewRef.get();
-			if (v != null) {
-				this.cleanup(v);
-			}
-		}
-	}
-
-	private static class TextWatchAttr extends CleansableAttrNode<TextWatcher> {
-
-		public TextWatchAttr(TextWatcher value) {
-			super(value);
-		}
-
-		@Override
-		public void apply(View v) {
-			super.apply(v);
-			if (v instanceof TextView) {
-				((TextView) v).addTextChangedListener(this.value);
-			}
-		}
-
-		@Override
-		public void cleanup(View v) {
-			if (v instanceof TextView) {
-				((TextView) v).removeTextChangedListener(this.value);
-			}
-		}
-	}
-
-	/**
 	 * A helper to listen to TextView changes
 	 * @param w Text watcher
 	 * @return text watcher attribute node
 	 */
 	public static AttrNode onTextChanged(final TextWatcher w) {
-		TextWatcher watcher = new TextWatcher() {
-			@Override
-			public void afterTextChanged(Editable s) {
-				w.afterTextChanged(s);
-				Anvil.render();
-			}
-			@Override
-			public void beforeTextChanged(CharSequence s, int from, int n, int after) {
-				w.beforeTextChanged(s, from, n, after);
-				Anvil.render();
-			}
-			@Override
-			public void onTextChanged(CharSequence s, int from, int before, int count) {
-				w.onTextChanged(s, from, before, count);
-				Anvil.render();
+		return new SimpleAttrNode(w) {
+			private int tagId = System.identityHashCode(this.getClass());
+
+			public void apply(View v) {
+				if (v instanceof TextView) {
+					TextView tv = (TextView) v;
+					Object tag = v.getTag(tagId);
+					if (tag instanceof TextWatcher) {
+						tv.removeTextChangedListener((TextWatcher) tag);
+					}
+					TextWatcher watcher = new TextWatcher() {
+						@Override
+						public void afterTextChanged(Editable s) {
+							w.afterTextChanged(s);
+							Anvil.render();
+						}
+						@Override
+						public void beforeTextChanged(CharSequence s, int from, int n, int after) {
+							w.beforeTextChanged(s, from, n, after);
+						}
+						@Override
+						public void onTextChanged(CharSequence s, int from, int before, int count) {
+							w.onTextChanged(s, from, before, count);
+						}
+					};
+
+					tv.setTag(tagId, watcher);
+					tv.addTextChangedListener(watcher);
+				}
 			}
 		};
-		return new TextWatchAttr(watcher);
 	}
 
 	/**
