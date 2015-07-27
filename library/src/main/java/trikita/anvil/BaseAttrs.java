@@ -339,7 +339,24 @@ public class BaseAttrs extends Nodes {
 	 * @return text watcher attribute node
 	 */
 	public static AttrNode onTextChanged(final TextWatcher w) {
-		return new TextWatchAttr(w);
+		TextWatcher watcher = new TextWatcher() {
+			@Override
+			public void afterTextChanged(Editable s) {
+				w.afterTextChanged(s);
+				Anvil.render();
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int from, int n, int after) {
+				w.beforeTextChanged(s, from, n, after);
+				Anvil.render();
+			}
+			@Override
+			public void onTextChanged(CharSequence s, int from, int before, int count) {
+				w.onTextChanged(s, from, before, count);
+				Anvil.render();
+			}
+		};
+		return new TextWatchAttr(watcher);
 	}
 
 	/**
