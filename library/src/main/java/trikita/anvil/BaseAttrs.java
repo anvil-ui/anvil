@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
@@ -305,6 +307,35 @@ public class BaseAttrs extends Nodes {
 
 					tv.setTag(tagId, watcher);
 					tv.addTextChangedListener(watcher);
+				}
+			}
+		};
+	}
+
+	public interface SimpleItemSelectedListener {
+		public void onItemSelected(AdapterView a, View v, int pos, long id);
+	}
+
+	public static Nodes.AttrNode onItemSelected(final SimpleItemSelectedListener l) {
+		return new SimpleAttrNode(l) {
+			public void apply(View v) {
+				if (v instanceof AdapterView) {
+					((AdapterView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+						public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
+							l.onItemSelected(a0, a1, a2, a3);
+							Anvil.render();
+						}
+						public void onNothingSelected(AdapterView a0) {}
+					});
+				}
+				if (v instanceof AutoCompleteTextView) {
+					((AutoCompleteTextView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+						public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
+							l.onItemSelected(a0, a1, a2, a3);
+							Anvil.render();
+						}
+						public void onNothingSelected(AdapterView a0) {}
+					});
 				}
 			}
 		};
