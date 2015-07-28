@@ -1,13 +1,19 @@
 package trikita.anvil;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Pair;
+import android.util.Property;
+import android.util.SparseArray;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.util.SparseArray;
-import android.os.Parcel;
-import android.os.Build;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A most common renderable implementation - a reactive view group that updates
@@ -20,6 +26,47 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 	public final static int DEFAULT_RENDERABLE_ID = 0xaccede;
 
 	private boolean isRendered = false;
+
+	// Custom Property implementation, holds one value of the given type, allows
+	// to get/set it from within the current RenderableView instance
+	protected class Prop<V> extends Property<RenderableView, V> {
+		private V value;
+
+		public Prop(String name, V value) {
+			super((Class<V>) value.getClass(), name);
+			this.value = value;
+		}
+
+		public V get() {
+			return get(RenderableView.this);
+		}
+
+		public void set(V value) {
+			set(RenderableView.this, value);
+		}
+
+		public V get(RenderableView object) {
+			if (object == RenderableView.this) {
+				return this.value;
+			} else {
+				throw new UnsupportedOperationException();
+			}
+		}
+
+		public void set(RenderableView object, V value) {
+			if (object == RenderableView.this) {
+				this.value = value;
+			}
+		}
+
+		public boolean isReadOnly() {
+			return false;
+		}
+	}
+
+	// List of object properties with their names
+	private Map<String, Prop<?>> mProps = new HashMap<>();
+
 
 	// We can't do render(this) here because it would call overridden methods
 	public RenderableView(Context c) {
@@ -183,6 +230,42 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 				return new SavedState[size];
 			}
 		});
+	}
+
+	// Helper to create new named property, if already exists - updates the value
+	public <T> Prop<T> prop(String name, T value) {
+		Prop<T> prop = (Prop<T>) mProps.get(name);
+		if (prop != null) {
+			prop.set(value);
+		} else {
+			prop = new Prop<T>(name, value);
+			mProps.put(name, prop);
+		}
+		return prop;
+	}
+
+	// Helper to get named property
+	public <T> Prop<T> prop(String name) {
+		return (Prop<T>) mProps.get(name);
+	}
+
+	// Binding to set property value. If it's a Prop class - update it, otherwise - 
+	// create a Property instance and use that. This implies having a setNNN
+	// method or NNN public field within the renderable component
+	public static <T> Nodes.AttrNode set(final String name, final T propValue) {
+		return new SimpleAttrNode(new Pair<>(name, propValue)) {
+			public void apply(View v) {
+				if (v instanceof RenderableView) {
+					Prop prop = ((RenderableView) v).prop(name);
+					if (prop != null) {
+						prop.set(propValue);
+					} else {
+						Property p = Property.of(v.getClass(), propValue.getClass(), name);
+						p.set(v, propValue);
+					}
+				}
+			}
+		};
 	}
 }
 
