@@ -275,5 +275,10 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 			}
 		};
 	}
+
+	// Helper for bindings that are evaluated only on the first rendering cycle
+	public Nodes.AttrNode once(final Nodes.AttrNode node) {
+		return isRendered ? null : node;
+	}
 }
 
