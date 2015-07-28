@@ -14,6 +14,8 @@ import android.widget.FrameLayout;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A most common renderable implementation - a reactive view group that updates
@@ -26,6 +28,8 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 	public final static int DEFAULT_RENDERABLE_ID = 0xaccede;
 
 	private boolean isRendered = false;
+
+	List<Nodes.ViewNode> mChildNodes = new ArrayList<>();
 
 	// Custom Property implementation, holds one value of the given type, allows
 	// to get/set it from within the current RenderableView instance
@@ -230,6 +234,10 @@ public abstract class RenderableView extends FrameLayout implements Renderable {
 				return new SavedState[size];
 			}
 		});
+	}
+
+	public List<Nodes.ViewNode> children() {
+		return mChildNodes;
 	}
 
 	// Helper to create new named property, if already exists - updates the value

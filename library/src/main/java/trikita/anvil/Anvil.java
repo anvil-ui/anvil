@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import static trikita.anvil.Nodes.*;
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -215,6 +216,13 @@ public final class Anvil {
 					node.viewClass != oldNode.viewClass) {
 				v = (View) node.viewClass.getConstructor(Context.class).newInstance(c);
 				mount.set(v);
+			}
+
+			if (v instanceof RenderableView && node.children.size() > 0) {
+				RenderableView rv = (RenderableView) v;
+				rv.mChildNodes = node.children;
+				node.children = new ArrayList<>();
+				node.children.add(rv.view());
 			}
 
 			int viewIndex = 0;
