@@ -387,7 +387,7 @@ public class BaseAttrs extends Nodes {
 	 * is created
 	 */
 	public static AttrNode config(final ConfigListener listener) {
-		return new SimpleAttrNode(listener) {
+		return new SimpleAttrNode(null) {
 			private ViewTreeObserver observer(View v) {
 				return ((ViewGroup) v.getParent()).getViewTreeObserver();
 			}
