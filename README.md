@@ -93,10 +93,12 @@ A user-friendly documentation is still in progress, but feel free to help with i
 
 JavaDocs can be found [here][1]
 
+Here is a [collection of simple examples helping to make first steps with Anvil][2]
+
 For the full list of available generators to bind data and listenters check these classes:
 
-* [API level 10 (Android 2.3)][2]
-* [API level 15 (Android 4.0)][3]
+* [API level 10 (Android 2.3)][3]
+* [API level 15 (Android 4.0)][4]
 
 Also, for more details see my blog posts about Anvil:
 
@@ -105,6 +107,7 @@ Also, for more details see my blog posts about Anvil:
 - http://zserge.com/blog/anvil-2.html
 - http://zserge.com/blog/anvil-kotlin.html
 
-[1]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/index.html
-[2]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/trikita/anvil/v10/Attrs.html
-[3]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.6/anvil-0.0.6-javadoc.jar/!/trikita/anvil/v15/Attrs.html
+[1]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.12/anvil-0.0.12-javadoc.jar/!/index.html
+[2]: https://github.com/zserge/anvil-examples
+[3]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.12/anvil-0.0.12-javadoc.jar/!/trikita/anvil/v10/Attrs.html
+[4]: https://oss.sonatype.org/service/local/repositories/releases/archive/co/trikita/anvil/0.0.12/anvil-0.0.12-javadoc.jar/!/trikita/anvil/v15/Attrs.html
