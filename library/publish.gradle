@@ -1,6 +1,6 @@
 def GROUPID = 'co.trikita'
 def ARTIFACT = 'anvil'
-def VERSION = '0.0.11'
+def VERSION = '0.0.12'
 def DESCRIPTION = 'Lightweight reactive UI library for Android'
 def WEBURL = 'https://github.com/zserge/anvil'
 def SCMURL = 'https://github.com/zserge/anvil.git'
