@@ -223,6 +223,18 @@ public class BaseAttrs extends Nodes {
 		};
 	}
 
+	public static AttrNode ref(final RefSet refs, final String name) {
+		final List<Object> params = new ArrayList<Object>() {{
+			add(refs); add(name);
+		}};
+
+		return new SimpleAttrNode(params) {
+			public void apply(View v) {
+				refs.set(name, v);
+			}
+		};
+	}
+
 	/**
 	 * A helper for toggling view visibility
 	 * @param visible view visibility flag
