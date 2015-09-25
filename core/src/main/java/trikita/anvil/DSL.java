@@ -6,7 +6,7 @@ public class DSL {
 
 	static Anvil.Mount current;
 
-	protected static final class ViewClassResult {}
+	public static final class ViewClassResult {}
 
 	public static ViewClassResult v(Class<? extends View> c) {
 		current.push(c);

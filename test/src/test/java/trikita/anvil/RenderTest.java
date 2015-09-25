@@ -34,7 +34,9 @@ public class RenderTest extends AndroidTestCase {
 
 		// On second run view should not be updated
 		View viewRef = rootView.getChildAt(0);
-		Anvil.render();
+
+		m.render();
+
 		assertEquals(1, rootView.getChildCount());
 		assertEquals(viewRef, rootView.getChildAt(0));
 		assertEquals(foo, rootView.getChildAt(0).getTag());

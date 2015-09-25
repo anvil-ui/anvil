@@ -10,7 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public final class Anvil {
 
@@ -18,9 +20,32 @@ public final class Anvil {
 
 	private final static List<Mount> mounts = new ArrayList<>();
 
+	public static View currentView() {
+		// TODO: null-safety
+		return DSL.current.cache.peek().view;
+	}
+
+	private static Runnable anvilRenderRunnable = new Runnable() {
+		public void run() {
+			Anvil.render();
+		}
+	};
+
+	private static Handler anvilUIHandler = null;
+
 	public static void render() {
-		// FIXME force thread
-		for (Mount m : mounts) {
+		// If Anvil.render() is called on a non-UI thread, use UI Handler
+		if (Looper.myLooper() != Looper.getMainLooper()) {
+			if (anvilUIHandler == null) {
+				anvilUIHandler = new Handler(Looper.getMainLooper());
+			}
+			anvilUIHandler.removeCallbacksAndMessages(null);
+			anvilUIHandler.post(anvilRenderRunnable);
+			return;
+		}
+		Set<Mount> keys = new HashSet<>();
+		keys.addAll(mounts);
+		for (Mount m : keys) {
 			m.render();
 		}
 	}
@@ -46,9 +71,10 @@ public final class Anvil {
 					 (this.value != null && this.value.equals(value)))) {
 				return this;
 			}
+			T oldValue = this.value;
 			this.func = func;
 			this.value = value;
-			this.func.apply(v, value);
+			this.func.apply(v, value, oldValue);
 			return this;
 		}
 	}
@@ -98,7 +124,7 @@ public final class Anvil {
 			this.lock = false;
 		}
 
-		public void cleanup() {
+		private void cleanup() {
 			// TODO remove all child nodes and clear cache's root child nodes and attrs
 		}
 

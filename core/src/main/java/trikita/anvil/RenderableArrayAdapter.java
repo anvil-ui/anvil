@@ -22,10 +22,9 @@ public abstract class RenderableArrayAdapter<T> extends RenderableAdapter {
 		return items.get(pos);
 	}
 
-	public void itemView(int pos) {
-		itemView(pos, getItem(pos));
+	public void view(int pos) {
+		view(pos, getItem(pos));
 	}
 
-	public void itemView(int pos, T value) {}
+	public abstract void view(int pos, T value);
 }
-

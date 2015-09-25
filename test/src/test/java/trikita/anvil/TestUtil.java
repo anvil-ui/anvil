@@ -121,7 +121,7 @@ public final class TestUtil {
 	// AttrFunc implementation for setTag()
 	private static class TagFunc implements AttrFunc<Object> {
 		private static final TagFunc instance = new TagFunc();
-		public void apply(View v, Object x) {
+		public void apply(View v, Object x, Object old) {
 			v.setTag(x);
 		}
 	}
