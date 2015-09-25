@@ -318,29 +318,42 @@ public class CommonAttrs extends DSL {
 		new WeakHashMap<StringBuilder, String>();
 
 	public static Void text(final StringBuilder sb) {
-		if (hasUserInput.containsKey(sb) == false) {
-			hasUserInput.put(sb, sb.toString());
-		}
-		onTextChanged(new TextWatcher() {
-			@Override
-			public void	afterTextChanged(Editable s) {
-				sb.replace(0, sb.length(), s.toString());
-				Anvil.render();
-			}
-			@Override
-			public void	beforeTextChanged(CharSequence s, int from, int n, int after) {}
-			@Override
-			public void	onTextChanged(CharSequence s, int from, int before, int n) {}
-			@Override
-			public int hashCode() { return sb.hashCode(); }
-			@Override
-			public boolean equals(Object o) { return sb.equals(o); }
-		});
 		if (sb.toString().equals(hasUserInput.get(sb)) == false) {
 			trikita.anvil.v15.Attrs.text(sb.toString());
 			hasUserInput.put(sb, sb.toString());
 		}
+		onTextChanged(new TextWatcherProxy(sb) {
+			@Override
+			public void	afterTextChanged(Editable s) {
+				boolean shouldRender = !s.toString().equals(hasUserInput.get(sb));
+				sb.replace(0, sb.length(), s.toString());
+				hasUserInput.put(sb, s.toString());
+				if (shouldRender) {
+					Anvil.render();
+				}
+			}
+		});
 		return null;
+	}
+
+	private static class TextWatcherProxy implements TextWatcher {
+		private final Object object;
+		public TextWatcherProxy(Object o) {
+			this.object = o;
+		}
+		public int hashCode() { return object.hashCode(); }
+		public boolean equals(Object o) {
+			if (o == null || o.getClass().equals(getClass()) == false) {
+				return false;
+			}
+			return ((TextWatcherProxy) o).equals(object);
+		}
+		@Override
+		public void	afterTextChanged(Editable s) {}
+		@Override
+		public void	beforeTextChanged(CharSequence s, int from, int n, int after) {}
+		@Override
+		public void	onTextChanged(CharSequence s, int from, int before, int n) {}
 	}
 
 	public static Void onTextChanged(TextWatcher w) {
@@ -354,7 +367,7 @@ public class CommonAttrs extends DSL {
 				if (old != null) {
 					tv.removeTextChangedListener(old);
 				}
-				tv.addTextChangedListener(new TextWatcher() {
+				tv.addTextChangedListener(new TextWatcherProxy(w) {
 					public void	afterTextChanged(Editable s) {
 						w.afterTextChanged(s);
 					}
@@ -366,8 +379,6 @@ public class CommonAttrs extends DSL {
 						int from, int before, int n) {
 						w.onTextChanged(s, from, before, n);
 					}
-					public int hashCode() { return w.hashCode(); }
-					public boolean equals(Object o) { return w.equals(o); }
 				});
 			}
 		}

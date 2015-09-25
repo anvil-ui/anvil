@@ -74,7 +74,12 @@ public final class Anvil {
 			T oldValue = this.value;
 			this.func = func;
 			this.value = value;
-			this.func.apply(v, value, oldValue);
+			// FIXME need to double-check the null-safety
+			if (oldValue == null || !oldValue.getClass().equals(value.getClass())) {
+				this.func.apply(v, value, null);
+			} else {
+				this.func.apply(v, value, oldValue);
+			}
 			return this;
 		}
 	}
