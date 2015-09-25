@@ -17,14 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 public class CommonAttrs extends DSL {
 
 	public interface SimpleItemSelectedListener {
 		public void onItemSelected(AdapterView a, View v, int pos, long id);
-	}
-
-	public static interface SimpleTextWatcher {
-		public void onTextChanged(String s);
 	}
 
 	//
@@ -144,7 +143,7 @@ public class CommonAttrs extends DSL {
 		}
 	}
 
-	public static Void gravity(int g) {
+	public static Void layoutGravity(int g) {
 		return attr(LayoutGravityFunc.instance, g);
 	}
 
@@ -163,27 +162,23 @@ public class CommonAttrs extends DSL {
 		}
 	}
 
-	//
-	// FIXME unimplemented layouts
-	//
-	
 	public static Void column(int c) {
+		// TODO
 		return null;
 	}
 
 	public static Void span(int span) {
+		// TODO
 		return null;
 	}
 
-	//
-	//
-	//
-
 	public static Void align(int verb) {
+		// TODO
 		return null;
 	}
 
 	public static Void align(int verb, int anchor) {
+		// TODO
 		return null;
 	}
 
@@ -289,12 +284,11 @@ public class CommonAttrs extends DSL {
 	}
 
 	public static Void visibility(boolean visible) {
-		return null;
-		//if (visible) {
-			//return visibility(View.VISIBLE);
-		//} else {
-			//return visibility(View.GONE);
-		//}
+		if (visible) {
+			return trikita.anvil.v15.Attrs.visibility(View.VISIBLE);
+		} else {
+			return trikita.anvil.v15.Attrs.visibility(View.GONE);
+		}
 	}
 
 	// -------------
@@ -304,7 +298,7 @@ public class CommonAttrs extends DSL {
 	private final static class TagFunc implements AttrFunc<Pair<Integer, Object>> {
 		private final static TagFunc instance = new TagFunc();
 		public void apply(View v, Pair<Integer, Object> p, Pair<Integer, Object> q) {
-
+			// TODO
 		}
 	}
 
@@ -314,64 +308,63 @@ public class CommonAttrs extends DSL {
 	private final static class ShadowLayerFunc implements AttrFunc<Number[]> {
 		private final static ShadowLayerFunc instance = new ShadowLayerFunc();
 		public void apply(View v, Number[] arg, Number[] old) {
-
+			// TODO
 		}
 	}
 
 	// Custom and simplified listeners
 
-	public static Void onTextChanged(TextWatcher w) {
-		return attr(TextWatcherFunc.instance, w);
-	}
+	private static Map<StringBuilder, String> hasUserInput =
+		new WeakHashMap<StringBuilder, String>();
 
-	public static Void onTextChanged(final SimpleTextWatcher w) {
-		return onTextChanged(new TextWatcher() {
+	public static Void text(final StringBuilder sb) {
+		if (hasUserInput.containsKey(sb) == false) {
+			hasUserInput.put(sb, sb.toString());
+		}
+		onTextChanged(new TextWatcher() {
 			@Override
 			public void	afterTextChanged(Editable s) {
-				w.onTextChanged(s.toString());
+				sb.replace(0, sb.length(), s.toString());
+				Anvil.render();
 			}
 			@Override
 			public void	beforeTextChanged(CharSequence s, int from, int n, int after) {}
 			@Override
 			public void	onTextChanged(CharSequence s, int from, int before, int n) {}
 			@Override
-			public int hashCode() { return w.hashCode(); }
+			public int hashCode() { return sb.hashCode(); }
 			@Override
-			public boolean equals(Object o) { return w.equals(o); }
+			public boolean equals(Object o) { return sb.equals(o); }
 		});
+		if (sb.toString().equals(hasUserInput.get(sb)) == false) {
+			trikita.anvil.v15.Attrs.text(sb.toString());
+			hasUserInput.put(sb, sb.toString());
+		}
+		return null;
 	}
 
+	public static Void onTextChanged(TextWatcher w) {
+		return attr(TextWatcherFunc.instance, w);
+	}
 	private final static class TextWatcherFunc implements AttrFunc<TextWatcher> {
 		private final static TextWatcherFunc instance = new TextWatcherFunc();
 		public void apply(final View v, final TextWatcher w, TextWatcher old) {
 			if (v instanceof TextView) {
 				TextView tv = (TextView) v;
 				if (old != null) {
-					System.out.println("remove old listener " + old);
 					tv.removeTextChangedListener(old);
 				}
-				System.out.println("add new listener " + w);
 				tv.addTextChangedListener(new TextWatcher() {
 					public void	afterTextChanged(Editable s) {
-						System.out.println("afterTextChanged() " + s.toString() + " " + this);
 						w.afterTextChanged(s);
-						if (v.isFocused()) {
-							//Anvil.render();
-						}
 					}
 					public void	beforeTextChanged(CharSequence s, int from, int n,
 						int after) {
 						w.beforeTextChanged(s, from, n, after);
-						if (v.isFocused()) {
-							//Anvil.render();
-						}
 					}
 					public void	onTextChanged(CharSequence s,
 						int from, int before, int n) {
 						w.onTextChanged(s, from, before, n);
-						if (v.isFocused()) {
-							//Anvil.render();
-						}
 					}
 					public int hashCode() { return w.hashCode(); }
 					public boolean equals(Object o) { return w.equals(o); }
@@ -392,7 +385,6 @@ public class CommonAttrs extends DSL {
 				new AdapterView.OnItemSelectedListener() {
 					@Override
 					public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
-						System.out.println("onItemSelected " + a2);
 						l.onItemSelected(a0, a1, a2, a3);
 						Anvil.render();
 					}

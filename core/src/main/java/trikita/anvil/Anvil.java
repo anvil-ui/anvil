@@ -98,7 +98,7 @@ public final class Anvil {
 			this.view = r;
 			cache.push(new Node());
 			cache.peek().view = v;
-		} 
+		}
 
 		public void render() {
 			if (this.lock) {
