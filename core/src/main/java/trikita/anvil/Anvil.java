@@ -68,7 +68,7 @@ public final class Anvil {
 		public Attr<T> apply(View v, AttrFunc<T> func, T value) {
 			if (this.func != null && this.func.getClass().equals(func.getClass()) &&
 					(this.value == value ||
-					 (this.value != null && this.value.equals(value)))) {
+					 (value != null && value.equals(this.value)))) {
 				return this;
 			}
 			T oldValue = this.value;
@@ -185,8 +185,12 @@ public final class Anvil {
 				ViewGroup vg = (ViewGroup) node.view;
 				vg.removeViews(node.child, vg.getChildCount() - node.child);
 			}
-			for (int i = size - 1; i > node.child; i++) {
+			for (int i = size - 1; i >= node.child; i--) {
 				node.children.remove(i);
+			}
+			size = node.attrs.size();
+			for (int i = size - 1; i >= node.attr; i--) {
+				node.attrs.remove(i);
 			}
 			node.view = null;
 		}
