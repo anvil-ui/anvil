@@ -1,5 +1,11 @@
 package trikita.anvil;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.TimeInterpolator;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -17,6 +23,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -69,15 +78,18 @@ public class CommonAttrs extends DSL {
 	}
 
 	public static Void size(int w, int h) {
-		return attr(LayoutSizeFunc.instance, new Integer[]{w, h});
+		return attr(LayoutSizeFunc.instance,
+				new AbstractMap.SimpleImmutableEntry<Integer, Integer>(w, h));
 	}
 
-	private final static class LayoutSizeFunc implements AttrFunc<Integer[]> {
+	private final static class LayoutSizeFunc
+			implements AttrFunc<Map.Entry<Integer, Integer>> {
 		private final static LayoutSizeFunc instance = new LayoutSizeFunc();
-		public void apply(View v, Integer[] arg, Integer[] old) {
+		public void apply(View v, Map.Entry<Integer, Integer> arg,
+				Map.Entry<Integer, Integer> old) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
-			p.width = arg[0];
-			p.height = arg[1];
+			p.width = arg.getKey();
+			p.height = arg.getValue();
 			v.setLayoutParams(p);
 		}
 	}
@@ -91,13 +103,18 @@ public class CommonAttrs extends DSL {
 	}
 
 	public static Void padding(int l, int t, int r, int b) {
-		return attr(PaddingFunc.instance, new Integer[]{l, r, r, b});
+		List<Integer> list = new ArrayList<>(4);
+		list.add(l);
+		list.add(t);
+		list.add(r);
+		list.add(b);
+		return attr(PaddingFunc.instance, list);
 	}
 
-	private final static class PaddingFunc implements AttrFunc<Integer[]> {
+	private final static class PaddingFunc implements AttrFunc<List<Integer>> {
 		private final static PaddingFunc instance = new PaddingFunc();
-		public void apply(View v, Integer[] arg, Integer[] old) {
-			v.setPadding(arg[0], arg[1], arg[2], arg[3]);
+		public void apply(View v, List<Integer> arg, List<Integer> old) {
+			v.setPadding(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
 		}
 	}
 
@@ -110,19 +127,24 @@ public class CommonAttrs extends DSL {
 	}
 
 	public static Void margin(int l, int t, int r, int b) {
-		return attr(LayoutMarginFunc.instance, new Integer[]{l, t, r, b});
+		List<Integer> list = new ArrayList<>(4);
+		list.add(l);
+		list.add(t);
+		list.add(r);
+		list.add(b);
+		return attr(LayoutMarginFunc.instance, list);
 	}
 
-	private final static class LayoutMarginFunc implements AttrFunc<Integer[]> {
+	private final static class LayoutMarginFunc implements AttrFunc<List<Integer>> {
 		private final static LayoutMarginFunc instance = new LayoutMarginFunc();
-		public void apply(View v, Integer[] arg, Integer[] old) {
+		public void apply(View v, List<Integer> arg, List<Integer> old) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
 			if (p instanceof ViewGroup.MarginLayoutParams) {
 				ViewGroup.MarginLayoutParams mp = (ViewGroup.MarginLayoutParams) p;
-				mp.leftMargin = arg[0];
-				mp.topMargin = arg[1];
-				mp.rightMargin = arg[2];
-				mp.bottomMargin = arg[3];
+				mp.leftMargin = arg.get(0);
+				mp.topMargin = arg.get(1);
+				mp.rightMargin = arg.get(2);
+				mp.bottomMargin = arg.get(3);
 				v.setLayoutParams(mp);
 			}
 		}
@@ -303,12 +325,21 @@ public class CommonAttrs extends DSL {
 	}
 
 	public static Void shadowLayer(float radius, float dx, float dy, int color) {
-		return attr(ShadowLayerFunc.instance, new Number[]{radius, dx, dy, color});
+		List<Number> list = new ArrayList<>(4);
+		list.add(radius);
+		list.add(dx);
+		list.add(dy);
+		list.add(color);
+		return attr(ShadowLayerFunc.instance, list);
 	}
-	private final static class ShadowLayerFunc implements AttrFunc<Number[]> {
+	private final static class ShadowLayerFunc implements AttrFunc<List<Number>> {
 		private final static ShadowLayerFunc instance = new ShadowLayerFunc();
-		public void apply(View v, Number[] arg, Number[] old) {
-			// TODO
+		public void apply(View v, List<Number> arg, List<Number> old) {
+			if (v instanceof TextView) {
+				((TextView) v).setShadowLayer(arg.get(0).floatValue(),
+						arg.get(1).floatValue(), arg.get(2).floatValue(),
+						arg.get(3).intValue());
+			}
 		}
 	}
 
@@ -412,6 +443,102 @@ public class CommonAttrs extends DSL {
 				((AutoCompleteTextView) v).setOnItemSelectedListener(wrapper);
 			}
 		}
+	}
+	private final static class AnimatorPair {
+		public Animator animator;
+		public boolean trigger;
+		public AnimatorPair(Animator a, boolean trigger) {
+			this.animator = a;
+			this.trigger = trigger;
+		}
+		public int hashCode() {
+			return trigger ? 0 : 1;
+		}
+		public boolean equals(Object o) {
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			AnimatorPair pair = (AnimatorPair) o;
+			if (pair.trigger != this.trigger) {
+				if (pair.animator != null && pair.animator.isRunning()) {
+					pair.animator.cancel();
+				}
+				return false;
+			}
+			this.animator = pair.animator;
+			return true;
+		}
+	}
+
+	private static class AnimatorFunc implements AttrFunc<AnimatorPair> {
+		private final static AnimatorFunc instance = new AnimatorFunc();
+
+		public void apply(View v, AnimatorPair a, AnimatorPair b) {
+			// If new animation is set to true and old one was false
+			// then start new animation
+			if (a.trigger) {
+				a.animator.setTarget(v);
+				a.animator.start();
+			}
+		}
+	}
+
+	public static Void anim(boolean trigger, Animator a) {
+		return attr(AnimatorFunc.instance, new AnimatorPair(a, trigger));
+	}
+
+	// FIXME wrap all Animator methods!
+	public static class SimpleAnimator extends Animator {
+		private AnimatorSet anim = new AnimatorSet();
+
+		public SimpleAnimator of(String prop, float ...values) {
+			this.anim.play(ObjectAnimator
+					.ofPropertyValuesHolder(Anvil.currentView(),
+						PropertyValuesHolder.ofFloat(prop, values)));
+			return this;
+		}
+
+		public SimpleAnimator delay(int ms) {
+			this.anim.setStartDelay(ms);
+			return this;
+		}
+
+		public SimpleAnimator duration(long ms) {
+			this.anim.setDuration(ms);
+			return this;
+		}
+
+		public SimpleAnimator listener(final Runnable r) {
+			this.anim.addListener(new AnimatorListenerAdapter() {
+				public void onAnimationEnd(Animator anim) {
+					r.run();
+				}
+			});
+			return this;
+		}
+
+		public SimpleAnimator listener(Animator.AnimatorListener l) {
+			this.anim.addListener(l);
+			return this;
+		}
+		public void setInterpolator(TimeInterpolator i) {
+			this.anim.setInterpolator(i);
+		}
+		public long getDuration() {
+			return this.anim.getDuration();
+		}
+		public void setTarget(Object t) { this.anim.setTarget(t); }
+		public Animator setDuration(long ms) { return this.duration(ms); }
+		public void setStartDelay(long ms) { this.anim.setStartDelay(ms); }
+		public long getStartDelay() { return this.anim.getStartDelay(); }
+		public boolean isRunning() { return this.anim.isRunning(); }
+		public void start() { this.anim.start(); }
+		public void cancel() { this.anim.cancel(); }
+		public void end() { this.anim.end(); }
+	}
+
+	public static SimpleAnimator of(String prop, float ...values) {
+		return new SimpleAnimator().of(prop, values);
 	}
 }
 
