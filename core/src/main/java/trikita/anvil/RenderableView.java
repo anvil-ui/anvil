@@ -1,44 +1,39 @@
 package trikita.anvil;
 
 import android.content.Context;
-import android.util.Pair;
-import android.util.Property;
-import android.view.View;
+import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import java.util.HashMap;
-import java.util.Map;
-
+// TODO: add method children() to render all child renderables
+// TODO: add method children(r) to override certain properties in child renderables
 public abstract class RenderableView extends FrameLayout implements Renderable {
 
-	Anvil.Mount mount = null;
+	private Anvil.Mount mount = null;
 
-	public RenderableView(Context c) {
-		super(c);
+	public RenderableView(Context context) {
+		super(context);
 	}
 
-	// TODO: other view constructors
+	public RenderableView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	public RenderableView(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+	}
 
 	@Override
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		assert(mount == null);
+		assert mount == null;
 		mount = Anvil.mount(this, this);
 	}
 
 	@Override
 	public void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-		assert(mount != null);
+		assert mount != null;
 		Anvil.unmount(mount);
-	}
-
-	protected void children() {
-		// TODO render children using their default render function
-	}
-
-	protected void children(Renderable r) {
-		// TODO render each childview overiding its default render function
 	}
 
 	public abstract void view();
