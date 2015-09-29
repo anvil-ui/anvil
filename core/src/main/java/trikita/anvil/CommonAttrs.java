@@ -31,16 +31,12 @@ import java.util.WeakHashMap;
 
 public class CommonAttrs extends DSL {
 
-	public interface SimpleItemSelectedListener {
-		public void onItemSelected(AdapterView a, View v, int pos, long id);
-	}
-
 	//
 	// Common attrs
 	//
 	
 	// weight constants
-	public final static int FILL = ViewGroup.LayoutParams.FILL_PARENT;
+	public final static int FILL = ViewGroup.LayoutParams.MATCH_PARENT;
 	public final static int MATCH = ViewGroup.LayoutParams.MATCH_PARENT;
 	public final static int WRAP = ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -344,12 +340,11 @@ public class CommonAttrs extends DSL {
 	}
 
 	// Custom and simplified listeners
-
 	private static Map<StringBuilder, String> hasUserInput =
 		new WeakHashMap<StringBuilder, String>();
 
 	public static Void text(final StringBuilder sb) {
-		if (sb.toString().equals(hasUserInput.get(sb)) == false) {
+		if (!sb.toString().equals(hasUserInput.get(sb))) {
 			trikita.anvil.v15.Attrs.text(sb.toString());
 			hasUserInput.put(sb, sb.toString());
 		}
@@ -374,16 +369,13 @@ public class CommonAttrs extends DSL {
 		}
 		public int hashCode() { return object.hashCode(); }
 		public boolean equals(Object o) {
-			if (o == null || o.getClass().equals(getClass()) == false) {
+			if (o == null || !o.getClass().equals(getClass())) {
 				return false;
 			}
 			return ((TextWatcherProxy) o).equals(object);
 		}
-		@Override
 		public void	afterTextChanged(Editable s) {}
-		@Override
 		public void	beforeTextChanged(CharSequence s, int from, int n, int after) {}
-		@Override
 		public void	onTextChanged(CharSequence s, int from, int before, int n) {}
 	}
 
@@ -413,6 +405,10 @@ public class CommonAttrs extends DSL {
 				});
 			}
 		}
+	}
+
+	public interface SimpleItemSelectedListener {
+		public void onItemSelected(AdapterView a, View v, int pos, long id);
 	}
 
 	public static Void onItemSelected(SimpleItemSelectedListener l) {
@@ -489,7 +485,7 @@ public class CommonAttrs extends DSL {
 
 	// FIXME wrap all Animator methods!
 	public static class SimpleAnimator extends Animator {
-		private AnimatorSet anim = new AnimatorSet();
+		private final AnimatorSet anim = new AnimatorSet();
 
 		public SimpleAnimator of(String prop, float ...values) {
 			this.anim.play(ObjectAnimator
