@@ -16,9 +16,11 @@ import java.util.Set;
 
 public final class Anvil {
 
-	private Anvil() {}
-
 	private final static List<Mount> mounts = new ArrayList<>();
+
+	private static Handler anvilUIHandler = null;
+
+	private Anvil() {}
 
 	public static View currentView() {
 		// TODO: null-safety
@@ -31,17 +33,17 @@ public final class Anvil {
 		}
 	};
 
-	private static Handler anvilUIHandler = null;
-
 	public static void render() {
-		// If Anvil.render() is called on a non-UI thread, use UI Handler
-		if (Looper.myLooper() != Looper.getMainLooper()) {
-			if (anvilUIHandler == null) {
-				anvilUIHandler = new Handler(Looper.getMainLooper());
+		synchronized (Anvil.class) {
+			// If Anvil.render() is called on a non-UI thread, use UI Handler
+			if (Looper.myLooper() != Looper.getMainLooper()) {
+				if (anvilUIHandler == null) {
+					anvilUIHandler = new Handler(Looper.getMainLooper());
+				}
+				anvilUIHandler.removeCallbacksAndMessages(null);
+				anvilUIHandler.post(anvilRenderRunnable);
+				return;
 			}
-			anvilUIHandler.removeCallbacksAndMessages(null);
-			anvilUIHandler.post(anvilRenderRunnable);
-			return;
 		}
 		Set<Mount> keys = new HashSet<>();
 		keys.addAll(mounts);
@@ -68,17 +70,17 @@ public final class Anvil {
 		public Attr<T> apply(View v, AttrFunc<T> func, T value) {
 			if (this.func != null && this.func.getClass().equals(func.getClass()) &&
 					(this.value == value ||
-					 (value != null && value.equals(this.value)))) {
+					 value != null && value.equals(this.value))) {
 				return this;
 			}
 			T oldValue = this.value;
 			this.func = func;
 			this.value = value;
 			// FIXME need to double-check the null-safety
-			if (oldValue == null || !oldValue.getClass().equals(value.getClass())) {
-				this.func.apply(v, value, null);
-			} else {
+			if (oldValue != null && value != null && oldValue.getClass().equals(value.getClass())) {
 				this.func.apply(v, value, oldValue);
+			} else {
+				this.func.apply(v, value, null);
 			}
 			return this;
 		}
@@ -86,13 +88,13 @@ public final class Anvil {
 
 	public static class Mount {
 		private final Renderable view;
-		private Deque<Node> cache = new ArrayDeque<>();
+		private final Deque<Node> cache = new ArrayDeque<>();
 		private boolean lock = false;
 
 		private final static class Node {
 			// Cache
-			private final List<Node> children = new ArrayList<Node>();
-			private final List<Attr> attrs = new ArrayList<Attr>();
+			private final List<Node> children = new ArrayList<>();
+			private final List<Attr> attrs = new ArrayList<>();
 			// Iterator state
 			private int attr;
 			private int child;
@@ -158,7 +160,7 @@ public final class Anvil {
 					childNode.children.clear();
 					childNode.attrs.clear();
 					Context c = cache.peekLast().view.getContext();
-					View v = (View) viewClass.getConstructor(Context.class).newInstance(c);
+					View v = viewClass.getConstructor(Context.class).newInstance(c);
 					if (index < vg.getChildCount()) {
 						vg.removeViewAt(index);
 					}
@@ -198,9 +200,11 @@ public final class Anvil {
 		<T> void attr(AttrFunc<T> func, T value) {
 			Node node = cache.peek();
 			if (node.attr < node.attrs.size()) {
-				node.attrs.get(node.attr).apply(node.view, func, value);
+				@SuppressWarnings("unchecked")
+				Attr<T> attr = node.attrs.get(node.attr);
+				attr.apply(node.view, func, value);
 			} else {
-				node.attrs.add(new Attr().apply(node.view, func, value));
+				node.attrs.add(new Attr<T>().apply(node.view, func, value));
 			}
 			node.attr++;
 		}
