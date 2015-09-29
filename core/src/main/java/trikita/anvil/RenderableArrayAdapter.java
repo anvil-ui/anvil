@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class RenderableArrayAdapter<T> extends RenderableAdapter {
-	private List<T> items;
+	private final List<T> items;
 
-	public RenderableArrayAdapter(T[] items) {
+	public RenderableArrayAdapter(T... items) {
 		this.items = Arrays.asList(items);
 	}
 
@@ -23,8 +23,6 @@ public abstract class RenderableArrayAdapter<T> extends RenderableAdapter {
 	}
 
 	public void view(int pos) {
-		view(pos, getItem(pos));
+		view(pos);
 	}
-
-	public abstract void view(int pos, T value);
 }

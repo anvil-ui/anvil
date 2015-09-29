@@ -5,20 +5,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 
-import java.util.Map;
-import java.util.WeakHashMap;
-
 public abstract class RenderableAdapter extends BaseAdapter {
-
-	public abstract void view(int index);
 	
 	private int currentPosition = -1;
 
 	@Override
-	public View getView(int pos, View v, ViewGroup parent) {
+	public View getView(int pos, View convertView, ViewGroup parent) {
+		View v = convertView;
 		if (v == null) {
-			final FrameLayout vg = new FrameLayout(parent.getContext());
 			currentPosition = pos;
+			FrameLayout vg = new FrameLayout(parent.getContext());
 			Anvil.Mount m = new Anvil.Mount(vg, new Renderable() {
 				public void view() {
 					RenderableAdapter.this.view(currentPosition);
@@ -39,4 +35,6 @@ public abstract class RenderableAdapter extends BaseAdapter {
 	public long getItemId(int pos) {
 		return pos; // just a most common implementation
 	}
+
+	public abstract void view(int index);
 }
