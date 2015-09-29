@@ -13,7 +13,7 @@ public class DSL {
 		return null;
 	}
 
-	static Void end() {
+	private static Void end() {
 		current.pop();
 		return null;
 	}
