@@ -52,8 +52,8 @@ dependencies {
 	compile 'org.jetbrains.kotlin:kotlin-stdlib:+'
 
 	androidTestCompile 'junit:junit:4.12+'
-	androidTestCompile project(':core')
+	androidTestCompile project(path: ':core', configuration: 'v15Debug')
 
 	testCompile 'junit:junit:4.12+'
-	testCompile project(':core')
+	testCompile project(path: ':core', configuration: 'v15Debug')
 }
