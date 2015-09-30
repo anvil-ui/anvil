@@ -16,14 +16,9 @@ apply from: 'attr-quirks.gradle'
 // - newer then API level 10 (GB 2.3.3, 99.8% of devices)
 // - newer than API level 15 (ICS 4.0.3, 95.7% of devices)
 // - newer than API level 19 (KK 4.0.3, 60.2% of devices)
+task generateV19Attrs(type: AttrsGeneratorTask) { apiLevel = 19 }
 task generateV15Attrs(type: AttrsGeneratorTask) { apiLevel = 15 }
-
-//gradle.projectsEvaluated {
-	//println(tasks)
-	//preBuild.dependsOn(generateV10Attrs)
-	//preBuild.dependsOn(generateV15Attrs)
-	//preBuild.dependsOn(generateV19Attrs)
-//}
+task generateV10Attrs(type: AttrsGeneratorTask) { apiLevel = 10 }
 
 class BuilderLock {
 	def locked = false
@@ -52,9 +47,9 @@ class AttrsGeneratorTask extends DefaultTask {
 
 		finalizeAttrs(attrsBuilder, attrMethods)
 
-		JavaFile.builder("trikita.anvil.v${apiLevel}", attrsBuilder.build())
+		JavaFile.builder("trikita.anvil", attrsBuilder.build())
 			.build()
-			.writeTo(getProject().file("src/main/java"))
+			.writeTo(getProject().file("src/v${apiLevel}/java"))
 	}
 
 	def getAndroidJar(api) {

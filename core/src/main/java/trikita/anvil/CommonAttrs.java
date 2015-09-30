@@ -303,9 +303,9 @@ public class CommonAttrs extends DSL {
 
 	public static Void visibility(boolean visible) {
 		if (visible) {
-			return trikita.anvil.v15.Attrs.visibility(View.VISIBLE);
+			return trikita.anvil.Attrs.visibility(View.VISIBLE);
 		} else {
-			return trikita.anvil.v15.Attrs.visibility(View.GONE);
+			return trikita.anvil.Attrs.visibility(View.GONE);
 		}
 	}
 
@@ -345,7 +345,7 @@ public class CommonAttrs extends DSL {
 
 	public static Void text(final StringBuilder sb) {
 		if (!sb.toString().equals(hasUserInput.get(sb))) {
-			trikita.anvil.v15.Attrs.text(sb.toString());
+			trikita.anvil.Attrs.text(sb.toString());
 			hasUserInput.put(sb, sb.toString());
 		}
 		onTextChanged(new TextWatcherProxy(sb) {
