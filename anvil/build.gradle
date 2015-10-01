@@ -50,6 +50,27 @@ apply from: 'gen.gradle'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
+def fixPom(pom) {
+	pom.withXml {
+		def root = asNode()
+		root.appendNode('description', 'Lightweight reactive UI library for Android')
+		root.appendNode('name', 'Anvil')
+		root.appendNode('url', 'https://github.com/zserge/anvil')
+		def scm = root.appendNode('scm')
+		scm.appendNode('url', 'https://github.com/zserge/anvil.git')
+		scm.appendNode('connection', 'https://github.com/zserge/anvil.git')
+		scm.appendNode('developerConnection', 'https://github.com/zserge/anvil.git')
+		def developer = root.appendNode('developers').appendNode('developer')
+		developer.appendNode('id', 'zserge')
+		developer.appendNode('name', 'Serge Zaitsev')
+		developer.appendNode('email', 'zaitsev.serge@gmail.com')
+		def license = root.appendNode('licenses').appendNode('license')
+		license.appendNode('name', 'MIT License')
+		license.appendNode('url', 'http://www.opensource.org/licenses/mit-license.php')
+		license.appendNode('distribution', 'repo')
+	}
+}
+
 publishing {
 	publications {
 		sdk10(MavenPublication) {
@@ -57,25 +78,28 @@ publishing {
 			version project.version
 			artifactId 'anvil-sdk10'
 			artifact "$buildDir/outputs/aar/anvil-sdk10-release.aar"
+			fixPom(pom)
 		}
 		sdk15(MavenPublication) {
 			groupId project.group
 			version project.version
 			artifactId 'anvil-sdk15'
 			artifact "$buildDir/outputs/aar/anvil-sdk15-release.aar"
+			fixPom(pom)
 		}
 		sdk19(MavenPublication) {
 			groupId project.group
 			version project.version
 			artifactId 'anvil-sdk19'
 			artifact "$buildDir/outputs/aar/anvil-sdk19-release.aar"
+			fixPom(pom)
 		}
 	}
 }
 
 bintray {
-	user = hasProperty('bintrayUser') ? bintrayUser : ''
-	key = hasProperty('bintrayApiKey') ? bintrayApiKey : ''
+	user = project.hasProperty('bintrayUser') ? bintrayUser : ''
+	key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
 	publications = ['sdk10', 'sdk15', 'sdk19']
 	pkg {
 		repo = 'maven'
@@ -85,15 +109,15 @@ bintray {
 		licenses = ['MIT']
 		publish = true
 		version {
-			name = version
+			name = project.version
 			gpg {
 				sign = true
-				passphrase = hasProperty('bintrayGpgPassword') ? bintrayGpgPassword : ''
+				passphrase = project.hasProperty('bintrayGpgPassword') ? bintrayGpgPassword : ''
 			}
 			mavenCentralSync {
 				sync = true
-				user = hasProperty('bintrayOssUser') ? bintrayOssUser : ''
-				password = hasProperty('bintrayOssPassword') ? bintrayOssPassword : ''
+				user = project.hasProperty('bintrayOssUser') ? bintrayOssUser : ''
+				password = project.hasProperty('bintrayOssPassword') ? bintrayOssPassword : ''
 				close = '1'
 			}
 		}
