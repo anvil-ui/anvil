@@ -18,18 +18,18 @@ public class RenderTest extends AndroidTestCase {
 		final ViewGroup rootView = new TestLayout(getContext());
 
 		final int[] called = {0};
-		Anvil.Mount m = Anvil.mount(rootView, new Renderable() {
+		Anvil.Mount m = Anvil.mount(rootView, new Anvil.Renderable() {
 			public void view() {
 				called[0]++;
 				o (testView(),
-					tag(foo));
+					dummy(foo));
 			}
 		});
 
 		// View should be rendered correctly and attributes should be set
 		assertEquals(1, rootView.getChildCount());
 		assertEquals(TestView.class, rootView.getChildAt(0).getClass());
-		assertEquals(foo, rootView.getChildAt(0).getTag());
+		assertEquals(foo, ((TestView) rootView.getChildAt(0)).getDummy());
 		assertEquals(1, called[0]);
 
 		// On second run view should not be updated
@@ -39,7 +39,7 @@ public class RenderTest extends AndroidTestCase {
 
 		assertEquals(1, rootView.getChildCount());
 		assertEquals(viewRef, rootView.getChildAt(0));
-		assertEquals(foo, rootView.getChildAt(0).getTag());
+		assertEquals(foo, ((TestView) rootView.getChildAt(0)).getDummy());
 		assertEquals(2, called[0]);
 
 		Anvil.unmount(m);

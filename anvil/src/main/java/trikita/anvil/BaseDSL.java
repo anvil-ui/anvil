@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public class CommonAttrs extends DSL {
+public class BaseDSL {
 
 	//
 	// Common attrs
@@ -79,7 +79,7 @@ public class CommonAttrs extends DSL {
 	}
 
 	private final static class LayoutSizeFunc
-			implements AttrFunc<Map.Entry<Integer, Integer>> {
+			implements Anvil.AttrFunc<Map.Entry<Integer, Integer>> {
 		private final static LayoutSizeFunc instance = new LayoutSizeFunc();
 		public void apply(View v, Map.Entry<Integer, Integer> arg,
 				Map.Entry<Integer, Integer> old) {
@@ -107,7 +107,7 @@ public class CommonAttrs extends DSL {
 		return attr(PaddingFunc.instance, list);
 	}
 
-	private final static class PaddingFunc implements AttrFunc<List<Integer>> {
+	private final static class PaddingFunc implements Anvil.AttrFunc<List<Integer>> {
 		private final static PaddingFunc instance = new PaddingFunc();
 		public void apply(View v, List<Integer> arg, List<Integer> old) {
 			v.setPadding(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
@@ -131,7 +131,7 @@ public class CommonAttrs extends DSL {
 		return attr(LayoutMarginFunc.instance, list);
 	}
 
-	private final static class LayoutMarginFunc implements AttrFunc<List<Integer>> {
+	private final static class LayoutMarginFunc implements Anvil.AttrFunc<List<Integer>> {
 		private final static LayoutMarginFunc instance = new LayoutMarginFunc();
 		public void apply(View v, List<Integer> arg, List<Integer> old) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
@@ -150,7 +150,7 @@ public class CommonAttrs extends DSL {
 		return attr(LayoutWeightFunc.instance, w);
 	}
 
-	private final static class LayoutWeightFunc implements AttrFunc<Float> {
+	private final static class LayoutWeightFunc implements Anvil.AttrFunc<Float> {
 		private final static LayoutWeightFunc instance = new LayoutWeightFunc();
 		public void apply(View v, Float arg, Float old) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
@@ -165,7 +165,7 @@ public class CommonAttrs extends DSL {
 		return attr(LayoutGravityFunc.instance, g);
 	}
 
-	private final static class LayoutGravityFunc implements AttrFunc<Integer> {
+	private final static class LayoutGravityFunc implements Anvil.AttrFunc<Integer> {
 		private final static LayoutGravityFunc instance = new LayoutGravityFunc();
 		public void apply(View v, Integer arg, Integer old) {
 			ViewGroup.LayoutParams p = v.getLayoutParams();
@@ -178,16 +178,6 @@ public class CommonAttrs extends DSL {
 				v.setLayoutParams(p);
 			}
 		}
-	}
-
-	public static Void column(int c) {
-		// TODO
-		return null;
-	}
-
-	public static Void span(int span) {
-		// TODO
-		return null;
 	}
 
 	public static Void align(int verb) {
@@ -292,7 +282,7 @@ public class CommonAttrs extends DSL {
 		return attr(TypefaceFunc.instance, font);
 	}
 
-	private final static class TypefaceFunc implements AttrFunc<String> {
+	private final static class TypefaceFunc implements Anvil.AttrFunc<String> {
 		private final static TypefaceFunc instance = new TypefaceFunc();
 		public void apply(View v, String font, String old) {
 			if (v instanceof TextView) {
@@ -303,9 +293,9 @@ public class CommonAttrs extends DSL {
 
 	public static Void visibility(boolean visible) {
 		if (visible) {
-			return trikita.anvil.Attrs.visibility(View.VISIBLE);
+			return trikita.anvil.DSL.visibility(View.VISIBLE);
 		} else {
-			return trikita.anvil.Attrs.visibility(View.GONE);
+			return trikita.anvil.DSL.visibility(View.GONE);
 		}
 	}
 
@@ -313,7 +303,7 @@ public class CommonAttrs extends DSL {
 	public static Void tag(int id, Object value) {
 		return attr(TagFunc.instance, new Pair<Integer, Object>(id, value));
 	}
-	private final static class TagFunc implements AttrFunc<Pair<Integer, Object>> {
+	private final static class TagFunc implements Anvil.AttrFunc<Pair<Integer, Object>> {
 		private final static TagFunc instance = new TagFunc();
 		public void apply(View v, Pair<Integer, Object> p, Pair<Integer, Object> q) {
 			// TODO
@@ -328,7 +318,7 @@ public class CommonAttrs extends DSL {
 		list.add(color);
 		return attr(ShadowLayerFunc.instance, list);
 	}
-	private final static class ShadowLayerFunc implements AttrFunc<List<Number>> {
+	private final static class ShadowLayerFunc implements Anvil.AttrFunc<List<Number>> {
 		private final static ShadowLayerFunc instance = new ShadowLayerFunc();
 		public void apply(View v, List<Number> arg, List<Number> old) {
 			if (v instanceof TextView) {
@@ -345,7 +335,7 @@ public class CommonAttrs extends DSL {
 
 	public static Void text(final StringBuilder sb) {
 		if (!sb.toString().equals(hasUserInput.get(sb))) {
-			trikita.anvil.Attrs.text(sb.toString());
+			trikita.anvil.DSL.text(sb.toString());
 			hasUserInput.put(sb, sb.toString());
 		}
 		onTextChanged(new TextWatcherProxy(sb) {
@@ -382,7 +372,7 @@ public class CommonAttrs extends DSL {
 	public static Void onTextChanged(TextWatcher w) {
 		return attr(TextWatcherFunc.instance, w);
 	}
-	private final static class TextWatcherFunc implements AttrFunc<TextWatcher> {
+	private final static class TextWatcherFunc implements Anvil.AttrFunc<TextWatcher> {
 		private final static TextWatcherFunc instance = new TextWatcherFunc();
 		public void apply(final View v, final TextWatcher w, TextWatcher old) {
 			if (v instanceof TextView) {
@@ -415,7 +405,7 @@ public class CommonAttrs extends DSL {
 		return attr(ItemSelectedFunc.instance, l);
 	}
 	private final static class ItemSelectedFunc
-			implements AttrFunc<SimpleItemSelectedListener> {
+			implements Anvil.AttrFunc<SimpleItemSelectedListener> {
 		private final static ItemSelectedFunc instance = new ItemSelectedFunc();
 		public void apply(View v, final SimpleItemSelectedListener l,
 				SimpleItemSelectedListener old) {
@@ -466,7 +456,7 @@ public class CommonAttrs extends DSL {
 		}
 	}
 
-	private static class AnimatorFunc implements AttrFunc<AnimatorPair> {
+	private static class AnimatorFunc implements Anvil.AttrFunc<AnimatorPair> {
 		private final static AnimatorFunc instance = new AnimatorFunc();
 
 		public void apply(View v, AnimatorPair a, AnimatorPair b) {
@@ -535,6 +525,32 @@ public class CommonAttrs extends DSL {
 
 	public static SimpleAnimator of(String prop, float ...values) {
 		return new SimpleAnimator().of(prop, values);
+	}
+
+	protected static final class ViewClassResult {}
+
+	public static ViewClassResult v(Class<? extends View> c) {
+		Anvil.currentMount().push(c);
+		return null;
+	}
+
+	private static Void end() {
+		Anvil.currentMount().pop();
+		return null;
+	}
+
+	public static Void x(ViewClassResult c, Object ...args) { return end(); }
+	public static Void o(ViewClassResult c, Object ...args) { return end(); }
+
+	public static Void v(Class<? extends View> c, Anvil.Renderable r) {
+		v(c);
+		r.view();
+		return end();
+	}
+
+	public static <T> Void attr(Anvil.AttrFunc<T> f, T value) {
+		Anvil.currentMount().attr(f, value);
+		return null;
 	}
 }
 

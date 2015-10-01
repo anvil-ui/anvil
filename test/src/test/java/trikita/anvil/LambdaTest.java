@@ -16,14 +16,14 @@ public class LambdaTest extends AndroidTestCase {
 	public void testSingleView() {
 		final ViewGroup rootView = new TestLayout(getContext());
 
-		Renderable r = () -> {
+		Anvil.Renderable r = () -> {
 			testLayout(() -> {
-				tag("123");
+				dummy("123");
 				testView(() -> {
-					tag(123);
+					dummy(123);
 				});
 				testView(() -> {
-					tag(456);
+					dummy(456);
 				});
 			});
 		};
@@ -32,12 +32,12 @@ public class LambdaTest extends AndroidTestCase {
 		// View should be rendered correctly and attributes should be set
 		assertEquals(1, rootView.getChildCount());
 		assertEquals(TestLayout.class, rootView.getChildAt(0).getClass());
-		assertEquals("123", rootView.getChildAt(0).getTag());
+		assertEquals("123", ((TestLayout) rootView.getChildAt(0)).getDummy());
 
 		TestLayout layout = (TestLayout) rootView.getChildAt(0);
 		assertEquals(2, layout.getChildCount());
-		assertEquals(123, layout.getChildAt(0).getTag());
-		assertEquals(456, layout.getChildAt(1).getTag());
+		assertEquals(123, ((TestView) layout.getChildAt(0)).getDummy());
+		assertEquals(456, ((TestView) layout.getChildAt(1)).getDummy());
 
 		Anvil.unmount(m);
 	}

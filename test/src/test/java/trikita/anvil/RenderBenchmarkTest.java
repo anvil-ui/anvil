@@ -19,32 +19,32 @@ public class RenderBenchmarkTest extends AndroidTestCase {
 	ViewGroup rootView;
 	
 	// Static layout, 3 nesting levels, 8 views, 16 attributes
-	Renderable staticView = new Renderable() {
+	Anvil.Renderable staticView = new Anvil.Renderable() {
 		public void view() {
 			o (v(TestLayout.class),
-					tag(0),
+					dummy(0),
 					o (v(TestView.class),
-						tag(0xffffffff),
-						tag(0),
-						tag(1)),
+						dummy(0xffffffff),
+						dummy(0),
+						dummy(1)),
 					o (v(TestView.class),
-						tag(0xffffffff),
-						tag(0xffffffff),
-						tag(0xffffffff),
-						tag(0xffffffff),
-						tag(1)),
+						dummy(0xffffffff),
+						dummy(0xffffffff),
+						dummy(0xffffffff),
+						dummy(0xffffffff),
+						dummy(1)),
 					o (v(TestLayout.class),
 						o (v(TestLayout.class),
 							o (v(TestView.class),
-								tag(0xffffffff),
-								tag(0xffffffff),
-								tag(1)),
+								dummy(0xffffffff),
+								dummy(0xffffffff),
+								dummy(1)),
 							o (v(TestView.class),
-								tag(0xffffffff),
-								tag(1)),
+								dummy(0xffffffff),
+								dummy(1)),
 							o (v(TestView.class),
-								tag(0xffffffff),
-								tag(1)))));
+								dummy(0xffffffff),
+								dummy(1)))));
 		}
 	};
 
@@ -52,65 +52,65 @@ public class RenderBenchmarkTest extends AndroidTestCase {
 	// 2 attributes can be changed manually, one is changed on every render cycle
 	// This means 12.5% of nodes/attributes are re-rendered on each cycle
 	Object dynamicValue;
-	Renderable dynamicView = new Renderable() {
+	Anvil.Renderable dynamicView = new Anvil.Renderable() {
 		public void view() {
 			x (v(TestLayout.class),
-					tag(dynamicValue),
+					dummy(dynamicValue),
 					x (v(TestView.class),
-						tag(0xffffffff),
-						tag(0),
-						tag(1)),
+						dummy(0xffffffff),
+						dummy(0),
+						dummy(1)),
 					x (v(TestView.class),
-						tag(0xffffffff),
-						tag(0xffffffff),
-						tag(0xffffffff),
-						tag(0xffffffff),
-						tag(dynamicValue)),
+						dummy(0xffffffff),
+						dummy(0xffffffff),
+						dummy(0xffffffff),
+						dummy(0xffffffff),
+						dummy(dynamicValue)),
 					x (v(TestLayout.class),
 						x (v(TestLayout.class),
 							x (v(TestView.class),
-								tag(0xffffffff),
-								tag(0xffffffff),
-								tag(1)),
+								dummy(0xffffffff),
+								dummy(0xffffffff),
+								dummy(1)),
 							x (v(TestView.class),
-								tag(0xffffffff),
-								tag(Math.random())),
+								dummy(0xffffffff),
+								dummy(Math.random())),
 							x (v(TestView.class),
-								tag(0xffffffff),
-								tag(1)))));
+								dummy(0xffffffff),
+								dummy(1)))));
 		}
 	};
 
-	Renderable dynamicLambdaView = () -> {
+	Anvil.Renderable dynamicLambdaView = () -> {
 		testLayout(() -> {
-			tag(dynamicValue);
+			dummy(dynamicValue);
 			testView(() -> {
-				tag(0xffffffff);
-				tag(0);
-				tag(1);
+				dummy(0xffffffff);
+				dummy(0);
+				dummy(1);
 			});
 			testView(() -> {});
 			testView(() -> {
-				tag(0xffffffff);
-				tag(0xffffffff);
-				tag(0xffffffff);
-				tag(0xffffffff);
-				tag(dynamicValue);
+				dummy(0xffffffff);
+				dummy(0xffffffff);
+				dummy(0xffffffff);
+				dummy(0xffffffff);
+				dummy(dynamicValue);
 			});
 			testLayout(() -> {
 				testLayout(() -> {
 					testView(() -> {
-						tag(0xffffffff);
-						tag(0xffffffff);
-						tag(1);
+						dummy(0xffffffff);
+						dummy(0xffffffff);
+						dummy(1);
 					});
 					testView(() -> {
-						tag(0xffffffff);
-						tag(Math.random());
+						dummy(0xffffffff);
+						dummy(Math.random());
 					});
 					testView(() -> {
-						tag(0xffffffff);
-						tag(1);
+						dummy(0xffffffff);
+						dummy(1);
 					});
 				});
 			});

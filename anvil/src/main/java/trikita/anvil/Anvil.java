@@ -16,16 +16,20 @@ import java.util.Set;
 
 public final class Anvil {
 
+	public interface Renderable {
+		void view();
+	}
+
+	public interface AttrFunc<T> {
+		void apply(View v, T value, T oldValue);
+	}
+
 	private final static List<Mount> mounts = new ArrayList<>();
+	private static Mount currentMount = null;
 
 	private static Handler anvilUIHandler = null;
 
 	private Anvil() {}
-
-	public static View currentView() {
-		// TODO: null-safety
-		return DSL.current.cache.peek().view;
-	}
 
 	private static Runnable anvilRenderRunnable = new Runnable() {
 		public void run() {
@@ -64,24 +68,15 @@ public final class Anvil {
 		mounts.remove(m);
 	}
 
-	private final static class Attr<T> {
-		private AttrFunc<T> func;
-		private T value;
-		public Attr<T> apply(View v, AttrFunc<T> func, T value) {
-			if (this.func != null && this.func.getClass().equals(func.getClass()) &&
-					(this.value == value ||
-					 value != null && value.equals(this.value))) {
-				return this;
-			}
-			T oldValue = this.value;
-			this.func = func;
-			this.value = value;
-			if (oldValue != null && value != null && oldValue.getClass().equals(value.getClass())) {
-				this.func.apply(v, value, oldValue);
-			} else {
-				this.func.apply(v, value, null);
-			}
-			return this;
+	static Mount currentMount() {
+		return currentMount;
+	}
+
+	public static View currentView() {
+		if (currentMount() != null) {
+			return currentMount.cache.peek().view;
+		} else {
+			return null;
 		}
 	}
 
@@ -98,6 +93,27 @@ public final class Anvil {
 			private int attr;
 			private int child;
 			private View view;
+
+			private final static class Attr<T> {
+				private AttrFunc<T> func;
+				private T value;
+				public Attr<T> apply(View v, AttrFunc<T> func, T value) {
+					if (this.func != null && this.func.getClass().equals(func.getClass()) &&
+							(this.value == value ||
+							 value != null && value.equals(this.value))) {
+						return this;
+							 }
+					T oldValue = this.value;
+					this.func = func;
+					this.value = value;
+					if (oldValue != null && value != null && oldValue.getClass().equals(value.getClass())) {
+						this.func.apply(v, value, oldValue);
+					} else {
+						this.func.apply(v, value, null);
+					}
+					return this;
+				}
+			}
 		}
 
 		public Mount(ViewGroup v, Renderable r) {
@@ -111,8 +127,8 @@ public final class Anvil {
 				return;
 			}
 			this.lock = true;
-			Mount prev = DSL.current;
-			DSL.current = this;
+			Mount prevMount = Anvil.currentMount;
+			Anvil.currentMount = this;
 			if (cache.size() != 1) {
 				throw new RuntimeException("Invalid view hierarchy: " + cache.size());
 			}
@@ -122,12 +138,13 @@ public final class Anvil {
 			root.child = 0;
 			// build view hiearchy
 			this.view.view();
+			// restore previous mount
+			Anvil.currentMount = prevMount;
+			this.lock = false;
 			// assert stack depth is 1
 			if (cache.size() != 1) {
 				throw new RuntimeException("Invalid view hierarchy: " + cache.size());
 			}
-			DSL.current = prev;
-			this.lock = false;
 		}
 
 		private void cleanup() {
@@ -200,10 +217,10 @@ public final class Anvil {
 			Node node = cache.peek();
 			if (node.attr < node.attrs.size()) {
 				@SuppressWarnings("unchecked")
-				Attr<T> attr = node.attrs.get(node.attr);
+				Node.Attr<T> attr = node.attrs.get(node.attr);
 				attr.apply(node.view, func, value);
 			} else {
-				node.attrs.add(new Attr<T>().apply(node.view, func, value));
+				node.attrs.add(new Node.Attr<T>().apply(node.view, func, value));
 			}
 			node.attr++;
 		}

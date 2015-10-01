@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-	compileSdkVersion 'android-22'
+	compileSdkVersion 'android-23'
 	buildToolsVersion '22.0.1'
 
 	compileOptions {
@@ -20,8 +20,8 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 10
-		targetSdkVersion 22
+		minSdkVersion 15
+		targetSdkVersion 23
 	}
 
 	lintOptions {
@@ -30,26 +30,20 @@ android {
 
 	publishNonDefault true
 	productFlavors {
-		v19 {
-			defaultConfig {
-				minSdkVersion 19
-				targetSdkVersion 22
-			}
+		sdk10 {
+			minSdkVersion 10
 		}
-		v15 {
-			defaultConfig {
-				minSdkVersion 15
-				targetSdkVersion 22
-			}
+		sdk15 {
+			minSdkVersion 15
 		}
-		v10 {
-			defaultConfig {
-				minSdkVersion 10
-				targetSdkVersion 22
-			}
+		sdk19 {
+			minSdkVersion 19
 		}
 	}
 }
+
+group = 'co.trikita'
+version = '0.1.0'
 
 apply from: 'gen.gradle'
 
@@ -58,23 +52,23 @@ apply plugin: 'com.jfrog.bintray'
 
 publishing {
 	publications {
-		v10(MavenPublication) {
-			groupId 'co.trikita'
-			artifactId 'anvil-v10'
-			version '0.1.0'
-			artifact "$project.buildDir/outputs/aar/core-v10-release.aar"
+		sdk10(MavenPublication) {
+			groupId project.group
+			version project.version
+			artifactId 'anvil-sdk10'
+			artifact "$buildDir/outputs/aar/anvil-sdk10-release.aar"
 		}
-		v15(MavenPublication) {
-			groupId 'co.trikita'
-			artifactId 'anvil-v15'
-			version '0.1.0'
-			artifact "$project.buildDir/outputs/aar/core-v15-release.aar"
+		sdk15(MavenPublication) {
+			groupId project.group
+			version project.version
+			artifactId 'anvil-sdk15'
+			artifact "$buildDir/outputs/aar/anvil-sdk15-release.aar"
 		}
-		v19(MavenPublication) {
-			groupId 'co.trikita'
-			artifactId 'anvil-v19'
-			version '0.1.0'
-			artifact "$project.buildDir/outputs/aar/core-v19-release.aar"
+		sdk19(MavenPublication) {
+			groupId project.group
+			version project.version
+			artifactId 'anvil-sdk19'
+			artifact "$buildDir/outputs/aar/anvil-sdk19-release.aar"
 		}
 	}
 }
@@ -82,7 +76,7 @@ publishing {
 bintray {
 	user = hasProperty('bintrayUser') ? bintrayUser : ''
 	key = hasProperty('bintrayApiKey') ? bintrayApiKey : ''
-	publications = ['v10', 'v15', 'v19']
+	publications = ['sdk10', 'sdk15', 'sdk19']
 	pkg {
 		repo = 'maven'
 		name = 'anvil'
@@ -91,7 +85,7 @@ bintray {
 		licenses = ['MIT']
 		publish = true
 		version {
-			name = '0.1.0'
+			name = version
 			gpg {
 				sign = true
 				passphrase = hasProperty('bintrayGpgPassword') ? bintrayGpgPassword : ''

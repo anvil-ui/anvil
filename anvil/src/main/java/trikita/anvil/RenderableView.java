@@ -6,7 +6,8 @@ import android.widget.FrameLayout;
 
 // TODO: add method children() to render all child renderables
 // TODO: add method children(r) to override certain properties in child renderables
-public abstract class RenderableView extends FrameLayout implements Renderable {
+public abstract class RenderableView extends FrameLayout
+	implements Anvil.Renderable {
 
 	private Anvil.Mount mount = null;
 

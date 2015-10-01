@@ -23,7 +23,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 10
+		minSdkVersion 15
 		targetSdkVersion 22
 	}
 
@@ -52,8 +52,8 @@ dependencies {
 	compile 'org.jetbrains.kotlin:kotlin-stdlib:+'
 
 	androidTestCompile 'junit:junit:4.12+'
-	androidTestCompile project(path: ':anvil', configuration: 'v15Debug')
+	androidTestCompile project(path: ':anvil', configuration: 'sdk15Debug')
 
 	testCompile 'junit:junit:4.12+'
-	testCompile project(path: ':anvil', configuration: 'v15Debug')
+	testCompile project(path: ':anvil', configuration: 'sdk15Debug')
 }

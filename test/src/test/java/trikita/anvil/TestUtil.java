@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import static trikita.anvil.DSL.*;
+import static trikita.anvil.BaseDSL.*;
 
 public final class TestUtil {
 
@@ -18,22 +18,19 @@ public final class TestUtil {
 
 	// View mock which contains tag
 	public static class TestView extends View {
-		private Object tag;
+		private Object dummy;
 		private int id = nextId();
 
 		public TestView(Context c) {
 			super(c);
 		}
 
-		@Override
-		public void setTag(Object tag) {
-			this.tag = tag;
-			super.setTag(tag);
+		public void setDummy(Object dummy) {
+			this.dummy = dummy;
 		}
 
-		@Override
-		public Object getTag() {
-			return this.tag;
+		public Object getDummy() {
+			return this.dummy;
 		}
 
 		@Override
@@ -44,7 +41,7 @@ public final class TestUtil {
 
 	// ViewGroup mock which contains tag and list of child views
 	public static class TestLayout extends FrameLayout {
-		private Object tag;
+		private Object dummy;
 		private List<View> children = new ArrayList<View>();
 		private int id = nextId();
 
@@ -52,15 +49,12 @@ public final class TestUtil {
 			super(c);
 		}
 
-		@Override
-		public void setTag(Object tag) {
-			this.tag = tag;
-			super.setTag(tag);
+		public void setDummy(Object dummy) {
+			this.dummy = dummy;
 		}
 
-		@Override
-		public Object getTag() {
-			return this.tag;
+		public Object getDummy() {
+			return this.dummy;
 		}
 
 		@Override
@@ -103,26 +97,30 @@ public final class TestUtil {
 	public static ViewClassResult testView() {
 		return v(TestView.class);
 	}
-	public static Void testView(Renderable r) {
+	public static Void testView(Anvil.Renderable r) {
 		return v(TestView.class, r);
 	}
 	public static ViewClassResult testLayout() {
 		return v(TestLayout.class);
 	}
-	public static Void testLayout(Renderable r) {
+	public static Void testLayout(Anvil.Renderable r) {
 		return v(TestLayout.class, r);
 	}
 
 	// Helper utility to set tag
-	public static Void tag(Object value) {
-		return attr(TagFunc.instance, value);
+	public static Void dummy(Object value) {
+		return attr(DummyFunc.instance, value);
 	}
 
 	// AttrFunc implementation for setTag()
-	private static class TagFunc implements AttrFunc<Object> {
-		private static final TagFunc instance = new TagFunc();
+	public static class DummyFunc implements Anvil.AttrFunc<Object> {
+		private static final DummyFunc instance = new DummyFunc();
 		public void apply(View v, Object x, Object old) {
-			v.setTag(x);
+			if (v instanceof TestView) {
+				((TestView) v).setDummy(x);
+			} else if (v instanceof TestLayout) {
+				((TestLayout) v).setDummy(x);
+			}
 		}
 	}
 }
