@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-	compileSdkVersion 'android-23'
+	compileSdkVersion 'android-21'
 	buildToolsVersion '22.0.1'
 
 	compileOptions {
