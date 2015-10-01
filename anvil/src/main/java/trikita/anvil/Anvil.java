@@ -14,14 +14,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Anvil class is a namespace for top-level static methods and interfaces. Most
+ * users would only use it to call {@code Anvil.render()}.
+ *
+ * Internally, Anvil class defines how Renderables are mounted into ViewGroups
+ * and how they are lazily rendered, and this is the key functionality of the
+ * Anvil library.
+ */
 public final class Anvil {
 
+	/** Renderable can be mounted and rendered using Anvil library. */
 	public interface Renderable {
+		/** This method is a place to define the structure of your layout, its view
+		 * properties and data bindings. */
 		void view();
 	}
 
+	/** AttrFunc replaces the old value with the new value in the given view. */
 	public interface AttrFunc<T> {
-		void apply(View v, T value, T oldValue);
+		void apply(View v, T newValue, T oldValue);
 	}
 
 	private final static List<Mount> mounts = new ArrayList<>();
@@ -37,6 +49,11 @@ public final class Anvil {
 		}
 	};
 
+	/** Starts the new rendering cycle updating all mounted
+	 * renderables. Update happens in a lazy manner, only the values that has
+	 * been changed since last rendering cycle will be actually updated in the
+	 * views. This method can be called from any thread, so it's safe to use
+	 * {@code Anvil.render()} in background services. */
 	public static void render() {
 		synchronized (Anvil.class) {
 			// If Anvil.render() is called on a non-UI thread, use UI Handler
@@ -56,6 +73,14 @@ public final class Anvil {
 		}
 	}
 
+	/**
+	 * Mounts a renderable function defining the layout into a ViewGroup. The
+	 * ViewGroup is assumed to be empty, so the Renderable would define what its
+	 * child views would be.
+	 * @param v a ViewGroup into which the renderable r will be mounted
+	 * @param r a Renderable to mount into a ViewGroup
+	 * @return a mount point keeping the result of mounting {@code r} into {@code v}
+	 */
 	public static Mount mount(ViewGroup v, Renderable r) {
 		Mount m = new Mount(v, r);
 		m.render();
@@ -63,15 +88,30 @@ public final class Anvil {
 		return m;
 	}
 
+	/**
+	 * Unmounts a  mounted renderable. This would also clean up all the child
+	 * views inside the parent ViewGroup, which acted as a mount point.
+	 * @param m A mount point to unmount from its ViewGroup
+	 */
 	public static void unmount(Mount m) {
 		m.cleanup();
 		mounts.remove(m);
 	}
 
+	/**
+	 * Returns currently rendered Mount point. Must be called from the
+	 * Renderable's view() method, otherwise it returns null 
+	 * @return current mount point 
+	 */
 	static Mount currentMount() {
 		return currentMount;
 	}
 
+	/**
+	 * Returns currently rendered View. It allows to access the real view from
+	 * inside the Renderable.
+	 * @return currently rendered View
+	 */
 	public static View currentView() {
 		if (currentMount() != null) {
 			return currentMount.cache.peek().view;
@@ -80,11 +120,15 @@ public final class Anvil {
 		}
 	}
 
+	/** Mount describes a mount point. Mount point is a Renderable function
+	 * attached to some ViewGroup. Mount point keeps track of the virtual layout
+	 * declared by Renderable */
 	public static class Mount {
 		private final Renderable view;
 		private final Deque<Node> cache = new ArrayDeque<>();
 		private boolean lock = false;
 
+		/** Node is a virual View declared in the Renderable's code */
 		private final static class Node {
 			// Cache
 			private final List<Node> children = new ArrayList<>();
@@ -116,12 +160,14 @@ public final class Anvil {
 			}
 		}
 
-		public Mount(ViewGroup v, Renderable r) {
+		Mount(ViewGroup v, Renderable r) {
 			this.view = r;
 			cache.push(new Node());
 			cache.peek().view = v;
 		}
 
+		/** Performs lazy rendering of the Renderable layout mounted into a
+		 * ViewGroup */
 		public void render() {
 			if (this.lock) {
 				return;
