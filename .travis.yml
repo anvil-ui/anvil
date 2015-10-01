@@ -4,4 +4,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - gradle test:check
+  - gradle test:check --stacktrace
