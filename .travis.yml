@@ -4,5 +4,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - cd test
-  - gradle check
+  - gradle test:check
