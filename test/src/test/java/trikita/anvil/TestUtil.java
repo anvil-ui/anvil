@@ -81,7 +81,7 @@ public final class TestUtil {
 
 		@Override
 		public void removeViews(int start, int count) {
-			for (int i = start+count-1; i >= start; i++) {
+			for (int i = start+count-1; i >= start; i--) {
 				removeViewAt(i);
 			}
 			super.removeViews(start, count);
