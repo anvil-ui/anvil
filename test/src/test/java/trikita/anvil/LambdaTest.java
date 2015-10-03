@@ -27,7 +27,7 @@ public class LambdaTest extends AndroidTestCase {
 				});
 			});
 		};
-		Anvil.Mount m = Anvil.mount(rootView, r);
+		Anvil.mount(rootView, r);
 
 		// View should be rendered correctly and attributes should be set
 		assertEquals(1, rootView.getChildCount());
@@ -39,7 +39,7 @@ public class LambdaTest extends AndroidTestCase {
 		assertEquals(123, ((TestView) layout.getChildAt(0)).getDummy());
 		assertEquals(456, ((TestView) layout.getChildAt(1)).getDummy());
 
-		Anvil.unmount(m);
+		Anvil.unmount(rootView);
 	}
 }
 

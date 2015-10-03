@@ -9,8 +9,6 @@ import android.widget.FrameLayout;
 public abstract class RenderableView extends FrameLayout
 	implements Anvil.Renderable {
 
-	private Anvil.Mount mount = null;
-
 	public RenderableView(Context context) {
 		super(context);
 	}
@@ -26,15 +24,13 @@ public abstract class RenderableView extends FrameLayout
 	@Override
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		assert mount == null;
-		mount = Anvil.mount(this, this);
+		Anvil.mount(this, this);
 	}
 
 	@Override
 	public void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-		assert mount != null;
-		Anvil.unmount(mount);
+		Anvil.unmount(this);
 	}
 
 	public abstract void view();

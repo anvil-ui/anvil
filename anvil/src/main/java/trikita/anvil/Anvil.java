@@ -7,12 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * Anvil class is a namespace for top-level static methods and interfaces. Most
@@ -36,7 +40,7 @@ public final class Anvil {
 		void apply(View v, T newValue, T oldValue);
 	}
 
-	private final static List<Mount> mounts = new ArrayList<>();
+	private final static Map<ViewGroup, Mount> mounts = new WeakHashMap<>();
 	private static Mount currentMount = null;
 
 	private static Handler anvilUIHandler = null;
@@ -67,7 +71,7 @@ public final class Anvil {
 			}
 		}
 		Set<Mount> keys = new HashSet<>();
-		keys.addAll(mounts);
+		keys.addAll(mounts.values());
 		for (Mount m : keys) {
 			m.render();
 		}
@@ -79,13 +83,12 @@ public final class Anvil {
 	 * child views would be.
 	 * @param v a ViewGroup into which the renderable r will be mounted
 	 * @param r a Renderable to mount into a ViewGroup
-	 * @return a mount point keeping the result of mounting {@code r} into {@code v}
 	 */
-	public static Mount mount(ViewGroup v, Renderable r) {
+	public static ViewGroup mount(ViewGroup v, Renderable r) {
 		Mount m = new Mount(v, r);
 		m.render();
-		mounts.add(m);
-		return m;
+		mounts.put(v, m);
+		return v;
 	}
 
 	/**
@@ -93,9 +96,12 @@ public final class Anvil {
 	 * views inside the parent ViewGroup, which acted as a mount point.
 	 * @param m A mount point to unmount from its ViewGroup
 	 */
-	public static void unmount(Mount m) {
-		m.cleanup();
-		mounts.remove(m);
+	public static void unmount(ViewGroup v) {
+		Mount m = mounts.get(v);
+		if (m != null) {
+			mounts.remove(v);
+			v.removeViews(0, v.getChildCount());
+		}
 	}
 
 	/**
@@ -123,8 +129,9 @@ public final class Anvil {
 	/** Mount describes a mount point. Mount point is a Renderable function
 	 * attached to some ViewGroup. Mount point keeps track of the virtual layout
 	 * declared by Renderable */
-	public static class Mount {
-		private final Renderable view;
+	static class Mount {
+		private final Renderable renderable;
+		private final WeakReference<ViewGroup> rootView;
 		private final Deque<Node> cache = new ArrayDeque<>();
 		private boolean lock = false;
 
@@ -138,6 +145,9 @@ public final class Anvil {
 			private int child;
 			private View view;
 
+			/** Attr keeps the last known value of a certain attribute and a setter function for it.
+			 * When the new value should be set, Attr compares it to the previously
+			 * known one and applies the setter function is needed. */
 			private final static class Attr<T> {
 				private AttrFunc<T> func;
 				private T value;
@@ -161,14 +171,14 @@ public final class Anvil {
 		}
 
 		Mount(ViewGroup v, Renderable r) {
-			this.view = r;
+			this.renderable = r;
+			this.rootView = new WeakReference<>(v);
 			cache.push(new Node());
-			cache.peek().view = v;
 		}
 
 		/** Performs lazy rendering of the Renderable layout mounted into a
 		 * ViewGroup */
-		public void render() {
+		void render() {
 			if (this.lock) {
 				return;
 			}
@@ -182,9 +192,13 @@ public final class Anvil {
 			Node root = cache.peek();
 			root.attr = 0;
 			root.child = 0;
-			// build view hiearchy
-			this.view.view();
+			root.view = rootView.get();
+			if (root.view != null) {
+				// build view hiearchy if viewgroup still exists
+				this.renderable.view();
+			}
 			// restore previous mount
+			root.view = null;
 			Anvil.currentMount = prevMount;
 			this.lock = false;
 			// assert stack depth is 1
@@ -193,16 +207,18 @@ public final class Anvil {
 			}
 		}
 
-		private void cleanup() {
-			// TODO remove all child nodes and clear cache's root child nodes and attrs
-		}
-
 		void push(Class<? extends View> viewClass) {
 			Node parentNode = cache.peek();
 			int index = parentNode.child;
 
-			Node childNode;
+			ViewGroup vg = (ViewGroup) parentNode.view;
+			View childView = null;
 			if (index < parentNode.children.size()) {
+				childView = vg.getChildAt(index);
+			}
+
+			Node childNode;
+			if (index < vg.getChildCount()) {
 				childNode = parentNode.children.get(index);
 			} else {
 				childNode = new Node();
@@ -210,19 +226,13 @@ public final class Anvil {
 			}
 			childNode.attr = 0;
 			childNode.child = 0;
+			childNode.view = childView;
 
-			ViewGroup vg = (ViewGroup) parentNode.view;
-			View childView = null;
-			if (index < vg.getChildCount()) {
-				childView = vg.getChildAt(index);
-				childNode.view = childView;
-			}
 			if (childView == null || childView.getClass() != viewClass) {
 				try {
 					childNode.children.clear();
 					childNode.attrs.clear();
-					Context c = cache.peekLast().view.getContext();
-					View v = viewClass.getConstructor(Context.class).newInstance(c);
+					View v = viewClass.getConstructor(Context.class).newInstance(vg.getContext());
 					if (index < vg.getChildCount()) {
 						vg.removeViewAt(index);
 					}
@@ -247,7 +257,9 @@ public final class Anvil {
 			int size = node.children.size();
 			if (node.view instanceof ViewGroup) {
 				ViewGroup vg = (ViewGroup) node.view;
-				vg.removeViews(node.child, vg.getChildCount() - node.child);
+				if (node.child < node.children.size()) {
+					vg.removeViews(node.child, node.children.size() - node.child);
+				}
 			}
 			for (int i = size - 1; i >= node.child; i--) {
 				node.children.remove(i);
