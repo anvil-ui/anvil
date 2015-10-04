@@ -11,9 +11,9 @@ Normally you would write your layouts in XMLs, then you get your views by their
 IDs and set their listeners, finally you would observe your data and modify
 view properties as your data changes.
 
-Anvil simplifies most of it:
+Anvil simplifies most this boring routine.
 
-1. Declare your layout, assign event listeners and bind data:
+First, declare your layout, assign event listeners and bind data:
 
 ``` Java
 public int ticktock = 0;
@@ -44,12 +44,12 @@ public void onCreate(Bundle b) {
 }
 ```
 
-Here we've created a very simple reactive view. We've defined our layout (a
-LinearLayout with TextView inside). We've defined styles (width, height,
-orientation and padding). We've set OnClickListener to the button. We've also
-bound a variable "ticktock" to the text inside a TextView.
+Here we've created a very simple reactive view and added it to our Activity.
+We've defined our layout (a LinearLayout with TextView inside). We've defined
+styles (width, height, orientation and padding). We've set OnClickListener to 
+the button. We've also bound a variable "ticktock" to the text inside a TextView.
 
-2. Update your views as your data changes:
+Next, let's update your views as your data changes:
 
 ``` java
 ticktock++;
@@ -60,7 +60,8 @@ At this point your layout will be updated and TextView will contain text
 "Tick-Tock: 1" instead of "Tick-Tock: 0". However the only actual view method
 being called would be setText().
 
-3. There is no need to call Anvil.render() inside your event listeners:
+You should know that there is no need to call Anvil.render() inside your event
+listeners, it's already called after each UI listener call:
 
 ``` java
 public void view() {
@@ -78,17 +79,20 @@ public void view() {
 }
 ```
 
-You may find more examples of using Anvil with Java 6, Java 8 and Kotlin at
+You may find more Anvil examples for Java 6, Java 8 and Kotlin at
 https://github.com/zserge/anvil-examples
 
 ## How it works
 
-No magic. When renderable is constructed it has 3 types of operations: push
-view, modify some attribute of the current view, and pop view. Pushing view
-adds it as a child to the parent view from the top of the stack. Attribute
-simple sets the given property to the view on top of the stack.
+No magic. When a renderable is being constructed there is 3 types of
+operation: push view, modify some attribute of the current view, and 
+pop view.
 
-When you mount this layout (assuming name is "John"):
+Pushing a view adds it as a child to the parent view from the top of
+the stack. Attribute modification simply sets the given property to
+the current view on top of the stack. Pop unwinds the stack.
+
+When you mount this layout (assuming the `name` is "John"):
 
 ``` java
 linearLayout(() -> {
@@ -108,41 +112,41 @@ Pop
 Pop
 ```
 
-The only trick is that these actions are caches in a so called "virtual layout"
-- a tree-like structure matching the actual layout by structure.
+The only trick is that these actions are cached into a so called "virtual layout"
+- a tree-like structure matching the actual layout of views and their properties.
 
-So when you call `Anvil.render()` once again it compares the sequence of
-actions with the cache and skips them if they match. Which means on the next
-`Anvil.render()` call _views will remain untouched_. This caching technique
+So when you call `Anvil.render()` next time it compares the sequence of
+actions with the cache and skips them if they didn't change. Which means on the next
+`Anvil.render()` call _ the views will remain untouched_. This caching technique
 makes render a very quick operation (having a layout of 100 views, 10
 attributes each you can do about 4000 render cycles per second!).
 
-Now, if you modify name from "John" to "Jane" and call Anvil.render() it will do the following:
+Now, if you modify the `name` from "John" to "Jane" and call Anvil.render() it will do the following:
 
 ```
 Push LinearLayout (noop)
 Push TextView (noop)
-Attr text "Hello Jane" (comparing with "Hello John" from the pervious render
-  and calling setText("Hello Jane") to the TextView)
+Attr text "Hello Jane" (comparing with "Hello John" from the pervious render,
+  noticing the difference and calling setText("Hello Jane") to the TextView)
 Pop
 Pop
 ```
 
-So if you modify one of the variables bound to some of the attributes - the
+So if you modify one of the variables "bound" to some of the attributes - the
 cache will be missed and attribute will be updated.
 
-Finally, for all event listeners a "proxy" is generated, which delegates its
-method calls to your event listener, but calls `Anvil.render` after each method
-call. This is very useful, because most of your data models are modified when
-user interacts with the UI, so you may omit calling `Anvil.render()` from every
-listener.
+For all event listeners a "proxy" is generated, which delegates its
+method calls to your actual event listener, but calls `Anvil.render` after each
+method. This is useful, because most of your data models are modified when
+the user interacts with the UI, so you write less code without calling
+`Anvil.render()` from every listener. Remember, no-op renders are very fast.
 
 ## Supported languages and API levels
 
 Anvil is written in Java 7, but it's API is designed to use lambdas as well, so
-in modern times it's recommended to use Anvil with Java8/Retrolambds or Kotlin.
+in modern times it's recommended to use Anvil with Java8/Retrolambda or Kotlin.
 
-Syntax is a bit different for each language, but very intuitive anyway.
+Syntax is a bit different for each language, but it's very intuitive anyway.
 
 Java 6 without lambdas:
 
