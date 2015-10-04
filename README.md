@@ -112,8 +112,8 @@ Pop
 Pop
 ```
 
-The only trick is that these actions are cached into a so called "virtual layout"
-- a tree-like structure matching the actual layout of views and their properties.
+The only trick is that these actions are cached into a so called "virtual layout" -
+a tree-like structure matching the actual layout of views and their properties.
 
 So when you call `Anvil.render()` next time it compares the sequence of
 actions with the cache and skips them if they didn't change. Which means on the next
@@ -202,13 +202,14 @@ public override fun view() {
 }
 ```
 
-Anvil library contains a few classes to work with the virtual layout, but most
-of the DSL (domain-specific language describing how to create views and set
+Anvil library contains only a few classes to work with the virtual layout, but most
+of the DSL (domain-specific language describing how to create views/layouts and set
 their attributes) is generated from `android.jar`.
 
 Anvil is published as three different libraries - `co.trikita:anvil-sdk10`,
 `co.trikita:anvil-sdk15` and `co.trikita:anvil-sdk19`, for different API levels.
-Pick one depending on the minimal API level you want to support:
+Pick one depending on the minimal API level you want to support. My recommendation
+is `anvil-sdk15`, which covers ~95% of the devices:
 
 ``` gradle
 // build.gradle
@@ -221,6 +222,8 @@ dependencies {
 ```
 
 ## API
+
+Here's a list of classes and methods you need to know to work with Anvil like a pro:
 
 * `Anvil.Renderable` - functional interface that one should implement to
 	describe layout structure, style and data bindings.
@@ -252,41 +255,46 @@ dependencies {
 
 ## DSL
 
-DSL consists of a few handwritten property setters, but most of the DSL is
+The bottom part of the iceberg is Anvil DSL.
+
+DSL consists of a few handwritten property setters, but most of it is
 generated from java classes in the android SDK.
 
 ### Property setters
 
-The setters are called as the view methods from Android SDK, but without the
+The setters are named as the view methods from Android SDK, but without the
 "set" prefix. E.g. "text(s)" instead of "setText(s)", "backgroundDrawable(d)"
 instead of "setBackgroundDrawable(d)" and so on.
 
-A full list of property setters for each API level will be added soon.
+_A full list of property setters for each API level will be added soon._
 
 ### Event listeners
 
 Event listeners also have names from the Android SDK, but without the "set"
-prefix and "Listener" suffix, e.g. "onClick" instead of "setOnClickListener".
+prefix and the "Listener" suffix, e.g. "onClick" instead of "setOnClickListener".
 
-A full list of event listener binders for each API level will be added soon.
+_A full list of event listener binders for each API level will be added soon._
 
 ### Handwritten bindings
 
 For LayoutParams the bindings can't be generated easily, so it was faster to write them manually:
 
 * size(width, height) - set width and height. Special constants like WRAP, FILL
-	and MATCH are available.
+  and MATCH are available.
 * dip(x) - returns the value in pixels for the dimension in density-independent
-	pixels. Often used with size, padding or margin calls.
+  pixels. Often used with size, padding or margin calls.
 * margin(m), margin(h, v), margin(l, t, r, b) - set view margin for all 4
-	sides, for horizontal/vertical dimension or for each side individually.
+  sides, for horizontal/vertical dimension or for each side individually.
 * weight(w) - modifies view layout weight.
 * layoutGravity(g) - modifies layout gravity of a view. Common constants like
-	START, END, CENTER, CENTER_VERTICAL etc are available.
+  START, END, CENTER, CENTER_VERTICAL etc are available.
 * align(verb, anchor), align(verb) - base functions for relative layout params.
-* above(id), alignBaseline(id), alignBottom(id), alignEnd(id), alignLeft(id), alignParentBottom(), alignParentEnd(), alignParentLeft(), alignParentRight(), alignParentStart(), alignParentTop(), alignRight(id), alignTop(id), below(id), centerHorizontal(), centerVertical(), centerInParent(), toEndOf(id), toLeftOf(id), toRightOf(id), toStartOf(id) - all possible settings for relative layout params
+* above(id), alignBaseline(id), alignBottom(id), alignEnd(id), alignLeft(id), alignParentBottom(),
+  alignParentEnd(), alignParentLeft(), alignParentRight(), alignParentStart(), alignParentTop(), alignRight(id),
+  alignTop(id), below(id), centerHorizontal(), centerVertical(), centerInParent(), toEndOf(id), toLeftOf(id),
+  toRightOf(id), toStartOf(id) - all possible settings for relative layout params
 
-A few bindings were written for other cases which we find useful:
+A few bindings have been  written for other use cases which we find useful:
 
 * isPortrait() - returns true if screen is now in the portrait mode. Useful for
 	tweaking layouts for different orientations.
