@@ -181,13 +181,12 @@ public class BaseDSL {
 	}
 
 	public static Void align(int verb) {
-		// TODO
-		return null;
+		return align(verb, -1);
 	}
 
 	public static Void align(int verb, int anchor) {
-		// TODO
-		return null;
+		return attr(LayoutAlignFunc.instance,
+				new AbstractMap.SimpleImmutableEntry<>(verb, anchor));
 	}
 
 	public Void above(int anchor) {
@@ -278,6 +277,18 @@ public class BaseDSL {
 		return align(RelativeLayout.START_OF, anchor);
 	}
 
+	private final static class LayoutAlignFunc implements Anvil.AttrFunc<Map.Entry<Integer, Integer>> {
+		private final static LayoutAlignFunc instance = new LayoutAlignFunc();
+		public void apply(View v, Map.Entry<Integer, Integer> e,
+				Map.Entry<Integer, Integer> old) {
+			ViewGroup.LayoutParams p = v.getLayoutParams();
+			if (p instanceof RelativeLayout.LayoutParams) {
+				((RelativeLayout.LayoutParams) p).addRule(e.getKey(), e.getValue());
+				v.setLayoutParams(p);
+			}
+		}
+	}
+
 	public static Void typeface(String font) {
 		return attr(TypefaceFunc.instance, font);
 	}
@@ -301,12 +312,13 @@ public class BaseDSL {
 
 	// -------------
 	public static Void tag(int id, Object value) {
-		return attr(TagFunc.instance, new Pair<Integer, Object>(id, value));
+		return attr(TagFunc.instance,
+				new AbstractMap.SimpleImmutableEntry<Integer, Object>(id, value));
 	}
-	private final static class TagFunc implements Anvil.AttrFunc<Pair<Integer, Object>> {
+	private final static class TagFunc implements Anvil.AttrFunc<Map.Entry<Integer, Object>> {
 		private final static TagFunc instance = new TagFunc();
-		public void apply(View v, Pair<Integer, Object> p, Pair<Integer, Object> q) {
-			// TODO
+		public void apply(View v, Map.Entry<Integer, Object> p, Map.Entry<Integer, Object> q) {
+			v.setTag(p.getKey(), p.getValue());
 		}
 	}
 
