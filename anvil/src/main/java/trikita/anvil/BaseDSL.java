@@ -189,95 +189,96 @@ public class BaseDSL {
 				new AbstractMap.SimpleImmutableEntry<>(verb, anchor));
 	}
 
-	public Void above(int anchor) {
+	public static Void above(int anchor) {
 		return align(RelativeLayout.ABOVE, anchor);
 	}
 
-	public Void alignBaseline(int anchor) {
+	public static Void alignBaseline(int anchor) {
 		return align(RelativeLayout.ALIGN_BASELINE, anchor);
 	}
 
-	public Void alignBottom(int anchor) {
+	public static Void alignBottom(int anchor) {
 		return align(RelativeLayout.ALIGN_BOTTOM, anchor);
 	}
 
-	public Void alignEnd(int anchor) {
+	public static Void alignEnd(int anchor) {
 		return align(RelativeLayout.ALIGN_END, anchor);
 	}
 
-	public Void alignLeft(int anchor) {
+	public static Void alignLeft(int anchor) {
 		return align(RelativeLayout.ALIGN_LEFT, anchor);
 	}
 
-	public Void alignParentBottom() {
+	public static Void alignParentBottom() {
 		return align(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 	}
 
-	public Void alignParentEnd() {
+	public static Void alignParentEnd() {
 		return align(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
 	}
 
-	public Void alignParentLeft() {
+	public static Void alignParentLeft() {
 		return align(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
 	}
 
-	public Void alignParentRight() {
+	public static Void alignParentRight() {
 		return align(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 	}
 
-	public Void alignParentStart() {
+	public static Void alignParentStart() {
 		return align(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE);
 	}
 
-	public Void alignParentTop() {
+	public static Void alignParentTop() {
 		return align(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
 	}
 
-	public Void alignRight(int anchor) {
+	public static Void alignRight(int anchor) {
 		return align(RelativeLayout.ALIGN_RIGHT, anchor);
 	}
 
-	public Void alignStart(int anchor) {
+	public static Void alignStart(int anchor) {
 		return align(RelativeLayout.ALIGN_START, anchor);
 	}
 
-	public Void alignTop(int anchor) {
+	public static Void alignTop(int anchor) {
 		return align(RelativeLayout.ALIGN_TOP, anchor);
 	}
 
-	public Void below(int anchor) {
+	public static Void below(int anchor) {
 		return align(RelativeLayout.BELOW, anchor);
 	}
 
-	public Void centerHorizontal() {
+	public static Void centerHorizontal() {
 		return align(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 	}
 
-	public Void centerInParent() {
+	public static Void centerInParent() {
 		return align(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 	}
 
-	public Void centerVertical() {
+	public static Void centerVertical() {
 		return align(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
 	}
 
-	public Void toEndOf(int anchor) {
+	public static Void toEndOf(int anchor) {
 		return align(RelativeLayout.END_OF, anchor);
 	}
 
-	public Void toLeftOf(int anchor) {
+	public static Void toLeftOf(int anchor) {
 		return align(RelativeLayout.LEFT_OF, anchor);
 	}
 
-	public Void toRightOf(int anchor) {
+	public static Void toRightOf(int anchor) {
 		return align(RelativeLayout.RIGHT_OF, anchor);
 	}
 
-	public Void toStartOf(int anchor) {
+	public static Void toStartOf(int anchor) {
 		return align(RelativeLayout.START_OF, anchor);
 	}
 
-	private final static class LayoutAlignFunc implements Anvil.AttrFunc<Map.Entry<Integer, Integer>> {
+	private final static class LayoutAlignFunc
+			implements Anvil.AttrFunc<Map.Entry<Integer, Integer>> {
 		private final static LayoutAlignFunc instance = new LayoutAlignFunc();
 		public void apply(View v, Map.Entry<Integer, Integer> e,
 				Map.Entry<Integer, Integer> old) {
