@@ -1,11 +1,6 @@
 package trikita.anvil;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.animation.TimeInterpolator;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -443,6 +438,7 @@ public class BaseDSL {
 			}
 		}
 	}
+
 	private final static class AnimatorPair {
 		public Animator animator;
 		public boolean trigger;
@@ -471,7 +467,6 @@ public class BaseDSL {
 
 	private static class AnimatorFunc implements Anvil.AttrFunc<AnimatorPair> {
 		private final static AnimatorFunc instance = new AnimatorFunc();
-
 		public void apply(View v, AnimatorPair a, AnimatorPair b) {
 			// If new animation is set to true and old one was false
 			// then start new animation
@@ -484,60 +479,6 @@ public class BaseDSL {
 
 	public static Void anim(boolean trigger, Animator a) {
 		return attr(AnimatorFunc.instance, new AnimatorPair(a, trigger));
-	}
-
-	// FIXME wrap all Animator methods!
-	public static class SimpleAnimator extends Animator {
-		private final AnimatorSet anim = new AnimatorSet();
-
-		public SimpleAnimator of(String prop, float ...values) {
-			this.anim.play(ObjectAnimator
-					.ofPropertyValuesHolder(Anvil.currentView(),
-						PropertyValuesHolder.ofFloat(prop, values)));
-			return this;
-		}
-
-		public SimpleAnimator delay(int ms) {
-			this.anim.setStartDelay(ms);
-			return this;
-		}
-
-		public SimpleAnimator duration(long ms) {
-			this.anim.setDuration(ms);
-			return this;
-		}
-
-		public SimpleAnimator listener(final Runnable r) {
-			this.anim.addListener(new AnimatorListenerAdapter() {
-				public void onAnimationEnd(Animator anim) {
-					r.run();
-				}
-			});
-			return this;
-		}
-
-		public SimpleAnimator listener(Animator.AnimatorListener l) {
-			this.anim.addListener(l);
-			return this;
-		}
-		public void setInterpolator(TimeInterpolator i) {
-			this.anim.setInterpolator(i);
-		}
-		public long getDuration() {
-			return this.anim.getDuration();
-		}
-		public void setTarget(Object t) { this.anim.setTarget(t); }
-		public Animator setDuration(long ms) { return this.duration(ms); }
-		public void setStartDelay(long ms) { this.anim.setStartDelay(ms); }
-		public long getStartDelay() { return this.anim.getStartDelay(); }
-		public boolean isRunning() { return this.anim.isRunning(); }
-		public void start() { this.anim.start(); }
-		public void cancel() { this.anim.cancel(); }
-		public void end() { this.anim.end(); }
-	}
-
-	public static SimpleAnimator of(String prop, float ...values) {
-		return new SimpleAnimator().of(prop, values);
 	}
 
 	protected static final class ViewClassResult {}
