@@ -296,6 +296,8 @@ For LayoutParams the bindings can't be generated easily, so it was faster to wri
 
 A few bindings have been  written for other use cases which we find useful:
 
+* R() - returns Resources associated with the current view. Usefule for
+  multiple screen support (sizes, dpi, orientation etc).
 * isPortrait() - returns true if screen is now in the portrait mode. Useful for
 	tweaking layouts for different orientations.
 * tupeface(font) - loads font from assets by its name and sets the typeface to
@@ -321,10 +323,6 @@ A special case for animations is added:
 
 * anim(trigger, Animator) - starts animation when trigger is true, cancels it
 	when the trigger becomes false.
-* of(prop, values...).of(prop, values...).delay(d).duration(t).listener(l) -
-	returns a new Animator instance, like PropertyAnimator, but with more
-	lightweight syntax. Listener can be a runnable, then it will be called when
-	animation is ended.
 
 Finally, a few low-level DSL functions are there, which you would no need unless you want to write your own property setters or custom view builders:
 
