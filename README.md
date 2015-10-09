@@ -117,7 +117,7 @@ a tree-like structure matching the actual layout of views and their properties.
 
 So when you call `Anvil.render()` next time it compares the sequence of
 actions with the cache and skips them if they didn't change. Which means on the next
-`Anvil.render()` call _ the views will remain untouched_. This caching technique
+`Anvil.render()` call _the views will remain untouched_. This caching technique
 makes render a very quick operation (having a layout of 100 views, 10
 attributes each you can do about 4000 render cycles per second!).
 
