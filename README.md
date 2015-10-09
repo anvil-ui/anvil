@@ -339,3 +339,7 @@ Finally, a few low-level DSL functions are there, which you would no need unless
 
 Code is distributed under MIT license, feel free to use in your proprietary
 projects as well.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/zserge/anvil/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
