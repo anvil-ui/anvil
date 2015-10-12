@@ -317,7 +317,7 @@ A few bindings have been  written for other use cases which we find useful:
 * `onItemSelected(lambda)` - accepts a functional interface to handle a `Spinner`
 	events. `onNothingSelected()` method is omitted, because it's rarely used anyway.
 
-If a binding you need is not in the list - please, check issue #27 and report it there.
+If a binding you need is not in the list - please, check [issue #27](https://github.com/zserge/anvil/issues/27) and report it there.
 
 A special case for animations is added:
 
