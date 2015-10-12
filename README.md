@@ -279,65 +279,65 @@ _A full list of event listener binders for each API level will be added soon._
 
 For LayoutParams the bindings can't be generated easily, so it was faster to write them manually:
 
-* size(width, height) - set width and height. Special constants like WRAP, FILL
-  and MATCH are available.
-* dip(x) - returns the value in pixels for the dimension in density-independent
-  pixels. Often used with size, padding or margin calls.
-* margin(m), margin(h, v), margin(l, t, r, b) - set view margin for all 4
-  sides, for horizontal/vertical dimension or for each side individually.
-* weight(w) - modifies view layout weight.
-* layoutGravity(g) - modifies layout gravity of a view. Common constants like
-  START, END, CENTER, CENTER_VERTICAL etc are available.
-* align(verb, anchor), align(verb) - base functions for relative layout params.
-* above(id), alignBaseline(id), alignBottom(id), alignEnd(id), alignLeft(id), alignParentBottom(),
-  alignParentEnd(), alignParentLeft(), alignParentRight(), alignParentStart(), alignParentTop(), alignRight(id),
-  alignTop(id), below(id), centerHorizontal(), centerVertical(), centerInParent(), toEndOf(id), toLeftOf(id),
-  toRightOf(id), toStartOf(id) - all possible settings for relative layout params
+* `size(width, height)` - set width and height. Special constants like `WRAP`, `FILL`
+  and `MATCH` are available.
+* `dip(x)` - returns the value in pixels for the dimension in density-independent
+  pixels. Often used with size, padding or margin properties.
+* `margin(m)`, `margin(h, v)`, `margin(l, t, r, b)` - set view margin for all 4
+  sides, for horizontal/vertical dimensions or for each side individually.
+* `weight(w)` - modifies view layout weight.
+* `layoutGravity(g)` - modifies layout gravity of a view. Common constants like
+  `START`, `END`, `CENTER`, `CENTER_VERTICAL`, etc. are available.
+* `align(verb, anchor)`, `align(verb)` - base functions for relative layout params.
+* `above(id)`, `alignBaseline(id)`, `alignBottom(id)`, `alignEnd(id)`, `alignLeft(id)`, `alignParentBottom()`,
+  `alignParentEnd()`, `alignParentLeft()`, `alignParentRight()`, `alignParentStart()`, `alignParentTop()`,
+  `alignRight(id)`, `alignTop(id)`, `below(id)`, `centerHorizontal()`, `centerVertical()`, `centerInParent()`,
+  `toEndOf(id)`, `toLeftOf(id)`, `toRightOf(id)`, `toStartOf(id)` - all possible settings for relative layout params
 
 A few bindings have been  written for other use cases which we find useful:
 
-* R() - returns Resources associated with the current view. Usefule for
+* `R()` - returns a `Resources` object associated with the current view. Useful for
   multiple screen support (sizes, dpi, orientation etc).
-* isPortrait() - returns true if screen is now in the portrait mode. Useful for
+* `isPortrait()` - returns true if a screen is portrait-oriented. Useful for
 	tweaking layouts for different orientations.
-* tupeface(font) - loads font from assets by its name and sets the typeface to
-	the TextView
-* padding(p), padding(h, v), padding(l, t, r, b) - set view padding for all 4
-	sides, for horizontal/vertical dimension or for each side individually.
-* visibility(flag) - sets visibility(VISIBLE) or visibility(GONE) depending on
-	the flag boolean value
-* shadowLayer(radius, dx, dy, color) - sets shadow layer of a TextView
-* onTextChanged(textWatcher) - binds a text watcher to the edit text. No
-	Anvil.render is called in this case, because you're likely to get an infinite
+* `typeface(font)` - loads font from assets by its file name and sets the typeface to
+	a TextView
+* `padding(p)`, `padding(h, v)`, `padding(l, t, r, b)` - set view padding for all 4
+	sides, for horizontal/vertical dimensions or for each side individually.
+* `visibility(flag)` - sets the visibility property to `View.VISIBLE` or `View.GONE` depending on
+	the `flag` boolean value
+* `shadowLayer(radius, dx, dy, color)` - sets shadow layer of a TextView
+* `onTextChanged(textWatcher)` - binds a text watcher to an `EditText`. No
+	`Anvil.render()` is called in this case, because you're likely to get an infinite
 	recursion.
-* text(StringBuildeer) - binds a string builder to the edit text, so when you
+* `text(StringBuilder)` - binds a string builder to the edit text, so when you
 	change its contents - the edit text is changed, and if you type something
 	manually - the string builder gets modified. So far it's the only two-way
 	data binding, becayse TextWatcher is a complicated beast.
-* onItemSelected(lambda) - accepts a functional interface to handle spinner
-	events. onNothingSelected method is omitted, because it's rarely used anyway.
+* `onItemSelected(lambda)` - accepts a functional interface to handle a `Spinner`
+	events. `onNothingSelected()` method is omitted, because it's rarely used anyway.
 
-If a binding you need is not on the list - check issue #27 and report it there.
+If a binding you need is not in the list - please, check issue #27 and report it there.
 
 A special case for animations is added:
 
-* anim(trigger, Animator) - starts animation when trigger is true, cancels it
-	when the trigger becomes false.
+* `anim(trigger, Animator)` - starts animation when `trigger` is true, cancels it
+	when the `trigger` becomes false.
 
 Finally, a few low-level DSL functions are there, which you would no need unless you want to write your own property setters or custom view builders:
 
-* v(class, attrs...) - pushes view, applies attributes, doesn't pop the view.
-* o(), x() - names that look like bullets, actually pop the view. These are used in Java 6 syntax.
-* v(class, renderable) - pushes the view, applies the renderable to fulfil
+* `v(class, attrs...)` - pushes view, applies attributes, doesn't pop the view.
+* `o()`, `x()` - names that look like bullets, actually pops the view. These are used in Java 6 syntax.
+* `v(class, renderable)` - pushes the view, applies the renderable to fulfil
 	attributes and child views, pops the view. This is used in Java 8 and Kotlin
 	syntax.
-* attr(func, value) - checks the cache for the given value of the given
+* `attr(func, value)` - checks the cache for the given value of the given
 	property setter function. Often used to create your own property setter
 	binding.
 
 ## License
 
-Code is distributed under MIT license, feel free to use in your proprietary
+Code is distributed under MIT license, feel free to use it in your proprietary
 projects as well.
 
 
