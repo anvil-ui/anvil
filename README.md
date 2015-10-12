@@ -327,7 +327,7 @@ A special case for animations is added:
 Finally, a few low-level DSL functions are there, which you would no need unless you want to write your own property setters or custom view builders:
 
 * `v(class, attrs...)` - pushes view, applies attributes, doesn't pop the view.
-* `o()`, `x()` - names that look like bullets, actually pops the view. These are used in Java 6 syntax.
+* `o()`, `x()` - names that look like bullets, actually pop the view. These are used in Java 6 syntax.
 * `v(class, renderable)` - pushes the view, applies the renderable to fulfil
 	attributes and child views, pops the view. This is used in Java 8 and Kotlin
 	syntax.
