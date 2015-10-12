@@ -43,7 +43,7 @@ android {
 }
 
 group = 'co.trikita'
-version = '0.1.1'
+version = '0.1.2'
 
 apply from: 'gen.gradle'
 
