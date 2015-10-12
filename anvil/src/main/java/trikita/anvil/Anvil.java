@@ -10,7 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +27,11 @@ import java.util.WeakHashMap;
  */
 public final class Anvil {
 
+	private final static Map<ViewGroup, Mount> mounts = new WeakHashMap<>();
+	private static Mount currentMount = null;
+
+	private static Handler anvilUIHandler = null;
+
 	/** Renderable can be mounted and rendered using Anvil library. */
 	public interface Renderable {
 		/** This method is a place to define the structure of your layout, its view
@@ -39,11 +43,6 @@ public final class Anvil {
 	public interface AttrFunc<T> {
 		void apply(View v, T newValue, T oldValue);
 	}
-
-	private final static Map<ViewGroup, Mount> mounts = new WeakHashMap<>();
-	private static Mount currentMount = null;
-
-	private static Handler anvilUIHandler = null;
 
 	private Anvil() {}
 
@@ -119,10 +118,10 @@ public final class Anvil {
 	 * @return currently rendered View
 	 */
 	public static View currentView() {
-		if (currentMount() != null) {
-			return currentMount.cache.peek().view;
-		} else {
+		if (currentMount() == null) {
 			return null;
+		} else {
+			return currentMount.cache.peek().view;
 		}
 	}
 

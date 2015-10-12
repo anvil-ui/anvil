@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Pair;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -406,7 +405,7 @@ public class BaseDSL {
 	}
 
 	public interface SimpleItemSelectedListener {
-		public void onItemSelected(AdapterView a, View v, int pos, long id);
+		void onItemSelected(AdapterView a, View v, int pos, long id);
 	}
 
 	public static Void onItemSelected(SimpleItemSelectedListener l) {

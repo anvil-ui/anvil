@@ -12,7 +12,7 @@ public abstract class RenderableAdapter extends BaseAdapter {
 	private int currentPosition = -1;
 
 	public interface Item<T> {
-		public void view(int index, T item);
+		void view(int index, T item);
 	}
 
 	public static <T> RenderableAdapter withItems(final List<T> items, final Item<T> r) {
