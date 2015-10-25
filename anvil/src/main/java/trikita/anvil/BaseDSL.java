@@ -297,6 +297,22 @@ public class BaseDSL {
 		}
 	}
 
+	public static Void typeface(String font, int style) {
+	    return attr(StyledTypefaceFunc.instance, new AbstractMap.SimpleImmutableEntry<String, Integer>(font, style));
+	}
+
+	private final static class StyledTypefaceFunc implements Anvil.AttrFunc<Map.Entry<String, Integer>> {
+	    private final static StyledTypefaceFunc instance = new StyledTypefaceFunc();
+	    public void apply(View v, Map.Entry<String, Integer> p, Map.Entry<String, Integer> q) {
+	        Typeface resolvedTypeface = null;
+	        if( p.getKey() != null )
+	            resolvedTypeface = Typeface.createFromAsset(v.getContext().getAssets(), p.getKey());
+	        if (v instanceof TextView) {
+	            ((TextView) v).setTypeface(resolvedTypeface, p.getValue());
+	        }
+	    }
+	}
+
 	public static Void visibility(boolean visible) {
 		if (visible) {
 			return trikita.anvil.DSL.visibility(View.VISIBLE);
