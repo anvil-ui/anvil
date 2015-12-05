@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -498,9 +499,13 @@ public class BaseDSL {
 
 	protected static final class ViewClassResult {}
 
-	public static ViewClassResult v(Class<? extends View> c) {
-		Anvil.currentMount().push(c);
+	public static ViewClassResult v(Class<? extends View> c, AttributeSet attrs) {
+		Anvil.currentMount().push(c, attrs);
 		return null;
+	}
+
+	public static ViewClassResult v(Class<? extends View> c) {
+		return v(c, (AttributeSet) null);
 	}
 
 	private static Void end() {
@@ -513,6 +518,12 @@ public class BaseDSL {
 
 	public static Void v(Class<? extends View> c, Anvil.Renderable r) {
 		v(c);
+		r.view();
+		return end();
+	}
+
+	public static Void v(Class<? extends View> c, AttributeSet attrs, Anvil.Renderable r) {
+		v(c, attrs);
 		r.view();
 		return end();
 	}

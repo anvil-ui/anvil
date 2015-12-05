@@ -1,6 +1,7 @@
 package trikita.anvil;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -21,8 +22,8 @@ public final class TestUtil {
 		private Object dummy;
 		private int id = nextId();
 
-		public TestView(Context c) {
-			super(c);
+		public TestView(Context c, AttributeSet attrs) {
+			super(c, attrs);
 		}
 
 		public void setDummy(Object dummy) {
@@ -45,8 +46,8 @@ public final class TestUtil {
 		private List<View> children = new ArrayList<View>();
 		private int id = nextId();
 
-		public TestLayout(Context c) {
-			super(c);
+		public TestLayout(Context c, AttributeSet attrs) {
+			super(c, attrs);
 		}
 
 		public void setDummy(Object dummy) {

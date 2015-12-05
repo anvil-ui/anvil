@@ -43,4 +43,3 @@ public class LambdaTest extends AndroidTestCase {
 	}
 }
 
-

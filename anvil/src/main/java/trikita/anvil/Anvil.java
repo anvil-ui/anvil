@@ -3,6 +3,7 @@ package trikita.anvil;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -206,7 +207,7 @@ public final class Anvil {
 			}
 		}
 
-		void push(Class<? extends View> viewClass) {
+		void push(Class<? extends View> viewClass, AttributeSet attrs) {
 			Node parentNode = cache.peek();
 			int index = parentNode.child;
 
@@ -231,7 +232,7 @@ public final class Anvil {
 				try {
 					childNode.children.clear();
 					childNode.attrs.clear();
-					View v = viewClass.getConstructor(Context.class).newInstance(vg.getContext());
+					View v = viewClass.getConstructor(Context.class).newInstance(vg.getContext(), attrs);
 					if (index < vg.getChildCount()) {
 						vg.removeViewAt(index);
 					}
