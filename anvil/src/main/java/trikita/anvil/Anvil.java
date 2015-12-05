@@ -232,7 +232,8 @@ public final class Anvil {
 				try {
 					childNode.children.clear();
 					childNode.attrs.clear();
-					View v = viewClass.getConstructor(Context.class).newInstance(vg.getContext(), attrs);
+					View v = viewClass.getConstructor(Context.class, AttributeSet.class)
+						.newInstance(vg.getContext(), attrs);
 					if (index < vg.getChildCount()) {
 						vg.removeViewAt(index);
 					}

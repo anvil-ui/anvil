@@ -15,7 +15,7 @@ public class RenderTest extends AndroidTestCase {
 	@Test
 	public void testSingleView() {
 		final Object foo = new Object();
-		final ViewGroup rootView = new TestLayout(getContext());
+		final ViewGroup rootView = new TestLayout(getContext(), null);
 
 		final int[] called = {0};
 		Anvil.mount(rootView, new Anvil.Renderable() {

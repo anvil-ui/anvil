@@ -119,7 +119,7 @@ public class RenderBenchmarkTest extends AndroidTestCase {
 
 	@Test
 	public void testStaticRender() {
-		rootView = new TestLayout(getContext());
+		rootView = new TestLayout(getContext(), null);
 		B b = new B("Benchmark/RenderStatic");
 		Anvil.mount(rootView, staticView);
 		while (!b.done()) {
@@ -131,7 +131,7 @@ public class RenderBenchmarkTest extends AndroidTestCase {
 
 	@Test
 	public void testDynamicRender() {
-		rootView = new TestLayout(getContext());
+		rootView = new TestLayout(getContext(), null);
 
 		Anvil.mount(rootView, dynamicView);
 		B b = new B("Benchmark/RenderDynamic");
@@ -146,7 +146,7 @@ public class RenderBenchmarkTest extends AndroidTestCase {
 
 	@Test
 	public void testLambdaDynamicRender() {
-		rootView = new TestLayout(getContext());
+		rootView = new TestLayout(getContext(), null);
 		Anvil.mount(rootView, dynamicLambdaView);
 		B b = new B("Benchmark/RenderDynamicLambda");
 		int i = 0;

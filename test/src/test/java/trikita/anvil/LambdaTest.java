@@ -14,7 +14,7 @@ import static trikita.anvil.TestUtil.*;
 public class LambdaTest extends AndroidTestCase {
 	@Test
 	public void testSingleView() {
-		final ViewGroup rootView = new TestLayout(getContext());
+		final ViewGroup rootView = new TestLayout(getContext(), null);
 
 		Anvil.Renderable r = () -> {
 			testLayout(() -> {
