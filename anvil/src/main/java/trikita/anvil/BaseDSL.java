@@ -499,17 +499,18 @@ public class BaseDSL {
 
 	protected static final class ViewClassResult {}
 
-	public static ViewClassResult v(Class<? extends View> c, AttributeSet attrs) {
-		Anvil.currentMount().push(c, attrs);
+	public static ViewClassResult v(Class<? extends View> c) {
+		Anvil.currentMount().startFromClass(c);
 		return null;
 	}
 
-	public static ViewClassResult v(Class<? extends View> c) {
-		return v(c, (AttributeSet) null);
+	public static ViewClassResult xml(int layoutId) {
+		Anvil.currentMount().startFromLayout(layoutId);
+		return null;
 	}
 
 	private static Void end() {
-		Anvil.currentMount().pop();
+		Anvil.currentMount().end();
 		return null;
 	}
 
@@ -522,8 +523,8 @@ public class BaseDSL {
 		return end();
 	}
 
-	public static Void v(Class<? extends View> c, AttributeSet attrs, Anvil.Renderable r) {
-		v(c, attrs);
+	public static Void xml(int layoutId, Anvil.Renderable r) {
+		xml(layoutId);
 		r.view();
 		return end();
 	}
@@ -531,6 +532,18 @@ public class BaseDSL {
 	public static <T> Void attr(Anvil.AttrFunc<T> f, T value) {
 		Anvil.currentMount().attr(f, value);
 		return null;
+	}
+
+	public static View withId(int id, Anvil.Renderable r) {
+		View v = Anvil.currentView();
+		if (v == null) {
+			throw new RuntimeException("Anvil.currentView() is null");
+		}
+		v = v.findViewById(id);
+		if (v == null) {
+			throw new RuntimeException("No view found for ID " + id);
+		}
+		return Anvil.mount(v, r);
 	}
 }
 

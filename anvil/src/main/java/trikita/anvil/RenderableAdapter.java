@@ -40,13 +40,13 @@ public abstract class RenderableAdapter extends BaseAdapter {
 					RenderableAdapter.this.view(currentPosition);
 				}
 			});
-			m.render();
+			Anvil.render(m);
 			vg.setTag(m);
 			v = vg;
 		} else {
 			Anvil.Mount m = (Anvil.Mount) v.getTag();
 			currentPosition = pos;
-			m.render();
+			Anvil.render(m);
 		}
 		return v;
 	}
