@@ -230,11 +230,11 @@ Here's a list of classes and methods you need to know to work with Anvil like a 
 * `Anvil.Renderable` - functional interface that one should implement to
 	describe layout structure, style and data bindings.
 
-* `Anvil.mount(ViewGroup, Anvil.Renderable)` - mounts renderable layout into a
-	ViewGroup
+* `Anvil.mount(View, Anvil.Renderable)` - mounts renderable layout into a
+	View or a ViewGroup
 
-* `Anvil.unmount(ViewGroup)` - unmounts renderable layout from the ViewGroup
-	removing all its child views
+* `Anvil.unmount(View)` - unmounts renderable layout from the View
+	removing all its child views if it's a ViewGroup
 
 * `Anvil.render()` - starts a new render cycle updating all mounted views
 
@@ -336,6 +336,72 @@ Finally, a few low-level DSL functions are there, which you would no need unless
 * `attr(func, value)` - checks the cache for the given value of the given
 	property setter function. Often used to create your own property setter
 	binding.
+
+## XML layouts
+
+If you're migrating an existing project to Anvil or if you prefer to keep your
+view layouts declared in XML - you can do so:
+
+``` kotlin
+public override fun view() {
+	// A designer gave us an XML with some fancy layout:
+	// a viewgroup with a button and a progress bar in it
+	xml(R.layout.my_layout) {
+		backgroudnColor(Settings.bgColor) // will modify root layout view color
+
+		withId(R.id.my_button) {
+			// button state may depend on some variable
+			enabled(isMyButtonEnabled)
+				// button click listener can be attached
+				onClick { v ->
+					...
+				}
+		}
+
+		withId(R.id.my_progress_bar) {
+			visible(isMyProgressBarShown)
+			progress(someProgressValue)
+		}
+	}
+}
+```
+
+Here `xml()` creates a view node, much like `frameLayout()` or `textView()`,
+except for it uses an XML file to inflate the views, not the direct view class
+constructor. Much like view "builders", `xml()` takes a renderable lambda as a
+parameter and uses that to modify the created view.
+
+Any attribute setters will affect the root view from the XML layout.
+
+If you want to modify attributes of the child views from the XML - you should
+use `withId()` to assign a renderable to a view with the given ID. You may not
+follow the hierarchy of the child views, e.g. all your `withId()` calls may be
+nested as the views are nested in the XML, or may be direct children of the
+`xml()` renderable. `xml()` calls can be nested, too.
+
+`xml()` also allows you to create views that can not be inflated from Java code
+but only from XML (such as hostozintal progress bars) or any other views where
+AttributeSet must be given or the views that rely on the `onFinishInflate`
+method to be called.
+
+`withId()` call is not limited to XML views, it can be used for views declared
+in code that have IDs. So if you have a custom viewgroup that creates its child
+views automatically and assigns some IDs to them - you can still modify their
+properties using `withId()`. Also, if any views are created inside the
+`withId()` or `xml()` - they will be appeneded to the view group:
+
+``` java
+v(MyComponent.java, () -> {
+	withId(R.id.child_view, () -> {
+		// R.id.child_view was implicitely created in MyComponent's constructor
+		// but we still can modify it here
+	});
+
+	textView(() -> {
+		// This textView will be appeneded to MyComponent layout
+	});
+});
+```
 
 ## License
 
