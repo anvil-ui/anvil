@@ -86,7 +86,9 @@ https://github.com/zserge/anvil-examples
 
 No magic. When a renderable object is being constructed there are 3 types of
 operations: push view, modify some attribute of the current view, and 
-pop view.
+pop view. If you're familiar with
+[incremental DOM](http://google.github.io/incremental-dom/#about) - Anvil
+follows the same approach.
 
 Pushing a view adds it as a child to the parent view from the top of
 the stack. Attribute modification simply sets the given property to
