@@ -1,10 +1,8 @@
 package trikita.anvil;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,11 +86,11 @@ public final class Anvil {
 	 */
 	public static View mount(View v, Renderable r) {
 		Mount m = mounts.get(v);
-		if (m != null) {
-			m.setRenderable(r);
-		} else {
+		if (m == null) {
 			m = new Mount(v, r);
 			mounts.put(v, m);
+		} else {
+			m.setRenderable(r);
 		}
 		render(m);
 		return v;
