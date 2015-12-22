@@ -2,6 +2,7 @@ package trikita.anvil;
 
 import android.content.Context;
 import android.test.AndroidTestCase;
+import android.test.UiThreadTest;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -12,39 +13,36 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import static trikita.anvil.DSL.*;
-import static trikita.anvil.TestUtil.*;
 
-public class RenderBenchmarkTest extends AndroidTestCase {
+public class RenderBenchmarkTest extends AnvilTestBase {
 
-	ViewGroup rootView;
-	
 	// Static layout, 3 nesting levels, 8 views, 16 attributes
 	Anvil.Renderable staticView = new Anvil.Renderable() {
 		public void view() {
 			o (v(TestLayout.class),
-					dummy(0),
+					fooProp(0),
 					o (v(TestView.class),
-						dummy(0xffffffff),
-						dummy(0),
-						dummy(1)),
+						fooProp(0xffffffff),
+						fooProp(0),
+						fooProp(1)),
 					o (v(TestView.class),
-						dummy(0xffffffff),
-						dummy(0xffffffff),
-						dummy(0xffffffff),
-						dummy(0xffffffff),
-						dummy(1)),
+						fooProp(0xffffffff),
+						fooProp(0xffffffff),
+						fooProp(0xffffffff),
+						fooProp(0xffffffff),
+						fooProp(1)),
 					o (v(TestLayout.class),
 						o (v(TestLayout.class),
 							o (v(TestView.class),
-								dummy(0xffffffff),
-								dummy(0xffffffff),
-								dummy(1)),
+								fooProp(0xffffffff),
+								fooProp(0xffffffff),
+								fooProp(1)),
 							o (v(TestView.class),
-								dummy(0xffffffff),
-								dummy(1)),
+								fooProp(0xffffffff),
+								fooProp(1)),
 							o (v(TestView.class),
-								dummy(0xffffffff),
-								dummy(1)))));
+								fooProp(0xffffffff),
+								fooProp(1)))));
 		}
 	};
 
@@ -55,62 +53,62 @@ public class RenderBenchmarkTest extends AndroidTestCase {
 	Anvil.Renderable dynamicView = new Anvil.Renderable() {
 		public void view() {
 			x (v(TestLayout.class),
-					dummy(dynamicValue),
+					fooProp(dynamicValue),
 					x (v(TestView.class),
-						dummy(0xffffffff),
-						dummy(0),
-						dummy(1)),
+						fooProp(0xffffffff),
+						fooProp(0),
+						fooProp(1)),
 					x (v(TestView.class),
-						dummy(0xffffffff),
-						dummy(0xffffffff),
-						dummy(0xffffffff),
-						dummy(0xffffffff),
-						dummy(dynamicValue)),
+						fooProp(0xffffffff),
+						fooProp(0xffffffff),
+						fooProp(0xffffffff),
+						fooProp(0xffffffff),
+						fooProp(dynamicValue)),
 					x (v(TestLayout.class),
 						x (v(TestLayout.class),
 							x (v(TestView.class),
-								dummy(0xffffffff),
-								dummy(0xffffffff),
-								dummy(1)),
+								fooProp(0xffffffff),
+								fooProp(0xffffffff),
+								fooProp(1)),
 							x (v(TestView.class),
-								dummy(0xffffffff),
-								dummy(Math.random())),
+								fooProp(0xffffffff),
+								fooProp(Math.random())),
 							x (v(TestView.class),
-								dummy(0xffffffff),
-								dummy(1)))));
+								fooProp(0xffffffff),
+								fooProp(1)))));
 		}
 	};
 
 	Anvil.Renderable dynamicLambdaView = () -> {
-		testLayout(() -> {
-			dummy(dynamicValue);
-			testView(() -> {
-				dummy(0xffffffff);
-				dummy(0);
-				dummy(1);
+		fooLayout(() -> {
+			fooProp(dynamicValue);
+			fooView(() -> {
+				fooProp(0xffffffff);
+				fooProp(0);
+				fooProp(1);
 			});
-			testView(() -> {});
-			testView(() -> {
-				dummy(0xffffffff);
-				dummy(0xffffffff);
-				dummy(0xffffffff);
-				dummy(0xffffffff);
-				dummy(dynamicValue);
+			fooView(() -> {});
+			fooView(() -> {
+				fooProp(0xffffffff);
+				fooProp(0xffffffff);
+				fooProp(0xffffffff);
+				fooProp(0xffffffff);
+				fooProp(dynamicValue);
 			});
-			testLayout(() -> {
-				testLayout(() -> {
-					testView(() -> {
-						dummy(0xffffffff);
-						dummy(0xffffffff);
-						dummy(1);
+			fooLayout(() -> {
+				fooLayout(() -> {
+					fooView(() -> {
+						fooProp(0xffffffff);
+						fooProp(0xffffffff);
+						fooProp(1);
 					});
-					testView(() -> {
-						dummy(0xffffffff);
-						dummy(Math.random());
+					fooView(() -> {
+						fooProp(0xffffffff);
+						fooProp(Math.random());
 					});
-					testView(() -> {
-						dummy(0xffffffff);
-						dummy(1);
+					fooView(() -> {
+						fooProp(0xffffffff);
+						fooProp(1);
 					});
 				});
 			});
@@ -118,43 +116,39 @@ public class RenderBenchmarkTest extends AndroidTestCase {
 	};
 
 	@Test
+	@UiThreadTest
 	public void testStaticRender() {
-		rootView = new TestLayout(getContext(), null);
 		B b = new B("Benchmark/RenderStatic");
-		Anvil.mount(rootView, staticView);
+		Anvil.mount(container, staticView);
 		while (!b.done()) {
 			Anvil.render();
 		}
-		Anvil.unmount(rootView);
 		System.out.println(b.report());
 	}
 
 	@Test
+	@UiThreadTest
 	public void testDynamicRender() {
-		rootView = new TestLayout(getContext(), null);
-
-		Anvil.mount(rootView, dynamicView);
+		Anvil.mount(container, dynamicView);
 		B b = new B("Benchmark/RenderDynamic");
 		int i = 0;
 		while (!b.done()) {
 			dynamicValue = ++i;
 			Anvil.render();
 		}
-		Anvil.unmount(rootView);
 		System.out.println(b.report());
 	}
 
 	@Test
+	@UiThreadTest
 	public void testLambdaDynamicRender() {
-		rootView = new TestLayout(getContext(), null);
-		Anvil.mount(rootView, dynamicLambdaView);
+		Anvil.mount(container, dynamicLambdaView);
 		B b = new B("Benchmark/RenderDynamicLambda");
 		int i = 0;
 		while (!b.done()) {
 			dynamicValue = ++i;
 			Anvil.render();
 		}
-		Anvil.unmount(rootView);
 		System.out.println(b.report());
 	}
 }
