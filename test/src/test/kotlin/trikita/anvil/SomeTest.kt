@@ -2,7 +2,7 @@ package trikita.anvil;
 
 import android.test.AndroidTestCase;
 
-import kotlin.test.assertEquals
+import kotlin.test.*
 import org.junit.Test
 
 class SomeTest() : AndroidTestCase() {

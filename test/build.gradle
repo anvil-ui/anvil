@@ -31,16 +31,16 @@ android {
 		abortOnError false
 	}
 
-	testOptions {
-		unitTests.returnDefaultValues = true
-	}
-
 	sourceSets {
 		androidTest {
 			java {
 				srcDirs += 'src/test/java'
 			}
 		}
+	}
+
+	testOptions {
+		unitTests.returnDefaultValues = true
 	}
 }
 
