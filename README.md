@@ -219,7 +219,7 @@ repositories {
 	jcenter()
 }
 dependencies {
-	compile 'co.trikita:anvil-api15:+'
+	compile 'co.trikita:anvil-sdk15:+'
 }
 ```
 
