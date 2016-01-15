@@ -10,4 +10,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - gradle test:check --stacktrace
+  - ./gradlew anvil:check --stacktrace
