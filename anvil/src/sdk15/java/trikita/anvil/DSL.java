@@ -3489,7 +3489,7 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final Drawable arg, final Drawable old) {
       if (v instanceof FrameLayout) {
-        ((FrameLayout) v).setForeground(arg);
+        v.setForeground(arg);
       }
     }
   }
@@ -3499,7 +3499,7 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof FrameLayout) {
-        ((FrameLayout) v).setForegroundGravity(arg);
+        v.setForegroundGravity(arg);
       }
     }
   }

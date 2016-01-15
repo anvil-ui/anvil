@@ -3,3 +3,5 @@ build/
 local.properties
 .env
 *.class
+.idea/
+*.iml

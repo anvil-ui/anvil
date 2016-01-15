@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -70,7 +69,7 @@ public class BaseDSL {
 
 	public static Void size(int w, int h) {
 		return attr(LayoutSizeFunc.instance,
-				new AbstractMap.SimpleImmutableEntry<Integer, Integer>(w, h));
+				new AbstractMap.SimpleImmutableEntry<>(w, h));
 	}
 
 	private final static class LayoutSizeFunc
@@ -299,7 +298,7 @@ public class BaseDSL {
 	}
 
 	public static Void typeface(String font, int style) {
-	    return attr(StyledTypefaceFunc.instance, new AbstractMap.SimpleImmutableEntry<String, Integer>(font, style));
+	    return attr(StyledTypefaceFunc.instance, new AbstractMap.SimpleImmutableEntry<>(font, style));
 	}
 
 	private final static class StyledTypefaceFunc implements Anvil.AttrFunc<Map.Entry<String, Integer>> {
@@ -325,7 +324,7 @@ public class BaseDSL {
 	// -------------
 	public static Void tag(int id, Object value) {
 		return attr(TagFunc.instance,
-				new AbstractMap.SimpleImmutableEntry<Integer, Object>(id, value));
+				new AbstractMap.SimpleImmutableEntry<>(id, value));
 	}
 	private final static class TagFunc implements Anvil.AttrFunc<Map.Entry<Integer, Object>> {
 		private final static TagFunc instance = new TagFunc();
@@ -354,8 +353,8 @@ public class BaseDSL {
 	}
 
 	// Custom and simplified listeners
-	private static Map<StringBuilder, String> hasUserInput =
-		new WeakHashMap<StringBuilder, String>();
+	private final static Map<StringBuilder, String> hasUserInput =
+			new WeakHashMap<>();
 
 	public static Void text(final StringBuilder sb) {
 		if (!sb.toString().equals(hasUserInput.get(sb))) {
@@ -383,10 +382,7 @@ public class BaseDSL {
 		}
 		public int hashCode() { return object.hashCode(); }
 		public boolean equals(Object o) {
-			if (o == null || !o.getClass().equals(getClass())) {
-				return false;
-			}
-			return ((TextWatcherProxy) o).equals(object);
+			return !(o == null || !o.getClass().equals(getClass())) && o.equals(object);
 		}
 		public void	afterTextChanged(Editable s) {}
 		public void	beforeTextChanged(CharSequence s, int from, int n, int after) {}
@@ -457,7 +453,7 @@ public class BaseDSL {
 
 	private final static class AnimatorPair {
 		public Animator animator;
-		public boolean trigger;
+		public final boolean trigger;
 		public AnimatorPair(Animator a, boolean trigger) {
 			this.animator = a;
 			this.trigger = trigger;
@@ -539,7 +535,7 @@ public class BaseDSL {
 		if (v == null) {
 			throw new RuntimeException("Anvil.currentView() is null");
 		}
-		v = v.findViewById(id);
+		v = Anvil.viewFactory.fromId(v, id);
 		if (v == null) {
 			throw new RuntimeException("No view found for ID " + id);
 		}

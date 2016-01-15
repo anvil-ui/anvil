@@ -45,9 +45,37 @@ public final class Anvil {
 		void apply(View v, T newValue, T oldValue);
 	}
 
+	interface ViewFactory {
+		View fromClass(Context c, Class<? extends View> v);
+		View fromXml(Context c, int xmlId);
+		View fromId(View v, int viewId);
+	}
+
+	final static ViewFactory viewFactory = new ViewFactory() {
+		public View fromClass(Context c, Class<? extends View> viewClass) {
+			try {
+				return viewClass.getConstructor(Context.class).newInstance(c);
+			} catch (InvocationTargetException e) {
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			} catch (NoSuchMethodException e) {
+				throw new RuntimeException(e);
+			} catch (InstantiationException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		public View fromXml(Context c, int xmlId) {
+			return LayoutInflater.from(c).inflate(xmlId, null, false);
+		}
+		public View fromId(View v, int viewId) {
+			return v.findViewById(viewId);
+		}
+	};
+
 	private Anvil() {}
 
-	private static Runnable anvilRenderRunnable = new Runnable() {
+	private final static Runnable anvilRenderRunnable = new Runnable() {
 		public void run() {
 			Anvil.render();
 		}
@@ -84,7 +112,7 @@ public final class Anvil {
 	 * @param v a View into which the renderable r will be mounted
 	 * @param r a Renderable to mount into a View
 	 */
-	public static View mount(View v, Renderable r) {
+	public static <T extends View> T mount(T v, Renderable r) {
 		Mount m = mounts.get(v);
 		if (m == null) {
 			m = new Mount(v, r);
@@ -99,7 +127,7 @@ public final class Anvil {
 	/**
 	 * Unmounts a  mounted renderable. This would also clean up all the child
 	 * views inside the parent ViewGroup, which acted as a mount point.
-	 * @param m A mount point to unmount from its View
+	 * @param v A mount point to unmount from its View
 	 */
 	public static void unmount(View v) {
 		Mount m = mounts.get(v);
@@ -126,12 +154,13 @@ public final class Anvil {
 	 * inside the Renderable.
 	 * @return currently rendered View
 	 */
-	public static View currentView() {
+	@SuppressWarnings("unchecked")
+	public static <T extends View> T currentView() {
 		if (currentMount() == null) {
 			return null;
 		}
 		Node node = currentMount.stack.peek();
-		return (node == null ? currentMount.rootView.get() : node.view);
+		return (T) (node == null ? currentMount.rootView.get() : node.view);
 	}
 
 	static void render(Mount m) {
@@ -170,12 +199,12 @@ public final class Anvil {
 		void render() {
 			assert this.stack.size() == 0;
 			this.stack.push(this.rootNode.reset());
-			// render view hiearchy if viewgroup still exists
+			// render view hierarchy if viewgroup still exists
 			if ((this.rootNode.view = this.rootView.get()) != null) {
 				this.renderable.view();
 			}
+			end();
 			this.rootNode.view = null;
-			this.stack.pop();
 			assert this.stack.size() == 0;
 		}
 
@@ -201,29 +230,19 @@ public final class Anvil {
 			Node node = startNode();
 			View view = node.view;
 			if (node.viewClass != viewClass) {
-				try {
-					node.layoutId = 0;
-					node.viewClass = viewClass;
-					node.children.clear();
-					node.attrs.clear();
-					if (view != null) {
-						node.parentView.removeView(view);
-					}
-					View v = viewClass.getConstructor(Context.class).newInstance(node.parentView.getContext());
-					if (node.viewIndex == -1) {
-						node.viewIndex = node.parentView.getChildCount();
-					}
-					node.parentView.addView(v, node.viewIndex);
-					node.view = v;
-				} catch (InvocationTargetException e) {
-					throw new RuntimeException(e);
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException(e);
-				} catch (NoSuchMethodException e) {
-					throw new RuntimeException(e);
-				} catch (InstantiationException e) {
-					throw new RuntimeException(e);
+				node.layoutId = 0;
+				node.viewClass = viewClass;
+				node.children.clear();
+				node.attrs.clear();
+				if (view != null) {
+					node.parentView.removeView(view);
 				}
+				View v = viewFactory.fromClass(node.parentView.getContext(), viewClass);
+				if (node.viewIndex == -1) {
+					node.viewIndex = node.parentView.getChildCount();
+				}
+				node.parentView.addView(v, node.viewIndex);
+				node.view = v;
 			}
 		}
 
@@ -238,7 +257,7 @@ public final class Anvil {
 				if (node.view != null) {
 					node.parentView.removeView(node.view);
 				}
-				View v = LayoutInflater.from(node.parentView.getContext()).inflate(layoutId, null, false);
+				View v = viewFactory.fromXml(node.parentView.getContext(), layoutId);
 				if (node.viewIndex == -1) {
 					node.viewIndex = node.parentView.getChildCount();
 				}
@@ -277,7 +296,7 @@ public final class Anvil {
 		}
 	}
 
-	/** Node is a virual View declared in the Renderable's code */
+	/** Node is a virtual View declared in the Renderable's code */
 	private final static class Node {
 		// Tree-like hierarchy of nodes
 		private final List<Node> children = new ArrayList<>();
