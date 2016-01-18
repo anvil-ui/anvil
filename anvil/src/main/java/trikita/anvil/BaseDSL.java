@@ -493,6 +493,19 @@ public class BaseDSL {
 		return attr(AnimatorFunc.instance, new AnimatorPair(a, trigger));
 	}
 
+	private static class InitFunc implements Anvil.AttrFunc<Runnable> {
+		private final static InitFunc instance = new InitFunc();
+		public void apply(View v, Runnable r, Runnable old) {
+			if (old == null && r != null) {
+				r.run();
+			}
+		}
+	}
+
+	public static Void init(Runnable r) {
+		return attr(InitFunc.instance, r);
+	}
+
 	protected static final class ViewClassResult {}
 
 	public static ViewClassResult v(Class<? extends View> c) {
