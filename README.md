@@ -298,6 +298,7 @@ For LayoutParams the bindings can't be generated easily, so it was faster to wri
 
 A few bindings have been  written for other use cases which we find useful:
 
+* `init(Runnable)` - executes a runnable once, useful to initialize custom views (see also `Anvil.currentView()`).
 * `R()` - returns a `Resources` object associated with the current view. Useful for
   multiple screen support (sizes, dpi, orientation etc).
 * `isPortrait()` - returns true if a screen is portrait-oriented. Useful for
