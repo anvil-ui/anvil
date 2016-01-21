@@ -5,8 +5,8 @@
 Anvil is a tiny library to create reactive UI components in Android. It's
 inspired a lot by React.
 
-[Anvil simple demos in Kotlin](https://github.com/zserge/anvil-kotlin-demos)
-[Anvil more advanced examples in Java or Kotlin](https://github.com/zserge/anvil-examples)
+- [Anvil simple demos in Kotlin](https://github.com/zserge/anvil-kotlin-demos)
+- [Anvil more advanced examples in Java or Kotlin](https://github.com/zserge/anvil-examples)
 
 ## Anvil quickstart
 
