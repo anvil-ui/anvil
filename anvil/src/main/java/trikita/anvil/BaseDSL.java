@@ -67,6 +67,15 @@ public class BaseDSL {
 		return Math.round(dip((float) value));
 	}
 
+	public static float sip(float value) {
+		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, value,
+				R().getDisplayMetrics());
+	}
+
+	public static int sip(int value) {
+		return Math.round(sip((float) value));
+	}
+
 	public static Void size(int w, int h) {
 		return attr(LayoutSizeFunc.instance,
 				new AbstractMap.SimpleImmutableEntry<>(w, h));
