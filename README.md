@@ -352,7 +352,7 @@ public override fun view() {
 	// A designer gave us an XML with some fancy layout:
 	// a viewgroup with a button and a progress bar in it
 	xml(R.layout.my_layout) {
-		backgroudnColor(Settings.bgColor) // will modify root layout view color
+		backgroundColor(Settings.bgColor) // will modify root layout view color
 
 		withId(R.id.my_button) {
 			// button state may depend on some variable
