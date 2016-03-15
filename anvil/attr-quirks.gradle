@@ -33,6 +33,7 @@ ext.QUIRKS = [
 	// Exception must be checked in this attribute setter
 	"android.widget.TextView": [
 		"setText": nop,
+		"setTextSize": nop, // broken: uses "sp" unit by default, fixed in BaseDSL
 		"setInputExtras": { b ->
 			b.addCode(""
 					+ "try {\n"

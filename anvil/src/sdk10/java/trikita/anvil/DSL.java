@@ -113,7 +113,7 @@ import java.lang.Void;
  * Please, don't edit it manually unless for debugging.
  */
 public final class DSL extends BaseDSL {
-  public static ViewClassResult appWidgetHostView() {
+  public static DSL.ViewClassResult appWidgetHostView() {
     return v(AppWidgetHostView.class);
   }
 
@@ -121,7 +121,7 @@ public final class DSL extends BaseDSL {
     return v(AppWidgetHostView.class, r);
   }
 
-  public static ViewClassResult gestureOverlayView() {
+  public static DSL.ViewClassResult gestureOverlayView() {
     return v(GestureOverlayView.class);
   }
 
@@ -129,7 +129,7 @@ public final class DSL extends BaseDSL {
     return v(GestureOverlayView.class, r);
   }
 
-  public static ViewClassResult extractEditText() {
+  public static DSL.ViewClassResult extractEditText() {
     return v(ExtractEditText.class);
   }
 
@@ -137,7 +137,7 @@ public final class DSL extends BaseDSL {
     return v(ExtractEditText.class, r);
   }
 
-  public static ViewClassResult keyboardView() {
+  public static DSL.ViewClassResult keyboardView() {
     return v(KeyboardView.class);
   }
 
@@ -145,7 +145,7 @@ public final class DSL extends BaseDSL {
     return v(KeyboardView.class, r);
   }
 
-  public static ViewClassResult gLSurfaceView() {
+  public static DSL.ViewClassResult gLSurfaceView() {
     return v(GLSurfaceView.class);
   }
 
@@ -153,7 +153,7 @@ public final class DSL extends BaseDSL {
     return v(GLSurfaceView.class, r);
   }
 
-  public static ViewClassResult surfaceView() {
+  public static DSL.ViewClassResult surfaceView() {
     return v(SurfaceView.class);
   }
 
@@ -161,7 +161,7 @@ public final class DSL extends BaseDSL {
     return v(SurfaceView.class, r);
   }
 
-  public static ViewClassResult view() {
+  public static DSL.ViewClassResult view() {
     return v(View.class);
   }
 
@@ -169,7 +169,7 @@ public final class DSL extends BaseDSL {
     return v(View.class, r);
   }
 
-  public static ViewClassResult viewGroup() {
+  public static DSL.ViewClassResult viewGroup() {
     return v(ViewGroup.class);
   }
 
@@ -177,7 +177,7 @@ public final class DSL extends BaseDSL {
     return v(ViewGroup.class, r);
   }
 
-  public static ViewClassResult viewStub() {
+  public static DSL.ViewClassResult viewStub() {
     return v(ViewStub.class);
   }
 
@@ -185,7 +185,7 @@ public final class DSL extends BaseDSL {
     return v(ViewStub.class, r);
   }
 
-  public static ViewClassResult webView() {
+  public static DSL.ViewClassResult webView() {
     return v(WebView.class);
   }
 
@@ -193,7 +193,7 @@ public final class DSL extends BaseDSL {
     return v(WebView.class, r);
   }
 
-  public static ViewClassResult absListView() {
+  public static DSL.ViewClassResult absListView() {
     return v(AbsListView.class);
   }
 
@@ -201,7 +201,7 @@ public final class DSL extends BaseDSL {
     return v(AbsListView.class, r);
   }
 
-  public static ViewClassResult absSeekBar() {
+  public static DSL.ViewClassResult absSeekBar() {
     return v(AbsSeekBar.class);
   }
 
@@ -209,7 +209,7 @@ public final class DSL extends BaseDSL {
     return v(AbsSeekBar.class, r);
   }
 
-  public static ViewClassResult absSpinner() {
+  public static DSL.ViewClassResult absSpinner() {
     return v(AbsSpinner.class);
   }
 
@@ -217,7 +217,7 @@ public final class DSL extends BaseDSL {
     return v(AbsSpinner.class, r);
   }
 
-  public static ViewClassResult absoluteLayout() {
+  public static DSL.ViewClassResult absoluteLayout() {
     return v(AbsoluteLayout.class);
   }
 
@@ -225,7 +225,7 @@ public final class DSL extends BaseDSL {
     return v(AbsoluteLayout.class, r);
   }
 
-  public static ViewClassResult adapterView() {
+  public static DSL.ViewClassResult adapterView() {
     return v(AdapterView.class);
   }
 
@@ -233,7 +233,7 @@ public final class DSL extends BaseDSL {
     return v(AdapterView.class, r);
   }
 
-  public static ViewClassResult analogClock() {
+  public static DSL.ViewClassResult analogClock() {
     return v(AnalogClock.class);
   }
 
@@ -241,7 +241,7 @@ public final class DSL extends BaseDSL {
     return v(AnalogClock.class, r);
   }
 
-  public static ViewClassResult autoCompleteTextView() {
+  public static DSL.ViewClassResult autoCompleteTextView() {
     return v(AutoCompleteTextView.class);
   }
 
@@ -249,7 +249,7 @@ public final class DSL extends BaseDSL {
     return v(AutoCompleteTextView.class, r);
   }
 
-  public static ViewClassResult button() {
+  public static DSL.ViewClassResult button() {
     return v(Button.class);
   }
 
@@ -257,7 +257,7 @@ public final class DSL extends BaseDSL {
     return v(Button.class, r);
   }
 
-  public static ViewClassResult checkBox() {
+  public static DSL.ViewClassResult checkBox() {
     return v(CheckBox.class);
   }
 
@@ -265,7 +265,7 @@ public final class DSL extends BaseDSL {
     return v(CheckBox.class, r);
   }
 
-  public static ViewClassResult checkedTextView() {
+  public static DSL.ViewClassResult checkedTextView() {
     return v(CheckedTextView.class);
   }
 
@@ -273,7 +273,7 @@ public final class DSL extends BaseDSL {
     return v(CheckedTextView.class, r);
   }
 
-  public static ViewClassResult chronometer() {
+  public static DSL.ViewClassResult chronometer() {
     return v(Chronometer.class);
   }
 
@@ -281,7 +281,7 @@ public final class DSL extends BaseDSL {
     return v(Chronometer.class, r);
   }
 
-  public static ViewClassResult compoundButton() {
+  public static DSL.ViewClassResult compoundButton() {
     return v(CompoundButton.class);
   }
 
@@ -289,7 +289,7 @@ public final class DSL extends BaseDSL {
     return v(CompoundButton.class, r);
   }
 
-  public static ViewClassResult datePicker() {
+  public static DSL.ViewClassResult datePicker() {
     return v(DatePicker.class);
   }
 
@@ -297,7 +297,7 @@ public final class DSL extends BaseDSL {
     return v(DatePicker.class, r);
   }
 
-  public static ViewClassResult dialerFilter() {
+  public static DSL.ViewClassResult dialerFilter() {
     return v(DialerFilter.class);
   }
 
@@ -305,7 +305,7 @@ public final class DSL extends BaseDSL {
     return v(DialerFilter.class, r);
   }
 
-  public static ViewClassResult digitalClock() {
+  public static DSL.ViewClassResult digitalClock() {
     return v(DigitalClock.class);
   }
 
@@ -313,7 +313,7 @@ public final class DSL extends BaseDSL {
     return v(DigitalClock.class, r);
   }
 
-  public static ViewClassResult editText() {
+  public static DSL.ViewClassResult editText() {
     return v(EditText.class);
   }
 
@@ -321,7 +321,7 @@ public final class DSL extends BaseDSL {
     return v(EditText.class, r);
   }
 
-  public static ViewClassResult expandableListView() {
+  public static DSL.ViewClassResult expandableListView() {
     return v(ExpandableListView.class);
   }
 
@@ -329,7 +329,7 @@ public final class DSL extends BaseDSL {
     return v(ExpandableListView.class, r);
   }
 
-  public static ViewClassResult frameLayout() {
+  public static DSL.ViewClassResult frameLayout() {
     return v(FrameLayout.class);
   }
 
@@ -337,7 +337,7 @@ public final class DSL extends BaseDSL {
     return v(FrameLayout.class, r);
   }
 
-  public static ViewClassResult gallery() {
+  public static DSL.ViewClassResult gallery() {
     return v(Gallery.class);
   }
 
@@ -345,7 +345,7 @@ public final class DSL extends BaseDSL {
     return v(Gallery.class, r);
   }
 
-  public static ViewClassResult gridView() {
+  public static DSL.ViewClassResult gridView() {
     return v(GridView.class);
   }
 
@@ -353,7 +353,7 @@ public final class DSL extends BaseDSL {
     return v(GridView.class, r);
   }
 
-  public static ViewClassResult horizontalScrollView() {
+  public static DSL.ViewClassResult horizontalScrollView() {
     return v(HorizontalScrollView.class);
   }
 
@@ -361,7 +361,7 @@ public final class DSL extends BaseDSL {
     return v(HorizontalScrollView.class, r);
   }
 
-  public static ViewClassResult imageButton() {
+  public static DSL.ViewClassResult imageButton() {
     return v(ImageButton.class);
   }
 
@@ -369,7 +369,7 @@ public final class DSL extends BaseDSL {
     return v(ImageButton.class, r);
   }
 
-  public static ViewClassResult imageSwitcher() {
+  public static DSL.ViewClassResult imageSwitcher() {
     return v(ImageSwitcher.class);
   }
 
@@ -377,7 +377,7 @@ public final class DSL extends BaseDSL {
     return v(ImageSwitcher.class, r);
   }
 
-  public static ViewClassResult imageView() {
+  public static DSL.ViewClassResult imageView() {
     return v(ImageView.class);
   }
 
@@ -385,7 +385,7 @@ public final class DSL extends BaseDSL {
     return v(ImageView.class, r);
   }
 
-  public static ViewClassResult linearLayout() {
+  public static DSL.ViewClassResult linearLayout() {
     return v(LinearLayout.class);
   }
 
@@ -393,7 +393,7 @@ public final class DSL extends BaseDSL {
     return v(LinearLayout.class, r);
   }
 
-  public static ViewClassResult listView() {
+  public static DSL.ViewClassResult listView() {
     return v(ListView.class);
   }
 
@@ -401,7 +401,7 @@ public final class DSL extends BaseDSL {
     return v(ListView.class, r);
   }
 
-  public static ViewClassResult mediaController() {
+  public static DSL.ViewClassResult mediaController() {
     return v(MediaController.class);
   }
 
@@ -409,7 +409,7 @@ public final class DSL extends BaseDSL {
     return v(MediaController.class, r);
   }
 
-  public static ViewClassResult multiAutoCompleteTextView() {
+  public static DSL.ViewClassResult multiAutoCompleteTextView() {
     return v(MultiAutoCompleteTextView.class);
   }
 
@@ -417,7 +417,7 @@ public final class DSL extends BaseDSL {
     return v(MultiAutoCompleteTextView.class, r);
   }
 
-  public static ViewClassResult progressBar() {
+  public static DSL.ViewClassResult progressBar() {
     return v(ProgressBar.class);
   }
 
@@ -425,7 +425,7 @@ public final class DSL extends BaseDSL {
     return v(ProgressBar.class, r);
   }
 
-  public static ViewClassResult quickContactBadge() {
+  public static DSL.ViewClassResult quickContactBadge() {
     return v(QuickContactBadge.class);
   }
 
@@ -433,7 +433,7 @@ public final class DSL extends BaseDSL {
     return v(QuickContactBadge.class, r);
   }
 
-  public static ViewClassResult radioButton() {
+  public static DSL.ViewClassResult radioButton() {
     return v(RadioButton.class);
   }
 
@@ -441,7 +441,7 @@ public final class DSL extends BaseDSL {
     return v(RadioButton.class, r);
   }
 
-  public static ViewClassResult radioGroup() {
+  public static DSL.ViewClassResult radioGroup() {
     return v(RadioGroup.class);
   }
 
@@ -449,7 +449,7 @@ public final class DSL extends BaseDSL {
     return v(RadioGroup.class, r);
   }
 
-  public static ViewClassResult ratingBar() {
+  public static DSL.ViewClassResult ratingBar() {
     return v(RatingBar.class);
   }
 
@@ -457,7 +457,7 @@ public final class DSL extends BaseDSL {
     return v(RatingBar.class, r);
   }
 
-  public static ViewClassResult relativeLayout() {
+  public static DSL.ViewClassResult relativeLayout() {
     return v(RelativeLayout.class);
   }
 
@@ -465,7 +465,7 @@ public final class DSL extends BaseDSL {
     return v(RelativeLayout.class, r);
   }
 
-  public static ViewClassResult scrollView() {
+  public static DSL.ViewClassResult scrollView() {
     return v(ScrollView.class);
   }
 
@@ -473,7 +473,7 @@ public final class DSL extends BaseDSL {
     return v(ScrollView.class, r);
   }
 
-  public static ViewClassResult seekBar() {
+  public static DSL.ViewClassResult seekBar() {
     return v(SeekBar.class);
   }
 
@@ -481,7 +481,7 @@ public final class DSL extends BaseDSL {
     return v(SeekBar.class, r);
   }
 
-  public static ViewClassResult slidingDrawer() {
+  public static DSL.ViewClassResult slidingDrawer() {
     return v(SlidingDrawer.class);
   }
 
@@ -489,7 +489,7 @@ public final class DSL extends BaseDSL {
     return v(SlidingDrawer.class, r);
   }
 
-  public static ViewClassResult spinner() {
+  public static DSL.ViewClassResult spinner() {
     return v(Spinner.class);
   }
 
@@ -497,7 +497,7 @@ public final class DSL extends BaseDSL {
     return v(Spinner.class, r);
   }
 
-  public static ViewClassResult tabHost() {
+  public static DSL.ViewClassResult tabHost() {
     return v(TabHost.class);
   }
 
@@ -505,7 +505,7 @@ public final class DSL extends BaseDSL {
     return v(TabHost.class, r);
   }
 
-  public static ViewClassResult tabWidget() {
+  public static DSL.ViewClassResult tabWidget() {
     return v(TabWidget.class);
   }
 
@@ -513,7 +513,7 @@ public final class DSL extends BaseDSL {
     return v(TabWidget.class, r);
   }
 
-  public static ViewClassResult tableLayout() {
+  public static DSL.ViewClassResult tableLayout() {
     return v(TableLayout.class);
   }
 
@@ -521,7 +521,7 @@ public final class DSL extends BaseDSL {
     return v(TableLayout.class, r);
   }
 
-  public static ViewClassResult tableRow() {
+  public static DSL.ViewClassResult tableRow() {
     return v(TableRow.class);
   }
 
@@ -529,7 +529,7 @@ public final class DSL extends BaseDSL {
     return v(TableRow.class, r);
   }
 
-  public static ViewClassResult textSwitcher() {
+  public static DSL.ViewClassResult textSwitcher() {
     return v(TextSwitcher.class);
   }
 
@@ -537,7 +537,7 @@ public final class DSL extends BaseDSL {
     return v(TextSwitcher.class, r);
   }
 
-  public static ViewClassResult textView() {
+  public static DSL.ViewClassResult textView() {
     return v(TextView.class);
   }
 
@@ -545,7 +545,7 @@ public final class DSL extends BaseDSL {
     return v(TextView.class, r);
   }
 
-  public static ViewClassResult timePicker() {
+  public static DSL.ViewClassResult timePicker() {
     return v(TimePicker.class);
   }
 
@@ -553,7 +553,7 @@ public final class DSL extends BaseDSL {
     return v(TimePicker.class, r);
   }
 
-  public static ViewClassResult toggleButton() {
+  public static DSL.ViewClassResult toggleButton() {
     return v(ToggleButton.class);
   }
 
@@ -561,7 +561,7 @@ public final class DSL extends BaseDSL {
     return v(ToggleButton.class, r);
   }
 
-  public static ViewClassResult twoLineListItem() {
+  public static DSL.ViewClassResult twoLineListItem() {
     return v(TwoLineListItem.class);
   }
 
@@ -569,7 +569,7 @@ public final class DSL extends BaseDSL {
     return v(TwoLineListItem.class, r);
   }
 
-  public static ViewClassResult videoView() {
+  public static DSL.ViewClassResult videoView() {
     return v(VideoView.class);
   }
 
@@ -577,7 +577,7 @@ public final class DSL extends BaseDSL {
     return v(VideoView.class, r);
   }
 
-  public static ViewClassResult viewAnimator() {
+  public static DSL.ViewClassResult viewAnimator() {
     return v(ViewAnimator.class);
   }
 
@@ -585,7 +585,7 @@ public final class DSL extends BaseDSL {
     return v(ViewAnimator.class, r);
   }
 
-  public static ViewClassResult viewFlipper() {
+  public static DSL.ViewClassResult viewFlipper() {
     return v(ViewFlipper.class);
   }
 
@@ -593,7 +593,7 @@ public final class DSL extends BaseDSL {
     return v(ViewFlipper.class, r);
   }
 
-  public static ViewClassResult viewSwitcher() {
+  public static DSL.ViewClassResult viewSwitcher() {
     return v(ViewSwitcher.class);
   }
 
@@ -601,7 +601,7 @@ public final class DSL extends BaseDSL {
     return v(ViewSwitcher.class, r);
   }
 
-  public static ViewClassResult zoomButton() {
+  public static DSL.ViewClassResult zoomButton() {
     return v(ZoomButton.class);
   }
 
@@ -609,7 +609,7 @@ public final class DSL extends BaseDSL {
     return v(ZoomButton.class, r);
   }
 
-  public static ViewClassResult zoomControls() {
+  public static DSL.ViewClassResult zoomControls() {
     return v(ZoomControls.class);
   }
 
@@ -930,7 +930,7 @@ public final class DSL extends BaseDSL {
   }
 
   public static Void excludeMimes(String[] arg) {
-    return DSL.attr(ExcludeMimesFunca088963b.instance, arg);
+    return DSL.attr(ExcludeMimesFunc708a3c87.instance, arg);
   }
 
   public static Void extractedText(ExtractedText arg) {
@@ -974,7 +974,7 @@ public final class DSL extends BaseDSL {
   }
 
   public static Void filters(InputFilter[] arg) {
-    return DSL.attr(FiltersFunc526df1e0.instance, arg);
+    return DSL.attr(FiltersFuncfb505582.instance, arg);
   }
 
   public static Void flipInterval(int arg) {
@@ -1743,10 +1743,6 @@ public final class DSL extends BaseDSL {
 
   public static Void textScaleX(float arg) {
     return DSL.attr(TextScaleXFunce0893188.instance, arg);
-  }
-
-  public static Void textSize(float arg) {
-    return DSL.attr(TextSizeFunce0893188.instance, arg);
   }
 
   public static Void threshold(int arg) {
@@ -2642,8 +2638,8 @@ public final class DSL extends BaseDSL {
     }
   }
 
-  private static final class ExcludeMimesFunca088963b implements Anvil.AttrFunc<String[]> {
-    public static final ExcludeMimesFunca088963b instance = new ExcludeMimesFunca088963b();
+  private static final class ExcludeMimesFunc708a3c87 implements Anvil.AttrFunc<String[]> {
+    public static final ExcludeMimesFunc708a3c87 instance = new ExcludeMimesFunc708a3c87();
 
     public void apply(View v, final String[] arg, final String[] old) {
       if (v instanceof QuickContactBadge) {
@@ -2754,8 +2750,8 @@ public final class DSL extends BaseDSL {
     }
   }
 
-  private static final class FiltersFunc526df1e0 implements Anvil.AttrFunc<InputFilter[]> {
-    public static final FiltersFunc526df1e0 instance = new FiltersFunc526df1e0();
+  private static final class FiltersFuncfb505582 implements Anvil.AttrFunc<InputFilter[]> {
+    public static final FiltersFuncfb505582 instance = new FiltersFuncfb505582();
 
     public void apply(View v, final InputFilter[] arg, final InputFilter[] old) {
       if (v instanceof TextView) {
@@ -4999,16 +4995,6 @@ public final class DSL extends BaseDSL {
     public void apply(View v, final Float arg, final Float old) {
       if (v instanceof TextView) {
         ((TextView) v).setTextScaleX(arg);
-      }
-    }
-  }
-
-  private static final class TextSizeFunce0893188 implements Anvil.AttrFunc<Float> {
-    public static final TextSizeFunce0893188 instance = new TextSizeFunce0893188();
-
-    public void apply(View v, final Float arg, final Float old) {
-      if (v instanceof TextView) {
-        ((TextView) v).setTextSize(arg);
       }
     }
   }
