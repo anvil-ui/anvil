@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -328,6 +329,19 @@ public class BaseDSL {
 			return trikita.anvil.DSL.visibility(View.VISIBLE);
 		} else {
 			return trikita.anvil.DSL.visibility(View.GONE);
+		}
+	}
+
+	public static Void check(int id) {
+		return attr(CheckFunc.instance, id);
+	}
+
+	private final static class CheckFunc implements Anvil.AttrFunc<Integer> {
+		private final static CheckFunc instance = new CheckFunc();
+		public void apply(View v, Integer id, Integer old) {
+			if (v instanceof RadioGroup) {
+				((RadioGroup) v).check(id);
+			}
 		}
 	}
 
