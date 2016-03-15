@@ -293,6 +293,19 @@ public class BaseDSL {
 		}
 	}
 
+	public static Void textSize(float size) {
+		return attr(TextSizeFunc.instance, size);
+	}
+
+	private final static class TextSizeFunc implements Anvil.AttrFunc<Float> {
+		private final static TextSizeFunc instance = new TextSizeFunc();
+		public void apply(View v, Float size, Float old) {
+			if (v instanceof TextView) {
+				((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+			}
+		}
+	}
+
 	public static Void typeface(String font) {
 		return attr(TypefaceFunc.instance, font);
 	}
