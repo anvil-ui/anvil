@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.AbstractMap;
@@ -459,6 +460,41 @@ public class BaseDSL {
 			}
 		}
 	}
+
+	public interface SimpleSeekBarChangeListener {
+		void onSeekBarChange(SeekBar s, int progress, boolean fromUser);
+	}
+
+	public static Void onSeekBarChange(SimpleSeekBarChangeListener l) {
+		return attr(SeekBarChangeFunc.instance, l);
+	}
+	private final static class SeekBarChangeFunc
+			implements Anvil.AttrFunc<SimpleSeekBarChangeListener> {
+		private final static SeekBarChangeFunc instance = new SeekBarChangeFunc();
+		public void apply(View v, final SimpleSeekBarChangeListener l,
+				SimpleSeekBarChangeListener old) {
+			SeekBar.OnSeekBarChangeListener wrapper =
+				new SeekBar.OnSeekBarChangeListener() {
+					@Override
+					public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
+						l.onSeekBarChange(a0, a1, a2);
+						Anvil.render();
+					}
+					@Override
+					public void onStartTrackingTouch(SeekBar a0) {}
+					@Override
+					public void onStopTrackingTouch(SeekBar a0) {}
+					@Override
+					public int hashCode() { return l.hashCode(); }
+					@Override
+					public boolean equals(Object o) { return l.equals(o); }
+				};
+			if (v instanceof SeekBar) {
+				((SeekBar) v).setOnSeekBarChangeListener(wrapper);
+			}
+		}
+	}
+
 
 	private final static class AnimatorPair {
 		public Animator animator;
