@@ -2296,10 +2296,6 @@ public final class DSL extends BaseDSL {
     return DSL.attr(TextFunc8567756a.instance, arg);
   }
 
-  public static Void text(CharSequence arg) {
-    return DSL.attr(TextFuncc0af808b.instance, arg);
-  }
-
   public static Void textAlignment(int arg) {
     return DSL.attr(TextAlignmentFunc8567756a.instance, arg);
   }
@@ -6816,19 +6812,6 @@ public final class DSL extends BaseDSL {
     public static final TextFunc8567756a instance = new TextFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof TextView) {
-        ((TextView) v).setText(arg);
-      }
-    }
-  }
-
-  private static final class TextFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
-    public static final TextFuncc0af808b instance = new TextFuncc0af808b();
-
-    public void apply(View v, final CharSequence arg, final CharSequence old) {
-      if (v instanceof TextSwitcher) {
-        ((TextSwitcher) v).setText(arg);
-      }
       if (v instanceof TextView) {
         ((TextView) v).setText(arg);
       }

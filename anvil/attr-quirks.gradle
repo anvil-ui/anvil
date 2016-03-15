@@ -27,12 +27,12 @@ ext.QUIRKS = [
 	],
 
 	"android.widget.TextSwitcher": [
-		"setText": nop, // overridden in basedsl together with textview
+		"setText:java.lang.CharSequence": nop, // overridden in basedsl together with textview
 	],
 
 	// Exception must be checked in this attribute setter
 	"android.widget.TextView": [
-		"setText": nop,
+		"setText:java.lang.CharSequence": nop,
 		"setTextSize": nop, // broken: uses "sp" unit by default, fixed in BaseDSL
 		"setInputExtras": { b ->
 			b.addCode(""
