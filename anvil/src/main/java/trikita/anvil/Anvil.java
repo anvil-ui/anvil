@@ -332,10 +332,9 @@ public final class Anvil {
 		private T value;
 		public Attr<T> apply(View v, AttrFunc<T> func, T value) {
 			if (this.func != null && this.func.getClass().equals(func.getClass()) &&
-					(this.value == value ||
-					 value != null && value.equals(this.value))) {
+					(this.value == value || value != null && value.equals(this.value))) {
 				return this;
-					 }
+			}
 			T oldValue = this.value;
 			this.func = func;
 			this.value = value;
