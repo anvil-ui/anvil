@@ -26,8 +26,13 @@ ext.QUIRKS = [
 		"setAdapter:android.widget.ListAdapter": nop
 	],
 
+	"android.widget.TextSwitcher": [
+		"setText": nop, // overridden in basedsl together with textview
+	],
+
 	// Exception must be checked in this attribute setter
 	"android.widget.TextView": [
+		"setText": nop,
 		"setInputExtras": { b ->
 			b.addCode(""
 					+ "try {\n"

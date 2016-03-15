@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import java.util.AbstractMap;
@@ -376,73 +377,128 @@ public class BaseDSL {
 		}
 	}
 
-	// Custom and simplified listeners
-	private final static Map<StringBuilder, String> hasUserInput =
-			new WeakHashMap<>();
-
-	public static Void text(final StringBuilder sb) {
-		if (!sb.toString().equals(hasUserInput.get(sb))) {
-			trikita.anvil.DSL.text(sb.toString());
-			hasUserInput.put(sb, sb.toString());
-		}
-		onTextChanged(new TextWatcherProxy(sb) {
-			@Override
-			public void	afterTextChanged(Editable s) {
-				boolean shouldRender = !s.toString().equals(hasUserInput.get(sb));
-				sb.replace(0, sb.length(), s.toString());
-				hasUserInput.put(sb, s.toString());
-				if (shouldRender) {
-					Anvil.render();
-				}
-			}
-		});
-		return null;
+	public interface SimpleTextWatcher {
+		void onTextChanged(CharSequence s);
 	}
 
-	private static class TextWatcherProxy implements TextWatcher {
-		private final Object object;
-		public TextWatcherProxy(Object o) {
-			this.object = o;
-		}
-		public int hashCode() { return object.hashCode(); }
-		public boolean equals(Object o) {
-			return !(o == null || !o.getClass().equals(getClass())) && o.equals(object);
-		}
-		public void	afterTextChanged(Editable s) {}
-		public void	beforeTextChanged(CharSequence s, int from, int n, int after) {}
-		public void	onTextChanged(CharSequence s, int from, int before, int n) {}
+	public static Void onTextChanged(SimpleTextWatcher w) {
+		return attr(SimpleTextWatcherFunc.instance, w);
 	}
 
 	public static Void onTextChanged(TextWatcher w) {
-		return attr(TextWatcherFunc.instance, w);
+	    return attr(TextWatcherFunc.instance, w);
 	}
-	private final static class TextWatcherFunc implements Anvil.AttrFunc<TextWatcher> {
-		private final static TextWatcherFunc instance = new TextWatcherFunc();
-		public void apply(final View v, final TextWatcher w, TextWatcher old) {
-			if (v instanceof TextView) {
-				TextView tv = (TextView) v;
-				if (old != null) {
-					tv.removeTextChangedListener(old);
-				}
-				tv.addTextChangedListener(new TextWatcherProxy(w) {
-					public void	afterTextChanged(Editable s) {
-						w.afterTextChanged(s);
-					}
-					public void	beforeTextChanged(CharSequence s, int from, int n,
-						int after) {
-						w.beforeTextChanged(s, from, n, after);
-					}
-					public void	onTextChanged(CharSequence s,
-						int from, int before, int n) {
-						w.onTextChanged(s, from, before, n);
-					}
-				});
-			}
+
+	public static Void text(CharSequence arg) {
+	    return attr(TextFunc.instance, arg);
+	}
+
+	private final static Map<TextWatcherProxy, Void> TEXT_WATCHERS = new WeakHashMap<>();
+	private static TextView CURRENT_INPUT_TEXT_VIEW = null;
+
+	private static class TextWatcherProxy implements TextWatcher {
+	    private final TextView v;
+	    private TextWatcher watcher;
+	    private SimpleTextWatcher simpleWatcher;
+	    private String text = "";
+
+	    public TextWatcherProxy(TextView v) {
+		this.v = v;
+	    }
+
+	    public TextWatcherProxy setImpl(TextWatcher w) {
+		this.watcher = w;
+		this.simpleWatcher = null;
+		return this;
+	    }
+	    public TextWatcherProxy setImpl(SimpleTextWatcher w) {
+		this.simpleWatcher = w;
+		this.watcher = null;
+		return this;
+	    }
+	    public boolean hasImpl(Object o) {
+		if (o == null) {
+		    return false;
 		}
+		return o.equals(this.watcher) || o.equals(this.simpleWatcher);
+	    }
+	    public void afterTextChanged(Editable s) {
+		if (this.watcher != null) {
+		    this.watcher.afterTextChanged(s);
+		}
+	    }
+	    public void beforeTextChanged(CharSequence s, int from, int n, int after) {
+		if (this.watcher != null) {
+		    this.watcher.beforeTextChanged(s, from, n, after);
+		}
+	    }
+	    public void onTextChanged(CharSequence s, int from, int before, int n) {
+		if (this.text.equals(s.toString()) == false) {
+		    if (this.watcher != null) {
+			this.watcher.onTextChanged(s, from, before, n);
+		    }
+		    if (this.simpleWatcher != null) {
+			this.simpleWatcher.onTextChanged(s);
+		    }
+		    this.text = s.toString();
+
+		    TextView old = CURRENT_INPUT_TEXT_VIEW;
+		    CURRENT_INPUT_TEXT_VIEW = this.v;
+		    Anvil.render();
+		    CURRENT_INPUT_TEXT_VIEW = old;
+		}
+	    }
+	}
+
+	private final static class TextWatcherFunc implements Anvil.AttrFunc<TextWatcher> {
+	    private final static TextWatcherFunc instance = new TextWatcherFunc();
+	    public void apply(final View v, final TextWatcher w, TextWatcher old) {
+		if (v instanceof TextView) {
+		    TextView tv = (TextView) v;
+		    for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+			if (proxy.hasImpl(old)) {
+			    proxy.setImpl(w);
+			    return;
+			}
+		    }
+		    TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
+		    TEXT_WATCHERS.put(proxy, null);
+		    tv.addTextChangedListener(proxy);
+		}
+	    }
+	}
+
+	private final static class SimpleTextWatcherFunc implements Anvil.AttrFunc<SimpleTextWatcher> {
+	    private final static SimpleTextWatcherFunc instance = new SimpleTextWatcherFunc();
+	    public void apply(final View v, final SimpleTextWatcher w, SimpleTextWatcher old) {
+		if (v instanceof TextView) {
+		    TextView tv = (TextView) v;
+		    for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+			if (proxy.hasImpl(old)) {
+			    proxy.setImpl(w);
+			    return;
+			}
+		    }
+		    TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
+		    TEXT_WATCHERS.put(proxy, null);
+		    tv.addTextChangedListener(proxy);
+		}
+	    }
+	}
+
+	private static final class TextFunc implements Anvil.AttrFunc<CharSequence> {
+	    public static final TextFunc instance = new TextFunc();
+	    public void apply(View v, final CharSequence arg, final CharSequence old) {
+		if (v instanceof TextView && v != CURRENT_INPUT_TEXT_VIEW) {
+		    ((TextView) v).setText(arg);
+		} else if (v instanceof TextSwitcher) {
+		    ((TextSwitcher) v).setText(arg);
+		}
+	    }
 	}
 
 	public interface SimpleItemSelectedListener {
-		void onItemSelected(AdapterView a, View v, int pos, long id);
+	    void onItemSelected(AdapterView a, View v, int pos, long id);
 	}
 
 	public static Void onItemSelected(SimpleItemSelectedListener l) {
