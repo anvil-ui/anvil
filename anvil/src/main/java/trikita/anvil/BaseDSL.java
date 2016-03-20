@@ -446,6 +446,8 @@ public class BaseDSL {
 		}
 	    }
 	    public void onTextChanged(CharSequence s, int from, int before, int n) {
+		    TextView old = CURRENT_INPUT_TEXT_VIEW;
+		    CURRENT_INPUT_TEXT_VIEW = this.v;
 		if (this.text.equals(s.toString()) == false) {
 		    if (this.watcher != null) {
 			this.watcher.onTextChanged(s, from, before, n);
@@ -455,8 +457,6 @@ public class BaseDSL {
 		    }
 		    this.text = s.toString();
 
-		    TextView old = CURRENT_INPUT_TEXT_VIEW;
-		    CURRENT_INPUT_TEXT_VIEW = this.v;
 		    Anvil.render();
 		    CURRENT_INPUT_TEXT_VIEW = old;
 		}
