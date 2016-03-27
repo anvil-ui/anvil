@@ -1,15 +1,48 @@
-# A modern way to build reactive Android user interfaces
+# Anvil - reactive views for Android
 
 [![Join the chat at https://gitter.im/zserge/anvil](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zserge/anvil?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/zserge/anvil.svg?branch=master)](https://travis-ci.org/zserge/anvil)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23193-brightgreen.svg)](http://androidweekly.net/issues/issue-193)
 
-Anvil is a tiny library to create reactive UI components in Android. It's
-inspired a lot by React.
+Anvil is a small Java library for creating reactive user interfaces.
+Originally inspired by [React](https://facebook.github.io/react/),
+it suits well as a view layer for [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)
+or [Redux](http://redux.js.org/) design patterns.
 
-- [Anvil simple demos in Kotlin](https://github.com/zserge/anvil-kotlin-demos)
-- [Anvil more advanced examples in Java or Kotlin](https://github.com/zserge/anvil-examples)
+## Features
 
-## Anvil quickstart
+* Super small (4 hand-written classes + 1 generated class)
+* Easy to learn (top-level API is only 5 functions)
+* Fast (uses no reflection¹)
+* Easy to read declarative syntax
+* Java 8 and Kotlin-friendly, but supports Java 6 as well
+* XML layouts are supported, too
+
+¹Reflection is still used to inflate views once (standard XML inflater does the
+same thing, so no performance loss here).
+
+## Installation
+
+``` gradle
+// build.gradle
+repositories {
+	jcenter()
+}
+dependencies {
+        compile 'co.trikita:anvil-sdk15:0.3.1'
+}
+```
+Anvil comes in multiple builds for different minimal SDK versions:
+
+* anvil-sdk10 (GB, 99.9% of devices, but might be abandoned soon)
+* anvil-sdk15 (ICS, 97.3% of devices)
+* anvil-sdk19 (Kitkat, 72.7% of devices)
+
+anvil-sdk10 is to be abandoned soon, while anvil-sdk21 is likely to be added.
+
+API levels 16, 17, 18, 22 or 23 are not added because they had very few
+UI-related methods added.
+
+## Examples
 
 Normally you would write your layouts in XMLs, then get your views by their
 IDs and set their listeners, finally you would observe your data and modify
@@ -84,7 +117,9 @@ public void view() {
 ```
 
 You may find more Anvil examples for Java 6, Java 8 and Kotlin at
-https://github.com/zserge/anvil-examples
+
+- [Anvil simple demos in Kotlin](https://github.com/zserge/anvil-kotlin-demos)
+- [Anvil more advanced examples in Java or Kotlin](https://github.com/zserge/anvil-examples)
 
 ## How it works
 
@@ -211,21 +246,6 @@ public override fun view() {
 Anvil library contains only a few classes to work with the virtual layout, but most
 of the DSL (domain-specific language describing how to create views/layouts and set
 their attributes) is generated from `android.jar`.
-
-Anvil is published as three different libraries - `co.trikita:anvil-sdk10`,
-`co.trikita:anvil-sdk15` and `co.trikita:anvil-sdk19` for different API levels.
-Pick one depending on the minimal API level you want to support. My recommendation
-is `anvil-sdk15`, which covers ~95% of the devices:
-
-``` gradle
-// build.gradle
-repositories {
-	jcenter()
-}
-dependencies {
-	compile 'co.trikita:anvil-sdk15:+'
-}
-```
 
 ## API
 
@@ -412,7 +432,4 @@ v(MyComponent.java, () -> {
 
 Code is distributed under MIT license, feel free to use it in your proprietary
 projects as well.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/zserge/anvil/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
