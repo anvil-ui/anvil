@@ -13,6 +13,7 @@ or [Redux](http://redux.js.org/) design patterns.
 * Super small (4 hand-written classes + 1 generated class)
 * Easy to learn (top-level API is only 5 functions)
 * Fast (uses no reflection¹)
+* Efficient (views are updated lazily, if the data change didn't affect the view - it remains untouched)
 * Easy to read declarative syntax
 * Java 8 and Kotlin-friendly, but supports Java 6 as well
 * XML layouts are supported, too
