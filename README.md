@@ -25,10 +25,10 @@ same thing, so no performance loss here).
 ``` gradle
 // build.gradle
 repositories {
-	jcenter()
+    jcenter()
 }
 dependencies {
-        compile 'co.trikita:anvil-sdk15:0.3.1'
+    compile 'co.trikita:anvil-sdk15:0.3.1'
 }
 ```
 Anvil comes in multiple builds for different minimal SDK versions:
@@ -55,29 +55,29 @@ First, declare your layout, assign event listeners and bind data:
 ``` Java
 public int ticktock = 0;
 public void onCreate(Bundle b) {
-	super.onCreate(b);
-	setContentView(new RenderableView(this) {
-		@Override
-		public void view() {
-			linearLayout(() -> {
-				size(MATCH, MATCH);
-				padding(dip(8));
-				orientation(LinearLayout.VERTICAL);
+    super.onCreate(b);
+    setContentView(new RenderableView(this) {
+        @Override
+        public void view() {
+            linearLayout(() -> {
+                size(MATCH, MATCH);
+                padding(dip(8));
+                orientation(LinearLayout.VERTICAL);
 
-				textView(() -> {
-					size(MATCH, WRAP);
-					text("Tick-tock: " + ticktock);
-				});
+                textView(() -> {
+                    size(MATCH, WRAP);
+                    text("Tick-tock: " + ticktock);
+                });
 
-				button(() -> {
-					size(MATCH, WRAP);
-					text("Close");
-					// Finish current activity when the button is clicked
-					onClick(v -> finish());
-				});
-			});
-		}
-	});
+                button(() -> {
+                    size(MATCH, WRAP);
+                    text("Close");
+                    // Finish current activity when the button is clicked
+                    onClick(v -> finish());
+                });
+            });
+        }
+    });
 }
 ```
 
@@ -102,17 +102,17 @@ listeners, it's already triggered after each UI listener call:
 
 ``` java
 public void view() {
-	linearLayout(() -> {
-		textView(() -> {
-			text("Clicks: " + numClicks);
-		});
-		button(() -> {
-			text("Click me");
-			onClick(v -> {
-				numClicks++; // text view will be updated automatically
-			});
-		});
-	});
+    linearLayout(() -> {
+        textView(() -> {
+            text("Clicks: " + numClicks);
+        });
+        button(() -> {
+            text("Click me");
+            onClick(v -> {
+                numClicks++; // text view will be updated automatically
+            });
+        });
+    });
 }
 ```
 
@@ -137,9 +137,9 @@ When you mount this layout (assuming the `name` is "John"):
 
 ``` java
 linearLayout(() -> {
-	textView(() -> {
-		text("Hello " + name);
-	});
+    textView(() -> {
+        text("Hello " + name);
+    });
 });
 ```
 
@@ -193,15 +193,15 @@ Java 6 without lambdas:
 
 ``` java
 public void view() {
-	o (linearLayout(),
-	  orientation(LinearLayout.VERTICAL),
+    o (linearLayout(),
+      orientation(LinearLayout.VERTICAL),
 
-		o (textView(),
-		  text("...")),
-		
-		o (button(),
-		  text("..."),
-		  onClick(myListener)));
+        o (textView(),
+          text("...")),
+        
+        o (button(),
+          text("..."),
+          onClick(myListener)));
 }
 ```
 
@@ -209,18 +209,18 @@ Java 8 + RetroLambda:
 
 ``` java
 public void view() {
-	linearLayout(() -> {
-		orientation(LinearLayout.VERTICAL);
-		textView(() -> {
-			text("....");
-		});
-		button(() -> {
-			text(".....");
-			onClick(v -> {
-				....
-			});
-		});
-	});
+    linearLayout(() -> {
+        orientation(LinearLayout.VERTICAL);
+        textView(() -> {
+            text("....");
+        });
+        button(() -> {
+            text(".....");
+            onClick(v -> {
+                ....
+            });
+        });
+    });
 }
 ```
 
@@ -228,18 +228,18 @@ Kotlin:
 
 ``` kotlin
 public override fun view() {
-	linearLayout {
-		orientation(LinearLayout.VERTICAL)
-		textView {
-			text("....")
-		}
-		button {
-			text("....")
-			onClick { v ->
-				...
-			}
-		}
-	}
+    linearLayout {
+        orientation(LinearLayout.VERTICAL)
+        textView {
+            text("....")
+        }
+        button {
+            text("....")
+            onClick { v ->
+                ...
+            }
+        }
+    }
 }
 ```
 
@@ -252,32 +252,32 @@ their attributes) is generated from `android.jar`.
 Here's a list of classes and methods you need to know to work with Anvil like a pro:
 
 * `Anvil.Renderable` - functional interface that one should implement to
-	describe layout structure, style and data bindings.
+    describe layout structure, style and data bindings.
 
 * `Anvil.mount(View, Anvil.Renderable)` - mounts renderable layout into a
-	View or a ViewGroup
+    View or a ViewGroup
 
 * `Anvil.unmount(View)` - unmounts renderable layout from the View
-	removing all its child views if it's a ViewGroup
+    removing all its child views if it's a ViewGroup
 
 * `Anvil.render()` - starts a new render cycle updating all mounted views
 
 * `Anvil.currentView(): View` - returns the view which is currently being
-	rendered. Useful in some very rare cases and only inside the Renderable's
-	method `view()` to get access to the real view and modifying it manually.
+    rendered. Useful in some very rare cases and only inside the Renderable's
+    method `view()` to get access to the real view and modifying it manually.
 
 * `RenderableView` - a most typical implementation of Anvil.Renderable.
-	Extending this class and overriding its method `view()` allows to create
-	self-contained reactive components that are mounted and unmounted
-	automatically.
+    Extending this class and overriding its method `view()` allows to create
+    self-contained reactive components that are mounted and unmounted
+    automatically.
 
 * `RenderableAdapter` - extending this class and overriding its `getCount()`,
-	`getItem(int)` and `view(int)` allows to create lists where each item is a
-	standalone reactive renderable object.
+    `getItem(int)` and `view(int)` allows to create lists where each item is a
+    standalone reactive renderable object.
 
 * `RenderableAdapter.withItems(list, cb(index, item))` - a shortcut to create
-	simple adapters for the given list of items. `cb` is a lambda that describes
-	the layout and bindings of a certain list item at the given index.
+    simple adapters for the given list of items. `cb` is a lambda that describes
+    the layout and bindings of a certain list item at the given index.
 
 ## DSL
 
@@ -326,41 +326,41 @@ A few bindings have been  written for other use cases which we find useful:
 * `R()` - returns a `Resources` object associated with the current view. Useful for
   multiple screen support (sizes, dpi, orientation etc).
 * `isPortrait()` - returns true if a screen is portrait-oriented. Useful for
-	tweaking layouts for different orientations.
+    tweaking layouts for different orientations.
 * `typeface(font)` - loads font from assets by its file name and sets the typeface to
-	a TextView
+    a TextView
 * `padding(p)`, `padding(h, v)`, `padding(l, t, r, b)` - set view padding for all 4
-	sides, for horizontal/vertical dimensions or for each side individually.
+    sides, for horizontal/vertical dimensions or for each side individually.
 * `visibility(flag)` - sets the visibility property to `View.VISIBLE` or `View.GONE` depending on
-	the `flag` boolean value
+    the `flag` boolean value
 * `shadowLayer(radius, dx, dy, color)` - sets shadow layer of a TextView
 * `onTextChanged(textWatcher)` - binds a text watcher to an `EditText`. No
-	`Anvil.render()` is called in this case, because you're likely to get an infinite
-	recursion.
+    `Anvil.render()` is called in this case, because you're likely to get an infinite
+    recursion.
 * `text(StringBuilder)` - binds a string builder to the edit text, so when you
-	change its contents - the edit text is changed, and if you type something
-	manually - the string builder gets modified. So far it's the only two-way
-	data binding, becayse TextWatcher is a complicated beast.
+    change its contents - the edit text is changed, and if you type something
+    manually - the string builder gets modified. So far it's the only two-way
+    data binding, becayse TextWatcher is a complicated beast.
 * `onItemSelected(lambda)` - accepts a functional interface to handle a `Spinner`
-	events. `onNothingSelected()` method is omitted, because it's rarely used anyway.
+    events. `onNothingSelected()` method is omitted, because it's rarely used anyway.
 
 If a binding you need is not in the list - please, check [issue #27](https://github.com/zserge/anvil/issues/27) and report it there.
 
 A special case for animations is added:
 
 * `anim(trigger, Animator)` - starts animation when `trigger` is true, cancels it
-	when the `trigger` becomes false.
+    when the `trigger` becomes false.
 
 Finally, a few low-level DSL functions are there, which you would no need unless you want to write your own property setters or custom view builders:
 
 * `v(class, attrs...)` - pushes view, applies attributes, doesn't pop the view.
 * `o()`, `x()` - names that look like bullets, actually pop the view. These are used in Java 6 syntax.
 * `v(class, renderable)` - pushes the view, applies the renderable to fulfil
-	attributes and child views, pops the view. This is used in Java 8 and Kotlin
-	syntax.
+    attributes and child views, pops the view. This is used in Java 8 and Kotlin
+    syntax.
 * `attr(func, value)` - checks the cache for the given value of the given
-	property setter function. Often used to create your own property setter
-	binding.
+    property setter function. Often used to create your own property setter
+    binding.
 
 ## XML layouts
 
@@ -369,25 +369,25 @@ view layouts declared in XML - you can do so:
 
 ``` kotlin
 public override fun view() {
-	// A designer gave us an XML with some fancy layout:
-	// a viewgroup with a button and a progress bar in it
-	xml(R.layout.my_layout) {
-		backgroundColor(Settings.bgColor) // will modify root layout view color
+    // A designer gave us an XML with some fancy layout:
+    // a viewgroup with a button and a progress bar in it
+    xml(R.layout.my_layout) {
+        backgroundColor(Settings.bgColor) // will modify root layout view color
 
-		withId(R.id.my_button) {
-			// button state may depend on some variable
-			enabled(isMyButtonEnabled)
-				// button click listener can be attached
-				onClick { v ->
-					...
-				}
-		}
+        withId(R.id.my_button) {
+            // button state may depend on some variable
+            enabled(isMyButtonEnabled)
+                // button click listener can be attached
+                onClick { v ->
+                    ...
+                }
+        }
 
-		withId(R.id.my_progress_bar) {
-			visible(isMyProgressBarShown)
-			progress(someProgressValue)
-		}
-	}
+        withId(R.id.my_progress_bar) {
+            visible(isMyProgressBarShown)
+            progress(someProgressValue)
+        }
+    }
 }
 ```
 
@@ -417,14 +417,14 @@ properties using `withId()`. Also, if any views are created inside the
 
 ``` java
 v(MyComponent.java, () -> {
-	withId(R.id.child_view, () -> {
-		// R.id.child_view was implicitely created in MyComponent's constructor
-		// but we still can modify it here
-	});
+    withId(R.id.child_view, () -> {
+        // R.id.child_view was implicitely created in MyComponent's constructor
+        // but we still can modify it here
+    });
 
-	textView(() -> {
-		// This textView will be appeneded to MyComponent layout
-	});
+    textView(() -> {
+        // This textView will be appeneded to MyComponent layout
+    });
 });
 ```
 
