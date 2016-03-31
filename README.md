@@ -1,12 +1,19 @@
+
 # Anvil - reactive views for Android
 
 [![Join the chat at https://gitter.im/zserge/anvil](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zserge/anvil?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/zserge/anvil.svg?branch=master)](https://travis-ci.org/zserge/anvil)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23193-brightgreen.svg)](http://androidweekly.net/issues/issue-193)
 
-Anvil is a small Java library for creating reactive user interfaces.
-Originally inspired by [React](https://facebook.github.io/react/),
-it suits well as a view layer for [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)
-or [Redux](http://redux.js.org/) design patterns.
+<br/>
+
+<div>
+<img align="left" src="https://raw.githubusercontent.com/zserge/anvil/master/logo/ic_launcher.png" alt="logo" width="96px" height="96px" />
+<p>
+Anvil is a small Java library for creating reactive user interfaces. Originally inspired by <a href="https://facebook.github.io/react/">React</a>, it suits well as a view layer for <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel">MVVM</a> or <a href="http://redux.js.org/">Redux</a> design patterns.
+</p>
+</div>
+
+<br/>
 
 ## Features
 
