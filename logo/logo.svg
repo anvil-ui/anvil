@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48px"
+   height="48px"
+   id="svg3126"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/anna/artwork-tmp/anvil-logo-all-stroke.png"
+   inkscape:export-xdpi="960"
+   inkscape:export-ydpi="960">
+  <defs
+     id="defs3128" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="8"
+     inkscape:cx="16.612506"
+     inkscape:cy="17.4022"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1317"
+     inkscape:window-height="744"
+     inkscape:window-x="49"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false">
+    <sodipodi:guide
+       orientation="0,1"
+       position="-13.571429,24"
+       id="guide3906" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="24,26.321429"
+       id="guide3908" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3131">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <path
+       inkscape:connector-curvature="0"
+       id="path3836"
+       d="M 24.001188,1.3757033 C 15.78327,1.9676929 8.5594938,16.956778 8.5099912,28.564333 c 0,0 -0.2118252,4.049799 0.6322936,9.062876 0.8441189,5.013078 5.7960262,-6.533701 14.8589032,-6.744466 9.16826,0.210765 13.962092,11.704853 14.858903,6.744466 0.89681,-4.960386 0.632293,-9.062876 0.632293,-9.062876 0,-11.159282 -8.405571,-26.2405693 -15.491196,-27.1886297 z m 0,7.7982893 c 2.386242,0 4.320673,1.9344304 4.320673,4.3206724 0,2.386243 -1.934431,4.320674 -4.320673,4.320674 -2.386242,0 -4.320674,-1.934431 -4.320674,-4.320674 0,-2.386242 1.934432,-4.3206724 4.320674,-4.3206724 z"
+       style="fill:none;stroke:#34495e;stroke-width:1.96871769000000008;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       sodipodi:nodetypes="ccccccccccccccsccccccccccccc"
+       inkscape:connector-curvature="0"
+       id="path4526"
+       d="m 14.464142,37.134906 c -0.343458,0.0793 -0.552084,0.512604 -0.399896,0.830553 l 1.415016,3.106882 c 0.173771,0.417117 0.87934,0.437275 1.076643,0.03076 l 0.553701,-1.107404 2.614704,5.813869 c 0.19007,0.440908 0.967343,0.397727 1.107403,-0.06152 l 1.845673,-5.106362 1.138165,2.553181 c 0.185838,0.411491 0.890804,0.411491 1.076643,0 l 1.722628,-3.568301 2.676225,7.628781 c 0.166627,0.448538 0.940776,0.448538 1.107404,0 l 3.629823,-9.197603 c 0.11278,-0.289924 -0.04842,-0.656329 -0.338354,-0.769081 -0.289934,-0.112752 -0.656324,0.04848 -0.76905,0.338424 l -3.04536,4.793207 -2.614703,-4.516356 c -0.161039,-0.423342 -0.868428,-0.463764 -1.076642,-0.06152 l -1.814912,2.799535 -1.199687,-1.784415 c -0.17871,-0.444303 -0.953635,-0.422778 -1.107404,0.03076 l -1.876434,3.106883 -2.52242,-3.629823 c -0.17377,-0.417117 -0.879339,-0.437275 -1.076642,-0.03076 l -0.553702,0.889889 -0.892075,-1.751203 C 15.03127,37.222462 14.730568,37.072111 14.464142,37.134906 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#34495e;fill-opacity:1;stroke:none;stroke-width:1.20000005000000010;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+  </g>
+</svg>
