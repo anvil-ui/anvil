@@ -58,10 +58,9 @@ view properties as your data changes.
 
 Anvil simplifies most of this boring routine.
 
-First, add two static imports that make it much easier to read and write your view:
+First, add a static import that makes it much easier to write your view:
 
 ``` java
-import static trikita.anvil.BaseDSL.*;
 import static trikita.anvil.DSL.*;
 ```
 
