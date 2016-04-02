@@ -58,7 +58,13 @@ view properties as your data changes.
 
 Anvil simplifies most of this boring routine.
 
-First, declare your layout, assign event listeners and bind data:
+First, add a static import that makes it much easier to write your view:
+
+``` java
+import static trikita.anvil.DSL.*;
+```
+
+Next, declare your layout, assign event listeners and bind data:
 
 ``` Java
 public int ticktock = 0;
