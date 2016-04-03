@@ -300,20 +300,18 @@ The bottom part of the iceberg is Anvil DSL.
 DSL consists of a few handwritten property setters, but most of it is
 generated from java classes in the android SDK.
 
+See a full list of the DSL methods for each API level [here](https://github.com/zserge/anvil/blob/master/DSL.md).
+
 ### Property setters
 
 The setters are named as the view methods from Android SDK, but without the
 "set" prefix. E.g. "text(s)" instead of "setText(s)", "backgroundDrawable(d)"
 instead of "setBackgroundDrawable(d)" and so on.
 
-_A full list of property setters for each API level will be added soon._
-
 ### Event listeners
 
 Event listeners also have names from the Android SDK, but without the "set"
 prefix and the "Listener" suffix, e.g. "onClick" instead of "setOnClickListener".
-
-_A full list of event listener binders for each API level will be added soon._
 
 ### Handwritten bindings
 
