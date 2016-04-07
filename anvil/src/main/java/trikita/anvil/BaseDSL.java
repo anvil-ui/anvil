@@ -449,13 +449,14 @@ public class BaseDSL {
 		    TextView old = CURRENT_INPUT_TEXT_VIEW;
 		    CURRENT_INPUT_TEXT_VIEW = this.v;
 		if (this.text.equals(s.toString()) == false) {
+		    this.text = s.toString();
+				
 		    if (this.watcher != null) {
 			this.watcher.onTextChanged(s, from, before, n);
 		    }
 		    if (this.simpleWatcher != null) {
 			this.simpleWatcher.onTextChanged(s);
 		    }
-		    this.text = s.toString();
 
 		    Anvil.render();
 		    CURRENT_INPUT_TEXT_VIEW = old;
