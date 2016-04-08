@@ -56,7 +56,7 @@ public class AnvilGenPlugin implements Plugin<Project> {
 
     def getSupportClosure(project, type, version, List<String> rawDeps) {
         return {
-            taskName = "generateSDK${dashToCamelCase(type)}DSL"
+            taskName = "generate${dashToCamelCase(type)}DSL"
             javadocContains = "It contains views and their setters from the library ${type}"
             outputDirectory = "sdk"
             jarFile = getSupportJar(project, type, version)
