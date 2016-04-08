@@ -410,104 +410,104 @@ public class BaseDSL {
 	private static TextView CURRENT_INPUT_TEXT_VIEW = null;
 
 	private static class TextWatcherProxy implements TextWatcher {
-	    private final TextView v;
-	    private TextWatcher watcher;
-	    private SimpleTextWatcher simpleWatcher;
-	    private String text = "";
+		private final TextView v;
+		private TextWatcher watcher;
+		private SimpleTextWatcher simpleWatcher;
+		private String text = "";
 
-	    public TextWatcherProxy(TextView v) {
-		this.v = v;
-	    }
+		public TextWatcherProxy(TextView v) {
+			this.v = v;
+		}
 
-	    public TextWatcherProxy setImpl(TextWatcher w) {
-		this.watcher = w;
-		this.simpleWatcher = null;
-		return this;
-	    }
-	    public TextWatcherProxy setImpl(SimpleTextWatcher w) {
-		this.simpleWatcher = w;
-		this.watcher = null;
-		return this;
-	    }
-	    public boolean hasImpl(Object o) {
-		if (o == null) {
-		    return false;
+		public TextWatcherProxy setImpl(TextWatcher w) {
+			this.watcher = w;
+			this.simpleWatcher = null;
+			return this;
 		}
-		return o.equals(this.watcher) || o.equals(this.simpleWatcher);
-	    }
-	    public void afterTextChanged(Editable s) {
-		if (this.watcher != null) {
-		    this.watcher.afterTextChanged(s);
+		public TextWatcherProxy setImpl(SimpleTextWatcher w) {
+			this.simpleWatcher = w;
+			this.watcher = null;
+			return this;
 		}
-	    }
-	    public void beforeTextChanged(CharSequence s, int from, int n, int after) {
-		if (this.watcher != null) {
-		    this.watcher.beforeTextChanged(s, from, n, after);
+		public boolean hasImpl(Object o) {
+			if (o == null) {
+				return false;
+			}
+			return o.equals(this.watcher) || o.equals(this.simpleWatcher);
 		}
-	    }
-	    public void onTextChanged(CharSequence s, int from, int before, int n) {
-		    TextView old = CURRENT_INPUT_TEXT_VIEW;
-		    CURRENT_INPUT_TEXT_VIEW = this.v;
-		if (this.text.equals(s.toString()) == false) {
-		    if (this.watcher != null) {
-			this.watcher.onTextChanged(s, from, before, n);
-		    }
-		    if (this.simpleWatcher != null) {
-			this.simpleWatcher.onTextChanged(s);
-		    }
-		    this.text = s.toString();
+		public void afterTextChanged(Editable s) {
+			if (this.watcher != null) {
+				this.watcher.afterTextChanged(s);
+			}
+		}
+		public void beforeTextChanged(CharSequence s, int from, int n, int after) {
+			if (this.watcher != null) {
+				this.watcher.beforeTextChanged(s, from, n, after);
+			}
+		}
+		public void onTextChanged(CharSequence s, int from, int before, int n) {
+			TextView old = CURRENT_INPUT_TEXT_VIEW;
+			CURRENT_INPUT_TEXT_VIEW = this.v;
+			if (this.text.equals(s.toString()) == false) {
+				if (this.watcher != null) {
+					this.watcher.onTextChanged(s, from, before, n);
+				}
+				if (this.simpleWatcher != null) {
+					this.simpleWatcher.onTextChanged(s);
+				}
+				this.text = s.toString();
 
-		    Anvil.render();
-		    CURRENT_INPUT_TEXT_VIEW = old;
+				Anvil.render();
+			}
+			CURRENT_INPUT_TEXT_VIEW = old;
 		}
-	    }
 	}
 
 	private final static class TextWatcherFunc implements Anvil.AttrFunc<TextWatcher> {
-	    private final static TextWatcherFunc instance = new TextWatcherFunc();
-	    public void apply(final View v, final TextWatcher w, TextWatcher old) {
-		if (v instanceof TextView) {
-		    TextView tv = (TextView) v;
-		    for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
-			if (proxy.hasImpl(old)) {
-			    proxy.setImpl(w);
-			    return;
+		private final static TextWatcherFunc instance = new TextWatcherFunc();
+		public void apply(final View v, final TextWatcher w, TextWatcher old) {
+			if (v instanceof TextView) {
+				TextView tv = (TextView) v;
+				for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+					if (proxy.hasImpl(old)) {
+						proxy.setImpl(w);
+						return;
+					}
+				}
+				TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
+				TEXT_WATCHERS.put(proxy, null);
+				tv.addTextChangedListener(proxy);
 			}
-		    }
-		    TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
-		    TEXT_WATCHERS.put(proxy, null);
-		    tv.addTextChangedListener(proxy);
 		}
-	    }
 	}
 
 	private final static class SimpleTextWatcherFunc implements Anvil.AttrFunc<SimpleTextWatcher> {
-	    private final static SimpleTextWatcherFunc instance = new SimpleTextWatcherFunc();
-	    public void apply(final View v, final SimpleTextWatcher w, SimpleTextWatcher old) {
-		if (v instanceof TextView) {
-		    TextView tv = (TextView) v;
-		    for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
-			if (proxy.hasImpl(old)) {
-			    proxy.setImpl(w);
-			    return;
+		private final static SimpleTextWatcherFunc instance = new SimpleTextWatcherFunc();
+		public void apply(final View v, final SimpleTextWatcher w, SimpleTextWatcher old) {
+			if (v instanceof TextView) {
+				TextView tv = (TextView) v;
+				for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+					if (proxy.hasImpl(old)) {
+						proxy.setImpl(w);
+						return;
+					}
+				}
+				TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
+				TEXT_WATCHERS.put(proxy, null);
+				tv.addTextChangedListener(proxy);
 			}
-		    }
-		    TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
-		    TEXT_WATCHERS.put(proxy, null);
-		    tv.addTextChangedListener(proxy);
 		}
-	    }
 	}
 
 	private static final class TextFunc implements Anvil.AttrFunc<CharSequence> {
-	    public static final TextFunc instance = new TextFunc();
-	    public void apply(View v, final CharSequence arg, final CharSequence old) {
-		if (v instanceof TextView && v != CURRENT_INPUT_TEXT_VIEW) {
-		    ((TextView) v).setText(arg);
-		} else if (v instanceof TextSwitcher) {
-		    ((TextSwitcher) v).setText(arg);
+		public static final TextFunc instance = new TextFunc();
+		public void apply(View v, final CharSequence arg, final CharSequence old) {
+			if (v instanceof TextView && v != CURRENT_INPUT_TEXT_VIEW) {
+				((TextView) v).setText(arg);
+			} else if (v instanceof TextSwitcher) {
+				((TextSwitcher) v).setText(arg);
+			}
 		}
-	    }
 	}
 
 	public interface SimpleItemSelectedListener {
