@@ -11,4 +11,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./gradlew anvil:check --stacktrace
+  - ./gradlew assemble anvil:check --stacktrace
