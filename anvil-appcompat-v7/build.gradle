@@ -36,7 +36,9 @@ android {
 
 apply from: 'attr-quirks.gradle'
 anvilgen {
-	type = "appcompat-v7"
+	type = "support"
+	libraryName = "appcompat-v7"
+	camelCaseName = "AppCompatv7"
 	version = "23.3.0"
 	dependencies = ['support-v4']
 	quirks = QUIRKS
@@ -48,8 +50,8 @@ repositories {
 }
 
 dependencies {
-	compile project(':anvil')
-	compile "com.android.support:appcompat-v7:23.3.0"
+	compile project(path: ':anvil', configuration: 'sdk19Release')
+	compile 'com.android.support:appcompat-v7:23.3.0'
 
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.mockito:mockito-core:2.0.36-beta'

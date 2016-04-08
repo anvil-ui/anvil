@@ -1,4 +1,8 @@
-def nop = {builder -> null}
+def nop = { builder -> null }
 
 ext.QUIRKS = [
+    // Although the method is public, the class required as a parameter is private! Great job!
+    "android.support.v7.widget.ActivityChooserView": [
+            "setActivityChooserModel": nop
+    ],
 ]

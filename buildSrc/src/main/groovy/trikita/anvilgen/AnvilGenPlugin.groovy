@@ -1,5 +1,6 @@
 package trikita.anvilgen
 
+import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.MethodSpec
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -37,10 +38,12 @@ public class AnvilGenPlugin implements Plugin<Project> {
             project.task(dependsOn: ["generateSDK10DSL", "generateSDK15DSL", "generateSDK19DSL"], "generateSDKDSL")
         } else {
             def version = project.anvilgen.version
+            def camelCaseName = project.anvilgen.camelCaseName
+            def libraryName = project.anvilgen.libraryName
             def dependencies = project.anvilgen.dependencies
             project.task(type: DSLGeneratorTask, dependsOn: ["prepareReleaseDependencies"],
-                    "generate${dashToCamelCase(type)}DSL",
-                    getSupportClosure(project, type, version, dependencies))
+                    "generate${camelCaseName}DSL",
+                    getSupportClosure(project, camelCaseName, libraryName, version, dependencies))
         }
     }
 
@@ -51,18 +54,22 @@ public class AnvilGenPlugin implements Plugin<Project> {
             outputDirectory = "sdk${apiLevel}"
             jarFile = getAndroidJar(project, apiLevel)
             dependencies = []
+            outputClassName = "DSL"
+            packageName = "trikita.anvil"
         }
     }
 
-    def getSupportClosure(project, type, version, List<String> rawDeps) {
+    def getSupportClosure(project, camelCaseName, libraryName, version, List<String> rawDeps) {
         return {
-            taskName = "generate${dashToCamelCase(type)}DSL"
-            javadocContains = "It contains views and their setters from the library ${type}"
-            outputDirectory = "sdk"
-            jarFile = getSupportJar(project, type, version)
+            taskName = "generate${camelCaseName}DSL"
+            javadocContains = "It contains views and their setters from the library ${libraryName}"
+            outputDirectory = "main"
+            jarFile = getSupportJar(project, libraryName, version)
             dependencies = rawDeps.collect {
                 getSupportJar(project, it, version)
             } << getAndroidJar(project, 19)
+            outputClassName = "${camelCaseName}DSL"
+            packageName = "trikita.anvil"
         }
     }
 
@@ -80,16 +87,8 @@ public class AnvilGenPlugin implements Plugin<Project> {
         return new File(sdkDir + "/platforms/android-" + api + "/android.jar")
     }
 
-    def getSupportJar(project, type, version) {
+    def getSupportJar(project, libraryName, version) {
         return new File(project.buildDir.absoluteFile,
-                "intermediates/exploded-aar/com.android.support/$type/$version/jars/classes.jar")
-    }
-
-    def dashToCamelCase(String str) {
-        if (!str || str.isAllWhitespace()) {
-            return ''
-        }
-        def remainder = str.substring(1).replaceAll(/-\w/) { it[1].toUpperCase() }
-        return new StringBuilder().append(str.charAt(0).toUpperCase()).append(remainder).toString()
+                "intermediates/exploded-aar/com.android.support/$libraryName/$version/jars/classes.jar")
     }
 }
