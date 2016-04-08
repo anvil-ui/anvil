@@ -1,0 +1,131 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:1.5.0'
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
+	}
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'trikita.anvilgen'
+
+android {
+	compileSdkVersion 'android-23'
+	buildToolsVersion '23.0.3'
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_7
+		targetCompatibility JavaVersion.VERSION_1_7
+	}
+
+	defaultConfig {
+		minSdkVersion 7
+		targetSdkVersion 23
+	}
+
+	lintOptions {
+		abortOnError false
+	}
+
+	testOptions {
+		unitTests.returnDefaultValues = true
+	}
+}
+
+apply from: 'attr-quirks.gradle'
+anvilgen {
+	type = "appcompat-v7"
+	version = "23.3.0"
+	dependencies = ['support-v4']
+	quirks = QUIRKS
+}
+
+repositories {
+	mavenLocal()
+	jcenter()
+}
+
+dependencies {
+	compile project(':anvil')
+	compile "com.android.support:appcompat-v7:23.3.0"
+
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.mockito:mockito-core:2.0.36-beta'
+}
+
+group = 'co.trikita'
+version = '0.3.1'
+
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+def fixPom(pom) {
+	pom.withXml {
+		def root = asNode()
+		root.appendNode('description', 'Lightweight reactive UI library for Android')
+		root.appendNode('name', 'Anvil')
+		root.appendNode('url', 'https://github.com/zserge/anvil')
+		def scm = root.appendNode('scm')
+		scm.appendNode('url', 'https://github.com/zserge/anvil.git')
+		scm.appendNode('connection', 'https://github.com/zserge/anvil.git')
+		scm.appendNode('developerConnection', 'https://github.com/zserge/anvil.git')
+		def developer = root.appendNode('developers').appendNode('developer')
+		developer.appendNode('id', 'zserge')
+		developer.appendNode('name', 'Serge Zaitsev')
+		developer.appendNode('email', 'zaitsev.serge@gmail.com')
+		def license = root.appendNode('licenses').appendNode('license')
+		license.appendNode('name', 'MIT License')
+		license.appendNode('url', 'http://www.opensource.org/licenses/mit-license.php')
+		license.appendNode('distribution', 'repo')
+	}
+}
+
+publishing {
+	publications {
+		sdk19(MavenPublication) {
+			groupId project.group
+			version project.version
+			artifactId 'anvil-appcompat-v7'
+			artifact "$buildDir/outputs/aar/anvil-appcompat-v7-release.aar"
+			fixPom(pom)
+		}
+	}
+}
+
+bintray {
+	user = project.hasProperty('bintrayUser') ? bintrayUser : ''
+	key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
+	publications = ['sdk10', 'sdk15', 'sdk19']
+	pkg {
+		repo = 'maven'
+		name = 'anvil'
+		websiteUrl = 'https://github.com/zserge/anvil'
+		vcsUrl = 'https://github.com/zserge/anvil.git'
+		licenses = ['MIT']
+		publish = true
+		version {
+			name = project.version
+			gpg {
+				sign = true
+				passphrase = project.hasProperty('bintrayGpgPassword') ? bintrayGpgPassword : ''
+			}
+			mavenCentralSync {
+				sync = true
+				user = project.hasProperty('bintrayOssUser') ? bintrayOssUser : ''
+				password = project.hasProperty('bintrayOssPassword') ? bintrayOssPassword : ''
+				close = '1'
+			}
+		}
+	}
+}
+
+android.libraryVariants.all { variant ->
+	task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+		description "Generates Javadoc for $variant.name."
+		source = variant.javaCompile.source
+		ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+		classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+	}
+}

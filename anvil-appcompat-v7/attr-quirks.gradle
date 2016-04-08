@@ -1,0 +1,4 @@
+def nop = {builder -> null}
+
+ext.QUIRKS = [
+]
