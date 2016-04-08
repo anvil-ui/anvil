@@ -1,0 +1,13 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+
+    compile 'com.android.tools.build:gradle:1.5.0'
+    compile 'com.squareup:javapoet:1.6.1'
+}

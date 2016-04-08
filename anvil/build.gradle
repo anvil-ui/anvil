@@ -9,6 +9,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'trikita.anvilgen'
 
 android {
 	compileSdkVersion 'android-23'
@@ -46,6 +47,11 @@ android {
 	}
 }
 
+apply from: 'attr-quirks.gradle'
+anvilgen {
+	quirks = QUIRKS
+}
+
 repositories {
 	mavenLocal()
 	jcenter()
@@ -58,8 +64,6 @@ dependencies {
 
 group = 'co.trikita'
 version = '0.3.1'
-
-apply from: 'gen.gradle'
 
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
