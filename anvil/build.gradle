@@ -49,7 +49,7 @@ android {
 
 apply from: 'attr-quirks.gradle'
 anvilgen {
-	type = "sdk"
+	type = 'sdk'
 	quirks = QUIRKS
 }
 

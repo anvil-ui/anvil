@@ -11,6 +11,7 @@ import java.util.jar.JarFile
 class DSLGeneratorTask extends DefaultTask {
 
     def jarFile
+    def dependencies
     def taskName
     def javadocContains
     def outputDirectory
@@ -27,7 +28,7 @@ class DSLGeneratorTask extends DefaultTask {
                 .superclass(ClassName.get("trikita.anvil", "BaseDSL"))
         def attrMethods = [:]
 
-        forEachView(jarFile) { view ->
+        forEachView { view ->
             processViews(attrsBuilder, view)
             forEachMethod(view) { m, name, arg, isListener ->
                 attrMethods = processAttrs(attrMethods, view, m, name, arg, isListener)
@@ -41,22 +42,30 @@ class DSLGeneratorTask extends DefaultTask {
                 .writeTo(getProject().file("src/$outputDirectory/java"))
     }
 
-    def forEachView(jarFile, cb) {
-        def jar = new JarFile(jarFile)
-        def url = new URL("jar", "", "file:" + jarFile.getAbsolutePath() + "!/")
-        def loader = new URLClassLoader([url] as URL[], getClass().getClassLoader())
+    def forEachView(cb) {
+        def urls = [new URL("jar", "", "file:" + jarFile.getAbsolutePath() + "!/")]
+        for (dep in dependencies) {
+            urls.add(new URL("jar", "", "file:" + dep.getAbsolutePath() + "!/"))
+        }
+        def loader = new URLClassLoader(urls as URL[], getClass().getClassLoader())
         def viewClass = loader.loadClass("android.view.View")
 
+        def jar = new JarFile(jarFile)
         for (e in Collections.list(jar.entries()).sort { it.getName() }) {
             if (e.getName().endsWith(".class")) {
                 def className = e.getName().replace(".class", "").replace("/", ".")
+
                 // Skip inner classes
                 if (className.contains('$')) {
-                    continue;
+                    continue
                 }
-                def c = loader.loadClass(className);
-                if (viewClass.isAssignableFrom(c)) {
-                    cb(c)
+                try {
+                    def c = loader.loadClass(className);
+                    if (viewClass.isAssignableFrom(c)) {
+                        cb(c)
+                    }
+                } catch (NoClassDefFoundError ignored) {
+                    // Skip this class
                 }
             }
         }

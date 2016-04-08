@@ -1,6 +1,5 @@
 package trikita.anvilgen
 
-
 import com.squareup.javapoet.MethodSpec
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -37,7 +36,11 @@ public class AnvilGenPlugin implements Plugin<Project> {
 
             project.task(dependsOn: ["generateSDK10DSL", "generateSDK15DSL", "generateSDK19DSL"], "generateSDKDSL")
         } else {
-            project.task(type: DSLGeneratorTask, "generate${dashToCamelCase(type)}DSL")
+            def version = project.anvilgen.version
+            def dependencies = project.anvilgen.dependencies
+            project.task(type: DSLGeneratorTask, dependsOn: ["prepareReleaseDependencies"],
+                    "generate${dashToCamelCase(type)}DSL",
+                    getSupportClosure(project, type, version, dependencies))
         }
     }
 
@@ -47,6 +50,19 @@ public class AnvilGenPlugin implements Plugin<Project> {
             javadocContains = "It contains views and their setters from API level ${apiLevel}"
             outputDirectory = "sdk${apiLevel}"
             jarFile = getAndroidJar(project, apiLevel)
+            dependencies = []
+        }
+    }
+
+    def getSupportClosure(project, type, version, List<String> rawDeps) {
+        return {
+            taskName = "generateSDK${dashToCamelCase(type)}DSL"
+            javadocContains = "It contains views and their setters from the library ${type}"
+            outputDirectory = "sdk"
+            jarFile = getSupportJar(project, type, version)
+            dependencies = rawDeps.collect {
+                getSupportJar(project, it, version)
+            } << getAndroidJar(project, 19)
         }
     }
 
@@ -64,10 +80,16 @@ public class AnvilGenPlugin implements Plugin<Project> {
         return new File(sdkDir + "/platforms/android-" + api + "/android.jar")
     }
 
-    def dashToCamelCase(str) {
+    def getSupportJar(project, type, version) {
+        return new File(project.buildDir.absoluteFile,
+                "intermediates/exploded-aar/com.android.support/$type/$version/jars/classes.jar")
+    }
+
+    def dashToCamelCase(String str) {
         if (!str || str.isAllWhitespace()) {
             return ''
         }
-        return str.replaceAll(/_\w/) { it[1].toUpperCase() }
+        def remainder = str.substring(1).replaceAll(/-\w/) { it[1].toUpperCase() }
+        return new StringBuilder().append(str.charAt(0).toUpperCase()).append(remainder).toString()
     }
 }
