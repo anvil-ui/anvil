@@ -1,9 +1,19 @@
 package trikita.anvilgen
 
+
+import com.squareup.javapoet.MethodSpec
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 public class AnvilGenPlugin implements Plugin<Project> {
+
+    static class BuilderLock {
+        def locked = false
+    }
+
+    static {
+        MethodSpec.Builder.mixin BuilderLock
+    }
 
     @Override
     void apply(Project project) {

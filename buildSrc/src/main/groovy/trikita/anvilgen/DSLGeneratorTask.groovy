@@ -10,14 +10,6 @@ import java.util.jar.JarFile
 
 class DSLGeneratorTask extends DefaultTask {
 
-    static class BuilderLock {
-        def locked = false
-    }
-
-    static {
-        MethodSpec.Builder.mixin BuilderLock
-    }
-
     def apiLevel
 
     @TaskAction
