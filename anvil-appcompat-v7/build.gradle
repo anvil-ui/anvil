@@ -21,25 +21,12 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 10
+		minSdkVersion 7
 		targetSdkVersion 23
 	}
 
 	lintOptions {
 		abortOnError false
-	}
-
-	publishNonDefault true
-	productFlavors {
-		sdk10 {
-			minSdkVersion 10
-		}
-		sdk15 {
-			minSdkVersion 15
-		}
-		sdk19 {
-			minSdkVersion 19
-		}
 	}
 
 	testOptions {
@@ -49,7 +36,11 @@ android {
 
 apply from: 'attr-quirks.gradle'
 anvilgen {
-	type = 'sdk'
+	type = "support"
+	libraryName = "appcompat-v7"
+	camelCaseName = "AppCompatv7"
+	version = "23.3.0"
+	dependencies = ['support-v4']
 	quirks = QUIRKS
 }
 
@@ -59,6 +50,9 @@ repositories {
 }
 
 dependencies {
+	compile project(path: ':anvil', configuration: 'sdk19Release')
+	compile 'com.android.support:appcompat-v7:23.3.0'
+
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.mockito:mockito-core:2.0.36-beta'
 }
@@ -92,25 +86,11 @@ def fixPom(pom) {
 
 publishing {
 	publications {
-		sdk10(MavenPublication) {
-			groupId project.group
-			version project.version
-			artifactId 'anvil-sdk10'
-			artifact "$buildDir/outputs/aar/anvil-sdk10-release.aar"
-			fixPom(pom)
-		}
-		sdk15(MavenPublication) {
-			groupId project.group
-			version project.version
-			artifactId 'anvil-sdk15'
-			artifact "$buildDir/outputs/aar/anvil-sdk15-release.aar"
-			fixPom(pom)
-		}
 		sdk19(MavenPublication) {
 			groupId project.group
 			version project.version
-			artifactId 'anvil-sdk19'
-			artifact "$buildDir/outputs/aar/anvil-sdk19-release.aar"
+			artifactId 'anvil-appcompat-v7'
+			artifact "$buildDir/outputs/aar/anvil-appcompat-v7-release.aar"
 			fixPom(pom)
 		}
 	}
