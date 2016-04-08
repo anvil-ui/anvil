@@ -1,0 +1,15 @@
+subprojects {
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    group = GROUP
+    version = VERSION_NAME
+}
