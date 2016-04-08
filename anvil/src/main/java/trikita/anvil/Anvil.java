@@ -87,16 +87,16 @@ public final class Anvil {
 	 * views. This method can be called from any thread, so it's safe to use
 	 * {@code Anvil.render()} in background services. */
 	public static void render() {
-		synchronized (Anvil.class) {
-			// If Anvil.render() is called on a non-UI thread, use UI Handler
-			if (Looper.myLooper() != Looper.getMainLooper()) {
+		// If Anvil.render() is called on a non-UI thread, use UI Handler
+		if (Looper.myLooper() != Looper.getMainLooper()) {
+			synchronized (Anvil.class) {
 				if (anvilUIHandler == null) {
 					anvilUIHandler = new Handler(Looper.getMainLooper());
 				}
-				anvilUIHandler.removeCallbacksAndMessages(null);
-				anvilUIHandler.post(anvilRenderRunnable);
-				return;
 			}
+			anvilUIHandler.removeCallbacksAndMessages(null);
+			anvilUIHandler.post(anvilRenderRunnable);
+			return;
 		}
 		Set<Mount> keys = new HashSet<>();
 		keys.addAll(mounts.values());
