@@ -6,6 +6,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 import javax.lang.model.element.Modifier
+import java.lang.reflect.Field
 import java.util.jar.JarFile
 
 class DSLGeneratorTask extends DefaultTask {
@@ -64,30 +65,45 @@ class DSLGeneratorTask extends DefaultTask {
                 }
                 try {
                     def c = loader.loadClass(className);
-                    if (viewClass.isAssignableFrom(c)) {
+                    if (viewClass.isAssignableFrom(c) &&
+                            java.lang.reflect.Modifier.isPublic(c.modifiers)) {
                         cb(c)
                     }
+
                 } catch (NoClassDefFoundError ignored) {
-                    // Skip this class
+                    // Simply skip this class.
+                    ignored.printStackTrace()
                 }
             }
         }
     }
 
     def forEachMethod(c, cb) {
-        for (m in c.getDeclaredMethods().sort { it.getName() }) {
-            if (!java.lang.reflect.Modifier.isPublic(m.getModifiers()) ||
+        for (m in c.declaredMethods.sort { it.name }) {
+            if (!java.lang.reflect.Modifier.isPublic(m.modifiers) ||
                     m.isSynthetic() || m.isBridge()) {
                 continue
             }
-            if (m.getName().matches('^setOn.*Listener$')) {
-                def name = m.getName()
-                cb(m, "on" + name.substring(5, name.length() - 8),
-                        m.getParameterTypes()[0], true)
-            } else if (m.getName().startsWith('set') && m.getParameterCount() == 1) {
-                def name = Character.toLowerCase(m.getName().charAt(3)).toString() +
-                        m.getName().substring(4)
-                cb(m, name, m.getParameterTypes()[0], false)
+
+            if (m.name.matches('^setOn.*Listener$')) {
+                def parameterType = m.parameterTypes[0]
+                if (!java.lang.reflect.Modifier.isPublic(parameterType.modifiers)) {
+                    // If the parameter is not public then the method is inaccessible for us.
+                    continue
+                }
+
+                def name = m.name
+                cb(m, "on" + name.substring(5, name.length() - 8), parameterType, true)
+            } else if (m.name.startsWith('set') && m.parameterCount == 1) {
+                def parameterType = m.parameterTypes[0]
+                if (!java.lang.reflect.Modifier.isPublic(parameterType.modifiers)) {
+                    // If the parameter is not public then the method is inaccessible for us.
+                    continue
+                }
+
+                def name = Character.toLowerCase(m.name.charAt(3)).toString() +
+                        m.name.substring(4)
+                cb(m, name, parameterType, false)
             }
         }
     }
@@ -98,8 +114,8 @@ class DSLGeneratorTask extends DefaultTask {
     // class, e.g. FrameLayout.class => frameLayout() { v(FrameLayout.class); }
     //
     def processViews(builder, view) {
-        def className = view.getCanonicalName();
-        def name = view.getSimpleName()
+        def className = view.canonicalName;
+        def name = view.simpleName
         if (project.anvilgen.quirks[className]) {
             def alias = project.anvilgen.quirks[className]["__viewAlias"];
             // if the whole view class is banned - do nothing
@@ -142,7 +158,7 @@ class DSLGeneratorTask extends DefaultTask {
     }
 
     def finalizeAttrs(builder, methods) {
-        methods.sort { it.key.method + " " + it.key.cls.getName() }.each {
+        methods.sort { it.key.method + " " + it.key.cls.name }.each {
             def cls = TypeName.get(it.key.cls).box()
             if (cls.isPrimitive()) {
                 cls = c.box()
@@ -190,7 +206,7 @@ class DSLGeneratorTask extends DefaultTask {
             builder = attrApplyBuilder(m)
         }
 
-        def className = m.getDeclaringClass().getCanonicalName();
+        def className = m.declaringClass.canonicalName;
         def listenerClass = m.getParameterTypes()[0];
 
         def listener = TypeSpec.anonymousClassBuilder("")
@@ -241,7 +257,7 @@ class DSLGeneratorTask extends DefaultTask {
             builder = attrApplyBuilder(m)
         }
 
-        def className = m.getDeclaringClass().getCanonicalName();
+        def className = m.declaringClass.canonicalName;
         if (project.anvilgen.quirks[className]) {
             def argClass = m.getParameterTypes()[0].getCanonicalName();
             if (project.anvilgen.quirks[className]["${m.getName()}:${argClass}"]) {
@@ -252,7 +268,7 @@ class DSLGeneratorTask extends DefaultTask {
             }
         }
 
-        if (m.getDeclaringClass().getCanonicalName() == "android.view.View") {
+        if (className == "android.view.View") {
             builder = attrApplyBuilder(m)
                     .addStatement("v.${m.getName()}(arg)")
             builder.locked = true
@@ -269,7 +285,6 @@ class DSLGeneratorTask extends DefaultTask {
         return fn(s.charAt(0)).toString() + s.substring(1)
     }
 
-    @EqualsAndHashCode
     class MethodKey {
         String method
         Class cls
@@ -277,6 +292,19 @@ class DSLGeneratorTask extends DefaultTask {
         MethodKey(m, c) {
             method = m
             cls = c
+        }
+
+        @Override
+        boolean equals(Object obj) {
+            if (!(obj instanceof MethodKey)) {
+                return false
+            }
+            return method.equals(obj.method) && cls.name.equals(obj.cls.name)
+        }
+
+        @Override
+        int hashCode() {
+            return method.hashCode() + 43 * cls.canonicalName.hashCode()
         }
     }
 }

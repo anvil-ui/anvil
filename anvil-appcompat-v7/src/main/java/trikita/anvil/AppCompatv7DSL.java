@@ -1,17 +1,36 @@
 package trikita.anvil;
 
+import android.app.SearchableInfo;
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.view.ActionProvider;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.view.menu.ExpandedMenuView;
 import android.support.v7.view.menu.ListMenuItemView;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.ActionBarContainer;
+import android.support.v7.widget.ActionBarContextView;
+import android.support.v7.widget.ActionBarOverlayLayout;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.ActivityChooserView;
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatCheckedTextView;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.AppCompatSeekBar;
+import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.ContentFrameLayout;
 import android.support.v7.widget.DialogTitle;
@@ -20,17 +39,22 @@ import android.support.v7.widget.FitWindowsLinearLayout;
 import android.support.v7.widget.FitWindowsViewGroup;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.ListViewCompat;
+import android.support.v7.widget.ScrollingTabContainerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.ViewStubCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.PopupWindow;
+import android.widget.SpinnerAdapter;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
 import java.lang.Integer;
+import java.lang.String;
 import java.lang.Void;
 
 /**
@@ -40,6 +64,14 @@ import java.lang.Void;
  * Please, don't edit it manually unless for debugging.
  */
 public final class AppCompatv7DSL extends BaseDSL {
+  public static AppCompatv7DSL.ViewClassResult actionMenuItemView() {
+    return v(ActionMenuItemView.class);
+  }
+
+  public static Void actionMenuItemView(Anvil.Renderable r) {
+    return v(ActionMenuItemView.class, r);
+  }
+
   public static AppCompatv7DSL.ViewClassResult expandedMenuView() {
     return v(ExpandedMenuView.class);
   }
@@ -64,6 +96,22 @@ public final class AppCompatv7DSL extends BaseDSL {
     return v(ActionBarContainer.class, r);
   }
 
+  public static AppCompatv7DSL.ViewClassResult actionBarContextView() {
+    return v(ActionBarContextView.class);
+  }
+
+  public static Void actionBarContextView(Anvil.Renderable r) {
+    return v(ActionBarContextView.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult actionBarOverlayLayout() {
+    return v(ActionBarOverlayLayout.class);
+  }
+
+  public static Void actionBarOverlayLayout(Anvil.Renderable r) {
+    return v(ActionBarOverlayLayout.class, r);
+  }
+
   public static AppCompatv7DSL.ViewClassResult actionMenuView() {
     return v(ActionMenuView.class);
   }
@@ -80,12 +128,76 @@ public final class AppCompatv7DSL extends BaseDSL {
     return v(ActivityChooserView.class, r);
   }
 
+  public static AppCompatv7DSL.ViewClassResult appCompatAutoCompleteTextView() {
+    return v(AppCompatAutoCompleteTextView.class);
+  }
+
+  public static Void appCompatAutoCompleteTextView(Anvil.Renderable r) {
+    return v(AppCompatAutoCompleteTextView.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatButton() {
+    return v(AppCompatButton.class);
+  }
+
+  public static Void appCompatButton(Anvil.Renderable r) {
+    return v(AppCompatButton.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatCheckBox() {
+    return v(AppCompatCheckBox.class);
+  }
+
+  public static Void appCompatCheckBox(Anvil.Renderable r) {
+    return v(AppCompatCheckBox.class, r);
+  }
+
   public static AppCompatv7DSL.ViewClassResult appCompatCheckedTextView() {
     return v(AppCompatCheckedTextView.class);
   }
 
   public static Void appCompatCheckedTextView(Anvil.Renderable r) {
     return v(AppCompatCheckedTextView.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatEditText() {
+    return v(AppCompatEditText.class);
+  }
+
+  public static Void appCompatEditText(Anvil.Renderable r) {
+    return v(AppCompatEditText.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatImageButton() {
+    return v(AppCompatImageButton.class);
+  }
+
+  public static Void appCompatImageButton(Anvil.Renderable r) {
+    return v(AppCompatImageButton.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatImageView() {
+    return v(AppCompatImageView.class);
+  }
+
+  public static Void appCompatImageView(Anvil.Renderable r) {
+    return v(AppCompatImageView.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatMultiAutoCompleteTextView() {
+    return v(AppCompatMultiAutoCompleteTextView.class);
+  }
+
+  public static Void appCompatMultiAutoCompleteTextView(Anvil.Renderable r) {
+    return v(AppCompatMultiAutoCompleteTextView.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatRadioButton() {
+    return v(AppCompatRadioButton.class);
+  }
+
+  public static Void appCompatRadioButton(Anvil.Renderable r) {
+    return v(AppCompatRadioButton.class, r);
   }
 
   public static AppCompatv7DSL.ViewClassResult appCompatRatingBar() {
@@ -102,6 +214,22 @@ public final class AppCompatv7DSL extends BaseDSL {
 
   public static Void appCompatSeekBar(Anvil.Renderable r) {
     return v(AppCompatSeekBar.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatSpinner() {
+    return v(AppCompatSpinner.class);
+  }
+
+  public static Void appCompatSpinner(Anvil.Renderable r) {
+    return v(AppCompatSpinner.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult appCompatTextView() {
+    return v(AppCompatTextView.class);
+  }
+
+  public static Void appCompatTextView(Anvil.Renderable r) {
+    return v(AppCompatTextView.class, r);
   }
 
   public static AppCompatv7DSL.ViewClassResult buttonBarLayout() {
@@ -160,6 +288,22 @@ public final class AppCompatv7DSL extends BaseDSL {
     return v(ListViewCompat.class, r);
   }
 
+  public static AppCompatv7DSL.ViewClassResult scrollingTabContainerView() {
+    return v(ScrollingTabContainerView.class);
+  }
+
+  public static Void scrollingTabContainerView(Anvil.Renderable r) {
+    return v(ScrollingTabContainerView.class, r);
+  }
+
+  public static AppCompatv7DSL.ViewClassResult searchView() {
+    return v(SearchView.class);
+  }
+
+  public static Void searchView(Anvil.Renderable r) {
+    return v(SearchView.class, r);
+  }
+
   public static AppCompatv7DSL.ViewClassResult switchCompat() {
     return v(SwitchCompat.class);
   }
@@ -184,12 +328,40 @@ public final class AppCompatv7DSL extends BaseDSL {
     return v(ViewStubCompat.class, r);
   }
 
+  public static Void actionBarHideOffset(int arg) {
+    return AppCompatv7DSL.attr(ActionBarHideOffsetFunc8567756a.instance, arg);
+  }
+
+  public static Void actionBarVisibilityCallback(ActionBarOverlayLayout.ActionBarVisibilityCallback arg) {
+    return AppCompatv7DSL.attr(ActionBarVisibilityCallbackFunccbf3fd1e.instance, arg);
+  }
+
+  public static Void adapter(SpinnerAdapter arg) {
+    return AppCompatv7DSL.attr(AdapterFunc32a095c1.instance, arg);
+  }
+
+  public static Void allowCollapse(boolean arg) {
+    return AppCompatv7DSL.attr(AllowCollapseFunc148d6054.instance, arg);
+  }
+
   public static Void allowStacking(boolean arg) {
     return AppCompatv7DSL.attr(AllowStackingFunc148d6054.instance, arg);
   }
 
+  public static Void appSearchData(Bundle arg) {
+    return AppCompatv7DSL.attr(AppSearchDataFuncb92e972d.instance, arg);
+  }
+
   public static Void attachListener(ContentFrameLayout.OnAttachListener arg) {
     return AppCompatv7DSL.attr(AttachListenerFunc3ca76dcd.instance, arg);
+  }
+
+  public static Void backgroundDrawable(Drawable arg) {
+    return AppCompatv7DSL.attr(BackgroundDrawableFuncfb47464a.instance, arg);
+  }
+
+  public static Void backgroundResource(int arg) {
+    return AppCompatv7DSL.attr(BackgroundResourceFunc8567756a.instance, arg);
   }
 
   public static Void baselineAligned(boolean arg) {
@@ -198,6 +370,14 @@ public final class AppCompatv7DSL extends BaseDSL {
 
   public static Void baselineAlignedChildIndex(int arg) {
     return AppCompatv7DSL.attr(BaselineAlignedChildIndexFunc8567756a.instance, arg);
+  }
+
+  public static Void buttonDrawable(Drawable arg) {
+    return AppCompatv7DSL.attr(ButtonDrawableFuncfb47464a.instance, arg);
+  }
+
+  public static Void buttonDrawable(int arg) {
+    return AppCompatv7DSL.attr(ButtonDrawableFunc8567756a.instance, arg);
   }
 
   public static Void checkMarkDrawable(int arg) {
@@ -216,6 +396,14 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(CollapsibleFunc148d6054.instance, arg);
   }
 
+  public static Void contentHeight(int arg) {
+    return AppCompatv7DSL.attr(ContentHeightFunc8567756a.instance, arg);
+  }
+
+  public static Void customView(View arg) {
+    return AppCompatv7DSL.attr(CustomViewFunc6c3617af.instance, arg);
+  }
+
   public static Void defaultActionButtonContentDescription(int arg) {
     return AppCompatv7DSL.attr(DefaultActionButtonContentDescriptionFunc8567756a.instance, arg);
   }
@@ -226,6 +414,22 @@ public final class AppCompatv7DSL extends BaseDSL {
 
   public static Void dividerPadding(int arg) {
     return AppCompatv7DSL.attr(DividerPaddingFunc8567756a.instance, arg);
+  }
+
+  public static Void dropDownBackgroundResource(int arg) {
+    return AppCompatv7DSL.attr(DropDownBackgroundResourceFunc8567756a.instance, arg);
+  }
+
+  public static Void dropDownHorizontalOffset(int arg) {
+    return AppCompatv7DSL.attr(DropDownHorizontalOffsetFunc8567756a.instance, arg);
+  }
+
+  public static Void dropDownVerticalOffset(int arg) {
+    return AppCompatv7DSL.attr(DropDownVerticalOffsetFunc8567756a.instance, arg);
+  }
+
+  public static Void dropDownWidth(int arg) {
+    return AppCompatv7DSL.attr(DropDownWidthFunc8567756a.instance, arg);
   }
 
   public static Void expandActivityOverflowButtonContentDescription(int arg) {
@@ -240,12 +444,24 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(ExpandedActionViewsExclusiveFunc148d6054.instance, arg);
   }
 
+  public static Void expandedFormat(boolean arg) {
+    return AppCompatv7DSL.attr(ExpandedFormatFunc148d6054.instance, arg);
+  }
+
   public static Void forceShowIcon(boolean arg) {
     return AppCompatv7DSL.attr(ForceShowIconFunc148d6054.instance, arg);
   }
 
   public static Void gravity(int arg) {
     return AppCompatv7DSL.attr(GravityFunc8567756a.instance, arg);
+  }
+
+  public static Void hasNonEmbeddedTabs(boolean arg) {
+    return AppCompatv7DSL.attr(HasNonEmbeddedTabsFunc148d6054.instance, arg);
+  }
+
+  public static Void hideOnContentScrollEnabled(boolean arg) {
+    return AppCompatv7DSL.attr(HideOnContentScrollEnabledFunc148d6054.instance, arg);
   }
 
   public static Void horizontalGravity(int arg) {
@@ -256,12 +472,40 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(IconFuncfb47464a.instance, arg);
   }
 
+  public static Void icon(int arg) {
+    return AppCompatv7DSL.attr(IconFunc8567756a.instance, arg);
+  }
+
+  public static Void iconified(boolean arg) {
+    return AppCompatv7DSL.attr(IconifiedFunc148d6054.instance, arg);
+  }
+
+  public static Void iconifiedByDefault(boolean arg) {
+    return AppCompatv7DSL.attr(IconifiedByDefaultFunc148d6054.instance, arg);
+  }
+
+  public static Void imageResource(int arg) {
+    return AppCompatv7DSL.attr(ImageResourceFunc8567756a.instance, arg);
+  }
+
+  public static Void imeOptions(int arg) {
+    return AppCompatv7DSL.attr(ImeOptionsFunc8567756a.instance, arg);
+  }
+
   public static Void inflatedId(int arg) {
     return AppCompatv7DSL.attr(InflatedIdFunc8567756a.instance, arg);
   }
 
   public static Void initialActivityCount(int arg) {
     return AppCompatv7DSL.attr(InitialActivityCountFunc8567756a.instance, arg);
+  }
+
+  public static Void inputType(int arg) {
+    return AppCompatv7DSL.attr(InputTypeFunc8567756a.instance, arg);
+  }
+
+  public static Void itemInvoker(MenuBuilder.ItemInvoker arg) {
+    return AppCompatv7DSL.attr(ItemInvokerFunc874ef140.instance, arg);
   }
 
   public static Void layoutInflater(LayoutInflater arg) {
@@ -288,6 +532,10 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(LogoDescriptionFuncc0af808b.instance, arg);
   }
 
+  public static Void maxWidth(int arg) {
+    return AppCompatv7DSL.attr(MaxWidthFunc8567756a.instance, arg);
+  }
+
   public static Void measureWithLargestChildEnabled(boolean arg) {
     return AppCompatv7DSL.attr(MeasureWithLargestChildEnabledFunc148d6054.instance, arg);
   }
@@ -312,6 +560,10 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(NavigationOnClickListenerFunc79a13a5e.instance, arg);
   }
 
+  public static Void onClose(SearchView.OnCloseListener arg) {
+    return AppCompatv7DSL.attr(OnCloseFuncfd9c6147.instance, arg);
+  }
+
   public static Void onDismiss(PopupWindow.OnDismissListener arg) {
     return AppCompatv7DSL.attr(OnDismissFunc6b0eb982.instance, arg);
   }
@@ -332,6 +584,22 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(OnMenuItemClickFunc68ab335d.instance, arg);
   }
 
+  public static Void onQueryText(SearchView.OnQueryTextListener arg) {
+    return AppCompatv7DSL.attr(OnQueryTextFunc59c08ee4.instance, arg);
+  }
+
+  public static Void onQueryTextFocusChange(View.OnFocusChangeListener arg) {
+    return AppCompatv7DSL.attr(OnQueryTextFocusChangeFunca56a1dfe.instance, arg);
+  }
+
+  public static Void onSearchClick(View.OnClickListener arg) {
+    return AppCompatv7DSL.attr(OnSearchClickFunc79a13a5e.instance, arg);
+  }
+
+  public static Void onSuggestion(SearchView.OnSuggestionListener arg) {
+    return AppCompatv7DSL.attr(OnSuggestionFunc59f9313d.instance, arg);
+  }
+
   public static Void orientation(int arg) {
     return AppCompatv7DSL.attr(OrientationFunc8567756a.instance, arg);
   }
@@ -344,6 +612,22 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(OverflowReservedFunc148d6054.instance, arg);
   }
 
+  public static Void overlayMode(boolean arg) {
+    return AppCompatv7DSL.attr(OverlayModeFunc148d6054.instance, arg);
+  }
+
+  public static Void popupBackgroundDrawable(Drawable arg) {
+    return AppCompatv7DSL.attr(PopupBackgroundDrawableFuncfb47464a.instance, arg);
+  }
+
+  public static Void popupBackgroundResource(int arg) {
+    return AppCompatv7DSL.attr(PopupBackgroundResourceFunc8567756a.instance, arg);
+  }
+
+  public static Void popupCallback(ActionMenuItemView.PopupCallback arg) {
+    return AppCompatv7DSL.attr(PopupCallbackFunc76c77ea5.instance, arg);
+  }
+
   public static Void popupTheme(int arg) {
     return AppCompatv7DSL.attr(PopupThemeFunc8567756a.instance, arg);
   }
@@ -352,8 +636,24 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(PrimaryBackgroundFuncfb47464a.instance, arg);
   }
 
+  public static Void prompt(CharSequence arg) {
+    return AppCompatv7DSL.attr(PromptFuncc0af808b.instance, arg);
+  }
+
   public static Void provider(ActionProvider arg) {
     return AppCompatv7DSL.attr(ProviderFunc66da8dbe.instance, arg);
+  }
+
+  public static Void queryHint(CharSequence arg) {
+    return AppCompatv7DSL.attr(QueryHintFuncc0af808b.instance, arg);
+  }
+
+  public static Void queryRefinementEnabled(boolean arg) {
+    return AppCompatv7DSL.attr(QueryRefinementEnabledFunc148d6054.instance, arg);
+  }
+
+  public static Void searchableInfo(SearchableInfo arg) {
+    return AppCompatv7DSL.attr(SearchableInfoFunc1f96c03c.instance, arg);
   }
 
   public static Void selector(Drawable arg) {
@@ -368,6 +668,10 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(ShowTextFunc148d6054.instance, arg);
   }
 
+  public static Void showingForActionMode(boolean arg) {
+    return AppCompatv7DSL.attr(ShowingForActionModeFunc148d6054.instance, arg);
+  }
+
   public static Void splitBackground(Drawable arg) {
     return AppCompatv7DSL.attr(SplitBackgroundFuncfb47464a.instance, arg);
   }
@@ -378,6 +682,10 @@ public final class AppCompatv7DSL extends BaseDSL {
 
   public static Void stackedBackground(Drawable arg) {
     return AppCompatv7DSL.attr(StackedBackgroundFuncfb47464a.instance, arg);
+  }
+
+  public static Void submitButtonEnabled(boolean arg) {
+    return AppCompatv7DSL.attr(SubmitButtonEnabledFunc148d6054.instance, arg);
   }
 
   public static Void subtitle(int arg) {
@@ -392,6 +700,30 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(SubtitleTextColorFunc8567756a.instance, arg);
   }
 
+  public static Void suggestionsAdapter(CursorAdapter arg) {
+    return AppCompatv7DSL.attr(SuggestionsAdapterFuncb430a5a1.instance, arg);
+  }
+
+  public static Void supportAllCaps(boolean arg) {
+    return AppCompatv7DSL.attr(SupportAllCapsFunc148d6054.instance, arg);
+  }
+
+  public static Void supportBackgroundTintList(ColorStateList arg) {
+    return AppCompatv7DSL.attr(SupportBackgroundTintListFunc9e5e0e4e.instance, arg);
+  }
+
+  public static Void supportBackgroundTintMode(PorterDuff.Mode arg) {
+    return AppCompatv7DSL.attr(SupportBackgroundTintModeFuncabb7a84e.instance, arg);
+  }
+
+  public static Void supportButtonTintList(ColorStateList arg) {
+    return AppCompatv7DSL.attr(SupportButtonTintListFunc9e5e0e4e.instance, arg);
+  }
+
+  public static Void supportButtonTintMode(PorterDuff.Mode arg) {
+    return AppCompatv7DSL.attr(SupportButtonTintModeFuncabb7a84e.instance, arg);
+  }
+
   public static Void switchMinWidth(int arg) {
     return AppCompatv7DSL.attr(SwitchMinWidthFunc8567756a.instance, arg);
   }
@@ -402,6 +734,14 @@ public final class AppCompatv7DSL extends BaseDSL {
 
   public static Void switchTypeface(Typeface arg) {
     return AppCompatv7DSL.attr(SwitchTypefaceFunc53b4afb.instance, arg);
+  }
+
+  public static Void tabContainer(ScrollingTabContainerView arg) {
+    return AppCompatv7DSL.attr(TabContainerFunc1a5e642b.instance, arg);
+  }
+
+  public static Void tabSelected(int arg) {
+    return AppCompatv7DSL.attr(TabSelectedFunc8567756a.instance, arg);
   }
 
   public static Void textOff(CharSequence arg) {
@@ -432,6 +772,10 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(TitleFuncc0af808b.instance, arg);
   }
 
+  public static Void titleOptional(boolean arg) {
+    return AppCompatv7DSL.attr(TitleOptionalFunc148d6054.instance, arg);
+  }
+
   public static Void titleTextColor(int arg) {
     return AppCompatv7DSL.attr(TitleTextColorFunc8567756a.instance, arg);
   }
@@ -442,6 +786,14 @@ public final class AppCompatv7DSL extends BaseDSL {
 
   public static Void trackResource(int arg) {
     return AppCompatv7DSL.attr(TrackResourceFunc8567756a.instance, arg);
+  }
+
+  public static Void transitioning(boolean arg) {
+    return AppCompatv7DSL.attr(TransitioningFunc148d6054.instance, arg);
+  }
+
+  public static Void uiOptions(int arg) {
+    return AppCompatv7DSL.attr(UiOptionsFunc8567756a.instance, arg);
   }
 
   public static Void verticalGravity(int arg) {
@@ -456,6 +808,54 @@ public final class AppCompatv7DSL extends BaseDSL {
     return AppCompatv7DSL.attr(WeightSumFunce0893188.instance, arg);
   }
 
+  public static Void windowCallback(Window.Callback arg) {
+    return AppCompatv7DSL.attr(WindowCallbackFunc13cc8159.instance, arg);
+  }
+
+  public static Void windowTitle(CharSequence arg) {
+    return AppCompatv7DSL.attr(WindowTitleFuncc0af808b.instance, arg);
+  }
+
+  private static final class ActionBarHideOffsetFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final ActionBarHideOffsetFunc8567756a instance = new ActionBarHideOffsetFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setActionBarHideOffset(arg);
+      }
+    }
+  }
+
+  private static final class ActionBarVisibilityCallbackFunccbf3fd1e implements Anvil.AttrFunc<ActionBarOverlayLayout.ActionBarVisibilityCallback> {
+    public static final ActionBarVisibilityCallbackFunccbf3fd1e instance = new ActionBarVisibilityCallbackFunccbf3fd1e();
+
+    public void apply(View v, final ActionBarOverlayLayout.ActionBarVisibilityCallback arg, final ActionBarOverlayLayout.ActionBarVisibilityCallback old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setActionBarVisibilityCallback(arg);
+      }
+    }
+  }
+
+  private static final class AdapterFunc32a095c1 implements Anvil.AttrFunc<SpinnerAdapter> {
+    public static final AdapterFunc32a095c1 instance = new AdapterFunc32a095c1();
+
+    public void apply(View v, final SpinnerAdapter arg, final SpinnerAdapter old) {
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setAdapter(arg);
+      }
+    }
+  }
+
+  private static final class AllowCollapseFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final AllowCollapseFunc148d6054 instance = new AllowCollapseFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ScrollingTabContainerView) {
+        ((ScrollingTabContainerView) v).setAllowCollapse(arg);
+      }
+    }
+  }
+
   private static final class AllowStackingFunc148d6054 implements Anvil.AttrFunc<Boolean> {
     public static final AllowStackingFunc148d6054 instance = new AllowStackingFunc148d6054();
 
@@ -466,12 +866,84 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class AppSearchDataFuncb92e972d implements Anvil.AttrFunc<Bundle> {
+    public static final AppSearchDataFuncb92e972d instance = new AppSearchDataFuncb92e972d();
+
+    public void apply(View v, final Bundle arg, final Bundle old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setAppSearchData(arg);
+      }
+    }
+  }
+
   private static final class AttachListenerFunc3ca76dcd implements Anvil.AttrFunc<ContentFrameLayout.OnAttachListener> {
     public static final AttachListenerFunc3ca76dcd instance = new AttachListenerFunc3ca76dcd();
 
     public void apply(View v, final ContentFrameLayout.OnAttachListener arg, final ContentFrameLayout.OnAttachListener old) {
       if (v instanceof ContentFrameLayout) {
         ((ContentFrameLayout) v).setAttachListener(arg);
+      }
+    }
+  }
+
+  private static final class BackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
+    public static final BackgroundDrawableFuncfb47464a instance = new BackgroundDrawableFuncfb47464a();
+
+    public void apply(View v, final Drawable arg, final Drawable old) {
+      if (v instanceof AppCompatAutoCompleteTextView) {
+        ((AppCompatAutoCompleteTextView) v).setBackgroundDrawable(arg);
+      }
+      if (v instanceof AppCompatButton) {
+        ((AppCompatButton) v).setBackgroundDrawable(arg);
+      }
+      if (v instanceof AppCompatEditText) {
+        ((AppCompatEditText) v).setBackgroundDrawable(arg);
+      }
+      if (v instanceof AppCompatImageButton) {
+        ((AppCompatImageButton) v).setBackgroundDrawable(arg);
+      }
+      if (v instanceof AppCompatImageView) {
+        ((AppCompatImageView) v).setBackgroundDrawable(arg);
+      }
+      if (v instanceof AppCompatMultiAutoCompleteTextView) {
+        ((AppCompatMultiAutoCompleteTextView) v).setBackgroundDrawable(arg);
+      }
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setBackgroundDrawable(arg);
+      }
+      if (v instanceof AppCompatTextView) {
+        ((AppCompatTextView) v).setBackgroundDrawable(arg);
+      }
+    }
+  }
+
+  private static final class BackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final BackgroundResourceFunc8567756a instance = new BackgroundResourceFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatAutoCompleteTextView) {
+        ((AppCompatAutoCompleteTextView) v).setBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatButton) {
+        ((AppCompatButton) v).setBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatEditText) {
+        ((AppCompatEditText) v).setBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatImageButton) {
+        ((AppCompatImageButton) v).setBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatImageView) {
+        ((AppCompatImageView) v).setBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatMultiAutoCompleteTextView) {
+        ((AppCompatMultiAutoCompleteTextView) v).setBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatTextView) {
+        ((AppCompatTextView) v).setBackgroundResource(arg);
       }
     }
   }
@@ -496,6 +968,32 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class ButtonDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
+    public static final ButtonDrawableFuncfb47464a instance = new ButtonDrawableFuncfb47464a();
+
+    public void apply(View v, final Drawable arg, final Drawable old) {
+      if (v instanceof AppCompatCheckBox) {
+        ((AppCompatCheckBox) v).setButtonDrawable(arg);
+      }
+      if (v instanceof AppCompatRadioButton) {
+        ((AppCompatRadioButton) v).setButtonDrawable(arg);
+      }
+    }
+  }
+
+  private static final class ButtonDrawableFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final ButtonDrawableFunc8567756a instance = new ButtonDrawableFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatCheckBox) {
+        ((AppCompatCheckBox) v).setButtonDrawable(arg);
+      }
+      if (v instanceof AppCompatRadioButton) {
+        ((AppCompatRadioButton) v).setButtonDrawable(arg);
+      }
+    }
+  }
+
   private static final class CheckMarkDrawableFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final CheckMarkDrawableFunc8567756a instance = new CheckMarkDrawableFunc8567756a();
 
@@ -510,6 +1008,9 @@ public final class AppCompatv7DSL extends BaseDSL {
     public static final CheckableFunc148d6054 instance = new CheckableFunc148d6054();
 
     public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionMenuItemView) {
+        ((ActionMenuItemView) v).setCheckable(arg);
+      }
       if (v instanceof ListMenuItemView) {
         ((ListMenuItemView) v).setCheckable(arg);
       }
@@ -520,6 +1021,9 @@ public final class AppCompatv7DSL extends BaseDSL {
     public static final CheckedFunc148d6054 instance = new CheckedFunc148d6054();
 
     public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionMenuItemView) {
+        ((ActionMenuItemView) v).setChecked(arg);
+      }
       if (v instanceof ListMenuItemView) {
         ((ListMenuItemView) v).setChecked(arg);
       }
@@ -535,6 +1039,29 @@ public final class AppCompatv7DSL extends BaseDSL {
     public void apply(View v, final Boolean arg, final Boolean old) {
       if (v instanceof Toolbar) {
         ((Toolbar) v).setCollapsible(arg);
+      }
+    }
+  }
+
+  private static final class ContentHeightFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final ContentHeightFunc8567756a instance = new ContentHeightFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof ActionBarContextView) {
+        ((ActionBarContextView) v).setContentHeight(arg);
+      }
+      if (v instanceof ScrollingTabContainerView) {
+        ((ScrollingTabContainerView) v).setContentHeight(arg);
+      }
+    }
+  }
+
+  private static final class CustomViewFunc6c3617af implements Anvil.AttrFunc<View> {
+    public static final CustomViewFunc6c3617af instance = new CustomViewFunc6c3617af();
+
+    public void apply(View v, final View arg, final View old) {
+      if (v instanceof ActionBarContextView) {
+        ((ActionBarContextView) v).setCustomView(arg);
       }
     }
   }
@@ -569,6 +1096,49 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class DropDownBackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final DropDownBackgroundResourceFunc8567756a instance = new DropDownBackgroundResourceFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatAutoCompleteTextView) {
+        ((AppCompatAutoCompleteTextView) v).setDropDownBackgroundResource(arg);
+      }
+      if (v instanceof AppCompatMultiAutoCompleteTextView) {
+        ((AppCompatMultiAutoCompleteTextView) v).setDropDownBackgroundResource(arg);
+      }
+    }
+  }
+
+  private static final class DropDownHorizontalOffsetFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final DropDownHorizontalOffsetFunc8567756a instance = new DropDownHorizontalOffsetFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setDropDownHorizontalOffset(arg);
+      }
+    }
+  }
+
+  private static final class DropDownVerticalOffsetFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final DropDownVerticalOffsetFunc8567756a instance = new DropDownVerticalOffsetFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setDropDownVerticalOffset(arg);
+      }
+    }
+  }
+
+  private static final class DropDownWidthFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final DropDownWidthFunc8567756a instance = new DropDownWidthFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setDropDownWidth(arg);
+      }
+    }
+  }
+
   private static final class ExpandActivityOverflowButtonContentDescriptionFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final ExpandActivityOverflowButtonContentDescriptionFunc8567756a instance = new ExpandActivityOverflowButtonContentDescriptionFunc8567756a();
 
@@ -599,6 +1169,16 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class ExpandedFormatFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final ExpandedFormatFunc148d6054 instance = new ExpandedFormatFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionMenuItemView) {
+        ((ActionMenuItemView) v).setExpandedFormat(arg);
+      }
+    }
+  }
+
   private static final class ForceShowIconFunc148d6054 implements Anvil.AttrFunc<Boolean> {
     public static final ForceShowIconFunc148d6054 instance = new ForceShowIconFunc148d6054();
 
@@ -619,6 +1199,26 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class HasNonEmbeddedTabsFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final HasNonEmbeddedTabsFunc148d6054 instance = new HasNonEmbeddedTabsFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setHasNonEmbeddedTabs(arg);
+      }
+    }
+  }
+
+  private static final class HideOnContentScrollEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final HideOnContentScrollEnabledFunc148d6054 instance = new HideOnContentScrollEnabledFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setHideOnContentScrollEnabled(arg);
+      }
+    }
+  }
+
   private static final class HorizontalGravityFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final HorizontalGravityFunc8567756a instance = new HorizontalGravityFunc8567756a();
 
@@ -633,8 +1233,67 @@ public final class AppCompatv7DSL extends BaseDSL {
     public static final IconFuncfb47464a instance = new IconFuncfb47464a();
 
     public void apply(View v, final Drawable arg, final Drawable old) {
+      if (v instanceof ActionMenuItemView) {
+        ((ActionMenuItemView) v).setIcon(arg);
+      }
       if (v instanceof ListMenuItemView) {
         ((ListMenuItemView) v).setIcon(arg);
+      }
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setIcon(arg);
+      }
+    }
+  }
+
+  private static final class IconFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final IconFunc8567756a instance = new IconFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setIcon(arg);
+      }
+    }
+  }
+
+  private static final class IconifiedFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final IconifiedFunc148d6054 instance = new IconifiedFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setIconified(arg);
+      }
+    }
+  }
+
+  private static final class IconifiedByDefaultFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final IconifiedByDefaultFunc148d6054 instance = new IconifiedByDefaultFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setIconifiedByDefault(arg);
+      }
+    }
+  }
+
+  private static final class ImageResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final ImageResourceFunc8567756a instance = new ImageResourceFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatImageButton) {
+        ((AppCompatImageButton) v).setImageResource(arg);
+      }
+      if (v instanceof AppCompatImageView) {
+        ((AppCompatImageView) v).setImageResource(arg);
+      }
+    }
+  }
+
+  private static final class ImeOptionsFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final ImeOptionsFunc8567756a instance = new ImeOptionsFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setImeOptions(arg);
       }
     }
   }
@@ -655,6 +1314,26 @@ public final class AppCompatv7DSL extends BaseDSL {
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof ActivityChooserView) {
         ((ActivityChooserView) v).setInitialActivityCount(arg);
+      }
+    }
+  }
+
+  private static final class InputTypeFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final InputTypeFunc8567756a instance = new InputTypeFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setInputType(arg);
+      }
+    }
+  }
+
+  private static final class ItemInvokerFunc874ef140 implements Anvil.AttrFunc<MenuBuilder.ItemInvoker> {
+    public static final ItemInvokerFunc874ef140 instance = new ItemInvokerFunc874ef140();
+
+    public void apply(View v, final MenuBuilder.ItemInvoker arg, final MenuBuilder.ItemInvoker old) {
+      if (v instanceof ActionMenuItemView) {
+        ((ActionMenuItemView) v).setItemInvoker(arg);
       }
     }
   }
@@ -693,6 +1372,9 @@ public final class AppCompatv7DSL extends BaseDSL {
     public static final LogoFunc8567756a instance = new LogoFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setLogo(arg);
+      }
       if (v instanceof Toolbar) {
         ((Toolbar) v).setLogo(arg);
       }
@@ -715,6 +1397,16 @@ public final class AppCompatv7DSL extends BaseDSL {
     public void apply(View v, final CharSequence arg, final CharSequence old) {
       if (v instanceof Toolbar) {
         ((Toolbar) v).setLogoDescription(arg);
+      }
+    }
+  }
+
+  private static final class MaxWidthFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final MaxWidthFunc8567756a instance = new MaxWidthFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setMaxWidth(arg);
       }
     }
   }
@@ -775,6 +1467,22 @@ public final class AppCompatv7DSL extends BaseDSL {
     public void apply(View v, final View.OnClickListener arg, final View.OnClickListener old) {
       if (v instanceof Toolbar) {
         ((Toolbar) v).setNavigationOnClickListener(arg);
+      }
+    }
+  }
+
+  private static final class OnCloseFuncfd9c6147 implements Anvil.AttrFunc<SearchView.OnCloseListener> {
+    public static final OnCloseFuncfd9c6147 instance = new OnCloseFuncfd9c6147();
+
+    public void apply(View v, final SearchView.OnCloseListener arg, final SearchView.OnCloseListener old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setOnCloseListener(new SearchView.OnCloseListener() {
+          public boolean onClose() {
+            boolean r = arg.onClose();
+            Anvil.render();
+            return r;
+          }
+        });
       }
     }
   }
@@ -864,6 +1572,80 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class OnQueryTextFunc59c08ee4 implements Anvil.AttrFunc<SearchView.OnQueryTextListener> {
+    public static final OnQueryTextFunc59c08ee4 instance = new OnQueryTextFunc59c08ee4();
+
+    public void apply(View v, final SearchView.OnQueryTextListener arg, final SearchView.OnQueryTextListener old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+          public boolean onQueryTextChange(String a0) {
+            boolean r = arg.onQueryTextChange(a0);
+            Anvil.render();
+            return r;
+          }
+
+          public boolean onQueryTextSubmit(String a0) {
+            boolean r = arg.onQueryTextSubmit(a0);
+            Anvil.render();
+            return r;
+          }
+        });
+      }
+    }
+  }
+
+  private static final class OnQueryTextFocusChangeFunca56a1dfe implements Anvil.AttrFunc<View.OnFocusChangeListener> {
+    public static final OnQueryTextFocusChangeFunca56a1dfe instance = new OnQueryTextFocusChangeFunca56a1dfe();
+
+    public void apply(View v, final View.OnFocusChangeListener arg, final View.OnFocusChangeListener old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+          public void onFocusChange(View a0, boolean a1) {
+            arg.onFocusChange(a0, a1);
+            Anvil.render();
+          }
+        });
+      }
+    }
+  }
+
+  private static final class OnSearchClickFunc79a13a5e implements Anvil.AttrFunc<View.OnClickListener> {
+    public static final OnSearchClickFunc79a13a5e instance = new OnSearchClickFunc79a13a5e();
+
+    public void apply(View v, final View.OnClickListener arg, final View.OnClickListener old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setOnSearchClickListener(new View.OnClickListener() {
+          public void onClick(View a0) {
+            arg.onClick(a0);
+            Anvil.render();
+          }
+        });
+      }
+    }
+  }
+
+  private static final class OnSuggestionFunc59f9313d implements Anvil.AttrFunc<SearchView.OnSuggestionListener> {
+    public static final OnSuggestionFunc59f9313d instance = new OnSuggestionFunc59f9313d();
+
+    public void apply(View v, final SearchView.OnSuggestionListener arg, final SearchView.OnSuggestionListener old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+          public boolean onSuggestionClick(int a0) {
+            boolean r = arg.onSuggestionClick(a0);
+            Anvil.render();
+            return r;
+          }
+
+          public boolean onSuggestionSelect(int a0) {
+            boolean r = arg.onSuggestionSelect(a0);
+            Anvil.render();
+            return r;
+          }
+        });
+      }
+    }
+  }
+
   private static final class OrientationFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final OrientationFunc8567756a instance = new OrientationFunc8567756a();
 
@@ -897,6 +1679,46 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class OverlayModeFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final OverlayModeFunc148d6054 instance = new OverlayModeFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setOverlayMode(arg);
+      }
+    }
+  }
+
+  private static final class PopupBackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
+    public static final PopupBackgroundDrawableFuncfb47464a instance = new PopupBackgroundDrawableFuncfb47464a();
+
+    public void apply(View v, final Drawable arg, final Drawable old) {
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setPopupBackgroundDrawable(arg);
+      }
+    }
+  }
+
+  private static final class PopupBackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final PopupBackgroundResourceFunc8567756a instance = new PopupBackgroundResourceFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setPopupBackgroundResource(arg);
+      }
+    }
+  }
+
+  private static final class PopupCallbackFunc76c77ea5 implements Anvil.AttrFunc<ActionMenuItemView.PopupCallback> {
+    public static final PopupCallbackFunc76c77ea5 instance = new PopupCallbackFunc76c77ea5();
+
+    public void apply(View v, final ActionMenuItemView.PopupCallback arg, final ActionMenuItemView.PopupCallback old) {
+      if (v instanceof ActionMenuItemView) {
+        ((ActionMenuItemView) v).setPopupCallback(arg);
+      }
+    }
+  }
+
   private static final class PopupThemeFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final PopupThemeFunc8567756a instance = new PopupThemeFunc8567756a();
 
@@ -920,12 +1742,52 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class PromptFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
+    public static final PromptFuncc0af808b instance = new PromptFuncc0af808b();
+
+    public void apply(View v, final CharSequence arg, final CharSequence old) {
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setPrompt(arg);
+      }
+    }
+  }
+
   private static final class ProviderFunc66da8dbe implements Anvil.AttrFunc<ActionProvider> {
     public static final ProviderFunc66da8dbe instance = new ProviderFunc66da8dbe();
 
     public void apply(View v, final ActionProvider arg, final ActionProvider old) {
       if (v instanceof ActivityChooserView) {
         ((ActivityChooserView) v).setProvider(arg);
+      }
+    }
+  }
+
+  private static final class QueryHintFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
+    public static final QueryHintFuncc0af808b instance = new QueryHintFuncc0af808b();
+
+    public void apply(View v, final CharSequence arg, final CharSequence old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setQueryHint(arg);
+      }
+    }
+  }
+
+  private static final class QueryRefinementEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final QueryRefinementEnabledFunc148d6054 instance = new QueryRefinementEnabledFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setQueryRefinementEnabled(arg);
+      }
+    }
+  }
+
+  private static final class SearchableInfoFunc1f96c03c implements Anvil.AttrFunc<SearchableInfo> {
+    public static final SearchableInfoFunc1f96c03c instance = new SearchableInfoFunc1f96c03c();
+
+    public void apply(View v, final SearchableInfo arg, final SearchableInfo old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setSearchableInfo(arg);
       }
     }
   }
@@ -960,6 +1822,16 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class ShowingForActionModeFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final ShowingForActionModeFunc148d6054 instance = new ShowingForActionModeFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setShowingForActionMode(arg);
+      }
+    }
+  }
+
   private static final class SplitBackgroundFuncfb47464a implements Anvil.AttrFunc<Drawable> {
     public static final SplitBackgroundFuncfb47464a instance = new SplitBackgroundFuncfb47464a();
 
@@ -990,6 +1862,16 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class SubmitButtonEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final SubmitButtonEnabledFunc148d6054 instance = new SubmitButtonEnabledFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setSubmitButtonEnabled(arg);
+      }
+    }
+  }
+
   private static final class SubtitleFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final SubtitleFunc8567756a instance = new SubtitleFunc8567756a();
 
@@ -1004,6 +1886,9 @@ public final class AppCompatv7DSL extends BaseDSL {
     public static final SubtitleFuncc0af808b instance = new SubtitleFuncc0af808b();
 
     public void apply(View v, final CharSequence arg, final CharSequence old) {
+      if (v instanceof ActionBarContextView) {
+        ((ActionBarContextView) v).setSubtitle(arg);
+      }
       if (v instanceof Toolbar) {
         ((Toolbar) v).setSubtitle(arg);
       }
@@ -1016,6 +1901,114 @@ public final class AppCompatv7DSL extends BaseDSL {
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof Toolbar) {
         ((Toolbar) v).setSubtitleTextColor(arg);
+      }
+    }
+  }
+
+  private static final class SuggestionsAdapterFuncb430a5a1 implements Anvil.AttrFunc<CursorAdapter> {
+    public static final SuggestionsAdapterFuncb430a5a1 instance = new SuggestionsAdapterFuncb430a5a1();
+
+    public void apply(View v, final CursorAdapter arg, final CursorAdapter old) {
+      if (v instanceof SearchView) {
+        ((SearchView) v).setSuggestionsAdapter(arg);
+      }
+    }
+  }
+
+  private static final class SupportAllCapsFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final SupportAllCapsFunc148d6054 instance = new SupportAllCapsFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof AppCompatButton) {
+        ((AppCompatButton) v).setSupportAllCaps(arg);
+      }
+    }
+  }
+
+  private static final class SupportBackgroundTintListFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
+    public static final SupportBackgroundTintListFunc9e5e0e4e instance = new SupportBackgroundTintListFunc9e5e0e4e();
+
+    public void apply(View v, final ColorStateList arg, final ColorStateList old) {
+      if (v instanceof AppCompatAutoCompleteTextView) {
+        ((AppCompatAutoCompleteTextView) v).setSupportBackgroundTintList(arg);
+      }
+      if (v instanceof AppCompatButton) {
+        ((AppCompatButton) v).setSupportBackgroundTintList(arg);
+      }
+      if (v instanceof AppCompatEditText) {
+        ((AppCompatEditText) v).setSupportBackgroundTintList(arg);
+      }
+      if (v instanceof AppCompatImageButton) {
+        ((AppCompatImageButton) v).setSupportBackgroundTintList(arg);
+      }
+      if (v instanceof AppCompatImageView) {
+        ((AppCompatImageView) v).setSupportBackgroundTintList(arg);
+      }
+      if (v instanceof AppCompatMultiAutoCompleteTextView) {
+        ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintList(arg);
+      }
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setSupportBackgroundTintList(arg);
+      }
+      if (v instanceof AppCompatTextView) {
+        ((AppCompatTextView) v).setSupportBackgroundTintList(arg);
+      }
+    }
+  }
+
+  private static final class SupportBackgroundTintModeFuncabb7a84e implements Anvil.AttrFunc<PorterDuff.Mode> {
+    public static final SupportBackgroundTintModeFuncabb7a84e instance = new SupportBackgroundTintModeFuncabb7a84e();
+
+    public void apply(View v, final PorterDuff.Mode arg, final PorterDuff.Mode old) {
+      if (v instanceof AppCompatAutoCompleteTextView) {
+        ((AppCompatAutoCompleteTextView) v).setSupportBackgroundTintMode(arg);
+      }
+      if (v instanceof AppCompatButton) {
+        ((AppCompatButton) v).setSupportBackgroundTintMode(arg);
+      }
+      if (v instanceof AppCompatEditText) {
+        ((AppCompatEditText) v).setSupportBackgroundTintMode(arg);
+      }
+      if (v instanceof AppCompatImageButton) {
+        ((AppCompatImageButton) v).setSupportBackgroundTintMode(arg);
+      }
+      if (v instanceof AppCompatImageView) {
+        ((AppCompatImageView) v).setSupportBackgroundTintMode(arg);
+      }
+      if (v instanceof AppCompatMultiAutoCompleteTextView) {
+        ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintMode(arg);
+      }
+      if (v instanceof AppCompatSpinner) {
+        ((AppCompatSpinner) v).setSupportBackgroundTintMode(arg);
+      }
+      if (v instanceof AppCompatTextView) {
+        ((AppCompatTextView) v).setSupportBackgroundTintMode(arg);
+      }
+    }
+  }
+
+  private static final class SupportButtonTintListFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
+    public static final SupportButtonTintListFunc9e5e0e4e instance = new SupportButtonTintListFunc9e5e0e4e();
+
+    public void apply(View v, final ColorStateList arg, final ColorStateList old) {
+      if (v instanceof AppCompatCheckBox) {
+        ((AppCompatCheckBox) v).setSupportButtonTintList(arg);
+      }
+      if (v instanceof AppCompatRadioButton) {
+        ((AppCompatRadioButton) v).setSupportButtonTintList(arg);
+      }
+    }
+  }
+
+  private static final class SupportButtonTintModeFuncabb7a84e implements Anvil.AttrFunc<PorterDuff.Mode> {
+    public static final SupportButtonTintModeFuncabb7a84e instance = new SupportButtonTintModeFuncabb7a84e();
+
+    public void apply(View v, final PorterDuff.Mode arg, final PorterDuff.Mode old) {
+      if (v instanceof AppCompatCheckBox) {
+        ((AppCompatCheckBox) v).setSupportButtonTintMode(arg);
+      }
+      if (v instanceof AppCompatRadioButton) {
+        ((AppCompatRadioButton) v).setSupportButtonTintMode(arg);
       }
     }
   }
@@ -1046,6 +2039,26 @@ public final class AppCompatv7DSL extends BaseDSL {
     public void apply(View v, final Typeface arg, final Typeface old) {
       if (v instanceof SwitchCompat) {
         ((SwitchCompat) v).setSwitchTypeface(arg);
+      }
+    }
+  }
+
+  private static final class TabContainerFunc1a5e642b implements Anvil.AttrFunc<ScrollingTabContainerView> {
+    public static final TabContainerFunc1a5e642b instance = new TabContainerFunc1a5e642b();
+
+    public void apply(View v, final ScrollingTabContainerView arg, final ScrollingTabContainerView old) {
+      if (v instanceof ActionBarContainer) {
+        ((ActionBarContainer) v).setTabContainer(arg);
+      }
+    }
+  }
+
+  private static final class TabSelectedFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final TabSelectedFunc8567756a instance = new TabSelectedFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof ScrollingTabContainerView) {
+        ((ScrollingTabContainerView) v).setTabSelected(arg);
       }
     }
   }
@@ -1114,11 +2127,27 @@ public final class AppCompatv7DSL extends BaseDSL {
     public static final TitleFuncc0af808b instance = new TitleFuncc0af808b();
 
     public void apply(View v, final CharSequence arg, final CharSequence old) {
+      if (v instanceof ActionMenuItemView) {
+        ((ActionMenuItemView) v).setTitle(arg);
+      }
       if (v instanceof ListMenuItemView) {
         ((ListMenuItemView) v).setTitle(arg);
       }
+      if (v instanceof ActionBarContextView) {
+        ((ActionBarContextView) v).setTitle(arg);
+      }
       if (v instanceof Toolbar) {
         ((Toolbar) v).setTitle(arg);
+      }
+    }
+  }
+
+  private static final class TitleOptionalFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final TitleOptionalFunc148d6054 instance = new TitleOptionalFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionBarContextView) {
+        ((ActionBarContextView) v).setTitleOptional(arg);
       }
     }
   }
@@ -1153,6 +2182,26 @@ public final class AppCompatv7DSL extends BaseDSL {
     }
   }
 
+  private static final class TransitioningFunc148d6054 implements Anvil.AttrFunc<Boolean> {
+    public static final TransitioningFunc148d6054 instance = new TransitioningFunc148d6054();
+
+    public void apply(View v, final Boolean arg, final Boolean old) {
+      if (v instanceof ActionBarContainer) {
+        ((ActionBarContainer) v).setTransitioning(arg);
+      }
+    }
+  }
+
+  private static final class UiOptionsFunc8567756a implements Anvil.AttrFunc<Integer> {
+    public static final UiOptionsFunc8567756a instance = new UiOptionsFunc8567756a();
+
+    public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setUiOptions(arg);
+      }
+    }
+  }
+
   private static final class VerticalGravityFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final VerticalGravityFunc8567756a instance = new VerticalGravityFunc8567756a();
 
@@ -1167,6 +2216,9 @@ public final class AppCompatv7DSL extends BaseDSL {
     public static final VisibilityFunc8567756a instance = new VisibilityFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
+      if (v instanceof ActionBarContainer) {
+        ((ActionBarContainer) v).setVisibility(arg);
+      }
       if (v instanceof ViewStubCompat) {
         ((ViewStubCompat) v).setVisibility(arg);
       }
@@ -1179,6 +2231,26 @@ public final class AppCompatv7DSL extends BaseDSL {
     public void apply(View v, final Float arg, final Float old) {
       if (v instanceof LinearLayoutCompat) {
         ((LinearLayoutCompat) v).setWeightSum(arg);
+      }
+    }
+  }
+
+  private static final class WindowCallbackFunc13cc8159 implements Anvil.AttrFunc<Window.Callback> {
+    public static final WindowCallbackFunc13cc8159 instance = new WindowCallbackFunc13cc8159();
+
+    public void apply(View v, final Window.Callback arg, final Window.Callback old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setWindowCallback(arg);
+      }
+    }
+  }
+
+  private static final class WindowTitleFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
+    public static final WindowTitleFuncc0af808b instance = new WindowTitleFuncc0af808b();
+
+    public void apply(View v, final CharSequence arg, final CharSequence old) {
+      if (v instanceof ActionBarOverlayLayout) {
+        ((ActionBarOverlayLayout) v).setWindowTitle(arg);
       }
     }
   }
