@@ -80,6 +80,8 @@ publishing {
 			version project.version
 			artifactId POM_ARTIFACT_ID
 			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_ID-release.aar"
+			artifact sourcesJar
+			artifact javadocJar
 			fixPom(pom)
 		}
 	}
@@ -110,6 +112,26 @@ bintray {
 			}
 		}
 	}
+}
+
+task sourcesJar(type: Jar) {
+	from android.sourceSets.main.java.srcDirs
+	classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+	source = android.sourceSets.main.java.srcDirs
+	classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+artifacts {
+	archives javadocJar
+	archives sourcesJar
 }
 
 android.libraryVariants.all { variant ->

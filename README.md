@@ -36,7 +36,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'co.trikita:anvil-sdk15:0.3.1'
+    compile 'co.trikita:anvil-sdk15:0.3.2'
 }
 ```
 Anvil comes in multiple builds for different minimal SDK versions:
