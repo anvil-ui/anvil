@@ -1,7 +1,4 @@
 buildscript {
-	repositories {
-		jcenter()
-	}
 	dependencies {
 		classpath 'com.android.tools.build:gradle:1.5.0'
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
@@ -53,18 +50,10 @@ anvilgen {
 	quirks = QUIRKS
 }
 
-repositories {
-	mavenLocal()
-	jcenter()
-}
-
 dependencies {
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.mockito:mockito-core:2.0.36-beta'
 }
-
-group = 'co.trikita'
-version = '0.3.1'
 
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
@@ -72,21 +61,21 @@ apply plugin: 'com.jfrog.bintray'
 def fixPom(pom) {
 	pom.withXml {
 		def root = asNode()
-		root.appendNode('description', 'Lightweight reactive UI library for Android')
-		root.appendNode('name', 'Anvil')
-		root.appendNode('url', 'https://github.com/zserge/anvil')
+		root.appendNode('description', POM_DESCRIPTION)
+		root.appendNode('name', POM_NAME)
+		root.appendNode('url', POM_URL)
 		def scm = root.appendNode('scm')
-		scm.appendNode('url', 'https://github.com/zserge/anvil.git')
-		scm.appendNode('connection', 'https://github.com/zserge/anvil.git')
-		scm.appendNode('developerConnection', 'https://github.com/zserge/anvil.git')
+		scm.appendNode('url', POM_SCM_URL)
+		scm.appendNode('connection', POM_SCM_CONNECTION)
+		scm.appendNode('developerConnection', POM_SCM_DEV_CONNECTION)
 		def developer = root.appendNode('developers').appendNode('developer')
-		developer.appendNode('id', 'zserge')
-		developer.appendNode('name', 'Serge Zaitsev')
-		developer.appendNode('email', 'zaitsev.serge@gmail.com')
+		developer.appendNode('id', POM_DEVELOPER_ID)
+		developer.appendNode('name', POM_DEVELOPER_NAME)
+		developer.appendNode('email', POM_DEVELOPER_EMAIL)
 		def license = root.appendNode('licenses').appendNode('license')
-		license.appendNode('name', 'MIT License')
-		license.appendNode('url', 'http://www.opensource.org/licenses/mit-license.php')
-		license.appendNode('distribution', 'repo')
+		license.appendNode('name', POM_LICENCE_NAME)
+		license.appendNode('url', POM_LICENCE_URL)
+		license.appendNode('distribution', POM_LICENCE_DIST)
 	}
 }
 
@@ -95,22 +84,22 @@ publishing {
 		sdk10(MavenPublication) {
 			groupId project.group
 			version project.version
-			artifactId 'anvil-sdk10'
-			artifact "$buildDir/outputs/aar/anvil-sdk10-release.aar"
+			artifactId POM_ARTIFACT_SDK10_ID
+			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK10_ID-release.aar"
 			fixPom(pom)
 		}
 		sdk15(MavenPublication) {
 			groupId project.group
 			version project.version
-			artifactId 'anvil-sdk15'
-			artifact "$buildDir/outputs/aar/anvil-sdk15-release.aar"
+			artifactId POM_ARTIFACT_SDK15_ID
+			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK15_ID-release.aar"
 			fixPom(pom)
 		}
 		sdk19(MavenPublication) {
 			groupId project.group
 			version project.version
-			artifactId 'anvil-sdk19'
-			artifact "$buildDir/outputs/aar/anvil-sdk19-release.aar"
+			artifactId POM_ARTIFACT_SDK19_ID
+			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK19_ID-release.aar"
 			fixPom(pom)
 		}
 	}
@@ -122,10 +111,10 @@ bintray {
 	publications = ['sdk10', 'sdk15', 'sdk19']
 	pkg {
 		repo = 'maven'
-		name = 'anvil'
-		websiteUrl = 'https://github.com/zserge/anvil'
-		vcsUrl = 'https://github.com/zserge/anvil.git'
-		licenses = ['MIT']
+		name = POM_PACKAGE_NAME
+		websiteUrl = POM_URL
+		vcsUrl = POM_SCM_URL
+		licenses = [POM_LICENCE_SHORT_NAME]
 		publish = true
 		version {
 			name = project.version
