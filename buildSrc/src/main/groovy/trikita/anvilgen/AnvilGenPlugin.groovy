@@ -1,6 +1,5 @@
 package trikita.anvilgen
 
-import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.MethodSpec
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -59,18 +58,27 @@ public class AnvilGenPlugin implements Plugin<Project> {
         }
     }
 
-    def getSupportClosure(project, camelCaseName, libraryName, version, List<String> rawDeps) {
+    def getSupportClosure(project, camelCaseName, libraryName, version, rawDeps) {
         return {
             taskName = "generate${camelCaseName}DSL"
             javadocContains = "It contains views and their setters from the library ${libraryName}"
             outputDirectory = "main"
             jarFile = getSupportJar(project, libraryName, version)
-            dependencies = rawDeps.collect {
-                getSupportJar(project, it, version)
-            } << getAndroidJar(project, 19)
+            dependencies = getSupportDependencies(project, version, rawDeps)
             outputClassName = "${camelCaseName}DSL"
             packageName = "trikita.anvil"
         }
+    }
+
+    def getSupportDependencies(project, version, Map<String, List<String>> rawDeps) {
+        return rawDeps.collect { entry ->
+            entry.value.collect {
+                getInternalSupportJar(project, entry.key, version, it ?: "classes")
+            }
+        }.inject([]) { temp, val ->
+            temp.addAll(val)
+            temp
+        } << getAndroidJar(project, 19)
     }
 
     def getAndroidJar(project, api) {
@@ -90,5 +98,10 @@ public class AnvilGenPlugin implements Plugin<Project> {
     def getSupportJar(project, libraryName, version) {
         return new File(project.buildDir.absoluteFile,
                 "intermediates/exploded-aar/com.android.support/$libraryName/$version/jars/classes.jar")
+    }
+
+    def getInternalSupportJar(project, libraryName, version, internalJar) {
+        return new File(project.buildDir.absoluteFile,
+                "intermediates/exploded-aar/com.android.support/$libraryName/$version/jars/${internalJar}.jar")
     }
 }

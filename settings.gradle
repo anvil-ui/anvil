@@ -1,2 +1,3 @@
 include 'anvil'
 include 'anvil-appcompat-v7'
+include 'anvil-support-v4'

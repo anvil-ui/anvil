@@ -18,7 +18,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 10
+		minSdkVersion 7
 		targetSdkVersion 23
 	}
 
@@ -34,16 +34,16 @@ android {
 apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
-	libraryName = "appcompat-v7"
-	camelCaseName = "AppCompatv7"
+	libraryName = "support-v4"
+	camelCaseName = "Supportv4"
 	version = "23.3.0"
-	dependencies = ["support-v4": [null, "libs/internal_impl-$version"]]
+	dependencies = ["support-v4": ["libs/internal_impl-$version"]]
 	quirks = QUIRKS
 }
 
 dependencies {
 	compile project(path: ':anvil', configuration: 'sdk10Release')
-	compile 'com.android.support:appcompat-v7:23.3.0'
+	compile 'com.android.support:support-v4:23.3.0'
 
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.mockito:mockito-core:2.0.36-beta'
