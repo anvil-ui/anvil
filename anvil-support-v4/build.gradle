@@ -75,7 +75,7 @@ def fixPom(pom) {
 
 publishing {
 	publications {
-		appcompatv7(MavenPublication) {
+		appcompatv4(MavenPublication) {
 			groupId project.group
 			version project.version
 			artifactId POM_ARTIFACT_ID
@@ -90,7 +90,7 @@ publishing {
 bintray {
 	user = project.hasProperty('bintrayUser') ? bintrayUser : ''
 	key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
-	publications = ['appcompatv7']
+	publications = ['appcompatv4']
 	pkg {
 		repo = 'maven'
 		name = POM_PACKAGE_NAME
