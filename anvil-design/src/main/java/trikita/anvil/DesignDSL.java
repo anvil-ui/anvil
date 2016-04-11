@@ -858,7 +858,7 @@ public final class DesignDSL extends BaseDSL {
             }
           });
         } else {
-          ((CoordinatorLayout) v).setOnHierarchyChangeListener(null);
+          ((CoordinatorLayout) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
     }
@@ -887,7 +887,7 @@ public final class DesignDSL extends BaseDSL {
             }
           });
         } else {
-          ((TabLayout) v).setOnTabSelectedListener(null);
+          ((TabLayout) v).setOnTabSelectedListener((TabLayout.OnTabSelectedListener) null);
         }
       }
     }

@@ -519,7 +519,7 @@ public final class Supportv4DSL extends BaseDSL {
             }
           });
         } else {
-          ((ViewPager) v).setOnPageChangeListener(null);
+          ((ViewPager) v).setOnPageChangeListener((ViewPager.OnPageChangeListener) null);
         }
       }
     }
@@ -538,7 +538,7 @@ public final class Supportv4DSL extends BaseDSL {
             }
           });
         } else {
-          ((SwipeRefreshLayout) v).setOnRefreshListener(null);
+          ((SwipeRefreshLayout) v).setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) null);
         }
       }
     }
@@ -557,7 +557,7 @@ public final class Supportv4DSL extends BaseDSL {
             }
           });
         } else {
-          ((NestedScrollView) v).setOnScrollChangeListener(null);
+          ((NestedScrollView) v).setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) null);
         }
       }
     }
@@ -576,7 +576,7 @@ public final class Supportv4DSL extends BaseDSL {
             }
           });
         } else {
-          ((FragmentTabHost) v).setOnTabChangedListener(null);
+          ((FragmentTabHost) v).setOnTabChangedListener((TabHost.OnTabChangeListener) null);
         }
       }
     }

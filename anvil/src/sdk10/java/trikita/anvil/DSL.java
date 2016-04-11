@@ -3763,7 +3763,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((CompoundButton) v).setOnCheckedChangeListener(null);
+          ((CompoundButton) v).setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) null);
         }
       }
     }
@@ -3782,7 +3782,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((RadioGroup) v).setOnCheckedChangeListener(null);
+          ((RadioGroup) v).setOnCheckedChangeListener((RadioGroup.OnCheckedChangeListener) null);
         }
       }
     }
@@ -3802,7 +3802,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnChildClickListener(null);
+          ((ExpandableListView) v).setOnChildClickListener((ExpandableListView.OnChildClickListener) null);
         }
       }
     }
@@ -3821,7 +3821,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((Chronometer) v).setOnChronometerTickListener(null);
+          ((Chronometer) v).setOnChronometerTickListener((Chronometer.OnChronometerTickListener) null);
         }
       }
     }
@@ -3839,7 +3839,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnClickListener(null);
+        v.setOnClickListener((View.OnClickListener) null);
       }
     }
   }
@@ -3857,7 +3857,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnCompletionListener(null);
+          ((VideoView) v).setOnCompletionListener((MediaPlayer.OnCompletionListener) null);
         }
       }
     }
@@ -3875,7 +3875,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnCreateContextMenuListener(null);
+        v.setOnCreateContextMenuListener((View.OnCreateContextMenuListener) null);
       }
     }
   }
@@ -3893,7 +3893,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerCloseListener(null);
+          ((SlidingDrawer) v).setOnDrawerCloseListener((SlidingDrawer.OnDrawerCloseListener) null);
         }
       }
     }
@@ -3912,7 +3912,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerOpenListener(null);
+          ((SlidingDrawer) v).setOnDrawerOpenListener((SlidingDrawer.OnDrawerOpenListener) null);
         }
       }
     }
@@ -3936,7 +3936,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerScrollListener(null);
+          ((SlidingDrawer) v).setOnDrawerScrollListener((SlidingDrawer.OnDrawerScrollListener) null);
         }
       }
     }
@@ -3956,7 +3956,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TextView) v).setOnEditorActionListener(null);
+          ((TextView) v).setOnEditorActionListener((TextView.OnEditorActionListener) null);
         }
       }
     }
@@ -3976,7 +3976,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnErrorListener(null);
+          ((VideoView) v).setOnErrorListener((MediaPlayer.OnErrorListener) null);
         }
       }
     }
@@ -3994,7 +3994,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnFocusChangeListener(null);
+        v.setOnFocusChangeListener((View.OnFocusChangeListener) null);
       }
     }
   }
@@ -4013,7 +4013,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupClickListener(null);
+          ((ExpandableListView) v).setOnGroupClickListener((ExpandableListView.OnGroupClickListener) null);
         }
       }
     }
@@ -4032,7 +4032,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupCollapseListener(null);
+          ((ExpandableListView) v).setOnGroupCollapseListener((ExpandableListView.OnGroupCollapseListener) null);
         }
       }
     }
@@ -4051,7 +4051,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupExpandListener(null);
+          ((ExpandableListView) v).setOnGroupExpandListener((ExpandableListView.OnGroupExpandListener) null);
         }
       }
     }
@@ -4075,7 +4075,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ViewGroup) v).setOnHierarchyChangeListener(null);
+          ((ViewGroup) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
       if (v instanceof RadioGroup) {
@@ -4092,7 +4092,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((RadioGroup) v).setOnHierarchyChangeListener(null);
+          ((RadioGroup) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
       if (v instanceof TableLayout) {
@@ -4109,7 +4109,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TableLayout) v).setOnHierarchyChangeListener(null);
+          ((TableLayout) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
       if (v instanceof TableRow) {
@@ -4126,7 +4126,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TableRow) v).setOnHierarchyChangeListener(null);
+          ((TableRow) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
     }
@@ -4145,7 +4145,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ViewStub) v).setOnInflateListener(null);
+          ((ViewStub) v).setOnInflateListener((ViewStub.OnInflateListener) null);
         }
       }
     }
@@ -4164,7 +4164,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemClickListener(null);
+          ((AdapterView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
       if (v instanceof AutoCompleteTextView) {
@@ -4176,7 +4176,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnItemClickListener(null);
+          ((AutoCompleteTextView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
       if (v instanceof ExpandableListView) {
@@ -4188,7 +4188,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnItemClickListener(null);
+          ((ExpandableListView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
       if (v instanceof Spinner) {
@@ -4200,7 +4200,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((Spinner) v).setOnItemClickListener(null);
+          ((Spinner) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
     }
@@ -4220,7 +4220,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemLongClickListener(null);
+          ((AdapterView) v).setOnItemLongClickListener((AdapterView.OnItemLongClickListener) null);
         }
       }
     }
@@ -4244,7 +4244,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemSelectedListener(null);
+          ((AdapterView) v).setOnItemSelectedListener((AdapterView.OnItemSelectedListener) null);
         }
       }
       if (v instanceof AutoCompleteTextView) {
@@ -4261,7 +4261,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnItemSelectedListener(null);
+          ((AutoCompleteTextView) v).setOnItemSelectedListener((AdapterView.OnItemSelectedListener) null);
         }
       }
     }
@@ -4280,7 +4280,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnKeyListener(null);
+        v.setOnKeyListener((View.OnKeyListener) null);
       }
     }
   }
@@ -4333,7 +4333,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((KeyboardView) v).setOnKeyboardActionListener(null);
+          ((KeyboardView) v).setOnKeyboardActionListener((KeyboardView.OnKeyboardActionListener) null);
         }
       }
     }
@@ -4352,7 +4352,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnLongClickListener(null);
+        v.setOnLongClickListener((View.OnLongClickListener) null);
       }
     }
   }
@@ -4370,7 +4370,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnPreparedListener(null);
+          ((VideoView) v).setOnPreparedListener((MediaPlayer.OnPreparedListener) null);
         }
       }
     }
@@ -4389,7 +4389,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((RatingBar) v).setOnRatingBarChangeListener(null);
+          ((RatingBar) v).setOnRatingBarChangeListener((RatingBar.OnRatingBarChangeListener) null);
         }
       }
     }
@@ -4413,7 +4413,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AbsListView) v).setOnScrollListener(null);
+          ((AbsListView) v).setOnScrollListener((AbsListView.OnScrollListener) null);
         }
       }
     }
@@ -4442,7 +4442,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SeekBar) v).setOnSeekBarChangeListener(null);
+          ((SeekBar) v).setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) null);
         }
       }
     }
@@ -4461,7 +4461,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TabHost) v).setOnTabChangedListener(null);
+          ((TabHost) v).setOnTabChangedListener((TabHost.OnTabChangeListener) null);
         }
       }
     }
@@ -4480,7 +4480,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TimePicker) v).setOnTimeChangedListener(null);
+          ((TimePicker) v).setOnTimeChangedListener((TimePicker.OnTimeChangedListener) null);
         }
       }
     }
@@ -4499,7 +4499,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnTouchListener(null);
+        v.setOnTouchListener((View.OnTouchListener) null);
       }
     }
   }
@@ -4517,7 +4517,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ZoomControls) v).setOnZoomInClickListener(null);
+          ((ZoomControls) v).setOnZoomInClickListener((View.OnClickListener) null);
         }
       }
     }
@@ -4536,7 +4536,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ZoomControls) v).setOnZoomOutClickListener(null);
+          ((ZoomControls) v).setOnZoomOutClickListener((View.OnClickListener) null);
         }
       }
     }
