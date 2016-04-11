@@ -66,8 +66,15 @@ public class AnvilGenPlugin implements Plugin<Project> {
             jarFile = getSupportJar(project, libraryName, version)
             dependencies = getSupportDependencies(project, version, rawDeps)
             outputClassName = "${camelCaseName}DSL"
-            packageName = "trikita.anvil"
+            packageName = "trikita.anvil." + dashToDot(libraryName)
         }
+    }
+
+    def dashToDot(libraryName) {
+        if (!libraryName || libraryName.isAllWhitespace()) {
+            return ''
+        }
+        return libraryName.replaceAll("-", ".")
     }
 
     def getSupportDependencies(project, version, Map<String, List<String>> rawDeps) {

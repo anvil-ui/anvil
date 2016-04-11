@@ -128,7 +128,7 @@ class DSLGeneratorTask extends DefaultTask {
         name = toCase(name, { c -> Character.toLowerCase(c) })
         builder.addMethod(MethodSpec.methodBuilder(name)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(ClassName.get("trikita.anvil", outputClassName, "ViewClassResult"))
+                .returns(ClassName.get(packageName, outputClassName, "ViewClassResult"))
                 .addStatement("return v(\$T.class)", view)
                 .build())
         builder.addMethod(MethodSpec.methodBuilder(name)
