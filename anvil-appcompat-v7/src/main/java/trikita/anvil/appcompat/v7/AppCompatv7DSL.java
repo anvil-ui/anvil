@@ -1,4 +1,4 @@
-package trikita.anvil;
+package trikita.anvil.appcompat.v7;
 
 import android.app.SearchableInfo;
 import android.content.res.ColorStateList;
@@ -56,6 +56,8 @@ import java.lang.Float;
 import java.lang.Integer;
 import java.lang.String;
 import java.lang.Void;
+import trikita.anvil.Anvil;
+import trikita.anvil.BaseDSL;
 
 /**
  * DSL for creating views and settings their attributes.
