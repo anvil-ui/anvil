@@ -1,4 +1,4 @@
-package trikita.anvil;
+package trikita.anvil.support.v4;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentTabHost;
@@ -19,6 +19,8 @@ import java.lang.Float;
 import java.lang.Integer;
 import java.lang.String;
 import java.lang.Void;
+import trikita.anvil.Anvil;
+import trikita.anvil.BaseDSL;
 
 /**
  * DSL for creating views and settings their attributes.

@@ -1,4 +1,4 @@
-package trikita.anvil;
+package trikita.anvil.design;
 
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
@@ -26,6 +26,8 @@ import java.lang.CharSequence;
 import java.lang.Float;
 import java.lang.Integer;
 import java.lang.Void;
+import trikita.anvil.Anvil;
+import trikita.anvil.BaseDSL;
 
 /**
  * DSL for creating views and settings their attributes.
