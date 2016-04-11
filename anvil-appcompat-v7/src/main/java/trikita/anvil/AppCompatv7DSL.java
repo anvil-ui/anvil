@@ -1476,13 +1476,17 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final SearchView.OnCloseListener arg, final SearchView.OnCloseListener old) {
       if (v instanceof SearchView) {
-        ((SearchView) v).setOnCloseListener(new SearchView.OnCloseListener() {
-          public boolean onClose() {
-            boolean r = arg.onClose();
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((SearchView) v).setOnCloseListener(new SearchView.OnCloseListener() {
+            public boolean onClose() {
+              boolean r = arg.onClose();
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((SearchView) v).setOnCloseListener(null);
+        }
       }
     }
   }
@@ -1492,12 +1496,16 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final PopupWindow.OnDismissListener arg, final PopupWindow.OnDismissListener old) {
       if (v instanceof ActivityChooserView) {
-        ((ActivityChooserView) v).setOnDismissListener(new PopupWindow.OnDismissListener() {
-          public void onDismiss() {
-            arg.onDismiss();
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ActivityChooserView) v).setOnDismissListener(new PopupWindow.OnDismissListener() {
+            public void onDismiss() {
+              arg.onDismiss();
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ActivityChooserView) v).setOnDismissListener(null);
+        }
       }
     }
   }
@@ -1507,20 +1515,28 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final FitWindowsViewGroup.OnFitSystemWindowsListener arg, final FitWindowsViewGroup.OnFitSystemWindowsListener old) {
       if (v instanceof FitWindowsFrameLayout) {
-        ((FitWindowsFrameLayout) v).setOnFitSystemWindowsListener(new FitWindowsViewGroup.OnFitSystemWindowsListener() {
-          public void onFitSystemWindows(Rect a0) {
-            arg.onFitSystemWindows(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((FitWindowsFrameLayout) v).setOnFitSystemWindowsListener(new FitWindowsViewGroup.OnFitSystemWindowsListener() {
+            public void onFitSystemWindows(Rect a0) {
+              arg.onFitSystemWindows(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((FitWindowsFrameLayout) v).setOnFitSystemWindowsListener(null);
+        }
       }
       if (v instanceof FitWindowsLinearLayout) {
-        ((FitWindowsLinearLayout) v).setOnFitSystemWindowsListener(new FitWindowsViewGroup.OnFitSystemWindowsListener() {
-          public void onFitSystemWindows(Rect a0) {
-            arg.onFitSystemWindows(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((FitWindowsLinearLayout) v).setOnFitSystemWindowsListener(new FitWindowsViewGroup.OnFitSystemWindowsListener() {
+            public void onFitSystemWindows(Rect a0) {
+              arg.onFitSystemWindows(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((FitWindowsLinearLayout) v).setOnFitSystemWindowsListener(null);
+        }
       }
     }
   }
@@ -1530,12 +1546,16 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final ViewStubCompat.OnInflateListener arg, final ViewStubCompat.OnInflateListener old) {
       if (v instanceof ViewStubCompat) {
-        ((ViewStubCompat) v).setOnInflateListener(new ViewStubCompat.OnInflateListener() {
-          public void onInflate(ViewStubCompat a0, View a1) {
-            arg.onInflate(a0, a1);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ViewStubCompat) v).setOnInflateListener(new ViewStubCompat.OnInflateListener() {
+            public void onInflate(ViewStubCompat a0, View a1) {
+              arg.onInflate(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ViewStubCompat) v).setOnInflateListener(null);
+        }
       }
     }
   }
@@ -1545,13 +1565,17 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final ActionMenuView.OnMenuItemClickListener arg, final ActionMenuView.OnMenuItemClickListener old) {
       if (v instanceof ActionMenuView) {
-        ((ActionMenuView) v).setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
-          public boolean onMenuItemClick(MenuItem a0) {
-            boolean r = arg.onMenuItemClick(a0);
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((ActionMenuView) v).setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem a0) {
+              boolean r = arg.onMenuItemClick(a0);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((ActionMenuView) v).setOnMenuItemClickListener(null);
+        }
       }
     }
   }
@@ -1561,13 +1585,17 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final Toolbar.OnMenuItemClickListener arg, final Toolbar.OnMenuItemClickListener old) {
       if (v instanceof Toolbar) {
-        ((Toolbar) v).setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-          public boolean onMenuItemClick(MenuItem a0) {
-            boolean r = arg.onMenuItemClick(a0);
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((Toolbar) v).setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem a0) {
+              boolean r = arg.onMenuItemClick(a0);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((Toolbar) v).setOnMenuItemClickListener(null);
+        }
       }
     }
   }
@@ -1577,19 +1605,23 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final SearchView.OnQueryTextListener arg, final SearchView.OnQueryTextListener old) {
       if (v instanceof SearchView) {
-        ((SearchView) v).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-          public boolean onQueryTextChange(String a0) {
-            boolean r = arg.onQueryTextChange(a0);
-            Anvil.render();
-            return r;
-          }
+        if (arg != null) {
+          ((SearchView) v).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String a0) {
+              boolean r = arg.onQueryTextChange(a0);
+              Anvil.render();
+              return r;
+            }
 
-          public boolean onQueryTextSubmit(String a0) {
-            boolean r = arg.onQueryTextSubmit(a0);
-            Anvil.render();
-            return r;
-          }
-        });
+            public boolean onQueryTextSubmit(String a0) {
+              boolean r = arg.onQueryTextSubmit(a0);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((SearchView) v).setOnQueryTextListener(null);
+        }
       }
     }
   }
@@ -1599,12 +1631,16 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final View.OnFocusChangeListener arg, final View.OnFocusChangeListener old) {
       if (v instanceof SearchView) {
-        ((SearchView) v).setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-          public void onFocusChange(View a0, boolean a1) {
-            arg.onFocusChange(a0, a1);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((SearchView) v).setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View a0, boolean a1) {
+              arg.onFocusChange(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((SearchView) v).setOnQueryTextFocusChangeListener(null);
+        }
       }
     }
   }
@@ -1614,12 +1650,16 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final View.OnClickListener arg, final View.OnClickListener old) {
       if (v instanceof SearchView) {
-        ((SearchView) v).setOnSearchClickListener(new View.OnClickListener() {
-          public void onClick(View a0) {
-            arg.onClick(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((SearchView) v).setOnSearchClickListener(new View.OnClickListener() {
+            public void onClick(View a0) {
+              arg.onClick(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((SearchView) v).setOnSearchClickListener(null);
+        }
       }
     }
   }
@@ -1629,19 +1669,23 @@ public final class AppCompatv7DSL extends BaseDSL {
 
     public void apply(View v, final SearchView.OnSuggestionListener arg, final SearchView.OnSuggestionListener old) {
       if (v instanceof SearchView) {
-        ((SearchView) v).setOnSuggestionListener(new SearchView.OnSuggestionListener() {
-          public boolean onSuggestionClick(int a0) {
-            boolean r = arg.onSuggestionClick(a0);
-            Anvil.render();
-            return r;
-          }
+        if (arg != null) {
+          ((SearchView) v).setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            public boolean onSuggestionClick(int a0) {
+              boolean r = arg.onSuggestionClick(a0);
+              Anvil.render();
+              return r;
+            }
 
-          public boolean onSuggestionSelect(int a0) {
-            boolean r = arg.onSuggestionSelect(a0);
-            Anvil.render();
-            return r;
-          }
-        });
+            public boolean onSuggestionSelect(int a0) {
+              boolean r = arg.onSuggestionSelect(a0);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((SearchView) v).setOnSuggestionListener(null);
+        }
       }
     }
   }

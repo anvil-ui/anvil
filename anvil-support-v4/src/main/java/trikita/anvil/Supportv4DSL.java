@@ -501,22 +501,26 @@ public final class Supportv4DSL extends BaseDSL {
 
     public void apply(View v, final ViewPager.OnPageChangeListener arg, final ViewPager.OnPageChangeListener old) {
       if (v instanceof ViewPager) {
-        ((ViewPager) v).setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-          public void onPageScrollStateChanged(int a0) {
-            arg.onPageScrollStateChanged(a0);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((ViewPager) v).setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public void onPageScrollStateChanged(int a0) {
+              arg.onPageScrollStateChanged(a0);
+              Anvil.render();
+            }
 
-          public void onPageScrolled(int a0, float a1, int a2) {
-            arg.onPageScrolled(a0, a1, a2);
-            Anvil.render();
-          }
+            public void onPageScrolled(int a0, float a1, int a2) {
+              arg.onPageScrolled(a0, a1, a2);
+              Anvil.render();
+            }
 
-          public void onPageSelected(int a0) {
-            arg.onPageSelected(a0);
-            Anvil.render();
-          }
-        });
+            public void onPageSelected(int a0) {
+              arg.onPageSelected(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ViewPager) v).setOnPageChangeListener(null);
+        }
       }
     }
   }
@@ -526,12 +530,16 @@ public final class Supportv4DSL extends BaseDSL {
 
     public void apply(View v, final SwipeRefreshLayout.OnRefreshListener arg, final SwipeRefreshLayout.OnRefreshListener old) {
       if (v instanceof SwipeRefreshLayout) {
-        ((SwipeRefreshLayout) v).setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-          public void onRefresh() {
-            arg.onRefresh();
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((SwipeRefreshLayout) v).setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            public void onRefresh() {
+              arg.onRefresh();
+              Anvil.render();
+            }
+          });
+        } else {
+          ((SwipeRefreshLayout) v).setOnRefreshListener(null);
+        }
       }
     }
   }
@@ -541,12 +549,16 @@ public final class Supportv4DSL extends BaseDSL {
 
     public void apply(View v, final NestedScrollView.OnScrollChangeListener arg, final NestedScrollView.OnScrollChangeListener old) {
       if (v instanceof NestedScrollView) {
-        ((NestedScrollView) v).setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-          public void onScrollChange(NestedScrollView a0, int a1, int a2, int a3, int a4) {
-            arg.onScrollChange(a0, a1, a2, a3, a4);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((NestedScrollView) v).setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            public void onScrollChange(NestedScrollView a0, int a1, int a2, int a3, int a4) {
+              arg.onScrollChange(a0, a1, a2, a3, a4);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((NestedScrollView) v).setOnScrollChangeListener(null);
+        }
       }
     }
   }
@@ -556,12 +568,16 @@ public final class Supportv4DSL extends BaseDSL {
 
     public void apply(View v, final TabHost.OnTabChangeListener arg, final TabHost.OnTabChangeListener old) {
       if (v instanceof FragmentTabHost) {
-        ((FragmentTabHost) v).setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-          public void onTabChanged(String a0) {
-            arg.onTabChanged(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((FragmentTabHost) v).setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            public void onTabChanged(String a0) {
+              arg.onTabChanged(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((FragmentTabHost) v).setOnTabChangedListener(null);
+        }
       }
     }
   }

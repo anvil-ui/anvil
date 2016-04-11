@@ -845,17 +845,21 @@ public final class DesignDSL extends BaseDSL {
 
     public void apply(View v, final ViewGroup.OnHierarchyChangeListener arg, final ViewGroup.OnHierarchyChangeListener old) {
       if (v instanceof CoordinatorLayout) {
-        ((CoordinatorLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-          public void onChildViewAdded(View a0, View a1) {
-            arg.onChildViewAdded(a0, a1);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((CoordinatorLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
+              Anvil.render();
+            }
 
-          public void onChildViewRemoved(View a0, View a1) {
-            arg.onChildViewRemoved(a0, a1);
-            Anvil.render();
-          }
-        });
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((CoordinatorLayout) v).setOnHierarchyChangeListener(null);
+        }
       }
     }
   }
@@ -865,22 +869,26 @@ public final class DesignDSL extends BaseDSL {
 
     public void apply(View v, final TabLayout.OnTabSelectedListener arg, final TabLayout.OnTabSelectedListener old) {
       if (v instanceof TabLayout) {
-        ((TabLayout) v).setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-          public void onTabReselected(TabLayout.Tab a0) {
-            arg.onTabReselected(a0);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((TabLayout) v).setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            public void onTabReselected(TabLayout.Tab a0) {
+              arg.onTabReselected(a0);
+              Anvil.render();
+            }
 
-          public void onTabSelected(TabLayout.Tab a0) {
-            arg.onTabSelected(a0);
-            Anvil.render();
-          }
+            public void onTabSelected(TabLayout.Tab a0) {
+              arg.onTabSelected(a0);
+              Anvil.render();
+            }
 
-          public void onTabUnselected(TabLayout.Tab a0) {
-            arg.onTabUnselected(a0);
-            Anvil.render();
-          }
-        });
+            public void onTabUnselected(TabLayout.Tab a0) {
+              arg.onTabUnselected(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((TabLayout) v).setOnTabSelectedListener(null);
+        }
       }
     }
   }

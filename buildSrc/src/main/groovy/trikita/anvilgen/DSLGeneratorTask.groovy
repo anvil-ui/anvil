@@ -239,13 +239,21 @@ class DSLGeneratorTask extends DefaultTask {
 
         if (className == "android.view.View") {
             builder = attrApplyBuilder(m)
+                    .beginControlFlow("if (arg != null)", m.getDeclaringClass())
                     .addStatement("v.${m.getName()}(\$L)", listener.build())
+                    .nextControlFlow("else")
+                    .addStatement("v.${m.getName()}(null)")
+                    .endControlFlow();
             builder.locked = true;
         } else if (!builder.locked) {
             builder
                     .beginControlFlow("if (v instanceof \$T)", m.getDeclaringClass())
+                    .beginControlFlow("if (arg != null)", m.getDeclaringClass())
                     .addStatement("((\$T) v).${m.getName()}(\$L)", m.getDeclaringClass(),
                     listener.build())
+                    .nextControlFlow("else")
+                    .addStatement("((\$T) v).${m.getName()}(null)", m.getDeclaringClass())
+                    .endControlFlow()
                     .endControlFlow();
         }
 

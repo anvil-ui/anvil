@@ -3755,12 +3755,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final CompoundButton.OnCheckedChangeListener arg, final CompoundButton.OnCheckedChangeListener old) {
       if (v instanceof CompoundButton) {
-        ((CompoundButton) v).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-          public void onCheckedChanged(CompoundButton a0, boolean a1) {
-            arg.onCheckedChanged(a0, a1);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((CompoundButton) v).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton a0, boolean a1) {
+              arg.onCheckedChanged(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((CompoundButton) v).setOnCheckedChangeListener(null);
+        }
       }
     }
   }
@@ -3770,12 +3774,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final RadioGroup.OnCheckedChangeListener arg, final RadioGroup.OnCheckedChangeListener old) {
       if (v instanceof RadioGroup) {
-        ((RadioGroup) v).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-          public void onCheckedChanged(RadioGroup a0, int a1) {
-            arg.onCheckedChanged(a0, a1);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((RadioGroup) v).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup a0, int a1) {
+              arg.onCheckedChanged(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((RadioGroup) v).setOnCheckedChangeListener(null);
+        }
       }
     }
   }
@@ -3785,13 +3793,17 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final ExpandableListView.OnChildClickListener arg, final ExpandableListView.OnChildClickListener old) {
       if (v instanceof ExpandableListView) {
-        ((ExpandableListView) v).setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-          public boolean onChildClick(ExpandableListView a0, View a1, int a2, int a3, long a4) {
-            boolean r = arg.onChildClick(a0, a1, a2, a3, a4);
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((ExpandableListView) v).setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            public boolean onChildClick(ExpandableListView a0, View a1, int a2, int a3, long a4) {
+              boolean r = arg.onChildClick(a0, a1, a2, a3, a4);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((ExpandableListView) v).setOnChildClickListener(null);
+        }
       }
     }
   }
@@ -3801,12 +3813,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final Chronometer.OnChronometerTickListener arg, final Chronometer.OnChronometerTickListener old) {
       if (v instanceof Chronometer) {
-        ((Chronometer) v).setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-          public void onChronometerTick(Chronometer a0) {
-            arg.onChronometerTick(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((Chronometer) v).setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            public void onChronometerTick(Chronometer a0) {
+              arg.onChronometerTick(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((Chronometer) v).setOnChronometerTickListener(null);
+        }
       }
     }
   }
@@ -3815,12 +3831,16 @@ public final class DSL extends BaseDSL {
     public static final OnClickFunc79a13a5e instance = new OnClickFunc79a13a5e();
 
     public void apply(View v, final View.OnClickListener arg, final View.OnClickListener old) {
-      v.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View a0) {
-          arg.onClick(a0);
-          Anvil.render();
-        }
-      });
+      if (arg != null) {
+        v.setOnClickListener(new View.OnClickListener() {
+          public void onClick(View a0) {
+            arg.onClick(a0);
+            Anvil.render();
+          }
+        });
+      } else {
+        v.setOnClickListener(null);
+      }
     }
   }
 
@@ -3829,12 +3849,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final MediaPlayer.OnCompletionListener arg, final MediaPlayer.OnCompletionListener old) {
       if (v instanceof VideoView) {
-        ((VideoView) v).setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-          public void onCompletion(MediaPlayer a0) {
-            arg.onCompletion(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((VideoView) v).setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer a0) {
+              arg.onCompletion(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((VideoView) v).setOnCompletionListener(null);
+        }
       }
     }
   }
@@ -3843,12 +3867,16 @@ public final class DSL extends BaseDSL {
     public static final OnCreateContextMenuFunc657678e8 instance = new OnCreateContextMenuFunc657678e8();
 
     public void apply(View v, final View.OnCreateContextMenuListener arg, final View.OnCreateContextMenuListener old) {
-      v.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-        public void onCreateContextMenu(ContextMenu a0, View a1, ContextMenu.ContextMenuInfo a2) {
-          arg.onCreateContextMenu(a0, a1, a2);
-          Anvil.render();
-        }
-      });
+      if (arg != null) {
+        v.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+          public void onCreateContextMenu(ContextMenu a0, View a1, ContextMenu.ContextMenuInfo a2) {
+            arg.onCreateContextMenu(a0, a1, a2);
+            Anvil.render();
+          }
+        });
+      } else {
+        v.setOnCreateContextMenuListener(null);
+      }
     }
   }
 
@@ -3857,12 +3885,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final SlidingDrawer.OnDrawerCloseListener arg, final SlidingDrawer.OnDrawerCloseListener old) {
       if (v instanceof SlidingDrawer) {
-        ((SlidingDrawer) v).setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
-          public void onDrawerClosed() {
-            arg.onDrawerClosed();
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((SlidingDrawer) v).setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+            public void onDrawerClosed() {
+              arg.onDrawerClosed();
+              Anvil.render();
+            }
+          });
+        } else {
+          ((SlidingDrawer) v).setOnDrawerCloseListener(null);
+        }
       }
     }
   }
@@ -3872,12 +3904,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final SlidingDrawer.OnDrawerOpenListener arg, final SlidingDrawer.OnDrawerOpenListener old) {
       if (v instanceof SlidingDrawer) {
-        ((SlidingDrawer) v).setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
-          public void onDrawerOpened() {
-            arg.onDrawerOpened();
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((SlidingDrawer) v).setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
+            public void onDrawerOpened() {
+              arg.onDrawerOpened();
+              Anvil.render();
+            }
+          });
+        } else {
+          ((SlidingDrawer) v).setOnDrawerOpenListener(null);
+        }
       }
     }
   }
@@ -3887,17 +3923,21 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final SlidingDrawer.OnDrawerScrollListener arg, final SlidingDrawer.OnDrawerScrollListener old) {
       if (v instanceof SlidingDrawer) {
-        ((SlidingDrawer) v).setOnDrawerScrollListener(new SlidingDrawer.OnDrawerScrollListener() {
-          public void onScrollEnded() {
-            arg.onScrollEnded();
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((SlidingDrawer) v).setOnDrawerScrollListener(new SlidingDrawer.OnDrawerScrollListener() {
+            public void onScrollEnded() {
+              arg.onScrollEnded();
+              Anvil.render();
+            }
 
-          public void onScrollStarted() {
-            arg.onScrollStarted();
-            Anvil.render();
-          }
-        });
+            public void onScrollStarted() {
+              arg.onScrollStarted();
+              Anvil.render();
+            }
+          });
+        } else {
+          ((SlidingDrawer) v).setOnDrawerScrollListener(null);
+        }
       }
     }
   }
@@ -3907,13 +3947,17 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final TextView.OnEditorActionListener arg, final TextView.OnEditorActionListener old) {
       if (v instanceof TextView) {
-        ((TextView) v).setOnEditorActionListener(new TextView.OnEditorActionListener() {
-          public boolean onEditorAction(TextView a0, int a1, KeyEvent a2) {
-            boolean r = arg.onEditorAction(a0, a1, a2);
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((TextView) v).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView a0, int a1, KeyEvent a2) {
+              boolean r = arg.onEditorAction(a0, a1, a2);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((TextView) v).setOnEditorActionListener(null);
+        }
       }
     }
   }
@@ -3923,13 +3967,17 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final MediaPlayer.OnErrorListener arg, final MediaPlayer.OnErrorListener old) {
       if (v instanceof VideoView) {
-        ((VideoView) v).setOnErrorListener(new MediaPlayer.OnErrorListener() {
-          public boolean onError(MediaPlayer a0, int a1, int a2) {
-            boolean r = arg.onError(a0, a1, a2);
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((VideoView) v).setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            public boolean onError(MediaPlayer a0, int a1, int a2) {
+              boolean r = arg.onError(a0, a1, a2);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((VideoView) v).setOnErrorListener(null);
+        }
       }
     }
   }
@@ -3938,12 +3986,16 @@ public final class DSL extends BaseDSL {
     public static final OnFocusChangeFunca56a1dfe instance = new OnFocusChangeFunca56a1dfe();
 
     public void apply(View v, final View.OnFocusChangeListener arg, final View.OnFocusChangeListener old) {
-      v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-        public void onFocusChange(View a0, boolean a1) {
-          arg.onFocusChange(a0, a1);
-          Anvil.render();
-        }
-      });
+      if (arg != null) {
+        v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+          public void onFocusChange(View a0, boolean a1) {
+            arg.onFocusChange(a0, a1);
+            Anvil.render();
+          }
+        });
+      } else {
+        v.setOnFocusChangeListener(null);
+      }
     }
   }
 
@@ -3952,13 +4004,17 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final ExpandableListView.OnGroupClickListener arg, final ExpandableListView.OnGroupClickListener old) {
       if (v instanceof ExpandableListView) {
-        ((ExpandableListView) v).setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-          public boolean onGroupClick(ExpandableListView a0, View a1, int a2, long a3) {
-            boolean r = arg.onGroupClick(a0, a1, a2, a3);
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((ExpandableListView) v).setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            public boolean onGroupClick(ExpandableListView a0, View a1, int a2, long a3) {
+              boolean r = arg.onGroupClick(a0, a1, a2, a3);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((ExpandableListView) v).setOnGroupClickListener(null);
+        }
       }
     }
   }
@@ -3968,12 +4024,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final ExpandableListView.OnGroupCollapseListener arg, final ExpandableListView.OnGroupCollapseListener old) {
       if (v instanceof ExpandableListView) {
-        ((ExpandableListView) v).setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-          public void onGroupCollapse(int a0) {
-            arg.onGroupCollapse(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ExpandableListView) v).setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            public void onGroupCollapse(int a0) {
+              arg.onGroupCollapse(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ExpandableListView) v).setOnGroupCollapseListener(null);
+        }
       }
     }
   }
@@ -3983,12 +4043,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final ExpandableListView.OnGroupExpandListener arg, final ExpandableListView.OnGroupExpandListener old) {
       if (v instanceof ExpandableListView) {
-        ((ExpandableListView) v).setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-          public void onGroupExpand(int a0) {
-            arg.onGroupExpand(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ExpandableListView) v).setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            public void onGroupExpand(int a0) {
+              arg.onGroupExpand(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ExpandableListView) v).setOnGroupExpandListener(null);
+        }
       }
     }
   }
@@ -3998,56 +4062,72 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final ViewGroup.OnHierarchyChangeListener arg, final ViewGroup.OnHierarchyChangeListener old) {
       if (v instanceof ViewGroup) {
-        ((ViewGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-          public void onChildViewAdded(View a0, View a1) {
-            arg.onChildViewAdded(a0, a1);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((ViewGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
+              Anvil.render();
+            }
 
-          public void onChildViewRemoved(View a0, View a1) {
-            arg.onChildViewRemoved(a0, a1);
-            Anvil.render();
-          }
-        });
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ViewGroup) v).setOnHierarchyChangeListener(null);
+        }
       }
       if (v instanceof RadioGroup) {
-        ((RadioGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-          public void onChildViewAdded(View a0, View a1) {
-            arg.onChildViewAdded(a0, a1);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((RadioGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
+              Anvil.render();
+            }
 
-          public void onChildViewRemoved(View a0, View a1) {
-            arg.onChildViewRemoved(a0, a1);
-            Anvil.render();
-          }
-        });
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((RadioGroup) v).setOnHierarchyChangeListener(null);
+        }
       }
       if (v instanceof TableLayout) {
-        ((TableLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-          public void onChildViewAdded(View a0, View a1) {
-            arg.onChildViewAdded(a0, a1);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((TableLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
+              Anvil.render();
+            }
 
-          public void onChildViewRemoved(View a0, View a1) {
-            arg.onChildViewRemoved(a0, a1);
-            Anvil.render();
-          }
-        });
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((TableLayout) v).setOnHierarchyChangeListener(null);
+        }
       }
       if (v instanceof TableRow) {
-        ((TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-          public void onChildViewAdded(View a0, View a1) {
-            arg.onChildViewAdded(a0, a1);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+            public void onChildViewAdded(View a0, View a1) {
+              arg.onChildViewAdded(a0, a1);
+              Anvil.render();
+            }
 
-          public void onChildViewRemoved(View a0, View a1) {
-            arg.onChildViewRemoved(a0, a1);
-            Anvil.render();
-          }
-        });
+            public void onChildViewRemoved(View a0, View a1) {
+              arg.onChildViewRemoved(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((TableRow) v).setOnHierarchyChangeListener(null);
+        }
       }
     }
   }
@@ -4057,12 +4137,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final ViewStub.OnInflateListener arg, final ViewStub.OnInflateListener old) {
       if (v instanceof ViewStub) {
-        ((ViewStub) v).setOnInflateListener(new ViewStub.OnInflateListener() {
-          public void onInflate(ViewStub a0, View a1) {
-            arg.onInflate(a0, a1);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ViewStub) v).setOnInflateListener(new ViewStub.OnInflateListener() {
+            public void onInflate(ViewStub a0, View a1) {
+              arg.onInflate(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ViewStub) v).setOnInflateListener(null);
+        }
       }
     }
   }
@@ -4072,36 +4156,52 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final AdapterView.OnItemClickListener arg, final AdapterView.OnItemClickListener old) {
       if (v instanceof AdapterView) {
-        ((AdapterView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-            arg.onItemClick(a0, a1, a2, a3);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((AdapterView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemClick(a0, a1, a2, a3);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((AdapterView) v).setOnItemClickListener(null);
+        }
       }
       if (v instanceof AutoCompleteTextView) {
-        ((AutoCompleteTextView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-            arg.onItemClick(a0, a1, a2, a3);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((AutoCompleteTextView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemClick(a0, a1, a2, a3);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((AutoCompleteTextView) v).setOnItemClickListener(null);
+        }
       }
       if (v instanceof ExpandableListView) {
-        ((ExpandableListView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-            arg.onItemClick(a0, a1, a2, a3);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ExpandableListView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemClick(a0, a1, a2, a3);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ExpandableListView) v).setOnItemClickListener(null);
+        }
       }
       if (v instanceof Spinner) {
-        ((Spinner) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-            arg.onItemClick(a0, a1, a2, a3);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((Spinner) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemClick(a0, a1, a2, a3);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((Spinner) v).setOnItemClickListener(null);
+        }
       }
     }
   }
@@ -4111,13 +4211,17 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final AdapterView.OnItemLongClickListener arg, final AdapterView.OnItemLongClickListener old) {
       if (v instanceof AdapterView) {
-        ((AdapterView) v).setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-          public boolean onItemLongClick(AdapterView a0, View a1, int a2, long a3) {
-            boolean r = arg.onItemLongClick(a0, a1, a2, a3);
-            Anvil.render();
-            return r;
-          }
-        });
+        if (arg != null) {
+          ((AdapterView) v).setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView a0, View a1, int a2, long a3) {
+              boolean r = arg.onItemLongClick(a0, a1, a2, a3);
+              Anvil.render();
+              return r;
+            }
+          });
+        } else {
+          ((AdapterView) v).setOnItemLongClickListener(null);
+        }
       }
     }
   }
@@ -4127,30 +4231,38 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final AdapterView.OnItemSelectedListener arg, final AdapterView.OnItemSelectedListener old) {
       if (v instanceof AdapterView) {
-        ((AdapterView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-          public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
-            arg.onItemSelected(a0, a1, a2, a3);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((AdapterView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
+              Anvil.render();
+            }
 
-          public void onNothingSelected(AdapterView a0) {
-            arg.onNothingSelected(a0);
-            Anvil.render();
-          }
-        });
+            public void onNothingSelected(AdapterView a0) {
+              arg.onNothingSelected(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((AdapterView) v).setOnItemSelectedListener(null);
+        }
       }
       if (v instanceof AutoCompleteTextView) {
-        ((AutoCompleteTextView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-          public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
-            arg.onItemSelected(a0, a1, a2, a3);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((AutoCompleteTextView) v).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
+              arg.onItemSelected(a0, a1, a2, a3);
+              Anvil.render();
+            }
 
-          public void onNothingSelected(AdapterView a0) {
-            arg.onNothingSelected(a0);
-            Anvil.render();
-          }
-        });
+            public void onNothingSelected(AdapterView a0) {
+              arg.onNothingSelected(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((AutoCompleteTextView) v).setOnItemSelectedListener(null);
+        }
       }
     }
   }
@@ -4159,13 +4271,17 @@ public final class DSL extends BaseDSL {
     public static final OnKeyFunce04764b5 instance = new OnKeyFunce04764b5();
 
     public void apply(View v, final View.OnKeyListener arg, final View.OnKeyListener old) {
-      v.setOnKeyListener(new View.OnKeyListener() {
-        public boolean onKey(View a0, int a1, KeyEvent a2) {
-          boolean r = arg.onKey(a0, a1, a2);
-          Anvil.render();
-          return r;
-        }
-      });
+      if (arg != null) {
+        v.setOnKeyListener(new View.OnKeyListener() {
+          public boolean onKey(View a0, int a1, KeyEvent a2) {
+            boolean r = arg.onKey(a0, a1, a2);
+            Anvil.render();
+            return r;
+          }
+        });
+      } else {
+        v.setOnKeyListener(null);
+      }
     }
   }
 
@@ -4174,47 +4290,51 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final KeyboardView.OnKeyboardActionListener arg, final KeyboardView.OnKeyboardActionListener old) {
       if (v instanceof KeyboardView) {
-        ((KeyboardView) v).setOnKeyboardActionListener(new KeyboardView.OnKeyboardActionListener() {
-          public void onKey(int a0, int[] a1) {
-            arg.onKey(a0, a1);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((KeyboardView) v).setOnKeyboardActionListener(new KeyboardView.OnKeyboardActionListener() {
+            public void onKey(int a0, int[] a1) {
+              arg.onKey(a0, a1);
+              Anvil.render();
+            }
 
-          public void onPress(int a0) {
-            arg.onPress(a0);
-            Anvil.render();
-          }
+            public void onPress(int a0) {
+              arg.onPress(a0);
+              Anvil.render();
+            }
 
-          public void onRelease(int a0) {
-            arg.onRelease(a0);
-            Anvil.render();
-          }
+            public void onRelease(int a0) {
+              arg.onRelease(a0);
+              Anvil.render();
+            }
 
-          public void onText(CharSequence a0) {
-            arg.onText(a0);
-            Anvil.render();
-          }
+            public void onText(CharSequence a0) {
+              arg.onText(a0);
+              Anvil.render();
+            }
 
-          public void swipeDown() {
-            arg.swipeDown();
-            Anvil.render();
-          }
+            public void swipeDown() {
+              arg.swipeDown();
+              Anvil.render();
+            }
 
-          public void swipeLeft() {
-            arg.swipeLeft();
-            Anvil.render();
-          }
+            public void swipeLeft() {
+              arg.swipeLeft();
+              Anvil.render();
+            }
 
-          public void swipeRight() {
-            arg.swipeRight();
-            Anvil.render();
-          }
+            public void swipeRight() {
+              arg.swipeRight();
+              Anvil.render();
+            }
 
-          public void swipeUp() {
-            arg.swipeUp();
-            Anvil.render();
-          }
-        });
+            public void swipeUp() {
+              arg.swipeUp();
+              Anvil.render();
+            }
+          });
+        } else {
+          ((KeyboardView) v).setOnKeyboardActionListener(null);
+        }
       }
     }
   }
@@ -4223,13 +4343,17 @@ public final class DSL extends BaseDSL {
     public static final OnLongClickFuncdc7f3c42 instance = new OnLongClickFuncdc7f3c42();
 
     public void apply(View v, final View.OnLongClickListener arg, final View.OnLongClickListener old) {
-      v.setOnLongClickListener(new View.OnLongClickListener() {
-        public boolean onLongClick(View a0) {
-          boolean r = arg.onLongClick(a0);
-          Anvil.render();
-          return r;
-        }
-      });
+      if (arg != null) {
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+          public boolean onLongClick(View a0) {
+            boolean r = arg.onLongClick(a0);
+            Anvil.render();
+            return r;
+          }
+        });
+      } else {
+        v.setOnLongClickListener(null);
+      }
     }
   }
 
@@ -4238,12 +4362,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final MediaPlayer.OnPreparedListener arg, final MediaPlayer.OnPreparedListener old) {
       if (v instanceof VideoView) {
-        ((VideoView) v).setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-          public void onPrepared(MediaPlayer a0) {
-            arg.onPrepared(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((VideoView) v).setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            public void onPrepared(MediaPlayer a0) {
+              arg.onPrepared(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((VideoView) v).setOnPreparedListener(null);
+        }
       }
     }
   }
@@ -4253,12 +4381,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final RatingBar.OnRatingBarChangeListener arg, final RatingBar.OnRatingBarChangeListener old) {
       if (v instanceof RatingBar) {
-        ((RatingBar) v).setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-          public void onRatingChanged(RatingBar a0, float a1, boolean a2) {
-            arg.onRatingChanged(a0, a1, a2);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((RatingBar) v).setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar a0, float a1, boolean a2) {
+              arg.onRatingChanged(a0, a1, a2);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((RatingBar) v).setOnRatingBarChangeListener(null);
+        }
       }
     }
   }
@@ -4268,17 +4400,21 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final AbsListView.OnScrollListener arg, final AbsListView.OnScrollListener old) {
       if (v instanceof AbsListView) {
-        ((AbsListView) v).setOnScrollListener(new AbsListView.OnScrollListener() {
-          public void onScroll(AbsListView a0, int a1, int a2, int a3) {
-            arg.onScroll(a0, a1, a2, a3);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((AbsListView) v).setOnScrollListener(new AbsListView.OnScrollListener() {
+            public void onScroll(AbsListView a0, int a1, int a2, int a3) {
+              arg.onScroll(a0, a1, a2, a3);
+              Anvil.render();
+            }
 
-          public void onScrollStateChanged(AbsListView a0, int a1) {
-            arg.onScrollStateChanged(a0, a1);
-            Anvil.render();
-          }
-        });
+            public void onScrollStateChanged(AbsListView a0, int a1) {
+              arg.onScrollStateChanged(a0, a1);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((AbsListView) v).setOnScrollListener(null);
+        }
       }
     }
   }
@@ -4288,22 +4424,26 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final SeekBar.OnSeekBarChangeListener arg, final SeekBar.OnSeekBarChangeListener old) {
       if (v instanceof SeekBar) {
-        ((SeekBar) v).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-          public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
-            arg.onProgressChanged(a0, a1, a2);
-            Anvil.render();
-          }
+        if (arg != null) {
+          ((SeekBar) v).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
+              arg.onProgressChanged(a0, a1, a2);
+              Anvil.render();
+            }
 
-          public void onStartTrackingTouch(SeekBar a0) {
-            arg.onStartTrackingTouch(a0);
-            Anvil.render();
-          }
+            public void onStartTrackingTouch(SeekBar a0) {
+              arg.onStartTrackingTouch(a0);
+              Anvil.render();
+            }
 
-          public void onStopTrackingTouch(SeekBar a0) {
-            arg.onStopTrackingTouch(a0);
-            Anvil.render();
-          }
-        });
+            public void onStopTrackingTouch(SeekBar a0) {
+              arg.onStopTrackingTouch(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((SeekBar) v).setOnSeekBarChangeListener(null);
+        }
       }
     }
   }
@@ -4313,12 +4453,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final TabHost.OnTabChangeListener arg, final TabHost.OnTabChangeListener old) {
       if (v instanceof TabHost) {
-        ((TabHost) v).setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-          public void onTabChanged(String a0) {
-            arg.onTabChanged(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((TabHost) v).setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            public void onTabChanged(String a0) {
+              arg.onTabChanged(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((TabHost) v).setOnTabChangedListener(null);
+        }
       }
     }
   }
@@ -4328,12 +4472,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final TimePicker.OnTimeChangedListener arg, final TimePicker.OnTimeChangedListener old) {
       if (v instanceof TimePicker) {
-        ((TimePicker) v).setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-          public void onTimeChanged(TimePicker a0, int a1, int a2) {
-            arg.onTimeChanged(a0, a1, a2);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((TimePicker) v).setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            public void onTimeChanged(TimePicker a0, int a1, int a2) {
+              arg.onTimeChanged(a0, a1, a2);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((TimePicker) v).setOnTimeChangedListener(null);
+        }
       }
     }
   }
@@ -4342,13 +4490,17 @@ public final class DSL extends BaseDSL {
     public static final OnTouchFunca554ad15 instance = new OnTouchFunca554ad15();
 
     public void apply(View v, final View.OnTouchListener arg, final View.OnTouchListener old) {
-      v.setOnTouchListener(new View.OnTouchListener() {
-        public boolean onTouch(View a0, MotionEvent a1) {
-          boolean r = arg.onTouch(a0, a1);
-          Anvil.render();
-          return r;
-        }
-      });
+      if (arg != null) {
+        v.setOnTouchListener(new View.OnTouchListener() {
+          public boolean onTouch(View a0, MotionEvent a1) {
+            boolean r = arg.onTouch(a0, a1);
+            Anvil.render();
+            return r;
+          }
+        });
+      } else {
+        v.setOnTouchListener(null);
+      }
     }
   }
 
@@ -4357,12 +4509,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final View.OnClickListener arg, final View.OnClickListener old) {
       if (v instanceof ZoomControls) {
-        ((ZoomControls) v).setOnZoomInClickListener(new View.OnClickListener() {
-          public void onClick(View a0) {
-            arg.onClick(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ZoomControls) v).setOnZoomInClickListener(new View.OnClickListener() {
+            public void onClick(View a0) {
+              arg.onClick(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ZoomControls) v).setOnZoomInClickListener(null);
+        }
       }
     }
   }
@@ -4372,12 +4528,16 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final View.OnClickListener arg, final View.OnClickListener old) {
       if (v instanceof ZoomControls) {
-        ((ZoomControls) v).setOnZoomOutClickListener(new View.OnClickListener() {
-          public void onClick(View a0) {
-            arg.onClick(a0);
-            Anvil.render();
-          }
-        });
+        if (arg != null) {
+          ((ZoomControls) v).setOnZoomOutClickListener(new View.OnClickListener() {
+            public void onClick(View a0) {
+              arg.onClick(a0);
+              Anvil.render();
+            }
+          });
+        } else {
+          ((ZoomControls) v).setOnZoomOutClickListener(null);
+        }
       }
     }
   }
