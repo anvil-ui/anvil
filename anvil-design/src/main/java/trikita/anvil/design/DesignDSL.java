@@ -17,10 +17,8 @@ import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -138,18 +136,6 @@ public final class DesignDSL {
 
   public static Void textInputLayout(Anvil.Renderable r) {
     return BaseDSL.v(TextInputLayout.class, r);
-  }
-
-  public static Void backgroundColor(int arg) {
-    return BaseDSL.attr(BackgroundColorFunc8567756a.instance, arg);
-  }
-
-  public static Void backgroundDrawable(Drawable arg) {
-    return BaseDSL.attr(BackgroundDrawableFuncfb47464a.instance, arg);
-  }
-
-  public static Void backgroundResource(int arg) {
-    return BaseDSL.attr(BackgroundResourceFunc8567756a.instance, arg);
   }
 
   public static Void backgroundTintList(ColorStateList arg) {
@@ -284,10 +270,6 @@ public final class DesignDSL {
     return BaseDSL.attr(IconFuncfb47464a.instance, arg);
   }
 
-  public static Void imageResource(int arg) {
-    return BaseDSL.attr(ImageResourceFunc8567756a.instance, arg);
-  }
-
   public static Void itemBackground(Drawable arg) {
     return BaseDSL.attr(ItemBackgroundFuncfb47464a.instance, arg);
   }
@@ -312,16 +294,8 @@ public final class DesignDSL {
     return BaseDSL.attr(NavigationItemSelectedListenerFunc80db0872.instance, arg);
   }
 
-  public static Void onHierarchyChange(ViewGroup.OnHierarchyChangeListener arg) {
-    return BaseDSL.attr(OnHierarchyChangeFunc7b5dc8bc.instance, arg);
-  }
-
   public static Void onTabSelected(TabLayout.OnTabSelectedListener arg) {
     return BaseDSL.attr(OnTabSelectedFuncaa1c085e.instance, arg);
-  }
-
-  public static Void orientation(int arg) {
-    return BaseDSL.attr(OrientationFunc8567756a.instance, arg);
   }
 
   public static Void rippleColor(int arg) {
@@ -376,10 +350,6 @@ public final class DesignDSL {
     return BaseDSL.attr(TabTextColorsFunc9e5e0e4e.instance, arg);
   }
 
-  public static Void tabsFromPagerAdapter(PagerAdapter arg) {
-    return BaseDSL.attr(TabsFromPagerAdapterFuncdc294743.instance, arg);
-  }
-
   public static Void targetElevation(float arg) {
     return BaseDSL.attr(TargetElevationFunce0893188.instance, arg);
   }
@@ -406,40 +376,6 @@ public final class DesignDSL {
 
   public static Void useCompatPadding(boolean arg) {
     return BaseDSL.attr(UseCompatPaddingFunc148d6054.instance, arg);
-  }
-
-  public static Void visibility(int arg) {
-    return BaseDSL.attr(VisibilityFunc8567756a.instance, arg);
-  }
-
-  private static final class BackgroundColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final BackgroundColorFunc8567756a instance = new BackgroundColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundColor(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final BackgroundDrawableFuncfb47464a instance = new BackgroundDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundDrawable(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final BackgroundResourceFunc8567756a instance = new BackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundResource(arg);
-      }
-    }
   }
 
   private static final class BackgroundTintListFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
@@ -772,16 +708,6 @@ public final class DesignDSL {
     }
   }
 
-  private static final class ImageResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ImageResourceFunc8567756a instance = new ImageResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setImageResource(arg);
-      }
-    }
-  }
-
   private static final class ItemBackgroundFuncfb47464a implements Anvil.AttrFunc<Drawable> {
     public static final ItemBackgroundFuncfb47464a instance = new ItemBackgroundFuncfb47464a();
 
@@ -842,30 +768,6 @@ public final class DesignDSL {
     }
   }
 
-  private static final class OnHierarchyChangeFunc7b5dc8bc implements Anvil.AttrFunc<ViewGroup.OnHierarchyChangeListener> {
-    public static final OnHierarchyChangeFunc7b5dc8bc instance = new OnHierarchyChangeFunc7b5dc8bc();
-
-    public void apply(View v, final ViewGroup.OnHierarchyChangeListener arg, final ViewGroup.OnHierarchyChangeListener old) {
-      if (v instanceof CoordinatorLayout) {
-        if (arg != null) {
-          ((CoordinatorLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((CoordinatorLayout) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
-        }
-      }
-    }
-  }
-
   private static final class OnTabSelectedFuncaa1c085e implements Anvil.AttrFunc<TabLayout.OnTabSelectedListener> {
     public static final OnTabSelectedFuncaa1c085e instance = new OnTabSelectedFuncaa1c085e();
 
@@ -891,16 +793,6 @@ public final class DesignDSL {
         } else {
           ((TabLayout) v).setOnTabSelectedListener((TabLayout.OnTabSelectedListener) null);
         }
-      }
-    }
-  }
-
-  private static final class OrientationFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final OrientationFunc8567756a instance = new OrientationFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppBarLayout) {
-        ((AppBarLayout) v).setOrientation(arg);
       }
     }
   }
@@ -1035,16 +927,6 @@ public final class DesignDSL {
     }
   }
 
-  private static final class TabsFromPagerAdapterFuncdc294743 implements Anvil.AttrFunc<PagerAdapter> {
-    public static final TabsFromPagerAdapterFuncdc294743 instance = new TabsFromPagerAdapterFuncdc294743();
-
-    public void apply(View v, final PagerAdapter arg, final PagerAdapter old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setTabsFromPagerAdapter(arg);
-      }
-    }
-  }
-
   private static final class TargetElevationFunce0893188 implements Anvil.AttrFunc<Float> {
     public static final TargetElevationFunce0893188 instance = new TargetElevationFunce0893188();
 
@@ -1114,19 +996,6 @@ public final class DesignDSL {
     public void apply(View v, final Boolean arg, final Boolean old) {
       if (v instanceof FloatingActionButton) {
         ((FloatingActionButton) v).setUseCompatPadding(arg);
-      }
-    }
-  }
-
-  private static final class VisibilityFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final VisibilityFunc8567756a instance = new VisibilityFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setVisibility(arg);
-      }
-      if (v instanceof CoordinatorLayout) {
-        ((CoordinatorLayout) v).setVisibility(arg);
       }
     }
   }

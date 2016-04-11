@@ -2070,9 +2070,6 @@ public final class DSL extends BaseDSL {
       if (v instanceof AbsListView) {
         ((AbsListView) v).setCacheColorHint(arg);
       }
-      if (v instanceof ListView) {
-        ((ListView) v).setCacheColorHint(arg);
-      }
     }
   }
 
@@ -2125,9 +2122,6 @@ public final class DSL extends BaseDSL {
       }
       if (v instanceof CompoundButton) {
         ((CompoundButton) v).setChecked(arg);
-      }
-      if (v instanceof ToggleButton) {
-        ((ToggleButton) v).setChecked(arg);
       }
     }
   }
@@ -2577,9 +2571,6 @@ public final class DSL extends BaseDSL {
     public static final EllipsizeFunc63cb4885 instance = new EllipsizeFunc63cb4885();
 
     public void apply(View v, final TextUtils.TruncateAt arg, final TextUtils.TruncateAt old) {
-      if (v instanceof EditText) {
-        ((EditText) v).setEllipsize(arg);
-      }
       if (v instanceof TextView) {
         ((TextView) v).setEllipsize(arg);
       }
@@ -2648,9 +2639,6 @@ public final class DSL extends BaseDSL {
     public static final ExtractedTextFunc410b6fe0 instance = new ExtractedTextFunc410b6fe0();
 
     public void apply(View v, final ExtractedText arg, final ExtractedText old) {
-      if (v instanceof ExtractEditText) {
-        ((ExtractEditText) v).setExtractedText(arg);
-      }
       if (v instanceof TextView) {
         ((TextView) v).setExtractedText(arg);
       }
@@ -3521,14 +3509,8 @@ public final class DSL extends BaseDSL {
     public static final MaxFunc8567756a instance = new MaxFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AbsSeekBar) {
-        ((AbsSeekBar) v).setMax(arg);
-      }
       if (v instanceof ProgressBar) {
         ((ProgressBar) v).setMax(arg);
-      }
-      if (v instanceof RatingBar) {
-        ((RatingBar) v).setMax(arg);
       }
     }
   }
@@ -4078,57 +4060,6 @@ public final class DSL extends BaseDSL {
           ((ViewGroup) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
-      if (v instanceof RadioGroup) {
-        if (arg != null) {
-          ((RadioGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((RadioGroup) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
-        }
-      }
-      if (v instanceof TableLayout) {
-        if (arg != null) {
-          ((TableLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((TableLayout) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
-        }
-      }
-      if (v instanceof TableRow) {
-        if (arg != null) {
-          ((TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((TableRow) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
-        }
-      }
     }
   }
 
@@ -4177,30 +4108,6 @@ public final class DSL extends BaseDSL {
           });
         } else {
           ((AutoCompleteTextView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
-        }
-      }
-      if (v instanceof ExpandableListView) {
-        if (arg != null) {
-          ((ExpandableListView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemClick(a0, a1, a2, a3);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((ExpandableListView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
-        }
-      }
-      if (v instanceof Spinner) {
-        if (arg != null) {
-          ((Spinner) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemClick(a0, a1, a2, a3);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((Spinner) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
     }
@@ -4885,20 +4792,11 @@ public final class DSL extends BaseDSL {
     public static final SelectionFunc8567756a instance = new SelectionFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AbsSpinner) {
-        ((AbsSpinner) v).setSelection(arg);
-      }
       if (v instanceof AdapterView) {
         ((AdapterView) v).setSelection(arg);
       }
       if (v instanceof EditText) {
         ((EditText) v).setSelection(arg);
-      }
-      if (v instanceof GridView) {
-        ((GridView) v).setSelection(arg);
-      }
-      if (v instanceof ListView) {
-        ((ListView) v).setSelection(arg);
       }
     }
   }

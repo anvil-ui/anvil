@@ -26,7 +26,6 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.net.http.SslCertificate;
 import android.opengl.GLSurfaceView;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -792,10 +791,6 @@ public final class DSL extends BaseDSL {
     return BaseDSL.attr(AlphaFunce0893188.instance, arg);
   }
 
-  public static Void alpha(int arg) {
-    return BaseDSL.attr(AlphaFunc8567756a.instance, arg);
-  }
-
   public static Void alwaysDrawnWithCacheEnabled(boolean arg) {
     return BaseDSL.attr(AlwaysDrawnWithCacheEnabledFunc148d6054.instance, arg);
   }
@@ -834,10 +829,6 @@ public final class DSL extends BaseDSL {
 
   public static Void backgroundColor(int arg) {
     return BaseDSL.attr(BackgroundColorFunc8567756a.instance, arg);
-  }
-
-  public static Void backgroundDrawable(Drawable arg) {
-    return BaseDSL.attr(BackgroundDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void backgroundResource(int arg) {
@@ -890,10 +881,6 @@ public final class DSL extends BaseDSL {
 
   public static Void cameraDistance(float arg) {
     return BaseDSL.attr(CameraDistanceFunce0893188.instance, arg);
-  }
-
-  public static Void certificate(SslCertificate arg) {
-    return BaseDSL.attr(CertificateFuncde9d69e1.instance, arg);
   }
 
   public static Void checkMarkDrawable(Drawable arg) {
@@ -1584,10 +1571,6 @@ public final class DSL extends BaseDSL {
     return BaseDSL.attr(LongClickableFunc148d6054.instance, arg);
   }
 
-  public static Void mapTrackballToArrowKeys(boolean arg) {
-    return BaseDSL.attr(MapTrackballToArrowKeysFunc148d6054.instance, arg);
-  }
-
   public static Void marqueeRepeatLimit(int arg) {
     return BaseDSL.attr(MarqueeRepeatLimitFunc8567756a.instance, arg);
   }
@@ -1950,10 +1933,6 @@ public final class DSL extends BaseDSL {
 
   public static Void persistentDrawingCache(int arg) {
     return BaseDSL.attr(PersistentDrawingCacheFunc8567756a.instance, arg);
-  }
-
-  public static Void pictureListener(WebView.PictureListener arg) {
-    return BaseDSL.attr(PictureListenerFunc42b89430.instance, arg);
   }
 
   public static Void pivotX(float arg) {
@@ -2589,12 +2568,6 @@ public final class DSL extends BaseDSL {
       if (v instanceof AdapterView) {
         ((AdapterView) v).setAdapter(arg);
       }
-      if (v instanceof AdapterViewAnimator) {
-        ((AdapterViewAnimator) v).setAdapter(arg);
-      }
-      if (v instanceof AdapterViewFlipper) {
-        ((AdapterViewFlipper) v).setAdapter(arg);
-      }
     }
   }
 
@@ -2653,16 +2626,6 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final Float arg, final Float old) {
       v.setAlpha(arg);
-    }
-  }
-
-  private static final class AlphaFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final AlphaFunc8567756a instance = new AlphaFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof ImageView) {
-        ((ImageView) v).setAlpha(arg);
-      }
     }
   }
 
@@ -2766,14 +2729,6 @@ public final class DSL extends BaseDSL {
     }
   }
 
-  private static final class BackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final BackgroundDrawableFuncfb47464a instance = new BackgroundDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      v.setBackgroundDrawable(arg);
-    }
-  }
-
   private static final class BackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final BackgroundResourceFunc8567756a instance = new BackgroundResourceFunc8567756a();
 
@@ -2867,9 +2822,6 @@ public final class DSL extends BaseDSL {
       if (v instanceof AbsListView) {
         ((AbsListView) v).setCacheColorHint(arg);
       }
-      if (v instanceof ListView) {
-        ((ListView) v).setCacheColorHint(arg);
-      }
     }
   }
 
@@ -2898,16 +2850,6 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final Float arg, final Float old) {
       v.setCameraDistance(arg);
-    }
-  }
-
-  private static final class CertificateFuncde9d69e1 implements Anvil.AttrFunc<SslCertificate> {
-    public static final CertificateFuncde9d69e1 instance = new CertificateFuncde9d69e1();
-
-    public void apply(View v, final SslCertificate arg, final SslCertificate old) {
-      if (v instanceof WebView) {
-        ((WebView) v).setCertificate(arg);
-      }
     }
   }
 
@@ -2940,12 +2882,6 @@ public final class DSL extends BaseDSL {
       }
       if (v instanceof CompoundButton) {
         ((CompoundButton) v).setChecked(arg);
-      }
-      if (v instanceof Switch) {
-        ((Switch) v).setChecked(arg);
-      }
-      if (v instanceof ToggleButton) {
-        ((ToggleButton) v).setChecked(arg);
       }
     }
   }
@@ -3267,9 +3203,6 @@ public final class DSL extends BaseDSL {
       if (v instanceof LinearLayout) {
         ((LinearLayout) v).setDividerDrawable(arg);
       }
-      if (v instanceof TabWidget) {
-        ((TabWidget) v).setDividerDrawable(arg);
-      }
     }
   }
 
@@ -3498,9 +3431,6 @@ public final class DSL extends BaseDSL {
     public static final EllipsizeFunc63cb4885 instance = new EllipsizeFunc63cb4885();
 
     public void apply(View v, final TextUtils.TruncateAt arg, final TextUtils.TruncateAt old) {
-      if (v instanceof EditText) {
-        ((EditText) v).setEllipsize(arg);
-      }
       if (v instanceof TextView) {
         ((TextView) v).setEllipsize(arg);
       }
@@ -3579,9 +3509,6 @@ public final class DSL extends BaseDSL {
     public static final ExtractedTextFunc410b6fe0 instance = new ExtractedTextFunc410b6fe0();
 
     public void apply(View v, final ExtractedText arg, final ExtractedText old) {
-      if (v instanceof ExtractEditText) {
-        ((ExtractEditText) v).setExtractedText(arg);
-      }
       if (v instanceof TextView) {
         ((TextView) v).setExtractedText(arg);
       }
@@ -4654,16 +4581,6 @@ public final class DSL extends BaseDSL {
     }
   }
 
-  private static final class MapTrackballToArrowKeysFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final MapTrackballToArrowKeysFunc148d6054 instance = new MapTrackballToArrowKeysFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof WebView) {
-        ((WebView) v).setMapTrackballToArrowKeys(arg);
-      }
-    }
-  }
-
   private static final class MarqueeRepeatLimitFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final MarqueeRepeatLimitFunc8567756a instance = new MarqueeRepeatLimitFunc8567756a();
 
@@ -4678,14 +4595,8 @@ public final class DSL extends BaseDSL {
     public static final MaxFunc8567756a instance = new MaxFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AbsSeekBar) {
-        ((AbsSeekBar) v).setMax(arg);
-      }
       if (v instanceof ProgressBar) {
         ((ProgressBar) v).setMax(arg);
-      }
-      if (v instanceof RatingBar) {
-        ((RatingBar) v).setMax(arg);
       }
     }
   }
@@ -5018,7 +4929,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((FragmentBreadCrumbs) v).setOnBreadCrumbClickListener(null);
+          ((FragmentBreadCrumbs) v).setOnBreadCrumbClickListener((FragmentBreadCrumbs.OnBreadCrumbClickListener) null);
         }
       }
     }
@@ -5037,7 +4948,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((CompoundButton) v).setOnCheckedChangeListener(null);
+          ((CompoundButton) v).setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) null);
         }
       }
     }
@@ -5056,7 +4967,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((RadioGroup) v).setOnCheckedChangeListener(null);
+          ((RadioGroup) v).setOnCheckedChangeListener((RadioGroup.OnCheckedChangeListener) null);
         }
       }
     }
@@ -5076,7 +4987,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnChildClickListener(null);
+          ((ExpandableListView) v).setOnChildClickListener((ExpandableListView.OnChildClickListener) null);
         }
       }
     }
@@ -5095,7 +5006,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((Chronometer) v).setOnChronometerTickListener(null);
+          ((Chronometer) v).setOnChronometerTickListener((Chronometer.OnChronometerTickListener) null);
         }
       }
     }
@@ -5113,7 +5024,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnClickListener(null);
+        v.setOnClickListener((View.OnClickListener) null);
       }
     }
   }
@@ -5132,7 +5043,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnCloseListener(null);
+          ((SearchView) v).setOnCloseListener((SearchView.OnCloseListener) null);
         }
       }
     }
@@ -5151,7 +5062,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnCompletionListener(null);
+          ((VideoView) v).setOnCompletionListener((MediaPlayer.OnCompletionListener) null);
         }
       }
     }
@@ -5169,7 +5080,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnCreateContextMenuListener(null);
+        v.setOnCreateContextMenuListener((View.OnCreateContextMenuListener) null);
       }
     }
   }
@@ -5187,7 +5098,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((CalendarView) v).setOnDateChangeListener(null);
+          ((CalendarView) v).setOnDateChangeListener((CalendarView.OnDateChangeListener) null);
         }
       }
     }
@@ -5206,7 +5117,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnDismissListener(null);
+          ((AutoCompleteTextView) v).setOnDismissListener((AutoCompleteTextView.OnDismissListener) null);
         }
       }
     }
@@ -5225,7 +5136,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnDragListener(null);
+        v.setOnDragListener((View.OnDragListener) null);
       }
     }
   }
@@ -5243,7 +5154,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerCloseListener(null);
+          ((SlidingDrawer) v).setOnDrawerCloseListener((SlidingDrawer.OnDrawerCloseListener) null);
         }
       }
     }
@@ -5262,7 +5173,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerOpenListener(null);
+          ((SlidingDrawer) v).setOnDrawerOpenListener((SlidingDrawer.OnDrawerOpenListener) null);
         }
       }
     }
@@ -5286,7 +5197,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerScrollListener(null);
+          ((SlidingDrawer) v).setOnDrawerScrollListener((SlidingDrawer.OnDrawerScrollListener) null);
         }
       }
     }
@@ -5306,7 +5217,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TextView) v).setOnEditorActionListener(null);
+          ((TextView) v).setOnEditorActionListener((TextView.OnEditorActionListener) null);
         }
       }
     }
@@ -5326,7 +5237,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnErrorListener(null);
+          ((VideoView) v).setOnErrorListener((MediaPlayer.OnErrorListener) null);
         }
       }
     }
@@ -5344,7 +5255,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnFocusChangeListener(null);
+        v.setOnFocusChangeListener((View.OnFocusChangeListener) null);
       }
     }
   }
@@ -5362,7 +5273,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnGenericMotionListener(null);
+        v.setOnGenericMotionListener((View.OnGenericMotionListener) null);
       }
     }
   }
@@ -5381,7 +5292,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupClickListener(null);
+          ((ExpandableListView) v).setOnGroupClickListener((ExpandableListView.OnGroupClickListener) null);
         }
       }
     }
@@ -5400,7 +5311,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupCollapseListener(null);
+          ((ExpandableListView) v).setOnGroupCollapseListener((ExpandableListView.OnGroupCollapseListener) null);
         }
       }
     }
@@ -5419,7 +5330,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupExpandListener(null);
+          ((ExpandableListView) v).setOnGroupExpandListener((ExpandableListView.OnGroupExpandListener) null);
         }
       }
     }
@@ -5443,58 +5354,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ViewGroup) v).setOnHierarchyChangeListener(null);
-        }
-      }
-      if (v instanceof RadioGroup) {
-        if (arg != null) {
-          ((RadioGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((RadioGroup) v).setOnHierarchyChangeListener(null);
-        }
-      }
-      if (v instanceof TableLayout) {
-        if (arg != null) {
-          ((TableLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((TableLayout) v).setOnHierarchyChangeListener(null);
-        }
-      }
-      if (v instanceof TableRow) {
-        if (arg != null) {
-          ((TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((TableRow) v).setOnHierarchyChangeListener(null);
+          ((ViewGroup) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
     }
@@ -5513,7 +5373,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnHoverListener(null);
+        v.setOnHoverListener((View.OnHoverListener) null);
       }
     }
   }
@@ -5531,7 +5391,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ViewStub) v).setOnInflateListener(null);
+          ((ViewStub) v).setOnInflateListener((ViewStub.OnInflateListener) null);
         }
       }
     }
@@ -5551,7 +5411,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnInfoListener(null);
+          ((VideoView) v).setOnInfoListener((MediaPlayer.OnInfoListener) null);
         }
       }
     }
@@ -5570,7 +5430,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemClickListener(null);
+          ((AdapterView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
       if (v instanceof AutoCompleteTextView) {
@@ -5582,31 +5442,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnItemClickListener(null);
-        }
-      }
-      if (v instanceof ExpandableListView) {
-        if (arg != null) {
-          ((ExpandableListView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemClick(a0, a1, a2, a3);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((ExpandableListView) v).setOnItemClickListener(null);
-        }
-      }
-      if (v instanceof Spinner) {
-        if (arg != null) {
-          ((Spinner) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemClick(a0, a1, a2, a3);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((Spinner) v).setOnItemClickListener(null);
+          ((AutoCompleteTextView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
     }
@@ -5626,7 +5462,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemLongClickListener(null);
+          ((AdapterView) v).setOnItemLongClickListener((AdapterView.OnItemLongClickListener) null);
         }
       }
     }
@@ -5650,7 +5486,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemSelectedListener(null);
+          ((AdapterView) v).setOnItemSelectedListener((AdapterView.OnItemSelectedListener) null);
         }
       }
       if (v instanceof AutoCompleteTextView) {
@@ -5667,7 +5503,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnItemSelectedListener(null);
+          ((AutoCompleteTextView) v).setOnItemSelectedListener((AdapterView.OnItemSelectedListener) null);
         }
       }
     }
@@ -5686,7 +5522,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnKeyListener(null);
+        v.setOnKeyListener((View.OnKeyListener) null);
       }
     }
   }
@@ -5739,7 +5575,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((KeyboardView) v).setOnKeyboardActionListener(null);
+          ((KeyboardView) v).setOnKeyboardActionListener((KeyboardView.OnKeyboardActionListener) null);
         }
       }
     }
@@ -5758,7 +5594,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnLongClickListener(null);
+        v.setOnLongClickListener((View.OnLongClickListener) null);
       }
     }
   }
@@ -5786,7 +5622,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnPreparedListener(null);
+          ((VideoView) v).setOnPreparedListener((MediaPlayer.OnPreparedListener) null);
         }
       }
     }
@@ -5812,7 +5648,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnQueryTextListener(null);
+          ((SearchView) v).setOnQueryTextListener((SearchView.OnQueryTextListener) null);
         }
       }
     }
@@ -5831,7 +5667,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnQueryTextFocusChangeListener(null);
+          ((SearchView) v).setOnQueryTextFocusChangeListener((View.OnFocusChangeListener) null);
         }
       }
     }
@@ -5850,7 +5686,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((RatingBar) v).setOnRatingBarChangeListener(null);
+          ((RatingBar) v).setOnRatingBarChangeListener((RatingBar.OnRatingBarChangeListener) null);
         }
       }
     }
@@ -5874,7 +5710,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AbsListView) v).setOnScrollListener(null);
+          ((AbsListView) v).setOnScrollListener((AbsListView.OnScrollListener) null);
         }
       }
     }
@@ -5893,7 +5729,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((NumberPicker) v).setOnScrollListener(null);
+          ((NumberPicker) v).setOnScrollListener((NumberPicker.OnScrollListener) null);
         }
       }
     }
@@ -5912,7 +5748,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnSearchClickListener(null);
+          ((SearchView) v).setOnSearchClickListener((View.OnClickListener) null);
         }
       }
     }
@@ -5941,7 +5777,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SeekBar) v).setOnSeekBarChangeListener(null);
+          ((SeekBar) v).setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) null);
         }
       }
     }
@@ -5967,7 +5803,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnSuggestionListener(null);
+          ((SearchView) v).setOnSuggestionListener((SearchView.OnSuggestionListener) null);
         }
       }
     }
@@ -5985,7 +5821,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnSystemUiVisibilityChangeListener(null);
+        v.setOnSystemUiVisibilityChangeListener((View.OnSystemUiVisibilityChangeListener) null);
       }
     }
   }
@@ -6003,7 +5839,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TabHost) v).setOnTabChangedListener(null);
+          ((TabHost) v).setOnTabChangedListener((TabHost.OnTabChangeListener) null);
         }
       }
     }
@@ -6022,7 +5858,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TimePicker) v).setOnTimeChangedListener(null);
+          ((TimePicker) v).setOnTimeChangedListener((TimePicker.OnTimeChangedListener) null);
         }
       }
     }
@@ -6041,7 +5877,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnTouchListener(null);
+        v.setOnTouchListener((View.OnTouchListener) null);
       }
     }
   }
@@ -6059,7 +5895,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((NumberPicker) v).setOnValueChangedListener(null);
+          ((NumberPicker) v).setOnValueChangedListener((NumberPicker.OnValueChangeListener) null);
         }
       }
     }
@@ -6078,7 +5914,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ZoomControls) v).setOnZoomInClickListener(null);
+          ((ZoomControls) v).setOnZoomInClickListener((View.OnClickListener) null);
         }
       }
     }
@@ -6097,7 +5933,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ZoomControls) v).setOnZoomOutClickListener(null);
+          ((ZoomControls) v).setOnZoomOutClickListener((View.OnClickListener) null);
         }
       }
     }
@@ -6193,16 +6029,6 @@ public final class DSL extends BaseDSL {
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof ViewGroup) {
         ((ViewGroup) v).setPersistentDrawingCache(arg);
-      }
-    }
-  }
-
-  private static final class PictureListenerFunc42b89430 implements Anvil.AttrFunc<WebView.PictureListener> {
-    public static final PictureListenerFunc42b89430 instance = new PictureListenerFunc42b89430();
-
-    public void apply(View v, final WebView.PictureListener arg, final WebView.PictureListener old) {
-      if (v instanceof WebView) {
-        ((WebView) v).setPictureListener(arg);
       }
     }
   }
@@ -6400,12 +6226,6 @@ public final class DSL extends BaseDSL {
       }
       if (v instanceof AdapterViewAnimator) {
         ((AdapterViewAnimator) v).setRemoteViewsAdapter(arg);
-      }
-      if (v instanceof GridView) {
-        ((GridView) v).setRemoteViewsAdapter(arg);
-      }
-      if (v instanceof ListView) {
-        ((ListView) v).setRemoteViewsAdapter(arg);
       }
     }
   }
@@ -6730,23 +6550,11 @@ public final class DSL extends BaseDSL {
     public static final SelectionFunc8567756a instance = new SelectionFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AbsSpinner) {
-        ((AbsSpinner) v).setSelection(arg);
-      }
       if (v instanceof AdapterView) {
         ((AdapterView) v).setSelection(arg);
       }
-      if (v instanceof AdapterViewAnimator) {
-        ((AdapterViewAnimator) v).setSelection(arg);
-      }
       if (v instanceof EditText) {
         ((EditText) v).setSelection(arg);
-      }
-      if (v instanceof GridView) {
-        ((GridView) v).setSelection(arg);
-      }
-      if (v instanceof ListView) {
-        ((ListView) v).setSelection(arg);
       }
     }
   }
