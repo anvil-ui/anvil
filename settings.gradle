@@ -1,5 +1,6 @@
 include 'anvil'
 include 'anvil-support-v4'
 include 'anvil-appcompat-v7'
+include 'anvil-cardview-v7'
 include 'anvil-design'
 
