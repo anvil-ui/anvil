@@ -49,7 +49,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.PopupWindow;
-import android.widget.SpinnerAdapter;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -338,10 +337,6 @@ public final class AppCompatv7DSL {
     return BaseDSL.attr(ActionBarVisibilityCallbackFunccbf3fd1e.instance, arg);
   }
 
-  public static Void adapter(SpinnerAdapter arg) {
-    return BaseDSL.attr(AdapterFunc32a095c1.instance, arg);
-  }
-
   public static Void allowCollapse(boolean arg) {
     return BaseDSL.attr(AllowCollapseFunc148d6054.instance, arg);
   }
@@ -358,32 +353,12 @@ public final class AppCompatv7DSL {
     return BaseDSL.attr(AttachListenerFunc3ca76dcd.instance, arg);
   }
 
-  public static Void backgroundDrawable(Drawable arg) {
-    return BaseDSL.attr(BackgroundDrawableFuncfb47464a.instance, arg);
-  }
-
-  public static Void backgroundResource(int arg) {
-    return BaseDSL.attr(BackgroundResourceFunc8567756a.instance, arg);
-  }
-
   public static Void baselineAligned(boolean arg) {
     return BaseDSL.attr(BaselineAlignedFunc148d6054.instance, arg);
   }
 
   public static Void baselineAlignedChildIndex(int arg) {
     return BaseDSL.attr(BaselineAlignedChildIndexFunc8567756a.instance, arg);
-  }
-
-  public static Void buttonDrawable(Drawable arg) {
-    return BaseDSL.attr(ButtonDrawableFuncfb47464a.instance, arg);
-  }
-
-  public static Void buttonDrawable(int arg) {
-    return BaseDSL.attr(ButtonDrawableFunc8567756a.instance, arg);
-  }
-
-  public static Void checkMarkDrawable(int arg) {
-    return BaseDSL.attr(CheckMarkDrawableFunc8567756a.instance, arg);
   }
 
   public static Void checkable(boolean arg) {
@@ -416,22 +391,6 @@ public final class AppCompatv7DSL {
 
   public static Void dividerPadding(int arg) {
     return BaseDSL.attr(DividerPaddingFunc8567756a.instance, arg);
-  }
-
-  public static Void dropDownBackgroundResource(int arg) {
-    return BaseDSL.attr(DropDownBackgroundResourceFunc8567756a.instance, arg);
-  }
-
-  public static Void dropDownHorizontalOffset(int arg) {
-    return BaseDSL.attr(DropDownHorizontalOffsetFunc8567756a.instance, arg);
-  }
-
-  public static Void dropDownVerticalOffset(int arg) {
-    return BaseDSL.attr(DropDownVerticalOffsetFunc8567756a.instance, arg);
-  }
-
-  public static Void dropDownWidth(int arg) {
-    return BaseDSL.attr(DropDownWidthFunc8567756a.instance, arg);
   }
 
   public static Void expandActivityOverflowButtonContentDescription(int arg) {
@@ -484,10 +443,6 @@ public final class AppCompatv7DSL {
 
   public static Void iconifiedByDefault(boolean arg) {
     return BaseDSL.attr(IconifiedByDefaultFunc148d6054.instance, arg);
-  }
-
-  public static Void imageResource(int arg) {
-    return BaseDSL.attr(ImageResourceFunc8567756a.instance, arg);
   }
 
   public static Void imeOptions(int arg) {
@@ -618,14 +573,6 @@ public final class AppCompatv7DSL {
     return BaseDSL.attr(OverlayModeFunc148d6054.instance, arg);
   }
 
-  public static Void popupBackgroundDrawable(Drawable arg) {
-    return BaseDSL.attr(PopupBackgroundDrawableFuncfb47464a.instance, arg);
-  }
-
-  public static Void popupBackgroundResource(int arg) {
-    return BaseDSL.attr(PopupBackgroundResourceFunc8567756a.instance, arg);
-  }
-
   public static Void popupCallback(ActionMenuItemView.PopupCallback arg) {
     return BaseDSL.attr(PopupCallbackFunc76c77ea5.instance, arg);
   }
@@ -636,10 +583,6 @@ public final class AppCompatv7DSL {
 
   public static Void primaryBackground(Drawable arg) {
     return BaseDSL.attr(PrimaryBackgroundFuncfb47464a.instance, arg);
-  }
-
-  public static Void prompt(CharSequence arg) {
-    return BaseDSL.attr(PromptFuncc0af808b.instance, arg);
   }
 
   public static Void provider(ActionProvider arg) {
@@ -656,10 +599,6 @@ public final class AppCompatv7DSL {
 
   public static Void searchableInfo(SearchableInfo arg) {
     return BaseDSL.attr(SearchableInfoFunc1f96c03c.instance, arg);
-  }
-
-  public static Void selector(Drawable arg) {
-    return BaseDSL.attr(SelectorFuncfb47464a.instance, arg);
   }
 
   public static Void showDividers(int arg) {
@@ -802,10 +741,6 @@ public final class AppCompatv7DSL {
     return BaseDSL.attr(VerticalGravityFunc8567756a.instance, arg);
   }
 
-  public static Void visibility(int arg) {
-    return BaseDSL.attr(VisibilityFunc8567756a.instance, arg);
-  }
-
   public static Void weightSum(float arg) {
     return BaseDSL.attr(WeightSumFunce0893188.instance, arg);
   }
@@ -834,16 +769,6 @@ public final class AppCompatv7DSL {
     public void apply(View v, final ActionBarOverlayLayout.ActionBarVisibilityCallback arg, final ActionBarOverlayLayout.ActionBarVisibilityCallback old) {
       if (v instanceof ActionBarOverlayLayout) {
         ((ActionBarOverlayLayout) v).setActionBarVisibilityCallback(arg);
-      }
-    }
-  }
-
-  private static final class AdapterFunc32a095c1 implements Anvil.AttrFunc<SpinnerAdapter> {
-    public static final AdapterFunc32a095c1 instance = new AdapterFunc32a095c1();
-
-    public void apply(View v, final SpinnerAdapter arg, final SpinnerAdapter old) {
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setAdapter(arg);
       }
     }
   }
@@ -888,68 +813,6 @@ public final class AppCompatv7DSL {
     }
   }
 
-  private static final class BackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final BackgroundDrawableFuncfb47464a instance = new BackgroundDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof AppCompatAutoCompleteTextView) {
-        ((AppCompatAutoCompleteTextView) v).setBackgroundDrawable(arg);
-      }
-      if (v instanceof AppCompatButton) {
-        ((AppCompatButton) v).setBackgroundDrawable(arg);
-      }
-      if (v instanceof AppCompatEditText) {
-        ((AppCompatEditText) v).setBackgroundDrawable(arg);
-      }
-      if (v instanceof AppCompatImageButton) {
-        ((AppCompatImageButton) v).setBackgroundDrawable(arg);
-      }
-      if (v instanceof AppCompatImageView) {
-        ((AppCompatImageView) v).setBackgroundDrawable(arg);
-      }
-      if (v instanceof AppCompatMultiAutoCompleteTextView) {
-        ((AppCompatMultiAutoCompleteTextView) v).setBackgroundDrawable(arg);
-      }
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setBackgroundDrawable(arg);
-      }
-      if (v instanceof AppCompatTextView) {
-        ((AppCompatTextView) v).setBackgroundDrawable(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final BackgroundResourceFunc8567756a instance = new BackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatAutoCompleteTextView) {
-        ((AppCompatAutoCompleteTextView) v).setBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatButton) {
-        ((AppCompatButton) v).setBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatEditText) {
-        ((AppCompatEditText) v).setBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatImageButton) {
-        ((AppCompatImageButton) v).setBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatImageView) {
-        ((AppCompatImageView) v).setBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatMultiAutoCompleteTextView) {
-        ((AppCompatMultiAutoCompleteTextView) v).setBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatTextView) {
-        ((AppCompatTextView) v).setBackgroundResource(arg);
-      }
-    }
-  }
-
   private static final class BaselineAlignedFunc148d6054 implements Anvil.AttrFunc<Boolean> {
     public static final BaselineAlignedFunc148d6054 instance = new BaselineAlignedFunc148d6054();
 
@@ -966,42 +829,6 @@ public final class AppCompatv7DSL {
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof LinearLayoutCompat) {
         ((LinearLayoutCompat) v).setBaselineAlignedChildIndex(arg);
-      }
-    }
-  }
-
-  private static final class ButtonDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final ButtonDrawableFuncfb47464a instance = new ButtonDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof AppCompatCheckBox) {
-        ((AppCompatCheckBox) v).setButtonDrawable(arg);
-      }
-      if (v instanceof AppCompatRadioButton) {
-        ((AppCompatRadioButton) v).setButtonDrawable(arg);
-      }
-    }
-  }
-
-  private static final class ButtonDrawableFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ButtonDrawableFunc8567756a instance = new ButtonDrawableFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatCheckBox) {
-        ((AppCompatCheckBox) v).setButtonDrawable(arg);
-      }
-      if (v instanceof AppCompatRadioButton) {
-        ((AppCompatRadioButton) v).setButtonDrawable(arg);
-      }
-    }
-  }
-
-  private static final class CheckMarkDrawableFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final CheckMarkDrawableFunc8567756a instance = new CheckMarkDrawableFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatCheckedTextView) {
-        ((AppCompatCheckedTextView) v).setCheckMarkDrawable(arg);
       }
     }
   }
@@ -1029,9 +856,6 @@ public final class AppCompatv7DSL {
       if (v instanceof ListMenuItemView) {
         ((ListMenuItemView) v).setChecked(arg);
       }
-      if (v instanceof SwitchCompat) {
-        ((SwitchCompat) v).setChecked(arg);
-      }
     }
   }
 
@@ -1049,9 +873,6 @@ public final class AppCompatv7DSL {
     public static final ContentHeightFunc8567756a instance = new ContentHeightFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof ActionBarContextView) {
-        ((ActionBarContextView) v).setContentHeight(arg);
-      }
       if (v instanceof ScrollingTabContainerView) {
         ((ScrollingTabContainerView) v).setContentHeight(arg);
       }
@@ -1094,49 +915,6 @@ public final class AppCompatv7DSL {
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof LinearLayoutCompat) {
         ((LinearLayoutCompat) v).setDividerPadding(arg);
-      }
-    }
-  }
-
-  private static final class DropDownBackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final DropDownBackgroundResourceFunc8567756a instance = new DropDownBackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatAutoCompleteTextView) {
-        ((AppCompatAutoCompleteTextView) v).setDropDownBackgroundResource(arg);
-      }
-      if (v instanceof AppCompatMultiAutoCompleteTextView) {
-        ((AppCompatMultiAutoCompleteTextView) v).setDropDownBackgroundResource(arg);
-      }
-    }
-  }
-
-  private static final class DropDownHorizontalOffsetFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final DropDownHorizontalOffsetFunc8567756a instance = new DropDownHorizontalOffsetFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setDropDownHorizontalOffset(arg);
-      }
-    }
-  }
-
-  private static final class DropDownVerticalOffsetFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final DropDownVerticalOffsetFunc8567756a instance = new DropDownVerticalOffsetFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setDropDownVerticalOffset(arg);
-      }
-    }
-  }
-
-  private static final class DropDownWidthFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final DropDownWidthFunc8567756a instance = new DropDownWidthFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setDropDownWidth(arg);
       }
     }
   }
@@ -1273,19 +1051,6 @@ public final class AppCompatv7DSL {
     public void apply(View v, final Boolean arg, final Boolean old) {
       if (v instanceof SearchView) {
         ((SearchView) v).setIconifiedByDefault(arg);
-      }
-    }
-  }
-
-  private static final class ImageResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ImageResourceFunc8567756a instance = new ImageResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatImageButton) {
-        ((AppCompatImageButton) v).setImageResource(arg);
-      }
-      if (v instanceof AppCompatImageView) {
-        ((AppCompatImageView) v).setImageResource(arg);
       }
     }
   }
@@ -1735,26 +1500,6 @@ public final class AppCompatv7DSL {
     }
   }
 
-  private static final class PopupBackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final PopupBackgroundDrawableFuncfb47464a instance = new PopupBackgroundDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setPopupBackgroundDrawable(arg);
-      }
-    }
-  }
-
-  private static final class PopupBackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final PopupBackgroundResourceFunc8567756a instance = new PopupBackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setPopupBackgroundResource(arg);
-      }
-    }
-  }
-
   private static final class PopupCallbackFunc76c77ea5 implements Anvil.AttrFunc<ActionMenuItemView.PopupCallback> {
     public static final PopupCallbackFunc76c77ea5 instance = new PopupCallbackFunc76c77ea5();
 
@@ -1784,16 +1529,6 @@ public final class AppCompatv7DSL {
     public void apply(View v, final Drawable arg, final Drawable old) {
       if (v instanceof ActionBarContainer) {
         ((ActionBarContainer) v).setPrimaryBackground(arg);
-      }
-    }
-  }
-
-  private static final class PromptFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
-    public static final PromptFuncc0af808b instance = new PromptFuncc0af808b();
-
-    public void apply(View v, final CharSequence arg, final CharSequence old) {
-      if (v instanceof AppCompatSpinner) {
-        ((AppCompatSpinner) v).setPrompt(arg);
       }
     }
   }
@@ -1834,16 +1569,6 @@ public final class AppCompatv7DSL {
     public void apply(View v, final SearchableInfo arg, final SearchableInfo old) {
       if (v instanceof SearchView) {
         ((SearchView) v).setSearchableInfo(arg);
-      }
-    }
-  }
-
-  private static final class SelectorFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final SelectorFuncfb47464a instance = new SelectorFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof ListViewCompat) {
-        ((ListViewCompat) v).setSelector(arg);
       }
     }
   }
@@ -2254,19 +1979,6 @@ public final class AppCompatv7DSL {
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof LinearLayoutCompat) {
         ((LinearLayoutCompat) v).setVerticalGravity(arg);
-      }
-    }
-  }
-
-  private static final class VisibilityFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final VisibilityFunc8567756a instance = new VisibilityFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof ActionBarContainer) {
-        ((ActionBarContainer) v).setVisibility(arg);
-      }
-      if (v instanceof ViewStubCompat) {
-        ((ViewStubCompat) v).setVisibility(arg);
       }
     }
   }

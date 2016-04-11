@@ -13,11 +13,9 @@ import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v4.widget.Space;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.widget.TabHost;
 import java.lang.Boolean;
 import java.lang.Float;
 import java.lang.Integer;
-import java.lang.String;
 import java.lang.Void;
 import trikita.anvil.Anvil;
 import trikita.anvil.BaseDSL;
@@ -113,22 +111,6 @@ public final class Supportv4DSL {
     return BaseDSL.attr(AdapterFuncdc294743.instance, arg);
   }
 
-  public static Void backgroundColor(int arg) {
-    return BaseDSL.attr(BackgroundColorFunc8567756a.instance, arg);
-  }
-
-  public static Void backgroundDrawable(Drawable arg) {
-    return BaseDSL.attr(BackgroundDrawableFuncfb47464a.instance, arg);
-  }
-
-  public static Void backgroundResource(int arg) {
-    return BaseDSL.attr(BackgroundResourceFunc8567756a.instance, arg);
-  }
-
-  public static Void colorScheme(int[] arg) {
-    return BaseDSL.attr(ColorSchemeFunc5fb6391.instance, arg);
-  }
-
   public static Void colorSchemeColors(int[] arg) {
     return BaseDSL.attr(ColorSchemeColorsFunc5fb6391.instance, arg);
   }
@@ -157,10 +139,6 @@ public final class Supportv4DSL {
     return BaseDSL.attr(DrawerElevationFunce0893188.instance, arg);
   }
 
-  public static Void drawerListener(DrawerLayout.DrawerListener arg) {
-    return BaseDSL.attr(DrawerListenerFunc17bd5440.instance, arg);
-  }
-
   public static Void drawerLockMode(int arg) {
     return BaseDSL.attr(DrawerLockModeFunc8567756a.instance, arg);
   }
@@ -185,20 +163,12 @@ public final class Supportv4DSL {
     return BaseDSL.attr(OffscreenPageLimitFunc8567756a.instance, arg);
   }
 
-  public static Void onPageChange(ViewPager.OnPageChangeListener arg) {
-    return BaseDSL.attr(OnPageChangeFunc248abe99.instance, arg);
-  }
-
   public static Void onRefresh(SwipeRefreshLayout.OnRefreshListener arg) {
     return BaseDSL.attr(OnRefreshFunc6ab1eac5.instance, arg);
   }
 
   public static Void onScrollChange(NestedScrollView.OnScrollChangeListener arg) {
     return BaseDSL.attr(OnScrollChangeFunc220ef5fd.instance, arg);
-  }
-
-  public static Void onTabChanged(TabHost.OnTabChangeListener arg) {
-    return BaseDSL.attr(OnTabChangedFunc2d645be.instance, arg);
   }
 
   public static Void pageMargin(int arg) {
@@ -221,10 +191,6 @@ public final class Supportv4DSL {
     return BaseDSL.attr(ParallaxDistanceFunc8567756a.instance, arg);
   }
 
-  public static Void progressBackgroundColor(int arg) {
-    return BaseDSL.attr(ProgressBackgroundColorFunc8567756a.instance, arg);
-  }
-
   public static Void progressBackgroundColorSchemeColor(int arg) {
     return BaseDSL.attr(ProgressBackgroundColorSchemeColorFunc8567756a.instance, arg);
   }
@@ -241,20 +207,12 @@ public final class Supportv4DSL {
     return BaseDSL.attr(ScrimColorFunc8567756a.instance, arg);
   }
 
-  public static Void shadowDrawable(Drawable arg) {
-    return BaseDSL.attr(ShadowDrawableFuncfb47464a.instance, arg);
-  }
-
   public static Void shadowDrawableLeft(Drawable arg) {
     return BaseDSL.attr(ShadowDrawableLeftFuncfb47464a.instance, arg);
   }
 
   public static Void shadowDrawableRight(Drawable arg) {
     return BaseDSL.attr(ShadowDrawableRightFuncfb47464a.instance, arg);
-  }
-
-  public static Void shadowResource(int arg) {
-    return BaseDSL.attr(ShadowResourceFunc8567756a.instance, arg);
   }
 
   public static Void shadowResourceLeft(int arg) {
@@ -311,46 +269,6 @@ public final class Supportv4DSL {
     public void apply(View v, final PagerAdapter arg, final PagerAdapter old) {
       if (v instanceof ViewPager) {
         ((ViewPager) v).setAdapter(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final BackgroundColorFunc8567756a instance = new BackgroundColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof PagerTabStrip) {
-        ((PagerTabStrip) v).setBackgroundColor(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final BackgroundDrawableFuncfb47464a instance = new BackgroundDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof PagerTabStrip) {
-        ((PagerTabStrip) v).setBackgroundDrawable(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final BackgroundResourceFunc8567756a instance = new BackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof PagerTabStrip) {
-        ((PagerTabStrip) v).setBackgroundResource(arg);
-      }
-    }
-  }
-
-  private static final class ColorSchemeFunc5fb6391 implements Anvil.AttrFunc<int[]> {
-    public static final ColorSchemeFunc5fb6391 instance = new ColorSchemeFunc5fb6391();
-
-    public void apply(View v, final int[] arg, final int[] old) {
-      if (v instanceof SwipeRefreshLayout) {
-        ((SwipeRefreshLayout) v).setColorScheme(arg);
       }
     }
   }
@@ -425,16 +343,6 @@ public final class Supportv4DSL {
     }
   }
 
-  private static final class DrawerListenerFunc17bd5440 implements Anvil.AttrFunc<DrawerLayout.DrawerListener> {
-    public static final DrawerListenerFunc17bd5440 instance = new DrawerListenerFunc17bd5440();
-
-    public void apply(View v, final DrawerLayout.DrawerListener arg, final DrawerLayout.DrawerListener old) {
-      if (v instanceof DrawerLayout) {
-        ((DrawerLayout) v).setDrawerListener(arg);
-      }
-    }
-  }
-
   private static final class DrawerLockModeFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final DrawerLockModeFunc8567756a instance = new DrawerLockModeFunc8567756a();
 
@@ -498,35 +406,6 @@ public final class Supportv4DSL {
     }
   }
 
-  private static final class OnPageChangeFunc248abe99 implements Anvil.AttrFunc<ViewPager.OnPageChangeListener> {
-    public static final OnPageChangeFunc248abe99 instance = new OnPageChangeFunc248abe99();
-
-    public void apply(View v, final ViewPager.OnPageChangeListener arg, final ViewPager.OnPageChangeListener old) {
-      if (v instanceof ViewPager) {
-        if (arg != null) {
-          ((ViewPager) v).setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int a0) {
-              arg.onPageScrollStateChanged(a0);
-              Anvil.render();
-            }
-
-            public void onPageScrolled(int a0, float a1, int a2) {
-              arg.onPageScrolled(a0, a1, a2);
-              Anvil.render();
-            }
-
-            public void onPageSelected(int a0) {
-              arg.onPageSelected(a0);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((ViewPager) v).setOnPageChangeListener((ViewPager.OnPageChangeListener) null);
-        }
-      }
-    }
-  }
-
   private static final class OnRefreshFunc6ab1eac5 implements Anvil.AttrFunc<SwipeRefreshLayout.OnRefreshListener> {
     public static final OnRefreshFunc6ab1eac5 instance = new OnRefreshFunc6ab1eac5();
 
@@ -560,25 +439,6 @@ public final class Supportv4DSL {
           });
         } else {
           ((NestedScrollView) v).setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) null);
-        }
-      }
-    }
-  }
-
-  private static final class OnTabChangedFunc2d645be implements Anvil.AttrFunc<TabHost.OnTabChangeListener> {
-    public static final OnTabChangedFunc2d645be instance = new OnTabChangedFunc2d645be();
-
-    public void apply(View v, final TabHost.OnTabChangeListener arg, final TabHost.OnTabChangeListener old) {
-      if (v instanceof FragmentTabHost) {
-        if (arg != null) {
-          ((FragmentTabHost) v).setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            public void onTabChanged(String a0) {
-              arg.onTabChanged(a0);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((FragmentTabHost) v).setOnTabChangedListener((TabHost.OnTabChangeListener) null);
         }
       }
     }
@@ -634,16 +494,6 @@ public final class Supportv4DSL {
     }
   }
 
-  private static final class ProgressBackgroundColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ProgressBackgroundColorFunc8567756a instance = new ProgressBackgroundColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof SwipeRefreshLayout) {
-        ((SwipeRefreshLayout) v).setProgressBackgroundColor(arg);
-      }
-    }
-  }
-
   private static final class ProgressBackgroundColorSchemeColorFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final ProgressBackgroundColorSchemeColorFunc8567756a instance = new ProgressBackgroundColorSchemeColorFunc8567756a();
 
@@ -684,16 +534,6 @@ public final class Supportv4DSL {
     }
   }
 
-  private static final class ShadowDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final ShadowDrawableFuncfb47464a instance = new ShadowDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof SlidingPaneLayout) {
-        ((SlidingPaneLayout) v).setShadowDrawable(arg);
-      }
-    }
-  }
-
   private static final class ShadowDrawableLeftFuncfb47464a implements Anvil.AttrFunc<Drawable> {
     public static final ShadowDrawableLeftFuncfb47464a instance = new ShadowDrawableLeftFuncfb47464a();
 
@@ -710,16 +550,6 @@ public final class Supportv4DSL {
     public void apply(View v, final Drawable arg, final Drawable old) {
       if (v instanceof SlidingPaneLayout) {
         ((SlidingPaneLayout) v).setShadowDrawableRight(arg);
-      }
-    }
-  }
-
-  private static final class ShadowResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ShadowResourceFunc8567756a instance = new ShadowResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof SlidingPaneLayout) {
-        ((SlidingPaneLayout) v).setShadowResource(arg);
       }
     }
   }
@@ -838,9 +668,6 @@ public final class Supportv4DSL {
     public static final TextSpacingFunc8567756a instance = new TextSpacingFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof PagerTabStrip) {
-        ((PagerTabStrip) v).setTextSpacing(arg);
-      }
       if (v instanceof PagerTitleStrip) {
         ((PagerTitleStrip) v).setTextSpacing(arg);
       }

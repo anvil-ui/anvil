@@ -1,12 +1,11 @@
 package trikita.anvilgen
 
 import com.squareup.javapoet.*
-import groovy.transform.EqualsAndHashCode
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 import javax.lang.model.element.Modifier
-import java.lang.reflect.Field
+import java.lang.reflect.Method
 import java.util.jar.JarFile
 
 class DSLGeneratorTask extends DefaultTask {
@@ -89,27 +88,61 @@ class DSLGeneratorTask extends DefaultTask {
                 continue
             }
 
-            if (m.name.matches('^setOn.*Listener$')) {
-                def parameterType = m.parameterTypes[0]
-                if (!java.lang.reflect.Modifier.isPublic(parameterType.modifiers)) {
-                    // If the parameter is not public then the method is inaccessible for us.
-                    continue
-                }
+            def parameterType = getMethodParameterType(m)
+            if (parameterType == null) {
+                continue
+            }
 
+            if (m.name.matches('^setOn.*Listener$')) {
                 def name = m.name
                 cb(m, "on" + name.substring(5, name.length() - 8), parameterType, true)
             } else if (m.name.startsWith('set') && m.parameterCount == 1) {
-                def parameterType = m.parameterTypes[0]
-                if (!java.lang.reflect.Modifier.isPublic(parameterType.modifiers)) {
-                    // If the parameter is not public then the method is inaccessible for us.
-                    continue
-                }
-
                 def name = Character.toLowerCase(m.name.charAt(3)).toString() +
                         m.name.substring(4)
                 cb(m, name, parameterType, false)
             }
         }
+    }
+
+    def getMethodParameterType(Method m) {
+        if (m.parameterTypes.length == 0) {
+            return null
+        }
+
+        def parameterType = m.parameterTypes[0]
+        if (!java.lang.reflect.Modifier.isPublic(parameterType.modifiers)) {
+            // If the parameter is not public then the method is inaccessible for us.
+            return null
+        } else if (m.annotations != null) {
+            for (a in m.annotations) {
+                // Don't process deprecated methods.
+                if (a.annotationType().equals(Deprecated.class)) {
+                    return null
+                }
+            }
+        } else if (m.declaringClass.canonicalName == "android.view.View") {
+            return parameterType
+        }
+
+        // Check if the method overrode from a super class.
+        def supClass = m.declaringClass.superclass
+        while (true) {
+            if (supClass == null) {
+                break
+            }
+            try {
+                supClass.getMethod(m.name, m.parameterTypes)
+                return null
+            } catch (NoSuchMethodException ignored) {
+                // Intended to occur
+            }
+
+            if (supClass.canonicalName == "android.view.View") {
+                break
+            }
+            supClass = supClass.superclass
+        }
+        return parameterType
     }
 
     //
@@ -218,7 +251,7 @@ class DSLGeneratorTask extends DefaultTask {
 
         def listener = TypeSpec.anonymousClassBuilder("")
                 .addSuperinterface(listenerClass)
-        listenerClass.getDeclaredMethods().sort { it.getName() }.each { lm ->
+        listenerClass.declaredMethods.sort { it.getName() }.each { lm ->
             def methodBuilder = MethodSpec.methodBuilder(lm.getName())
                     .addModifiers(Modifier.PUBLIC)
                     .returns(lm.getReturnType())
@@ -253,8 +286,7 @@ class DSLGeneratorTask extends DefaultTask {
                     .endControlFlow();
             builder.locked = true;
         } else if (!builder.locked) {
-            builder
-                    .beginControlFlow("if (v instanceof \$T)", m.getDeclaringClass())
+            builder.beginControlFlow("if (v instanceof \$T)", m.getDeclaringClass())
                     .beginControlFlow("if (arg != null)", m.getDeclaringClass())
                     .addStatement("((\$T) v).${m.getName()}(\$L)", m.getDeclaringClass(),
                     listener.build())
