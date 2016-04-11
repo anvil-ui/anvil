@@ -17,10 +17,8 @@ import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -35,411 +33,349 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library design.
  * Please, don't edit it manually unless for debugging.
  */
-public final class DesignDSL extends BaseDSL {
-  public static DesignDSL.ViewClassResult foregroundLinearLayout() {
-    return v(ForegroundLinearLayout.class);
+public final class DesignDSL {
+  public static BaseDSL.ViewClassResult foregroundLinearLayout() {
+    return BaseDSL.v(ForegroundLinearLayout.class);
   }
 
   public static Void foregroundLinearLayout(Anvil.Renderable r) {
-    return v(ForegroundLinearLayout.class, r);
+    return BaseDSL.v(ForegroundLinearLayout.class, r);
   }
 
-  public static DesignDSL.ViewClassResult navigationMenuItemView() {
-    return v(NavigationMenuItemView.class);
+  public static BaseDSL.ViewClassResult navigationMenuItemView() {
+    return BaseDSL.v(NavigationMenuItemView.class);
   }
 
   public static Void navigationMenuItemView(Anvil.Renderable r) {
-    return v(NavigationMenuItemView.class, r);
+    return BaseDSL.v(NavigationMenuItemView.class, r);
   }
 
-  public static DesignDSL.ViewClassResult navigationMenuView() {
-    return v(NavigationMenuView.class);
+  public static BaseDSL.ViewClassResult navigationMenuView() {
+    return BaseDSL.v(NavigationMenuView.class);
   }
 
   public static Void navigationMenuView(Anvil.Renderable r) {
-    return v(NavigationMenuView.class, r);
+    return BaseDSL.v(NavigationMenuView.class, r);
   }
 
-  public static DesignDSL.ViewClassResult scrimInsetsFrameLayout() {
-    return v(ScrimInsetsFrameLayout.class);
+  public static BaseDSL.ViewClassResult scrimInsetsFrameLayout() {
+    return BaseDSL.v(ScrimInsetsFrameLayout.class);
   }
 
   public static Void scrimInsetsFrameLayout(Anvil.Renderable r) {
-    return v(ScrimInsetsFrameLayout.class, r);
+    return BaseDSL.v(ScrimInsetsFrameLayout.class, r);
   }
 
-  public static DesignDSL.ViewClassResult appBarLayout() {
-    return v(AppBarLayout.class);
+  public static BaseDSL.ViewClassResult appBarLayout() {
+    return BaseDSL.v(AppBarLayout.class);
   }
 
   public static Void appBarLayout(Anvil.Renderable r) {
-    return v(AppBarLayout.class, r);
+    return BaseDSL.v(AppBarLayout.class, r);
   }
 
-  public static DesignDSL.ViewClassResult collapsingToolbarLayout() {
-    return v(CollapsingToolbarLayout.class);
+  public static BaseDSL.ViewClassResult collapsingToolbarLayout() {
+    return BaseDSL.v(CollapsingToolbarLayout.class);
   }
 
   public static Void collapsingToolbarLayout(Anvil.Renderable r) {
-    return v(CollapsingToolbarLayout.class, r);
+    return BaseDSL.v(CollapsingToolbarLayout.class, r);
   }
 
-  public static DesignDSL.ViewClassResult coordinatorLayout() {
-    return v(CoordinatorLayout.class);
+  public static BaseDSL.ViewClassResult coordinatorLayout() {
+    return BaseDSL.v(CoordinatorLayout.class);
   }
 
   public static Void coordinatorLayout(Anvil.Renderable r) {
-    return v(CoordinatorLayout.class, r);
+    return BaseDSL.v(CoordinatorLayout.class, r);
   }
 
-  public static DesignDSL.ViewClassResult floatingActionButton() {
-    return v(FloatingActionButton.class);
+  public static BaseDSL.ViewClassResult floatingActionButton() {
+    return BaseDSL.v(FloatingActionButton.class);
   }
 
   public static Void floatingActionButton(Anvil.Renderable r) {
-    return v(FloatingActionButton.class, r);
+    return BaseDSL.v(FloatingActionButton.class, r);
   }
 
-  public static DesignDSL.ViewClassResult navigationView() {
-    return v(NavigationView.class);
+  public static BaseDSL.ViewClassResult navigationView() {
+    return BaseDSL.v(NavigationView.class);
   }
 
   public static Void navigationView(Anvil.Renderable r) {
-    return v(NavigationView.class, r);
+    return BaseDSL.v(NavigationView.class, r);
   }
 
-  public static DesignDSL.ViewClassResult tabItem() {
-    return v(TabItem.class);
+  public static BaseDSL.ViewClassResult tabItem() {
+    return BaseDSL.v(TabItem.class);
   }
 
   public static Void tabItem(Anvil.Renderable r) {
-    return v(TabItem.class, r);
+    return BaseDSL.v(TabItem.class, r);
   }
 
-  public static DesignDSL.ViewClassResult tabLayout() {
-    return v(TabLayout.class);
+  public static BaseDSL.ViewClassResult tabLayout() {
+    return BaseDSL.v(TabLayout.class);
   }
 
   public static Void tabLayout(Anvil.Renderable r) {
-    return v(TabLayout.class, r);
+    return BaseDSL.v(TabLayout.class, r);
   }
 
-  public static DesignDSL.ViewClassResult textInputEditText() {
-    return v(TextInputEditText.class);
+  public static BaseDSL.ViewClassResult textInputEditText() {
+    return BaseDSL.v(TextInputEditText.class);
   }
 
   public static Void textInputEditText(Anvil.Renderable r) {
-    return v(TextInputEditText.class, r);
+    return BaseDSL.v(TextInputEditText.class, r);
   }
 
-  public static DesignDSL.ViewClassResult textInputLayout() {
-    return v(TextInputLayout.class);
+  public static BaseDSL.ViewClassResult textInputLayout() {
+    return BaseDSL.v(TextInputLayout.class);
   }
 
   public static Void textInputLayout(Anvil.Renderable r) {
-    return v(TextInputLayout.class, r);
-  }
-
-  public static Void backgroundColor(int arg) {
-    return DesignDSL.attr(BackgroundColorFunc8567756a.instance, arg);
-  }
-
-  public static Void backgroundDrawable(Drawable arg) {
-    return DesignDSL.attr(BackgroundDrawableFuncfb47464a.instance, arg);
-  }
-
-  public static Void backgroundResource(int arg) {
-    return DesignDSL.attr(BackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.v(TextInputLayout.class, r);
   }
 
   public static Void backgroundTintList(ColorStateList arg) {
-    return DesignDSL.attr(BackgroundTintListFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr(BackgroundTintListFunc9e5e0e4e.instance, arg);
   }
 
   public static Void backgroundTintMode(PorterDuff.Mode arg) {
-    return DesignDSL.attr(BackgroundTintModeFuncabb7a84e.instance, arg);
+    return BaseDSL.attr(BackgroundTintModeFuncabb7a84e.instance, arg);
   }
 
   public static Void checkable(boolean arg) {
-    return DesignDSL.attr(CheckableFunc148d6054.instance, arg);
+    return BaseDSL.attr(CheckableFunc148d6054.instance, arg);
   }
 
   public static Void checked(boolean arg) {
-    return DesignDSL.attr(CheckedFunc148d6054.instance, arg);
+    return BaseDSL.attr(CheckedFunc148d6054.instance, arg);
   }
 
   public static Void checkedItem(int arg) {
-    return DesignDSL.attr(CheckedItemFunc8567756a.instance, arg);
+    return BaseDSL.attr(CheckedItemFunc8567756a.instance, arg);
   }
 
   public static Void collapsedTitleGravity(int arg) {
-    return DesignDSL.attr(CollapsedTitleGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(CollapsedTitleGravityFunc8567756a.instance, arg);
   }
 
   public static Void collapsedTitleTextAppearance(int arg) {
-    return DesignDSL.attr(CollapsedTitleTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr(CollapsedTitleTextAppearanceFunc8567756a.instance, arg);
   }
 
   public static Void collapsedTitleTextColor(int arg) {
-    return DesignDSL.attr(CollapsedTitleTextColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(CollapsedTitleTextColorFunc8567756a.instance, arg);
   }
 
   public static Void collapsedTitleTypeface(Typeface arg) {
-    return DesignDSL.attr(CollapsedTitleTypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr(CollapsedTitleTypefaceFunc53b4afb.instance, arg);
   }
 
   public static Void compatElevation(float arg) {
-    return DesignDSL.attr(CompatElevationFunce0893188.instance, arg);
+    return BaseDSL.attr(CompatElevationFunce0893188.instance, arg);
   }
 
   public static Void contentScrim(Drawable arg) {
-    return DesignDSL.attr(ContentScrimFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ContentScrimFuncfb47464a.instance, arg);
   }
 
   public static Void contentScrimColor(int arg) {
-    return DesignDSL.attr(ContentScrimColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(ContentScrimColorFunc8567756a.instance, arg);
   }
 
   public static Void contentScrimResource(int arg) {
-    return DesignDSL.attr(ContentScrimResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(ContentScrimResourceFunc8567756a.instance, arg);
   }
 
   public static Void counterEnabled(boolean arg) {
-    return DesignDSL.attr(CounterEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(CounterEnabledFunc148d6054.instance, arg);
   }
 
   public static Void counterMaxLength(int arg) {
-    return DesignDSL.attr(CounterMaxLengthFunc8567756a.instance, arg);
+    return BaseDSL.attr(CounterMaxLengthFunc8567756a.instance, arg);
   }
 
   public static Void error(CharSequence arg) {
-    return DesignDSL.attr(ErrorFuncc0af808b.instance, arg);
+    return BaseDSL.attr(ErrorFuncc0af808b.instance, arg);
   }
 
   public static Void errorEnabled(boolean arg) {
-    return DesignDSL.attr(ErrorEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(ErrorEnabledFunc148d6054.instance, arg);
   }
 
   public static Void expanded(boolean arg) {
-    return DesignDSL.attr(ExpandedFunc148d6054.instance, arg);
+    return BaseDSL.attr(ExpandedFunc148d6054.instance, arg);
   }
 
   public static Void expandedTitleColor(int arg) {
-    return DesignDSL.attr(ExpandedTitleColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(ExpandedTitleColorFunc8567756a.instance, arg);
   }
 
   public static Void expandedTitleGravity(int arg) {
-    return DesignDSL.attr(ExpandedTitleGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(ExpandedTitleGravityFunc8567756a.instance, arg);
   }
 
   public static Void expandedTitleMarginBottom(int arg) {
-    return DesignDSL.attr(ExpandedTitleMarginBottomFunc8567756a.instance, arg);
+    return BaseDSL.attr(ExpandedTitleMarginBottomFunc8567756a.instance, arg);
   }
 
   public static Void expandedTitleMarginEnd(int arg) {
-    return DesignDSL.attr(ExpandedTitleMarginEndFunc8567756a.instance, arg);
+    return BaseDSL.attr(ExpandedTitleMarginEndFunc8567756a.instance, arg);
   }
 
   public static Void expandedTitleMarginStart(int arg) {
-    return DesignDSL.attr(ExpandedTitleMarginStartFunc8567756a.instance, arg);
+    return BaseDSL.attr(ExpandedTitleMarginStartFunc8567756a.instance, arg);
   }
 
   public static Void expandedTitleMarginTop(int arg) {
-    return DesignDSL.attr(ExpandedTitleMarginTopFunc8567756a.instance, arg);
+    return BaseDSL.attr(ExpandedTitleMarginTopFunc8567756a.instance, arg);
   }
 
   public static Void expandedTitleTextAppearance(int arg) {
-    return DesignDSL.attr(ExpandedTitleTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr(ExpandedTitleTextAppearanceFunc8567756a.instance, arg);
   }
 
   public static Void expandedTitleTypeface(Typeface arg) {
-    return DesignDSL.attr(ExpandedTitleTypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr(ExpandedTitleTypefaceFunc53b4afb.instance, arg);
   }
 
   public static Void foreground(Drawable arg) {
-    return DesignDSL.attr(ForegroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ForegroundFuncfb47464a.instance, arg);
   }
 
   public static Void foregroundGravity(int arg) {
-    return DesignDSL.attr(ForegroundGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(ForegroundGravityFunc8567756a.instance, arg);
   }
 
   public static Void hint(CharSequence arg) {
-    return DesignDSL.attr(HintFuncc0af808b.instance, arg);
+    return BaseDSL.attr(HintFuncc0af808b.instance, arg);
   }
 
   public static Void hintAnimationEnabled(boolean arg) {
-    return DesignDSL.attr(HintAnimationEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(HintAnimationEnabledFunc148d6054.instance, arg);
   }
 
   public static Void hintEnabled(boolean arg) {
-    return DesignDSL.attr(HintEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(HintEnabledFunc148d6054.instance, arg);
   }
 
   public static Void hintTextAppearance(int arg) {
-    return DesignDSL.attr(HintTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr(HintTextAppearanceFunc8567756a.instance, arg);
   }
 
   public static Void icon(Drawable arg) {
-    return DesignDSL.attr(IconFuncfb47464a.instance, arg);
-  }
-
-  public static Void imageResource(int arg) {
-    return DesignDSL.attr(ImageResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(IconFuncfb47464a.instance, arg);
   }
 
   public static Void itemBackground(Drawable arg) {
-    return DesignDSL.attr(ItemBackgroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ItemBackgroundFuncfb47464a.instance, arg);
   }
 
   public static Void itemBackgroundResource(int arg) {
-    return DesignDSL.attr(ItemBackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(ItemBackgroundResourceFunc8567756a.instance, arg);
   }
 
   public static Void itemIconTintList(ColorStateList arg) {
-    return DesignDSL.attr(ItemIconTintListFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr(ItemIconTintListFunc9e5e0e4e.instance, arg);
   }
 
   public static Void itemTextAppearance(int arg) {
-    return DesignDSL.attr(ItemTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr(ItemTextAppearanceFunc8567756a.instance, arg);
   }
 
   public static Void itemTextColor(ColorStateList arg) {
-    return DesignDSL.attr(ItemTextColorFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr(ItemTextColorFunc9e5e0e4e.instance, arg);
   }
 
   public static Void navigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener arg) {
-    return DesignDSL.attr(NavigationItemSelectedListenerFunc80db0872.instance, arg);
-  }
-
-  public static Void onHierarchyChange(ViewGroup.OnHierarchyChangeListener arg) {
-    return DesignDSL.attr(OnHierarchyChangeFunc7b5dc8bc.instance, arg);
+    return BaseDSL.attr(NavigationItemSelectedListenerFunc80db0872.instance, arg);
   }
 
   public static Void onTabSelected(TabLayout.OnTabSelectedListener arg) {
-    return DesignDSL.attr(OnTabSelectedFuncaa1c085e.instance, arg);
-  }
-
-  public static Void orientation(int arg) {
-    return DesignDSL.attr(OrientationFunc8567756a.instance, arg);
+    return BaseDSL.attr(OnTabSelectedFuncaa1c085e.instance, arg);
   }
 
   public static Void rippleColor(int arg) {
-    return DesignDSL.attr(RippleColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(RippleColorFunc8567756a.instance, arg);
   }
 
   public static Void scrimsShown(boolean arg) {
-    return DesignDSL.attr(ScrimsShownFunc148d6054.instance, arg);
+    return BaseDSL.attr(ScrimsShownFunc148d6054.instance, arg);
   }
 
   public static Void selectedTabIndicatorColor(int arg) {
-    return DesignDSL.attr(SelectedTabIndicatorColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(SelectedTabIndicatorColorFunc8567756a.instance, arg);
   }
 
   public static Void selectedTabIndicatorHeight(int arg) {
-    return DesignDSL.attr(SelectedTabIndicatorHeightFunc8567756a.instance, arg);
+    return BaseDSL.attr(SelectedTabIndicatorHeightFunc8567756a.instance, arg);
   }
 
   public static Void statusBarBackground(Drawable arg) {
-    return DesignDSL.attr(StatusBarBackgroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr(StatusBarBackgroundFuncfb47464a.instance, arg);
   }
 
   public static Void statusBarBackgroundColor(int arg) {
-    return DesignDSL.attr(StatusBarBackgroundColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(StatusBarBackgroundColorFunc8567756a.instance, arg);
   }
 
   public static Void statusBarBackgroundResource(int arg) {
-    return DesignDSL.attr(StatusBarBackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(StatusBarBackgroundResourceFunc8567756a.instance, arg);
   }
 
   public static Void statusBarScrim(Drawable arg) {
-    return DesignDSL.attr(StatusBarScrimFuncfb47464a.instance, arg);
+    return BaseDSL.attr(StatusBarScrimFuncfb47464a.instance, arg);
   }
 
   public static Void statusBarScrimColor(int arg) {
-    return DesignDSL.attr(StatusBarScrimColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(StatusBarScrimColorFunc8567756a.instance, arg);
   }
 
   public static Void statusBarScrimResource(int arg) {
-    return DesignDSL.attr(StatusBarScrimResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(StatusBarScrimResourceFunc8567756a.instance, arg);
   }
 
   public static Void tabGravity(int arg) {
-    return DesignDSL.attr(TabGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(TabGravityFunc8567756a.instance, arg);
   }
 
   public static Void tabMode(int arg) {
-    return DesignDSL.attr(TabModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(TabModeFunc8567756a.instance, arg);
   }
 
   public static Void tabTextColors(ColorStateList arg) {
-    return DesignDSL.attr(TabTextColorsFunc9e5e0e4e.instance, arg);
-  }
-
-  public static Void tabsFromPagerAdapter(PagerAdapter arg) {
-    return DesignDSL.attr(TabsFromPagerAdapterFuncdc294743.instance, arg);
+    return BaseDSL.attr(TabTextColorsFunc9e5e0e4e.instance, arg);
   }
 
   public static Void targetElevation(float arg) {
-    return DesignDSL.attr(TargetElevationFunce0893188.instance, arg);
+    return BaseDSL.attr(TargetElevationFunce0893188.instance, arg);
   }
 
   public static Void textColor(ColorStateList arg) {
-    return DesignDSL.attr(TextColorFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr(TextColorFunc9e5e0e4e.instance, arg);
   }
 
   public static Void title(CharSequence arg) {
-    return DesignDSL.attr(TitleFuncc0af808b.instance, arg);
+    return BaseDSL.attr(TitleFuncc0af808b.instance, arg);
   }
 
   public static Void titleEnabled(boolean arg) {
-    return DesignDSL.attr(TitleEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(TitleEnabledFunc148d6054.instance, arg);
   }
 
   public static Void typeface(Typeface arg) {
-    return DesignDSL.attr(TypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr(TypefaceFunc53b4afb.instance, arg);
   }
 
   public static Void upWithViewPager(ViewPager arg) {
-    return DesignDSL.attr(UpWithViewPagerFunc648eda47.instance, arg);
+    return BaseDSL.attr(UpWithViewPagerFunc648eda47.instance, arg);
   }
 
   public static Void useCompatPadding(boolean arg) {
-    return DesignDSL.attr(UseCompatPaddingFunc148d6054.instance, arg);
-  }
-
-  public static Void visibility(int arg) {
-    return DesignDSL.attr(VisibilityFunc8567756a.instance, arg);
-  }
-
-  private static final class BackgroundColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final BackgroundColorFunc8567756a instance = new BackgroundColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundColor(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final BackgroundDrawableFuncfb47464a instance = new BackgroundDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundDrawable(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final BackgroundResourceFunc8567756a instance = new BackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundResource(arg);
-      }
-    }
+    return BaseDSL.attr(UseCompatPaddingFunc148d6054.instance, arg);
   }
 
   private static final class BackgroundTintListFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
@@ -772,16 +708,6 @@ public final class DesignDSL extends BaseDSL {
     }
   }
 
-  private static final class ImageResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ImageResourceFunc8567756a instance = new ImageResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setImageResource(arg);
-      }
-    }
-  }
-
   private static final class ItemBackgroundFuncfb47464a implements Anvil.AttrFunc<Drawable> {
     public static final ItemBackgroundFuncfb47464a instance = new ItemBackgroundFuncfb47464a();
 
@@ -842,30 +768,6 @@ public final class DesignDSL extends BaseDSL {
     }
   }
 
-  private static final class OnHierarchyChangeFunc7b5dc8bc implements Anvil.AttrFunc<ViewGroup.OnHierarchyChangeListener> {
-    public static final OnHierarchyChangeFunc7b5dc8bc instance = new OnHierarchyChangeFunc7b5dc8bc();
-
-    public void apply(View v, final ViewGroup.OnHierarchyChangeListener arg, final ViewGroup.OnHierarchyChangeListener old) {
-      if (v instanceof CoordinatorLayout) {
-        if (arg != null) {
-          ((CoordinatorLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((CoordinatorLayout) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
-        }
-      }
-    }
-  }
-
   private static final class OnTabSelectedFuncaa1c085e implements Anvil.AttrFunc<TabLayout.OnTabSelectedListener> {
     public static final OnTabSelectedFuncaa1c085e instance = new OnTabSelectedFuncaa1c085e();
 
@@ -891,16 +793,6 @@ public final class DesignDSL extends BaseDSL {
         } else {
           ((TabLayout) v).setOnTabSelectedListener((TabLayout.OnTabSelectedListener) null);
         }
-      }
-    }
-  }
-
-  private static final class OrientationFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final OrientationFunc8567756a instance = new OrientationFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AppBarLayout) {
-        ((AppBarLayout) v).setOrientation(arg);
       }
     }
   }
@@ -1035,16 +927,6 @@ public final class DesignDSL extends BaseDSL {
     }
   }
 
-  private static final class TabsFromPagerAdapterFuncdc294743 implements Anvil.AttrFunc<PagerAdapter> {
-    public static final TabsFromPagerAdapterFuncdc294743 instance = new TabsFromPagerAdapterFuncdc294743();
-
-    public void apply(View v, final PagerAdapter arg, final PagerAdapter old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setTabsFromPagerAdapter(arg);
-      }
-    }
-  }
-
   private static final class TargetElevationFunce0893188 implements Anvil.AttrFunc<Float> {
     public static final TargetElevationFunce0893188 instance = new TargetElevationFunce0893188();
 
@@ -1114,19 +996,6 @@ public final class DesignDSL extends BaseDSL {
     public void apply(View v, final Boolean arg, final Boolean old) {
       if (v instanceof FloatingActionButton) {
         ((FloatingActionButton) v).setUseCompatPadding(arg);
-      }
-    }
-  }
-
-  private static final class VisibilityFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final VisibilityFunc8567756a instance = new VisibilityFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setVisibility(arg);
-      }
-      if (v instanceof CoordinatorLayout) {
-        ((CoordinatorLayout) v).setVisibility(arg);
       }
     }
   }

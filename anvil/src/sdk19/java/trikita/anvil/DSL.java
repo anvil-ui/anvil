@@ -26,7 +26,6 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.net.http.SslCertificate;
 import android.opengl.GLSurfaceView;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -140,2412 +139,2392 @@ import java.util.Locale;
  * Please, don't edit it manually unless for debugging.
  */
 public final class DSL extends BaseDSL {
-  public static DSL.ViewClassResult fragmentBreadCrumbs() {
-    return v(FragmentBreadCrumbs.class);
+  public static BaseDSL.ViewClassResult fragmentBreadCrumbs() {
+    return BaseDSL.v(FragmentBreadCrumbs.class);
   }
 
   public static Void fragmentBreadCrumbs(Anvil.Renderable r) {
-    return v(FragmentBreadCrumbs.class, r);
+    return BaseDSL.v(FragmentBreadCrumbs.class, r);
   }
 
-  public static DSL.ViewClassResult mediaRouteButton() {
-    return v(MediaRouteButton.class);
+  public static BaseDSL.ViewClassResult mediaRouteButton() {
+    return BaseDSL.v(MediaRouteButton.class);
   }
 
   public static Void mediaRouteButton(Anvil.Renderable r) {
-    return v(MediaRouteButton.class, r);
+    return BaseDSL.v(MediaRouteButton.class, r);
   }
 
-  public static DSL.ViewClassResult appWidgetHostView() {
-    return v(AppWidgetHostView.class);
+  public static BaseDSL.ViewClassResult appWidgetHostView() {
+    return BaseDSL.v(AppWidgetHostView.class);
   }
 
   public static Void appWidgetHostView(Anvil.Renderable r) {
-    return v(AppWidgetHostView.class, r);
+    return BaseDSL.v(AppWidgetHostView.class, r);
   }
 
-  public static DSL.ViewClassResult gestureOverlayView() {
-    return v(GestureOverlayView.class);
+  public static BaseDSL.ViewClassResult gestureOverlayView() {
+    return BaseDSL.v(GestureOverlayView.class);
   }
 
   public static Void gestureOverlayView(Anvil.Renderable r) {
-    return v(GestureOverlayView.class, r);
+    return BaseDSL.v(GestureOverlayView.class, r);
   }
 
-  public static DSL.ViewClassResult extractEditText() {
-    return v(ExtractEditText.class);
+  public static BaseDSL.ViewClassResult extractEditText() {
+    return BaseDSL.v(ExtractEditText.class);
   }
 
   public static Void extractEditText(Anvil.Renderable r) {
-    return v(ExtractEditText.class, r);
+    return BaseDSL.v(ExtractEditText.class, r);
   }
 
-  public static DSL.ViewClassResult keyboardView() {
-    return v(KeyboardView.class);
+  public static BaseDSL.ViewClassResult keyboardView() {
+    return BaseDSL.v(KeyboardView.class);
   }
 
   public static Void keyboardView(Anvil.Renderable r) {
-    return v(KeyboardView.class, r);
+    return BaseDSL.v(KeyboardView.class, r);
   }
 
-  public static DSL.ViewClassResult gLSurfaceView() {
-    return v(GLSurfaceView.class);
+  public static BaseDSL.ViewClassResult gLSurfaceView() {
+    return BaseDSL.v(GLSurfaceView.class);
   }
 
   public static Void gLSurfaceView(Anvil.Renderable r) {
-    return v(GLSurfaceView.class, r);
+    return BaseDSL.v(GLSurfaceView.class, r);
   }
 
-  public static DSL.ViewClassResult surfaceView() {
-    return v(SurfaceView.class);
+  public static BaseDSL.ViewClassResult surfaceView() {
+    return BaseDSL.v(SurfaceView.class);
   }
 
   public static Void surfaceView(Anvil.Renderable r) {
-    return v(SurfaceView.class, r);
+    return BaseDSL.v(SurfaceView.class, r);
   }
 
-  public static DSL.ViewClassResult textureView() {
-    return v(TextureView.class);
+  public static BaseDSL.ViewClassResult textureView() {
+    return BaseDSL.v(TextureView.class);
   }
 
   public static Void textureView(Anvil.Renderable r) {
-    return v(TextureView.class, r);
+    return BaseDSL.v(TextureView.class, r);
   }
 
-  public static DSL.ViewClassResult view() {
-    return v(View.class);
+  public static BaseDSL.ViewClassResult view() {
+    return BaseDSL.v(View.class);
   }
 
   public static Void view(Anvil.Renderable r) {
-    return v(View.class, r);
+    return BaseDSL.v(View.class, r);
   }
 
-  public static DSL.ViewClassResult viewGroup() {
-    return v(ViewGroup.class);
+  public static BaseDSL.ViewClassResult viewGroup() {
+    return BaseDSL.v(ViewGroup.class);
   }
 
   public static Void viewGroup(Anvil.Renderable r) {
-    return v(ViewGroup.class, r);
+    return BaseDSL.v(ViewGroup.class, r);
   }
 
-  public static DSL.ViewClassResult viewStub() {
-    return v(ViewStub.class);
+  public static BaseDSL.ViewClassResult viewStub() {
+    return BaseDSL.v(ViewStub.class);
   }
 
   public static Void viewStub(Anvil.Renderable r) {
-    return v(ViewStub.class, r);
+    return BaseDSL.v(ViewStub.class, r);
   }
 
-  public static DSL.ViewClassResult webView() {
-    return v(WebView.class);
+  public static BaseDSL.ViewClassResult webView() {
+    return BaseDSL.v(WebView.class);
   }
 
   public static Void webView(Anvil.Renderable r) {
-    return v(WebView.class, r);
+    return BaseDSL.v(WebView.class, r);
   }
 
-  public static DSL.ViewClassResult absListView() {
-    return v(AbsListView.class);
+  public static BaseDSL.ViewClassResult absListView() {
+    return BaseDSL.v(AbsListView.class);
   }
 
   public static Void absListView(Anvil.Renderable r) {
-    return v(AbsListView.class, r);
+    return BaseDSL.v(AbsListView.class, r);
   }
 
-  public static DSL.ViewClassResult absSeekBar() {
-    return v(AbsSeekBar.class);
+  public static BaseDSL.ViewClassResult absSeekBar() {
+    return BaseDSL.v(AbsSeekBar.class);
   }
 
   public static Void absSeekBar(Anvil.Renderable r) {
-    return v(AbsSeekBar.class, r);
+    return BaseDSL.v(AbsSeekBar.class, r);
   }
 
-  public static DSL.ViewClassResult absSpinner() {
-    return v(AbsSpinner.class);
+  public static BaseDSL.ViewClassResult absSpinner() {
+    return BaseDSL.v(AbsSpinner.class);
   }
 
   public static Void absSpinner(Anvil.Renderable r) {
-    return v(AbsSpinner.class, r);
+    return BaseDSL.v(AbsSpinner.class, r);
   }
 
-  public static DSL.ViewClassResult absoluteLayout() {
-    return v(AbsoluteLayout.class);
+  public static BaseDSL.ViewClassResult absoluteLayout() {
+    return BaseDSL.v(AbsoluteLayout.class);
   }
 
   public static Void absoluteLayout(Anvil.Renderable r) {
-    return v(AbsoluteLayout.class, r);
+    return BaseDSL.v(AbsoluteLayout.class, r);
   }
 
-  public static DSL.ViewClassResult adapterView() {
-    return v(AdapterView.class);
+  public static BaseDSL.ViewClassResult adapterView() {
+    return BaseDSL.v(AdapterView.class);
   }
 
   public static Void adapterView(Anvil.Renderable r) {
-    return v(AdapterView.class, r);
+    return BaseDSL.v(AdapterView.class, r);
   }
 
-  public static DSL.ViewClassResult adapterViewAnimator() {
-    return v(AdapterViewAnimator.class);
+  public static BaseDSL.ViewClassResult adapterViewAnimator() {
+    return BaseDSL.v(AdapterViewAnimator.class);
   }
 
   public static Void adapterViewAnimator(Anvil.Renderable r) {
-    return v(AdapterViewAnimator.class, r);
+    return BaseDSL.v(AdapterViewAnimator.class, r);
   }
 
-  public static DSL.ViewClassResult adapterViewFlipper() {
-    return v(AdapterViewFlipper.class);
+  public static BaseDSL.ViewClassResult adapterViewFlipper() {
+    return BaseDSL.v(AdapterViewFlipper.class);
   }
 
   public static Void adapterViewFlipper(Anvil.Renderable r) {
-    return v(AdapterViewFlipper.class, r);
+    return BaseDSL.v(AdapterViewFlipper.class, r);
   }
 
-  public static DSL.ViewClassResult analogClock() {
-    return v(AnalogClock.class);
+  public static BaseDSL.ViewClassResult analogClock() {
+    return BaseDSL.v(AnalogClock.class);
   }
 
   public static Void analogClock(Anvil.Renderable r) {
-    return v(AnalogClock.class, r);
+    return BaseDSL.v(AnalogClock.class, r);
   }
 
-  public static DSL.ViewClassResult autoCompleteTextView() {
-    return v(AutoCompleteTextView.class);
+  public static BaseDSL.ViewClassResult autoCompleteTextView() {
+    return BaseDSL.v(AutoCompleteTextView.class);
   }
 
   public static Void autoCompleteTextView(Anvil.Renderable r) {
-    return v(AutoCompleteTextView.class, r);
+    return BaseDSL.v(AutoCompleteTextView.class, r);
   }
 
-  public static DSL.ViewClassResult button() {
-    return v(Button.class);
+  public static BaseDSL.ViewClassResult button() {
+    return BaseDSL.v(Button.class);
   }
 
   public static Void button(Anvil.Renderable r) {
-    return v(Button.class, r);
+    return BaseDSL.v(Button.class, r);
   }
 
-  public static DSL.ViewClassResult calendarView() {
-    return v(CalendarView.class);
+  public static BaseDSL.ViewClassResult calendarView() {
+    return BaseDSL.v(CalendarView.class);
   }
 
   public static Void calendarView(Anvil.Renderable r) {
-    return v(CalendarView.class, r);
+    return BaseDSL.v(CalendarView.class, r);
   }
 
-  public static DSL.ViewClassResult checkBox() {
-    return v(CheckBox.class);
+  public static BaseDSL.ViewClassResult checkBox() {
+    return BaseDSL.v(CheckBox.class);
   }
 
   public static Void checkBox(Anvil.Renderable r) {
-    return v(CheckBox.class, r);
+    return BaseDSL.v(CheckBox.class, r);
   }
 
-  public static DSL.ViewClassResult checkedTextView() {
-    return v(CheckedTextView.class);
+  public static BaseDSL.ViewClassResult checkedTextView() {
+    return BaseDSL.v(CheckedTextView.class);
   }
 
   public static Void checkedTextView(Anvil.Renderable r) {
-    return v(CheckedTextView.class, r);
+    return BaseDSL.v(CheckedTextView.class, r);
   }
 
-  public static DSL.ViewClassResult chronometer() {
-    return v(Chronometer.class);
+  public static BaseDSL.ViewClassResult chronometer() {
+    return BaseDSL.v(Chronometer.class);
   }
 
   public static Void chronometer(Anvil.Renderable r) {
-    return v(Chronometer.class, r);
+    return BaseDSL.v(Chronometer.class, r);
   }
 
-  public static DSL.ViewClassResult compoundButton() {
-    return v(CompoundButton.class);
+  public static BaseDSL.ViewClassResult compoundButton() {
+    return BaseDSL.v(CompoundButton.class);
   }
 
   public static Void compoundButton(Anvil.Renderable r) {
-    return v(CompoundButton.class, r);
+    return BaseDSL.v(CompoundButton.class, r);
   }
 
-  public static DSL.ViewClassResult datePicker() {
-    return v(DatePicker.class);
+  public static BaseDSL.ViewClassResult datePicker() {
+    return BaseDSL.v(DatePicker.class);
   }
 
   public static Void datePicker(Anvil.Renderable r) {
-    return v(DatePicker.class, r);
+    return BaseDSL.v(DatePicker.class, r);
   }
 
-  public static DSL.ViewClassResult dialerFilter() {
-    return v(DialerFilter.class);
+  public static BaseDSL.ViewClassResult dialerFilter() {
+    return BaseDSL.v(DialerFilter.class);
   }
 
   public static Void dialerFilter(Anvil.Renderable r) {
-    return v(DialerFilter.class, r);
+    return BaseDSL.v(DialerFilter.class, r);
   }
 
-  public static DSL.ViewClassResult digitalClock() {
-    return v(DigitalClock.class);
+  public static BaseDSL.ViewClassResult digitalClock() {
+    return BaseDSL.v(DigitalClock.class);
   }
 
   public static Void digitalClock(Anvil.Renderable r) {
-    return v(DigitalClock.class, r);
+    return BaseDSL.v(DigitalClock.class, r);
   }
 
-  public static DSL.ViewClassResult editText() {
-    return v(EditText.class);
+  public static BaseDSL.ViewClassResult editText() {
+    return BaseDSL.v(EditText.class);
   }
 
   public static Void editText(Anvil.Renderable r) {
-    return v(EditText.class, r);
+    return BaseDSL.v(EditText.class, r);
   }
 
-  public static DSL.ViewClassResult expandableListView() {
-    return v(ExpandableListView.class);
+  public static BaseDSL.ViewClassResult expandableListView() {
+    return BaseDSL.v(ExpandableListView.class);
   }
 
   public static Void expandableListView(Anvil.Renderable r) {
-    return v(ExpandableListView.class, r);
+    return BaseDSL.v(ExpandableListView.class, r);
   }
 
-  public static DSL.ViewClassResult frameLayout() {
-    return v(FrameLayout.class);
+  public static BaseDSL.ViewClassResult frameLayout() {
+    return BaseDSL.v(FrameLayout.class);
   }
 
   public static Void frameLayout(Anvil.Renderable r) {
-    return v(FrameLayout.class, r);
+    return BaseDSL.v(FrameLayout.class, r);
   }
 
-  public static DSL.ViewClassResult gallery() {
-    return v(Gallery.class);
+  public static BaseDSL.ViewClassResult gallery() {
+    return BaseDSL.v(Gallery.class);
   }
 
   public static Void gallery(Anvil.Renderable r) {
-    return v(Gallery.class, r);
+    return BaseDSL.v(Gallery.class, r);
   }
 
-  public static DSL.ViewClassResult gridLayout() {
-    return v(GridLayout.class);
+  public static BaseDSL.ViewClassResult gridLayout() {
+    return BaseDSL.v(GridLayout.class);
   }
 
   public static Void gridLayout(Anvil.Renderable r) {
-    return v(GridLayout.class, r);
+    return BaseDSL.v(GridLayout.class, r);
   }
 
-  public static DSL.ViewClassResult gridView() {
-    return v(GridView.class);
+  public static BaseDSL.ViewClassResult gridView() {
+    return BaseDSL.v(GridView.class);
   }
 
   public static Void gridView(Anvil.Renderable r) {
-    return v(GridView.class, r);
+    return BaseDSL.v(GridView.class, r);
   }
 
-  public static DSL.ViewClassResult horizontalScrollView() {
-    return v(HorizontalScrollView.class);
+  public static BaseDSL.ViewClassResult horizontalScrollView() {
+    return BaseDSL.v(HorizontalScrollView.class);
   }
 
   public static Void horizontalScrollView(Anvil.Renderable r) {
-    return v(HorizontalScrollView.class, r);
+    return BaseDSL.v(HorizontalScrollView.class, r);
   }
 
-  public static DSL.ViewClassResult imageButton() {
-    return v(ImageButton.class);
+  public static BaseDSL.ViewClassResult imageButton() {
+    return BaseDSL.v(ImageButton.class);
   }
 
   public static Void imageButton(Anvil.Renderable r) {
-    return v(ImageButton.class, r);
+    return BaseDSL.v(ImageButton.class, r);
   }
 
-  public static DSL.ViewClassResult imageSwitcher() {
-    return v(ImageSwitcher.class);
+  public static BaseDSL.ViewClassResult imageSwitcher() {
+    return BaseDSL.v(ImageSwitcher.class);
   }
 
   public static Void imageSwitcher(Anvil.Renderable r) {
-    return v(ImageSwitcher.class, r);
+    return BaseDSL.v(ImageSwitcher.class, r);
   }
 
-  public static DSL.ViewClassResult imageView() {
-    return v(ImageView.class);
+  public static BaseDSL.ViewClassResult imageView() {
+    return BaseDSL.v(ImageView.class);
   }
 
   public static Void imageView(Anvil.Renderable r) {
-    return v(ImageView.class, r);
+    return BaseDSL.v(ImageView.class, r);
   }
 
-  public static DSL.ViewClassResult linearLayout() {
-    return v(LinearLayout.class);
+  public static BaseDSL.ViewClassResult linearLayout() {
+    return BaseDSL.v(LinearLayout.class);
   }
 
   public static Void linearLayout(Anvil.Renderable r) {
-    return v(LinearLayout.class, r);
+    return BaseDSL.v(LinearLayout.class, r);
   }
 
-  public static DSL.ViewClassResult listView() {
-    return v(ListView.class);
+  public static BaseDSL.ViewClassResult listView() {
+    return BaseDSL.v(ListView.class);
   }
 
   public static Void listView(Anvil.Renderable r) {
-    return v(ListView.class, r);
+    return BaseDSL.v(ListView.class, r);
   }
 
-  public static DSL.ViewClassResult mediaController() {
-    return v(MediaController.class);
+  public static BaseDSL.ViewClassResult mediaController() {
+    return BaseDSL.v(MediaController.class);
   }
 
   public static Void mediaController(Anvil.Renderable r) {
-    return v(MediaController.class, r);
+    return BaseDSL.v(MediaController.class, r);
   }
 
-  public static DSL.ViewClassResult multiAutoCompleteTextView() {
-    return v(MultiAutoCompleteTextView.class);
+  public static BaseDSL.ViewClassResult multiAutoCompleteTextView() {
+    return BaseDSL.v(MultiAutoCompleteTextView.class);
   }
 
   public static Void multiAutoCompleteTextView(Anvil.Renderable r) {
-    return v(MultiAutoCompleteTextView.class, r);
+    return BaseDSL.v(MultiAutoCompleteTextView.class, r);
   }
 
-  public static DSL.ViewClassResult numberPicker() {
-    return v(NumberPicker.class);
+  public static BaseDSL.ViewClassResult numberPicker() {
+    return BaseDSL.v(NumberPicker.class);
   }
 
   public static Void numberPicker(Anvil.Renderable r) {
-    return v(NumberPicker.class, r);
+    return BaseDSL.v(NumberPicker.class, r);
   }
 
-  public static DSL.ViewClassResult progressBar() {
-    return v(ProgressBar.class);
+  public static BaseDSL.ViewClassResult progressBar() {
+    return BaseDSL.v(ProgressBar.class);
   }
 
   public static Void progressBar(Anvil.Renderable r) {
-    return v(ProgressBar.class, r);
+    return BaseDSL.v(ProgressBar.class, r);
   }
 
-  public static DSL.ViewClassResult quickContactBadge() {
-    return v(QuickContactBadge.class);
+  public static BaseDSL.ViewClassResult quickContactBadge() {
+    return BaseDSL.v(QuickContactBadge.class);
   }
 
   public static Void quickContactBadge(Anvil.Renderable r) {
-    return v(QuickContactBadge.class, r);
+    return BaseDSL.v(QuickContactBadge.class, r);
   }
 
-  public static DSL.ViewClassResult radioButton() {
-    return v(RadioButton.class);
+  public static BaseDSL.ViewClassResult radioButton() {
+    return BaseDSL.v(RadioButton.class);
   }
 
   public static Void radioButton(Anvil.Renderable r) {
-    return v(RadioButton.class, r);
+    return BaseDSL.v(RadioButton.class, r);
   }
 
-  public static DSL.ViewClassResult radioGroup() {
-    return v(RadioGroup.class);
+  public static BaseDSL.ViewClassResult radioGroup() {
+    return BaseDSL.v(RadioGroup.class);
   }
 
   public static Void radioGroup(Anvil.Renderable r) {
-    return v(RadioGroup.class, r);
+    return BaseDSL.v(RadioGroup.class, r);
   }
 
-  public static DSL.ViewClassResult ratingBar() {
-    return v(RatingBar.class);
+  public static BaseDSL.ViewClassResult ratingBar() {
+    return BaseDSL.v(RatingBar.class);
   }
 
   public static Void ratingBar(Anvil.Renderable r) {
-    return v(RatingBar.class, r);
+    return BaseDSL.v(RatingBar.class, r);
   }
 
-  public static DSL.ViewClassResult relativeLayout() {
-    return v(RelativeLayout.class);
+  public static BaseDSL.ViewClassResult relativeLayout() {
+    return BaseDSL.v(RelativeLayout.class);
   }
 
   public static Void relativeLayout(Anvil.Renderable r) {
-    return v(RelativeLayout.class, r);
+    return BaseDSL.v(RelativeLayout.class, r);
   }
 
-  public static DSL.ViewClassResult scrollView() {
-    return v(ScrollView.class);
+  public static BaseDSL.ViewClassResult scrollView() {
+    return BaseDSL.v(ScrollView.class);
   }
 
   public static Void scrollView(Anvil.Renderable r) {
-    return v(ScrollView.class, r);
+    return BaseDSL.v(ScrollView.class, r);
   }
 
-  public static DSL.ViewClassResult searchView() {
-    return v(SearchView.class);
+  public static BaseDSL.ViewClassResult searchView() {
+    return BaseDSL.v(SearchView.class);
   }
 
   public static Void searchView(Anvil.Renderable r) {
-    return v(SearchView.class, r);
+    return BaseDSL.v(SearchView.class, r);
   }
 
-  public static DSL.ViewClassResult seekBar() {
-    return v(SeekBar.class);
+  public static BaseDSL.ViewClassResult seekBar() {
+    return BaseDSL.v(SeekBar.class);
   }
 
   public static Void seekBar(Anvil.Renderable r) {
-    return v(SeekBar.class, r);
+    return BaseDSL.v(SeekBar.class, r);
   }
 
-  public static DSL.ViewClassResult slidingDrawer() {
-    return v(SlidingDrawer.class);
+  public static BaseDSL.ViewClassResult slidingDrawer() {
+    return BaseDSL.v(SlidingDrawer.class);
   }
 
   public static Void slidingDrawer(Anvil.Renderable r) {
-    return v(SlidingDrawer.class, r);
+    return BaseDSL.v(SlidingDrawer.class, r);
   }
 
-  public static DSL.ViewClassResult space() {
-    return v(Space.class);
+  public static BaseDSL.ViewClassResult space() {
+    return BaseDSL.v(Space.class);
   }
 
   public static Void space(Anvil.Renderable r) {
-    return v(Space.class, r);
+    return BaseDSL.v(Space.class, r);
   }
 
-  public static DSL.ViewClassResult spinner() {
-    return v(Spinner.class);
+  public static BaseDSL.ViewClassResult spinner() {
+    return BaseDSL.v(Spinner.class);
   }
 
   public static Void spinner(Anvil.Renderable r) {
-    return v(Spinner.class, r);
+    return BaseDSL.v(Spinner.class, r);
   }
 
-  public static DSL.ViewClassResult stackView() {
-    return v(StackView.class);
+  public static BaseDSL.ViewClassResult stackView() {
+    return BaseDSL.v(StackView.class);
   }
 
   public static Void stackView(Anvil.Renderable r) {
-    return v(StackView.class, r);
+    return BaseDSL.v(StackView.class, r);
   }
 
-  public static DSL.ViewClassResult switchView() {
-    return v(Switch.class);
+  public static BaseDSL.ViewClassResult switchView() {
+    return BaseDSL.v(Switch.class);
   }
 
   public static Void switchView(Anvil.Renderable r) {
-    return v(Switch.class, r);
+    return BaseDSL.v(Switch.class, r);
   }
 
-  public static DSL.ViewClassResult tabHost() {
-    return v(TabHost.class);
+  public static BaseDSL.ViewClassResult tabHost() {
+    return BaseDSL.v(TabHost.class);
   }
 
   public static Void tabHost(Anvil.Renderable r) {
-    return v(TabHost.class, r);
+    return BaseDSL.v(TabHost.class, r);
   }
 
-  public static DSL.ViewClassResult tabWidget() {
-    return v(TabWidget.class);
+  public static BaseDSL.ViewClassResult tabWidget() {
+    return BaseDSL.v(TabWidget.class);
   }
 
   public static Void tabWidget(Anvil.Renderable r) {
-    return v(TabWidget.class, r);
+    return BaseDSL.v(TabWidget.class, r);
   }
 
-  public static DSL.ViewClassResult tableLayout() {
-    return v(TableLayout.class);
+  public static BaseDSL.ViewClassResult tableLayout() {
+    return BaseDSL.v(TableLayout.class);
   }
 
   public static Void tableLayout(Anvil.Renderable r) {
-    return v(TableLayout.class, r);
+    return BaseDSL.v(TableLayout.class, r);
   }
 
-  public static DSL.ViewClassResult tableRow() {
-    return v(TableRow.class);
+  public static BaseDSL.ViewClassResult tableRow() {
+    return BaseDSL.v(TableRow.class);
   }
 
   public static Void tableRow(Anvil.Renderable r) {
-    return v(TableRow.class, r);
+    return BaseDSL.v(TableRow.class, r);
   }
 
-  public static DSL.ViewClassResult textClock() {
-    return v(TextClock.class);
+  public static BaseDSL.ViewClassResult textClock() {
+    return BaseDSL.v(TextClock.class);
   }
 
   public static Void textClock(Anvil.Renderable r) {
-    return v(TextClock.class, r);
+    return BaseDSL.v(TextClock.class, r);
   }
 
-  public static DSL.ViewClassResult textSwitcher() {
-    return v(TextSwitcher.class);
+  public static BaseDSL.ViewClassResult textSwitcher() {
+    return BaseDSL.v(TextSwitcher.class);
   }
 
   public static Void textSwitcher(Anvil.Renderable r) {
-    return v(TextSwitcher.class, r);
+    return BaseDSL.v(TextSwitcher.class, r);
   }
 
-  public static DSL.ViewClassResult textView() {
-    return v(TextView.class);
+  public static BaseDSL.ViewClassResult textView() {
+    return BaseDSL.v(TextView.class);
   }
 
   public static Void textView(Anvil.Renderable r) {
-    return v(TextView.class, r);
+    return BaseDSL.v(TextView.class, r);
   }
 
-  public static DSL.ViewClassResult timePicker() {
-    return v(TimePicker.class);
+  public static BaseDSL.ViewClassResult timePicker() {
+    return BaseDSL.v(TimePicker.class);
   }
 
   public static Void timePicker(Anvil.Renderable r) {
-    return v(TimePicker.class, r);
+    return BaseDSL.v(TimePicker.class, r);
   }
 
-  public static DSL.ViewClassResult toggleButton() {
-    return v(ToggleButton.class);
+  public static BaseDSL.ViewClassResult toggleButton() {
+    return BaseDSL.v(ToggleButton.class);
   }
 
   public static Void toggleButton(Anvil.Renderable r) {
-    return v(ToggleButton.class, r);
+    return BaseDSL.v(ToggleButton.class, r);
   }
 
-  public static DSL.ViewClassResult twoLineListItem() {
-    return v(TwoLineListItem.class);
+  public static BaseDSL.ViewClassResult twoLineListItem() {
+    return BaseDSL.v(TwoLineListItem.class);
   }
 
   public static Void twoLineListItem(Anvil.Renderable r) {
-    return v(TwoLineListItem.class, r);
+    return BaseDSL.v(TwoLineListItem.class, r);
   }
 
-  public static DSL.ViewClassResult videoView() {
-    return v(VideoView.class);
+  public static BaseDSL.ViewClassResult videoView() {
+    return BaseDSL.v(VideoView.class);
   }
 
   public static Void videoView(Anvil.Renderable r) {
-    return v(VideoView.class, r);
+    return BaseDSL.v(VideoView.class, r);
   }
 
-  public static DSL.ViewClassResult viewAnimator() {
-    return v(ViewAnimator.class);
+  public static BaseDSL.ViewClassResult viewAnimator() {
+    return BaseDSL.v(ViewAnimator.class);
   }
 
   public static Void viewAnimator(Anvil.Renderable r) {
-    return v(ViewAnimator.class, r);
+    return BaseDSL.v(ViewAnimator.class, r);
   }
 
-  public static DSL.ViewClassResult viewFlipper() {
-    return v(ViewFlipper.class);
+  public static BaseDSL.ViewClassResult viewFlipper() {
+    return BaseDSL.v(ViewFlipper.class);
   }
 
   public static Void viewFlipper(Anvil.Renderable r) {
-    return v(ViewFlipper.class, r);
+    return BaseDSL.v(ViewFlipper.class, r);
   }
 
-  public static DSL.ViewClassResult viewSwitcher() {
-    return v(ViewSwitcher.class);
+  public static BaseDSL.ViewClassResult viewSwitcher() {
+    return BaseDSL.v(ViewSwitcher.class);
   }
 
   public static Void viewSwitcher(Anvil.Renderable r) {
-    return v(ViewSwitcher.class, r);
+    return BaseDSL.v(ViewSwitcher.class, r);
   }
 
-  public static DSL.ViewClassResult zoomButton() {
-    return v(ZoomButton.class);
+  public static BaseDSL.ViewClassResult zoomButton() {
+    return BaseDSL.v(ZoomButton.class);
   }
 
   public static Void zoomButton(Anvil.Renderable r) {
-    return v(ZoomButton.class, r);
+    return BaseDSL.v(ZoomButton.class, r);
   }
 
-  public static DSL.ViewClassResult zoomControls() {
-    return v(ZoomControls.class);
+  public static BaseDSL.ViewClassResult zoomControls() {
+    return BaseDSL.v(ZoomControls.class);
   }
 
   public static Void zoomControls(Anvil.Renderable r) {
-    return v(ZoomControls.class, r);
+    return BaseDSL.v(ZoomControls.class, r);
   }
 
   public static Void accessibilityDelegate(View.AccessibilityDelegate arg) {
-    return DSL.attr(AccessibilityDelegateFuncf6d047d4.instance, arg);
+    return BaseDSL.attr(AccessibilityDelegateFuncf6d047d4.instance, arg);
   }
 
   public static Void accessibilityLiveRegion(int arg) {
-    return DSL.attr(AccessibilityLiveRegionFunc8567756a.instance, arg);
+    return BaseDSL.attr(AccessibilityLiveRegionFunc8567756a.instance, arg);
   }
 
   public static Void activated(boolean arg) {
-    return DSL.attr(ActivatedFunc148d6054.instance, arg);
+    return BaseDSL.attr(ActivatedFunc148d6054.instance, arg);
   }
 
   public static Void activity(Activity arg) {
-    return DSL.attr(ActivityFunccb86c57b.instance, arg);
+    return BaseDSL.attr(ActivityFunccb86c57b.instance, arg);
   }
 
   public static Void adapter(Adapter arg) {
-    return DSL.attr(AdapterFunc1b2776e4.instance, arg);
+    return BaseDSL.attr(AdapterFunc1b2776e4.instance, arg);
   }
 
   public static Void adapter(ExpandableListAdapter arg) {
-    return DSL.attr(AdapterFunc9c589812.instance, arg);
+    return BaseDSL.attr(AdapterFunc9c589812.instance, arg);
   }
 
   public static Void addStatesFromChildren(boolean arg) {
-    return DSL.attr(AddStatesFromChildrenFunc148d6054.instance, arg);
+    return BaseDSL.attr(AddStatesFromChildrenFunc148d6054.instance, arg);
   }
 
   public static Void adjustViewBounds(boolean arg) {
-    return DSL.attr(AdjustViewBoundsFunc148d6054.instance, arg);
+    return BaseDSL.attr(AdjustViewBoundsFunc148d6054.instance, arg);
   }
 
   public static Void alignmentMode(int arg) {
-    return DSL.attr(AlignmentModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(AlignmentModeFunc8567756a.instance, arg);
   }
 
   public static Void allCaps(boolean arg) {
-    return DSL.attr(AllCapsFunc148d6054.instance, arg);
+    return BaseDSL.attr(AllCapsFunc148d6054.instance, arg);
   }
 
   public static Void alpha(float arg) {
-    return DSL.attr(AlphaFunce0893188.instance, arg);
-  }
-
-  public static Void alpha(int arg) {
-    return DSL.attr(AlphaFunc8567756a.instance, arg);
+    return BaseDSL.attr(AlphaFunce0893188.instance, arg);
   }
 
   public static Void alwaysDrawnWithCacheEnabled(boolean arg) {
-    return DSL.attr(AlwaysDrawnWithCacheEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(AlwaysDrawnWithCacheEnabledFunc148d6054.instance, arg);
   }
 
   public static Void anchorView(View arg) {
-    return DSL.attr(AnchorViewFunc6c3617af.instance, arg);
+    return BaseDSL.attr(AnchorViewFunc6c3617af.instance, arg);
   }
 
   public static Void animateFirstView(boolean arg) {
-    return DSL.attr(AnimateFirstViewFunc148d6054.instance, arg);
+    return BaseDSL.attr(AnimateFirstViewFunc148d6054.instance, arg);
   }
 
   public static Void animation(Animation arg) {
-    return DSL.attr(AnimationFunc76cb7b50.instance, arg);
+    return BaseDSL.attr(AnimationFunc76cb7b50.instance, arg);
   }
 
   public static Void animationCacheEnabled(boolean arg) {
-    return DSL.attr(AnimationCacheEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(AnimationCacheEnabledFunc148d6054.instance, arg);
   }
 
   public static Void animationDuration(int arg) {
-    return DSL.attr(AnimationDurationFunc8567756a.instance, arg);
+    return BaseDSL.attr(AnimationDurationFunc8567756a.instance, arg);
   }
 
   public static Void autoLinkMask(int arg) {
-    return DSL.attr(AutoLinkMaskFunc8567756a.instance, arg);
+    return BaseDSL.attr(AutoLinkMaskFunc8567756a.instance, arg);
   }
 
   public static Void autoStart(boolean arg) {
-    return DSL.attr(AutoStartFunc148d6054.instance, arg);
+    return BaseDSL.attr(AutoStartFunc148d6054.instance, arg);
   }
 
   public static Void background(Drawable arg) {
-    return DSL.attr(BackgroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr(BackgroundFuncfb47464a.instance, arg);
   }
 
   public static Void backgroundColor(int arg) {
-    return DSL.attr(BackgroundColorFunc8567756a.instance, arg);
-  }
-
-  public static Void backgroundDrawable(Drawable arg) {
-    return DSL.attr(BackgroundDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(BackgroundColorFunc8567756a.instance, arg);
   }
 
   public static Void backgroundResource(int arg) {
-    return DSL.attr(BackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(BackgroundResourceFunc8567756a.instance, arg);
   }
 
   public static Void base(long arg) {
-    return DSL.attr(BaseFunc17c521d0.instance, arg);
+    return BaseDSL.attr(BaseFunc17c521d0.instance, arg);
   }
 
   public static Void baseline(int arg) {
-    return DSL.attr(BaselineFunc8567756a.instance, arg);
+    return BaseDSL.attr(BaselineFunc8567756a.instance, arg);
   }
 
   public static Void baselineAlignBottom(boolean arg) {
-    return DSL.attr(BaselineAlignBottomFunc148d6054.instance, arg);
+    return BaseDSL.attr(BaselineAlignBottomFunc148d6054.instance, arg);
   }
 
   public static Void baselineAligned(boolean arg) {
-    return DSL.attr(BaselineAlignedFunc148d6054.instance, arg);
+    return BaseDSL.attr(BaselineAlignedFunc148d6054.instance, arg);
   }
 
   public static Void baselineAlignedChildIndex(int arg) {
-    return DSL.attr(BaselineAlignedChildIndexFunc8567756a.instance, arg);
+    return BaseDSL.attr(BaselineAlignedChildIndexFunc8567756a.instance, arg);
   }
 
   public static Void bottom(int arg) {
-    return DSL.attr(BottomFunc8567756a.instance, arg);
+    return BaseDSL.attr(BottomFunc8567756a.instance, arg);
   }
 
   public static Void buttonDrawable(Drawable arg) {
-    return DSL.attr(ButtonDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ButtonDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void buttonDrawable(int arg) {
-    return DSL.attr(ButtonDrawableFunc8567756a.instance, arg);
+    return BaseDSL.attr(ButtonDrawableFunc8567756a.instance, arg);
   }
 
   public static Void cacheColorHint(int arg) {
-    return DSL.attr(CacheColorHintFunc8567756a.instance, arg);
+    return BaseDSL.attr(CacheColorHintFunc8567756a.instance, arg);
   }
 
   public static Void calendarViewShown(boolean arg) {
-    return DSL.attr(CalendarViewShownFunc148d6054.instance, arg);
+    return BaseDSL.attr(CalendarViewShownFunc148d6054.instance, arg);
   }
 
   public static Void callbackDuringFling(boolean arg) {
-    return DSL.attr(CallbackDuringFlingFunc148d6054.instance, arg);
+    return BaseDSL.attr(CallbackDuringFlingFunc148d6054.instance, arg);
   }
 
   public static Void cameraDistance(float arg) {
-    return DSL.attr(CameraDistanceFunce0893188.instance, arg);
-  }
-
-  public static Void certificate(SslCertificate arg) {
-    return DSL.attr(CertificateFuncde9d69e1.instance, arg);
+    return BaseDSL.attr(CameraDistanceFunce0893188.instance, arg);
   }
 
   public static Void checkMarkDrawable(Drawable arg) {
-    return DSL.attr(CheckMarkDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(CheckMarkDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void checkMarkDrawable(int arg) {
-    return DSL.attr(CheckMarkDrawableFunc8567756a.instance, arg);
+    return BaseDSL.attr(CheckMarkDrawableFunc8567756a.instance, arg);
   }
 
   public static Void checked(boolean arg) {
-    return DSL.attr(CheckedFunc148d6054.instance, arg);
+    return BaseDSL.attr(CheckedFunc148d6054.instance, arg);
   }
 
   public static Void childDivider(Drawable arg) {
-    return DSL.attr(ChildDividerFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ChildDividerFuncfb47464a.instance, arg);
   }
 
   public static Void childIndicator(Drawable arg) {
-    return DSL.attr(ChildIndicatorFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ChildIndicatorFuncfb47464a.instance, arg);
   }
 
   public static Void choiceMode(int arg) {
-    return DSL.attr(ChoiceModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(ChoiceModeFunc8567756a.instance, arg);
   }
 
   public static Void clickable(boolean arg) {
-    return DSL.attr(ClickableFunc148d6054.instance, arg);
+    return BaseDSL.attr(ClickableFunc148d6054.instance, arg);
   }
 
   public static Void clipBounds(Rect arg) {
-    return DSL.attr(ClipBoundsFunc1cc93e48.instance, arg);
+    return BaseDSL.attr(ClipBoundsFunc1cc93e48.instance, arg);
   }
 
   public static Void clipChildren(boolean arg) {
-    return DSL.attr(ClipChildrenFunc148d6054.instance, arg);
+    return BaseDSL.attr(ClipChildrenFunc148d6054.instance, arg);
   }
 
   public static Void clipToPadding(boolean arg) {
-    return DSL.attr(ClipToPaddingFunc148d6054.instance, arg);
+    return BaseDSL.attr(ClipToPaddingFunc148d6054.instance, arg);
   }
 
   public static Void colorFilter(ColorFilter arg) {
-    return DSL.attr(ColorFilterFunc6bb7b3d7.instance, arg);
+    return BaseDSL.attr(ColorFilterFunc6bb7b3d7.instance, arg);
   }
 
   public static Void colorFilter(int arg) {
-    return DSL.attr(ColorFilterFunc8567756a.instance, arg);
+    return BaseDSL.attr(ColorFilterFunc8567756a.instance, arg);
   }
 
   public static Void columnCount(int arg) {
-    return DSL.attr(ColumnCountFunc8567756a.instance, arg);
+    return BaseDSL.attr(ColumnCountFunc8567756a.instance, arg);
   }
 
   public static Void columnOrderPreserved(boolean arg) {
-    return DSL.attr(ColumnOrderPreservedFunc148d6054.instance, arg);
+    return BaseDSL.attr(ColumnOrderPreservedFunc148d6054.instance, arg);
   }
 
   public static Void columnWidth(int arg) {
-    return DSL.attr(ColumnWidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(ColumnWidthFunc8567756a.instance, arg);
   }
 
   public static Void completionHint(CharSequence arg) {
-    return DSL.attr(CompletionHintFuncc0af808b.instance, arg);
+    return BaseDSL.attr(CompletionHintFuncc0af808b.instance, arg);
   }
 
   public static Void compoundDrawablePadding(int arg) {
-    return DSL.attr(CompoundDrawablePaddingFunc8567756a.instance, arg);
+    return BaseDSL.attr(CompoundDrawablePaddingFunc8567756a.instance, arg);
   }
 
   public static Void contentDescription(CharSequence arg) {
-    return DSL.attr(ContentDescriptionFuncc0af808b.instance, arg);
+    return BaseDSL.attr(ContentDescriptionFuncc0af808b.instance, arg);
   }
 
   public static Void cropToPadding(boolean arg) {
-    return DSL.attr(CropToPaddingFunc148d6054.instance, arg);
+    return BaseDSL.attr(CropToPaddingFunc148d6054.instance, arg);
   }
 
   public static Void currentHour(Integer arg) {
-    return DSL.attr(CurrentHourFunc8567756a.instance, arg);
+    return BaseDSL.attr(CurrentHourFunc8567756a.instance, arg);
   }
 
   public static Void currentMinute(Integer arg) {
-    return DSL.attr(CurrentMinuteFunc8567756a.instance, arg);
+    return BaseDSL.attr(CurrentMinuteFunc8567756a.instance, arg);
   }
 
   public static Void currentTab(int arg) {
-    return DSL.attr(CurrentTabFunc8567756a.instance, arg);
+    return BaseDSL.attr(CurrentTabFunc8567756a.instance, arg);
   }
 
   public static Void currentTabByTag(String arg) {
-    return DSL.attr(CurrentTabByTagFunc473e3665.instance, arg);
+    return BaseDSL.attr(CurrentTabByTagFunc473e3665.instance, arg);
   }
 
   public static Void currentText(CharSequence arg) {
-    return DSL.attr(CurrentTextFuncc0af808b.instance, arg);
+    return BaseDSL.attr(CurrentTextFuncc0af808b.instance, arg);
   }
 
   public static Void cursorVisible(boolean arg) {
-    return DSL.attr(CursorVisibleFunc148d6054.instance, arg);
+    return BaseDSL.attr(CursorVisibleFunc148d6054.instance, arg);
   }
 
   public static Void customSelectionActionModeCallback(ActionMode.Callback arg) {
-    return DSL.attr(CustomSelectionActionModeCallbackFunc57558b70.instance, arg);
+    return BaseDSL.attr(CustomSelectionActionModeCallbackFunc57558b70.instance, arg);
   }
 
   public static Void date(long arg) {
-    return DSL.attr(DateFunc17c521d0.instance, arg);
+    return BaseDSL.attr(DateFunc17c521d0.instance, arg);
   }
 
   public static Void dateTextAppearance(int arg) {
-    return DSL.attr(DateTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr(DateTextAppearanceFunc8567756a.instance, arg);
   }
 
   public static Void debugFlags(int arg) {
-    return DSL.attr(DebugFlagsFunc8567756a.instance, arg);
+    return BaseDSL.attr(DebugFlagsFunc8567756a.instance, arg);
   }
 
   public static Void descendantFocusability(int arg) {
-    return DSL.attr(DescendantFocusabilityFunc8567756a.instance, arg);
+    return BaseDSL.attr(DescendantFocusabilityFunc8567756a.instance, arg);
   }
 
   public static Void digitsWatcher(TextWatcher arg) {
-    return DSL.attr(DigitsWatcherFuncb32320d.instance, arg);
+    return BaseDSL.attr(DigitsWatcherFuncb32320d.instance, arg);
   }
 
   public static Void displayedChild(int arg) {
-    return DSL.attr(DisplayedChildFunc8567756a.instance, arg);
+    return BaseDSL.attr(DisplayedChildFunc8567756a.instance, arg);
   }
 
   public static Void displayedValues(String[] arg) {
-    return DSL.attr(DisplayedValuesFunc708a3c87.instance, arg);
+    return BaseDSL.attr(DisplayedValuesFunc708a3c87.instance, arg);
   }
 
   public static Void divider(Drawable arg) {
-    return DSL.attr(DividerFuncfb47464a.instance, arg);
+    return BaseDSL.attr(DividerFuncfb47464a.instance, arg);
   }
 
   public static Void dividerDrawable(Drawable arg) {
-    return DSL.attr(DividerDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(DividerDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void dividerDrawable(int arg) {
-    return DSL.attr(DividerDrawableFunc8567756a.instance, arg);
+    return BaseDSL.attr(DividerDrawableFunc8567756a.instance, arg);
   }
 
   public static Void dividerHeight(int arg) {
-    return DSL.attr(DividerHeightFunc8567756a.instance, arg);
+    return BaseDSL.attr(DividerHeightFunc8567756a.instance, arg);
   }
 
   public static Void dividerPadding(int arg) {
-    return DSL.attr(DividerPaddingFunc8567756a.instance, arg);
+    return BaseDSL.attr(DividerPaddingFunc8567756a.instance, arg);
   }
 
   public static Void downloadListener(DownloadListener arg) {
-    return DSL.attr(DownloadListenerFunc34ae5869.instance, arg);
+    return BaseDSL.attr(DownloadListenerFunc34ae5869.instance, arg);
   }
 
   public static Void drawSelectorOnTop(boolean arg) {
-    return DSL.attr(DrawSelectorOnTopFunc148d6054.instance, arg);
+    return BaseDSL.attr(DrawSelectorOnTopFunc148d6054.instance, arg);
   }
 
   public static Void drawingCacheBackgroundColor(int arg) {
-    return DSL.attr(DrawingCacheBackgroundColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(DrawingCacheBackgroundColorFunc8567756a.instance, arg);
   }
 
   public static Void drawingCacheEnabled(boolean arg) {
-    return DSL.attr(DrawingCacheEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(DrawingCacheEnabledFunc148d6054.instance, arg);
   }
 
   public static Void drawingCacheQuality(int arg) {
-    return DSL.attr(DrawingCacheQualityFunc8567756a.instance, arg);
+    return BaseDSL.attr(DrawingCacheQualityFunc8567756a.instance, arg);
   }
 
   public static Void dropDownAnchor(int arg) {
-    return DSL.attr(DropDownAnchorFunc8567756a.instance, arg);
+    return BaseDSL.attr(DropDownAnchorFunc8567756a.instance, arg);
   }
 
   public static Void dropDownBackgroundDrawable(Drawable arg) {
-    return DSL.attr(DropDownBackgroundDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(DropDownBackgroundDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void dropDownBackgroundResource(int arg) {
-    return DSL.attr(DropDownBackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(DropDownBackgroundResourceFunc8567756a.instance, arg);
   }
 
   public static Void dropDownHeight(int arg) {
-    return DSL.attr(DropDownHeightFunc8567756a.instance, arg);
+    return BaseDSL.attr(DropDownHeightFunc8567756a.instance, arg);
   }
 
   public static Void dropDownHorizontalOffset(int arg) {
-    return DSL.attr(DropDownHorizontalOffsetFunc8567756a.instance, arg);
+    return BaseDSL.attr(DropDownHorizontalOffsetFunc8567756a.instance, arg);
   }
 
   public static Void dropDownVerticalOffset(int arg) {
-    return DSL.attr(DropDownVerticalOffsetFunc8567756a.instance, arg);
+    return BaseDSL.attr(DropDownVerticalOffsetFunc8567756a.instance, arg);
   }
 
   public static Void dropDownWidth(int arg) {
-    return DSL.attr(DropDownWidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(DropDownWidthFunc8567756a.instance, arg);
   }
 
   public static Void duplicateParentStateEnabled(boolean arg) {
-    return DSL.attr(DuplicateParentStateEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(DuplicateParentStateEnabledFunc148d6054.instance, arg);
   }
 
   public static Void eGLConfigChooser(GLSurfaceView.EGLConfigChooser arg) {
-    return DSL.attr(EGLConfigChooserFuncb283fdb0.instance, arg);
+    return BaseDSL.attr(EGLConfigChooserFuncb283fdb0.instance, arg);
   }
 
   public static Void eGLConfigChooser(boolean arg) {
-    return DSL.attr(EGLConfigChooserFunc148d6054.instance, arg);
+    return BaseDSL.attr(EGLConfigChooserFunc148d6054.instance, arg);
   }
 
   public static Void eGLContextClientVersion(int arg) {
-    return DSL.attr(EGLContextClientVersionFunc8567756a.instance, arg);
+    return BaseDSL.attr(EGLContextClientVersionFunc8567756a.instance, arg);
   }
 
   public static Void eGLContextFactory(GLSurfaceView.EGLContextFactory arg) {
-    return DSL.attr(EGLContextFactoryFunc8cdc7924.instance, arg);
+    return BaseDSL.attr(EGLContextFactoryFunc8cdc7924.instance, arg);
   }
 
   public static Void eGLWindowSurfaceFactory(GLSurfaceView.EGLWindowSurfaceFactory arg) {
-    return DSL.attr(EGLWindowSurfaceFactoryFunc204911b6.instance, arg);
+    return BaseDSL.attr(EGLWindowSurfaceFactoryFunc204911b6.instance, arg);
   }
 
   public static Void editableFactory(Editable.Factory arg) {
-    return DSL.attr(EditableFactoryFunc1efa17e2.instance, arg);
+    return BaseDSL.attr(EditableFactoryFunc1efa17e2.instance, arg);
   }
 
   public static Void ellipsize(TextUtils.TruncateAt arg) {
-    return DSL.attr(EllipsizeFunc63cb4885.instance, arg);
+    return BaseDSL.attr(EllipsizeFunc63cb4885.instance, arg);
   }
 
   public static Void emptyView(View arg) {
-    return DSL.attr(EmptyViewFunc6c3617af.instance, arg);
+    return BaseDSL.attr(EmptyViewFunc6c3617af.instance, arg);
   }
 
   public static Void ems(int arg) {
-    return DSL.attr(EmsFunc8567756a.instance, arg);
+    return BaseDSL.attr(EmsFunc8567756a.instance, arg);
   }
 
   public static Void enabled(boolean arg) {
-    return DSL.attr(EnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(EnabledFunc148d6054.instance, arg);
   }
 
   public static Void error(CharSequence arg) {
-    return DSL.attr(ErrorFuncc0af808b.instance, arg);
+    return BaseDSL.attr(ErrorFuncc0af808b.instance, arg);
   }
 
   public static Void eventsInterceptionEnabled(boolean arg) {
-    return DSL.attr(EventsInterceptionEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(EventsInterceptionEnabledFunc148d6054.instance, arg);
   }
 
   public static Void excludeMimes(String[] arg) {
-    return DSL.attr(ExcludeMimesFunc708a3c87.instance, arg);
+    return BaseDSL.attr(ExcludeMimesFunc708a3c87.instance, arg);
   }
 
   public static Void extendedSettingsClickListener(View.OnClickListener arg) {
-    return DSL.attr(ExtendedSettingsClickListenerFunc79a13a5e.instance, arg);
+    return BaseDSL.attr(ExtendedSettingsClickListenerFunc79a13a5e.instance, arg);
   }
 
   public static Void extractedText(ExtractedText arg) {
-    return DSL.attr(ExtractedTextFunc410b6fe0.instance, arg);
+    return BaseDSL.attr(ExtractedTextFunc410b6fe0.instance, arg);
   }
 
   public static Void factory(ViewSwitcher.ViewFactory arg) {
-    return DSL.attr(FactoryFunc6a48ea48.instance, arg);
+    return BaseDSL.attr(FactoryFunc6a48ea48.instance, arg);
   }
 
   public static Void fadeEnabled(boolean arg) {
-    return DSL.attr(FadeEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(FadeEnabledFunc148d6054.instance, arg);
   }
 
   public static Void fadeOffset(long arg) {
-    return DSL.attr(FadeOffsetFunc17c521d0.instance, arg);
+    return BaseDSL.attr(FadeOffsetFunc17c521d0.instance, arg);
   }
 
   public static Void fadingEdgeLength(int arg) {
-    return DSL.attr(FadingEdgeLengthFunc8567756a.instance, arg);
+    return BaseDSL.attr(FadingEdgeLengthFunc8567756a.instance, arg);
   }
 
   public static Void fastScrollAlwaysVisible(boolean arg) {
-    return DSL.attr(FastScrollAlwaysVisibleFunc148d6054.instance, arg);
+    return BaseDSL.attr(FastScrollAlwaysVisibleFunc148d6054.instance, arg);
   }
 
   public static Void fastScrollEnabled(boolean arg) {
-    return DSL.attr(FastScrollEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(FastScrollEnabledFunc148d6054.instance, arg);
   }
 
   public static Void fillViewport(boolean arg) {
-    return DSL.attr(FillViewportFunc148d6054.instance, arg);
+    return BaseDSL.attr(FillViewportFunc148d6054.instance, arg);
   }
 
   public static Void filterText(String arg) {
-    return DSL.attr(FilterTextFunc473e3665.instance, arg);
+    return BaseDSL.attr(FilterTextFunc473e3665.instance, arg);
   }
 
   public static Void filterTouchesWhenObscured(boolean arg) {
-    return DSL.attr(FilterTouchesWhenObscuredFunc148d6054.instance, arg);
+    return BaseDSL.attr(FilterTouchesWhenObscuredFunc148d6054.instance, arg);
   }
 
   public static Void filterWatcher(TextWatcher arg) {
-    return DSL.attr(FilterWatcherFuncb32320d.instance, arg);
+    return BaseDSL.attr(FilterWatcherFuncb32320d.instance, arg);
   }
 
   public static Void filters(InputFilter[] arg) {
-    return DSL.attr(FiltersFuncfb505582.instance, arg);
+    return BaseDSL.attr(FiltersFuncfb505582.instance, arg);
   }
 
   public static Void findListener(WebView.FindListener arg) {
-    return DSL.attr(FindListenerFunc28f7f5ef.instance, arg);
+    return BaseDSL.attr(FindListenerFunc28f7f5ef.instance, arg);
   }
 
   public static Void firstDayOfWeek(int arg) {
-    return DSL.attr(FirstDayOfWeekFunc8567756a.instance, arg);
+    return BaseDSL.attr(FirstDayOfWeekFunc8567756a.instance, arg);
   }
 
   public static Void fitsSystemWindows(boolean arg) {
-    return DSL.attr(FitsSystemWindowsFunc148d6054.instance, arg);
+    return BaseDSL.attr(FitsSystemWindowsFunc148d6054.instance, arg);
   }
 
   public static Void flipInterval(int arg) {
-    return DSL.attr(FlipIntervalFunc8567756a.instance, arg);
+    return BaseDSL.attr(FlipIntervalFunc8567756a.instance, arg);
   }
 
   public static Void focusable(boolean arg) {
-    return DSL.attr(FocusableFunc148d6054.instance, arg);
+    return BaseDSL.attr(FocusableFunc148d6054.instance, arg);
   }
 
   public static Void focusableInTouchMode(boolean arg) {
-    return DSL.attr(FocusableInTouchModeFunc148d6054.instance, arg);
+    return BaseDSL.attr(FocusableInTouchModeFunc148d6054.instance, arg);
   }
 
   public static Void focusedMonthDateColor(int arg) {
-    return DSL.attr(FocusedMonthDateColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(FocusedMonthDateColorFunc8567756a.instance, arg);
   }
 
   public static Void footerDividersEnabled(boolean arg) {
-    return DSL.attr(FooterDividersEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(FooterDividersEnabledFunc148d6054.instance, arg);
   }
 
   public static Void foreground(Drawable arg) {
-    return DSL.attr(ForegroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ForegroundFuncfb47464a.instance, arg);
   }
 
   public static Void foregroundGravity(int arg) {
-    return DSL.attr(ForegroundGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(ForegroundGravityFunc8567756a.instance, arg);
   }
 
   public static Void format(String arg) {
-    return DSL.attr(FormatFunc473e3665.instance, arg);
+    return BaseDSL.attr(FormatFunc473e3665.instance, arg);
   }
 
   public static Void format12Hour(CharSequence arg) {
-    return DSL.attr(Format12HourFuncc0af808b.instance, arg);
+    return BaseDSL.attr(Format12HourFuncc0af808b.instance, arg);
   }
 
   public static Void format24Hour(CharSequence arg) {
-    return DSL.attr(Format24HourFuncc0af808b.instance, arg);
+    return BaseDSL.attr(Format24HourFuncc0af808b.instance, arg);
   }
 
   public static Void formatter(NumberPicker.Formatter arg) {
-    return DSL.attr(FormatterFunc5e27b07e.instance, arg);
+    return BaseDSL.attr(FormatterFunc5e27b07e.instance, arg);
   }
 
   public static Void freezesText(boolean arg) {
-    return DSL.attr(FreezesTextFunc148d6054.instance, arg);
+    return BaseDSL.attr(FreezesTextFunc148d6054.instance, arg);
   }
 
   public static Void friction(float arg) {
-    return DSL.attr(FrictionFunce0893188.instance, arg);
+    return BaseDSL.attr(FrictionFunce0893188.instance, arg);
   }
 
   public static Void gLWrapper(GLSurfaceView.GLWrapper arg) {
-    return DSL.attr(GLWrapperFunc9520092d.instance, arg);
+    return BaseDSL.attr(GLWrapperFunc9520092d.instance, arg);
   }
 
   public static Void gesture(Gesture arg) {
-    return DSL.attr(GestureFunc15eb6005.instance, arg);
+    return BaseDSL.attr(GestureFunc15eb6005.instance, arg);
   }
 
   public static Void gestureColor(int arg) {
-    return DSL.attr(GestureColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(GestureColorFunc8567756a.instance, arg);
   }
 
   public static Void gestureStrokeAngleThreshold(float arg) {
-    return DSL.attr(GestureStrokeAngleThresholdFunce0893188.instance, arg);
+    return BaseDSL.attr(GestureStrokeAngleThresholdFunce0893188.instance, arg);
   }
 
   public static Void gestureStrokeLengthThreshold(float arg) {
-    return DSL.attr(GestureStrokeLengthThresholdFunce0893188.instance, arg);
+    return BaseDSL.attr(GestureStrokeLengthThresholdFunce0893188.instance, arg);
   }
 
   public static Void gestureStrokeSquarenessTreshold(float arg) {
-    return DSL.attr(GestureStrokeSquarenessTresholdFunce0893188.instance, arg);
+    return BaseDSL.attr(GestureStrokeSquarenessTresholdFunce0893188.instance, arg);
   }
 
   public static Void gestureStrokeType(int arg) {
-    return DSL.attr(GestureStrokeTypeFunc8567756a.instance, arg);
+    return BaseDSL.attr(GestureStrokeTypeFunc8567756a.instance, arg);
   }
 
   public static Void gestureStrokeWidth(float arg) {
-    return DSL.attr(GestureStrokeWidthFunce0893188.instance, arg);
+    return BaseDSL.attr(GestureStrokeWidthFunce0893188.instance, arg);
   }
 
   public static Void gestureVisible(boolean arg) {
-    return DSL.attr(GestureVisibleFunc148d6054.instance, arg);
+    return BaseDSL.attr(GestureVisibleFunc148d6054.instance, arg);
   }
 
   public static Void gravity(int arg) {
-    return DSL.attr(GravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(GravityFunc8567756a.instance, arg);
   }
 
   public static Void groupIndicator(Drawable arg) {
-    return DSL.attr(GroupIndicatorFuncfb47464a.instance, arg);
+    return BaseDSL.attr(GroupIndicatorFuncfb47464a.instance, arg);
   }
 
   public static Void hapticFeedbackEnabled(boolean arg) {
-    return DSL.attr(HapticFeedbackEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(HapticFeedbackEnabledFunc148d6054.instance, arg);
   }
 
   public static Void hasTransientState(boolean arg) {
-    return DSL.attr(HasTransientStateFunc148d6054.instance, arg);
+    return BaseDSL.attr(HasTransientStateFunc148d6054.instance, arg);
   }
 
   public static Void headerDividersEnabled(boolean arg) {
-    return DSL.attr(HeaderDividersEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(HeaderDividersEnabledFunc148d6054.instance, arg);
   }
 
   public static Void height(int arg) {
-    return DSL.attr(HeightFunc8567756a.instance, arg);
+    return BaseDSL.attr(HeightFunc8567756a.instance, arg);
   }
 
   public static Void highlightColor(int arg) {
-    return DSL.attr(HighlightColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(HighlightColorFunc8567756a.instance, arg);
   }
 
   public static Void hint(int arg) {
-    return DSL.attr(HintFunc8567756a.instance, arg);
+    return BaseDSL.attr(HintFunc8567756a.instance, arg);
   }
 
   public static Void hint(CharSequence arg) {
-    return DSL.attr(HintFuncc0af808b.instance, arg);
+    return BaseDSL.attr(HintFuncc0af808b.instance, arg);
   }
 
   public static Void hintTextColor(ColorStateList arg) {
-    return DSL.attr(HintTextColorFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr(HintTextColorFunc9e5e0e4e.instance, arg);
   }
 
   public static Void hintTextColor(int arg) {
-    return DSL.attr(HintTextColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(HintTextColorFunc8567756a.instance, arg);
   }
 
   public static Void horizontalFadingEdgeEnabled(boolean arg) {
-    return DSL.attr(HorizontalFadingEdgeEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(HorizontalFadingEdgeEnabledFunc148d6054.instance, arg);
   }
 
   public static Void horizontalGravity(int arg) {
-    return DSL.attr(HorizontalGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(HorizontalGravityFunc8567756a.instance, arg);
   }
 
   public static Void horizontalScrollBarEnabled(boolean arg) {
-    return DSL.attr(HorizontalScrollBarEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(HorizontalScrollBarEnabledFunc148d6054.instance, arg);
   }
 
   public static Void horizontalScrollbarOverlay(boolean arg) {
-    return DSL.attr(HorizontalScrollbarOverlayFunc148d6054.instance, arg);
+    return BaseDSL.attr(HorizontalScrollbarOverlayFunc148d6054.instance, arg);
   }
 
   public static Void horizontalSpacing(int arg) {
-    return DSL.attr(HorizontalSpacingFunc8567756a.instance, arg);
+    return BaseDSL.attr(HorizontalSpacingFunc8567756a.instance, arg);
   }
 
   public static Void horizontallyScrolling(boolean arg) {
-    return DSL.attr(HorizontallyScrollingFunc148d6054.instance, arg);
+    return BaseDSL.attr(HorizontallyScrollingFunc148d6054.instance, arg);
   }
 
   public static Void hovered(boolean arg) {
-    return DSL.attr(HoveredFunc148d6054.instance, arg);
+    return BaseDSL.attr(HoveredFunc148d6054.instance, arg);
   }
 
   public static Void iconified(boolean arg) {
-    return DSL.attr(IconifiedFunc148d6054.instance, arg);
+    return BaseDSL.attr(IconifiedFunc148d6054.instance, arg);
   }
 
   public static Void iconifiedByDefault(boolean arg) {
-    return DSL.attr(IconifiedByDefaultFunc148d6054.instance, arg);
+    return BaseDSL.attr(IconifiedByDefaultFunc148d6054.instance, arg);
   }
 
   public static Void id(int arg) {
-    return DSL.attr(IdFunc8567756a.instance, arg);
+    return BaseDSL.attr(IdFunc8567756a.instance, arg);
   }
 
   public static Void ignoreGravity(int arg) {
-    return DSL.attr(IgnoreGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(IgnoreGravityFunc8567756a.instance, arg);
   }
 
   public static Void imageAlpha(int arg) {
-    return DSL.attr(ImageAlphaFunc8567756a.instance, arg);
+    return BaseDSL.attr(ImageAlphaFunc8567756a.instance, arg);
   }
 
   public static Void imageBitmap(Bitmap arg) {
-    return DSL.attr(ImageBitmapFuncf4654c93.instance, arg);
+    return BaseDSL.attr(ImageBitmapFuncf4654c93.instance, arg);
   }
 
   public static Void imageDrawable(Drawable arg) {
-    return DSL.attr(ImageDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ImageDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void imageLevel(int arg) {
-    return DSL.attr(ImageLevelFunc8567756a.instance, arg);
+    return BaseDSL.attr(ImageLevelFunc8567756a.instance, arg);
   }
 
   public static Void imageMatrix(Matrix arg) {
-    return DSL.attr(ImageMatrixFunc6b9f325.instance, arg);
+    return BaseDSL.attr(ImageMatrixFunc6b9f325.instance, arg);
   }
 
   public static Void imageResource(int arg) {
-    return DSL.attr(ImageResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(ImageResourceFunc8567756a.instance, arg);
   }
 
   public static Void imageURI(Uri arg) {
-    return DSL.attr(ImageURIFunc75f430fc.instance, arg);
+    return BaseDSL.attr(ImageURIFunc75f430fc.instance, arg);
   }
 
   public static Void imeOptions(int arg) {
-    return DSL.attr(ImeOptionsFunc8567756a.instance, arg);
+    return BaseDSL.attr(ImeOptionsFunc8567756a.instance, arg);
   }
 
   public static Void importantForAccessibility(int arg) {
-    return DSL.attr(ImportantForAccessibilityFunc8567756a.instance, arg);
+    return BaseDSL.attr(ImportantForAccessibilityFunc8567756a.instance, arg);
   }
 
   public static Void inAnimation(ObjectAnimator arg) {
-    return DSL.attr(InAnimationFunc9a08bdaf.instance, arg);
+    return BaseDSL.attr(InAnimationFunc9a08bdaf.instance, arg);
   }
 
   public static Void inAnimation(Animation arg) {
-    return DSL.attr(InAnimationFunc76cb7b50.instance, arg);
+    return BaseDSL.attr(InAnimationFunc76cb7b50.instance, arg);
   }
 
   public static Void includeFontPadding(boolean arg) {
-    return DSL.attr(IncludeFontPaddingFunc148d6054.instance, arg);
+    return BaseDSL.attr(IncludeFontPaddingFunc148d6054.instance, arg);
   }
 
   public static Void indeterminate(boolean arg) {
-    return DSL.attr(IndeterminateFunc148d6054.instance, arg);
+    return BaseDSL.attr(IndeterminateFunc148d6054.instance, arg);
   }
 
   public static Void indeterminateDrawable(Drawable arg) {
-    return DSL.attr(IndeterminateDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(IndeterminateDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void inflatedId(int arg) {
-    return DSL.attr(InflatedIdFunc8567756a.instance, arg);
+    return BaseDSL.attr(InflatedIdFunc8567756a.instance, arg);
   }
 
   public static Void initialScale(int arg) {
-    return DSL.attr(InitialScaleFunc8567756a.instance, arg);
+    return BaseDSL.attr(InitialScaleFunc8567756a.instance, arg);
   }
 
   public static Void inputExtras(int arg) {
-    return DSL.attr(InputExtrasFunc8567756a.instance, arg);
+    return BaseDSL.attr(InputExtrasFunc8567756a.instance, arg);
   }
 
   public static Void inputType(int arg) {
-    return DSL.attr(InputTypeFunc8567756a.instance, arg);
+    return BaseDSL.attr(InputTypeFunc8567756a.instance, arg);
   }
 
   public static Void interpolator(Interpolator arg) {
-    return DSL.attr(InterpolatorFunc805e457b.instance, arg);
+    return BaseDSL.attr(InterpolatorFunc805e457b.instance, arg);
   }
 
   public static Void is24HourView(Boolean arg) {
-    return DSL.attr(Is24HourViewFunc148d6054.instance, arg);
+    return BaseDSL.attr(Is24HourViewFunc148d6054.instance, arg);
   }
 
   public static Void isIndicator(boolean arg) {
-    return DSL.attr(IsIndicatorFunc148d6054.instance, arg);
+    return BaseDSL.attr(IsIndicatorFunc148d6054.instance, arg);
   }
 
   public static Void isZoomInEnabled(boolean arg) {
-    return DSL.attr(IsZoomInEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(IsZoomInEnabledFunc148d6054.instance, arg);
   }
 
   public static Void isZoomOutEnabled(boolean arg) {
-    return DSL.attr(IsZoomOutEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(IsZoomOutEnabledFunc148d6054.instance, arg);
   }
 
   public static Void itemsCanFocus(boolean arg) {
-    return DSL.attr(ItemsCanFocusFunc148d6054.instance, arg);
+    return BaseDSL.attr(ItemsCanFocusFunc148d6054.instance, arg);
   }
 
   public static Void keepScreenOn(boolean arg) {
-    return DSL.attr(KeepScreenOnFunc148d6054.instance, arg);
+    return BaseDSL.attr(KeepScreenOnFunc148d6054.instance, arg);
   }
 
   public static Void keyListener(KeyListener arg) {
-    return DSL.attr(KeyListenerFuncc20cfe68.instance, arg);
+    return BaseDSL.attr(KeyListenerFuncc20cfe68.instance, arg);
   }
 
   public static Void keyProgressIncrement(int arg) {
-    return DSL.attr(KeyProgressIncrementFunc8567756a.instance, arg);
+    return BaseDSL.attr(KeyProgressIncrementFunc8567756a.instance, arg);
   }
 
   public static Void keyboard(Keyboard arg) {
-    return DSL.attr(KeyboardFunc68284f4c.instance, arg);
+    return BaseDSL.attr(KeyboardFunc68284f4c.instance, arg);
   }
 
   public static Void labelFor(int arg) {
-    return DSL.attr(LabelForFunc8567756a.instance, arg);
+    return BaseDSL.attr(LabelForFunc8567756a.instance, arg);
   }
 
   public static Void layerPaint(Paint arg) {
-    return DSL.attr(LayerPaintFunc7c40a07a.instance, arg);
+    return BaseDSL.attr(LayerPaintFunc7c40a07a.instance, arg);
   }
 
   public static Void layoutAnimation(LayoutAnimationController arg) {
-    return DSL.attr(LayoutAnimationFunc97b72682.instance, arg);
+    return BaseDSL.attr(LayoutAnimationFunc97b72682.instance, arg);
   }
 
   public static Void layoutAnimationListener(Animation.AnimationListener arg) {
-    return DSL.attr(LayoutAnimationListenerFunc3ffca91a.instance, arg);
+    return BaseDSL.attr(LayoutAnimationListenerFunc3ffca91a.instance, arg);
   }
 
   public static Void layoutDirection(int arg) {
-    return DSL.attr(LayoutDirectionFunc8567756a.instance, arg);
+    return BaseDSL.attr(LayoutDirectionFunc8567756a.instance, arg);
   }
 
   public static Void layoutInflater(LayoutInflater arg) {
-    return DSL.attr(LayoutInflaterFunc3f91d1f.instance, arg);
+    return BaseDSL.attr(LayoutInflaterFunc3f91d1f.instance, arg);
   }
 
   public static Void layoutMode(int arg) {
-    return DSL.attr(LayoutModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(LayoutModeFunc8567756a.instance, arg);
   }
 
   public static Void layoutParams(ViewGroup.LayoutParams arg) {
-    return DSL.attr(LayoutParamsFunc613f8e8e.instance, arg);
+    return BaseDSL.attr(LayoutParamsFunc613f8e8e.instance, arg);
   }
 
   public static Void layoutResource(int arg) {
-    return DSL.attr(LayoutResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(LayoutResourceFunc8567756a.instance, arg);
   }
 
   public static Void layoutTransition(LayoutTransition arg) {
-    return DSL.attr(LayoutTransitionFuncda5a1c48.instance, arg);
+    return BaseDSL.attr(LayoutTransitionFuncda5a1c48.instance, arg);
   }
 
   public static Void left(int arg) {
-    return DSL.attr(LeftFunc8567756a.instance, arg);
+    return BaseDSL.attr(LeftFunc8567756a.instance, arg);
   }
 
   public static Void leftStripDrawable(Drawable arg) {
-    return DSL.attr(LeftStripDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(LeftStripDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void leftStripDrawable(int arg) {
-    return DSL.attr(LeftStripDrawableFunc8567756a.instance, arg);
+    return BaseDSL.attr(LeftStripDrawableFunc8567756a.instance, arg);
   }
 
   public static Void lettersWatcher(TextWatcher arg) {
-    return DSL.attr(LettersWatcherFuncb32320d.instance, arg);
+    return BaseDSL.attr(LettersWatcherFuncb32320d.instance, arg);
   }
 
   public static Void lines(int arg) {
-    return DSL.attr(LinesFunc8567756a.instance, arg);
+    return BaseDSL.attr(LinesFunc8567756a.instance, arg);
   }
 
   public static Void linkTextColor(ColorStateList arg) {
-    return DSL.attr(LinkTextColorFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr(LinkTextColorFunc9e5e0e4e.instance, arg);
   }
 
   public static Void linkTextColor(int arg) {
-    return DSL.attr(LinkTextColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(LinkTextColorFunc8567756a.instance, arg);
   }
 
   public static Void linksClickable(boolean arg) {
-    return DSL.attr(LinksClickableFunc148d6054.instance, arg);
+    return BaseDSL.attr(LinksClickableFunc148d6054.instance, arg);
   }
 
   public static Void listSelection(int arg) {
-    return DSL.attr(ListSelectionFunc8567756a.instance, arg);
+    return BaseDSL.attr(ListSelectionFunc8567756a.instance, arg);
   }
 
   public static Void longClickable(boolean arg) {
-    return DSL.attr(LongClickableFunc148d6054.instance, arg);
-  }
-
-  public static Void mapTrackballToArrowKeys(boolean arg) {
-    return DSL.attr(MapTrackballToArrowKeysFunc148d6054.instance, arg);
+    return BaseDSL.attr(LongClickableFunc148d6054.instance, arg);
   }
 
   public static Void marqueeRepeatLimit(int arg) {
-    return DSL.attr(MarqueeRepeatLimitFunc8567756a.instance, arg);
+    return BaseDSL.attr(MarqueeRepeatLimitFunc8567756a.instance, arg);
   }
 
   public static Void max(int arg) {
-    return DSL.attr(MaxFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxFunc8567756a.instance, arg);
   }
 
   public static Void maxDate(long arg) {
-    return DSL.attr(MaxDateFunc17c521d0.instance, arg);
+    return BaseDSL.attr(MaxDateFunc17c521d0.instance, arg);
   }
 
   public static Void maxEms(int arg) {
-    return DSL.attr(MaxEmsFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxEmsFunc8567756a.instance, arg);
   }
 
   public static Void maxHeight(int arg) {
-    return DSL.attr(MaxHeightFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxHeightFunc8567756a.instance, arg);
   }
 
   public static Void maxLines(int arg) {
-    return DSL.attr(MaxLinesFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxLinesFunc8567756a.instance, arg);
   }
 
   public static Void maxValue(int arg) {
-    return DSL.attr(MaxValueFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxValueFunc8567756a.instance, arg);
   }
 
   public static Void maxVisible(int arg) {
-    return DSL.attr(MaxVisibleFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxVisibleFunc8567756a.instance, arg);
   }
 
   public static Void maxWidth(int arg) {
-    return DSL.attr(MaxWidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxWidthFunc8567756a.instance, arg);
   }
 
   public static Void measureAllChildren(boolean arg) {
-    return DSL.attr(MeasureAllChildrenFunc148d6054.instance, arg);
+    return BaseDSL.attr(MeasureAllChildrenFunc148d6054.instance, arg);
   }
 
   public static Void measureWithLargestChildEnabled(boolean arg) {
-    return DSL.attr(MeasureWithLargestChildEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(MeasureWithLargestChildEnabledFunc148d6054.instance, arg);
   }
 
   public static Void mediaController(MediaController arg) {
-    return DSL.attr(MediaControllerFunc727c9135.instance, arg);
+    return BaseDSL.attr(MediaControllerFunc727c9135.instance, arg);
   }
 
   public static Void mediaPlayer(MediaController.MediaPlayerControl arg) {
-    return DSL.attr(MediaPlayerFunc3deec331.instance, arg);
+    return BaseDSL.attr(MediaPlayerFunc3deec331.instance, arg);
   }
 
   public static Void minDate(long arg) {
-    return DSL.attr(MinDateFunc17c521d0.instance, arg);
+    return BaseDSL.attr(MinDateFunc17c521d0.instance, arg);
   }
 
   public static Void minEms(int arg) {
-    return DSL.attr(MinEmsFunc8567756a.instance, arg);
+    return BaseDSL.attr(MinEmsFunc8567756a.instance, arg);
   }
 
   public static Void minHeight(int arg) {
-    return DSL.attr(MinHeightFunc8567756a.instance, arg);
+    return BaseDSL.attr(MinHeightFunc8567756a.instance, arg);
   }
 
   public static Void minLines(int arg) {
-    return DSL.attr(MinLinesFunc8567756a.instance, arg);
+    return BaseDSL.attr(MinLinesFunc8567756a.instance, arg);
   }
 
   public static Void minValue(int arg) {
-    return DSL.attr(MinValueFunc8567756a.instance, arg);
+    return BaseDSL.attr(MinValueFunc8567756a.instance, arg);
   }
 
   public static Void minWidth(int arg) {
-    return DSL.attr(MinWidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(MinWidthFunc8567756a.instance, arg);
   }
 
   public static Void minimumHeight(int arg) {
-    return DSL.attr(MinimumHeightFunc8567756a.instance, arg);
+    return BaseDSL.attr(MinimumHeightFunc8567756a.instance, arg);
   }
 
   public static Void minimumWidth(int arg) {
-    return DSL.attr(MinimumWidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(MinimumWidthFunc8567756a.instance, arg);
   }
 
   public static Void mode(int arg) {
-    return DSL.attr(ModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(ModeFunc8567756a.instance, arg);
   }
 
   public static Void motionEventSplittingEnabled(boolean arg) {
-    return DSL.attr(MotionEventSplittingEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(MotionEventSplittingEnabledFunc148d6054.instance, arg);
   }
 
   public static Void movementMethod(MovementMethod arg) {
-    return DSL.attr(MovementMethodFunc9584901b.instance, arg);
+    return BaseDSL.attr(MovementMethodFunc9584901b.instance, arg);
   }
 
   public static Void multiChoiceModeListener(AbsListView.MultiChoiceModeListener arg) {
-    return DSL.attr(MultiChoiceModeListenerFunc74531ecd.instance, arg);
+    return BaseDSL.attr(MultiChoiceModeListenerFunc74531ecd.instance, arg);
   }
 
   public static Void networkAvailable(boolean arg) {
-    return DSL.attr(NetworkAvailableFunc148d6054.instance, arg);
+    return BaseDSL.attr(NetworkAvailableFunc148d6054.instance, arg);
   }
 
   public static Void nextFocusDownId(int arg) {
-    return DSL.attr(NextFocusDownIdFunc8567756a.instance, arg);
+    return BaseDSL.attr(NextFocusDownIdFunc8567756a.instance, arg);
   }
 
   public static Void nextFocusForwardId(int arg) {
-    return DSL.attr(NextFocusForwardIdFunc8567756a.instance, arg);
+    return BaseDSL.attr(NextFocusForwardIdFunc8567756a.instance, arg);
   }
 
   public static Void nextFocusLeftId(int arg) {
-    return DSL.attr(NextFocusLeftIdFunc8567756a.instance, arg);
+    return BaseDSL.attr(NextFocusLeftIdFunc8567756a.instance, arg);
   }
 
   public static Void nextFocusRightId(int arg) {
-    return DSL.attr(NextFocusRightIdFunc8567756a.instance, arg);
+    return BaseDSL.attr(NextFocusRightIdFunc8567756a.instance, arg);
   }
 
   public static Void nextFocusUpId(int arg) {
-    return DSL.attr(NextFocusUpIdFunc8567756a.instance, arg);
+    return BaseDSL.attr(NextFocusUpIdFunc8567756a.instance, arg);
   }
 
   public static Void numColumns(int arg) {
-    return DSL.attr(NumColumnsFunc8567756a.instance, arg);
+    return BaseDSL.attr(NumColumnsFunc8567756a.instance, arg);
   }
 
   public static Void numStars(int arg) {
-    return DSL.attr(NumStarsFunc8567756a.instance, arg);
+    return BaseDSL.attr(NumStarsFunc8567756a.instance, arg);
   }
 
   public static Void onBreadCrumbClick(FragmentBreadCrumbs.OnBreadCrumbClickListener arg) {
-    return DSL.attr(OnBreadCrumbClickFunc9216bf60.instance, arg);
+    return BaseDSL.attr(OnBreadCrumbClickFunc9216bf60.instance, arg);
   }
 
   public static Void onCheckedChange(CompoundButton.OnCheckedChangeListener arg) {
-    return DSL.attr(OnCheckedChangeFunca7ec32e6.instance, arg);
+    return BaseDSL.attr(OnCheckedChangeFunca7ec32e6.instance, arg);
   }
 
   public static Void onCheckedChange(RadioGroup.OnCheckedChangeListener arg) {
-    return DSL.attr(OnCheckedChangeFunc9ce6f1ed.instance, arg);
+    return BaseDSL.attr(OnCheckedChangeFunc9ce6f1ed.instance, arg);
   }
 
   public static Void onChildClick(ExpandableListView.OnChildClickListener arg) {
-    return DSL.attr(OnChildClickFunc41bf08ab.instance, arg);
+    return BaseDSL.attr(OnChildClickFunc41bf08ab.instance, arg);
   }
 
   public static Void onChronometerTick(Chronometer.OnChronometerTickListener arg) {
-    return DSL.attr(OnChronometerTickFunc314a7a05.instance, arg);
+    return BaseDSL.attr(OnChronometerTickFunc314a7a05.instance, arg);
   }
 
   public static Void onClick(View.OnClickListener arg) {
-    return DSL.attr(OnClickFunc79a13a5e.instance, arg);
+    return BaseDSL.attr(OnClickFunc79a13a5e.instance, arg);
   }
 
   public static Void onClose(SearchView.OnCloseListener arg) {
-    return DSL.attr(OnCloseFunc2f96a1d7.instance, arg);
+    return BaseDSL.attr(OnCloseFunc2f96a1d7.instance, arg);
   }
 
   public static Void onCompletion(MediaPlayer.OnCompletionListener arg) {
-    return DSL.attr(OnCompletionFunc118298c1.instance, arg);
+    return BaseDSL.attr(OnCompletionFunc118298c1.instance, arg);
   }
 
   public static Void onCreateContextMenu(View.OnCreateContextMenuListener arg) {
-    return DSL.attr(OnCreateContextMenuFunc657678e8.instance, arg);
+    return BaseDSL.attr(OnCreateContextMenuFunc657678e8.instance, arg);
   }
 
   public static Void onDateChange(CalendarView.OnDateChangeListener arg) {
-    return DSL.attr(OnDateChangeFuncd43c4991.instance, arg);
+    return BaseDSL.attr(OnDateChangeFuncd43c4991.instance, arg);
   }
 
   public static Void onDismiss(AutoCompleteTextView.OnDismissListener arg) {
-    return DSL.attr(OnDismissFuncfea72fd6.instance, arg);
+    return BaseDSL.attr(OnDismissFuncfea72fd6.instance, arg);
   }
 
   public static Void onDrag(View.OnDragListener arg) {
-    return DSL.attr(OnDragFunc685605c6.instance, arg);
+    return BaseDSL.attr(OnDragFunc685605c6.instance, arg);
   }
 
   public static Void onDrawerClose(SlidingDrawer.OnDrawerCloseListener arg) {
-    return DSL.attr(OnDrawerCloseFunc2c932b02.instance, arg);
+    return BaseDSL.attr(OnDrawerCloseFunc2c932b02.instance, arg);
   }
 
   public static Void onDrawerOpen(SlidingDrawer.OnDrawerOpenListener arg) {
-    return DSL.attr(OnDrawerOpenFuncbff66a28.instance, arg);
+    return BaseDSL.attr(OnDrawerOpenFuncbff66a28.instance, arg);
   }
 
   public static Void onDrawerScroll(SlidingDrawer.OnDrawerScrollListener arg) {
-    return DSL.attr(OnDrawerScrollFunc44bfdd2b.instance, arg);
+    return BaseDSL.attr(OnDrawerScrollFunc44bfdd2b.instance, arg);
   }
 
   public static Void onEditorAction(TextView.OnEditorActionListener arg) {
-    return DSL.attr(OnEditorActionFuncb9b05d07.instance, arg);
+    return BaseDSL.attr(OnEditorActionFuncb9b05d07.instance, arg);
   }
 
   public static Void onError(MediaPlayer.OnErrorListener arg) {
-    return DSL.attr(OnErrorFunc19f5c42b.instance, arg);
+    return BaseDSL.attr(OnErrorFunc19f5c42b.instance, arg);
   }
 
   public static Void onFocusChange(View.OnFocusChangeListener arg) {
-    return DSL.attr(OnFocusChangeFunca56a1dfe.instance, arg);
+    return BaseDSL.attr(OnFocusChangeFunca56a1dfe.instance, arg);
   }
 
   public static Void onGenericMotion(View.OnGenericMotionListener arg) {
-    return DSL.attr(OnGenericMotionFunc35b75643.instance, arg);
+    return BaseDSL.attr(OnGenericMotionFunc35b75643.instance, arg);
   }
 
   public static Void onGroupClick(ExpandableListView.OnGroupClickListener arg) {
-    return DSL.attr(OnGroupClickFunc8330a028.instance, arg);
+    return BaseDSL.attr(OnGroupClickFunc8330a028.instance, arg);
   }
 
   public static Void onGroupCollapse(ExpandableListView.OnGroupCollapseListener arg) {
-    return DSL.attr(OnGroupCollapseFunc817eb235.instance, arg);
+    return BaseDSL.attr(OnGroupCollapseFunc817eb235.instance, arg);
   }
 
   public static Void onGroupExpand(ExpandableListView.OnGroupExpandListener arg) {
-    return DSL.attr(OnGroupExpandFunccdb64d22.instance, arg);
+    return BaseDSL.attr(OnGroupExpandFunccdb64d22.instance, arg);
   }
 
   public static Void onHierarchyChange(ViewGroup.OnHierarchyChangeListener arg) {
-    return DSL.attr(OnHierarchyChangeFunc7b5dc8bc.instance, arg);
+    return BaseDSL.attr(OnHierarchyChangeFunc7b5dc8bc.instance, arg);
   }
 
   public static Void onHover(View.OnHoverListener arg) {
-    return DSL.attr(OnHoverFuncbf544a12.instance, arg);
+    return BaseDSL.attr(OnHoverFuncbf544a12.instance, arg);
   }
 
   public static Void onInflate(ViewStub.OnInflateListener arg) {
-    return DSL.attr(OnInflateFuncdd97752b.instance, arg);
+    return BaseDSL.attr(OnInflateFuncdd97752b.instance, arg);
   }
 
   public static Void onInfo(MediaPlayer.OnInfoListener arg) {
-    return DSL.attr(OnInfoFuncfc58c853.instance, arg);
+    return BaseDSL.attr(OnInfoFuncfc58c853.instance, arg);
   }
 
   public static Void onItemClick(AdapterView.OnItemClickListener arg) {
-    return DSL.attr(OnItemClickFuncbe673005.instance, arg);
+    return BaseDSL.attr(OnItemClickFuncbe673005.instance, arg);
   }
 
   public static Void onItemLongClick(AdapterView.OnItemLongClickListener arg) {
-    return DSL.attr(OnItemLongClickFuncbc740669.instance, arg);
+    return BaseDSL.attr(OnItemLongClickFuncbc740669.instance, arg);
   }
 
   public static Void onItemSelected(AdapterView.OnItemSelectedListener arg) {
-    return DSL.attr(OnItemSelectedFuncb7923a26.instance, arg);
+    return BaseDSL.attr(OnItemSelectedFuncb7923a26.instance, arg);
   }
 
   public static Void onKey(View.OnKeyListener arg) {
-    return DSL.attr(OnKeyFunce04764b5.instance, arg);
+    return BaseDSL.attr(OnKeyFunce04764b5.instance, arg);
   }
 
   public static Void onKeyboardAction(KeyboardView.OnKeyboardActionListener arg) {
-    return DSL.attr(OnKeyboardActionFunc754370ed.instance, arg);
+    return BaseDSL.attr(OnKeyboardActionFunc754370ed.instance, arg);
   }
 
   public static Void onLongClick(View.OnLongClickListener arg) {
-    return DSL.attr(OnLongClickFuncdc7f3c42.instance, arg);
+    return BaseDSL.attr(OnLongClickFuncdc7f3c42.instance, arg);
   }
 
   public static Void onLongPressUpdateInterval(long arg) {
-    return DSL.attr(OnLongPressUpdateIntervalFunc17c521d0.instance, arg);
+    return BaseDSL.attr(OnLongPressUpdateIntervalFunc17c521d0.instance, arg);
   }
 
   public static Void onPrepared(MediaPlayer.OnPreparedListener arg) {
-    return DSL.attr(OnPreparedFuncde5b2862.instance, arg);
+    return BaseDSL.attr(OnPreparedFuncde5b2862.instance, arg);
   }
 
   public static Void onQueryText(SearchView.OnQueryTextListener arg) {
-    return DSL.attr(OnQueryTextFunc8c880774.instance, arg);
+    return BaseDSL.attr(OnQueryTextFunc8c880774.instance, arg);
   }
 
   public static Void onQueryTextFocusChange(View.OnFocusChangeListener arg) {
-    return DSL.attr(OnQueryTextFocusChangeFunca56a1dfe.instance, arg);
+    return BaseDSL.attr(OnQueryTextFocusChangeFunca56a1dfe.instance, arg);
   }
 
   public static Void onRatingBarChange(RatingBar.OnRatingBarChangeListener arg) {
-    return DSL.attr(OnRatingBarChangeFunceb1aadb8.instance, arg);
+    return BaseDSL.attr(OnRatingBarChangeFunceb1aadb8.instance, arg);
   }
 
   public static Void onScroll(AbsListView.OnScrollListener arg) {
-    return DSL.attr(OnScrollFunce14bebe4.instance, arg);
+    return BaseDSL.attr(OnScrollFunce14bebe4.instance, arg);
   }
 
   public static Void onScroll(NumberPicker.OnScrollListener arg) {
-    return DSL.attr(OnScrollFunca8ab482c.instance, arg);
+    return BaseDSL.attr(OnScrollFunca8ab482c.instance, arg);
   }
 
   public static Void onSearchClick(View.OnClickListener arg) {
-    return DSL.attr(OnSearchClickFunc79a13a5e.instance, arg);
+    return BaseDSL.attr(OnSearchClickFunc79a13a5e.instance, arg);
   }
 
   public static Void onSeekBarChange(SeekBar.OnSeekBarChangeListener arg) {
-    return DSL.attr(OnSeekBarChangeFunc11980542.instance, arg);
+    return BaseDSL.attr(OnSeekBarChangeFunc11980542.instance, arg);
   }
 
   public static Void onSuggestion(SearchView.OnSuggestionListener arg) {
-    return DSL.attr(OnSuggestionFunc8020caad.instance, arg);
+    return BaseDSL.attr(OnSuggestionFunc8020caad.instance, arg);
   }
 
   public static Void onSystemUiVisibilityChange(View.OnSystemUiVisibilityChangeListener arg) {
-    return DSL.attr(OnSystemUiVisibilityChangeFunc42302537.instance, arg);
+    return BaseDSL.attr(OnSystemUiVisibilityChangeFunc42302537.instance, arg);
   }
 
   public static Void onTabChanged(TabHost.OnTabChangeListener arg) {
-    return DSL.attr(OnTabChangedFunc2d645be.instance, arg);
+    return BaseDSL.attr(OnTabChangedFunc2d645be.instance, arg);
   }
 
   public static Void onTimeChanged(TimePicker.OnTimeChangedListener arg) {
-    return DSL.attr(OnTimeChangedFuncaf1cf294.instance, arg);
+    return BaseDSL.attr(OnTimeChangedFuncaf1cf294.instance, arg);
   }
 
   public static Void onTouch(View.OnTouchListener arg) {
-    return DSL.attr(OnTouchFunca554ad15.instance, arg);
+    return BaseDSL.attr(OnTouchFunca554ad15.instance, arg);
   }
 
   public static Void onValueChanged(NumberPicker.OnValueChangeListener arg) {
-    return DSL.attr(OnValueChangedFunc6e8a79aa.instance, arg);
+    return BaseDSL.attr(OnValueChangedFunc6e8a79aa.instance, arg);
   }
 
   public static Void onZoomInClick(View.OnClickListener arg) {
-    return DSL.attr(OnZoomInClickFunc79a13a5e.instance, arg);
+    return BaseDSL.attr(OnZoomInClickFunc79a13a5e.instance, arg);
   }
 
   public static Void onZoomOutClick(View.OnClickListener arg) {
-    return DSL.attr(OnZoomOutClickFunc79a13a5e.instance, arg);
+    return BaseDSL.attr(OnZoomOutClickFunc79a13a5e.instance, arg);
   }
 
   public static Void opaque(boolean arg) {
-    return DSL.attr(OpaqueFunc148d6054.instance, arg);
+    return BaseDSL.attr(OpaqueFunc148d6054.instance, arg);
   }
 
   public static Void orientation(int arg) {
-    return DSL.attr(OrientationFunc8567756a.instance, arg);
+    return BaseDSL.attr(OrientationFunc8567756a.instance, arg);
   }
 
   public static Void outAnimation(ObjectAnimator arg) {
-    return DSL.attr(OutAnimationFunc9a08bdaf.instance, arg);
+    return BaseDSL.attr(OutAnimationFunc9a08bdaf.instance, arg);
   }
 
   public static Void outAnimation(Animation arg) {
-    return DSL.attr(OutAnimationFunc76cb7b50.instance, arg);
+    return BaseDSL.attr(OutAnimationFunc76cb7b50.instance, arg);
   }
 
   public static Void overScrollMode(int arg) {
-    return DSL.attr(OverScrollModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(OverScrollModeFunc8567756a.instance, arg);
   }
 
   public static Void overscrollFooter(Drawable arg) {
-    return DSL.attr(OverscrollFooterFuncfb47464a.instance, arg);
+    return BaseDSL.attr(OverscrollFooterFuncfb47464a.instance, arg);
   }
 
   public static Void overscrollHeader(Drawable arg) {
-    return DSL.attr(OverscrollHeaderFuncfb47464a.instance, arg);
+    return BaseDSL.attr(OverscrollHeaderFuncfb47464a.instance, arg);
   }
 
   public static Void paintFlags(int arg) {
-    return DSL.attr(PaintFlagsFunc8567756a.instance, arg);
+    return BaseDSL.attr(PaintFlagsFunc8567756a.instance, arg);
   }
 
   public static Void persistentDrawingCache(int arg) {
-    return DSL.attr(PersistentDrawingCacheFunc8567756a.instance, arg);
-  }
-
-  public static Void pictureListener(WebView.PictureListener arg) {
-    return DSL.attr(PictureListenerFunc42b89430.instance, arg);
+    return BaseDSL.attr(PersistentDrawingCacheFunc8567756a.instance, arg);
   }
 
   public static Void pivotX(float arg) {
-    return DSL.attr(PivotXFunce0893188.instance, arg);
+    return BaseDSL.attr(PivotXFunce0893188.instance, arg);
   }
 
   public static Void pivotY(float arg) {
-    return DSL.attr(PivotYFunce0893188.instance, arg);
+    return BaseDSL.attr(PivotYFunce0893188.instance, arg);
   }
 
   public static Void popupBackgroundDrawable(Drawable arg) {
-    return DSL.attr(PopupBackgroundDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(PopupBackgroundDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void popupBackgroundResource(int arg) {
-    return DSL.attr(PopupBackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(PopupBackgroundResourceFunc8567756a.instance, arg);
   }
 
   public static Void popupParent(View arg) {
-    return DSL.attr(PopupParentFunc6c3617af.instance, arg);
+    return BaseDSL.attr(PopupParentFunc6c3617af.instance, arg);
   }
 
   public static Void preserveEGLContextOnPause(boolean arg) {
-    return DSL.attr(PreserveEGLContextOnPauseFunc148d6054.instance, arg);
+    return BaseDSL.attr(PreserveEGLContextOnPauseFunc148d6054.instance, arg);
   }
 
   public static Void pressed(boolean arg) {
-    return DSL.attr(PressedFunc148d6054.instance, arg);
+    return BaseDSL.attr(PressedFunc148d6054.instance, arg);
   }
 
   public static Void previewEnabled(boolean arg) {
-    return DSL.attr(PreviewEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(PreviewEnabledFunc148d6054.instance, arg);
   }
 
   public static Void privateImeOptions(String arg) {
-    return DSL.attr(PrivateImeOptionsFunc473e3665.instance, arg);
+    return BaseDSL.attr(PrivateImeOptionsFunc473e3665.instance, arg);
   }
 
   public static Void progress(int arg) {
-    return DSL.attr(ProgressFunc8567756a.instance, arg);
+    return BaseDSL.attr(ProgressFunc8567756a.instance, arg);
   }
 
   public static Void progressDrawable(Drawable arg) {
-    return DSL.attr(ProgressDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ProgressDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void prompt(CharSequence arg) {
-    return DSL.attr(PromptFuncc0af808b.instance, arg);
+    return BaseDSL.attr(PromptFuncc0af808b.instance, arg);
   }
 
   public static Void promptId(int arg) {
-    return DSL.attr(PromptIdFunc8567756a.instance, arg);
+    return BaseDSL.attr(PromptIdFunc8567756a.instance, arg);
   }
 
   public static Void proximityCorrectionEnabled(boolean arg) {
-    return DSL.attr(ProximityCorrectionEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(ProximityCorrectionEnabledFunc148d6054.instance, arg);
   }
 
   public static Void queryHint(CharSequence arg) {
-    return DSL.attr(QueryHintFuncc0af808b.instance, arg);
+    return BaseDSL.attr(QueryHintFuncc0af808b.instance, arg);
   }
 
   public static Void queryRefinementEnabled(boolean arg) {
-    return DSL.attr(QueryRefinementEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(QueryRefinementEnabledFunc148d6054.instance, arg);
   }
 
   public static Void rating(float arg) {
-    return DSL.attr(RatingFunce0893188.instance, arg);
+    return BaseDSL.attr(RatingFunce0893188.instance, arg);
   }
 
   public static Void rawInputType(int arg) {
-    return DSL.attr(RawInputTypeFunc8567756a.instance, arg);
+    return BaseDSL.attr(RawInputTypeFunc8567756a.instance, arg);
   }
 
   public static Void recyclerListener(AbsListView.RecyclerListener arg) {
-    return DSL.attr(RecyclerListenerFunc93ebab97.instance, arg);
+    return BaseDSL.attr(RecyclerListenerFunc93ebab97.instance, arg);
   }
 
   public static Void remoteViewsAdapter(Intent arg) {
-    return DSL.attr(RemoteViewsAdapterFuncbcfa9f30.instance, arg);
+    return BaseDSL.attr(RemoteViewsAdapterFuncbcfa9f30.instance, arg);
   }
 
   public static Void renderMode(int arg) {
-    return DSL.attr(RenderModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(RenderModeFunc8567756a.instance, arg);
   }
 
   public static Void renderer(GLSurfaceView.Renderer arg) {
-    return DSL.attr(RendererFunc48532fc4.instance, arg);
+    return BaseDSL.attr(RendererFunc48532fc4.instance, arg);
   }
 
   public static Void right(int arg) {
-    return DSL.attr(RightFunc8567756a.instance, arg);
+    return BaseDSL.attr(RightFunc8567756a.instance, arg);
   }
 
   public static Void rightStripDrawable(Drawable arg) {
-    return DSL.attr(RightStripDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(RightStripDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void rightStripDrawable(int arg) {
-    return DSL.attr(RightStripDrawableFunc8567756a.instance, arg);
+    return BaseDSL.attr(RightStripDrawableFunc8567756a.instance, arg);
   }
 
   public static Void rotation(float arg) {
-    return DSL.attr(RotationFunce0893188.instance, arg);
+    return BaseDSL.attr(RotationFunce0893188.instance, arg);
   }
 
   public static Void rotationX(float arg) {
-    return DSL.attr(RotationXFunce0893188.instance, arg);
+    return BaseDSL.attr(RotationXFunce0893188.instance, arg);
   }
 
   public static Void rotationY(float arg) {
-    return DSL.attr(RotationYFunce0893188.instance, arg);
+    return BaseDSL.attr(RotationYFunce0893188.instance, arg);
   }
 
   public static Void routeTypes(int arg) {
-    return DSL.attr(RouteTypesFunc8567756a.instance, arg);
+    return BaseDSL.attr(RouteTypesFunc8567756a.instance, arg);
   }
 
   public static Void rowCount(int arg) {
-    return DSL.attr(RowCountFunc8567756a.instance, arg);
+    return BaseDSL.attr(RowCountFunc8567756a.instance, arg);
   }
 
   public static Void rowOrderPreserved(boolean arg) {
-    return DSL.attr(RowOrderPreservedFunc148d6054.instance, arg);
+    return BaseDSL.attr(RowOrderPreservedFunc148d6054.instance, arg);
   }
 
   public static Void saveEnabled(boolean arg) {
-    return DSL.attr(SaveEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(SaveEnabledFunc148d6054.instance, arg);
   }
 
   public static Void saveFromParentEnabled(boolean arg) {
-    return DSL.attr(SaveFromParentEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(SaveFromParentEnabledFunc148d6054.instance, arg);
   }
 
   public static Void scaleType(ImageView.ScaleType arg) {
-    return DSL.attr(ScaleTypeFunc1c5151cb.instance, arg);
+    return BaseDSL.attr(ScaleTypeFunc1c5151cb.instance, arg);
   }
 
   public static Void scaleX(float arg) {
-    return DSL.attr(ScaleXFunce0893188.instance, arg);
+    return BaseDSL.attr(ScaleXFunce0893188.instance, arg);
   }
 
   public static Void scaleY(float arg) {
-    return DSL.attr(ScaleYFunce0893188.instance, arg);
+    return BaseDSL.attr(ScaleYFunce0893188.instance, arg);
   }
 
   public static Void scrollBarDefaultDelayBeforeFade(int arg) {
-    return DSL.attr(ScrollBarDefaultDelayBeforeFadeFunc8567756a.instance, arg);
+    return BaseDSL.attr(ScrollBarDefaultDelayBeforeFadeFunc8567756a.instance, arg);
   }
 
   public static Void scrollBarFadeDuration(int arg) {
-    return DSL.attr(ScrollBarFadeDurationFunc8567756a.instance, arg);
+    return BaseDSL.attr(ScrollBarFadeDurationFunc8567756a.instance, arg);
   }
 
   public static Void scrollBarSize(int arg) {
-    return DSL.attr(ScrollBarSizeFunc8567756a.instance, arg);
+    return BaseDSL.attr(ScrollBarSizeFunc8567756a.instance, arg);
   }
 
   public static Void scrollBarStyle(int arg) {
-    return DSL.attr(ScrollBarStyleFunc8567756a.instance, arg);
+    return BaseDSL.attr(ScrollBarStyleFunc8567756a.instance, arg);
   }
 
   public static Void scrollContainer(boolean arg) {
-    return DSL.attr(ScrollContainerFunc148d6054.instance, arg);
+    return BaseDSL.attr(ScrollContainerFunc148d6054.instance, arg);
   }
 
   public static Void scrollX(int arg) {
-    return DSL.attr(ScrollXFunc8567756a.instance, arg);
+    return BaseDSL.attr(ScrollXFunc8567756a.instance, arg);
   }
 
   public static Void scrollY(int arg) {
-    return DSL.attr(ScrollYFunc8567756a.instance, arg);
+    return BaseDSL.attr(ScrollYFunc8567756a.instance, arg);
   }
 
   public static Void scrollbarFadingEnabled(boolean arg) {
-    return DSL.attr(ScrollbarFadingEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(ScrollbarFadingEnabledFunc148d6054.instance, arg);
   }
 
   public static Void scroller(Scroller arg) {
-    return DSL.attr(ScrollerFunc7fa71345.instance, arg);
+    return BaseDSL.attr(ScrollerFunc7fa71345.instance, arg);
   }
 
   public static Void scrollingCacheEnabled(boolean arg) {
-    return DSL.attr(ScrollingCacheEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(ScrollingCacheEnabledFunc148d6054.instance, arg);
   }
 
   public static Void searchableInfo(SearchableInfo arg) {
-    return DSL.attr(SearchableInfoFunc1f96c03c.instance, arg);
+    return BaseDSL.attr(SearchableInfoFunc1f96c03c.instance, arg);
   }
 
   public static Void secondaryProgress(int arg) {
-    return DSL.attr(SecondaryProgressFunc8567756a.instance, arg);
+    return BaseDSL.attr(SecondaryProgressFunc8567756a.instance, arg);
   }
 
   public static Void secure(boolean arg) {
-    return DSL.attr(SecureFunc148d6054.instance, arg);
+    return BaseDSL.attr(SecureFunc148d6054.instance, arg);
   }
 
   public static Void selectAllOnFocus(boolean arg) {
-    return DSL.attr(SelectAllOnFocusFunc148d6054.instance, arg);
+    return BaseDSL.attr(SelectAllOnFocusFunc148d6054.instance, arg);
   }
 
   public static Void selected(boolean arg) {
-    return DSL.attr(SelectedFunc148d6054.instance, arg);
+    return BaseDSL.attr(SelectedFunc148d6054.instance, arg);
   }
 
   public static Void selectedDateVerticalBar(Drawable arg) {
-    return DSL.attr(SelectedDateVerticalBarFuncfb47464a.instance, arg);
+    return BaseDSL.attr(SelectedDateVerticalBarFuncfb47464a.instance, arg);
   }
 
   public static Void selectedDateVerticalBar(int arg) {
-    return DSL.attr(SelectedDateVerticalBarFunc8567756a.instance, arg);
+    return BaseDSL.attr(SelectedDateVerticalBarFunc8567756a.instance, arg);
   }
 
   public static Void selectedGroup(int arg) {
-    return DSL.attr(SelectedGroupFunc8567756a.instance, arg);
+    return BaseDSL.attr(SelectedGroupFunc8567756a.instance, arg);
   }
 
   public static Void selectedWeekBackgroundColor(int arg) {
-    return DSL.attr(SelectedWeekBackgroundColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(SelectedWeekBackgroundColorFunc8567756a.instance, arg);
   }
 
   public static Void selection(int arg) {
-    return DSL.attr(SelectionFunc8567756a.instance, arg);
+    return BaseDSL.attr(SelectionFunc8567756a.instance, arg);
   }
 
   public static Void selector(Drawable arg) {
-    return DSL.attr(SelectorFuncfb47464a.instance, arg);
+    return BaseDSL.attr(SelectorFuncfb47464a.instance, arg);
   }
 
   public static Void selector(int arg) {
-    return DSL.attr(SelectorFunc8567756a.instance, arg);
+    return BaseDSL.attr(SelectorFunc8567756a.instance, arg);
   }
 
   public static Void shifted(boolean arg) {
-    return DSL.attr(ShiftedFunc148d6054.instance, arg);
+    return BaseDSL.attr(ShiftedFunc148d6054.instance, arg);
   }
 
   public static Void showDividers(int arg) {
-    return DSL.attr(ShowDividersFunc8567756a.instance, arg);
+    return BaseDSL.attr(ShowDividersFunc8567756a.instance, arg);
   }
 
   public static Void showWeekNumber(boolean arg) {
-    return DSL.attr(ShowWeekNumberFunc148d6054.instance, arg);
+    return BaseDSL.attr(ShowWeekNumberFunc148d6054.instance, arg);
   }
 
   public static Void shownWeekCount(int arg) {
-    return DSL.attr(ShownWeekCountFunc8567756a.instance, arg);
+    return BaseDSL.attr(ShownWeekCountFunc8567756a.instance, arg);
   }
 
   public static Void shrinkAllColumns(boolean arg) {
-    return DSL.attr(ShrinkAllColumnsFunc148d6054.instance, arg);
+    return BaseDSL.attr(ShrinkAllColumnsFunc148d6054.instance, arg);
   }
 
   public static Void singleLine(boolean arg) {
-    return DSL.attr(SingleLineFunc148d6054.instance, arg);
+    return BaseDSL.attr(SingleLineFunc148d6054.instance, arg);
   }
 
   public static Void smoothScrollbarEnabled(boolean arg) {
-    return DSL.attr(SmoothScrollbarEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(SmoothScrollbarEnabledFunc148d6054.instance, arg);
   }
 
   public static Void smoothScrollingEnabled(boolean arg) {
-    return DSL.attr(SmoothScrollingEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(SmoothScrollingEnabledFunc148d6054.instance, arg);
   }
 
   public static Void soundEffectsEnabled(boolean arg) {
-    return DSL.attr(SoundEffectsEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(SoundEffectsEnabledFunc148d6054.instance, arg);
   }
 
   public static Void spacing(int arg) {
-    return DSL.attr(SpacingFunc8567756a.instance, arg);
+    return BaseDSL.attr(SpacingFunc8567756a.instance, arg);
   }
 
   public static Void spannableFactory(Spannable.Factory arg) {
-    return DSL.attr(SpannableFactoryFunc195c8c78.instance, arg);
+    return BaseDSL.attr(SpannableFactoryFunc195c8c78.instance, arg);
   }
 
   public static Void spinnersShown(boolean arg) {
-    return DSL.attr(SpinnersShownFunc148d6054.instance, arg);
+    return BaseDSL.attr(SpinnersShownFunc148d6054.instance, arg);
   }
 
   public static Void stackFromBottom(boolean arg) {
-    return DSL.attr(StackFromBottomFunc148d6054.instance, arg);
+    return BaseDSL.attr(StackFromBottomFunc148d6054.instance, arg);
   }
 
   public static Void stepSize(float arg) {
-    return DSL.attr(StepSizeFunce0893188.instance, arg);
+    return BaseDSL.attr(StepSizeFunce0893188.instance, arg);
   }
 
   public static Void stretchAllColumns(boolean arg) {
-    return DSL.attr(StretchAllColumnsFunc148d6054.instance, arg);
+    return BaseDSL.attr(StretchAllColumnsFunc148d6054.instance, arg);
   }
 
   public static Void stretchMode(int arg) {
-    return DSL.attr(StretchModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(StretchModeFunc8567756a.instance, arg);
   }
 
   public static Void stripEnabled(boolean arg) {
-    return DSL.attr(StripEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(StripEnabledFunc148d6054.instance, arg);
   }
 
   public static Void submitButtonEnabled(boolean arg) {
-    return DSL.attr(SubmitButtonEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(SubmitButtonEnabledFunc148d6054.instance, arg);
   }
 
   public static Void suggestionsAdapter(CursorAdapter arg) {
-    return DSL.attr(SuggestionsAdapterFunc2f59eaee.instance, arg);
+    return BaseDSL.attr(SuggestionsAdapterFunc2f59eaee.instance, arg);
   }
 
   public static Void surfaceTexture(SurfaceTexture arg) {
-    return DSL.attr(SurfaceTextureFuncc2f30b12.instance, arg);
+    return BaseDSL.attr(SurfaceTextureFuncc2f30b12.instance, arg);
   }
 
   public static Void surfaceTextureListener(TextureView.SurfaceTextureListener arg) {
-    return DSL.attr(SurfaceTextureListenerFunc528d697a.instance, arg);
+    return BaseDSL.attr(SurfaceTextureListenerFunc528d697a.instance, arg);
   }
 
   public static Void switchMinWidth(int arg) {
-    return DSL.attr(SwitchMinWidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(SwitchMinWidthFunc8567756a.instance, arg);
   }
 
   public static Void switchPadding(int arg) {
-    return DSL.attr(SwitchPaddingFunc8567756a.instance, arg);
+    return BaseDSL.attr(SwitchPaddingFunc8567756a.instance, arg);
   }
 
   public static Void switchTypeface(Typeface arg) {
-    return DSL.attr(SwitchTypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr(SwitchTypefaceFunc53b4afb.instance, arg);
   }
 
   public static Void systemUiVisibility(int arg) {
-    return DSL.attr(SystemUiVisibilityFunc8567756a.instance, arg);
+    return BaseDSL.attr(SystemUiVisibilityFunc8567756a.instance, arg);
   }
 
   public static Void tag(Object arg) {
-    return DSL.attr(TagFunc3f697993.instance, arg);
+    return BaseDSL.attr(TagFunc3f697993.instance, arg);
   }
 
   public static Void text(int arg) {
-    return DSL.attr(TextFunc8567756a.instance, arg);
+    return BaseDSL.attr(TextFunc8567756a.instance, arg);
   }
 
   public static Void textAlignment(int arg) {
-    return DSL.attr(TextAlignmentFunc8567756a.instance, arg);
+    return BaseDSL.attr(TextAlignmentFunc8567756a.instance, arg);
   }
 
   public static Void textColor(ColorStateList arg) {
-    return DSL.attr(TextColorFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr(TextColorFunc9e5e0e4e.instance, arg);
   }
 
   public static Void textColor(int arg) {
-    return DSL.attr(TextColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(TextColorFunc8567756a.instance, arg);
   }
 
   public static Void textDirection(int arg) {
-    return DSL.attr(TextDirectionFunc8567756a.instance, arg);
+    return BaseDSL.attr(TextDirectionFunc8567756a.instance, arg);
   }
 
   public static Void textFilterEnabled(boolean arg) {
-    return DSL.attr(TextFilterEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(TextFilterEnabledFunc148d6054.instance, arg);
   }
 
   public static Void textIsSelectable(boolean arg) {
-    return DSL.attr(TextIsSelectableFunc148d6054.instance, arg);
+    return BaseDSL.attr(TextIsSelectableFunc148d6054.instance, arg);
   }
 
   public static Void textKeepState(CharSequence arg) {
-    return DSL.attr(TextKeepStateFuncc0af808b.instance, arg);
+    return BaseDSL.attr(TextKeepStateFuncc0af808b.instance, arg);
   }
 
   public static Void textLocale(Locale arg) {
-    return DSL.attr(TextLocaleFuncba8c481a.instance, arg);
+    return BaseDSL.attr(TextLocaleFuncba8c481a.instance, arg);
   }
 
   public static Void textOff(CharSequence arg) {
-    return DSL.attr(TextOffFuncc0af808b.instance, arg);
+    return BaseDSL.attr(TextOffFuncc0af808b.instance, arg);
   }
 
   public static Void textOn(CharSequence arg) {
-    return DSL.attr(TextOnFuncc0af808b.instance, arg);
+    return BaseDSL.attr(TextOnFuncc0af808b.instance, arg);
   }
 
   public static Void textScaleX(float arg) {
-    return DSL.attr(TextScaleXFunce0893188.instance, arg);
+    return BaseDSL.attr(TextScaleXFunce0893188.instance, arg);
   }
 
   public static Void threshold(int arg) {
-    return DSL.attr(ThresholdFunc8567756a.instance, arg);
+    return BaseDSL.attr(ThresholdFunc8567756a.instance, arg);
   }
 
   public static Void thumb(Drawable arg) {
-    return DSL.attr(ThumbFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ThumbFuncfb47464a.instance, arg);
   }
 
   public static Void thumbDrawable(Drawable arg) {
-    return DSL.attr(ThumbDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(ThumbDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void thumbOffset(int arg) {
-    return DSL.attr(ThumbOffsetFunc8567756a.instance, arg);
+    return BaseDSL.attr(ThumbOffsetFunc8567756a.instance, arg);
   }
 
   public static Void thumbResource(int arg) {
-    return DSL.attr(ThumbResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(ThumbResourceFunc8567756a.instance, arg);
   }
 
   public static Void thumbTextPadding(int arg) {
-    return DSL.attr(ThumbTextPaddingFunc8567756a.instance, arg);
+    return BaseDSL.attr(ThumbTextPaddingFunc8567756a.instance, arg);
   }
 
   public static Void timeZone(String arg) {
-    return DSL.attr(TimeZoneFunc473e3665.instance, arg);
+    return BaseDSL.attr(TimeZoneFunc473e3665.instance, arg);
   }
 
   public static Void tokenizer(MultiAutoCompleteTextView.Tokenizer arg) {
-    return DSL.attr(TokenizerFunc6ae2b151.instance, arg);
+    return BaseDSL.attr(TokenizerFunc6ae2b151.instance, arg);
   }
 
   public static Void top(int arg) {
-    return DSL.attr(TopFunc8567756a.instance, arg);
+    return BaseDSL.attr(TopFunc8567756a.instance, arg);
   }
 
   public static Void touchDelegate(TouchDelegate arg) {
-    return DSL.attr(TouchDelegateFunc8217a01a.instance, arg);
+    return BaseDSL.attr(TouchDelegateFunc8217a01a.instance, arg);
   }
 
   public static Void trackDrawable(Drawable arg) {
-    return DSL.attr(TrackDrawableFuncfb47464a.instance, arg);
+    return BaseDSL.attr(TrackDrawableFuncfb47464a.instance, arg);
   }
 
   public static Void trackResource(int arg) {
-    return DSL.attr(TrackResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr(TrackResourceFunc8567756a.instance, arg);
   }
 
   public static Void transcriptMode(int arg) {
-    return DSL.attr(TranscriptModeFunc8567756a.instance, arg);
+    return BaseDSL.attr(TranscriptModeFunc8567756a.instance, arg);
   }
 
   public static Void transform(Matrix arg) {
-    return DSL.attr(TransformFunc6b9f325.instance, arg);
+    return BaseDSL.attr(TransformFunc6b9f325.instance, arg);
   }
 
   public static Void transformationMethod(TransformationMethod arg) {
-    return DSL.attr(TransformationMethodFunc65bbcab5.instance, arg);
+    return BaseDSL.attr(TransformationMethodFunc65bbcab5.instance, arg);
   }
 
   public static Void translationX(float arg) {
-    return DSL.attr(TranslationXFunce0893188.instance, arg);
+    return BaseDSL.attr(TranslationXFunce0893188.instance, arg);
   }
 
   public static Void translationY(float arg) {
-    return DSL.attr(TranslationYFunce0893188.instance, arg);
+    return BaseDSL.attr(TranslationYFunce0893188.instance, arg);
   }
 
   public static Void typeface(Typeface arg) {
-    return DSL.attr(TypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr(TypefaceFunc53b4afb.instance, arg);
   }
 
   public static Void uncertainGestureColor(int arg) {
-    return DSL.attr(UncertainGestureColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(UncertainGestureColorFunc8567756a.instance, arg);
   }
 
   public static Void unfocusedMonthDateColor(int arg) {
-    return DSL.attr(UnfocusedMonthDateColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(UnfocusedMonthDateColorFunc8567756a.instance, arg);
   }
 
   public static Void unselectedAlpha(float arg) {
-    return DSL.attr(UnselectedAlphaFunce0893188.instance, arg);
+    return BaseDSL.attr(UnselectedAlphaFunce0893188.instance, arg);
   }
 
   public static Void up(LocalActivityManager arg) {
-    return DSL.attr(UpFunc7b013b1f.instance, arg);
+    return BaseDSL.attr(UpFunc7b013b1f.instance, arg);
   }
 
   public static Void useDefaultMargins(boolean arg) {
-    return DSL.attr(UseDefaultMarginsFunc148d6054.instance, arg);
+    return BaseDSL.attr(UseDefaultMarginsFunc148d6054.instance, arg);
   }
 
   public static Void validator(AutoCompleteTextView.Validator arg) {
-    return DSL.attr(ValidatorFuncd6d080a9.instance, arg);
+    return BaseDSL.attr(ValidatorFuncd6d080a9.instance, arg);
   }
 
   public static Void value(int arg) {
-    return DSL.attr(ValueFunc8567756a.instance, arg);
+    return BaseDSL.attr(ValueFunc8567756a.instance, arg);
   }
 
   public static Void velocityScale(float arg) {
-    return DSL.attr(VelocityScaleFunce0893188.instance, arg);
+    return BaseDSL.attr(VelocityScaleFunce0893188.instance, arg);
   }
 
   public static Void verticalCorrection(int arg) {
-    return DSL.attr(VerticalCorrectionFunc8567756a.instance, arg);
+    return BaseDSL.attr(VerticalCorrectionFunc8567756a.instance, arg);
   }
 
   public static Void verticalFadingEdgeEnabled(boolean arg) {
-    return DSL.attr(VerticalFadingEdgeEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(VerticalFadingEdgeEnabledFunc148d6054.instance, arg);
   }
 
   public static Void verticalGravity(int arg) {
-    return DSL.attr(VerticalGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr(VerticalGravityFunc8567756a.instance, arg);
   }
 
   public static Void verticalScrollBarEnabled(boolean arg) {
-    return DSL.attr(VerticalScrollBarEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(VerticalScrollBarEnabledFunc148d6054.instance, arg);
   }
 
   public static Void verticalScrollbarOverlay(boolean arg) {
-    return DSL.attr(VerticalScrollbarOverlayFunc148d6054.instance, arg);
+    return BaseDSL.attr(VerticalScrollbarOverlayFunc148d6054.instance, arg);
   }
 
   public static Void verticalScrollbarPosition(int arg) {
-    return DSL.attr(VerticalScrollbarPositionFunc8567756a.instance, arg);
+    return BaseDSL.attr(VerticalScrollbarPositionFunc8567756a.instance, arg);
   }
 
   public static Void verticalSpacing(int arg) {
-    return DSL.attr(VerticalSpacingFunc8567756a.instance, arg);
+    return BaseDSL.attr(VerticalSpacingFunc8567756a.instance, arg);
   }
 
   public static Void videoPath(String arg) {
-    return DSL.attr(VideoPathFunc473e3665.instance, arg);
+    return BaseDSL.attr(VideoPathFunc473e3665.instance, arg);
   }
 
   public static Void videoURI(Uri arg) {
-    return DSL.attr(VideoURIFunc75f430fc.instance, arg);
+    return BaseDSL.attr(VideoURIFunc75f430fc.instance, arg);
   }
 
   public static Void visibility(int arg) {
-    return DSL.attr(VisibilityFunc8567756a.instance, arg);
+    return BaseDSL.attr(VisibilityFunc8567756a.instance, arg);
   }
 
   public static Void webChromeClient(WebChromeClient arg) {
-    return DSL.attr(WebChromeClientFunc54f22bac.instance, arg);
+    return BaseDSL.attr(WebChromeClientFunc54f22bac.instance, arg);
   }
 
   public static Void webContentsDebuggingEnabled(boolean arg) {
-    return DSL.attr(WebContentsDebuggingEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr(WebContentsDebuggingEnabledFunc148d6054.instance, arg);
   }
 
   public static Void webViewClient(WebViewClient arg) {
-    return DSL.attr(WebViewClientFunc95cf0d57.instance, arg);
+    return BaseDSL.attr(WebViewClientFunc95cf0d57.instance, arg);
   }
 
   public static Void weekDayTextAppearance(int arg) {
-    return DSL.attr(WeekDayTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr(WeekDayTextAppearanceFunc8567756a.instance, arg);
   }
 
   public static Void weekNumberColor(int arg) {
-    return DSL.attr(WeekNumberColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(WeekNumberColorFunc8567756a.instance, arg);
   }
 
   public static Void weekSeparatorLineColor(int arg) {
-    return DSL.attr(WeekSeparatorLineColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(WeekSeparatorLineColorFunc8567756a.instance, arg);
   }
 
   public static Void weightSum(float arg) {
-    return DSL.attr(WeightSumFunce0893188.instance, arg);
+    return BaseDSL.attr(WeightSumFunce0893188.instance, arg);
   }
 
   public static Void width(int arg) {
-    return DSL.attr(WidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(WidthFunc8567756a.instance, arg);
   }
 
   public static Void willNotCacheDrawing(boolean arg) {
-    return DSL.attr(WillNotCacheDrawingFunc148d6054.instance, arg);
+    return BaseDSL.attr(WillNotCacheDrawingFunc148d6054.instance, arg);
   }
 
   public static Void willNotDraw(boolean arg) {
-    return DSL.attr(WillNotDrawFunc148d6054.instance, arg);
+    return BaseDSL.attr(WillNotDrawFunc148d6054.instance, arg);
   }
 
   public static Void wrapSelectorWheel(boolean arg) {
-    return DSL.attr(WrapSelectorWheelFunc148d6054.instance, arg);
+    return BaseDSL.attr(WrapSelectorWheelFunc148d6054.instance, arg);
   }
 
   public static Void x(float arg) {
-    return DSL.attr(XFunce0893188.instance, arg);
+    return BaseDSL.attr(XFunce0893188.instance, arg);
   }
 
   public static Void y(float arg) {
-    return DSL.attr(YFunce0893188.instance, arg);
+    return BaseDSL.attr(YFunce0893188.instance, arg);
   }
 
   public static Void zOrderMediaOverlay(boolean arg) {
-    return DSL.attr(ZOrderMediaOverlayFunc148d6054.instance, arg);
+    return BaseDSL.attr(ZOrderMediaOverlayFunc148d6054.instance, arg);
   }
 
   public static Void zOrderOnTop(boolean arg) {
-    return DSL.attr(ZOrderOnTopFunc148d6054.instance, arg);
+    return BaseDSL.attr(ZOrderOnTopFunc148d6054.instance, arg);
   }
 
   public static Void zoomSpeed(long arg) {
-    return DSL.attr(ZoomSpeedFunc17c521d0.instance, arg);
+    return BaseDSL.attr(ZoomSpeedFunc17c521d0.instance, arg);
   }
 
   private static final class AccessibilityDelegateFuncf6d047d4 implements Anvil.AttrFunc<View.AccessibilityDelegate> {
@@ -2588,12 +2567,6 @@ public final class DSL extends BaseDSL {
     public void apply(View v, final Adapter arg, final Adapter old) {
       if (v instanceof AdapterView) {
         ((AdapterView) v).setAdapter(arg);
-      }
-      if (v instanceof AdapterViewAnimator) {
-        ((AdapterViewAnimator) v).setAdapter(arg);
-      }
-      if (v instanceof AdapterViewFlipper) {
-        ((AdapterViewFlipper) v).setAdapter(arg);
       }
     }
   }
@@ -2653,16 +2626,6 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final Float arg, final Float old) {
       v.setAlpha(arg);
-    }
-  }
-
-  private static final class AlphaFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final AlphaFunc8567756a instance = new AlphaFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof ImageView) {
-        ((ImageView) v).setAlpha(arg);
-      }
     }
   }
 
@@ -2766,14 +2729,6 @@ public final class DSL extends BaseDSL {
     }
   }
 
-  private static final class BackgroundDrawableFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final BackgroundDrawableFuncfb47464a instance = new BackgroundDrawableFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      v.setBackgroundDrawable(arg);
-    }
-  }
-
   private static final class BackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final BackgroundResourceFunc8567756a instance = new BackgroundResourceFunc8567756a();
 
@@ -2867,9 +2822,6 @@ public final class DSL extends BaseDSL {
       if (v instanceof AbsListView) {
         ((AbsListView) v).setCacheColorHint(arg);
       }
-      if (v instanceof ListView) {
-        ((ListView) v).setCacheColorHint(arg);
-      }
     }
   }
 
@@ -2898,16 +2850,6 @@ public final class DSL extends BaseDSL {
 
     public void apply(View v, final Float arg, final Float old) {
       v.setCameraDistance(arg);
-    }
-  }
-
-  private static final class CertificateFuncde9d69e1 implements Anvil.AttrFunc<SslCertificate> {
-    public static final CertificateFuncde9d69e1 instance = new CertificateFuncde9d69e1();
-
-    public void apply(View v, final SslCertificate arg, final SslCertificate old) {
-      if (v instanceof WebView) {
-        ((WebView) v).setCertificate(arg);
-      }
     }
   }
 
@@ -2940,12 +2882,6 @@ public final class DSL extends BaseDSL {
       }
       if (v instanceof CompoundButton) {
         ((CompoundButton) v).setChecked(arg);
-      }
-      if (v instanceof Switch) {
-        ((Switch) v).setChecked(arg);
-      }
-      if (v instanceof ToggleButton) {
-        ((ToggleButton) v).setChecked(arg);
       }
     }
   }
@@ -3267,9 +3203,6 @@ public final class DSL extends BaseDSL {
       if (v instanceof LinearLayout) {
         ((LinearLayout) v).setDividerDrawable(arg);
       }
-      if (v instanceof TabWidget) {
-        ((TabWidget) v).setDividerDrawable(arg);
-      }
     }
   }
 
@@ -3498,9 +3431,6 @@ public final class DSL extends BaseDSL {
     public static final EllipsizeFunc63cb4885 instance = new EllipsizeFunc63cb4885();
 
     public void apply(View v, final TextUtils.TruncateAt arg, final TextUtils.TruncateAt old) {
-      if (v instanceof EditText) {
-        ((EditText) v).setEllipsize(arg);
-      }
       if (v instanceof TextView) {
         ((TextView) v).setEllipsize(arg);
       }
@@ -3579,9 +3509,6 @@ public final class DSL extends BaseDSL {
     public static final ExtractedTextFunc410b6fe0 instance = new ExtractedTextFunc410b6fe0();
 
     public void apply(View v, final ExtractedText arg, final ExtractedText old) {
-      if (v instanceof ExtractEditText) {
-        ((ExtractEditText) v).setExtractedText(arg);
-      }
       if (v instanceof TextView) {
         ((TextView) v).setExtractedText(arg);
       }
@@ -4654,16 +4581,6 @@ public final class DSL extends BaseDSL {
     }
   }
 
-  private static final class MapTrackballToArrowKeysFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final MapTrackballToArrowKeysFunc148d6054 instance = new MapTrackballToArrowKeysFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof WebView) {
-        ((WebView) v).setMapTrackballToArrowKeys(arg);
-      }
-    }
-  }
-
   private static final class MarqueeRepeatLimitFunc8567756a implements Anvil.AttrFunc<Integer> {
     public static final MarqueeRepeatLimitFunc8567756a instance = new MarqueeRepeatLimitFunc8567756a();
 
@@ -4678,14 +4595,8 @@ public final class DSL extends BaseDSL {
     public static final MaxFunc8567756a instance = new MaxFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AbsSeekBar) {
-        ((AbsSeekBar) v).setMax(arg);
-      }
       if (v instanceof ProgressBar) {
         ((ProgressBar) v).setMax(arg);
-      }
-      if (v instanceof RatingBar) {
-        ((RatingBar) v).setMax(arg);
       }
     }
   }
@@ -5018,7 +4929,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((FragmentBreadCrumbs) v).setOnBreadCrumbClickListener(null);
+          ((FragmentBreadCrumbs) v).setOnBreadCrumbClickListener((FragmentBreadCrumbs.OnBreadCrumbClickListener) null);
         }
       }
     }
@@ -5037,7 +4948,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((CompoundButton) v).setOnCheckedChangeListener(null);
+          ((CompoundButton) v).setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) null);
         }
       }
     }
@@ -5056,7 +4967,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((RadioGroup) v).setOnCheckedChangeListener(null);
+          ((RadioGroup) v).setOnCheckedChangeListener((RadioGroup.OnCheckedChangeListener) null);
         }
       }
     }
@@ -5076,7 +4987,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnChildClickListener(null);
+          ((ExpandableListView) v).setOnChildClickListener((ExpandableListView.OnChildClickListener) null);
         }
       }
     }
@@ -5095,7 +5006,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((Chronometer) v).setOnChronometerTickListener(null);
+          ((Chronometer) v).setOnChronometerTickListener((Chronometer.OnChronometerTickListener) null);
         }
       }
     }
@@ -5113,7 +5024,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnClickListener(null);
+        v.setOnClickListener((View.OnClickListener) null);
       }
     }
   }
@@ -5132,7 +5043,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnCloseListener(null);
+          ((SearchView) v).setOnCloseListener((SearchView.OnCloseListener) null);
         }
       }
     }
@@ -5151,7 +5062,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnCompletionListener(null);
+          ((VideoView) v).setOnCompletionListener((MediaPlayer.OnCompletionListener) null);
         }
       }
     }
@@ -5169,7 +5080,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnCreateContextMenuListener(null);
+        v.setOnCreateContextMenuListener((View.OnCreateContextMenuListener) null);
       }
     }
   }
@@ -5187,7 +5098,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((CalendarView) v).setOnDateChangeListener(null);
+          ((CalendarView) v).setOnDateChangeListener((CalendarView.OnDateChangeListener) null);
         }
       }
     }
@@ -5206,7 +5117,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnDismissListener(null);
+          ((AutoCompleteTextView) v).setOnDismissListener((AutoCompleteTextView.OnDismissListener) null);
         }
       }
     }
@@ -5225,7 +5136,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnDragListener(null);
+        v.setOnDragListener((View.OnDragListener) null);
       }
     }
   }
@@ -5243,7 +5154,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerCloseListener(null);
+          ((SlidingDrawer) v).setOnDrawerCloseListener((SlidingDrawer.OnDrawerCloseListener) null);
         }
       }
     }
@@ -5262,7 +5173,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerOpenListener(null);
+          ((SlidingDrawer) v).setOnDrawerOpenListener((SlidingDrawer.OnDrawerOpenListener) null);
         }
       }
     }
@@ -5286,7 +5197,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SlidingDrawer) v).setOnDrawerScrollListener(null);
+          ((SlidingDrawer) v).setOnDrawerScrollListener((SlidingDrawer.OnDrawerScrollListener) null);
         }
       }
     }
@@ -5306,7 +5217,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TextView) v).setOnEditorActionListener(null);
+          ((TextView) v).setOnEditorActionListener((TextView.OnEditorActionListener) null);
         }
       }
     }
@@ -5326,7 +5237,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnErrorListener(null);
+          ((VideoView) v).setOnErrorListener((MediaPlayer.OnErrorListener) null);
         }
       }
     }
@@ -5344,7 +5255,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnFocusChangeListener(null);
+        v.setOnFocusChangeListener((View.OnFocusChangeListener) null);
       }
     }
   }
@@ -5362,7 +5273,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnGenericMotionListener(null);
+        v.setOnGenericMotionListener((View.OnGenericMotionListener) null);
       }
     }
   }
@@ -5381,7 +5292,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupClickListener(null);
+          ((ExpandableListView) v).setOnGroupClickListener((ExpandableListView.OnGroupClickListener) null);
         }
       }
     }
@@ -5400,7 +5311,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupCollapseListener(null);
+          ((ExpandableListView) v).setOnGroupCollapseListener((ExpandableListView.OnGroupCollapseListener) null);
         }
       }
     }
@@ -5419,7 +5330,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ExpandableListView) v).setOnGroupExpandListener(null);
+          ((ExpandableListView) v).setOnGroupExpandListener((ExpandableListView.OnGroupExpandListener) null);
         }
       }
     }
@@ -5443,58 +5354,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ViewGroup) v).setOnHierarchyChangeListener(null);
-        }
-      }
-      if (v instanceof RadioGroup) {
-        if (arg != null) {
-          ((RadioGroup) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((RadioGroup) v).setOnHierarchyChangeListener(null);
-        }
-      }
-      if (v instanceof TableLayout) {
-        if (arg != null) {
-          ((TableLayout) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((TableLayout) v).setOnHierarchyChangeListener(null);
-        }
-      }
-      if (v instanceof TableRow) {
-        if (arg != null) {
-          ((TableRow) v).setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            public void onChildViewAdded(View a0, View a1) {
-              arg.onChildViewAdded(a0, a1);
-              Anvil.render();
-            }
-
-            public void onChildViewRemoved(View a0, View a1) {
-              arg.onChildViewRemoved(a0, a1);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((TableRow) v).setOnHierarchyChangeListener(null);
+          ((ViewGroup) v).setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) null);
         }
       }
     }
@@ -5513,7 +5373,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnHoverListener(null);
+        v.setOnHoverListener((View.OnHoverListener) null);
       }
     }
   }
@@ -5531,7 +5391,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ViewStub) v).setOnInflateListener(null);
+          ((ViewStub) v).setOnInflateListener((ViewStub.OnInflateListener) null);
         }
       }
     }
@@ -5551,7 +5411,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnInfoListener(null);
+          ((VideoView) v).setOnInfoListener((MediaPlayer.OnInfoListener) null);
         }
       }
     }
@@ -5570,7 +5430,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemClickListener(null);
+          ((AdapterView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
       if (v instanceof AutoCompleteTextView) {
@@ -5582,31 +5442,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnItemClickListener(null);
-        }
-      }
-      if (v instanceof ExpandableListView) {
-        if (arg != null) {
-          ((ExpandableListView) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemClick(a0, a1, a2, a3);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((ExpandableListView) v).setOnItemClickListener(null);
-        }
-      }
-      if (v instanceof Spinner) {
-        if (arg != null) {
-          ((Spinner) v).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView a0, View a1, int a2, long a3) {
-              arg.onItemClick(a0, a1, a2, a3);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((Spinner) v).setOnItemClickListener(null);
+          ((AutoCompleteTextView) v).setOnItemClickListener((AdapterView.OnItemClickListener) null);
         }
       }
     }
@@ -5626,7 +5462,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemLongClickListener(null);
+          ((AdapterView) v).setOnItemLongClickListener((AdapterView.OnItemLongClickListener) null);
         }
       }
     }
@@ -5650,7 +5486,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AdapterView) v).setOnItemSelectedListener(null);
+          ((AdapterView) v).setOnItemSelectedListener((AdapterView.OnItemSelectedListener) null);
         }
       }
       if (v instanceof AutoCompleteTextView) {
@@ -5667,7 +5503,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AutoCompleteTextView) v).setOnItemSelectedListener(null);
+          ((AutoCompleteTextView) v).setOnItemSelectedListener((AdapterView.OnItemSelectedListener) null);
         }
       }
     }
@@ -5686,7 +5522,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnKeyListener(null);
+        v.setOnKeyListener((View.OnKeyListener) null);
       }
     }
   }
@@ -5739,7 +5575,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((KeyboardView) v).setOnKeyboardActionListener(null);
+          ((KeyboardView) v).setOnKeyboardActionListener((KeyboardView.OnKeyboardActionListener) null);
         }
       }
     }
@@ -5758,7 +5594,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnLongClickListener(null);
+        v.setOnLongClickListener((View.OnLongClickListener) null);
       }
     }
   }
@@ -5786,7 +5622,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((VideoView) v).setOnPreparedListener(null);
+          ((VideoView) v).setOnPreparedListener((MediaPlayer.OnPreparedListener) null);
         }
       }
     }
@@ -5812,7 +5648,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnQueryTextListener(null);
+          ((SearchView) v).setOnQueryTextListener((SearchView.OnQueryTextListener) null);
         }
       }
     }
@@ -5831,7 +5667,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnQueryTextFocusChangeListener(null);
+          ((SearchView) v).setOnQueryTextFocusChangeListener((View.OnFocusChangeListener) null);
         }
       }
     }
@@ -5850,7 +5686,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((RatingBar) v).setOnRatingBarChangeListener(null);
+          ((RatingBar) v).setOnRatingBarChangeListener((RatingBar.OnRatingBarChangeListener) null);
         }
       }
     }
@@ -5874,7 +5710,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((AbsListView) v).setOnScrollListener(null);
+          ((AbsListView) v).setOnScrollListener((AbsListView.OnScrollListener) null);
         }
       }
     }
@@ -5893,7 +5729,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((NumberPicker) v).setOnScrollListener(null);
+          ((NumberPicker) v).setOnScrollListener((NumberPicker.OnScrollListener) null);
         }
       }
     }
@@ -5912,7 +5748,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnSearchClickListener(null);
+          ((SearchView) v).setOnSearchClickListener((View.OnClickListener) null);
         }
       }
     }
@@ -5941,7 +5777,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SeekBar) v).setOnSeekBarChangeListener(null);
+          ((SeekBar) v).setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) null);
         }
       }
     }
@@ -5967,7 +5803,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((SearchView) v).setOnSuggestionListener(null);
+          ((SearchView) v).setOnSuggestionListener((SearchView.OnSuggestionListener) null);
         }
       }
     }
@@ -5985,7 +5821,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnSystemUiVisibilityChangeListener(null);
+        v.setOnSystemUiVisibilityChangeListener((View.OnSystemUiVisibilityChangeListener) null);
       }
     }
   }
@@ -6003,7 +5839,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TabHost) v).setOnTabChangedListener(null);
+          ((TabHost) v).setOnTabChangedListener((TabHost.OnTabChangeListener) null);
         }
       }
     }
@@ -6022,7 +5858,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((TimePicker) v).setOnTimeChangedListener(null);
+          ((TimePicker) v).setOnTimeChangedListener((TimePicker.OnTimeChangedListener) null);
         }
       }
     }
@@ -6041,7 +5877,7 @@ public final class DSL extends BaseDSL {
           }
         });
       } else {
-        v.setOnTouchListener(null);
+        v.setOnTouchListener((View.OnTouchListener) null);
       }
     }
   }
@@ -6059,7 +5895,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((NumberPicker) v).setOnValueChangedListener(null);
+          ((NumberPicker) v).setOnValueChangedListener((NumberPicker.OnValueChangeListener) null);
         }
       }
     }
@@ -6078,7 +5914,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ZoomControls) v).setOnZoomInClickListener(null);
+          ((ZoomControls) v).setOnZoomInClickListener((View.OnClickListener) null);
         }
       }
     }
@@ -6097,7 +5933,7 @@ public final class DSL extends BaseDSL {
             }
           });
         } else {
-          ((ZoomControls) v).setOnZoomOutClickListener(null);
+          ((ZoomControls) v).setOnZoomOutClickListener((View.OnClickListener) null);
         }
       }
     }
@@ -6193,16 +6029,6 @@ public final class DSL extends BaseDSL {
     public void apply(View v, final Integer arg, final Integer old) {
       if (v instanceof ViewGroup) {
         ((ViewGroup) v).setPersistentDrawingCache(arg);
-      }
-    }
-  }
-
-  private static final class PictureListenerFunc42b89430 implements Anvil.AttrFunc<WebView.PictureListener> {
-    public static final PictureListenerFunc42b89430 instance = new PictureListenerFunc42b89430();
-
-    public void apply(View v, final WebView.PictureListener arg, final WebView.PictureListener old) {
-      if (v instanceof WebView) {
-        ((WebView) v).setPictureListener(arg);
       }
     }
   }
@@ -6400,12 +6226,6 @@ public final class DSL extends BaseDSL {
       }
       if (v instanceof AdapterViewAnimator) {
         ((AdapterViewAnimator) v).setRemoteViewsAdapter(arg);
-      }
-      if (v instanceof GridView) {
-        ((GridView) v).setRemoteViewsAdapter(arg);
-      }
-      if (v instanceof ListView) {
-        ((ListView) v).setRemoteViewsAdapter(arg);
       }
     }
   }
@@ -6730,23 +6550,11 @@ public final class DSL extends BaseDSL {
     public static final SelectionFunc8567756a instance = new SelectionFunc8567756a();
 
     public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof AbsSpinner) {
-        ((AbsSpinner) v).setSelection(arg);
-      }
       if (v instanceof AdapterView) {
         ((AdapterView) v).setSelection(arg);
       }
-      if (v instanceof AdapterViewAnimator) {
-        ((AdapterViewAnimator) v).setSelection(arg);
-      }
       if (v instanceof EditText) {
         ((EditText) v).setSelection(arg);
-      }
-      if (v instanceof GridView) {
-        ((GridView) v).setSelection(arg);
-      }
-      if (v instanceof ListView) {
-        ((ListView) v).setSelection(arg);
       }
     }
   }

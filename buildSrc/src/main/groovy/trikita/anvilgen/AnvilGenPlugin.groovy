@@ -1,5 +1,6 @@
 package trikita.anvilgen
 
+import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.MethodSpec
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -55,6 +56,7 @@ public class AnvilGenPlugin implements Plugin<Project> {
             dependencies = []
             outputClassName = "DSL"
             packageName = "trikita.anvil"
+            superclass = ClassName.get("trikita.anvil", "BaseDSL")
         }
     }
 
