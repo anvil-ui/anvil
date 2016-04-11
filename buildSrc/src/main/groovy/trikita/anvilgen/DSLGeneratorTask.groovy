@@ -18,6 +18,7 @@ class DSLGeneratorTask extends DefaultTask {
     def outputDirectory
     def outputClassName
     def packageName
+    def superclass
 
     @TaskAction
     generate() {
@@ -28,7 +29,10 @@ class DSLGeneratorTask extends DefaultTask {
                 "$javadocContains.\n" +
                 "Please, don't edit it manually unless for debugging.\n")
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .superclass(ClassName.get("trikita.anvil", "BaseDSL"))
+
+        if (superclass != null) {
+            attrsBuilder = attrsBuilder.superclass(superclass)
+        }
 
         def attrMethods = [:]
 
@@ -126,17 +130,19 @@ class DSLGeneratorTask extends DefaultTask {
             }
         }
         name = toCase(name, { c -> Character.toLowerCase(c) })
+        def baseDsl = ClassName.get("trikita.anvil", "BaseDSL")
+        def result = ClassName.get("trikita.anvil", "BaseDSL", "ViewClassResult")
         builder.addMethod(MethodSpec.methodBuilder(name)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(ClassName.get(packageName, outputClassName, "ViewClassResult"))
-                .addStatement("return v(\$T.class)", view)
+                .returns(result)
+                .addStatement("return \$T.v(\$T.class)", baseDsl, view)
                 .build())
         builder.addMethod(MethodSpec.methodBuilder(name)
                 .addParameter(ParameterSpec.builder(ClassName.get("trikita.anvil",
                 "Anvil", "Renderable"), "r").build())
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(TypeName.BOXED_VOID)
-                .addStatement("return v(\$T.class, r)", view)
+                .addStatement("return \$T.v(\$T.class, r)", baseDsl, view)
                 .build())
     }
 
@@ -163,6 +169,7 @@ class DSLGeneratorTask extends DefaultTask {
             if (cls.isPrimitive()) {
                 cls = c.box()
             }
+            def baseDsl = ClassName.get("trikita.anvil", "BaseDSL")
             def attrFuncType = ClassName.get("trikita.anvil", "Anvil", "AttrFunc")
             def className = toCase(it.key.method, { c -> Character.toUpperCase(c) }) +
                     "Func" + Integer.toHexString(cls.hashCode())
@@ -185,7 +192,7 @@ class DSLGeneratorTask extends DefaultTask {
                     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                     .addParameter(ParameterSpec.builder(it.key.cls, "arg").build())
                     .returns(TypeName.BOXED_VOID)
-                    .addStatement("return ${outputClassName}.attr(${className}.instance, arg)")
+                    .addStatement("return \$T.attr(${className}.instance, arg)", baseDsl)
             builder.addMethod(wrapperMethod.build())
         }
     }

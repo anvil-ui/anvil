@@ -634,7 +634,7 @@ public class BaseDSL {
 		return attr(InitFunc.instance, r);
 	}
 
-	protected static final class ViewClassResult {}
+	public static final class ViewClassResult {}
 
 	public static ViewClassResult v(Class<? extends View> c) {
 		Anvil.currentMount().startFromClass(c);
