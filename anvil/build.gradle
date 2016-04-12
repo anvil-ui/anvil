@@ -18,7 +18,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 10
+		minSdkVersion 15
 		targetSdkVersion 23
 	}
 
@@ -28,14 +28,14 @@ android {
 
 	publishNonDefault true
 	productFlavors {
-		sdk10 {
-			minSdkVersion 10
-		}
 		sdk15 {
 			minSdkVersion 15
 		}
 		sdk19 {
 			minSdkVersion 19
+		}
+		sdk21 {
+			minSdkVersion 21
 		}
 	}
 
@@ -81,15 +81,6 @@ def fixPom(pom) {
 
 publishing {
 	publications {
-		sdk10(MavenPublication) {
-			groupId project.group
-			version project.version
-			artifactId POM_ARTIFACT_SDK10_ID
-			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK10_ID-release.aar"
-			artifact sourcesJar
-			artifact javadocJar
-			fixPom(pom)
-		}
 		sdk15(MavenPublication) {
 			groupId project.group
 			version project.version
@@ -108,13 +99,22 @@ publishing {
 			artifact javadocJar
 			fixPom(pom)
 		}
+		sdk21(MavenPublication) {
+			groupId project.group
+			version project.version
+			artifactId POM_ARTIFACT_SDK21_ID
+			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK21_ID-release.aar"
+			artifact sourcesJar
+			artifact javadocJar
+			fixPom(pom)
+		}
 	}
 }
 
 bintray {
 	user = project.hasProperty('bintrayUser') ? bintrayUser : ''
 	key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
-	publications = ['sdk10', 'sdk15', 'sdk19']
+	publications = ['sdk15', 'sdk19', 'sdk21']
 	pkg {
 		repo = 'maven'
 		name = POM_PACKAGE_NAME

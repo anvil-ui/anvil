@@ -27,15 +27,14 @@ public class AnvilGenPlugin implements Plugin<Project> {
         def type = project.anvilgen.type
         if (type == "sdk") {
             // Most practical API versions according to Android Dashboards:
-            // - newer then API level 10 (GB 2.3.3, 99.9% of devices)
             // - newer than API level 15 (ICS 4.0.3, 97.3% of devices)
             // - newer than API level 19 (KK 4.0.3, 72.7% of devices)
             // - newer than API level 21 (LP 5.0, 38.4% of devices)
+            project.task(type: DSLGeneratorTask, "generateSDK21DSL", getSDKClosure(project, 21))
             project.task(type: DSLGeneratorTask, "generateSDK19DSL", getSDKClosure(project, 19))
             project.task(type: DSLGeneratorTask, "generateSDK15DSL", getSDKClosure(project, 15))
-            project.task(type: DSLGeneratorTask, "generateSDK10DSL", getSDKClosure(project, 10))
 
-            project.task(dependsOn: ["generateSDK10DSL", "generateSDK15DSL", "generateSDK19DSL"], "generateSDKDSL")
+            project.task(dependsOn: ["generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL"], "generateSDKDSL")
         } else {
             def version = project.anvilgen.version
             def camelCaseName = project.anvilgen.camelCaseName
