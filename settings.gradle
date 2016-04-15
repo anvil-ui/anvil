@@ -4,4 +4,5 @@ include 'anvil-appcompat-v7'
 include 'anvil-cardview-v7'
 include 'anvil-gridlayout-v7'
 include 'anvil-design'
+include 'anvil-recyclerview-v7'
 
