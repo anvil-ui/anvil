@@ -130,6 +130,13 @@ public void view() {
 }
 ```
 
+## Made with Anvil
+
+[![Talalarmo](https://raw.githubusercontent.com/trikita/talalarmo/master/src/main/res/drawable-xhdpi/ic_launcher.png)](https://github.com/trikita/talalarmo)
+[![Slide](https://raw.githubusercontent.com/trikita/slide/master/src/main/res/mipmap-xxhdpi/ic_launcher.png)](https://github.com/trikita/slide)
+[![Spot](https://i.imgur.com/Al3sh3Q.png)](https://play.google.com/store/apps/details?id=trikita.spot)
+[![Quilt](https://i.imgur.com/rqI02l0.png)](https://play.google.com/store/apps/details?id=trikita.quilt)
+
 You may find more Anvil examples for Java 6, Java 8 and Kotlin at
 
 - [Anvil simple demos in Kotlin](https://github.com/zserge/anvil-kotlin-demos)
