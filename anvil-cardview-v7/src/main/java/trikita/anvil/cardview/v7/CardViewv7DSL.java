@@ -15,45 +15,37 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library cardview-v7.
  * Please, don't edit it manually unless for debugging.
  */
-public final class CardViewv7DSL extends BaseDSL {
-  public static CardViewv7DSL.ViewClassResult cardView() {
-    return v(CardView.class);
+public final class CardViewv7DSL {
+  public static BaseDSL.ViewClassResult cardView() {
+    return BaseDSL.v(CardView.class);
   }
 
   public static Void cardView(Anvil.Renderable r) {
-    return v(CardView.class, r);
+    return BaseDSL.v(CardView.class, r);
   }
 
   public static Void cardBackgroundColor(int arg) {
-    return CardViewv7DSL.attr(CardBackgroundColorFunc8567756a.instance, arg);
+    return BaseDSL.attr(CardBackgroundColorFunc8567756a.instance, arg);
   }
 
   public static Void cardElevation(float arg) {
-    return CardViewv7DSL.attr(CardElevationFunce0893188.instance, arg);
+    return BaseDSL.attr(CardElevationFunce0893188.instance, arg);
   }
 
   public static Void maxCardElevation(float arg) {
-    return CardViewv7DSL.attr(MaxCardElevationFunce0893188.instance, arg);
-  }
-
-  public static Void minimumHeight(int arg) {
-    return CardViewv7DSL.attr(MinimumHeightFunc8567756a.instance, arg);
-  }
-
-  public static Void minimumWidth(int arg) {
-    return CardViewv7DSL.attr(MinimumWidthFunc8567756a.instance, arg);
+    return BaseDSL.attr(MaxCardElevationFunce0893188.instance, arg);
   }
 
   public static Void preventCornerOverlap(boolean arg) {
-    return CardViewv7DSL.attr(PreventCornerOverlapFunc148d6054.instance, arg);
+    return BaseDSL.attr(PreventCornerOverlapFunc148d6054.instance, arg);
   }
 
   public static Void radius(float arg) {
-    return CardViewv7DSL.attr(RadiusFunce0893188.instance, arg);
+    return BaseDSL.attr(RadiusFunce0893188.instance, arg);
   }
 
   public static Void useCompatPadding(boolean arg) {
-    return CardViewv7DSL.attr(UseCompatPaddingFunc148d6054.instance, arg);
+    return BaseDSL.attr(UseCompatPaddingFunc148d6054.instance, arg);
   }
 
   private static final class CardBackgroundColorFunc8567756a implements Anvil.AttrFunc<Integer> {
@@ -82,26 +74,6 @@ public final class CardViewv7DSL extends BaseDSL {
     public void apply(View v, final Float arg, final Float old) {
       if (v instanceof CardView) {
         ((CardView) v).setMaxCardElevation(arg);
-      }
-    }
-  }
-
-  private static final class MinimumHeightFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final MinimumHeightFunc8567756a instance = new MinimumHeightFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CardView) {
-        ((CardView) v).setMinimumHeight(arg);
-      }
-    }
-  }
-
-  private static final class MinimumWidthFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final MinimumWidthFunc8567756a instance = new MinimumWidthFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CardView) {
-        ((CardView) v).setMinimumWidth(arg);
       }
     }
   }
