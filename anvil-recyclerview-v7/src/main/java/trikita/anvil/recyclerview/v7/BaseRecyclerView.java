@@ -11,10 +11,6 @@ import static trikita.anvil.BaseDSL.attr;
 
 class BaseRecyclerView {
 
-    public static void defaultItemAnimator() {
-        attr(DefaultItemAnimatorFunc.instance, null);
-    }
-
     public static void linearLayoutManager() {
         linearLayoutManager(LinearLayoutManager.VERTICAL);
     }
@@ -29,18 +25,6 @@ class BaseRecyclerView {
 
     private static void linearLayoutManager(LinearLayoutManagerParams params) {
         attr(LinearLayoutManagerFunc.instance, params);
-    }
-
-    private static final class DefaultItemAnimatorFunc implements Anvil.AttrFunc<Void> {
-
-        private static final DefaultItemAnimatorFunc instance = new DefaultItemAnimatorFunc();
-
-        @Override
-        public void apply(View v, Void newValue, Void oldValue) {
-            if (v instanceof RecyclerView) {
-                ((RecyclerView) v).setItemAnimator(new DefaultItemAnimator());
-            }
-        }
     }
 
     private static final class LinearLayoutManagerFunc implements Anvil.AttrFunc<LinearLayoutManagerParams> {
