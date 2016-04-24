@@ -1,13 +1,14 @@
 package trikita.anvil.recyclerview.v7;
 
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import trikita.anvil.Anvil;
-
 import static trikita.anvil.BaseDSL.attr;
+
+import trikita.anvil.Anvil;
 
 class BaseRecyclerView {
 
@@ -20,17 +21,23 @@ class BaseRecyclerView {
     }
 
     public static void linearLayoutManager(int orientation, boolean reverseLayout) {
-        linearLayoutManager(new LinearLayoutManagerParams(orientation, reverseLayout));
+        attr(LinearLayoutManagerFunc.instance,
+                new LayoutManagerParams(0, orientation, reverseLayout));
     }
 
-    private static void linearLayoutManager(LinearLayoutManagerParams params) {
-        attr(LinearLayoutManagerFunc.instance, params);
+    public static void gridLayoutManager(int spanCount) {
+        gridLayoutManager(spanCount, LinearLayoutManager.VERTICAL, false);
     }
 
-    private static final class LinearLayoutManagerFunc implements Anvil.AttrFunc<LinearLayoutManagerParams> {
+    public static void gridLayoutManager(int spanCount, int orientation, boolean reverseLayout) {
+        attr(GridLayoutManagerFunc.instance,
+                new LayoutManagerParams(spanCount, orientation, reverseLayout));
+    }
+
+    private static final class LinearLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
         private static final LinearLayoutManagerFunc instance = new LinearLayoutManagerFunc();
 
-        public void apply(View v, final LinearLayoutManagerParams arg, final LinearLayoutManagerParams old) {
+        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
             if (v instanceof RecyclerView) {
                 ((RecyclerView) v).setLayoutManager(
                         new LinearLayoutManager(v.getContext(), arg.orientation, arg.reverseLayout));
@@ -38,11 +45,26 @@ class BaseRecyclerView {
         }
     }
 
-    private static class LinearLayoutManagerParams {
-        private int orientation = LinearLayoutManager.VERTICAL;
-        private boolean reverseLayout;
+    private static final class GridLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
+        private static final GridLayoutManagerFunc instance = new GridLayoutManagerFunc();
 
-        public LinearLayoutManagerParams(int orientation, boolean reverseLayout) {
+        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
+            if (v instanceof RecyclerView) {
+                ((RecyclerView) v).setLayoutManager(
+                        new GridLayoutManager(v.getContext(),
+                            arg.spanCount, arg.orientation, arg.reverseLayout));
+            }
+        }
+    }
+
+
+    private static class LayoutManagerParams {
+        private final int spanCount;
+        private final int orientation;
+        private final boolean reverseLayout;
+
+        public LayoutManagerParams(int spanCount, int orientation, boolean reverseLayout) {
+            this.spanCount = spanCount;
             this.orientation = orientation;
             this.reverseLayout = reverseLayout;
         }
