@@ -68,5 +68,17 @@ class BaseRecyclerView {
             this.orientation = orientation;
             this.reverseLayout = reverseLayout;
         }
+
+        public int hashCode() {
+            return (spanCount << 4) + (orientation << 1) + (reverseLayout ? 1 : 0);
+        }
+
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof LayoutManagerParams)) return false;
+            LayoutManagerParams params = (LayoutManagerParams) o;
+            return params.spanCount == spanCount && params.orientation == orientation &&
+                params.reverseLayout == reverseLayout;
+        }
     }
 }
