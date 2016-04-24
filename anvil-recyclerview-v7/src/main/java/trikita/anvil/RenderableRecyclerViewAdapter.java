@@ -7,65 +7,49 @@ import android.widget.FrameLayout;
 
 import java.util.List;
 
-public abstract class RenderableRecyclerViewAdapter extends RecyclerView.Adapter<RenderableRecyclerViewAdapter.ViewHolder> {
+public abstract class RenderableRecyclerViewAdapter
+        extends RecyclerView.Adapter<RenderableRecyclerViewAdapter.MountHolder> {
 
-    public interface Item<T> {
-        void view(int index, T item);
-    }
-
-    public static <T> RenderableRecyclerViewAdapter withItems(final List<T> items, final Item<T> r) {
+    public static <T> RenderableRecyclerViewAdapter withItems(final List<T> items,
+            final RenderableAdapter.Item<T> r) {
         return new RenderableRecyclerViewAdapter() {
-            @Override
-            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return new ViewHolder(new FrameLayout(parent.getContext()), new ViewHolder.ItemRenderable() {
-                    @Override
-                    public void itemView(int position) {
-                        view(position);
-                    }
-                });
+            {
+                setHasStableIds(false);
             }
-
-            @Override
-            public void onBindViewHolder(ViewHolder holder, int position) {
-                holder.render(position);
-            }
-
-            @Override
             public int getItemCount() {
                 return items.size();
             }
-
-            public T getItem(int pos) {
-                return items.get(pos);
+            public int getItemViewType(int pos) {
+                Object item = items.get(pos);
+                return item == null ? 0 : item.getClass().hashCode();
             }
-
-            public void view(int pos) {
-                r.view(pos, getItem(pos));
+            public void view(RecyclerView.ViewHolder holder) {
+                int i = holder.getLayoutPosition();
+                r.view(i, items.get(i));
             }
         };
     }
 
-    public final static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public MountHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        FrameLayout root = new FrameLayout(parent.getContext());
+        root.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        return new MountHolder(root);
+    }
 
-        private final Anvil.Mount mount;
-        private int currentPosition = -1;
-
-        private ViewHolder(View parent, final ItemRenderable renderable) {
-            super(parent);
-            mount = new Anvil.Mount(parent, new Anvil.Renderable() {
+    @Override
+    public void onBindViewHolder(final MountHolder h, int position) {
+        if (h.mount == null) {
+            h.mount = new Anvil.Mount((ViewGroup) h.itemView, new Anvil.Renderable() {
                 public void view() {
-                    renderable.itemView(currentPosition);
+                    RenderableRecyclerViewAdapter.this.view(h);
                 }
             });
-        }
-
-        private void render(int position) {
-            currentPosition = position;
-            Anvil.render(mount);
-        }
-
-        public interface ItemRenderable {
-            void itemView(int position);
+            Anvil.render(h.mount);
+        } else {
+            Anvil.render(h.mount);
         }
     }
 
@@ -74,5 +58,13 @@ public abstract class RenderableRecyclerViewAdapter extends RecyclerView.Adapter
         return pos; // just a most common implementation
     }
 
-    public abstract void view(int index);
+    public static class MountHolder extends RecyclerView.ViewHolder {
+        private Anvil.Mount mount;
+
+        public MountHolder(ViewGroup itemView) {
+            super(itemView);
+        }
+    }
+
+    public abstract void view(RecyclerView.ViewHolder holder);
 }
