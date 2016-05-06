@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.NoSuchPropertyException;
+import android.util.Property;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -163,6 +165,11 @@ public class BaseDSL {
 			if (p instanceof LinearLayout.LayoutParams) {
 				((LinearLayout.LayoutParams) p).weight = arg;
 				v.setLayoutParams(p);
+			} else {
+				try {
+					((Property<ViewGroup.LayoutParams, Float>)
+					 Property.of(p.getClass(), Float.class, "weight")).set(p, arg);
+				} catch (NoSuchPropertyException ignored) {}
 			}
 		}
 	}
@@ -178,10 +185,14 @@ public class BaseDSL {
 			if (p instanceof LinearLayout.LayoutParams) {
 				((LinearLayout.LayoutParams) p).gravity = arg;
 				v.setLayoutParams(p);
-			}
-			if (p instanceof FrameLayout.LayoutParams) {
+			} else if (p instanceof FrameLayout.LayoutParams) {
 				((FrameLayout.LayoutParams) p).gravity = arg;
 				v.setLayoutParams(p);
+			} else {
+				try {
+					((Property<ViewGroup.LayoutParams, Integer>)
+					 Property.of(p.getClass(), Integer.class, "gravity")).set(p, arg);
+				} catch (NoSuchPropertyException ignored) {}
 			}
 		}
 	}
