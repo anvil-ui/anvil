@@ -229,7 +229,7 @@ public final class Anvil {
 		void startFromClass(Class<? extends View> viewClass) {
 			Node node = startNode();
 			View view = node.view;
-			if (node.viewClass != viewClass) {
+			if (view == null || node.viewClass != viewClass) {
 				node.layoutId = 0;
 				node.viewClass = viewClass;
 				node.children.clear();
