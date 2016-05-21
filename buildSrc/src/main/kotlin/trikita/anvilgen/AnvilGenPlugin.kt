@@ -32,7 +32,7 @@ class AnvilGenPlugin : Plugin<Project> {
             project.task(mapOf("dependsOn" to arrayOf("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")), "generateSDKDSL")
         } else {
             val supportClosure = getSupportClosure(project, extension.camelCaseName,
-                    extension.libraryName, extension.version, extension.dependencies)
+                    extension.libraryName, extension.version, extension.superclass, extension.dependencies)
             project.task(mapOf("type" to DSLGeneratorTask::class.java, "dependsOn" to listOf("prepareReleaseDependencies")),
                     "generate${extension.camelCaseName}DSL",
                     supportClosure)
@@ -65,6 +65,7 @@ class AnvilGenPlugin : Plugin<Project> {
                           camelCaseName: String,
                           libraryName: String,
                           version: String,
+                          superclassName: String,
                           rawDeps: Map<String, List<String?>>): Closure<Any> {
         return object : Closure<Any>(this) {
             init {
@@ -80,6 +81,10 @@ class AnvilGenPlugin : Plugin<Project> {
                     dependencies = getSupportDependencies(project, version, rawDeps)
                     outputClassName = "${camelCaseName}DSL"
                     packageName = "trikita.anvil." + dashToDot(libraryName)
+
+                    if (superclassName.isNotEmpty()) {
+                        superclass = ClassName.get(packageName, superclassName)
+                    }
                 }
                 return null
             }

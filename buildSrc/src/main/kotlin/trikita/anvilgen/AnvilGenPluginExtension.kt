@@ -7,4 +7,5 @@ open class AnvilGenPluginExtension {
     var version = ""
     var quirks = mutableMapOf<String, Map<String, Any>>()
     var dependencies = mutableMapOf<String, List<String>>()
+    var superclass = ""
 }
