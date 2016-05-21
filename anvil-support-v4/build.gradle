@@ -37,7 +37,7 @@ anvilgen {
 	libraryName = "support-v4"
 	camelCaseName = "Supportv4"
 	version = "23.3.0"
-	dependencies = ["support-v4": ["libs/internal_impl-$version"]]
+	dependencies = ["support-v4": ["libs/internal_impl-$version".toString()]]
 	quirks = QUIRKS
 }
 

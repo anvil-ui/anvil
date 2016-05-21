@@ -37,7 +37,7 @@ anvilgen {
 	libraryName = "cardview-v7"
 	camelCaseName = "CardViewv7"
 	version = "23.3.0"
-	dependencies = ["cardview-v7": ["libs/internal_impl-$version"]]
+	dependencies = ["cardview-v7": ["libs/internal_impl-$version".toString()]]
 	quirks = QUIRKS
 }
 

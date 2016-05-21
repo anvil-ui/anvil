@@ -37,7 +37,7 @@ anvilgen {
 	libraryName = "gridlayout-v7"
 	camelCaseName = "GridLayoutv7"
 	version = "23.3.0"
-	dependencies = ["support-v4": [null, "libs/internal_impl-$version"]]
+	dependencies = ["support-v4": [null, "libs/internal_impl-$version".toString()]]
 	quirks = QUIRKS
 }
 

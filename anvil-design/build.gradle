@@ -38,7 +38,7 @@ anvilgen {
 	camelCaseName = "Design"
 	version = "23.3.0"
 	dependencies = [
-			"support-v4": [null, "libs/internal_impl-$version"],
+			"support-v4": [null, "libs/internal_impl-$version".toString()],
 			"appcompat-v7": [null],
 			"recyclerview-v7": [null]
 	]
