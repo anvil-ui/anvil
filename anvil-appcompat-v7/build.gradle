@@ -36,14 +36,14 @@ anvilgen {
 	type = "support"
 	libraryName = "appcompat-v7"
 	camelCaseName = "AppCompatv7"
-	version = "23.3.0"
-	dependencies = ["support-v4": [null, "libs/internal_impl-$version"]]
+	version = "23.4.0"
+	dependencies = ["support-v4": [null, "libs/internal_impl-$version".toString()]]
 	quirks = QUIRKS
 }
 
 dependencies {
 	compile project(path: ':anvil', configuration: 'sdk15Release')
-	compile 'com.android.support:appcompat-v7:23.3.0'
+	compile 'com.android.support:appcompat-v7:23.4.0'
 
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.mockito:mockito-core:2.0.36-beta'

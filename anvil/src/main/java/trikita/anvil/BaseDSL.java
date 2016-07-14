@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.NoSuchPropertyException;
@@ -347,6 +348,69 @@ public class BaseDSL {
 	            ((TextView) v).setTypeface(resolvedTypeface, p.getValue());
 	        }
 	    }
+	}
+
+	public static Void compoundDrawables(Drawable l, Drawable t, Drawable r, Drawable b) {
+		List<Drawable> list = new ArrayList<>(4);
+		list.add(l);
+		list.add(t);
+		list.add(r);
+		list.add(b);
+		return attr(CompoundDrawablesFunc.instance, list);
+	}
+
+	private final static class CompoundDrawablesFunc implements Anvil.AttrFunc<List<Drawable>> {
+		private final static CompoundDrawablesFunc instance = new CompoundDrawablesFunc();
+
+		public void apply(View v, List<Drawable> arg, List<Drawable> old) {
+			if (v instanceof TextView) {
+				((TextView) v).setCompoundDrawables(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
+			}
+		}
+	}
+
+	public static Void compoundDrawablesWithIntrinsicBounds(Drawable l, Drawable t,
+															Drawable r, Drawable b) {
+		List<Drawable> list = new ArrayList<>(4);
+		list.add(l);
+		list.add(t);
+		list.add(r);
+		list.add(b);
+		return attr(CompoundDrawablesWithIntrinsicBoundsFunc.instance, list);
+	}
+
+	private final static class CompoundDrawablesWithIntrinsicBoundsFunc implements Anvil.AttrFunc<List<Drawable>> {
+		private final static CompoundDrawablesWithIntrinsicBoundsFunc instance
+				= new CompoundDrawablesWithIntrinsicBoundsFunc();
+
+		public void apply(View v, List<Drawable> arg, List<Drawable> old) {
+			if (v instanceof TextView) {
+				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(arg.get(0), arg.get(1),
+																	   arg.get(2), arg.get(3));
+			}
+		}
+	}
+
+	public static Void compoundDrawablesWithIntrinsicBoundsResource(int l, int t,
+																	int r, int b) {
+		List<Integer> list = new ArrayList<>(4);
+		list.add(l);
+		list.add(t);
+		list.add(r);
+		list.add(b);
+		return attr(CompoundDrawablesWithIntrinsicBoundsResourceFunc.instance, list);
+	}
+
+	private final static class CompoundDrawablesWithIntrinsicBoundsResourceFunc implements Anvil.AttrFunc<List<Integer>> {
+		private final static CompoundDrawablesWithIntrinsicBoundsResourceFunc instance
+				= new CompoundDrawablesWithIntrinsicBoundsResourceFunc();
+
+		public void apply(View v, List<Integer> arg, List<Integer> old) {
+			if (v instanceof TextView) {
+				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(arg.get(0), arg.get(1),
+																	   arg.get(2), arg.get(3));
+			}
+		}
 	}
 
 	public static Void visibility(boolean visible) {

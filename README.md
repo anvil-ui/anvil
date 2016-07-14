@@ -36,16 +36,14 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'co.trikita:anvil-sdk15:0.3.2'
+    compile 'co.trikita:anvil-sdk15:0.4.0'
 }
 ```
 Anvil comes in multiple builds for different minimal SDK versions:
 
-* anvil-sdk10 (GB, 99.9% of devices, but might be abandoned soon)
-* anvil-sdk15 (ICS, 97.3% of devices)
-* anvil-sdk19 (Kitkat, 72.7% of devices)
-
-anvil-sdk10 is to be abandoned soon, while anvil-sdk21 is likely to be added.
+* anvil-sdk15 (ICS, 97.7% of devices)
+* anvil-sdk19 (Kitkat, 75.6% of devices)
+* anvil-sdk21 (Lollipop, 43.1% of devices)
 
 API levels 16, 17, 18, 22 or 23 are not added because they had very few
 UI-related methods added.

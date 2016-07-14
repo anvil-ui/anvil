@@ -15,7 +15,7 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library recyclerview-v7.
  * Please, don't edit it manually unless for debugging.
  */
-public final class RecyclerViewv7DSL extends BaseRecyclerView{
+public final class RecyclerViewv7DSL extends BaseRecyclerView {
   public static BaseDSL.ViewClassResult recyclerView() {
     return BaseDSL.v(RecyclerView.class);
   }
