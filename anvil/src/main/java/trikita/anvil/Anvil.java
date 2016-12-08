@@ -134,8 +134,14 @@ public final class Anvil {
 		if (m != null) {
 			mounts.remove(v);
 			if (v instanceof ViewGroup) {
-				ViewGroup vg = (ViewGroup) v;
-				vg.removeViews(0, vg.getChildCount());
+				ViewGroup viewGroup = (ViewGroup) v;
+
+				int childCount = viewGroup.getChildCount();
+				for (int i = 0; i < childCount; i++) {
+					unmount(viewGroup.getChildAt(i));
+				}
+
+				viewGroup.removeViews(0, childCount);
 			}
 		}
 	}
