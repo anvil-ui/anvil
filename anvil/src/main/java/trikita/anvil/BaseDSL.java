@@ -321,6 +321,20 @@ public class BaseDSL {
 		}
 	}
 
+	public static Void textSize(int unit, float size) {
+		return attr(TextSizeWithUnitFunc.instance, new AbstractMap.SimpleImmutableEntry<>(unit, size));
+	}
+
+	private final static class TextSizeWithUnitFunc
+			implements Anvil.AttrFunc<Map.Entry<Integer, Float>> {
+		private final static TextSizeWithUnitFunc instance = new TextSizeWithUnitFunc();
+		public void apply(View v, Map.Entry<Integer, Float> size, Map.Entry<Integer, Float> old) {
+			if (v instanceof TextView) {
+				((TextView) v).setTextSize(size.getKey(), size.getValue());
+			}
+		}
+	}
+
 	public static Void typeface(String font) {
 		return attr(TypefaceFunc.instance, font);
 	}
