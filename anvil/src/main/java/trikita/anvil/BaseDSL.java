@@ -716,6 +716,11 @@ public class BaseDSL {
 		return null;
 	}
 
+    public static ViewClassResult v(Anvil.FactoryFunc<? extends View> viewFactoryFunc) {
+        Anvil.currentMount().startFromFactory(viewFactoryFunc);
+        return null;
+    }
+
 	public static ViewClassResult xml(int layoutId) {
 		Anvil.currentMount().startFromLayout(layoutId);
 		return null;
@@ -734,6 +739,12 @@ public class BaseDSL {
 		r.view();
 		return end();
 	}
+
+    public static Void v(Anvil.FactoryFunc<? extends View> c, Anvil.Renderable r) {
+        v(c);
+        r.view();
+        return end();
+    }
 
 	public static Void xml(int layoutId, Anvil.Renderable r) {
 		xml(layoutId);
