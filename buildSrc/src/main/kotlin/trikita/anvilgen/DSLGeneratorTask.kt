@@ -155,6 +155,11 @@ open class DSLGeneratorTask : DefaultTask() {
     // class, e.g. FrameLayout.class => frameLayout() { v(FrameLayout.class) }
     //
     fun processViews(builder: TypeSpec.Builder, view: Class<*>) {
+        // Skip abstract views.
+        // We shortcircuit it here, since we still want to generate attrs for these kinds of views.
+        if (java.lang.reflect.Modifier.isAbstract(view.modifiers)) {
+            return
+        }
         val className = view.canonicalName
         var name = view.simpleName
         val extension = project.extensions.getByName("anvilgen") as AnvilGenPluginExtension
