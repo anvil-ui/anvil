@@ -25,6 +25,12 @@ public class ViewByIdTest extends Utils {
             addView(firstView, 0);
             addView(secondView, 0);
         }
+        public final static Anvil.FactoryFunc<CustomLayout> FACTORY = new Anvil.FactoryFunc<CustomLayout>() {
+            @Override
+            public CustomLayout apply(Context context) {
+                return new CustomLayout(context);
+            }
+        };
     }
 
     @Test
@@ -32,6 +38,39 @@ public class ViewByIdTest extends Utils {
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
                 v(CustomLayout.class, new Anvil.Renderable() {
+                    public void view() {
+                        // The order doesn't matter
+                        withId(ID_SECOND, new Anvil.Renderable() {
+                            public void view() {
+                                prop("baz", "qux");
+                            }
+                        });
+                        withId(ID_FIRST, new Anvil.Renderable() {
+                            public void view() {
+                                prop("foo", "bar");
+                            }
+                        });
+                        // Also, one view can be looked up by id many times
+                        withId(ID_SECOND, new Anvil.Renderable() {
+                            public void view() {
+                                prop("hello", "world");
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        CustomLayout layout = (CustomLayout) container.getChildAt(0);
+        assertEquals("bar", layout.firstView.props.get("foo"));
+        assertEquals("qux", layout.secondView.props.get("baz"));
+        assertEquals("world", layout.secondView.props.get("hello"));
+    }
+
+    @Test
+    public void testWithIdWithFactoryFunc() {
+        Anvil.mount(container, new Anvil.Renderable() {
+            public void view() {
+                v(CustomLayout.FACTORY, new Anvil.Renderable() {
                     public void view() {
                         // The order doesn't matter
                         withId(ID_SECOND, new Anvil.Renderable() {

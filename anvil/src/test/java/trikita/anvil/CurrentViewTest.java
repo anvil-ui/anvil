@@ -33,4 +33,30 @@ public class CurrentViewTest extends Utils {
         });
         assertNull(Anvil.currentView());
     }
+
+    @Test
+    public void testCurrentViewWithFactoryFunc() {
+        assertNull(Anvil.currentView());
+        Anvil.mount(container, new Anvil.Renderable() {
+            public void view() {
+                assertTrue(Anvil.currentView() instanceof ViewGroup);
+                v(MockLayout.FACTORY, new Anvil.Renderable() {
+                    public void view() {
+                        assertTrue(Anvil.currentView() instanceof MockLayout);
+                        v(MockView.FACTORY, new Anvil.Renderable() {
+                            public void view() {
+                                assertTrue(Anvil.currentView() instanceof MockView);
+                                prop("foo", "bar");
+                                MockView view = Anvil.currentView(); // should cast automatically
+                                assertEquals("bar", view.props.get("foo"));
+                            }
+                        });
+                        assertTrue(Anvil.currentView() instanceof MockLayout);
+                    }
+                });
+                assertTrue(Anvil.currentView() instanceof ViewGroup);
+            }
+        });
+        assertNull(Anvil.currentView());
+    }
 }

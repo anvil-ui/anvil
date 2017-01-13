@@ -25,6 +25,20 @@ public class IncrementalRenderTest extends Utils {
     }
 
     @Test
+    public void testConstantsRenderedOnceWithFactoryFunc() {
+        Anvil.mount(container, new Anvil.Renderable() {
+            public void view() {
+                o(v(MockLayout.FACTORY), prop("foo", "bar"));
+            }
+        });
+        assertEquals(1, (int) createdViews.get(MockLayout.class));
+        assertEquals(1, (int) changedAttrs.get("foo"));
+        Anvil.render();
+        assertEquals(1, (int) createdViews.get(MockLayout.class));
+        assertEquals(1, (int) changedAttrs.get("foo"));
+    }
+
+    @Test
     public void testDynamicAttributeRenderedLazily() {
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
@@ -49,6 +63,36 @@ public class IncrementalRenderTest extends Utils {
                         o(v(MockLayout.class)),
                         showView ?
                                 o(v(MockView.class)) :
+                                null);
+            }
+        });
+        MockLayout layout = (MockLayout) container.getChildAt(0);
+        assertEquals(2, layout.getChildCount());
+        assertEquals(1, (int) createdViews.get(MockView.class));
+        Anvil.render();
+        assertEquals(1, (int) createdViews.get(MockView.class));
+        showView = false;
+        Anvil.render();
+        assertEquals(1, layout.getChildCount());
+        assertEquals(1, (int) createdViews.get(MockView.class));
+        Anvil.render();
+        assertEquals(1, (int) createdViews.get(MockView.class));
+        showView = true;
+        Anvil.render();
+        assertEquals(2, layout.getChildCount());
+        assertEquals(2, (int) createdViews.get(MockView.class));
+        Anvil.render();
+        assertEquals(2, (int) createdViews.get(MockView.class));
+    }
+
+    @Test
+    public void testDynamicViewRenderedLazilyWithFactoryFunc() {
+        Anvil.mount(container, new Anvil.Renderable() {
+            public void view() {
+                o(v(MockLayout.FACTORY),
+                        o(v(MockLayout.FACTORY)),
+                        showView ?
+                                o(v(MockView.FACTORY)) :
                                 null);
             }
         });
