@@ -160,6 +160,14 @@ open class DSLGeneratorTask : DefaultTask() {
         if (java.lang.reflect.Modifier.isAbstract(view.modifiers)) {
             return
         }
+        // Skip classes without single argument Context constructors
+        if (!view.constructors.isEmpty()) { // No constructors. Valid, since superclass should have the right one.
+            val contextConstructor = view.constructors.filter { it ->
+                it.parameterCount == 1 && it.parameters[0].type.canonicalName == "android.content.Context"
+            }.firstOrNull()
+            contextConstructor ?: return
+        }
+
         val className = view.canonicalName
         var name = view.simpleName
         val extension = project.extensions.getByName("anvilgen") as AnvilGenPluginExtension
