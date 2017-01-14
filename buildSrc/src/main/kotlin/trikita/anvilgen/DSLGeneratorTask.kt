@@ -223,8 +223,17 @@ open class DSLGeneratorTask : DefaultTask() {
                     .addSuperinterface(ParameterizedTypeName.get(attrFuncType, cls))
             attrBuilder.addField(FieldSpec
                     .builder(ClassName.get("", className), "instance")
-                    .addModifiers(Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
-                    .initializer("new $className()")
+                    .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
+                    .initializer("null")
+                    .build())
+            attrBuilder.addMethod(MethodSpec
+                    .methodBuilder("getInstance")
+                    .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                    .returns(ClassName.get("", className))
+                    .beginControlFlow("if(instance == null)")
+                    .addStatement("instance = new $className()")
+                    .endControlFlow()
+                    .addStatement("return instance")
                     .build())
             attrBuilder.addMethod(it.value.build())
             builder.addType(attrBuilder.build())
@@ -233,7 +242,7 @@ open class DSLGeneratorTask : DefaultTask() {
                     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                     .addParameter(ParameterSpec.builder(it.key.cls, "arg").build())
                     .returns(TypeName.VOID.box())
-                    .addStatement("return \$T.attr($className.instance, arg)", baseDsl)
+                    .addStatement("return \$T.attr($className.getInstance(), arg)", baseDsl)
             builder.addMethod(wrapperMethod.build())
         }
     }
