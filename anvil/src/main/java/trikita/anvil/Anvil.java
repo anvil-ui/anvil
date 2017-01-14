@@ -33,6 +33,10 @@ public final class Anvil {
 
 	private static Handler anvilUIHandler = null;
 
+    public interface FactoryFunc<T extends View> {
+        T apply(Context context);
+    }
+
 	/** Renderable can be mounted and rendered using Anvil library. */
 	public interface Renderable {
 		/** This method is a place to define the structure of your layout, its view
@@ -46,12 +50,16 @@ public final class Anvil {
 	}
 
 	interface ViewFactory {
+        View fromFactoryFunc(Context c, FactoryFunc<? extends View> factoryFunc);
 		View fromClass(Context c, Class<? extends View> v);
 		View fromXml(Context c, int xmlId);
 		View fromId(View v, int viewId);
 	}
 
 	final static ViewFactory viewFactory = new ViewFactory() {
+        public View fromFactoryFunc(Context c, FactoryFunc<? extends View> factoryFunc) {
+            return factoryFunc.apply(c);
+        }
 		public View fromClass(Context c, Class<? extends View> viewClass) {
 			try {
 				return viewClass.getConstructor(Context.class).newInstance(c);
@@ -231,6 +239,27 @@ public final class Anvil {
 			return node;
 		}
 
+        void startFromFactory(FactoryFunc<? extends View> viewFactoryFunc) {
+            Node node = startNode();
+            View view = node.view;
+            if (view == null || node.viewFactoryFunc != viewFactoryFunc) {
+                node.layoutId = 0;
+                node.viewClass = null;
+                node.viewFactoryFunc = viewFactoryFunc;
+                node.children.clear();
+                node.attrs.clear();
+                if (view != null) {
+                    node.parentView.removeView(view);
+                }
+                View v = viewFactory.fromFactoryFunc(node.parentView.getContext(), viewFactoryFunc);
+                if (node.viewIndex == -1) {
+                    node.viewIndex = node.parentView.getChildCount();
+                }
+                node.parentView.addView(v, node.viewIndex);
+                node.view = v;
+            }
+        }
+
 		// Create/replace view object from the given view class
 		void startFromClass(Class<? extends View> viewClass) {
 			Node node = startNode();
@@ -238,6 +267,7 @@ public final class Anvil {
 			if (view == null || node.viewClass != viewClass) {
 				node.layoutId = 0;
 				node.viewClass = viewClass;
+                node.viewFactoryFunc = null;
 				node.children.clear();
 				node.attrs.clear();
 				if (view != null) {
@@ -258,6 +288,7 @@ public final class Anvil {
 			if (node.layoutId != layoutId) {
 				node.layoutId = layoutId;
 				node.viewClass = null;
+                node.viewFactoryFunc = null;
 				node.children.clear();
 				node.attrs.clear();
 				if (node.view != null) {
@@ -311,7 +342,8 @@ public final class Anvil {
 		// Index of the real view inside the parent viewgroup
 		private int viewIndex = -1;
 
-		// view class or layout id given when the node was last updated
+		// view factory func, class or layout id given when the node was last updated
+        private FactoryFunc<? extends View> viewFactoryFunc;
 		private Class<? extends View> viewClass;
 		private int layoutId;
 

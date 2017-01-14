@@ -155,6 +155,19 @@ open class DSLGeneratorTask : DefaultTask() {
     // class, e.g. FrameLayout.class => frameLayout() { v(FrameLayout.class) }
     //
     fun processViews(builder: TypeSpec.Builder, view: Class<*>) {
+        // Skip abstract views.
+        // We shortcircuit it here, since we still want to generate attrs for these kinds of views.
+        if (java.lang.reflect.Modifier.isAbstract(view.modifiers)) {
+            return
+        }
+        // Skip classes without single argument Context constructors
+        if (!view.constructors.isEmpty()) { // No constructors. Valid, since superclass should have the right one.
+            val contextConstructor = view.constructors.filter { it ->
+                it.parameterCount == 1 && it.parameters[0].type.canonicalName == "android.content.Context"
+            }.firstOrNull()
+            contextConstructor ?: return
+        }
+
         val className = view.canonicalName
         var name = view.simpleName
         val extension = project.extensions.getByName("anvilgen") as AnvilGenPluginExtension
@@ -172,18 +185,60 @@ open class DSLGeneratorTask : DefaultTask() {
         name = toCase(name, { c -> Character.toLowerCase(c) })
         val baseDsl = ClassName.get("trikita.anvil", "BaseDSL")
         val result = ClassName.get("trikita.anvil", "BaseDSL", "ViewClassResult")
+        val factoryName = "${view.simpleName}FactoryFunc"
         builder.addMethod(MethodSpec.methodBuilder(name)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(result)
-                .addStatement("return \$T.v(\$T.class)", baseDsl, view)
+                .addStatement("return \$T.v($factoryName.getInstance())", baseDsl)
                 .build())
         builder.addMethod(MethodSpec.methodBuilder(name)
                 .addParameter(ParameterSpec.builder(ClassName.get("trikita.anvil",
                         "Anvil", "Renderable"), "r").build())
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(TypeName.VOID.box())
-                .addStatement("return \$T.v(\$T.class, r)", baseDsl, view)
+                .addStatement("return \$T.v($factoryName.getInstance(), r)", baseDsl)
                 .build())
+
+        generateViewFactory(builder, view, factoryName)
+    }
+
+    //
+    // View factory func generator
+    //
+    fun generateViewFactory(builder: TypeSpec.Builder, view: Class<*>, factoryName: String) {
+        val cls = TypeName.get(view)
+        val factoryFuncType = ClassName.get("trikita.anvil", "Anvil", "FactoryFunc")
+
+        val factoryBuilder = TypeSpec.classBuilder(factoryName)
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .addSuperinterface(ParameterizedTypeName.get(factoryFuncType, cls))
+
+        factoryBuilder.addField(FieldSpec
+                .builder(ClassName.get("", factoryName), "instance")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
+                .initializer("null")
+                .build())
+
+        factoryBuilder.addMethod(MethodSpec
+                .methodBuilder("getInstance")
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(ClassName.get("", factoryName))
+                .beginControlFlow("if(instance == null)")
+                .addStatement("instance = new $factoryName()")
+                .endControlFlow()
+                .addStatement("return instance")
+                .build())
+
+        factoryBuilder.addMethod(MethodSpec
+                .methodBuilder("apply")
+                .addModifiers(Modifier.PUBLIC)
+                .returns(view)
+                .addParameter(ClassName.get("android.content", "Context"), "c")
+                .addStatement("return new \$T(c)", view)
+                .build())
+
+        builder.addType(factoryBuilder.build())
+        builder.build()
     }
 
     //

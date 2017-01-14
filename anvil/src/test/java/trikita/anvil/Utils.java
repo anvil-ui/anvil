@@ -43,6 +43,14 @@ public class Utils implements Anvil.ViewFactory {
         }
     }
 
+    @Override
+    public View fromFactoryFunc(Context c, Anvil.FactoryFunc<? extends View> factoryFunc) {
+        View v =  factoryFunc.apply(c);
+        Class vClass = v.getClass();
+        createdViews.put(vClass, !createdViews.containsKey(vClass) ? 1 : (createdViews.get(vClass) + 1));
+        return Mockito.spy(v);
+    }
+
     public View fromClass(Context c, Class<? extends View> v) {
         try {
             createdViews.put(v, !createdViews.containsKey(v) ? 1 : (createdViews.get(v) + 1));
@@ -97,6 +105,13 @@ public class Utils implements Anvil.ViewFactory {
     }
 
     public static class MockView extends View {
+        public final static Anvil.FactoryFunc<MockView> FACTORY = new Anvil.FactoryFunc<MockView>() {
+            @Override
+            public MockView apply(Context context) {
+                return new MockView(context);
+            }
+        };
+
         public final Map<String, Object> props = new HashMap<>();
         public MockView(Context c) {
             super(c);
@@ -110,6 +125,13 @@ public class Utils implements Anvil.ViewFactory {
     }
 
     public static class MockLayout extends FrameLayout {
+        public final static Anvil.FactoryFunc<MockLayout> FACTORY = new Anvil.FactoryFunc<MockLayout>() {
+            @Override
+            public MockLayout apply(Context context) {
+                return new MockLayout(context);
+            }
+        };
+
         public final Map<String, Object> props = new HashMap<>();
         private List<View> children = new ArrayList<>();
 
