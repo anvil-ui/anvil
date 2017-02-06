@@ -10,7 +10,7 @@ apply plugin: 'trikita.anvilgen'
 
 android {
 	compileSdkVersion 'android-25'
-	buildToolsVersion '23.0.3'
+	buildToolsVersion '25.0.2'
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
