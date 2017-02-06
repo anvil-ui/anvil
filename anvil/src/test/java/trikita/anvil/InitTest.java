@@ -16,24 +16,24 @@ public class InitTest extends Utils {
 
     @Test
     public void testInit() {
+        System.out.println("============================");
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
-                init(makeFunc("before"));
+                init(makeFunc("once"));
                 v(MockView.class, new Anvil.Renderable() {
                     public void view() {
                         init(makeFunc("setUpView"));
                     }
                 });
-                init(makeFunc("after"));
             }
         });
-        assertTrue(called.get("before"));
+        System.out.println("============================");
+        assertTrue(called.get("once"));
         assertTrue(called.get("setUpView"));
-        assertTrue(called.get("after"));
+        called.clear();
         Anvil.render();
-        assertTrue(called.get("before"));
-        assertTrue(called.get("setUpView"));
-        assertTrue(called.get("after"));
+        assertFalse(called.containsKey("once"));
+        assertFalse(called.containsKey("setUpView"));
     }
 
     // new function will be created each time, but only the first one should be called

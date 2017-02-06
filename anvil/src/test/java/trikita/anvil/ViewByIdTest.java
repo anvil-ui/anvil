@@ -5,6 +5,7 @@ import android.content.Context;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static trikita.anvil.BaseDSL.attr;
 import static trikita.anvil.BaseDSL.v;
 import static trikita.anvil.BaseDSL.withId;
 
@@ -29,34 +30,34 @@ public class ViewByIdTest extends Utils {
 
     @Test
     public void testWithId() {
-        Anvil.mount(container, new Anvil.Renderable() {
-            public void view() {
-                v(CustomLayout.class, new Anvil.Renderable() {
-                    public void view() {
-                        // The order doesn't matter
-                        withId(ID_SECOND, new Anvil.Renderable() {
-                            public void view() {
-                                prop("baz", "qux");
-                            }
-                        });
-                        withId(ID_FIRST, new Anvil.Renderable() {
-                            public void view() {
-                                prop("foo", "bar");
-                            }
-                        });
-                        // Also, one view can be looked up by id many times
-                        withId(ID_SECOND, new Anvil.Renderable() {
-                            public void view() {
-                                prop("hello", "world");
-                            }
-                        });
-                    }
-                });
-            }
-        });
-        CustomLayout layout = (CustomLayout) container.getChildAt(0);
-        assertEquals("bar", layout.firstView.props.get("foo"));
-        assertEquals("qux", layout.secondView.props.get("baz"));
-        assertEquals("world", layout.secondView.props.get("hello"));
+//        Anvil.mount(container, new Anvil.Renderable() {
+//            public void view() {
+//                v(CustomLayout.class, new Anvil.Renderable() {
+//                    public void view() {
+//                        // The order doesn't matter
+//                        withId(ID_SECOND, new Anvil.Renderable() {
+//                            public void view() {
+//                                attr("text", "qux");
+//                            }
+//                        });
+//                        withId(ID_FIRST, new Anvil.Renderable() {
+//                            public void view() {
+//                                attr("text", "bar");
+//                            }
+//                        });
+//                        // Also, one view can be looked up by id many times
+//                        withId(ID_SECOND, new Anvil.Renderable() {
+//                            public void view() {
+//                                attr("tag", "world");
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        });
+//        CustomLayout layout = (CustomLayout) container.getChildAt(0);
+//        assertEquals("bar", layout.firstView.getText());
+//        assertEquals("qux", layout.secondView.getText());
+//        assertEquals("world", layout.secondView.getTag());
     }
 }

@@ -19,10 +19,10 @@ public class SyntaxTest extends Utils {
             public void view() {
                 v(MockLayout.class, new Anvil.Renderable() {
                     public void view() {
-                        prop("a", 1);
+                        attr("tag", 1);
                         v(MockView.class, new Anvil.Renderable() {
                             public void view() {
-                                prop("b", 2);
+                                attr("tag", 2);
                             }
                         });
                         if (showNestedLayout) {
@@ -32,7 +32,7 @@ public class SyntaxTest extends Utils {
                                         final int index = i;
                                         v(MockView.class, new Anvil.Renderable() {
                                             public void view() {
-                                                prop("index", index);
+                                                attr("tag", index);
                                             }
                                         });
                                     }
@@ -44,13 +44,13 @@ public class SyntaxTest extends Utils {
             }
         });
         MockLayout layout = (MockLayout) container.getChildAt(0);
-        assertEquals(1, layout.props.get("a"));
+        assertEquals(1, layout.getTag());
         MockView header = (MockView) layout.getChildAt(0);
-        assertEquals(2, header.props.get("b"));
+        assertEquals(2, header.getTag());
         MockLayout content = (MockLayout) layout.getChildAt(1);
         for (int i = 0; i < numberOfChildViews; i++) {
             MockView v = (MockView) content.getChildAt(i);
-            assertEquals(i, v.props.get("index"));
+            assertEquals(i, v.getTag());
         }
     }
 
@@ -59,27 +59,27 @@ public class SyntaxTest extends Utils {
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
                 o (v(MockLayout.class),
-                        prop("a", 1),
+                        attr("tag", 1),
                         o (v(MockView.class),
-                                prop("b", 2)),
+                                attr("tag", 2)),
                         o (v(MockLayout.class),
                                 showNestedLayout ? childViews(numberOfChildViews) : null));
             }
         });
         MockLayout layout = (MockLayout) container.getChildAt(0);
-        assertEquals(1, layout.props.get("a"));
+        assertEquals(1, layout.getTag());
         MockView header = (MockView) layout.getChildAt(0);
-        assertEquals(2, header.props.get("b"));
+        assertEquals(2, header.getTag());
         MockLayout content = (MockLayout) layout.getChildAt(1);
         for (int i = 0; i < numberOfChildViews; i++) {
             MockView v = (MockView) content.getChildAt(i);
-            assertEquals(i, v.props.get("index"));
+            assertEquals(i, v.getTag());
         }
     }
 
     private Void childViews(int count) {
         for (int i = 0; i < numberOfChildViews; i++) {
-            o (v(MockView.class), prop("index", i));
+            o (v(MockView.class), attr("tag", i));
         }
         return null;
     }

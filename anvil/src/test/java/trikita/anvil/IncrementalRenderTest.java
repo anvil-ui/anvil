@@ -14,31 +14,31 @@ public class IncrementalRenderTest extends Utils {
     public void testConstantsRenderedOnce() {
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
-                o(v(MockLayout.class), prop("foo", "bar"));
+                o(v(MockLayout.class), attr("text", "bar"));
             }
         });
         assertEquals(1, (int) createdViews.get(MockLayout.class));
-        assertEquals(1, (int) changedAttrs.get("foo"));
+        assertEquals(1, (int) changedAttrs.get("text"));
         Anvil.render();
         assertEquals(1, (int) createdViews.get(MockLayout.class));
-        assertEquals(1, (int) changedAttrs.get("foo"));
+        assertEquals(1, (int) changedAttrs.get("text"));
     }
 
     @Test
     public void testDynamicAttributeRenderedLazily() {
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
-                o(v(MockLayout.class), prop("foo", fooValue));
+                o(v(MockLayout.class), attr("text", fooValue));
             }
         });
-        assertEquals(1, (int) changedAttrs.get("foo"));
+        assertEquals(1, (int) changedAttrs.get("text"));
         Anvil.render();
-        assertEquals(1, (int) changedAttrs.get("foo"));
+        assertEquals(1, (int) changedAttrs.get("text"));
         fooValue = "b";
         Anvil.render();
-        assertEquals(2, (int) changedAttrs.get("foo"));
+        assertEquals(2, (int) changedAttrs.get("text"));
         Anvil.render();
-        assertEquals(2, (int) changedAttrs.get("foo"));
+        assertEquals(2, (int) changedAttrs.get("text"));
     }
 
     @Test
@@ -80,22 +80,22 @@ public class IncrementalRenderTest extends Utils {
         MockLayout rootB = new MockLayout(getContext());
         Anvil.mount(rootA, new Anvil.Renderable() {
             public void view() {
-                prop("foo", firstMountValue);
+                attr("text", firstMountValue);
             }
         });
         Anvil.mount(rootB, new Anvil.Renderable() {
             public void view() {
-                prop("bar", secondMountValue);
+                attr("tag", secondMountValue);
             }
         });
-        assertEquals("foo", rootA.props.get("foo"));
-        assertEquals("bar", rootB.props.get("bar"));
+        assertEquals("foo", rootA.getText());
+        assertEquals("bar", rootB.getTag());
 
         firstMountValue = "baz";
         secondMountValue = "qux";
         Anvil.render();
 
-        assertEquals("baz", rootA.props.get("foo"));
-        assertEquals("qux", rootB.props.get("bar"));
+        assertEquals("baz", rootA.getText());
+        assertEquals("qux", rootB.getTag());
     }
 }

@@ -20,9 +20,9 @@ public class CurrentViewTest extends Utils {
                         v(MockView.class, new Anvil.Renderable() {
                             public void view() {
                                 assertTrue(Anvil.currentView() instanceof MockView);
-                                prop("foo", "bar");
+                                attr("text", "bar");
                                 MockView view = Anvil.currentView(); // should cast automatically
-                                assertEquals("bar", view.props.get("foo"));
+                                assertEquals("bar", view.getText());
                             }
                         });
                         assertTrue(Anvil.currentView() instanceof MockLayout);

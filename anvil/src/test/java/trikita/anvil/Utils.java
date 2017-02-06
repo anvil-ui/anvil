@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 
 import org.junit.After;
@@ -13,65 +15,45 @@ import org.mockito.Mockito;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
-public class Utils implements Anvil.ViewFactory {
+public class Utils {
 
     Map<Class, Integer> createdViews = new HashMap<>();
     Map<String, Integer> changedAttrs = new HashMap<>();
 
     public Utils() {
-        mockViewFactory(this);
-    }
-
-    protected void mockViewFactory(Anvil.ViewFactory viewFactory) {
-        // Mock default view factory
-        try {
-            Field factory = Anvil.class.getDeclaredField("viewFactory");
-            Field modifiers = Field.class.getDeclaredField("modifiers");
-            modifiers.setAccessible(true);
-            modifiers.setInt(factory, factory.getModifiers() & ~Modifier.FINAL);
-            factory.setAccessible(true);
-            factory.set(null, viewFactory);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public View fromClass(Context c, Class<? extends View> v) {
-        try {
-            createdViews.put(v, !createdViews.containsKey(v) ? 1 : (createdViews.get(v) + 1));
-            return Mockito.spy(v.getConstructor(Context.class).newInstance(getContext()));
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public View fromXml(Context c, int xmlId) {
-        return null;
-    }
-
-    public View fromId(View v, int viewId) {
-        if (v instanceof MockLayout) {
-            for (View child : ((MockLayout) v).children) {
-                if (child.getId() == viewId) {
-                    return child;
-                }
+        Anvil.registerAttributeSetter(new Anvil.AttributeSetter() {
+            public boolean set(View v, String name, Object value, Object prevValue) {
+                changedAttrs.put(name, !changedAttrs.containsKey(name) ? 1 : (changedAttrs.get(name) + 1));
+                return false;
             }
-        }
-        return null;
+        });
+        Anvil.registerViewFactory(new Anvil.ViewFactory() {
+            public View fromClass(Context c, Class<? extends View> v) {
+                createdViews.put(v, !createdViews.containsKey(v) ? 1 : (createdViews.get(v) + 1));
+                return null;
+            }
+            public View fromXml(Context c, int xmlId) {
+                return null;
+            }
+        });
     }
+
+//    public View fromId(View v, int viewId) {
+//        if (v instanceof MockLayout) {
+//            for (View child : ((MockLayout) v).children) {
+//                if (child.getId() == viewId) {
+//                    return child;
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     Anvil.Renderable empty = new Anvil.Renderable() {
         public void view() {}
@@ -97,21 +79,25 @@ public class Utils implements Anvil.ViewFactory {
     }
 
     public static class MockView extends View {
-        public final Map<String, Object> props = new HashMap<>();
-        public MockView(Context c) {
-            super(c);
-        }
-        public void setId(int id) {
-            this.props.put("id", id);
-        }
-        public int getId() {
-            return (Integer) this.props.get("id");
-        }
+        private int id = 0;
+        private Object tag;
+        private String text;
+        public MockView(Context c) { super(c); }
+        public void setId(int id) { this.id = id; }
+        public int getId() { return this.id; }
+        public void setText(String text) { this.text = text; }
+        public String getText() { return this.text; }
+        public Object getTag() { return tag; }
+        public void setTag(Object tag) { this.tag = tag; }
+        public String toString() { return "MockView$"+this.hashCode(); }
     }
 
     public static class MockLayout extends FrameLayout {
-        public final Map<String, Object> props = new HashMap<>();
         private List<View> children = new ArrayList<>();
+
+        private int id;
+        private Object tag;
+        private String text;
 
         public MockLayout(Context c) {
             super(c);
@@ -146,31 +132,13 @@ public class Utils implements Anvil.ViewFactory {
             super.removeViews(start, count);
         }
 
-        public void setId(int id) {
-            this.props.put("id", id);
-        }
+        public void setId(int id) { this.id = id; }
+        public int getId() { return this.id; }
+        public Object getTag() { return tag; }
+        public void setTag(Object tag) { this.tag = tag; }
+        public String getText() { return text; }
+        public void setText(String text) { this.text = text; }
 
-        public int getId() {
-            return (Integer) this.props.get("id");
-        }
-    }
-
-    PropFunc propFuncInstance = new PropFunc();
-
-    public Void prop(String name, Object value) {
-        return BaseDSL.attr(propFuncInstance, new AbstractMap.SimpleImmutableEntry<>(name, value));
-    }
-
-    // AttrFunc implementation for props<k,v>
-    public class PropFunc implements Anvil.AttrFunc<Map.Entry<String, Object>> {
-        public void apply(View v, Map.Entry<String, Object> x, Map.Entry<String, Object> old) {
-            String key = x.getKey();
-            changedAttrs.put(key, !changedAttrs.containsKey(key) ? 1 : (changedAttrs.get(key) + 1));
-            if (v instanceof MockView) {
-                ((MockView) v).props.put(x.getKey(), x.getValue());
-            } else if (v instanceof MockLayout) {
-                ((MockLayout) v).props.put(x.getKey(), x.getValue());
-            }
-        }
+        public String toString() { return "MockLayout$"+this.hashCode(); }
     }
 }
