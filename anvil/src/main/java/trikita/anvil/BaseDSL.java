@@ -7,15 +7,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.NoSuchPropertyException;
-import android.util.Property;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -29,7 +26,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public class BaseDSL {
+public class BaseDSL implements Anvil.AttributeSetter {
+
+	static {
+		Anvil.registerAttributeSetter(new BaseDSL());
+	}
 
 	//
 	// Common attrs
@@ -83,128 +84,41 @@ public class BaseDSL {
 	}
 
 	public static Void size(int w, int h) {
-		return attr(LayoutSizeFunc.instance,
-				new AbstractMap.SimpleImmutableEntry<>(w, h));
+		return attr("size", new AbstractMap.SimpleImmutableEntry<>(w, h));
 	}
-
-	private final static class LayoutSizeFunc
-			implements Anvil.AttrFunc<Map.Entry<Integer, Integer>> {
-		private final static LayoutSizeFunc instance = new LayoutSizeFunc();
-		public void apply(View v, Map.Entry<Integer, Integer> arg,
-				Map.Entry<Integer, Integer> old) {
-			ViewGroup.LayoutParams p = v.getLayoutParams();
-			p.width = arg.getKey();
-			p.height = arg.getValue();
-			v.setLayoutParams(p);
-		}
-	}
-
 	public static Void padding(int p) {
 		return padding(p, p, p, p);
 	}
-
 	public static Void padding(int h, int v) {
 		return padding(h, v, h, v);
 	}
-
 	public static Void padding(int l, int t, int r, int b) {
 		List<Integer> list = new ArrayList<>(4);
-		list.add(l);
-		list.add(t);
-		list.add(r);
-		list.add(b);
-		return attr(PaddingFunc.instance, list);
-	}
-
-	private final static class PaddingFunc implements Anvil.AttrFunc<List<Integer>> {
-		private final static PaddingFunc instance = new PaddingFunc();
-		public void apply(View v, List<Integer> arg, List<Integer> old) {
-			v.setPadding(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
-		}
+		list.add(l); list.add(t); list.add(r); list.add(b);
+		return attr("padding", list);
 	}
 
 	public static Void margin(int w) {
 		return margin(w, w, w, w);
 	}
-
 	public static Void margin(int h, int v) {
 		return margin(h, v, h, v);
 	}
-
 	public static Void margin(int l, int t, int r, int b) {
 		List<Integer> list = new ArrayList<>(4);
-		list.add(l);
-		list.add(t);
-		list.add(r);
-		list.add(b);
-		return attr(LayoutMarginFunc.instance, list);
-	}
-
-	private final static class LayoutMarginFunc implements Anvil.AttrFunc<List<Integer>> {
-		private final static LayoutMarginFunc instance = new LayoutMarginFunc();
-		public void apply(View v, List<Integer> arg, List<Integer> old) {
-			ViewGroup.LayoutParams p = v.getLayoutParams();
-			if (p instanceof ViewGroup.MarginLayoutParams) {
-				ViewGroup.MarginLayoutParams mp = (ViewGroup.MarginLayoutParams) p;
-				mp.leftMargin = arg.get(0);
-				mp.topMargin = arg.get(1);
-				mp.rightMargin = arg.get(2);
-				mp.bottomMargin = arg.get(3);
-				v.setLayoutParams(mp);
-			}
-		}
+		list.add(l); list.add(t); list.add(r); list.add(b);
+		return attr("margin", list);
 	}
 
 	public static Void weight(float w) {
-		return attr(LayoutWeightFunc.instance, w);
+		return attr("weight", w);
 	}
-
-	private final static class LayoutWeightFunc implements Anvil.AttrFunc<Float> {
-		private final static LayoutWeightFunc instance = new LayoutWeightFunc();
-		public void apply(View v, Float arg, Float old) {
-			ViewGroup.LayoutParams p = v.getLayoutParams();
-			if (p instanceof LinearLayout.LayoutParams) {
-				((LinearLayout.LayoutParams) p).weight = arg;
-				v.setLayoutParams(p);
-			} else {
-				try {
-					((Property<ViewGroup.LayoutParams, Float>)
-					 Property.of(p.getClass(), Float.class, "weight")).set(p, arg);
-				} catch (NoSuchPropertyException ignored) {}
-			}
-		}
-	}
-
 	public static Void layoutGravity(int g) {
-		return attr(LayoutGravityFunc.instance, g);
-	}
-
-	private final static class LayoutGravityFunc implements Anvil.AttrFunc<Integer> {
-		private final static LayoutGravityFunc instance = new LayoutGravityFunc();
-		public void apply(View v, Integer arg, Integer old) {
-			ViewGroup.LayoutParams p = v.getLayoutParams();
-			if (p instanceof LinearLayout.LayoutParams) {
-				((LinearLayout.LayoutParams) p).gravity = arg;
-				v.setLayoutParams(p);
-			} else if (p instanceof FrameLayout.LayoutParams) {
-				((FrameLayout.LayoutParams) p).gravity = arg;
-				v.setLayoutParams(p);
-			} else {
-				try {
-					((Property<ViewGroup.LayoutParams, Integer>)
-					 Property.of(p.getClass(), Integer.class, "gravity")).set(p, arg);
-				} catch (NoSuchPropertyException ignored) {}
-			}
-		}
+		return attr("layoutGravity", g);
 	}
 
 	public static Void align(int verb) {
 		return align(verb, -1);
-	}
-
-	public static Void align(int verb, int anchor) {
-		return attr(LayoutAlignFunc.instance,
-				new AbstractMap.SimpleImmutableEntry<>(verb, anchor));
 	}
 
 	public static Void above(int anchor) {
@@ -295,100 +209,33 @@ public class BaseDSL {
 		return align(RelativeLayout.START_OF, anchor);
 	}
 
-	private final static class LayoutAlignFunc
-			implements Anvil.AttrFunc<Map.Entry<Integer, Integer>> {
-		private final static LayoutAlignFunc instance = new LayoutAlignFunc();
-		public void apply(View v, Map.Entry<Integer, Integer> e,
-				Map.Entry<Integer, Integer> old) {
-			ViewGroup.LayoutParams p = v.getLayoutParams();
-			if (p instanceof RelativeLayout.LayoutParams) {
-				((RelativeLayout.LayoutParams) p).addRule(e.getKey(), e.getValue());
-				v.setLayoutParams(p);
-			}
-		}
+	public static Void align(int verb, int anchor) {
+		return attr("align", new AbstractMap.SimpleImmutableEntry<>(verb, anchor));
 	}
 
 	public static Void textSize(float size) {
-		return attr(TextSizeFunc.instance, size);
-	}
-
-	private final static class TextSizeFunc implements Anvil.AttrFunc<Float> {
-		private final static TextSizeFunc instance = new TextSizeFunc();
-		public void apply(View v, Float size, Float old) {
-			if (v instanceof TextView) {
-				((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
-			}
-		}
+		return attr("textSize", size);
 	}
 
 	public static Void typeface(String font) {
-		return attr(TypefaceFunc.instance, font);
-	}
-
-	private final static class TypefaceFunc implements Anvil.AttrFunc<String> {
-		private final static TypefaceFunc instance = new TypefaceFunc();
-		public void apply(View v, String font, String old) {
-			if (v instanceof TextView) {
-				((TextView) v).setTypeface(Typeface.createFromAsset(v.getContext().getAssets(), font));
-			}
-		}
+		return attr("typeface", font);
 	}
 
 	public static Void typeface(String font, int style) {
-	    return attr(StyledTypefaceFunc.instance, new AbstractMap.SimpleImmutableEntry<>(font, style));
-	}
-
-	private final static class StyledTypefaceFunc implements Anvil.AttrFunc<Map.Entry<String, Integer>> {
-	    private final static StyledTypefaceFunc instance = new StyledTypefaceFunc();
-	    public void apply(View v, Map.Entry<String, Integer> p, Map.Entry<String, Integer> q) {
-	        Typeface resolvedTypeface = null;
-	        if( p.getKey() != null )
-	            resolvedTypeface = Typeface.createFromAsset(v.getContext().getAssets(), p.getKey());
-	        if (v instanceof TextView) {
-	            ((TextView) v).setTypeface(resolvedTypeface, p.getValue());
-	        }
-	    }
+		return attr("styledTypeface", new AbstractMap.SimpleImmutableEntry<>(font, style));
 	}
 
 	public static Void compoundDrawables(Drawable l, Drawable t, Drawable r, Drawable b) {
 		List<Drawable> list = new ArrayList<>(4);
-		list.add(l);
-		list.add(t);
-		list.add(r);
-		list.add(b);
-		return attr(CompoundDrawablesFunc.instance, list);
-	}
-
-	private final static class CompoundDrawablesFunc implements Anvil.AttrFunc<List<Drawable>> {
-		private final static CompoundDrawablesFunc instance = new CompoundDrawablesFunc();
-
-		public void apply(View v, List<Drawable> arg, List<Drawable> old) {
-			if (v instanceof TextView) {
-				((TextView) v).setCompoundDrawables(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
-			}
-		}
+		list.add(l); list.add(t); list.add(r); list.add(b);
+		return attr("compoundDrawables", list);
 	}
 
 	public static Void compoundDrawablesWithIntrinsicBounds(Drawable l, Drawable t,
 															Drawable r, Drawable b) {
 		List<Drawable> list = new ArrayList<>(4);
-		list.add(l);
-		list.add(t);
-		list.add(r);
-		list.add(b);
-		return attr(CompoundDrawablesWithIntrinsicBoundsFunc.instance, list);
-	}
-
-	private final static class CompoundDrawablesWithIntrinsicBoundsFunc implements Anvil.AttrFunc<List<Drawable>> {
-		private final static CompoundDrawablesWithIntrinsicBoundsFunc instance
-				= new CompoundDrawablesWithIntrinsicBoundsFunc();
-
-		public void apply(View v, List<Drawable> arg, List<Drawable> old) {
-			if (v instanceof TextView) {
-				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(arg.get(0), arg.get(1),
-																	   arg.get(2), arg.get(3));
-			}
-		}
+		list.add(l); list.add(t); list.add(r); list.add(b);
+		return attr("compoundDrawablesWithIntrinsicBounds", list);
 	}
 
 	public static Void compoundDrawablesWithIntrinsicBoundsResource(int l, int t,
@@ -398,19 +245,7 @@ public class BaseDSL {
 		list.add(t);
 		list.add(r);
 		list.add(b);
-		return attr(CompoundDrawablesWithIntrinsicBoundsResourceFunc.instance, list);
-	}
-
-	private final static class CompoundDrawablesWithIntrinsicBoundsResourceFunc implements Anvil.AttrFunc<List<Integer>> {
-		private final static CompoundDrawablesWithIntrinsicBoundsResourceFunc instance
-				= new CompoundDrawablesWithIntrinsicBoundsResourceFunc();
-
-		public void apply(View v, List<Integer> arg, List<Integer> old) {
-			if (v instanceof TextView) {
-				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(arg.get(0), arg.get(1),
-																	   arg.get(2), arg.get(3));
-			}
-		}
+		return attr("compoundDrawablesWithIntrinsicBoundsResource", list);
 	}
 
 	public static Void visibility(boolean visible) {
@@ -422,63 +257,27 @@ public class BaseDSL {
 	}
 
 	public static Void check(int id) {
-		return attr(CheckFunc.instance, id);
+		return attr("check", id);
 	}
 
-	private final static class CheckFunc implements Anvil.AttrFunc<Integer> {
-		private final static CheckFunc instance = new CheckFunc();
-		public void apply(View v, Integer id, Integer old) {
-			if (v instanceof RadioGroup) {
-				((RadioGroup) v).check(id);
-			}
-		}
-	}
-
-	// -------------
 	public static Void tag(int id, Object value) {
-		return attr(TagFunc.instance,
-				new AbstractMap.SimpleImmutableEntry<>(id, value));
-	}
-	private final static class TagFunc implements Anvil.AttrFunc<Map.Entry<Integer, Object>> {
-		private final static TagFunc instance = new TagFunc();
-		public void apply(View v, Map.Entry<Integer, Object> p, Map.Entry<Integer, Object> q) {
-			v.setTag(p.getKey(), p.getValue());
-		}
+		return attr("tag", new AbstractMap.SimpleImmutableEntry<>(id, value));
 	}
 
 	public static Void shadowLayer(float radius, float dx, float dy, int color) {
 		List<Number> list = new ArrayList<>(4);
-		list.add(radius);
-		list.add(dx);
-		list.add(dy);
-		list.add(color);
-		return attr(ShadowLayerFunc.instance, list);
-	}
-	private final static class ShadowLayerFunc implements Anvil.AttrFunc<List<Number>> {
-		private final static ShadowLayerFunc instance = new ShadowLayerFunc();
-		public void apply(View v, List<Number> arg, List<Number> old) {
-			if (v instanceof TextView) {
-				((TextView) v).setShadowLayer(arg.get(0).floatValue(),
-						arg.get(1).floatValue(), arg.get(2).floatValue(),
-						arg.get(3).intValue());
-			}
-		}
+		list.add(radius); list.add(dx); list.add(dy); list.add(color);
+		return attr("shadowLayer", list);
 	}
 
 	public interface SimpleTextWatcher {
 		void onTextChanged(CharSequence s);
 	}
-
-	public static Void onTextChanged(SimpleTextWatcher w) {
-		return attr(SimpleTextWatcherFunc.instance, w);
+	public interface SimpleSeekBarChangeListener {
+		void onSeekBarChange(SeekBar s, int progress, boolean fromUser);
 	}
-
-	public static Void onTextChanged(TextWatcher w) {
-	    return attr(TextWatcherFunc.instance, w);
-	}
-
-	public static Void text(CharSequence arg) {
-	    return attr(TextFunc.instance, arg);
+	public interface SimpleItemSelectedListener {
+		void onItemSelected(AdapterView a, View v, int pos, long id);
 	}
 
 	private final static Map<TextWatcherProxy, Void> TEXT_WATCHERS = new WeakHashMap<>();
@@ -538,121 +337,32 @@ public class BaseDSL {
 		}
 	}
 
-	private final static class TextWatcherFunc implements Anvil.AttrFunc<TextWatcher> {
-		private final static TextWatcherFunc instance = new TextWatcherFunc();
-		public void apply(final View v, final TextWatcher w, TextWatcher old) {
-			if (v instanceof TextView) {
-				TextView tv = (TextView) v;
-				for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
-					if (proxy.hasImpl(old)) {
-						proxy.setImpl(w);
-						return;
-					}
-				}
-				TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
-				TEXT_WATCHERS.put(proxy, null);
-				tv.addTextChangedListener(proxy);
-			}
+	private final static class ItemSelectedWrapper implements AdapterView.OnItemSelectedListener {
+		private final SimpleItemSelectedListener parent;
+		private ItemSelectedWrapper(SimpleItemSelectedListener parent) { this.parent = parent; }
+		public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
+			parent.onItemSelected(a0, a1, a2, a3);
+			Anvil.render();
 		}
+		public void onNothingSelected(AdapterView a0) {}
+		public int hashCode() { return parent.hashCode(); }
+		public boolean equals(Object o) { return parent.equals(o); }
 	}
 
-	private final static class SimpleTextWatcherFunc implements Anvil.AttrFunc<SimpleTextWatcher> {
-		private final static SimpleTextWatcherFunc instance = new SimpleTextWatcherFunc();
-		public void apply(final View v, final SimpleTextWatcher w, SimpleTextWatcher old) {
-			if (v instanceof TextView) {
-				TextView tv = (TextView) v;
-				for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
-					if (proxy.hasImpl(old)) {
-						proxy.setImpl(w);
-						return;
-					}
-				}
-				TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl(w);
-				TEXT_WATCHERS.put(proxy, null);
-				tv.addTextChangedListener(proxy);
-			}
+	private final static class SeekBarChangeWrapper implements SeekBar.OnSeekBarChangeListener {
+		private final SimpleSeekBarChangeListener parent;
+		private SeekBarChangeWrapper(SimpleSeekBarChangeListener parent) {
+			this.parent = parent;
 		}
-	}
-
-	private static final class TextFunc implements Anvil.AttrFunc<CharSequence> {
-		public static final TextFunc instance = new TextFunc();
-		public void apply(View v, final CharSequence arg, final CharSequence old) {
-			if (v instanceof TextView && v != CURRENT_INPUT_TEXT_VIEW) {
-				((TextView) v).setText(arg);
-			} else if (v instanceof TextSwitcher) {
-				((TextSwitcher) v).setText(arg);
-			}
+		public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
+			parent.onSeekBarChange(a0, a1, a2);
+			Anvil.render();
 		}
+		public void onStartTrackingTouch(SeekBar a0) {}
+		public void onStopTrackingTouch(SeekBar a0) {}
+		public int hashCode() { return parent.hashCode(); }
+		public boolean equals(Object o) { return parent.equals(o); }
 	}
-
-	public interface SimpleItemSelectedListener {
-	    void onItemSelected(AdapterView a, View v, int pos, long id);
-	}
-
-	public static Void onItemSelected(SimpleItemSelectedListener l) {
-		return attr(ItemSelectedFunc.instance, l);
-	}
-	private final static class ItemSelectedFunc
-			implements Anvil.AttrFunc<SimpleItemSelectedListener> {
-		private final static ItemSelectedFunc instance = new ItemSelectedFunc();
-		public void apply(View v, final SimpleItemSelectedListener l,
-				SimpleItemSelectedListener old) {
-			AdapterView.OnItemSelectedListener wrapper =
-				new AdapterView.OnItemSelectedListener() {
-					@Override
-					public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
-						l.onItemSelected(a0, a1, a2, a3);
-						Anvil.render();
-					}
-					@Override
-					public void onNothingSelected(AdapterView a0) {}
-					@Override
-					public int hashCode() { return l.hashCode(); }
-					@Override
-					public boolean equals(Object o) { return l.equals(o); }
-				};
-			if (v instanceof AdapterView) {
-				((AdapterView) v).setOnItemSelectedListener(wrapper);
-			} else if (v instanceof AutoCompleteTextView) {
-				((AutoCompleteTextView) v).setOnItemSelectedListener(wrapper);
-			}
-		}
-	}
-
-	public interface SimpleSeekBarChangeListener {
-		void onSeekBarChange(SeekBar s, int progress, boolean fromUser);
-	}
-
-	public static Void onSeekBarChange(SimpleSeekBarChangeListener l) {
-		return attr(SeekBarChangeFunc.instance, l);
-	}
-	private final static class SeekBarChangeFunc
-			implements Anvil.AttrFunc<SimpleSeekBarChangeListener> {
-		private final static SeekBarChangeFunc instance = new SeekBarChangeFunc();
-		public void apply(View v, final SimpleSeekBarChangeListener l,
-				SimpleSeekBarChangeListener old) {
-			SeekBar.OnSeekBarChangeListener wrapper =
-				new SeekBar.OnSeekBarChangeListener() {
-					@Override
-					public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
-						l.onSeekBarChange(a0, a1, a2);
-						Anvil.render();
-					}
-					@Override
-					public void onStartTrackingTouch(SeekBar a0) {}
-					@Override
-					public void onStopTrackingTouch(SeekBar a0) {}
-					@Override
-					public int hashCode() { return l.hashCode(); }
-					@Override
-					public boolean equals(Object o) { return l.equals(o); }
-				};
-			if (v instanceof SeekBar) {
-				((SeekBar) v).setOnSeekBarChangeListener(wrapper);
-			}
-		}
-	}
-
 
 	private final static class AnimatorPair {
 		public Animator animator;
@@ -680,53 +390,33 @@ public class BaseDSL {
 		}
 	}
 
-	private static class AnimatorFunc implements Anvil.AttrFunc<AnimatorPair> {
-		private final static AnimatorFunc instance = new AnimatorFunc();
-		public void apply(View v, AnimatorPair a, AnimatorPair b) {
-			// If new animation is set to true and old one was false
-			// then start new animation
-			if (a.trigger) {
-				a.animator.setTarget(v);
-				a.animator.start();
-			}
-		}
-	}
-
-	public static Void anim(boolean trigger, Animator a) {
-		return attr(AnimatorFunc.instance, new AnimatorPair(a, trigger));
-	}
-
-	private static class InitFunc implements Anvil.AttrFunc<Runnable> {
-		private final static InitFunc instance = new InitFunc();
-		public void apply(View v, Runnable r, Runnable old) {
-			if (old == null && r != null) {
-				r.run();
-			}
-		}
-	}
-
+	public static Void onItemSelected(SimpleItemSelectedListener l) { return attr("onItemSelected", l); }
+	public static Void onSeekBarChange(SimpleSeekBarChangeListener l) { return attr("onSeekBarChange", l); }
+	public static Void anim(boolean trigger, Animator a) { return attr("anim", new AnimatorPair(a, trigger)); }
 	public static Void init(Runnable r) {
-		return attr(InitFunc.instance, r);
+		return attr("init", r);
 	}
+	public static Void onTextChanged(SimpleTextWatcher w) { return attr("onTextChanged", w); }
+	public static Void onTextChanged(TextWatcher w) { return attr("onTextChanged", w); }
+	public static Void text(CharSequence arg) { return attr("text", arg); }
 
 	public static final class ViewClassResult {}
 
 	public static ViewClassResult v(Class<? extends View> c) {
-		Anvil.currentMount().startFromClass(c);
+		Anvil.currentMount().iterator.start(c, 0, null);
 		return null;
 	}
 
 	public static ViewClassResult xml(int layoutId) {
-		Anvil.currentMount().startFromLayout(layoutId);
+		Anvil.currentMount().iterator.start(null, layoutId, null);
 		return null;
 	}
 
 	private static Void end() {
-		Anvil.currentMount().end();
+		Anvil.currentMount().iterator.end();
 		return null;
 	}
 
-	public static Void x(ViewClassResult c, Object ...args) { return end(); }
 	public static Void o(ViewClassResult c, Object ...args) { return end(); }
 
 	public static Void v(Class<? extends View> c, Anvil.Renderable r) {
@@ -741,8 +431,8 @@ public class BaseDSL {
 		return end();
 	}
 
-	public static <T> Void attr(Anvil.AttrFunc<T> f, T value) {
-		Anvil.currentMount().attr(f, value);
+	public static <T> Void attr(String name, T value) {
+		Anvil.currentMount().iterator.attr(name, value);
 		return null;
 	}
 
@@ -751,11 +441,202 @@ public class BaseDSL {
 		if (v == null) {
 			throw new RuntimeException("Anvil.currentView() is null");
 		}
-		v = Anvil.viewFactory.fromId(v, id);
+		// FIXME: how to mock this for tests?
+		v = v.findViewById(id);
 		if (v == null) {
 			throw new RuntimeException("No view found for ID " + id);
 		}
 		return Anvil.mount(v, r);
+	}
+
+	@Override
+	public boolean set(View v, String name, Object value, Object prevValue) {
+		switch (name) {
+			case "init":
+				if (Anvil.get(v, "_initialized") == null) {
+					Anvil.set(v, "_initialized", true);
+					((Runnable) value).run();
+				}
+				return true;
+			case "anim":
+				AnimatorPair a = (AnimatorPair) value;
+				if (a.trigger) {
+					a.animator.setTarget(v);
+					a.animator.start();
+				}
+				return true;
+			case "onSeekBarChange":
+				if (v instanceof SeekBar && value instanceof SimpleSeekBarChangeListener) {
+					((SeekBar) v).setOnSeekBarChangeListener(
+							new SeekBarChangeWrapper((SimpleSeekBarChangeListener) value));
+					return true;
+				}
+				break;
+			case "onItemSelected":
+				if (v instanceof AdapterView && value instanceof SimpleItemSelectedListener) {
+					((AdapterView) v).setOnItemSelectedListener(new ItemSelectedWrapper((SimpleItemSelectedListener) value));
+					return true;
+				} else if (v instanceof AutoCompleteTextView && value instanceof SimpleItemSelectedListener) {
+					((AutoCompleteTextView) v).setOnItemSelectedListener(new ItemSelectedWrapper((SimpleItemSelectedListener) value));
+					return true;
+				}
+				break;
+			case "text":
+				if (v instanceof TextView && value instanceof CharSequence) {
+					if (v != CURRENT_INPUT_TEXT_VIEW) {
+						((TextView) v).setText((CharSequence) value);
+					}
+					return true;
+				} else if (v instanceof TextSwitcher && value instanceof CharSequence) {
+					((TextSwitcher) v).setText((CharSequence) value);
+					return true;
+				}
+				break;
+			case "onTextChanged":
+				if (v instanceof TextView && value instanceof SimpleTextWatcher) {
+					TextView tv = (TextView) v;
+					for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+						if (proxy.hasImpl(prevValue)) {
+							proxy.setImpl((SimpleTextWatcher) value);
+							return true;
+						}
+					}
+					TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl((SimpleTextWatcher) value);
+					TEXT_WATCHERS.put(proxy, null);
+					tv.addTextChangedListener(proxy);
+					return true;
+				}
+				if (v instanceof TextView && value instanceof TextWatcher) {
+					TextView tv = (TextView) v;
+					for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+						if (proxy.hasImpl(prevValue)) {
+							proxy.setImpl((TextWatcher) value);
+							return true;
+						}
+					}
+					TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl((TextWatcher) value);
+					TEXT_WATCHERS.put(proxy, null);
+					tv.addTextChangedListener(proxy);
+					return true;
+				}
+				break;
+			case "tag":
+				if (value instanceof AbstractMap.SimpleImmutableEntry) {
+					AbstractMap.SimpleImmutableEntry p = (AbstractMap.SimpleImmutableEntry) value;
+					v.setTag((Integer) p.getKey(), p.getValue());
+					return true;
+				}
+				break;
+			case "size":
+				if (value instanceof AbstractMap.SimpleImmutableEntry) {
+					AbstractMap.SimpleImmutableEntry arg = (AbstractMap.SimpleImmutableEntry) value;
+					ViewGroup.LayoutParams p = v.getLayoutParams();
+					p.width = (int) arg.getKey();
+					p.height = (int) arg.getValue();
+					v.setLayoutParams(p);
+					return true;
+				}
+				break;
+			case "check":
+				if (v instanceof RadioGroup) {
+					((RadioGroup) v).check((Integer) value);
+					return true;
+				}
+				break;
+			case "shadowLayer":
+				if (v instanceof TextView && value instanceof List) {
+					List<Number> arg = (List<Number>) value;
+					((TextView) v).setShadowLayer(arg.get(0).floatValue(),
+							arg.get(1).floatValue(), arg.get(2).floatValue(),
+							arg.get(3).intValue());
+					return true;
+				}
+				break;
+			case "padding":
+				if (value instanceof List) {
+					List<Integer> arg = (List<Integer>) value;
+					v.setPadding(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
+					return true;
+				}
+				break;
+			case "margin":
+				if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams && value instanceof List) {
+					List<Integer> arg = (List<Integer>) value;
+					ViewGroup.MarginLayoutParams mp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+					mp.leftMargin = arg.get(0);
+					mp.topMargin = arg.get(1);
+					mp.rightMargin = arg.get(2);
+					mp.bottomMargin = arg.get(3);
+					v.setLayoutParams(mp);
+					return true;
+				}
+				break;
+			case "weight":
+				if (v.getLayoutParams() instanceof LinearLayout.LayoutParams && value instanceof Float) {
+					((LinearLayout.LayoutParams) v.getLayoutParams()).weight = (float) value;
+					return true;
+				}
+				break;
+			case "layoutGravity":
+//			ViewGroup.LayoutParams p = v.getLayoutParams();
+//			if (p instanceof LinearLayout.LayoutParams) {
+//				((LinearLayout.LayoutParams) p).gravity = arg;
+//				v.setLayoutParams(p);
+//			} else if (p instanceof FrameLayout.LayoutParams) {
+//				((FrameLayout.LayoutParams) p).gravity = arg;
+//				v.setLayoutParams(p);
+//			} else {
+//				try {
+//					((Property<ViewGroup.LayoutParams, Integer>)
+//					 Property.of(p.getClass(), Integer.class, "gravity")).set(p, arg);
+//				} catch (NoSuchPropertyException ignored) {}
+//			}
+				break;
+			case "align":
+				if (v.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
+					AbstractMap.SimpleImmutableEntry<Integer, Integer> e = (AbstractMap.SimpleImmutableEntry<Integer,Integer>) value;
+					((RelativeLayout.LayoutParams) v.getLayoutParams()).addRule(e.getKey(), e.getValue());
+					return true;
+				}
+				break;
+			case "textSize":
+				if (v instanceof TextView && value instanceof Float) {
+					((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_PX, (Float) value);
+					return true;
+				}
+				break;
+			case "typeface":
+				if (v instanceof TextView && value instanceof String) {
+					((TextView) v).setTypeface(Typeface.createFromAsset(v.getContext().getAssets(), (String) value));
+					return true;
+				}
+				break;
+			case "styledTypeface":
+//	        Typeface resolvedTypeface = null;
+//	        if( p.getKey() != null )
+//	            resolvedTypeface = Typeface.createFromAsset(v.getContext().getAssets(), p.getKey());
+//	        if (v instanceof TextView) {
+//	            ((TextView) v).setTypeface(resolvedTypeface, p.getValue());
+//	        }
+				break;
+			case "compoundDrawables":
+//			if (v instanceof TextView) {
+//				((TextView) v).setCompoundDrawables(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
+//			}
+				break;
+			case "compoundDrawablesWithIntrinsicBounds":
+//			if (v instanceof TextView) {
+//				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(arg.get(0), arg.get(1),
+//																	   arg.get(2), arg.get(3));
+				break;
+			case "compoundDrawablesWithIntrinsicBoundsResource":
+//			if (v instanceof TextView) {
+//				((TextView) v).setCompoundDrawablesWithIntrinsicBoundsResource(arg.get(0), arg.get(1),
+//																	   arg.get(2), arg.get(3));
+//                }
+				break;
+		}
+		return false;
 	}
 }
 
