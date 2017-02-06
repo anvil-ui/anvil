@@ -1,6 +1,7 @@
 package trikita.anvilgen
 
 import com.squareup.javapoet.*
+import com.sun.org.apache.xpath.internal.operations.Bool
 import groovy.lang.Closure
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -38,16 +39,46 @@ open class DSLGeneratorTask : DefaultTask() {
             attrsBuilder = attrsBuilder.superclass(superclass)
         }
 
-        var attrMethods = sortedMapOf<MethodKey, MethodSpec.Builder>()
+        attrsBuilder.addSuperinterface(ClassName.get("trikita.anvil", "Anvil", "AttributeSetter"))
+        attrsBuilder.addStaticBlock(CodeBlock.of(
+                "Anvil.registerAttributeSetter(new \$L());\n", outputClassName))
+
+        var attrSwitch = MethodSpec.methodBuilder("set")
+                .addParameter(ClassName.get("android.view", "View"), "v")
+                .addParameter(ClassName.get("java.lang", "String"), "name")
+                .addParameter(ParameterSpec.builder(TypeName.OBJECT, "arg")
+                        .addModifiers(Modifier.FINAL).build())
+                .addParameter(ParameterSpec.builder(TypeName.OBJECT, "old")
+                        .addModifiers(Modifier.FINAL).build())
+                .returns(TypeName.BOOLEAN)
+                .addModifiers(Modifier.PUBLIC)
+
+        var attrCases = CodeBlock.builder().beginControlFlow("switch (name)")
+
+        var attrs = mutableListOf<Attr>()
 
         forEachView { view ->
             processViews(attrsBuilder, view)
             forEachMethod(view) { m, name, arg, isListener ->
-                attrMethods = processAttrs(attrMethods, m, name, arg, isListener)
+                var attr: Attr?
+                if (isListener) {
+                    attr = listener(name, m, arg)
+                } else {
+                    attr = setter(name, m, arg)
+                }
+                if (attr != null) {
+                    attrs.add(attr)
+                }
             }
         }
 
-        finalizeAttrs(attrsBuilder, attrMethods)
+        finalizeAttrs(attrs, attrsBuilder, attrCases)
+
+        attrCases.endControlFlow()
+
+        attrSwitch.addCode(attrCases.build()).addCode("return false;\n");
+
+        attrsBuilder.addMethod(attrSwitch.build());
 
         JavaFile.builder(packageName, attrsBuilder.build())
                 .build()
@@ -189,77 +220,14 @@ open class DSLGeneratorTask : DefaultTask() {
     //
     // Attrs generator functions
     //
-    fun processAttrs(methods: SortedMap<MethodKey, MethodSpec.Builder>,
-                     method: Method,
-                     name: String,
-                     klass: Class<*>,
-                     isListener: Boolean): SortedMap<MethodKey, MethodSpec.Builder> {
-        val fn: MethodSpec.Builder?
-        val key = MethodKey(name, klass)
-        if (isListener) {
-            fn = listener(methods[key], method)
-        } else {
-            fn = setter(methods[key], method)
-        }
-        if (fn != null) {
-            methods.put(key, fn)
-        }
-        return methods
-    }
-
-    fun finalizeAttrs(builder: TypeSpec.Builder, methods: MutableMap<MethodKey, MethodSpec.Builder>) {
-        // .sort { it.key.method + " " + it.key.cls.name }
-        methods.forEach {
-            var cls = TypeName.get(it.key.cls).box()
-            if (cls.isPrimitive) {
-                cls = cls.box()
-            }
-            val baseDsl = ClassName.get("trikita.anvil", "BaseDSL")
-            val attrFuncType = ClassName.get("trikita.anvil", "Anvil", "AttrFunc")
-            val className = toCase(it.key.method, { c -> Character.toUpperCase(c) }) +
-                    "Func" + Integer.toHexString(cls.hashCode())
-            val attrBuilder = TypeSpec.classBuilder(className)
-                    .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
-                    .addSuperinterface(ParameterizedTypeName.get(attrFuncType, cls))
-            attrBuilder.addField(FieldSpec
-                    .builder(ClassName.get("", className), "instance")
-                    .addModifiers(Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
-                    .initializer("new $className()")
-                    .build())
-            attrBuilder.addMethod(it.value.build())
-            builder.addType(attrBuilder.build())
-
-            val wrapperMethod = MethodSpec.methodBuilder(it.key.method)
-                    .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                    .addParameter(ParameterSpec.builder(it.key.cls, "arg").build())
-                    .returns(TypeName.VOID.box())
-                    .addStatement("return \$T.attr($className.instance, arg)", baseDsl)
-            builder.addMethod(wrapperMethod.build())
-        }
-    }
-
-    fun attrApplyBuilder(m: Method): MethodSpec.Builder {
-        val cls = TypeName.get(m.parameterTypes[0]).box()
-        return MethodSpec.methodBuilder("apply")
-                .addModifiers(Modifier.PUBLIC)
-                .addParameter(ClassName.get("android.view", "View"), "v")
-                .addParameter(ParameterSpec.builder(cls, "arg")
-                        .addModifiers(Modifier.FINAL).build())
-                .addParameter(ParameterSpec.builder(cls, "old")
-                        .addModifiers(Modifier.FINAL).build())
-    }
-
-    fun listener(inputBuilder: MethodSpec.Builder?, m: Method): MethodSpec.Builder {
-        var builder = inputBuilder ?: attrApplyBuilder(m)
-
-        val className = m.declaringClass.canonicalName
-        val listenerClass = m.parameterTypes[0]
-
+    fun listener(name: String,
+                 m: Method,
+                 listenerClass: Class<*>): Attr? {
+        val viewClass = m.declaringClass.canonicalName
         val listener = TypeSpec.anonymousClassBuilder("")
                 .addSuperinterface(listenerClass)
         val declaredMethods = listenerClass.declaredMethods.clone()
         declaredMethods.sortBy { it.name }
-
         declaredMethods.forEach { lm ->
             val methodBuilder = MethodSpec.methodBuilder(lm.name)
                     .addModifiers(Modifier.PUBLIC)
@@ -273,11 +241,11 @@ open class DSLGeneratorTask : DefaultTask() {
 
             if (lm.returnType.equals(Void.TYPE)) {
                 methodBuilder
-                        .addStatement("arg.\$L($args)", lm.name)
+                        .addStatement("((\$T) arg).\$L($args)", listenerClass, lm.name)
                         .addStatement("\$T.render()", ClassName.get("trikita.anvil", "Anvil"))
             } else {
                 methodBuilder
-                        .addStatement("\$T r = arg.\$L($args)", lm.returnType, lm.name)
+                        .addStatement("\$T r = ((\$T) arg).\$L($args)", lm.returnType, listenerClass, lm.name)
                         .addStatement("\$T.render()", ClassName.get("trikita.anvil", "Anvil"))
                         .addStatement("return r")
             }
@@ -285,15 +253,17 @@ open class DSLGeneratorTask : DefaultTask() {
             listener.addMethod(methodBuilder.build())
         }
 
-        if (className == "android.view.View") {
-            builder = attrApplyBuilder(m)
-                    .beginControlFlow("if (arg != null)", m.declaringClass)
+        val attr = Attr(name, listenerClass, m)
+        if (viewClass == "android.view.View") {
+            attr.code.beginControlFlow("if (arg != null)", m.declaringClass)
                     .addStatement("v.${m.name}(\$L)", listener.build())
                     .nextControlFlow("else")
                     .addStatement("v.${m.name}((\$T) null)", listenerClass)
                     .endControlFlow()
+                    .addStatement("return true")
+            attr.unreachableBreak = true;
         } else {
-            builder.beginControlFlow("if (v instanceof \$T)", m.declaringClass)
+            attr.code.beginControlFlow("if (v instanceof \$T && arg instanceof \$T)", m.declaringClass, listenerClass)
                     .beginControlFlow("if (arg != null)", m.declaringClass)
                     .addStatement("((\$T) v).${m.name}(\$L)", m.declaringClass,
                             listener.build())
@@ -301,66 +271,98 @@ open class DSLGeneratorTask : DefaultTask() {
                     .addStatement("((\$T) v).${m.name}((\$T) null)", m.declaringClass,
                             listenerClass)
                     .endControlFlow()
+                    .addStatement("return true")
                     .endControlFlow()
         }
-
-        return builder
+        return attr
     }
 
-    fun setter(inputBuilder: MethodSpec.Builder?, m: Method): MethodSpec.Builder? {
-        var builder = inputBuilder ?: attrApplyBuilder(m)
+    fun setter(name: String,
+               m: Method,
+               argClass: Class<*>): Attr? {
 
-        val className = m.declaringClass.canonicalName
+        val viewClass = m.declaringClass.canonicalName
+        val attr = Attr(name, argClass, m)
+
         val extension = project.extensions.getByName("anvilgen") as AnvilGenPluginExtension
-        val quirks = extension.quirks[className]
+        val quirks = extension.quirks[viewClass]
         if (quirks != null) {
-            val argClass = m.parameterTypes[0].canonicalName
-            val closure = quirks["${m.name}:$argClass"]
+            val closure = quirks["${m.name}:${argClass.canonicalName}"]
             if (closure != null) {
-                return (closure as Closure<MethodSpec.Builder?>).call(builder)
-            }
-            val nameClosure = quirks[m.name]
-            if (nameClosure != null) {
-                return (nameClosure as Closure<MethodSpec.Builder?>).call(builder)
+                return (closure as Closure<Attr?>).call(attr)
+            } else {
+                val nameClosure = quirks[m.name]
+                if (nameClosure != null) {
+                    return (nameClosure as Closure<Attr?>).call(attr)
+                }
             }
         }
-
-        if (className == "android.view.View") {
-            builder = attrApplyBuilder(m)
-                    .addStatement("v.${m.getName()}(arg)")
+        val argBoxed = TypeName.get(argClass).box()
+        if (viewClass == "android.view.View") {
+            attr.code.beginControlFlow("if (arg instanceof \$T)", argBoxed)
+                    .addStatement("v.${m.name}((\$T) arg)", argClass)
+                    .addStatement("return true")
+                    .endControlFlow()
         } else {
-            builder.beginControlFlow("if (v instanceof \$T)", m.declaringClass)
-                    .addStatement("((\$T) v).${m.name}(arg)", m.declaringClass)
+            attr.code.beginControlFlow("if (v instanceof \$T && arg instanceof \$T)", m.declaringClass, argBoxed)
+                    .addStatement("((\$T) v).${m.name}((\$T) arg)", m.declaringClass, argClass)
+                    .addStatement("return true")
                     .endControlFlow()
         }
+        return attr;
+    }
 
-        return builder
+    fun addWrapperMethod(builder: TypeSpec.Builder, name: String, argClass: Class<*>) {
+        val baseDsl = ClassName.get("trikita.anvil", "BaseDSL")
+        val wrapperMethod = MethodSpec.methodBuilder(name)
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .addParameter(ParameterSpec.builder(argClass, "arg").build())
+                .returns(TypeName.VOID.box())
+                .addStatement("return \$T.attr(\$S, arg)", baseDsl, name)
+        builder.addMethod(wrapperMethod.build())
+    }
+
+    fun finalizeAttrs(attrs: List<Attr>, dsl: TypeSpec.Builder, cases: CodeBlock.Builder) {
+        attrs.sortedBy { it.name }.groupBy { it.name }.forEach {
+            var all = it.value
+            var filered = all.filter { a ->
+                !all.any { b ->
+                    a != b && a.param == b.param &&
+                            a.setter.declaringClass.isAssignableFrom(b.setter.declaringClass)
+                }
+            }
+
+            cases.add("case \$S:\n", it.key)
+            cases.indent();
+            filered.filter { it.setter.declaringClass.canonicalName != "android.view.View" }.forEach {
+                cases.add(it.code.build())
+            }
+
+            val common = filered.firstOrNull() { it.setter.declaringClass.canonicalName == "android.view.View" }
+            if (common != null) {
+                cases.add(common.code.build())
+            }
+            if (common == null || !common.unreachableBreak) {
+                cases.add("break;\n")
+            }
+            cases.unindent();
+        }
+
+        attrs.sortedBy { it.name }.groupBy { it.name }.forEach {
+            val name = it.key
+            it.value.groupBy { it.param }.forEach {
+                addWrapperMethod(dsl, name, it.key)
+            }
+        }
     }
 
     fun toCase(s: String, fn: (Char) -> Char): String {
         return fn(s[0]).toString() + s.substring(1)
     }
 
-    class MethodKey(val method: String, val cls: Class<*>) : Comparable<MethodKey> {
-
-        override fun compareTo(other: MethodKey): Int {
-            val methodCompare = method.compareTo(other.method)
-            if (methodCompare != 0) {
-                return methodCompare
-            }
-            return cls.name.compareTo(other.cls.name)
-        }
-
-        override fun equals(other: Any?): Boolean {
-            if (other !is MethodKey) {
-                return false
-            }
-            return method.equals(other.method) && cls.name.equals(other.cls.name)
-        }
-
-        override fun hashCode(): Int {
-            return method.hashCode() + 43 * cls.canonicalName.hashCode()
-        }
-    }
+    data class Attr(val name: String,
+                    val param: Class<*>,
+                    val setter: Method,
+                    var unreachableBreak: Boolean = false,
+                    val code: CodeBlock.Builder = CodeBlock.builder())
 }
-
