@@ -8,53 +8,53 @@ import android.widget.FrameLayout;
 import java.util.List;
 
 public abstract class RenderableAdapter extends BaseAdapter {
-	
-	private int currentPosition = -1;
 
-	public interface Item<T> {
-		void view(int index, T item);
-	}
+    private int currentPosition = -1;
 
-	public static <T> RenderableAdapter withItems(final List<T> items, final Item<T> r) {
-		return new RenderableAdapter() {
-			public int getCount() {
-				return items.size();
-			}
-			public T getItem(int pos) {
-				return items.get(pos);
-			}
-			public void view(int pos) {
-				r.view(pos, getItem(pos));
-			}
-		};
-	}
+    public interface Item<T> {
+        void view(int index, T item);
+    }
 
-	@Override
-	public View getView(int pos, View convertView, ViewGroup parent) {
-		View v = convertView;
-		if (v == null) {
-			currentPosition = pos;
-			FrameLayout vg = new FrameLayout(parent.getContext());
-			Anvil.Mount m = new Anvil.Mount(vg, new Anvil.Renderable() {
-				public void view() {
-					RenderableAdapter.this.view(currentPosition);
-				}
-			});
-			Anvil.render(m);
-			vg.setTag(m);
-			v = vg;
-		} else {
-			Anvil.Mount m = (Anvil.Mount) v.getTag();
-			currentPosition = pos;
-			Anvil.render(m);
-		}
-		return v;
-	}
+    public static <T> RenderableAdapter withItems(final List<T> items, final Item<T> r) {
+        return new RenderableAdapter() {
+            public int getCount() {
+                return items.size();
+            }
+            public T getItem(int pos) {
+                return items.get(pos);
+            }
+            public void view(int pos) {
+                r.view(pos, getItem(pos));
+            }
+        };
+    }
 
-	@Override
-	public long getItemId(int pos) {
-		return pos; // just a most common implementation
-	}
+    @Override
+    public View getView(int pos, View convertView, ViewGroup parent) {
+        View v = convertView;
+        if (v == null) {
+            currentPosition = pos;
+            FrameLayout vg = new FrameLayout(parent.getContext());
+            Anvil.Mount m = new Anvil.Mount(vg, new Anvil.Renderable() {
+                public void view() {
+                    RenderableAdapter.this.view(currentPosition);
+                }
+            });
+            Anvil.render(m);
+            vg.setTag(m);
+            v = vg;
+        } else {
+            Anvil.Mount m = (Anvil.Mount) v.getTag();
+            currentPosition = pos;
+            Anvil.render(m);
+        }
+        return v;
+    }
 
-	public abstract void view(int index);
+    @Override
+    public long getItemId(int pos) {
+        return pos; // just a most common implementation
+    }
+
+    public abstract void view(int index);
 }
