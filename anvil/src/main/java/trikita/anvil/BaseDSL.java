@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -578,20 +579,14 @@ public class BaseDSL implements Anvil.AttributeSetter {
 				}
 				break;
 			case "layoutGravity":
-//			ViewGroup.LayoutParams p = v.getLayoutParams();
-//			if (p instanceof LinearLayout.LayoutParams) {
-//				((LinearLayout.LayoutParams) p).gravity = arg;
-//				v.setLayoutParams(p);
-//			} else if (p instanceof FrameLayout.LayoutParams) {
-//				((FrameLayout.LayoutParams) p).gravity = arg;
-//				v.setLayoutParams(p);
-//			} else {
-//				try {
-//					((Property<ViewGroup.LayoutParams, Integer>)
-//					 Property.of(p.getClass(), Integer.class, "gravity")).set(p, arg);
-//				} catch (NoSuchPropertyException ignored) {}
-//			}
-				break;
+                if (v.getLayoutParams() instanceof LinearLayout.LayoutParams && value instanceof Integer) {
+                    ((LinearLayout.LayoutParams) v.getLayoutParams()).gravity = (int) value;
+                    return true;
+                } else if (v.getLayoutParams() instanceof FrameLayout.LayoutParams && value instanceof Integer) {
+                    ((FrameLayout.LayoutParams) v.getLayoutParams()).gravity = (int) value;
+                    return true;
+                }
+                    break;
 			case "align":
 				if (v.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
 					AbstractMap.SimpleImmutableEntry<Integer, Integer> e = (AbstractMap.SimpleImmutableEntry<Integer,Integer>) value;
