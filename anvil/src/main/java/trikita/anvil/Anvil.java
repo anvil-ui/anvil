@@ -218,7 +218,6 @@ public final class Anvil {
         if (m.lock) {
             return;
         }
-        long start = System.currentTimeMillis();
         m.lock = true;
         Mount prev = currentMount;
         currentMount = m;
@@ -229,8 +228,6 @@ public final class Anvil {
         m.iterator.end();
         currentMount = prev;
         m.lock = false;
-        long end = System.currentTimeMillis();
-        System.out.println("render(5) " + m + " " + (end - start));
     }
 
     /** Mount describes a mount point. Mount point is a Renderable function
