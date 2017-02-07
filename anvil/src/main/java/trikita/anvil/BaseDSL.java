@@ -51,12 +51,69 @@ public class BaseDSL implements Anvil.AttributeSetter {
     public final static int GROW_VERTICAL = Gravity.FILL_VERTICAL;
     public final static int CENTER_HORIZONTAL = Gravity.CENTER_HORIZONTAL;
     public final static int GROW_HORIZONTAL = Gravity.FILL_HORIZONTAL;
-    public final static int CENTER = CENTER_VERTICAL|CENTER_HORIZONTAL;
-    public final static int GROW = GROW_VERTICAL|GROW_HORIZONTAL;
+    public final static int CENTER = CENTER_VERTICAL | CENTER_HORIZONTAL;
+    public final static int GROW = GROW_VERTICAL | GROW_HORIZONTAL;
     public final static int CLIP_VERTICAL = Gravity.CLIP_VERTICAL;
     public final static int CLIP_HORIZONTAL = Gravity.CLIP_HORIZONTAL;
     public final static int START = Gravity.START;
     public final static int END = Gravity.END;
+
+    //
+    // Helper DSL methods, not related to any specific attributes
+    //
+
+    public static final class ViewClassResult {
+    }
+
+    public static ViewClassResult v(Class<? extends View> c) {
+        Anvil.currentMount().iterator.start(c, 0, null);
+        return null;
+    }
+
+    public static ViewClassResult xml(int layoutId) {
+        Anvil.currentMount().iterator.start(null, layoutId, null);
+        return null;
+    }
+
+    private static Void end() {
+        Anvil.currentMount().iterator.end();
+        return null;
+    }
+
+    public static Void o(ViewClassResult c, Object... args) {
+        return end();
+    }
+
+    public static Void v(Class<? extends View> c, Anvil.Renderable r) {
+        v(c);
+        r.view();
+        return end();
+    }
+
+    public static Void xml(int layoutId, Anvil.Renderable r) {
+        xml(layoutId);
+        r.view();
+        return end();
+    }
+
+    public static <T> Void attr(String name, T value) {
+        Anvil.currentMount().iterator.attr(name, value);
+        return null;
+    }
+
+    public static View withId(int id, Anvil.Renderable r) {
+        View v = Anvil.currentView();
+        if (v == null) {
+            throw new RuntimeException("Anvil.currentView() is null");
+        }
+        // FIXME: how to mock this for tests?
+        v = v.findViewById(id);
+        if (v == null) {
+            throw new RuntimeException("No view found for ID " + id);
+        }
+        return Anvil.mount(v, r);
+    }
+
 
     public static Resources R() {
         return Anvil.currentView().getResources();
@@ -84,36 +141,52 @@ public class BaseDSL implements Anvil.AttributeSetter {
         return Math.round(sip((float) value));
     }
 
+    //
+    // Attribute setters
+    //
+
     public static Void size(int w, int h) {
         return attr("size", new AbstractMap.SimpleImmutableEntry<>(w, h));
     }
+
     public static Void padding(int p) {
         return padding(p, p, p, p);
     }
+
     public static Void padding(int h, int v) {
         return padding(h, v, h, v);
     }
+
     public static Void padding(int l, int t, int r, int b) {
         List<Integer> list = new ArrayList<>(4);
-        list.add(l); list.add(t); list.add(r); list.add(b);
+        list.add(l);
+        list.add(t);
+        list.add(r);
+        list.add(b);
         return attr("padding", list);
     }
 
     public static Void margin(int w) {
         return margin(w, w, w, w);
     }
+
     public static Void margin(int h, int v) {
         return margin(h, v, h, v);
     }
+
     public static Void margin(int l, int t, int r, int b) {
         List<Integer> list = new ArrayList<>(4);
-        list.add(l); list.add(t); list.add(r); list.add(b);
+        list.add(l);
+        list.add(t);
+        list.add(r);
+        list.add(b);
         return attr("margin", list);
     }
 
     public static Void weight(float w) {
         return attr("weight", w);
     }
+
     public static Void layoutGravity(int g) {
         return attr("layoutGravity", g);
     }
@@ -228,14 +301,20 @@ public class BaseDSL implements Anvil.AttributeSetter {
 
     public static Void compoundDrawables(Drawable l, Drawable t, Drawable r, Drawable b) {
         List<Drawable> list = new ArrayList<>(4);
-        list.add(l); list.add(t); list.add(r); list.add(b);
+        list.add(l);
+        list.add(t);
+        list.add(r);
+        list.add(b);
         return attr("compoundDrawables", list);
     }
 
     public static Void compoundDrawablesWithIntrinsicBounds(Drawable l, Drawable t,
                                                             Drawable r, Drawable b) {
         List<Drawable> list = new ArrayList<>(4);
-        list.add(l); list.add(t); list.add(r); list.add(b);
+        list.add(l);
+        list.add(t);
+        list.add(r);
+        list.add(b);
         return attr("compoundDrawablesWithIntrinsicBounds", list);
     }
 
@@ -267,24 +346,67 @@ public class BaseDSL implements Anvil.AttributeSetter {
 
     public static Void shadowLayer(float radius, float dx, float dy, int color) {
         List<Number> list = new ArrayList<>(4);
-        list.add(radius); list.add(dx); list.add(dy); list.add(color);
+        list.add(radius);
+        list.add(dx);
+        list.add(dy);
+        list.add(color);
         return attr("shadowLayer", list);
     }
+
+    public static Void onItemSelected(SimpleItemSelectedListener l) {
+        return attr("onItemSelected", l);
+    }
+
+    public static Void onSeekBarChange(SimpleSeekBarChangeListener l) {
+        return attr("onSeekBarChange", l);
+    }
+
+    public static Void anim(boolean trigger, Animator a) {
+        return attr("anim", new AnimatorPair(a, trigger));
+    }
+
+    public static Void init(Runnable r) {
+        return attr("init", r);
+    }
+
+    public static Void onTextChanged(SimpleTextWatcher w) {
+        return attr("onTextChanged", w);
+    }
+
+    public static Void onTextChanged(TextWatcher w) {
+        return attr("onTextChanged", w);
+    }
+
+    public static Void text(CharSequence arg) {
+        return attr("text", arg);
+    }
+
+
+    //
+    // Simple lambda-friendly interface wrappers for data bindings
+    //
 
     public interface SimpleTextWatcher {
         void onTextChanged(CharSequence s);
     }
+
     public interface SimpleSeekBarChangeListener {
         void onSeekBarChange(SeekBar s, int progress, boolean fromUser);
     }
+
     public interface SimpleItemSelectedListener {
         void onItemSelected(AdapterView a, View v, int pos, long id);
     }
 
-    private final static Map<TextWatcherProxy, Void> TEXT_WATCHERS = new WeakHashMap<>();
-    private static TextView CURRENT_INPUT_TEXT_VIEW = null;
+    //
+    // Helper classes for data bindings
+    //
 
     private static class TextWatcherProxy implements TextWatcher {
+
+        private final static Map<TextWatcherProxy, Void> TEXT_WATCHERS = new WeakHashMap<>();
+        private static TextView CURRENT_INPUT_TEXT_VIEW = null;
+
         private final TextView v;
         private TextWatcher watcher;
         private SimpleTextWatcher simpleWatcher;
@@ -299,27 +421,32 @@ public class BaseDSL implements Anvil.AttributeSetter {
             this.simpleWatcher = null;
             return this;
         }
+
         public TextWatcherProxy setImpl(SimpleTextWatcher w) {
             this.simpleWatcher = w;
             this.watcher = null;
             return this;
         }
+
         public boolean hasImpl(Object o) {
             if (o == null) {
                 return false;
             }
             return o.equals(this.watcher) || o.equals(this.simpleWatcher);
         }
+
         public void afterTextChanged(Editable s) {
             if (this.watcher != null) {
                 this.watcher.afterTextChanged(s);
             }
         }
+
         public void beforeTextChanged(CharSequence s, int from, int n, int after) {
             if (this.watcher != null) {
                 this.watcher.beforeTextChanged(s, from, n, after);
             }
         }
+
         public void onTextChanged(CharSequence s, int from, int before, int n) {
             TextView old = CURRENT_INPUT_TEXT_VIEW;
             CURRENT_INPUT_TEXT_VIEW = this.v;
@@ -340,41 +467,68 @@ public class BaseDSL implements Anvil.AttributeSetter {
 
     private final static class ItemSelectedWrapper implements AdapterView.OnItemSelectedListener {
         private final SimpleItemSelectedListener parent;
-        private ItemSelectedWrapper(SimpleItemSelectedListener parent) { this.parent = parent; }
+
+        private ItemSelectedWrapper(SimpleItemSelectedListener parent) {
+            this.parent = parent;
+        }
+
         public void onItemSelected(AdapterView a0, View a1, int a2, long a3) {
             parent.onItemSelected(a0, a1, a2, a3);
             Anvil.render();
         }
-        public void onNothingSelected(AdapterView a0) {}
-        public int hashCode() { return parent.hashCode(); }
-        public boolean equals(Object o) { return parent.equals(o); }
+
+        public void onNothingSelected(AdapterView a0) {
+        }
+
+        public int hashCode() {
+            return parent.hashCode();
+        }
+
+        public boolean equals(Object o) {
+            return parent.equals(o);
+        }
     }
 
     private final static class SeekBarChangeWrapper implements SeekBar.OnSeekBarChangeListener {
         private final SimpleSeekBarChangeListener parent;
+
         private SeekBarChangeWrapper(SimpleSeekBarChangeListener parent) {
             this.parent = parent;
         }
+
         public void onProgressChanged(SeekBar a0, int a1, boolean a2) {
             parent.onSeekBarChange(a0, a1, a2);
             Anvil.render();
         }
-        public void onStartTrackingTouch(SeekBar a0) {}
-        public void onStopTrackingTouch(SeekBar a0) {}
-        public int hashCode() { return parent.hashCode(); }
-        public boolean equals(Object o) { return parent.equals(o); }
+
+        public void onStartTrackingTouch(SeekBar a0) {
+        }
+
+        public void onStopTrackingTouch(SeekBar a0) {
+        }
+
+        public int hashCode() {
+            return parent.hashCode();
+        }
+
+        public boolean equals(Object o) {
+            return parent.equals(o);
+        }
     }
 
     private final static class AnimatorPair {
         public Animator animator;
         public final boolean trigger;
+
         public AnimatorPair(Animator a, boolean trigger) {
             this.animator = a;
             this.trigger = trigger;
         }
+
         public int hashCode() {
             return trigger ? 0 : 1;
         }
+
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) {
                 return false;
@@ -389,65 +543,6 @@ public class BaseDSL implements Anvil.AttributeSetter {
             this.animator = pair.animator;
             return true;
         }
-    }
-
-    public static Void onItemSelected(SimpleItemSelectedListener l) { return attr("onItemSelected", l); }
-    public static Void onSeekBarChange(SimpleSeekBarChangeListener l) { return attr("onSeekBarChange", l); }
-    public static Void anim(boolean trigger, Animator a) { return attr("anim", new AnimatorPair(a, trigger)); }
-    public static Void init(Runnable r) {
-        return attr("init", r);
-    }
-    public static Void onTextChanged(SimpleTextWatcher w) { return attr("onTextChanged", w); }
-    public static Void onTextChanged(TextWatcher w) { return attr("onTextChanged", w); }
-    public static Void text(CharSequence arg) { return attr("text", arg); }
-
-    public static final class ViewClassResult {}
-
-    public static ViewClassResult v(Class<? extends View> c) {
-        Anvil.currentMount().iterator.start(c, 0, null);
-        return null;
-    }
-
-    public static ViewClassResult xml(int layoutId) {
-        Anvil.currentMount().iterator.start(null, layoutId, null);
-        return null;
-    }
-
-    private static Void end() {
-        Anvil.currentMount().iterator.end();
-        return null;
-    }
-
-    public static Void o(ViewClassResult c, Object ...args) { return end(); }
-
-    public static Void v(Class<? extends View> c, Anvil.Renderable r) {
-        v(c);
-        r.view();
-        return end();
-    }
-
-    public static Void xml(int layoutId, Anvil.Renderable r) {
-        xml(layoutId);
-        r.view();
-        return end();
-    }
-
-    public static <T> Void attr(String name, T value) {
-        Anvil.currentMount().iterator.attr(name, value);
-        return null;
-    }
-
-    public static View withId(int id, Anvil.Renderable r) {
-        View v = Anvil.currentView();
-        if (v == null) {
-            throw new RuntimeException("Anvil.currentView() is null");
-        }
-        // FIXME: how to mock this for tests?
-        v = v.findViewById(id);
-        if (v == null) {
-            throw new RuntimeException("No view found for ID " + id);
-        }
-        return Anvil.mount(v, r);
     }
 
     @Override
@@ -484,7 +579,7 @@ public class BaseDSL implements Anvil.AttributeSetter {
                 break;
             case "text":
                 if (v instanceof TextView && value instanceof CharSequence) {
-                    if (v != CURRENT_INPUT_TEXT_VIEW) {
+                    if (v != TextWatcherProxy.CURRENT_INPUT_TEXT_VIEW) {
                         ((TextView) v).setText((CharSequence) value);
                     }
                     return true;
@@ -496,27 +591,27 @@ public class BaseDSL implements Anvil.AttributeSetter {
             case "onTextChanged":
                 if (v instanceof TextView && value instanceof SimpleTextWatcher) {
                     TextView tv = (TextView) v;
-                    for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+                    for (TextWatcherProxy proxy : TextWatcherProxy.TEXT_WATCHERS.keySet()) {
                         if (proxy.hasImpl(prevValue)) {
                             proxy.setImpl((SimpleTextWatcher) value);
                             return true;
                         }
                     }
                     TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl((SimpleTextWatcher) value);
-                    TEXT_WATCHERS.put(proxy, null);
+                    TextWatcherProxy.TEXT_WATCHERS.put(proxy, null);
                     tv.addTextChangedListener(proxy);
                     return true;
                 }
                 if (v instanceof TextView && value instanceof TextWatcher) {
                     TextView tv = (TextView) v;
-                    for (TextWatcherProxy proxy : TEXT_WATCHERS.keySet()) {
+                    for (TextWatcherProxy proxy : TextWatcherProxy.TEXT_WATCHERS.keySet()) {
                         if (proxy.hasImpl(prevValue)) {
                             proxy.setImpl((TextWatcher) value);
                             return true;
                         }
                     }
                     TextWatcherProxy proxy = new TextWatcherProxy(tv).setImpl((TextWatcher) value);
-                    TEXT_WATCHERS.put(proxy, null);
+                    TextWatcherProxy.TEXT_WATCHERS.put(proxy, null);
                     tv.addTextChangedListener(proxy);
                     return true;
                 }
@@ -586,10 +681,10 @@ public class BaseDSL implements Anvil.AttributeSetter {
                     ((FrameLayout.LayoutParams) v.getLayoutParams()).gravity = (int) value;
                     return true;
                 }
-                    break;
+                break;
             case "align":
                 if (v.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
-                    AbstractMap.SimpleImmutableEntry<Integer, Integer> e = (AbstractMap.SimpleImmutableEntry<Integer,Integer>) value;
+                    AbstractMap.SimpleImmutableEntry<Integer, Integer> e = (AbstractMap.SimpleImmutableEntry<Integer, Integer>) value;
                     ((RelativeLayout.LayoutParams) v.getLayoutParams()).addRule(e.getKey(), e.getValue());
                     return true;
                 }
@@ -643,4 +738,3 @@ public class BaseDSL implements Anvil.AttributeSetter {
         return false;
     }
 }
-
