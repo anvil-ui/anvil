@@ -607,28 +607,37 @@ public class BaseDSL implements Anvil.AttributeSetter {
                 }
                 break;
             case "styledTypeface":
-//	        Typeface resolvedTypeface = null;
-//	        if( p.getKey() != null )
-//	            resolvedTypeface = Typeface.createFromAsset(v.getContext().getAssets(), p.getKey());
-//	        if (v instanceof TextView) {
-//	            ((TextView) v).setTypeface(resolvedTypeface, p.getValue());
-//	        }
+                if (v instanceof TextView && value instanceof AbstractMap.SimpleImmutableEntry) {
+                    AbstractMap.SimpleImmutableEntry<String, Integer> e =
+                            (AbstractMap.SimpleImmutableEntry<String, Integer>) value;
+                    Typeface typeface = null;
+                    if (e.getKey() != null) {
+                        typeface = Typeface.createFromAsset(v.getContext().getAssets(), e.getKey());
+                    }
+                    ((TextView) v).setTypeface(typeface, e.getValue());
+                    return true;
+                }
                 break;
             case "compoundDrawables":
-//			if (v instanceof TextView) {
-//				((TextView) v).setCompoundDrawables(arg.get(0), arg.get(1), arg.get(2), arg.get(3));
-//			}
+                if (v instanceof TextView && value instanceof List) {
+                    List<Drawable> l = (List<Drawable>) value;
+                    ((TextView) v).setCompoundDrawables(l.get(0), l.get(1), l.get(2), l.get(3));
+                    return true;
+                }
                 break;
             case "compoundDrawablesWithIntrinsicBounds":
-//			if (v instanceof TextView) {
-//				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(arg.get(0), arg.get(1),
-//																	   arg.get(2), arg.get(3));
+                if (v instanceof TextView && value instanceof List) {
+                    List<Drawable> l = (List<Drawable>) value;
+                    ((TextView) v).setCompoundDrawablesWithIntrinsicBounds(l.get(0), l.get(1), l.get(2), l.get(3));
+                    return true;
+                }
                 break;
             case "compoundDrawablesWithIntrinsicBoundsResource":
-//			if (v instanceof TextView) {
-//				((TextView) v).setCompoundDrawablesWithIntrinsicBoundsResource(arg.get(0), arg.get(1),
-//																	   arg.get(2), arg.get(3));
-//                }
+                if (v instanceof TextView && value instanceof List) {
+                    List<Integer> l = (List<Integer>) value;
+                    ((TextView) v).setCompoundDrawablesWithIntrinsicBounds(l.get(0), l.get(1), l.get(2), l.get(3));
+                    return true;
+                }
                 break;
         }
         return false;
