@@ -1,11 +1,12 @@
 package trikita.anvil.gridlayout.v7;
 
 import android.support.v7.widget.GridLayout;
-import android.support.v7.widget.Space;
 import android.util.Printer;
 import android.view.View;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.Object;
+import java.lang.String;
 import java.lang.Void;
 import trikita.anvil.Anvil;
 import trikita.anvil.BaseDSL;
@@ -16,7 +17,11 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library gridlayout-v7.
  * Please, don't edit it manually unless for debugging.
  */
-public final class GridLayoutv7DSL {
+public final class GridLayoutv7DSL implements Anvil.AttributeSetter {
+  static {
+    Anvil.registerAttributeSetter(new GridLayoutv7DSL());
+  }
+
   public static BaseDSL.ViewClassResult gridLayout() {
     return BaseDSL.v(GridLayout.class);
   }
@@ -25,123 +30,89 @@ public final class GridLayoutv7DSL {
     return BaseDSL.v(GridLayout.class, r);
   }
 
-  public static BaseDSL.ViewClassResult space() {
-    return BaseDSL.v(Space.class);
-  }
-
-  public static Void space(Anvil.Renderable r) {
-    return BaseDSL.v(Space.class, r);
-  }
-
   public static Void alignmentMode(int arg) {
-    return BaseDSL.attr(AlignmentModeFunc8567756a.instance, arg);
+    return BaseDSL.attr("alignmentMode", arg);
   }
 
   public static Void columnCount(int arg) {
-    return BaseDSL.attr(ColumnCountFunc8567756a.instance, arg);
+    return BaseDSL.attr("columnCount", arg);
   }
 
   public static Void columnOrderPreserved(boolean arg) {
-    return BaseDSL.attr(ColumnOrderPreservedFunc148d6054.instance, arg);
+    return BaseDSL.attr("columnOrderPreserved", arg);
   }
 
   public static Void orientation(int arg) {
-    return BaseDSL.attr(OrientationFunc8567756a.instance, arg);
+    return BaseDSL.attr("orientation", arg);
   }
 
   public static Void printer(Printer arg) {
-    return BaseDSL.attr(PrinterFunc4d515f2d.instance, arg);
+    return BaseDSL.attr("printer", arg);
   }
 
   public static Void rowCount(int arg) {
-    return BaseDSL.attr(RowCountFunc8567756a.instance, arg);
+    return BaseDSL.attr("rowCount", arg);
   }
 
   public static Void rowOrderPreserved(boolean arg) {
-    return BaseDSL.attr(RowOrderPreservedFunc148d6054.instance, arg);
+    return BaseDSL.attr("rowOrderPreserved", arg);
   }
 
   public static Void useDefaultMargins(boolean arg) {
-    return BaseDSL.attr(UseDefaultMarginsFunc148d6054.instance, arg);
+    return BaseDSL.attr("useDefaultMargins", arg);
   }
 
-  private static final class AlignmentModeFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final AlignmentModeFunc8567756a instance = new AlignmentModeFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setAlignmentMode(arg);
-      }
+  public boolean set(View v, String name, final Object arg, final Object old) {
+    switch (name) {
+      case "alignmentMode":
+        if (v instanceof GridLayout && arg instanceof Integer) {
+          ((GridLayout) v).setAlignmentMode((int) arg);
+          return true;
+        }
+        break;
+      case "columnCount":
+        if (v instanceof GridLayout && arg instanceof Integer) {
+          ((GridLayout) v).setColumnCount((int) arg);
+          return true;
+        }
+        break;
+      case "columnOrderPreserved":
+        if (v instanceof GridLayout && arg instanceof Boolean) {
+          ((GridLayout) v).setColumnOrderPreserved((boolean) arg);
+          return true;
+        }
+        break;
+      case "orientation":
+        if (v instanceof GridLayout && arg instanceof Integer) {
+          ((GridLayout) v).setOrientation((int) arg);
+          return true;
+        }
+        break;
+      case "printer":
+        if (v instanceof GridLayout && arg instanceof Printer) {
+          ((GridLayout) v).setPrinter((Printer) arg);
+          return true;
+        }
+        break;
+      case "rowCount":
+        if (v instanceof GridLayout && arg instanceof Integer) {
+          ((GridLayout) v).setRowCount((int) arg);
+          return true;
+        }
+        break;
+      case "rowOrderPreserved":
+        if (v instanceof GridLayout && arg instanceof Boolean) {
+          ((GridLayout) v).setRowOrderPreserved((boolean) arg);
+          return true;
+        }
+        break;
+      case "useDefaultMargins":
+        if (v instanceof GridLayout && arg instanceof Boolean) {
+          ((GridLayout) v).setUseDefaultMargins((boolean) arg);
+          return true;
+        }
+        break;
     }
-  }
-
-  private static final class ColumnCountFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ColumnCountFunc8567756a instance = new ColumnCountFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setColumnCount(arg);
-      }
-    }
-  }
-
-  private static final class ColumnOrderPreservedFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final ColumnOrderPreservedFunc148d6054 instance = new ColumnOrderPreservedFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setColumnOrderPreserved(arg);
-      }
-    }
-  }
-
-  private static final class OrientationFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final OrientationFunc8567756a instance = new OrientationFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setOrientation(arg);
-      }
-    }
-  }
-
-  private static final class PrinterFunc4d515f2d implements Anvil.AttrFunc<Printer> {
-    public static final PrinterFunc4d515f2d instance = new PrinterFunc4d515f2d();
-
-    public void apply(View v, final Printer arg, final Printer old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setPrinter(arg);
-      }
-    }
-  }
-
-  private static final class RowCountFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final RowCountFunc8567756a instance = new RowCountFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setRowCount(arg);
-      }
-    }
-  }
-
-  private static final class RowOrderPreservedFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final RowOrderPreservedFunc148d6054 instance = new RowOrderPreservedFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setRowOrderPreserved(arg);
-      }
-    }
-  }
-
-  private static final class UseDefaultMarginsFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final UseDefaultMarginsFunc148d6054 instance = new UseDefaultMarginsFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof GridLayout) {
-        ((GridLayout) v).setUseDefaultMargins(arg);
-      }
-    }
+    return false;
   }
 }

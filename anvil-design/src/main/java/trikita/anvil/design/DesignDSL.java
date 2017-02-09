@@ -4,11 +4,18 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.design.internal.BaselineLayout;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.internal.BottomNavigationPresenter;
 import android.support.design.internal.ForegroundLinearLayout;
 import android.support.design.internal.NavigationMenuItemView;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.internal.ScrimInsetsFrameLayout;
+import android.support.design.internal.SnackbarContentLayout;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CheckableImageButton;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,11 +25,15 @@ import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 import android.view.View;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
 import java.lang.Integer;
+import java.lang.Long;
+import java.lang.Object;
+import java.lang.String;
 import java.lang.Void;
 import trikita.anvil.Anvil;
 import trikita.anvil.BaseDSL;
@@ -33,7 +44,35 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library design.
  * Please, don't edit it manually unless for debugging.
  */
-public final class DesignDSL {
+public final class DesignDSL implements Anvil.AttributeSetter {
+  static {
+    Anvil.registerAttributeSetter(new DesignDSL());
+  }
+
+  public static BaseDSL.ViewClassResult baselineLayout() {
+    return BaseDSL.v(BaselineLayout.class);
+  }
+
+  public static Void baselineLayout(Anvil.Renderable r) {
+    return BaseDSL.v(BaselineLayout.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult bottomNavigationItemView() {
+    return BaseDSL.v(BottomNavigationItemView.class);
+  }
+
+  public static Void bottomNavigationItemView(Anvil.Renderable r) {
+    return BaseDSL.v(BottomNavigationItemView.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult bottomNavigationMenuView() {
+    return BaseDSL.v(BottomNavigationMenuView.class);
+  }
+
+  public static Void bottomNavigationMenuView(Anvil.Renderable r) {
+    return BaseDSL.v(BottomNavigationMenuView.class, r);
+  }
+
   public static BaseDSL.ViewClassResult foregroundLinearLayout() {
     return BaseDSL.v(ForegroundLinearLayout.class);
   }
@@ -66,12 +105,36 @@ public final class DesignDSL {
     return BaseDSL.v(ScrimInsetsFrameLayout.class, r);
   }
 
+  public static BaseDSL.ViewClassResult snackbarContentLayout() {
+    return BaseDSL.v(SnackbarContentLayout.class);
+  }
+
+  public static Void snackbarContentLayout(Anvil.Renderable r) {
+    return BaseDSL.v(SnackbarContentLayout.class, r);
+  }
+
   public static BaseDSL.ViewClassResult appBarLayout() {
     return BaseDSL.v(AppBarLayout.class);
   }
 
   public static Void appBarLayout(Anvil.Renderable r) {
     return BaseDSL.v(AppBarLayout.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult bottomNavigationView() {
+    return BaseDSL.v(BottomNavigationView.class);
+  }
+
+  public static Void bottomNavigationView(Anvil.Renderable r) {
+    return BaseDSL.v(BottomNavigationView.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult checkableImageButton() {
+    return BaseDSL.v(CheckableImageButton.class);
+  }
+
+  public static Void checkableImageButton(Anvil.Renderable r) {
+    return BaseDSL.v(CheckableImageButton.class, r);
   }
 
   public static BaseDSL.ViewClassResult collapsingToolbarLayout() {
@@ -139,864 +202,858 @@ public final class DesignDSL {
   }
 
   public static Void backgroundTintList(ColorStateList arg) {
-    return BaseDSL.attr(BackgroundTintListFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr("backgroundTintList", arg);
   }
 
   public static Void backgroundTintMode(PorterDuff.Mode arg) {
-    return BaseDSL.attr(BackgroundTintModeFuncabb7a84e.instance, arg);
+    return BaseDSL.attr("backgroundTintMode", arg);
   }
 
   public static Void checkable(boolean arg) {
-    return BaseDSL.attr(CheckableFunc148d6054.instance, arg);
+    return BaseDSL.attr("checkable", arg);
   }
 
   public static Void checked(boolean arg) {
-    return BaseDSL.attr(CheckedFunc148d6054.instance, arg);
+    return BaseDSL.attr("checked", arg);
   }
 
   public static Void checkedItem(int arg) {
-    return BaseDSL.attr(CheckedItemFunc8567756a.instance, arg);
+    return BaseDSL.attr("checkedItem", arg);
   }
 
   public static Void collapsedTitleGravity(int arg) {
-    return BaseDSL.attr(CollapsedTitleGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr("collapsedTitleGravity", arg);
   }
 
   public static Void collapsedTitleTextAppearance(int arg) {
-    return BaseDSL.attr(CollapsedTitleTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr("collapsedTitleTextAppearance", arg);
+  }
+
+  public static Void collapsedTitleTextColor(ColorStateList arg) {
+    return BaseDSL.attr("collapsedTitleTextColor", arg);
   }
 
   public static Void collapsedTitleTextColor(int arg) {
-    return BaseDSL.attr(CollapsedTitleTextColorFunc8567756a.instance, arg);
+    return BaseDSL.attr("collapsedTitleTextColor", arg);
   }
 
   public static Void collapsedTitleTypeface(Typeface arg) {
-    return BaseDSL.attr(CollapsedTitleTypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr("collapsedTitleTypeface", arg);
   }
 
   public static Void compatElevation(float arg) {
-    return BaseDSL.attr(CompatElevationFunce0893188.instance, arg);
+    return BaseDSL.attr("compatElevation", arg);
   }
 
   public static Void contentScrim(Drawable arg) {
-    return BaseDSL.attr(ContentScrimFuncfb47464a.instance, arg);
+    return BaseDSL.attr("contentScrim", arg);
   }
 
   public static Void contentScrimColor(int arg) {
-    return BaseDSL.attr(ContentScrimColorFunc8567756a.instance, arg);
+    return BaseDSL.attr("contentScrimColor", arg);
   }
 
   public static Void contentScrimResource(int arg) {
-    return BaseDSL.attr(ContentScrimResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr("contentScrimResource", arg);
   }
 
   public static Void counterEnabled(boolean arg) {
-    return BaseDSL.attr(CounterEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr("counterEnabled", arg);
   }
 
   public static Void counterMaxLength(int arg) {
-    return BaseDSL.attr(CounterMaxLengthFunc8567756a.instance, arg);
+    return BaseDSL.attr("counterMaxLength", arg);
   }
 
   public static Void error(CharSequence arg) {
-    return BaseDSL.attr(ErrorFuncc0af808b.instance, arg);
+    return BaseDSL.attr("error", arg);
   }
 
   public static Void errorEnabled(boolean arg) {
-    return BaseDSL.attr(ErrorEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr("errorEnabled", arg);
+  }
+
+  public static Void errorTextAppearance(int arg) {
+    return BaseDSL.attr("errorTextAppearance", arg);
   }
 
   public static Void expanded(boolean arg) {
-    return BaseDSL.attr(ExpandedFunc148d6054.instance, arg);
+    return BaseDSL.attr("expanded", arg);
   }
 
   public static Void expandedTitleColor(int arg) {
-    return BaseDSL.attr(ExpandedTitleColorFunc8567756a.instance, arg);
+    return BaseDSL.attr("expandedTitleColor", arg);
   }
 
   public static Void expandedTitleGravity(int arg) {
-    return BaseDSL.attr(ExpandedTitleGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr("expandedTitleGravity", arg);
   }
 
   public static Void expandedTitleMarginBottom(int arg) {
-    return BaseDSL.attr(ExpandedTitleMarginBottomFunc8567756a.instance, arg);
+    return BaseDSL.attr("expandedTitleMarginBottom", arg);
   }
 
   public static Void expandedTitleMarginEnd(int arg) {
-    return BaseDSL.attr(ExpandedTitleMarginEndFunc8567756a.instance, arg);
+    return BaseDSL.attr("expandedTitleMarginEnd", arg);
   }
 
   public static Void expandedTitleMarginStart(int arg) {
-    return BaseDSL.attr(ExpandedTitleMarginStartFunc8567756a.instance, arg);
+    return BaseDSL.attr("expandedTitleMarginStart", arg);
   }
 
   public static Void expandedTitleMarginTop(int arg) {
-    return BaseDSL.attr(ExpandedTitleMarginTopFunc8567756a.instance, arg);
+    return BaseDSL.attr("expandedTitleMarginTop", arg);
   }
 
   public static Void expandedTitleTextAppearance(int arg) {
-    return BaseDSL.attr(ExpandedTitleTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr("expandedTitleTextAppearance", arg);
+  }
+
+  public static Void expandedTitleTextColor(ColorStateList arg) {
+    return BaseDSL.attr("expandedTitleTextColor", arg);
   }
 
   public static Void expandedTitleTypeface(Typeface arg) {
-    return BaseDSL.attr(ExpandedTitleTypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr("expandedTitleTypeface", arg);
   }
 
   public static Void foreground(Drawable arg) {
-    return BaseDSL.attr(ForegroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr("foreground", arg);
   }
 
   public static Void foregroundGravity(int arg) {
-    return BaseDSL.attr(ForegroundGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr("foregroundGravity", arg);
   }
 
   public static Void hint(CharSequence arg) {
-    return BaseDSL.attr(HintFuncc0af808b.instance, arg);
+    return BaseDSL.attr("hint", arg);
   }
 
   public static Void hintAnimationEnabled(boolean arg) {
-    return BaseDSL.attr(HintAnimationEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr("hintAnimationEnabled", arg);
   }
 
   public static Void hintEnabled(boolean arg) {
-    return BaseDSL.attr(HintEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr("hintEnabled", arg);
   }
 
   public static Void hintTextAppearance(int arg) {
-    return BaseDSL.attr(HintTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr("hintTextAppearance", arg);
   }
 
   public static Void icon(Drawable arg) {
-    return BaseDSL.attr(IconFuncfb47464a.instance, arg);
+    return BaseDSL.attr("icon", arg);
+  }
+
+  public static Void iconTintList(ColorStateList arg) {
+    return BaseDSL.attr("iconTintList", arg);
   }
 
   public static Void itemBackground(Drawable arg) {
-    return BaseDSL.attr(ItemBackgroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr("itemBackground", arg);
+  }
+
+  public static Void itemBackground(int arg) {
+    return BaseDSL.attr("itemBackground", arg);
+  }
+
+  public static Void itemBackgroundRes(int arg) {
+    return BaseDSL.attr("itemBackgroundRes", arg);
   }
 
   public static Void itemBackgroundResource(int arg) {
-    return BaseDSL.attr(ItemBackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr("itemBackgroundResource", arg);
   }
 
   public static Void itemIconTintList(ColorStateList arg) {
-    return BaseDSL.attr(ItemIconTintListFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr("itemIconTintList", arg);
+  }
+
+  public static Void itemPosition(int arg) {
+    return BaseDSL.attr("itemPosition", arg);
   }
 
   public static Void itemTextAppearance(int arg) {
-    return BaseDSL.attr(ItemTextAppearanceFunc8567756a.instance, arg);
+    return BaseDSL.attr("itemTextAppearance", arg);
   }
 
   public static Void itemTextColor(ColorStateList arg) {
-    return BaseDSL.attr(ItemTextColorFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr("itemTextColor", arg);
   }
 
   public static Void navigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener arg) {
-    return BaseDSL.attr(NavigationItemSelectedListenerFunc80db0872.instance, arg);
+    return BaseDSL.attr("navigationItemSelectedListener", arg);
   }
 
-  public static Void onTabSelected(TabLayout.OnTabSelectedListener arg) {
-    return BaseDSL.attr(OnTabSelectedFuncaa1c085e.instance, arg);
+  public static Void needsEmptyIcon(boolean arg) {
+    return BaseDSL.attr("needsEmptyIcon", arg);
+  }
+
+  public static Void onNavigationItemSelected(BottomNavigationView.OnNavigationItemSelectedListener arg) {
+    return BaseDSL.attr("onNavigationItemSelected", arg);
+  }
+
+  public static Void passwordVisibilityToggleContentDescription(int arg) {
+    return BaseDSL.attr("passwordVisibilityToggleContentDescription", arg);
+  }
+
+  public static Void passwordVisibilityToggleContentDescription(CharSequence arg) {
+    return BaseDSL.attr("passwordVisibilityToggleContentDescription", arg);
+  }
+
+  public static Void passwordVisibilityToggleDrawable(Drawable arg) {
+    return BaseDSL.attr("passwordVisibilityToggleDrawable", arg);
+  }
+
+  public static Void passwordVisibilityToggleDrawable(int arg) {
+    return BaseDSL.attr("passwordVisibilityToggleDrawable", arg);
+  }
+
+  public static Void passwordVisibilityToggleEnabled(boolean arg) {
+    return BaseDSL.attr("passwordVisibilityToggleEnabled", arg);
+  }
+
+  public static Void passwordVisibilityToggleTintList(ColorStateList arg) {
+    return BaseDSL.attr("passwordVisibilityToggleTintList", arg);
+  }
+
+  public static Void passwordVisibilityToggleTintMode(PorterDuff.Mode arg) {
+    return BaseDSL.attr("passwordVisibilityToggleTintMode", arg);
+  }
+
+  public static Void presenter(BottomNavigationPresenter arg) {
+    return BaseDSL.attr("presenter", arg);
   }
 
   public static Void rippleColor(int arg) {
-    return BaseDSL.attr(RippleColorFunc8567756a.instance, arg);
+    return BaseDSL.attr("rippleColor", arg);
+  }
+
+  public static Void scrimAnimationDuration(long arg) {
+    return BaseDSL.attr("scrimAnimationDuration", arg);
+  }
+
+  public static Void scrimVisibleHeightTrigger(int arg) {
+    return BaseDSL.attr("scrimVisibleHeightTrigger", arg);
   }
 
   public static Void scrimsShown(boolean arg) {
-    return BaseDSL.attr(ScrimsShownFunc148d6054.instance, arg);
+    return BaseDSL.attr("scrimsShown", arg);
   }
 
   public static Void selectedTabIndicatorColor(int arg) {
-    return BaseDSL.attr(SelectedTabIndicatorColorFunc8567756a.instance, arg);
+    return BaseDSL.attr("selectedTabIndicatorColor", arg);
   }
 
   public static Void selectedTabIndicatorHeight(int arg) {
-    return BaseDSL.attr(SelectedTabIndicatorHeightFunc8567756a.instance, arg);
+    return BaseDSL.attr("selectedTabIndicatorHeight", arg);
+  }
+
+  public static Void shiftingMode(boolean arg) {
+    return BaseDSL.attr("shiftingMode", arg);
+  }
+
+  public static Void size(int arg) {
+    return BaseDSL.attr("size", arg);
   }
 
   public static Void statusBarBackground(Drawable arg) {
-    return BaseDSL.attr(StatusBarBackgroundFuncfb47464a.instance, arg);
+    return BaseDSL.attr("statusBarBackground", arg);
   }
 
   public static Void statusBarBackgroundColor(int arg) {
-    return BaseDSL.attr(StatusBarBackgroundColorFunc8567756a.instance, arg);
+    return BaseDSL.attr("statusBarBackgroundColor", arg);
   }
 
   public static Void statusBarBackgroundResource(int arg) {
-    return BaseDSL.attr(StatusBarBackgroundResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr("statusBarBackgroundResource", arg);
   }
 
   public static Void statusBarScrim(Drawable arg) {
-    return BaseDSL.attr(StatusBarScrimFuncfb47464a.instance, arg);
+    return BaseDSL.attr("statusBarScrim", arg);
   }
 
   public static Void statusBarScrimColor(int arg) {
-    return BaseDSL.attr(StatusBarScrimColorFunc8567756a.instance, arg);
+    return BaseDSL.attr("statusBarScrimColor", arg);
   }
 
   public static Void statusBarScrimResource(int arg) {
-    return BaseDSL.attr(StatusBarScrimResourceFunc8567756a.instance, arg);
+    return BaseDSL.attr("statusBarScrimResource", arg);
   }
 
   public static Void tabGravity(int arg) {
-    return BaseDSL.attr(TabGravityFunc8567756a.instance, arg);
+    return BaseDSL.attr("tabGravity", arg);
   }
 
   public static Void tabMode(int arg) {
-    return BaseDSL.attr(TabModeFunc8567756a.instance, arg);
+    return BaseDSL.attr("tabMode", arg);
   }
 
   public static Void tabTextColors(ColorStateList arg) {
-    return BaseDSL.attr(TabTextColorsFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr("tabTextColors", arg);
   }
 
-  public static Void targetElevation(float arg) {
-    return BaseDSL.attr(TargetElevationFunce0893188.instance, arg);
+  public static Void textAppearance(int arg) {
+    return BaseDSL.attr("textAppearance", arg);
   }
 
   public static Void textColor(ColorStateList arg) {
-    return BaseDSL.attr(TextColorFunc9e5e0e4e.instance, arg);
+    return BaseDSL.attr("textColor", arg);
   }
 
   public static Void title(CharSequence arg) {
-    return BaseDSL.attr(TitleFuncc0af808b.instance, arg);
+    return BaseDSL.attr("title", arg);
   }
 
   public static Void titleEnabled(boolean arg) {
-    return BaseDSL.attr(TitleEnabledFunc148d6054.instance, arg);
+    return BaseDSL.attr("titleEnabled", arg);
   }
 
   public static Void typeface(Typeface arg) {
-    return BaseDSL.attr(TypefaceFunc53b4afb.instance, arg);
+    return BaseDSL.attr("typeface", arg);
   }
 
   public static Void upWithViewPager(ViewPager arg) {
-    return BaseDSL.attr(UpWithViewPagerFunc648eda47.instance, arg);
+    return BaseDSL.attr("upWithViewPager", arg);
   }
 
   public static Void useCompatPadding(boolean arg) {
-    return BaseDSL.attr(UseCompatPaddingFunc148d6054.instance, arg);
+    return BaseDSL.attr("useCompatPadding", arg);
   }
 
-  private static final class BackgroundTintListFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
-    public static final BackgroundTintListFunc9e5e0e4e instance = new BackgroundTintListFunc9e5e0e4e();
-
-    public void apply(View v, final ColorStateList arg, final ColorStateList old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundTintList(arg);
-      }
-    }
-  }
-
-  private static final class BackgroundTintModeFuncabb7a84e implements Anvil.AttrFunc<PorterDuff.Mode> {
-    public static final BackgroundTintModeFuncabb7a84e instance = new BackgroundTintModeFuncabb7a84e();
-
-    public void apply(View v, final PorterDuff.Mode arg, final PorterDuff.Mode old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setBackgroundTintMode(arg);
-      }
-    }
-  }
-
-  private static final class CheckableFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final CheckableFunc148d6054 instance = new CheckableFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof NavigationMenuItemView) {
-        ((NavigationMenuItemView) v).setCheckable(arg);
-      }
-    }
-  }
-
-  private static final class CheckedFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final CheckedFunc148d6054 instance = new CheckedFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof NavigationMenuItemView) {
-        ((NavigationMenuItemView) v).setChecked(arg);
-      }
-    }
-  }
-
-  private static final class CheckedItemFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final CheckedItemFunc8567756a instance = new CheckedItemFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof NavigationView) {
-        ((NavigationView) v).setCheckedItem(arg);
-      }
-    }
-  }
-
-  private static final class CollapsedTitleGravityFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final CollapsedTitleGravityFunc8567756a instance = new CollapsedTitleGravityFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setCollapsedTitleGravity(arg);
-      }
-    }
-  }
-
-  private static final class CollapsedTitleTextAppearanceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final CollapsedTitleTextAppearanceFunc8567756a instance = new CollapsedTitleTextAppearanceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setCollapsedTitleTextAppearance(arg);
-      }
-    }
-  }
-
-  private static final class CollapsedTitleTextColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final CollapsedTitleTextColorFunc8567756a instance = new CollapsedTitleTextColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setCollapsedTitleTextColor(arg);
-      }
-    }
-  }
-
-  private static final class CollapsedTitleTypefaceFunc53b4afb implements Anvil.AttrFunc<Typeface> {
-    public static final CollapsedTitleTypefaceFunc53b4afb instance = new CollapsedTitleTypefaceFunc53b4afb();
-
-    public void apply(View v, final Typeface arg, final Typeface old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setCollapsedTitleTypeface(arg);
-      }
-    }
-  }
-
-  private static final class CompatElevationFunce0893188 implements Anvil.AttrFunc<Float> {
-    public static final CompatElevationFunce0893188 instance = new CompatElevationFunce0893188();
-
-    public void apply(View v, final Float arg, final Float old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setCompatElevation(arg);
-      }
-    }
-  }
-
-  private static final class ContentScrimFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final ContentScrimFuncfb47464a instance = new ContentScrimFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setContentScrim(arg);
-      }
-    }
-  }
-
-  private static final class ContentScrimColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ContentScrimColorFunc8567756a instance = new ContentScrimColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setContentScrimColor(arg);
-      }
-    }
-  }
-
-  private static final class ContentScrimResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ContentScrimResourceFunc8567756a instance = new ContentScrimResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setContentScrimResource(arg);
-      }
-    }
-  }
-
-  private static final class CounterEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final CounterEnabledFunc148d6054 instance = new CounterEnabledFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setCounterEnabled(arg);
-      }
-    }
-  }
-
-  private static final class CounterMaxLengthFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final CounterMaxLengthFunc8567756a instance = new CounterMaxLengthFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setCounterMaxLength(arg);
-      }
-    }
-  }
-
-  private static final class ErrorFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
-    public static final ErrorFuncc0af808b instance = new ErrorFuncc0af808b();
-
-    public void apply(View v, final CharSequence arg, final CharSequence old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setError(arg);
-      }
-    }
-  }
-
-  private static final class ErrorEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final ErrorEnabledFunc148d6054 instance = new ErrorEnabledFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setErrorEnabled(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final ExpandedFunc148d6054 instance = new ExpandedFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof AppBarLayout) {
-        ((AppBarLayout) v).setExpanded(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ExpandedTitleColorFunc8567756a instance = new ExpandedTitleColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleColor(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleGravityFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ExpandedTitleGravityFunc8567756a instance = new ExpandedTitleGravityFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleGravity(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleMarginBottomFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ExpandedTitleMarginBottomFunc8567756a instance = new ExpandedTitleMarginBottomFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleMarginBottom(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleMarginEndFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ExpandedTitleMarginEndFunc8567756a instance = new ExpandedTitleMarginEndFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleMarginEnd(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleMarginStartFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ExpandedTitleMarginStartFunc8567756a instance = new ExpandedTitleMarginStartFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleMarginStart(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleMarginTopFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ExpandedTitleMarginTopFunc8567756a instance = new ExpandedTitleMarginTopFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleMarginTop(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleTextAppearanceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ExpandedTitleTextAppearanceFunc8567756a instance = new ExpandedTitleTextAppearanceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleTextAppearance(arg);
-      }
-    }
-  }
-
-  private static final class ExpandedTitleTypefaceFunc53b4afb implements Anvil.AttrFunc<Typeface> {
-    public static final ExpandedTitleTypefaceFunc53b4afb instance = new ExpandedTitleTypefaceFunc53b4afb();
-
-    public void apply(View v, final Typeface arg, final Typeface old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setExpandedTitleTypeface(arg);
-      }
-    }
-  }
-
-  private static final class ForegroundFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final ForegroundFuncfb47464a instance = new ForegroundFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof ForegroundLinearLayout) {
-        ((ForegroundLinearLayout) v).setForeground(arg);
-      }
-    }
-  }
-
-  private static final class ForegroundGravityFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ForegroundGravityFunc8567756a instance = new ForegroundGravityFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof ForegroundLinearLayout) {
-        ((ForegroundLinearLayout) v).setForegroundGravity(arg);
-      }
-    }
-  }
-
-  private static final class HintFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
-    public static final HintFuncc0af808b instance = new HintFuncc0af808b();
-
-    public void apply(View v, final CharSequence arg, final CharSequence old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setHint(arg);
-      }
-    }
-  }
-
-  private static final class HintAnimationEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final HintAnimationEnabledFunc148d6054 instance = new HintAnimationEnabledFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setHintAnimationEnabled(arg);
-      }
-    }
-  }
-
-  private static final class HintEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final HintEnabledFunc148d6054 instance = new HintEnabledFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setHintEnabled(arg);
-      }
-    }
-  }
-
-  private static final class HintTextAppearanceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final HintTextAppearanceFunc8567756a instance = new HintTextAppearanceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setHintTextAppearance(arg);
-      }
-    }
-  }
-
-  private static final class IconFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final IconFuncfb47464a instance = new IconFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof NavigationMenuItemView) {
-        ((NavigationMenuItemView) v).setIcon(arg);
-      }
-    }
-  }
-
-  private static final class ItemBackgroundFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final ItemBackgroundFuncfb47464a instance = new ItemBackgroundFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof NavigationView) {
-        ((NavigationView) v).setItemBackground(arg);
-      }
-    }
-  }
-
-  private static final class ItemBackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ItemBackgroundResourceFunc8567756a instance = new ItemBackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof NavigationView) {
-        ((NavigationView) v).setItemBackgroundResource(arg);
-      }
-    }
-  }
-
-  private static final class ItemIconTintListFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
-    public static final ItemIconTintListFunc9e5e0e4e instance = new ItemIconTintListFunc9e5e0e4e();
-
-    public void apply(View v, final ColorStateList arg, final ColorStateList old) {
-      if (v instanceof NavigationView) {
-        ((NavigationView) v).setItemIconTintList(arg);
-      }
-    }
-  }
-
-  private static final class ItemTextAppearanceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final ItemTextAppearanceFunc8567756a instance = new ItemTextAppearanceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof NavigationView) {
-        ((NavigationView) v).setItemTextAppearance(arg);
-      }
-    }
-  }
-
-  private static final class ItemTextColorFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
-    public static final ItemTextColorFunc9e5e0e4e instance = new ItemTextColorFunc9e5e0e4e();
-
-    public void apply(View v, final ColorStateList arg, final ColorStateList old) {
-      if (v instanceof NavigationView) {
-        ((NavigationView) v).setItemTextColor(arg);
-      }
-    }
-  }
-
-  private static final class NavigationItemSelectedListenerFunc80db0872 implements Anvil.AttrFunc<NavigationView.OnNavigationItemSelectedListener> {
-    public static final NavigationItemSelectedListenerFunc80db0872 instance = new NavigationItemSelectedListenerFunc80db0872();
-
-    public void apply(View v, final NavigationView.OnNavigationItemSelectedListener arg, final NavigationView.OnNavigationItemSelectedListener old) {
-      if (v instanceof NavigationView) {
-        ((NavigationView) v).setNavigationItemSelectedListener(arg);
-      }
-    }
-  }
-
-  private static final class OnTabSelectedFuncaa1c085e implements Anvil.AttrFunc<TabLayout.OnTabSelectedListener> {
-    public static final OnTabSelectedFuncaa1c085e instance = new OnTabSelectedFuncaa1c085e();
-
-    public void apply(View v, final TabLayout.OnTabSelectedListener arg, final TabLayout.OnTabSelectedListener old) {
-      if (v instanceof TabLayout) {
-        if (arg != null) {
-          ((TabLayout) v).setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            public void onTabReselected(TabLayout.Tab a0) {
-              arg.onTabReselected(a0);
-              Anvil.render();
-            }
-
-            public void onTabSelected(TabLayout.Tab a0) {
-              arg.onTabSelected(a0);
-              Anvil.render();
-            }
-
-            public void onTabUnselected(TabLayout.Tab a0) {
-              arg.onTabUnselected(a0);
-              Anvil.render();
-            }
-          });
-        } else {
-          ((TabLayout) v).setOnTabSelectedListener((TabLayout.OnTabSelectedListener) null);
+  public boolean set(View v, String name, final Object arg, final Object old) {
+    switch (name) {
+      case "backgroundTintList":
+        if (v instanceof FloatingActionButton && arg instanceof ColorStateList) {
+          ((FloatingActionButton) v).setBackgroundTintList((ColorStateList) arg);
+          return true;
         }
-      }
+        break;
+      case "backgroundTintMode":
+        if (v instanceof FloatingActionButton && arg instanceof PorterDuff.Mode) {
+          ((FloatingActionButton) v).setBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        break;
+      case "checkable":
+        if (v instanceof BottomNavigationItemView && arg instanceof Boolean) {
+          ((BottomNavigationItemView) v).setCheckable((boolean) arg);
+          return true;
+        }
+        if (v instanceof NavigationMenuItemView && arg instanceof Boolean) {
+          ((NavigationMenuItemView) v).setCheckable((boolean) arg);
+          return true;
+        }
+        break;
+      case "checked":
+        if (v instanceof BottomNavigationItemView && arg instanceof Boolean) {
+          ((BottomNavigationItemView) v).setChecked((boolean) arg);
+          return true;
+        }
+        if (v instanceof NavigationMenuItemView && arg instanceof Boolean) {
+          ((NavigationMenuItemView) v).setChecked((boolean) arg);
+          return true;
+        }
+        if (v instanceof CheckableImageButton && arg instanceof Boolean) {
+          ((CheckableImageButton) v).setChecked((boolean) arg);
+          return true;
+        }
+        break;
+      case "checkedItem":
+        if (v instanceof NavigationView && arg instanceof Integer) {
+          ((NavigationView) v).setCheckedItem((int) arg);
+          return true;
+        }
+        break;
+      case "collapsedTitleGravity":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setCollapsedTitleGravity((int) arg);
+          return true;
+        }
+        break;
+      case "collapsedTitleTextAppearance":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setCollapsedTitleTextAppearance((int) arg);
+          return true;
+        }
+        break;
+      case "collapsedTitleTextColor":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof ColorStateList) {
+          ((CollapsingToolbarLayout) v).setCollapsedTitleTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setCollapsedTitleTextColor((int) arg);
+          return true;
+        }
+        break;
+      case "collapsedTitleTypeface":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Typeface) {
+          ((CollapsingToolbarLayout) v).setCollapsedTitleTypeface((Typeface) arg);
+          return true;
+        }
+        break;
+      case "compatElevation":
+        if (v instanceof FloatingActionButton && arg instanceof Float) {
+          ((FloatingActionButton) v).setCompatElevation((float) arg);
+          return true;
+        }
+        break;
+      case "contentScrim":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Drawable) {
+          ((CollapsingToolbarLayout) v).setContentScrim((Drawable) arg);
+          return true;
+        }
+        break;
+      case "contentScrimColor":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setContentScrimColor((int) arg);
+          return true;
+        }
+        break;
+      case "contentScrimResource":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setContentScrimResource((int) arg);
+          return true;
+        }
+        break;
+      case "counterEnabled":
+        if (v instanceof TextInputLayout && arg instanceof Boolean) {
+          ((TextInputLayout) v).setCounterEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "counterMaxLength":
+        if (v instanceof TextInputLayout && arg instanceof Integer) {
+          ((TextInputLayout) v).setCounterMaxLength((int) arg);
+          return true;
+        }
+        break;
+      case "error":
+        if (v instanceof TextInputLayout && arg instanceof CharSequence) {
+          ((TextInputLayout) v).setError((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "errorEnabled":
+        if (v instanceof TextInputLayout && arg instanceof Boolean) {
+          ((TextInputLayout) v).setErrorEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "errorTextAppearance":
+        if (v instanceof TextInputLayout && arg instanceof Integer) {
+          ((TextInputLayout) v).setErrorTextAppearance((int) arg);
+          return true;
+        }
+        break;
+      case "expanded":
+        if (v instanceof AppBarLayout && arg instanceof Boolean) {
+          ((AppBarLayout) v).setExpanded((boolean) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleColor":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleColor((int) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleGravity":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleGravity((int) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleMarginBottom":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleMarginBottom((int) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleMarginEnd":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleMarginEnd((int) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleMarginStart":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleMarginStart((int) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleMarginTop":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleMarginTop((int) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleTextAppearance":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleTextAppearance((int) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleTextColor":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof ColorStateList) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleTextColor((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "expandedTitleTypeface":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Typeface) {
+          ((CollapsingToolbarLayout) v).setExpandedTitleTypeface((Typeface) arg);
+          return true;
+        }
+        break;
+      case "foreground":
+        if (v instanceof ForegroundLinearLayout && arg instanceof Drawable) {
+          ((ForegroundLinearLayout) v).setForeground((Drawable) arg);
+          return true;
+        }
+        break;
+      case "foregroundGravity":
+        if (v instanceof ForegroundLinearLayout && arg instanceof Integer) {
+          ((ForegroundLinearLayout) v).setForegroundGravity((int) arg);
+          return true;
+        }
+        break;
+      case "hint":
+        if (v instanceof TextInputLayout && arg instanceof CharSequence) {
+          ((TextInputLayout) v).setHint((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "hintAnimationEnabled":
+        if (v instanceof TextInputLayout && arg instanceof Boolean) {
+          ((TextInputLayout) v).setHintAnimationEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "hintEnabled":
+        if (v instanceof TextInputLayout && arg instanceof Boolean) {
+          ((TextInputLayout) v).setHintEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "hintTextAppearance":
+        if (v instanceof TextInputLayout && arg instanceof Integer) {
+          ((TextInputLayout) v).setHintTextAppearance((int) arg);
+          return true;
+        }
+        break;
+      case "icon":
+        if (v instanceof BottomNavigationItemView && arg instanceof Drawable) {
+          ((BottomNavigationItemView) v).setIcon((Drawable) arg);
+          return true;
+        }
+        if (v instanceof NavigationMenuItemView && arg instanceof Drawable) {
+          ((NavigationMenuItemView) v).setIcon((Drawable) arg);
+          return true;
+        }
+        break;
+      case "iconTintList":
+        if (v instanceof BottomNavigationItemView && arg instanceof ColorStateList) {
+          ((BottomNavigationItemView) v).setIconTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof BottomNavigationMenuView && arg instanceof ColorStateList) {
+          ((BottomNavigationMenuView) v).setIconTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "itemBackground":
+        if (v instanceof NavigationView && arg instanceof Drawable) {
+          ((NavigationView) v).setItemBackground((Drawable) arg);
+          return true;
+        }
+        if (v instanceof BottomNavigationItemView && arg instanceof Integer) {
+          ((BottomNavigationItemView) v).setItemBackground((int) arg);
+          return true;
+        }
+        break;
+      case "itemBackgroundRes":
+        if (v instanceof BottomNavigationMenuView && arg instanceof Integer) {
+          ((BottomNavigationMenuView) v).setItemBackgroundRes((int) arg);
+          return true;
+        }
+        break;
+      case "itemBackgroundResource":
+        if (v instanceof BottomNavigationView && arg instanceof Integer) {
+          ((BottomNavigationView) v).setItemBackgroundResource((int) arg);
+          return true;
+        }
+        if (v instanceof NavigationView && arg instanceof Integer) {
+          ((NavigationView) v).setItemBackgroundResource((int) arg);
+          return true;
+        }
+        break;
+      case "itemIconTintList":
+        if (v instanceof BottomNavigationView && arg instanceof ColorStateList) {
+          ((BottomNavigationView) v).setItemIconTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof NavigationView && arg instanceof ColorStateList) {
+          ((NavigationView) v).setItemIconTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "itemPosition":
+        if (v instanceof BottomNavigationItemView && arg instanceof Integer) {
+          ((BottomNavigationItemView) v).setItemPosition((int) arg);
+          return true;
+        }
+        break;
+      case "itemTextAppearance":
+        if (v instanceof NavigationView && arg instanceof Integer) {
+          ((NavigationView) v).setItemTextAppearance((int) arg);
+          return true;
+        }
+        break;
+      case "itemTextColor":
+        if (v instanceof BottomNavigationMenuView && arg instanceof ColorStateList) {
+          ((BottomNavigationMenuView) v).setItemTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof BottomNavigationView && arg instanceof ColorStateList) {
+          ((BottomNavigationView) v).setItemTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof NavigationView && arg instanceof ColorStateList) {
+          ((NavigationView) v).setItemTextColor((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "navigationItemSelectedListener":
+        if (v instanceof NavigationView && arg instanceof NavigationView.OnNavigationItemSelectedListener) {
+          ((NavigationView) v).setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) arg);
+          return true;
+        }
+        break;
+      case "needsEmptyIcon":
+        if (v instanceof NavigationMenuItemView && arg instanceof Boolean) {
+          ((NavigationMenuItemView) v).setNeedsEmptyIcon((boolean) arg);
+          return true;
+        }
+        break;
+      case "onNavigationItemSelected":
+        if (v instanceof BottomNavigationView && arg instanceof BottomNavigationView.OnNavigationItemSelectedListener) {
+          if (arg != null) {
+            ((BottomNavigationView) v).setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+              public boolean onNavigationItemSelected(MenuItem a0) {
+                boolean r = ((BottomNavigationView.OnNavigationItemSelectedListener) arg).onNavigationItemSelected(a0);
+                Anvil.render();
+                return r;
+              }
+            });
+          } else {
+            ((BottomNavigationView) v).setOnNavigationItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) null);
+          }
+          return true;
+        }
+        break;
+      case "passwordVisibilityToggleContentDescription":
+        if (v instanceof TextInputLayout && arg instanceof Integer) {
+          ((TextInputLayout) v).setPasswordVisibilityToggleContentDescription((int) arg);
+          return true;
+        }
+        if (v instanceof TextInputLayout && arg instanceof CharSequence) {
+          ((TextInputLayout) v).setPasswordVisibilityToggleContentDescription((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "passwordVisibilityToggleDrawable":
+        if (v instanceof TextInputLayout && arg instanceof Drawable) {
+          ((TextInputLayout) v).setPasswordVisibilityToggleDrawable((Drawable) arg);
+          return true;
+        }
+        if (v instanceof TextInputLayout && arg instanceof Integer) {
+          ((TextInputLayout) v).setPasswordVisibilityToggleDrawable((int) arg);
+          return true;
+        }
+        break;
+      case "passwordVisibilityToggleEnabled":
+        if (v instanceof TextInputLayout && arg instanceof Boolean) {
+          ((TextInputLayout) v).setPasswordVisibilityToggleEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "passwordVisibilityToggleTintList":
+        if (v instanceof TextInputLayout && arg instanceof ColorStateList) {
+          ((TextInputLayout) v).setPasswordVisibilityToggleTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "passwordVisibilityToggleTintMode":
+        if (v instanceof TextInputLayout && arg instanceof PorterDuff.Mode) {
+          ((TextInputLayout) v).setPasswordVisibilityToggleTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        break;
+      case "presenter":
+        if (v instanceof BottomNavigationMenuView && arg instanceof BottomNavigationPresenter) {
+          ((BottomNavigationMenuView) v).setPresenter((BottomNavigationPresenter) arg);
+          return true;
+        }
+        break;
+      case "rippleColor":
+        if (v instanceof FloatingActionButton && arg instanceof Integer) {
+          ((FloatingActionButton) v).setRippleColor((int) arg);
+          return true;
+        }
+        break;
+      case "scrimAnimationDuration":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Long) {
+          ((CollapsingToolbarLayout) v).setScrimAnimationDuration((long) arg);
+          return true;
+        }
+        break;
+      case "scrimVisibleHeightTrigger":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setScrimVisibleHeightTrigger((int) arg);
+          return true;
+        }
+        break;
+      case "scrimsShown":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Boolean) {
+          ((CollapsingToolbarLayout) v).setScrimsShown((boolean) arg);
+          return true;
+        }
+        break;
+      case "selectedTabIndicatorColor":
+        if (v instanceof TabLayout && arg instanceof Integer) {
+          ((TabLayout) v).setSelectedTabIndicatorColor((int) arg);
+          return true;
+        }
+        break;
+      case "selectedTabIndicatorHeight":
+        if (v instanceof TabLayout && arg instanceof Integer) {
+          ((TabLayout) v).setSelectedTabIndicatorHeight((int) arg);
+          return true;
+        }
+        break;
+      case "shiftingMode":
+        if (v instanceof BottomNavigationItemView && arg instanceof Boolean) {
+          ((BottomNavigationItemView) v).setShiftingMode((boolean) arg);
+          return true;
+        }
+        break;
+      case "size":
+        if (v instanceof FloatingActionButton && arg instanceof Integer) {
+          ((FloatingActionButton) v).setSize((int) arg);
+          return true;
+        }
+        break;
+      case "statusBarBackground":
+        if (v instanceof CoordinatorLayout && arg instanceof Drawable) {
+          ((CoordinatorLayout) v).setStatusBarBackground((Drawable) arg);
+          return true;
+        }
+        break;
+      case "statusBarBackgroundColor":
+        if (v instanceof CoordinatorLayout && arg instanceof Integer) {
+          ((CoordinatorLayout) v).setStatusBarBackgroundColor((int) arg);
+          return true;
+        }
+        break;
+      case "statusBarBackgroundResource":
+        if (v instanceof CoordinatorLayout && arg instanceof Integer) {
+          ((CoordinatorLayout) v).setStatusBarBackgroundResource((int) arg);
+          return true;
+        }
+        break;
+      case "statusBarScrim":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Drawable) {
+          ((CollapsingToolbarLayout) v).setStatusBarScrim((Drawable) arg);
+          return true;
+        }
+        break;
+      case "statusBarScrimColor":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setStatusBarScrimColor((int) arg);
+          return true;
+        }
+        break;
+      case "statusBarScrimResource":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Integer) {
+          ((CollapsingToolbarLayout) v).setStatusBarScrimResource((int) arg);
+          return true;
+        }
+        break;
+      case "tabGravity":
+        if (v instanceof TabLayout && arg instanceof Integer) {
+          ((TabLayout) v).setTabGravity((int) arg);
+          return true;
+        }
+        break;
+      case "tabMode":
+        if (v instanceof TabLayout && arg instanceof Integer) {
+          ((TabLayout) v).setTabMode((int) arg);
+          return true;
+        }
+        break;
+      case "tabTextColors":
+        if (v instanceof TabLayout && arg instanceof ColorStateList) {
+          ((TabLayout) v).setTabTextColors((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "textAppearance":
+        if (v instanceof NavigationMenuItemView && arg instanceof Integer) {
+          ((NavigationMenuItemView) v).setTextAppearance((int) arg);
+          return true;
+        }
+        break;
+      case "textColor":
+        if (v instanceof BottomNavigationItemView && arg instanceof ColorStateList) {
+          ((BottomNavigationItemView) v).setTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof NavigationMenuItemView && arg instanceof ColorStateList) {
+          ((NavigationMenuItemView) v).setTextColor((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "title":
+        if (v instanceof BottomNavigationItemView && arg instanceof CharSequence) {
+          ((BottomNavigationItemView) v).setTitle((CharSequence) arg);
+          return true;
+        }
+        if (v instanceof NavigationMenuItemView && arg instanceof CharSequence) {
+          ((NavigationMenuItemView) v).setTitle((CharSequence) arg);
+          return true;
+        }
+        if (v instanceof CollapsingToolbarLayout && arg instanceof CharSequence) {
+          ((CollapsingToolbarLayout) v).setTitle((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "titleEnabled":
+        if (v instanceof CollapsingToolbarLayout && arg instanceof Boolean) {
+          ((CollapsingToolbarLayout) v).setTitleEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "typeface":
+        if (v instanceof TextInputLayout && arg instanceof Typeface) {
+          ((TextInputLayout) v).setTypeface((Typeface) arg);
+          return true;
+        }
+        break;
+      case "upWithViewPager":
+        if (v instanceof TabLayout && arg instanceof ViewPager) {
+          ((TabLayout) v).setupWithViewPager((ViewPager) arg);
+          return true;
+        }
+        break;
+      case "useCompatPadding":
+        if (v instanceof FloatingActionButton && arg instanceof Boolean) {
+          ((FloatingActionButton) v).setUseCompatPadding((boolean) arg);
+          return true;
+        }
+        break;
     }
-  }
-
-  private static final class RippleColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final RippleColorFunc8567756a instance = new RippleColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setRippleColor(arg);
-      }
-    }
-  }
-
-  private static final class ScrimsShownFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final ScrimsShownFunc148d6054 instance = new ScrimsShownFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setScrimsShown(arg);
-      }
-    }
-  }
-
-  private static final class SelectedTabIndicatorColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final SelectedTabIndicatorColorFunc8567756a instance = new SelectedTabIndicatorColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setSelectedTabIndicatorColor(arg);
-      }
-    }
-  }
-
-  private static final class SelectedTabIndicatorHeightFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final SelectedTabIndicatorHeightFunc8567756a instance = new SelectedTabIndicatorHeightFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setSelectedTabIndicatorHeight(arg);
-      }
-    }
-  }
-
-  private static final class StatusBarBackgroundFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final StatusBarBackgroundFuncfb47464a instance = new StatusBarBackgroundFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof CoordinatorLayout) {
-        ((CoordinatorLayout) v).setStatusBarBackground(arg);
-      }
-    }
-  }
-
-  private static final class StatusBarBackgroundColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final StatusBarBackgroundColorFunc8567756a instance = new StatusBarBackgroundColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CoordinatorLayout) {
-        ((CoordinatorLayout) v).setStatusBarBackgroundColor(arg);
-      }
-    }
-  }
-
-  private static final class StatusBarBackgroundResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final StatusBarBackgroundResourceFunc8567756a instance = new StatusBarBackgroundResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CoordinatorLayout) {
-        ((CoordinatorLayout) v).setStatusBarBackgroundResource(arg);
-      }
-    }
-  }
-
-  private static final class StatusBarScrimFuncfb47464a implements Anvil.AttrFunc<Drawable> {
-    public static final StatusBarScrimFuncfb47464a instance = new StatusBarScrimFuncfb47464a();
-
-    public void apply(View v, final Drawable arg, final Drawable old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setStatusBarScrim(arg);
-      }
-    }
-  }
-
-  private static final class StatusBarScrimColorFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final StatusBarScrimColorFunc8567756a instance = new StatusBarScrimColorFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setStatusBarScrimColor(arg);
-      }
-    }
-  }
-
-  private static final class StatusBarScrimResourceFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final StatusBarScrimResourceFunc8567756a instance = new StatusBarScrimResourceFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setStatusBarScrimResource(arg);
-      }
-    }
-  }
-
-  private static final class TabGravityFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final TabGravityFunc8567756a instance = new TabGravityFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setTabGravity(arg);
-      }
-    }
-  }
-
-  private static final class TabModeFunc8567756a implements Anvil.AttrFunc<Integer> {
-    public static final TabModeFunc8567756a instance = new TabModeFunc8567756a();
-
-    public void apply(View v, final Integer arg, final Integer old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setTabMode(arg);
-      }
-    }
-  }
-
-  private static final class TabTextColorsFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
-    public static final TabTextColorsFunc9e5e0e4e instance = new TabTextColorsFunc9e5e0e4e();
-
-    public void apply(View v, final ColorStateList arg, final ColorStateList old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setTabTextColors(arg);
-      }
-    }
-  }
-
-  private static final class TargetElevationFunce0893188 implements Anvil.AttrFunc<Float> {
-    public static final TargetElevationFunce0893188 instance = new TargetElevationFunce0893188();
-
-    public void apply(View v, final Float arg, final Float old) {
-      if (v instanceof AppBarLayout) {
-        ((AppBarLayout) v).setTargetElevation(arg);
-      }
-    }
-  }
-
-  private static final class TextColorFunc9e5e0e4e implements Anvil.AttrFunc<ColorStateList> {
-    public static final TextColorFunc9e5e0e4e instance = new TextColorFunc9e5e0e4e();
-
-    public void apply(View v, final ColorStateList arg, final ColorStateList old) {
-      if (v instanceof NavigationMenuItemView) {
-        ((NavigationMenuItemView) v).setTextColor(arg);
-      }
-    }
-  }
-
-  private static final class TitleFuncc0af808b implements Anvil.AttrFunc<CharSequence> {
-    public static final TitleFuncc0af808b instance = new TitleFuncc0af808b();
-
-    public void apply(View v, final CharSequence arg, final CharSequence old) {
-      if (v instanceof NavigationMenuItemView) {
-        ((NavigationMenuItemView) v).setTitle(arg);
-      }
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setTitle(arg);
-      }
-    }
-  }
-
-  private static final class TitleEnabledFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final TitleEnabledFunc148d6054 instance = new TitleEnabledFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof CollapsingToolbarLayout) {
-        ((CollapsingToolbarLayout) v).setTitleEnabled(arg);
-      }
-    }
-  }
-
-  private static final class TypefaceFunc53b4afb implements Anvil.AttrFunc<Typeface> {
-    public static final TypefaceFunc53b4afb instance = new TypefaceFunc53b4afb();
-
-    public void apply(View v, final Typeface arg, final Typeface old) {
-      if (v instanceof TextInputLayout) {
-        ((TextInputLayout) v).setTypeface(arg);
-      }
-    }
-  }
-
-  private static final class UpWithViewPagerFunc648eda47 implements Anvil.AttrFunc<ViewPager> {
-    public static final UpWithViewPagerFunc648eda47 instance = new UpWithViewPagerFunc648eda47();
-
-    public void apply(View v, final ViewPager arg, final ViewPager old) {
-      if (v instanceof TabLayout) {
-        ((TabLayout) v).setupWithViewPager(arg);
-      }
-    }
-  }
-
-  private static final class UseCompatPaddingFunc148d6054 implements Anvil.AttrFunc<Boolean> {
-    public static final UseCompatPaddingFunc148d6054 instance = new UseCompatPaddingFunc148d6054();
-
-    public void apply(View v, final Boolean arg, final Boolean old) {
-      if (v instanceof FloatingActionButton) {
-        ((FloatingActionButton) v).setUseCompatPadding(arg);
-      }
-    }
+    return false;
   }
 }

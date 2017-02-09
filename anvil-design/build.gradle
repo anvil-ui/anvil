@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath 'com.android.tools.build:gradle:1.5.0'
+		classpath 'com.android.tools.build:gradle:2.2.3'
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
 	}
 }
@@ -9,8 +9,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'trikita.anvilgen'
 
 android {
-	compileSdkVersion 'android-23'
-	buildToolsVersion '23.0.3'
+	compileSdkVersion 'android-25'
+	buildToolsVersion '25.0.2'
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -19,7 +19,7 @@ android {
 
 	defaultConfig {
 		minSdkVersion 15
-		targetSdkVersion 23
+		targetSdkVersion 25
 	}
 
 	lintOptions {
@@ -36,18 +36,23 @@ anvilgen {
 	type = "support"
 	libraryName = "design"
 	camelCaseName = "Design"
-	version = "23.4.0"
+	version = "25.1.1"
 	dependencies = [
-			"support-v4": [null, "libs/internal_impl-$version".toString()],
-			"appcompat-v7": [null],
-			"recyclerview-v7": [null]
+	  "support-core-ui": [null],
+	  "support-core-utils": [null],
+	  "support-compat": [null],
+	  "support-media-compat": [null],
+	  "support-fragment": [null],
+	  "transition": [null],
+		"appcompat-v7": [null],
+		"recyclerview-v7": [null]
 	]
 	quirks = QUIRKS
 }
 
 dependencies {
 	compile project(path: ':anvil', configuration: 'sdk15Release')
-	compile 'com.android.support:design:23.4.0'
+	compile 'com.android.support:design:25.1.1'
 
 	testCompile 'junit:junit:4.12'
 	testCompile 'org.mockito:mockito-core:2.0.36-beta'

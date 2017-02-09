@@ -21,7 +21,7 @@ class BaseRecyclerView {
     }
 
     public static void linearLayoutManager(int orientation, boolean reverseLayout) {
-        attr(LinearLayoutManagerFunc.instance,
+        attr("linearLayoutManager",
                 new LayoutManagerParams(0, orientation, reverseLayout));
     }
 
@@ -30,32 +30,32 @@ class BaseRecyclerView {
     }
 
     public static void gridLayoutManager(int spanCount, int orientation, boolean reverseLayout) {
-        attr(GridLayoutManagerFunc.instance,
+        attr("gridLayoutManager",
                 new LayoutManagerParams(spanCount, orientation, reverseLayout));
     }
 
-    private static final class LinearLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
-        private static final LinearLayoutManagerFunc instance = new LinearLayoutManagerFunc();
-
-        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
-            if (v instanceof RecyclerView) {
-                ((RecyclerView) v).setLayoutManager(
-                        new LinearLayoutManager(v.getContext(), arg.orientation, arg.reverseLayout));
-            }
-        }
-    }
-
-    private static final class GridLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
-        private static final GridLayoutManagerFunc instance = new GridLayoutManagerFunc();
-
-        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
-            if (v instanceof RecyclerView) {
-                ((RecyclerView) v).setLayoutManager(
-                        new GridLayoutManager(v.getContext(),
-                            arg.spanCount, arg.orientation, arg.reverseLayout));
-            }
-        }
-    }
+//    private static final class LinearLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
+//        private static final LinearLayoutManagerFunc instance = new LinearLayoutManagerFunc();
+//
+//        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
+//            if (v instanceof RecyclerView) {
+//                ((RecyclerView) v).setLayoutManager(
+//                        new LinearLayoutManager(v.getContext(), arg.orientation, arg.reverseLayout));
+//            }
+//        }
+//    }
+//
+//    private static final class GridLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
+//        private static final GridLayoutManagerFunc instance = new GridLayoutManagerFunc();
+//
+//        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
+//            if (v instanceof RecyclerView) {
+//                ((RecyclerView) v).setLayoutManager(
+//                        new GridLayoutManager(v.getContext(),
+//                            arg.spanCount, arg.orientation, arg.reverseLayout));
+//            }
+//        }
+//    }
 
 
     private static class LayoutManagerParams {
