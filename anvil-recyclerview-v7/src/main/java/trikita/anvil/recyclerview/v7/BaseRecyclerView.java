@@ -10,7 +10,7 @@ import static trikita.anvil.BaseDSL.attr;
 
 import trikita.anvil.Anvil;
 
-class BaseRecyclerView {
+class BaseRecyclerView implements Anvil.AttributeSetter {
 
     public static void linearLayoutManager() {
         linearLayoutManager(LinearLayoutManager.VERTICAL);
@@ -34,29 +34,18 @@ class BaseRecyclerView {
                 new LayoutManagerParams(spanCount, orientation, reverseLayout));
     }
 
-//    private static final class LinearLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
-//        private static final LinearLayoutManagerFunc instance = new LinearLayoutManagerFunc();
-//
-//        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
-//            if (v instanceof RecyclerView) {
-//                ((RecyclerView) v).setLayoutManager(
-//                        new LinearLayoutManager(v.getContext(), arg.orientation, arg.reverseLayout));
-//            }
-//        }
-//    }
-//
-//    private static final class GridLayoutManagerFunc implements Anvil.AttrFunc<LayoutManagerParams> {
-//        private static final GridLayoutManagerFunc instance = new GridLayoutManagerFunc();
-//
-//        public void apply(View v, final LayoutManagerParams arg, final LayoutManagerParams old) {
-//            if (v instanceof RecyclerView) {
-//                ((RecyclerView) v).setLayoutManager(
-//                        new GridLayoutManager(v.getContext(),
-//                            arg.spanCount, arg.orientation, arg.reverseLayout));
-//            }
-//        }
-//    }
-
+    @Override
+    public boolean set(View v, String name, Object value, Object prevValue) {
+        if (name.equals("linearLayoutManager") || name.equals("gridLayoutManager")) {
+            if (v instanceof RecyclerView && value instanceof LayoutManagerParams) {
+                LayoutManagerParams p = (LayoutManagerParams) value;
+                ((RecyclerView) v).setLayoutManager(
+                        new LinearLayoutManager(v.getContext(), p.orientation, p.reverseLayout));
+                return true;
+            }
+        }
+        return false;
+    }
 
     private static class LayoutManagerParams {
         private final int spanCount;
