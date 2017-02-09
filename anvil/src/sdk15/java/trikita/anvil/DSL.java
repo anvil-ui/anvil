@@ -1277,11 +1277,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("hint", arg);
   }
 
-  public static Void hintTextColor(int arg) {
+  public static Void hintTextColor(ColorStateList arg) {
     return BaseDSL.attr("hintTextColor", arg);
   }
 
-  public static Void hintTextColor(ColorStateList arg) {
+  public static Void hintTextColor(int arg) {
     return BaseDSL.attr("hintTextColor", arg);
   }
 
@@ -1457,11 +1457,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("left", arg);
   }
 
-  public static Void leftStripDrawable(int arg) {
+  public static Void leftStripDrawable(Drawable arg) {
     return BaseDSL.attr("leftStripDrawable", arg);
   }
 
-  public static Void leftStripDrawable(Drawable arg) {
+  public static Void leftStripDrawable(int arg) {
     return BaseDSL.attr("leftStripDrawable", arg);
   }
 
@@ -2037,11 +2037,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("selection", arg);
   }
 
-  public static Void selector(int arg) {
+  public static Void selector(Drawable arg) {
     return BaseDSL.attr("selector", arg);
   }
 
-  public static Void selector(Drawable arg) {
+  public static Void selector(int arg) {
     return BaseDSL.attr("selector", arg);
   }
 
@@ -2133,19 +2133,19 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("tag", arg);
   }
 
-  public static Void text(CharSequence arg) {
-    return BaseDSL.attr("text", arg);
-  }
-
   public static Void text(int arg) {
     return BaseDSL.attr("text", arg);
   }
 
-  public static Void textColor(int arg) {
-    return BaseDSL.attr("textColor", arg);
+  public static Void text(CharSequence arg) {
+    return BaseDSL.attr("text", arg);
   }
 
   public static Void textColor(ColorStateList arg) {
+    return BaseDSL.attr("textColor", arg);
+  }
+
+  public static Void textColor(int arg) {
     return BaseDSL.attr("textColor", arg);
   }
 
@@ -3194,12 +3194,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "hintTextColor":
-        if (v instanceof TextView && arg instanceof Integer) {
-          ((TextView) v).setHintTextColor((int) arg);
-          return true;
-        }
         if (v instanceof TextView && arg instanceof ColorStateList) {
           ((TextView) v).setHintTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof TextView && arg instanceof Integer) {
+          ((TextView) v).setHintTextColor((int) arg);
           return true;
         }
         break;
@@ -3488,12 +3488,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "leftStripDrawable":
-        if (v instanceof TabWidget && arg instanceof Integer) {
-          ((TabWidget) v).setLeftStripDrawable((int) arg);
-          return true;
-        }
         if (v instanceof TabWidget && arg instanceof Drawable) {
           ((TabWidget) v).setLeftStripDrawable((Drawable) arg);
+          return true;
+        }
+        if (v instanceof TabWidget && arg instanceof Integer) {
+          ((TabWidget) v).setLeftStripDrawable((int) arg);
           return true;
         }
         break;
@@ -4893,12 +4893,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "selector":
-        if (v instanceof AbsListView && arg instanceof Integer) {
-          ((AbsListView) v).setSelector((int) arg);
-          return true;
-        }
         if (v instanceof AbsListView && arg instanceof Drawable) {
           ((AbsListView) v).setSelector((Drawable) arg);
+          return true;
+        }
+        if (v instanceof AbsListView && arg instanceof Integer) {
+          ((AbsListView) v).setSelector((int) arg);
           return true;
         }
         break;
@@ -5039,22 +5039,22 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "text":
-        if (v instanceof TextSwitcher && arg instanceof CharSequence) {
-          ((TextSwitcher) v).setText((CharSequence) arg);
-          return true;
-        }
         if (v instanceof TextView && arg instanceof Integer) {
           ((TextView) v).setText((int) arg);
           return true;
         }
-        break;
-      case "textColor":
-        if (v instanceof TextView && arg instanceof Integer) {
-          ((TextView) v).setTextColor((int) arg);
+        if (v instanceof TextSwitcher && arg instanceof CharSequence) {
+          ((TextSwitcher) v).setText((CharSequence) arg);
           return true;
         }
+        break;
+      case "textColor":
         if (v instanceof TextView && arg instanceof ColorStateList) {
           ((TextView) v).setTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof TextView && arg instanceof Integer) {
+          ((TextView) v).setTextColor((int) arg);
           return true;
         }
         break;

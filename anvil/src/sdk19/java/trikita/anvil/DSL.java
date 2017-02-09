@@ -863,11 +863,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("bottom", arg);
   }
 
-  public static Void buttonDrawable(int arg) {
+  public static Void buttonDrawable(Drawable arg) {
     return BaseDSL.attr("buttonDrawable", arg);
   }
 
-  public static Void buttonDrawable(Drawable arg) {
+  public static Void buttonDrawable(int arg) {
     return BaseDSL.attr("buttonDrawable", arg);
   }
 
@@ -1091,11 +1091,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("duplicateParentStateEnabled", arg);
   }
 
-  public static Void eGLConfigChooser(boolean arg) {
+  public static Void eGLConfigChooser(GLSurfaceView.EGLConfigChooser arg) {
     return BaseDSL.attr("eGLConfigChooser", arg);
   }
 
-  public static Void eGLConfigChooser(GLSurfaceView.EGLConfigChooser arg) {
+  public static Void eGLConfigChooser(boolean arg) {
     return BaseDSL.attr("eGLConfigChooser", arg);
   }
 
@@ -1323,19 +1323,19 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("highlightColor", arg);
   }
 
-  public static Void hint(CharSequence arg) {
-    return BaseDSL.attr("hint", arg);
-  }
-
   public static Void hint(int arg) {
     return BaseDSL.attr("hint", arg);
   }
 
-  public static Void hintTextColor(int arg) {
-    return BaseDSL.attr("hintTextColor", arg);
+  public static Void hint(CharSequence arg) {
+    return BaseDSL.attr("hint", arg);
   }
 
   public static Void hintTextColor(ColorStateList arg) {
+    return BaseDSL.attr("hintTextColor", arg);
+  }
+
+  public static Void hintTextColor(int arg) {
     return BaseDSL.attr("hintTextColor", arg);
   }
 
@@ -1539,11 +1539,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("left", arg);
   }
 
-  public static Void leftStripDrawable(int arg) {
+  public static Void leftStripDrawable(Drawable arg) {
     return BaseDSL.attr("leftStripDrawable", arg);
   }
 
-  public static Void leftStripDrawable(Drawable arg) {
+  public static Void leftStripDrawable(int arg) {
     return BaseDSL.attr("leftStripDrawable", arg);
   }
 
@@ -1555,11 +1555,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("lines", arg);
   }
 
-  public static Void linkTextColor(int arg) {
+  public static Void linkTextColor(ColorStateList arg) {
     return BaseDSL.attr("linkTextColor", arg);
   }
 
-  public static Void linkTextColor(ColorStateList arg) {
+  public static Void linkTextColor(int arg) {
     return BaseDSL.attr("linkTextColor", arg);
   }
 
@@ -2275,11 +2275,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("tag", arg);
   }
 
-  public static Void text(CharSequence arg) {
+  public static Void text(int arg) {
     return BaseDSL.attr("text", arg);
   }
 
-  public static Void text(int arg) {
+  public static Void text(CharSequence arg) {
     return BaseDSL.attr("text", arg);
   }
 
@@ -2712,12 +2712,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "buttonDrawable":
-        if (v instanceof CompoundButton && arg instanceof Integer) {
-          ((CompoundButton) v).setButtonDrawable((int) arg);
-          return true;
-        }
         if (v instanceof CompoundButton && arg instanceof Drawable) {
           ((CompoundButton) v).setButtonDrawable((Drawable) arg);
+          return true;
+        }
+        if (v instanceof CompoundButton && arg instanceof Integer) {
+          ((CompoundButton) v).setButtonDrawable((int) arg);
           return true;
         }
         break;
@@ -3070,12 +3070,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "eGLConfigChooser":
-        if (v instanceof GLSurfaceView && arg instanceof Boolean) {
-          ((GLSurfaceView) v).setEGLConfigChooser((boolean) arg);
-          return true;
-        }
         if (v instanceof GLSurfaceView && arg instanceof GLSurfaceView.EGLConfigChooser) {
           ((GLSurfaceView) v).setEGLConfigChooser((GLSurfaceView.EGLConfigChooser) arg);
+          return true;
+        }
+        if (v instanceof GLSurfaceView && arg instanceof Boolean) {
+          ((GLSurfaceView) v).setEGLConfigChooser((boolean) arg);
           return true;
         }
         break;
@@ -3444,22 +3444,22 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "hint":
-        if (v instanceof TextView && arg instanceof CharSequence) {
-          ((TextView) v).setHint((CharSequence) arg);
-          return true;
-        }
         if (v instanceof TextView && arg instanceof Integer) {
           ((TextView) v).setHint((int) arg);
           return true;
         }
-        break;
-      case "hintTextColor":
-        if (v instanceof TextView && arg instanceof Integer) {
-          ((TextView) v).setHintTextColor((int) arg);
+        if (v instanceof TextView && arg instanceof CharSequence) {
+          ((TextView) v).setHint((CharSequence) arg);
           return true;
         }
+        break;
+      case "hintTextColor":
         if (v instanceof TextView && arg instanceof ColorStateList) {
           ((TextView) v).setHintTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof TextView && arg instanceof Integer) {
+          ((TextView) v).setHintTextColor((int) arg);
           return true;
         }
         break;
@@ -3790,12 +3790,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "leftStripDrawable":
-        if (v instanceof TabWidget && arg instanceof Integer) {
-          ((TabWidget) v).setLeftStripDrawable((int) arg);
-          return true;
-        }
         if (v instanceof TabWidget && arg instanceof Drawable) {
           ((TabWidget) v).setLeftStripDrawable((Drawable) arg);
+          return true;
+        }
+        if (v instanceof TabWidget && arg instanceof Integer) {
+          ((TabWidget) v).setLeftStripDrawable((int) arg);
           return true;
         }
         break;
@@ -3812,12 +3812,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "linkTextColor":
-        if (v instanceof TextView && arg instanceof Integer) {
-          ((TextView) v).setLinkTextColor((int) arg);
-          return true;
-        }
         if (v instanceof TextView && arg instanceof ColorStateList) {
           ((TextView) v).setLinkTextColor((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof TextView && arg instanceof Integer) {
+          ((TextView) v).setLinkTextColor((int) arg);
           return true;
         }
         break;
@@ -5448,12 +5448,12 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "text":
-        if (v instanceof TextSwitcher && arg instanceof CharSequence) {
-          ((TextSwitcher) v).setText((CharSequence) arg);
-          return true;
-        }
         if (v instanceof TextView && arg instanceof Integer) {
           ((TextView) v).setText((int) arg);
+          return true;
+        }
+        if (v instanceof TextSwitcher && arg instanceof CharSequence) {
+          ((TextSwitcher) v).setText((CharSequence) arg);
           return true;
         }
         break;
