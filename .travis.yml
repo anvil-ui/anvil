@@ -1,5 +1,9 @@
 language: android
 
+env:
+  global:
+    - GRADLE_OPTS=-Xmx512m
+
 android:
   components:
     - tools
