@@ -324,7 +324,7 @@ open class DSLGeneratorTask : DefaultTask() {
 
     fun finalizeAttrs(attrs: List<Attr>, dsl: TypeSpec.Builder, cases: CodeBlock.Builder) {
         attrs.sortedBy { it.name }.groupBy { it.name }.forEach {
-            var all = it.value
+            var all = it.value.sortedBy { it.param.name }
             var filered = all.filter { a ->
                 !all.any { b ->
                     a != b && a.param == b.param &&
@@ -350,7 +350,7 @@ open class DSLGeneratorTask : DefaultTask() {
 
         attrs.sortedBy { it.name }.groupBy { it.name }.forEach {
             val name = it.key
-            it.value.groupBy { it.param }.forEach {
+            it.value.sortedBy { it.param.name }.groupBy { it.param }.forEach {
                 addWrapperMethod(dsl, name, it.key)
             }
         }
