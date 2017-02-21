@@ -281,6 +281,7 @@ public final class Anvil {
                     for (ViewFactory vf : viewFactories) {
                         v = vf.fromXml(context, layoutId);
                         if (v != null) {
+                            set(v, "_layoutId", layoutId);
                             vg.addView(v, i);
                             break;
                         }
@@ -294,8 +295,9 @@ public final class Anvil {
 
             void end() {
                 int index = indices.peek();
-                if (views.peek() != null && views.peek() instanceof  ViewGroup) {
-                    ViewGroup vg = (ViewGroup) views.peek();
+                View v = views.peek();
+                if (v != null && v instanceof ViewGroup && get(v, "_layoutId") == null && mounts.get(v) == null) {
+                    ViewGroup vg = (ViewGroup) v;
                     if (index < vg.getChildCount()) {
                         vg.removeViews(index, vg.getChildCount() - index);
                     }
