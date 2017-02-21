@@ -296,7 +296,9 @@ public final class Anvil {
             void end() {
                 int index = indices.peek();
                 View v = views.peek();
-                if (v != null && v instanceof ViewGroup && get(v, "_layoutId") == null && mounts.get(v) == null) {
+                if (v != null && v instanceof ViewGroup &&
+                        get(v, "_layoutId") == null &&
+                        (mounts.get(v) == null || mounts.get(v) == Mount.this)) {
                     ViewGroup vg = (ViewGroup) v;
                     if (index < vg.getChildCount()) {
                         vg.removeViews(index, vg.getChildCount() - index);
