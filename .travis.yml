@@ -1,10 +1,14 @@
 language: android
 
+env:
+  global:
+    - GRADLE_OPTS=-Xmx512m
+
 android:
   components:
     - tools
-    - build-tools-23.0.3
-    - android-23
+    - build-tools-25.0.2
+    - android-25
     - extra-android-m2repository
 
 jdk:

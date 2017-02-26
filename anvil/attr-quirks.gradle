@@ -1,4 +1,4 @@
-def nop = {builder -> null}
+def nop = {attr -> null}
 
 ext.QUIRKS = [
 	// This requires lots of type checks, skipping this factory method for now
@@ -26,25 +26,21 @@ ext.QUIRKS = [
 		"setAdapter:android.widget.ListAdapter": nop
 	],
 
-	"android.widget.TextSwitcher": [
-		"setText:java.lang.CharSequence": nop, // overridden in basedsl together with textview
-	],
-
 	// Exception must be checked in this attribute setter
 	"android.widget.TextView": [
 		"setText:java.lang.CharSequence": nop,
 		"setTextSize": nop, // broken: uses "sp" unit by default, fixed in BaseDSL
-		"setInputExtras": { b ->
-			b.addCode(""
+		"setInputExtras": { attr ->
+			attr.code.add(""
 					+ "try {\n"
-					+ "	if (v instanceof android.widget.TextView)\n"
-					+ "		((android.widget.TextView) v).setInputExtras(arg);\n"
+					+ "	if (v instanceof android.widget.TextView && arg instanceof Integer)\n"
+					+ "		((android.widget.TextView) v).setInputExtras((int) arg);\n"
 					+ "} catch (org.xmlpull.v1.XmlPullParserException e) {\n"
 					+ "	e.printStackTrace();\n"
 					+ "} catch (java.io.IOException e) {\n"
 					+ "	e.printStackTrace();\n"
 					+ "}\n")
-			return b
+			return attr
 		}
 	],
 
@@ -55,12 +51,12 @@ ext.QUIRKS = [
 	// This will remove the whole builder, so no factory method will be generated
 	"android.renderscript.RSSurfaceView": [
 		"__viewAlias": false,
-		"setRenderScriptGL": { b -> null }
+		"setRenderScriptGL": nop,
 	],
 
 	// This will remove the whole builder, so no factory method will be generated
 	"android.renderscript.RSTextureView": [
 		"__viewAlias": false,
-		"setRenderScriptGL": { b -> null }
+		"setRenderScriptGL": nop,
 	],
 ]

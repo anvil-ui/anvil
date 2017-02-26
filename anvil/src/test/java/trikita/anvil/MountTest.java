@@ -16,7 +16,7 @@ public class MountTest extends Utils {
         public void view() {
             v(MockView.class, new Anvil.Renderable() {
                 public void view() {
-                    prop("foo", "bar");
+                    attr("text", "bar");
                 }
             });
         }
@@ -33,7 +33,7 @@ public class MountTest extends Utils {
         assertEquals(1, container.getChildCount());
         assertTrue(container.getChildAt(0) instanceof MockView);
         MockView v = (MockView) container.getChildAt(0);
-        assertEquals("bar", v.props.get("foo"));
+        assertEquals("bar", v.getText());
     }
 
     @Test
@@ -58,10 +58,14 @@ public class MountTest extends Utils {
     public void testMountInfoView() {
         MockView v = Anvil.mount(new MockView(getContext()), new Anvil.Renderable() {
             public void view() {
-                prop("foo", "bar");
+                attr("id", 100);
+                attr("text", "bar");
+                attr("tag", "foo");
             }
         });
-        assertEquals("bar", v.props.get("foo"));
+        assertEquals(100, v.getId());
+        assertEquals("foo", v.getTag());
+        assertEquals("bar", v.getText());
     }
 
     @Test

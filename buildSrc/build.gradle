@@ -19,8 +19,8 @@ repositories {
 dependencies {
     compile gradleApi()
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.2"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0"
     compile "org.jetbrains.kotlin:kotlin-reflect:1.0.2"
 
-    compile 'com.squareup:javapoet:1.6.1'
+    compile 'com.squareup:javapoet:1.7.0'
 }
