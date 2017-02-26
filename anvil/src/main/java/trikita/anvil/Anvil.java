@@ -272,6 +272,7 @@ public final class Anvil {
                     for (ViewFactory vf : viewFactories) {
                         v = vf.fromClass(context, c);
                         if (v != null) {
+                            set(v, "_anvil", 1);
                             vg.addView(v, i);
                             break;
                         }
@@ -281,6 +282,7 @@ public final class Anvil {
                     for (ViewFactory vf : viewFactories) {
                         v = vf.fromXml(context, layoutId);
                         if (v != null) {
+                            set(v, "_anvil", 1);
                             set(v, "_layoutId", layoutId);
                             vg.addView(v, i);
                             break;
@@ -320,6 +322,19 @@ public final class Anvil {
                         }
                     }
                 }
+            }
+
+            public void skip() {
+                int i;
+                ViewGroup vg = (ViewGroup) views.peek();
+                for (i = indices.pop(); i < vg.getChildCount(); i++) {
+                    View v = vg.getChildAt(i);
+                    if (get(v, "_anvil") != null) {
+                        indices.push(i);
+                        return;
+                    }
+                }
+                indices.push(i);
             }
 
             public View currentView() {

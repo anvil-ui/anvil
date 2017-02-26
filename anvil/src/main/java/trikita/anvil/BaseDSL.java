@@ -65,6 +65,11 @@ public class BaseDSL implements Anvil.AttributeSetter {
     public static final class ViewClassResult {
     }
 
+    public static ViewClassResult skip() {
+        Anvil.currentMount().iterator.skip();
+        return null;
+    }
+
     public static ViewClassResult v(Class<? extends View> c) {
         Anvil.currentMount().iterator.start(c, 0, null);
         return null;
