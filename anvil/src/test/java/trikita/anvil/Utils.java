@@ -38,7 +38,7 @@ public class Utils {
                 createdViews.put(v, !createdViews.containsKey(v) ? 1 : (createdViews.get(v) + 1));
                 return null;
             }
-            public View fromXml(Context c, int xmlId) {
+            public View fromXml(ViewGroup parent, int xmlId) {
                 return null;
             }
         });

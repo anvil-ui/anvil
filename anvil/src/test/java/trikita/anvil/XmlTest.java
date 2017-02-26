@@ -2,13 +2,15 @@ package trikita.anvil;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+
 import static trikita.anvil.BaseDSL.attr;
-import static trikita.anvil.BaseDSL.xml;
 import static trikita.anvil.BaseDSL.v;
+import static trikita.anvil.BaseDSL.xml;
 
 public class XmlTest extends Utils {
     private final static int ID_HEADER = 100;
@@ -19,12 +21,11 @@ public class XmlTest extends Utils {
     public XmlTest() {
         Anvil.registerViewFactory(new Anvil.ViewFactory() {
             public View fromClass(Context c, Class<? extends View> v) { return null; }
-            public View fromXml(Context c, int xmlId) {
-                System.out.println("fromXml " + c + " " + xmlId);
+            public View fromXml(ViewGroup parent, int xmlId) {
                 if (xmlId == LAYOUT) {
                     inflateCount++;
-                    MockLayout layout = new MockLayout(c);
-                    MockView header = new MockView(c);
+                    MockLayout layout = new MockLayout(parent.getContext());
+                    MockView header = new MockView(parent.getContext());
                     header.setId(ID_HEADER);
                     layout.addView(header, 0);
                     return layout;

@@ -46,7 +46,7 @@ public final class Anvil {
 
     public interface ViewFactory {
         View fromClass(Context c, Class<? extends View> v);
-        View fromXml(Context c, int xmlId);
+        View fromXml(ViewGroup parent, int xmlId);
     }
 
     private final static List<ViewFactory> viewFactories = new ArrayList<ViewFactory>() {{
@@ -67,8 +67,8 @@ public final class Anvil {
                 throw new RuntimeException(e);
             }
         }
-        public View fromXml(Context c, int xmlId) {
-            return LayoutInflater.from(c).inflate(xmlId, null, false);
+        public View fromXml(ViewGroup parent, int xmlId) {
+            return LayoutInflater.from(parent.getContext()).inflate(xmlId, parent, false);
         }
     };
 
@@ -280,7 +280,7 @@ public final class Anvil {
                 } else if (c == null && (v == null || get(v, "_layoutId") != Integer.valueOf(layoutId))) {
                     vg.removeView(v);
                     for (ViewFactory vf : viewFactories) {
-                        v = vf.fromXml(context, layoutId);
+                        v = vf.fromXml(vg, layoutId);
                         if (v != null) {
                             set(v, "_anvil", 1);
                             set(v, "_layoutId", layoutId);
