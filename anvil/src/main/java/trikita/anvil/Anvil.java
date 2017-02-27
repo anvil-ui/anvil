@@ -255,13 +255,22 @@ public final class Anvil {
                 assert views.size() == 0;
                 assert indices.size() == 0;
                 indices.push(0);
-                views.push(rootView.get());
+                View v = rootView.get();
+                if (v != null) {
+                    views.push(v);
+                }
             }
 
             void start(Class<? extends View> c, int layoutId, Object key) {
-                assert views.peek() instanceof ViewGroup;
-                ViewGroup vg = (ViewGroup) views.peek();
                 int i = indices.peek();
+                View parentView = views.peek();
+                if (parentView == null) {
+                    return;
+                }
+                if (!(parentView instanceof ViewGroup)) {
+                    throw new RuntimeException("child views are allowed only inside view groups");
+                }
+                ViewGroup vg = (ViewGroup) parentView;
                 View v = null;
                 if (i < vg.getChildCount()) {
                     v = vg.getChildAt(i);
@@ -312,6 +321,9 @@ public final class Anvil {
 
             <T> void attr(String name, T value) {
                 View currentView = views.peek();
+                if (currentView == null) {
+                    return;
+                }
                 @SuppressWarnings("unchecked")
                 T currentValue = (T) get(currentView, name);
                 if (currentValue == null || !currentValue.equals(value)) {
