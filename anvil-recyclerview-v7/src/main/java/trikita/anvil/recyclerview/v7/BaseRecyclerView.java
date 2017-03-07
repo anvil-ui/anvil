@@ -1,16 +1,17 @@
 package trikita.anvil.recyclerview.v7;
 
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
+import static trikita.anvil.BaseDSL.attr;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import static trikita.anvil.BaseDSL.attr;
-
 import trikita.anvil.Anvil;
 
 class BaseRecyclerView implements Anvil.AttributeSetter {
+
+    static {
+        Anvil.registerAttributeSetter(new BaseRecyclerView());
+    }
 
     public static void linearLayoutManager() {
         linearLayoutManager(LinearLayoutManager.VERTICAL);
