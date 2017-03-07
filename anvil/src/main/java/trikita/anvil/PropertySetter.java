@@ -102,7 +102,7 @@ final class PropertySetter implements Anvil.AttributeSetter {
                     if ((m.getName().equals(setter) || m.getName().equals(listener)) &&
                             m.getParameterTypes().length == 1) {
                         Class arg = m.getParameterTypes()[0];
-                        if ((value == null && !arg.isPrimitive()) || assignable(arg, value.getClass())) {
+                        if ((value == null && !arg.isPrimitive()) || (value != null && assignable(arg, value.getClass()))) {
                             m.invoke(v, value);
                             return true;
                         }
