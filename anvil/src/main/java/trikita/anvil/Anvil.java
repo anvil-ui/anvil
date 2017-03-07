@@ -309,6 +309,8 @@ public final class Anvil {
                 View v = views.peek();
                 if (v != null && v instanceof ViewGroup &&
                         get(v, "_layoutId") == null &&
+                        !v.getClass().getName().equals("android.support.v7.widget.RecyclerView") &&
+                        !v.getClass().getName().equals("android.support.v4.view.ViewPager") &&
                         (mounts.get(v) == null || mounts.get(v) == Mount.this)) {
                     ViewGroup vg = (ViewGroup) v;
                     if (index < vg.getChildCount()) {
