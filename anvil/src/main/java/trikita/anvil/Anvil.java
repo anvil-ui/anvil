@@ -309,12 +309,10 @@ public final class Anvil {
                 View v = views.peek();
                 if (v != null && v instanceof ViewGroup &&
                         get(v, "_layoutId") == null &&
-                        !v.getClass().getName().equals("android.support.v7.widget.RecyclerView") &&
-                        !v.getClass().getName().equals("android.support.v4.view.ViewPager") &&
                         (mounts.get(v) == null || mounts.get(v) == Mount.this)) {
                     ViewGroup vg = (ViewGroup) v;
                     if (index < vg.getChildCount()) {
-                        vg.removeViews(index, vg.getChildCount() - index);
+                        removeNonAnvilViews(vg, index, vg.getChildCount() - index);
                     }
                 }
                 indices.pop();
@@ -335,6 +333,22 @@ public final class Anvil {
                             return;
                         }
                     }
+                }
+            }
+
+            private void removeNonAnvilViews(ViewGroup vg, int start, int count) {
+                final int end = start + count;
+                List<View> toBeRemoved = new ArrayList<>();
+
+                for (int i = start; i < end; i++) {
+                    View v = vg.getChildAt(i);
+                    if (get(v, "_anvil") != null) {
+                        toBeRemoved.add(v);
+                    }
+                }
+
+                for (View v : toBeRemoved) {
+                    vg.removeView(v);
                 }
             }
 
