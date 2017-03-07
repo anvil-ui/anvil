@@ -1,11 +1,11 @@
 package trikita.anvil;
 
+import android.view.View;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-
-import android.view.View;
 
 final class PropertySetter implements Anvil.AttributeSetter {
 
