@@ -312,7 +312,7 @@ public final class Anvil {
                         (mounts.get(v) == null || mounts.get(v) == Mount.this)) {
                     ViewGroup vg = (ViewGroup) v;
                     if (index < vg.getChildCount()) {
-                        vg.removeViews(index, vg.getChildCount() - index);
+                        removeNonAnvilViews(vg, index, vg.getChildCount() - index);
                     }
                 }
                 indices.pop();
@@ -332,6 +332,17 @@ public final class Anvil {
                             set(currentView, name, value);
                             return;
                         }
+                    }
+                }
+            }
+
+            private void removeNonAnvilViews(ViewGroup vg, int start, int count) {
+                final int end = start + count - 1;
+
+                for (int i = end; i >= start; i--) {
+                    View v = vg.getChildAt(i);
+                    if (get(v, "_anvil") != null) {
+                        vg.removeView(v);
                     }
                 }
             }
