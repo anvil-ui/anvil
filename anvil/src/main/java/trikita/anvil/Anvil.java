@@ -337,18 +337,13 @@ public final class Anvil {
             }
 
             private void removeNonAnvilViews(ViewGroup vg, int start, int count) {
-                final int end = start + count;
-                List<View> toBeRemoved = new ArrayList<>();
+                final int end = start + count - 1;
 
-                for (int i = start; i < end; i++) {
+                for (int i = end; i >= start; i--) {
                     View v = vg.getChildAt(i);
                     if (get(v, "_anvil") != null) {
-                        toBeRemoved.add(v);
+                        vg.removeView(v);
                     }
-                }
-
-                for (View v : toBeRemoved) {
-                    vg.removeView(v);
                 }
             }
 
