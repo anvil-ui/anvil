@@ -286,7 +286,7 @@ public final class Anvil {
                             break;
                         }
                     }
-                } else if (c == null && (v == null || get(v, "_layoutId") != Integer.valueOf(layoutId))) {
+                } else if (c == null && (v == null || !Integer.valueOf(layoutId).equals(get(v, "_layoutId")))) {
                     vg.removeView(v);
                     for (ViewFactory vf : viewFactories) {
                         v = vf.fromXml(vg, layoutId);
