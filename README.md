@@ -41,9 +41,9 @@ dependencies {
 ```
 Anvil comes in multiple builds for different minimal SDK versions:
 
-* anvil-sdk15 (ICS, 97.7% of devices)
-* anvil-sdk19 (Kitkat, 75.6% of devices)
-* anvil-sdk21 (Lollipop, 43.1% of devices)
+* anvil-sdk15 (ICS, 99.7% of devices)
+* anvil-sdk19 (Kitkat, 94.3% of devices)
+* anvil-sdk21 (Lollipop, 82.3% of devices)
 
 API levels 16, 17, 18, 22 or 23 are not added because they had very few
 UI-related methods added.
