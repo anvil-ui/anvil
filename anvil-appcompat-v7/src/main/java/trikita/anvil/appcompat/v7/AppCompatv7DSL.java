@@ -39,7 +39,6 @@ import android.support.v7.widget.FitWindowsFrameLayout;
 import android.support.v7.widget.FitWindowsLinearLayout;
 import android.support.v7.widget.FitWindowsViewGroup;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.ScrollingTabContainerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SwitchCompat;
@@ -295,14 +294,6 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.v(LinearLayoutCompat.class, r);
   }
 
-  public static BaseDSL.ViewClassResult listViewCompat() {
-    return BaseDSL.v(ListViewCompat.class);
-  }
-
-  public static Void listViewCompat(Anvil.Renderable r) {
-    return BaseDSL.v(ListViewCompat.class, r);
-  }
-
   public static BaseDSL.ViewClassResult scrollingTabContainerView() {
     return BaseDSL.v(ScrollingTabContainerView.class);
   }
@@ -365,6 +356,10 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
 
   public static Void attachListener(ContentFrameLayout.OnAttachListener arg) {
     return BaseDSL.attr("attachListener", arg);
+  }
+
+  public static Void autoSizeTextTypeWithDefaults(int arg) {
+    return BaseDSL.attr("autoSizeTextTypeWithDefaults", arg);
   }
 
   public static Void baselineAligned(boolean arg) {
@@ -687,6 +682,14 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("supportButtonTintMode", arg);
   }
 
+  public static Void supportImageTintList(ColorStateList arg) {
+    return BaseDSL.attr("supportImageTintList", arg);
+  }
+
+  public static Void supportImageTintMode(PorterDuff.Mode arg) {
+    return BaseDSL.attr("supportImageTintMode", arg);
+  }
+
   public static Void switchMinWidth(int arg) {
     return BaseDSL.attr("switchMinWidth", arg);
   }
@@ -842,6 +845,16 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
       case "attachListener":
         if (v instanceof ContentFrameLayout && arg instanceof ContentFrameLayout.OnAttachListener) {
           ((ContentFrameLayout) v).setAttachListener((ContentFrameLayout.OnAttachListener) arg);
+          return true;
+        }
+        break;
+      case "autoSizeTextTypeWithDefaults":
+        if (v instanceof AppCompatButton && arg instanceof Integer) {
+          ((AppCompatButton) v).setAutoSizeTextTypeWithDefaults((int) arg);
+          return true;
+        }
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setAutoSizeTextTypeWithDefaults((int) arg);
           return true;
         }
         break;
@@ -1524,6 +1537,26 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
         }
         if (v instanceof AppCompatRadioButton && arg instanceof PorterDuff.Mode) {
           ((AppCompatRadioButton) v).setSupportButtonTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        break;
+      case "supportImageTintList":
+        if (v instanceof AppCompatImageButton && arg instanceof ColorStateList) {
+          ((AppCompatImageButton) v).setSupportImageTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageView && arg instanceof ColorStateList) {
+          ((AppCompatImageView) v).setSupportImageTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "supportImageTintMode":
+        if (v instanceof AppCompatImageButton && arg instanceof PorterDuff.Mode) {
+          ((AppCompatImageButton) v).setSupportImageTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageView && arg instanceof PorterDuff.Mode) {
+          ((AppCompatImageView) v).setSupportImageTintMode((PorterDuff.Mode) arg);
           return true;
         }
         break;

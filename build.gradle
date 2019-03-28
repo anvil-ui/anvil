@@ -1,12 +1,20 @@
 subprojects {
+    ext {
+        mockito_version = '2.23.0'
+        support_version = '27.1.1'
+        agp_version = '3.3.2'
+    }
+
     buildscript {
         repositories {
+            google()
             jcenter()
         }
     }
 
     repositories {
         mavenLocal()
+        google()
         jcenter()
     }
 

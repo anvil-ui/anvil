@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath 'com.android.tools.build:gradle:2.2.3'
+		classpath "com.android.tools.build:gradle:$agp_version"
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
 	}
 }
@@ -9,8 +9,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'trikita.anvilgen'
 
 android {
-	compileSdkVersion 'android-25'
-	buildToolsVersion '25.0.2'
+	compileSdkVersion 27
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -19,14 +18,14 @@ android {
 
 	defaultConfig {
 		minSdkVersion 15
-		targetSdkVersion 25
+		targetSdkVersion 27
 	}
 
 	lintOptions {
 		abortOnError false
 	}
 
-	publishNonDefault true
+	flavorDimensions "api"
 	productFlavors {
 		sdk15 {
 			minSdkVersion 15
@@ -51,8 +50,8 @@ anvilgen {
 }
 
 dependencies {
-	testCompile 'junit:junit:4.12'
-	testCompile 'org.mockito:mockito-core:2.0.43-beta'
+	testImplementation 'junit:junit:4.12'
+	testImplementation "org.mockito:mockito-core:$mockito_version"
 }
 
 apply plugin: 'maven-publish'
@@ -161,8 +160,8 @@ artifacts {
 android.libraryVariants.all { variant ->
 	task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
 		description "Generates Javadoc for $variant.name."
-		source = variant.javaCompile.source
+		source = variant.getCompileClasspath(null).getAsFileTree()
 		ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-		classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+		classpath = files(variant.getCompileClasspath(null)) + files(ext.androidJar)
 	}
 }
