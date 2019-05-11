@@ -21,7 +21,7 @@ android {
 		minSdkVersion 15
 		targetSdkVersion 27
 
-		missingDimensionStrategy 'api', 'sdk15'
+		missingDimensionStrategy 'api', 'sdk21'
 	}
 
 	lintOptions {
