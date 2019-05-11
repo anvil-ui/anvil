@@ -13,6 +13,9 @@ android:
   licenses:
     - '.+'
 
+before_install:
+  - yes | sdkmanager "platforms;android-27"
+
 jdk:
   - oraclejdk8
 
