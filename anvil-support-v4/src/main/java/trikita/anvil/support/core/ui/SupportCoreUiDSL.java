@@ -1,6 +1,7 @@
 package trikita.anvil.support.core.ui;
 
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.PagerTitleStrip;
@@ -30,6 +31,14 @@ import trikita.anvil.BaseDSL;
 public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
   static {
     Anvil.registerAttributeSetter(new SupportCoreUiDSL());
+  }
+
+  public static BaseDSL.ViewClassResult coordinatorLayout() {
+    return BaseDSL.v(CoordinatorLayout.class);
+  }
+
+  public static Void coordinatorLayout(Anvil.Renderable r) {
+    return BaseDSL.v(CoordinatorLayout.class, r);
   }
 
   public static BaseDSL.ViewClassResult pagerTabStrip() {
@@ -148,10 +157,6 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("gravity", arg);
   }
 
-  public static Void nestedScrollingEnabled(boolean arg) {
-    return BaseDSL.attr("nestedScrollingEnabled", arg);
-  }
-
   public static Void nonPrimaryAlpha(float arg) {
     return BaseDSL.attr("nonPrimaryAlpha", arg);
   }
@@ -248,6 +253,10 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("statusBarBackgroundColor", arg);
   }
 
+  public static Void statusBarBackgroundResource(int arg) {
+    return BaseDSL.attr("statusBarBackgroundResource", arg);
+  }
+
   public static Void tabIndicatorColor(int arg) {
     return BaseDSL.attr("tabIndicatorColor", arg);
   }
@@ -329,16 +338,6 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
       case "gravity":
         if (v instanceof PagerTitleStrip && arg instanceof Integer) {
           ((PagerTitleStrip) v).setGravity((int) arg);
-          return true;
-        }
-        break;
-      case "nestedScrollingEnabled":
-        if (v instanceof NestedScrollView && arg instanceof Boolean) {
-          ((NestedScrollView) v).setNestedScrollingEnabled((boolean) arg);
-          return true;
-        }
-        if (v instanceof SwipeRefreshLayout && arg instanceof Boolean) {
-          ((SwipeRefreshLayout) v).setNestedScrollingEnabled((boolean) arg);
           return true;
         }
         break;
@@ -485,6 +484,10 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "statusBarBackground":
+        if (v instanceof CoordinatorLayout && arg instanceof Drawable) {
+          ((CoordinatorLayout) v).setStatusBarBackground((Drawable) arg);
+          return true;
+        }
         if (v instanceof DrawerLayout && arg instanceof Drawable) {
           ((DrawerLayout) v).setStatusBarBackground((Drawable) arg);
           return true;
@@ -495,8 +498,18 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "statusBarBackgroundColor":
+        if (v instanceof CoordinatorLayout && arg instanceof Integer) {
+          ((CoordinatorLayout) v).setStatusBarBackgroundColor((int) arg);
+          return true;
+        }
         if (v instanceof DrawerLayout && arg instanceof Integer) {
           ((DrawerLayout) v).setStatusBarBackgroundColor((int) arg);
+          return true;
+        }
+        break;
+      case "statusBarBackgroundResource":
+        if (v instanceof CoordinatorLayout && arg instanceof Integer) {
+          ((CoordinatorLayout) v).setStatusBarBackgroundResource((int) arg);
           return true;
         }
         break;

@@ -1,0 +1,48 @@
+/**
+ * Taken from https://gist.github.com/n-belokopytov/d44949590748b096c1a497008b761d04
+ */
+android.libraryVariants.all { variant ->
+    task "copyDependencies${variant.name.capitalize()}"() {
+        outputs.upToDateWhen { false }
+        doLast {
+            println "Executing copyDependencies${variant.name.capitalize()}"
+            variant.getCompileClasspath().each { fileDependency ->
+                def sourcePath = fileDependency.absolutePath
+                def destinationPath = project.projectDir.path + "/build/dependencies/${variant.name}/"
+                println "Copying dependency:"
+                println sourcePath
+
+                //The monstrous regex that gets the name of the lib from it’s exploded .aar path
+                def dependencyName
+                if (sourcePath.contains("classes.jar")) {
+                    def dependencyAarNameRegexResult = (sourcePath =~ /.*\/(.*)\.aar\/.*\/jars\/classes\.jar/)
+                    if (dependencyAarNameRegexResult.size() > 0) {
+                        dependencyName = dependencyAarNameRegexResult[0][1]
+                        println "Exploded AAR found : ${dependencyName}"
+                    }
+                } else {
+                    def dependencyJarNameRegexResult = (sourcePath =~ /.*\/caches\/[^\/]+\/[^\/]+\/(.*)\/.*\/.*\.jar/)
+                    if (dependencyJarNameRegexResult.size() > 0) {
+                        dependencyName = (dependencyJarNameRegexResult[0][1]).replace("/","-")
+                        println "Jar found : ${dependencyName}"
+                    }
+                }
+
+
+                copy {
+                    from sourcePath
+                    into destinationPath
+
+                    rename { String filename ->
+                        if (filename.contains(".jar") && dependencyName != null) {
+                            dependencyName = "${dependencyName}.jar"
+                            println "Renaming dependency file to : ${dependencyName}"
+                            return dependencyName
+                        }
+                        return filename
+                    }
+                }
+            }
+        }
+    }
+}

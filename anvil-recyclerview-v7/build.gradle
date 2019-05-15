@@ -1,16 +1,16 @@
 buildscript {
 	dependencies {
-		classpath 'com.android.tools.build:gradle:2.2.3'
+		classpath "com.android.tools.build:gradle:$agp_version"
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
 	}
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'trikita.anvilgen'
+apply from: "$rootProject.projectDir/copyDeps.gradle"
 
 android {
-	compileSdkVersion 'android-25'
-	buildToolsVersion '25.0.2'
+	compileSdkVersion 27
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -19,7 +19,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion 15
-		targetSdkVersion 25
+		targetSdkVersion 27
+
+		missingDimensionStrategy 'api', 'sdk15'
 	}
 
 	lintOptions {
@@ -36,24 +38,24 @@ anvilgen {
 	type = "support"
 	libraryName = "recyclerview-v7"
 	camelCaseName = "RecyclerViewv7"
-	version = "25.1.1"
+	version = support_version
 	dependencies = [
-	  "support-core-ui": [null],
-	  "support-core-utils": [null],
-	  "support-compat": [null],
-	  "support-media-compat": [null],
-	  "support-fragment": [null],
+	  "support-core-ui": null,
+	  "support-core-utils": null,
+	  "support-compat": null,
+	  "support-media-compat": null,
+	  "support-fragment": null,
 	]
 	quirks = QUIRKS
 	superclass = "BaseRecyclerView"
 }
 
 dependencies {
-	compile project(path: ':anvil', configuration: 'sdk15Release')
-	compile 'com.android.support:recyclerview-v7:25.1.1'
+	implementation project(path: ':anvil')
+	implementation "com.android.support:recyclerview-v7:$support_version"
 
-	testCompile 'junit:junit:4.12'
-	testCompile 'org.mockito:mockito-core:2.0.36-beta'
+	testImplementation 'junit:junit:4.12'
+	testImplementation "org.mockito:mockito-core:$mockito_version"
 }
 
 apply plugin: 'maven-publish'
@@ -144,8 +146,8 @@ artifacts {
 android.libraryVariants.all { variant ->
 	task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
 		description "Generates Javadoc for $variant.name."
-		source = variant.javaCompile.source
+		source = variant.getCompileClasspath(null).getAsFileTree()
 		ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-		classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+		classpath = files(variant.getCompileClasspath(null)) + files(ext.androidJar)
 	}
 }

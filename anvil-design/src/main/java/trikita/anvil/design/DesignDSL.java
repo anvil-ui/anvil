@@ -17,7 +17,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CheckableImageButton;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabItem;
@@ -145,14 +144,6 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.v(CollapsingToolbarLayout.class, r);
   }
 
-  public static BaseDSL.ViewClassResult coordinatorLayout() {
-    return BaseDSL.v(CoordinatorLayout.class);
-  }
-
-  public static Void coordinatorLayout(Anvil.Renderable r) {
-    return BaseDSL.v(CoordinatorLayout.class, r);
-  }
-
   public static BaseDSL.ViewClassResult floatingActionButton() {
     return BaseDSL.v(FloatingActionButton.class);
   }
@@ -199,14 +190,6 @@ public final class DesignDSL implements Anvil.AttributeSetter {
 
   public static Void textInputLayout(Anvil.Renderable r) {
     return BaseDSL.v(TextInputLayout.class, r);
-  }
-
-  public static Void backgroundTintList(ColorStateList arg) {
-    return BaseDSL.attr("backgroundTintList", arg);
-  }
-
-  public static Void backgroundTintMode(PorterDuff.Mode arg) {
-    return BaseDSL.attr("backgroundTintMode", arg);
   }
 
   public static Void checkable(boolean arg) {
@@ -265,6 +248,10 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("counterMaxLength", arg);
   }
 
+  public static Void customSize(int arg) {
+    return BaseDSL.attr("customSize", arg);
+  }
+
   public static Void error(CharSequence arg) {
     return BaseDSL.attr("error", arg);
   }
@@ -315,14 +302,6 @@ public final class DesignDSL implements Anvil.AttributeSetter {
 
   public static Void expandedTitleTypeface(Typeface arg) {
     return BaseDSL.attr("expandedTitleTypeface", arg);
-  }
-
-  public static Void foreground(Drawable arg) {
-    return BaseDSL.attr("foreground", arg);
-  }
-
-  public static Void foregroundGravity(int arg) {
-    return BaseDSL.attr("foregroundGravity", arg);
   }
 
   public static Void hint(CharSequence arg) {
@@ -389,6 +368,10 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("needsEmptyIcon", arg);
   }
 
+  public static Void onNavigationItemReselected(BottomNavigationView.OnNavigationItemReselectedListener arg) {
+    return BaseDSL.attr("onNavigationItemReselected", arg);
+  }
+
   public static Void onNavigationItemSelected(BottomNavigationView.OnNavigationItemSelectedListener arg) {
     return BaseDSL.attr("onNavigationItemSelected", arg);
   }
@@ -441,6 +424,10 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("scrimsShown", arg);
   }
 
+  public static Void selectedItemId(int arg) {
+    return BaseDSL.attr("selectedItemId", arg);
+  }
+
   public static Void selectedTabIndicatorColor(int arg) {
     return BaseDSL.attr("selectedTabIndicatorColor", arg);
   }
@@ -455,18 +442,6 @@ public final class DesignDSL implements Anvil.AttributeSetter {
 
   public static Void size(int arg) {
     return BaseDSL.attr("size", arg);
-  }
-
-  public static Void statusBarBackground(Drawable arg) {
-    return BaseDSL.attr("statusBarBackground", arg);
-  }
-
-  public static Void statusBarBackgroundColor(int arg) {
-    return BaseDSL.attr("statusBarBackgroundColor", arg);
-  }
-
-  public static Void statusBarBackgroundResource(int arg) {
-    return BaseDSL.attr("statusBarBackgroundResource", arg);
   }
 
   public static Void statusBarScrim(Drawable arg) {
@@ -523,18 +498,6 @@ public final class DesignDSL implements Anvil.AttributeSetter {
 
   public boolean set(View v, String name, final Object arg, final Object old) {
     switch (name) {
-      case "backgroundTintList":
-        if (v instanceof FloatingActionButton && arg instanceof ColorStateList) {
-          ((FloatingActionButton) v).setBackgroundTintList((ColorStateList) arg);
-          return true;
-        }
-        break;
-      case "backgroundTintMode":
-        if (v instanceof FloatingActionButton && arg instanceof PorterDuff.Mode) {
-          ((FloatingActionButton) v).setBackgroundTintMode((PorterDuff.Mode) arg);
-          return true;
-        }
-        break;
       case "checkable":
         if (v instanceof BottomNavigationItemView && arg instanceof Boolean) {
           ((BottomNavigationItemView) v).setCheckable((boolean) arg);
@@ -629,6 +592,12 @@ public final class DesignDSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "customSize":
+        if (v instanceof FloatingActionButton && arg instanceof Integer) {
+          ((FloatingActionButton) v).setCustomSize((int) arg);
+          return true;
+        }
+        break;
       case "error":
         if (v instanceof TextInputLayout && arg instanceof CharSequence) {
           ((TextInputLayout) v).setError((CharSequence) arg);
@@ -704,18 +673,6 @@ public final class DesignDSL implements Anvil.AttributeSetter {
       case "expandedTitleTypeface":
         if (v instanceof CollapsingToolbarLayout && arg instanceof Typeface) {
           ((CollapsingToolbarLayout) v).setExpandedTitleTypeface((Typeface) arg);
-          return true;
-        }
-        break;
-      case "foreground":
-        if (v instanceof ForegroundLinearLayout && arg instanceof Drawable) {
-          ((ForegroundLinearLayout) v).setForeground((Drawable) arg);
-          return true;
-        }
-        break;
-      case "foregroundGravity":
-        if (v instanceof ForegroundLinearLayout && arg instanceof Integer) {
-          ((ForegroundLinearLayout) v).setForegroundGravity((int) arg);
           return true;
         }
         break;
@@ -837,6 +794,21 @@ public final class DesignDSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "onNavigationItemReselected":
+        if (v instanceof BottomNavigationView && arg instanceof BottomNavigationView.OnNavigationItemReselectedListener) {
+          if (arg != null) {
+            ((BottomNavigationView) v).setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+              public void onNavigationItemReselected(MenuItem a0) {
+                ((BottomNavigationView.OnNavigationItemReselectedListener) arg).onNavigationItemReselected(a0);
+                Anvil.render();
+              }
+            });
+          } else {
+            ((BottomNavigationView) v).setOnNavigationItemReselectedListener((BottomNavigationView.OnNavigationItemReselectedListener) null);
+          }
+          return true;
+        }
+        break;
       case "onNavigationItemSelected":
         if (v instanceof BottomNavigationView && arg instanceof BottomNavigationView.OnNavigationItemSelectedListener) {
           if (arg != null) {
@@ -921,6 +893,12 @@ public final class DesignDSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "selectedItemId":
+        if (v instanceof BottomNavigationView && arg instanceof Integer) {
+          ((BottomNavigationView) v).setSelectedItemId((int) arg);
+          return true;
+        }
+        break;
       case "selectedTabIndicatorColor":
         if (v instanceof TabLayout && arg instanceof Integer) {
           ((TabLayout) v).setSelectedTabIndicatorColor((int) arg);
@@ -942,24 +920,6 @@ public final class DesignDSL implements Anvil.AttributeSetter {
       case "size":
         if (v instanceof FloatingActionButton && arg instanceof Integer) {
           ((FloatingActionButton) v).setSize((int) arg);
-          return true;
-        }
-        break;
-      case "statusBarBackground":
-        if (v instanceof CoordinatorLayout && arg instanceof Drawable) {
-          ((CoordinatorLayout) v).setStatusBarBackground((Drawable) arg);
-          return true;
-        }
-        break;
-      case "statusBarBackgroundColor":
-        if (v instanceof CoordinatorLayout && arg instanceof Integer) {
-          ((CoordinatorLayout) v).setStatusBarBackgroundColor((int) arg);
-          return true;
-        }
-        break;
-      case "statusBarBackgroundResource":
-        if (v instanceof CoordinatorLayout && arg instanceof Integer) {
-          ((CoordinatorLayout) v).setStatusBarBackgroundResource((int) arg);
           return true;
         }
         break;

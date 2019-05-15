@@ -42,6 +42,10 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
     return BaseDSL.attr("childDrawingOrderCallback", arg);
   }
 
+  public static Void edgeEffectFactory(RecyclerView.EdgeEffectFactory arg) {
+    return BaseDSL.attr("edgeEffectFactory", arg);
+  }
+
   public static Void hasFixedSize(boolean arg) {
     return BaseDSL.attr("hasFixedSize", arg);
   }
@@ -60,10 +64,6 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
 
   public static Void layoutManager(RecyclerView.LayoutManager arg) {
     return BaseDSL.attr("layoutManager", arg);
-  }
-
-  public static Void nestedScrollingEnabled(boolean arg) {
-    return BaseDSL.attr("nestedScrollingEnabled", arg);
   }
 
   public static Void onFling(RecyclerView.OnFlingListener arg) {
@@ -110,6 +110,12 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
           return true;
         }
         break;
+      case "edgeEffectFactory":
+        if (v instanceof RecyclerView && arg instanceof RecyclerView.EdgeEffectFactory) {
+          ((RecyclerView) v).setEdgeEffectFactory((RecyclerView.EdgeEffectFactory) arg);
+          return true;
+        }
+        break;
       case "hasFixedSize":
         if (v instanceof RecyclerView && arg instanceof Boolean) {
           ((RecyclerView) v).setHasFixedSize((boolean) arg);
@@ -137,12 +143,6 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
       case "layoutManager":
         if (v instanceof RecyclerView && arg instanceof RecyclerView.LayoutManager) {
           ((RecyclerView) v).setLayoutManager((RecyclerView.LayoutManager) arg);
-          return true;
-        }
-        break;
-      case "nestedScrollingEnabled":
-        if (v instanceof RecyclerView && arg instanceof Boolean) {
-          ((RecyclerView) v).setNestedScrollingEnabled((boolean) arg);
           return true;
         }
         break;

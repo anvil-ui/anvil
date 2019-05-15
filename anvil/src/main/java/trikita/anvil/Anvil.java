@@ -316,7 +316,9 @@ public final class Anvil {
                     }
                 }
                 indices.pop();
-                views.pop();
+                if (v != null){
+                    views.pop();
+                }
             }
 
             <T> void attr(String name, T value) {

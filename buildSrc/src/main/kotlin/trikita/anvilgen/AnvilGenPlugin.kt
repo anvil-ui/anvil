@@ -29,13 +29,20 @@ class AnvilGenPlugin : Plugin<Project> {
             project.task(mapOf("type" to DSLGeneratorTask::class.java), "generateSDK19DSL", getSDKClosure(project, 19))
             project.task(mapOf("type" to DSLGeneratorTask::class.java), "generateSDK15DSL", getSDKClosure(project, 15))
 
-            project.task(mapOf("dependsOn" to arrayOf("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")), "generateSDKDSL")
+            project.task(
+                mapOf("dependsOn" to arrayOf("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")),
+                "generateSDKDSL"
+            )
         } else {
-            val supportClosure = getSupportClosure(project, extension.camelCaseName,
-                    extension.libraryName, extension.version, extension.superclass, extension.dependencies)
-            project.task(mapOf("type" to DSLGeneratorTask::class.java, "dependsOn" to listOf("prepareReleaseDependencies")),
-                    "generate${extension.camelCaseName}DSL",
-                    supportClosure)
+            val supportClosure = getSupportClosure(
+                project, extension.camelCaseName,
+                extension.libraryName, extension.version, extension.superclass, extension.dependencies
+            )
+            project.task(
+                mapOf("type" to DSLGeneratorTask::class.java, "dependsOn" to listOf("copyDependenciesRelease")),
+                "generate${extension.camelCaseName}DSL",
+                supportClosure
+            )
         }
     }
 
@@ -61,12 +68,14 @@ class AnvilGenPlugin : Plugin<Project> {
         }
     }
 
-    fun getSupportClosure(project: Project,
-                          camelCaseName: String,
-                          libraryName: String,
-                          version: String,
-                          superclassName: String,
-                          rawDeps: Map<String, List<String?>>): Closure<Any> {
+    fun getSupportClosure(
+        project: Project,
+        camelCaseName: String,
+        libraryName: String,
+        version: String,
+        superclassName: String,
+        rawDeps: Map<String, String?>
+    ): Closure<Any> {
         return object : Closure<Any>(this) {
             init {
                 maximumNumberOfParameters = 1
@@ -98,16 +107,13 @@ class AnvilGenPlugin : Plugin<Project> {
         return libraryName.replace('-', '.')
     }
 
-    fun getSupportDependencies(project: Project, version: String, rawDeps: Map<String, List<String?>>): List<File> {
-        val list = rawDeps.flatMap { entry ->
-            entry.value.map {
-                getInternalSupportJar(project, entry.key, version, it ?: "classes")
-            }
-        }
+    fun getSupportDependencies(project: Project, version: String, rawDeps: Map<String, String?>): List<File> {
+        val list = rawDeps.map { entry ->
+            getDependencyJar(project, entry.key, entry.value ?: version)
+        }.toMutableList()
 
-        val arrayList = ArrayList(list)
-        arrayList.add(getAndroidJar(project, 19))
-        return arrayList
+        list.add(getAndroidJar(project, 23))
+        return list
     }
 
     fun getAndroidJar(project: Project, api: Int): File {
@@ -125,15 +131,10 @@ class AnvilGenPlugin : Plugin<Project> {
     }
 
     fun getSupportJar(project: Project, libraryName: String, version: String): File {
-        return File(project.buildDir.absoluteFile,
-                "intermediates/exploded-aar/com.android.support/$libraryName/$version/jars/classes.jar")
+        return File(project.buildDir.absoluteFile, "dependencies/release/$libraryName-$version.jar")
     }
 
-    fun getInternalSupportJar(project: Project,
-                              libraryName: String,
-                              version: String,
-                              internalJar: String): File {
-        return File(project.buildDir.absoluteFile,
-                "intermediates/exploded-aar/com.android.support/$libraryName/$version/jars/$internalJar.jar")
+    fun getDependencyJar(project: Project, libraryName: String, version: String): File {
+        return File(project.buildDir.absoluteFile, "dependencies/release/$libraryName-$version.jar")
     }
 }
