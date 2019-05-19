@@ -1,6 +1,7 @@
 package trikita.anvil.support.core.ui;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
@@ -165,15 +166,15 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("offscreenPageLimit", arg);
   }
 
-  public static Void onChildScrollUpCallback(SwipeRefreshLayout.OnChildScrollUpCallback arg) {
+  public static Void onChildScrollUpCallback(@Nullable SwipeRefreshLayout.OnChildScrollUpCallback arg) {
     return BaseDSL.attr("onChildScrollUpCallback", arg);
   }
 
-  public static Void onRefresh(SwipeRefreshLayout.OnRefreshListener arg) {
+  public static Void onRefresh(@Nullable SwipeRefreshLayout.OnRefreshListener arg) {
     return BaseDSL.attr("onRefresh", arg);
   }
 
-  public static Void onScrollChange(NestedScrollView.OnScrollChangeListener arg) {
+  public static Void onScrollChange(@Nullable NestedScrollView.OnScrollChangeListener arg) {
     return BaseDSL.attr("onScrollChange", arg);
   }
 
@@ -181,7 +182,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("pageMargin", arg);
   }
 
-  public static Void pageMarginDrawable(Drawable arg) {
+  public static Void pageMarginDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("pageMarginDrawable", arg);
   }
 
@@ -189,7 +190,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("pageMarginDrawable", arg);
   }
 
-  public static Void panelSlideListener(SlidingPaneLayout.PanelSlideListener arg) {
+  public static Void panelSlideListener(@Nullable SlidingPaneLayout.PanelSlideListener arg) {
     return BaseDSL.attr("panelSlideListener", arg);
   }
 
@@ -213,11 +214,11 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("scrimColor", arg);
   }
 
-  public static Void shadowDrawableLeft(Drawable arg) {
+  public static Void shadowDrawableLeft(@Nullable Drawable arg) {
     return BaseDSL.attr("shadowDrawableLeft", arg);
   }
 
-  public static Void shadowDrawableRight(Drawable arg) {
+  public static Void shadowDrawableRight(@Nullable Drawable arg) {
     return BaseDSL.attr("shadowDrawableRight", arg);
   }
 
@@ -241,7 +242,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("smoothScrollingEnabled", arg);
   }
 
-  public static Void statusBarBackground(Drawable arg) {
+  public static Void statusBarBackground(@Nullable Drawable arg) {
     return BaseDSL.attr("statusBarBackground", arg);
   }
 
@@ -396,7 +397,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "pageMarginDrawable":
-        if (v instanceof ViewPager && arg instanceof Drawable) {
+        if (v instanceof ViewPager && (arg == null || arg instanceof Drawable)) {
           ((ViewPager) v).setPageMarginDrawable((Drawable) arg);
           return true;
         }
@@ -442,13 +443,13 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "shadowDrawableLeft":
-        if (v instanceof SlidingPaneLayout && arg instanceof Drawable) {
+        if (v instanceof SlidingPaneLayout && (arg == null || arg instanceof Drawable)) {
           ((SlidingPaneLayout) v).setShadowDrawableLeft((Drawable) arg);
           return true;
         }
         break;
       case "shadowDrawableRight":
-        if (v instanceof SlidingPaneLayout && arg instanceof Drawable) {
+        if (v instanceof SlidingPaneLayout && (arg == null || arg instanceof Drawable)) {
           ((SlidingPaneLayout) v).setShadowDrawableRight((Drawable) arg);
           return true;
         }
@@ -484,11 +485,11 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "statusBarBackground":
-        if (v instanceof CoordinatorLayout && arg instanceof Drawable) {
+        if (v instanceof CoordinatorLayout && (arg == null || arg instanceof Drawable)) {
           ((CoordinatorLayout) v).setStatusBarBackground((Drawable) arg);
           return true;
         }
-        if (v instanceof DrawerLayout && arg instanceof Drawable) {
+        if (v instanceof DrawerLayout && (arg == null || arg instanceof Drawable)) {
           ((DrawerLayout) v).setStatusBarBackground((Drawable) arg);
           return true;
         }

@@ -14,6 +14,7 @@ apply plugin: 'kotlin'
 
 repositories {
     mavenCentral()
+    google()
 }
 
 dependencies {
@@ -21,6 +22,6 @@ dependencies {
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-
+    compile "com.android.support:support-annotations:27.1.1"
     compile 'com.squareup:javapoet:1.7.0'
 }

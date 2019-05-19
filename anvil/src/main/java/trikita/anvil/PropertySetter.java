@@ -1,5 +1,6 @@
 package trikita.anvil;
 
+import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.InvocationTargetException;
@@ -96,6 +97,7 @@ final class PropertySetter implements Anvil.AttributeSetter {
         String setter = "set" + name;
         String listener = "set" + name + "Listener";
         Class<?> cls = v.getClass();
+        Log.d("REFLECT", "set attr " + name + " for view " + v.getClass().getSimpleName() + " with value " + value + " oldValue " + prevValue);
         while (cls != null) {
             try {
                 for (Method m : cls.getDeclaredMethods()) {
