@@ -9,12 +9,12 @@ import java.net.URLClassLoader
 
 class NullabilityHolder(isSourceSdk: Boolean) {
 
-    val nullabilityMap: MutableMap<String, Boolean?> = HashMap()
-    var nullableLiteral : String
-    var nonNullableLiteral : String
+    val nullabilityMap: MutableMap<MethodSignature, Boolean?> = HashMap()
+    var nullableLiteral: String
+    var nonNullableLiteral: String
 
     init {
-        if (isSourceSdk){
+        if (isSourceSdk) {
             nullableLiteral = "Landroidx/annotation/RecentlyNullable;"
             nonNullableLiteral = "Landroidx/annotation/RecentlyNonNull;"
         } else {
@@ -27,7 +27,7 @@ class NullabilityHolder(isSourceSdk: Boolean) {
         val cn = ClassNode()
         val cr = try {
             ClassReader(loader.getResourceAsStream(rawClassName))
-        } catch (io : IOException) {
+        } catch (io: IOException) {
             return
         }
 
@@ -43,11 +43,10 @@ class NullabilityHolder(isSourceSdk: Boolean) {
 
                 val hasNullable = hasNullableOrNonNullAnnotation(methodNode.invisibleParameterAnnotations[0])
                 val argType = convertTypeNameFromRaw(methodNode.localVariables[1].desc)
-                println("++++++++++++++++++++++++++++++")
-                println("class: $className method: ${methodNode.name} param name ${methodNode.localVariables[1].name} type $argType : hasNullableOrNonNullAnnotation : $hasNullable")
                 val formattedMethodName = formatMethodName(methodNode.name, 1)
                 formattedMethodName?.let {
-                    nullabilityMap["$className\$${it.formattedName}\$$argType"] = hasNullable
+
+                    nullabilityMap[MethodSignature(className, it.formattedName, argType)] = hasNullable
                 }
             }
         }
@@ -70,7 +69,7 @@ class NullabilityHolder(isSourceSdk: Boolean) {
             var anNode: AnnotationNode?
             for (annotation in annotationList) {
                 anNode = annotation as AnnotationNode
-                when (anNode.desc){
+                when (anNode.desc) {
                     nullableLiteral -> return true
                     nonNullableLiteral -> return false
                 }
@@ -82,15 +81,18 @@ class NullabilityHolder(isSourceSdk: Boolean) {
     fun isParameterNullable(m: Method): Boolean? {
         val formattedMethodName = formatMethodName(m.name, 1)
         return formattedMethodName?.let {
-            val key = "${m.declaringClass.canonicalName}\$${it.formattedName}\$${m.parameters[0].type.canonicalName}"
-            nullabilityMap[key]
+            nullabilityMap[MethodSignature(
+                m.declaringClass.canonicalName,
+                it.formattedName,
+                m.parameters[0].type.canonicalName
+            )]
         }
     }
 
-    fun isParameterNullable(className: String, methodName: String, argType : String ): Boolean? {
-        val key = "$className\$$methodName\$$argType"
-        return nullabilityMap[key]
+    fun isParameterNullable(className: String, methodName: String, argType: String): Boolean? {
+        return nullabilityMap[MethodSignature(className, methodName, argType)]
     }
 
-
 }
+
+data class MethodSignature(val className: String, val methodName: String, val firstArgType: String)
