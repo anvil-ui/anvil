@@ -583,7 +583,7 @@ public class BaseDSL implements Anvil.AttributeSetter {
                 }
                 break;
             case "text":
-                if (v instanceof TextView && (value == null || value instanceof CharSequence)) {
+                if (v instanceof TextView && value instanceof CharSequence) {
                     if (v != TextWatcherProxy.CURRENT_INPUT_TEXT_VIEW) {
                         ((TextView) v).setText((CharSequence) value);
                     }
