@@ -5,4 +5,5 @@ include 'anvil-cardview-v7'
 include 'anvil-gridlayout-v7'
 include 'anvil-design'
 include 'anvil-recyclerview-v7'
+include ':sample'
 
