@@ -49,6 +49,7 @@ anvilgen {
 	  "android.arch.lifecycle-common":  "1.1.0",
 	]
 	quirks = QUIRKS
+	superclass = "BaseAppCompat"
 }
 
 dependencies {

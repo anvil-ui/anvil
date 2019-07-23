@@ -52,6 +52,7 @@ anvilgen {
 	  "viewmodel": "1.1.0"
 	]
 	quirks = QUIRKS
+	superclass = "BaseDesign"
 }
 
 dependencies {
