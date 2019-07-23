@@ -564,6 +564,8 @@ public class BaseDSL implements Anvil.AttributeSetter {
                 if (a.trigger) {
                     a.animator.setTarget(v);
                     a.animator.start();
+                } else {
+                    a.animator.cancel();
                 }
                 return true;
             case "onSeekBarChange":
