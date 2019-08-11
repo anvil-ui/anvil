@@ -2,7 +2,8 @@ package trikita.anvilgen
 
 open class AnvilGenPluginExtension {
     var type = ""
-    var libraryName = ""
+    var moduleName = ""
+    var libraries = mutableMapOf<String, String?>()
     var camelCaseName = ""
     var version = ""
     var quirks = mutableMapOf<String, Map<String, Any>>()

@@ -24,8 +24,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.opengl.GLSurfaceView;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spannable;
@@ -119,6 +117,8 @@ import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 import android.widget.ZoomButton;
 import android.widget.ZoomControls;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -731,7 +731,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.v(ZoomControls.class, r);
   }
 
-  public static Void accessibilityDelegate(@Nullable View.AccessibilityDelegate arg) {
+  public static Void accessibilityDelegate(View.AccessibilityDelegate arg) {
     return BaseDSL.attr("accessibilityDelegate", arg);
   }
 
@@ -1635,7 +1635,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onBreadCrumbClick", arg);
   }
 
-  public static Void onCheckedChange(@Nullable CompoundButton.OnCheckedChangeListener arg) {
+  public static Void onCheckedChange(CompoundButton.OnCheckedChangeListener arg) {
     return BaseDSL.attr("onCheckedChange", arg);
   }
 
@@ -1651,7 +1651,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onChronometerTick", arg);
   }
 
-  public static Void onClick(@Nullable View.OnClickListener arg) {
+  public static Void onClick(View.OnClickListener arg) {
     return BaseDSL.attr("onClick", arg);
   }
 
@@ -1727,7 +1727,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onInflate", arg);
   }
 
-  public static Void onItemClick(@Nullable AdapterView.OnItemClickListener arg) {
+  public static Void onItemClick(AdapterView.OnItemClickListener arg) {
     return BaseDSL.attr("onItemClick", arg);
   }
 
@@ -1735,7 +1735,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onItemLongClick", arg);
   }
 
-  public static Void onItemSelected(@Nullable AdapterView.OnItemSelectedListener arg) {
+  public static Void onItemSelected(AdapterView.OnItemSelectedListener arg) {
     return BaseDSL.attr("onItemSelected", arg);
   }
 
@@ -1747,7 +1747,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onKeyboardAction", arg);
   }
 
-  public static Void onLongClick(@Nullable View.OnLongClickListener arg) {
+  public static Void onLongClick(View.OnLongClickListener arg) {
     return BaseDSL.attr("onLongClick", arg);
   }
 

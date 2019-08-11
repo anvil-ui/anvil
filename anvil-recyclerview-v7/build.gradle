@@ -10,7 +10,7 @@ apply plugin: 'trikita.anvilgen'
 apply from: "$rootProject.projectDir/copyDeps.gradle"
 
 android {
-	compileSdkVersion 27
+	compileSdkVersion 28
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -19,7 +19,7 @@ android {
 
 	defaultConfig {
 		minSdkVersion 15
-		targetSdkVersion 27
+		targetSdkVersion 28
 
 		missingDimensionStrategy 'api', 'sdk15'
 	}
@@ -36,15 +36,17 @@ android {
 apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
-	libraryName = "recyclerview-v7"
+	moduleName = "recyclerview-v7"
+	libraries = ["recyclerview" : null]
 	camelCaseName = "RecyclerViewv7"
-	version = support_version
+	version = androidx_version
 	dependencies = [
-	  "support-core-ui": null,
-	  "support-core-utils": null,
-	  "support-compat": null,
-	  "support-media-compat": null,
-	  "support-fragment": null,
+	  "legacy-support-core-ui": null,
+	  "legacy-core-utils": null,
+	  "media": null,
+	  "core" : null,
+	  "customview" : null,
+	  "fragment": null,
 	]
 	quirks = QUIRKS
 	superclass = "BaseRecyclerView"
@@ -52,7 +54,7 @@ anvilgen {
 
 dependencies {
 	implementation project(path: ':anvil')
-	implementation "com.android.support:recyclerview-v7:$support_version"
+	implementation "androidx.recyclerview:recyclerview:$androidx_version"
 
 	testImplementation 'junit:junit:4.12'
 	testImplementation "org.mockito:mockito-core:$mockito_version"

@@ -30,8 +30,6 @@ import android.media.MediaPlayer;
 import android.media.tv.TvView;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spannable;
@@ -133,6 +131,8 @@ import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 import android.widget.ZoomButton;
 import android.widget.ZoomControls;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -786,7 +786,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.v(ZoomControls.class, r);
   }
 
-  public static Void accessibilityDelegate(@Nullable View.AccessibilityDelegate arg) {
+  public static Void accessibilityDelegate(View.AccessibilityDelegate arg) {
     return BaseDSL.attr("accessibilityDelegate", arg);
   }
 
@@ -878,7 +878,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("backgroundTintList", arg);
   }
 
-  public static Void backgroundTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void backgroundTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("backgroundTintMode", arg);
   }
 
@@ -918,7 +918,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("buttonTintList", arg);
   }
 
-  public static Void buttonTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void buttonTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("buttonTintMode", arg);
   }
 
@@ -930,7 +930,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("calendarViewShown", arg);
   }
 
-  public static Void callback(@Nullable TvView.TvInputCallback arg) {
+  public static Void callback(TvView.TvInputCallback arg) {
     return BaseDSL.attr("callback", arg);
   }
 
@@ -958,7 +958,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("checkMarkTintList", arg);
   }
 
-  public static Void checkMarkTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void checkMarkTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("checkMarkTintMode", arg);
   }
 
@@ -1506,7 +1506,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("imageTintList", arg);
   }
 
-  public static Void imageTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void imageTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("imageTintMode", arg);
   }
 
@@ -1550,7 +1550,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("indeterminateTintList", arg);
   }
 
-  public static Void indeterminateTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void indeterminateTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("indeterminateTintMode", arg);
   }
 
@@ -1874,7 +1874,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onBreadCrumbClick", arg);
   }
 
-  public static Void onCheckedChange(@Nullable CompoundButton.OnCheckedChangeListener arg) {
+  public static Void onCheckedChange(CompoundButton.OnCheckedChangeListener arg) {
     return BaseDSL.attr("onCheckedChange", arg);
   }
 
@@ -1890,7 +1890,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onChronometerTick", arg);
   }
 
-  public static Void onClick(@Nullable View.OnClickListener arg) {
+  public static Void onClick(View.OnClickListener arg) {
     return BaseDSL.attr("onClick", arg);
   }
 
@@ -1974,7 +1974,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onInfo", arg);
   }
 
-  public static Void onItemClick(@Nullable AdapterView.OnItemClickListener arg) {
+  public static Void onItemClick(AdapterView.OnItemClickListener arg) {
     return BaseDSL.attr("onItemClick", arg);
   }
 
@@ -1982,7 +1982,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onItemLongClick", arg);
   }
 
-  public static Void onItemSelected(@Nullable AdapterView.OnItemSelectedListener arg) {
+  public static Void onItemSelected(AdapterView.OnItemSelectedListener arg) {
     return BaseDSL.attr("onItemSelected", arg);
   }
 
@@ -1994,7 +1994,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onKeyboardAction", arg);
   }
 
-  public static Void onLongClick(@Nullable View.OnLongClickListener arg) {
+  public static Void onLongClick(View.OnLongClickListener arg) {
     return BaseDSL.attr("onLongClick", arg);
   }
 
@@ -2170,7 +2170,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("progressBackgroundTintList", arg);
   }
 
-  public static Void progressBackgroundTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void progressBackgroundTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("progressBackgroundTintMode", arg);
   }
 
@@ -2186,7 +2186,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("progressTintList", arg);
   }
 
-  public static Void progressTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void progressTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("progressTintMode", arg);
   }
 
@@ -2342,7 +2342,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("secondaryProgressTintList", arg);
   }
 
-  public static Void secondaryProgressTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void secondaryProgressTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("secondaryProgressTintMode", arg);
   }
 
@@ -2602,7 +2602,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("thumbTintList", arg);
   }
 
-  public static Void thumbTintMode(@Nullable PorterDuff.Mode arg) {
+  public static Void thumbTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("thumbTintMode", arg);
   }
 
@@ -3027,7 +3027,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "buttonTintMode":
-        if (v instanceof CompoundButton && arg instanceof PorterDuff.Mode) {
+        if (v instanceof CompoundButton && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((CompoundButton) v).setButtonTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -3045,7 +3045,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "callback":
-        if (v instanceof TvView && arg instanceof TvView.TvInputCallback) {
+        if (v instanceof TvView && (arg == null || arg instanceof TvView.TvInputCallback)) {
           ((TvView) v).setCallback((TvView.TvInputCallback) arg);
           return true;
         }
@@ -3085,7 +3085,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "checkMarkTintMode":
-        if (v instanceof CheckedTextView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof CheckedTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((CheckedTextView) v).setCheckMarkTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -3965,7 +3965,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "imageTintMode":
-        if (v instanceof ImageView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ImageView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ImageView) v).setImageTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -4037,7 +4037,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "indeterminateTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setIndeterminateTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -5554,7 +5554,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "progressBackgroundTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setProgressBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -5578,7 +5578,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "progressTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setProgressTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -5814,7 +5814,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "secondaryProgressTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setSecondaryProgressTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -6214,7 +6214,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "thumbTintMode":
-        if (v instanceof AbsSeekBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AbsSeekBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AbsSeekBar) v).setThumbTintMode((PorterDuff.Mode) arg);
           return true;
         }

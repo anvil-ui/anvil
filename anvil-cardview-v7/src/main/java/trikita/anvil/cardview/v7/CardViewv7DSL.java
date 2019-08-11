@@ -1,9 +1,9 @@
 package trikita.anvil.cardview.v7;
 
 import android.content.res.ColorStateList;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.view.View;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import java.lang.Boolean;
 import java.lang.Float;
 import java.lang.Integer;

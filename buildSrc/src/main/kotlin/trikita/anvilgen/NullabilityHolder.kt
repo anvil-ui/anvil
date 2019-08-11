@@ -18,8 +18,8 @@ class NullabilityHolder(isSourceSdk: Boolean) {
             nullableLiteral = "Landroidx/annotation/RecentlyNullable;"
             nonNullableLiteral = "Landroidx/annotation/RecentlyNonNull;"
         } else {
-            nullableLiteral = "Landroid/support/annotation/Nullable;"
-            nonNullableLiteral = "Landroid/support/annotation/NonNull;"
+            nullableLiteral = "Landroidx/annotation/Nullable;"
+            nonNullableLiteral = "Landroidx/annotation/NonNull;"
         }
     }
 
@@ -41,27 +41,31 @@ class NullabilityHolder(isSourceSdk: Boolean) {
                 && methodNode.localVariables?.size == 2
             ) {
 
-                val hasNullable = hasNullableOrNonNullAnnotation(methodNode.invisibleParameterAnnotations[0])
+                val hasNullable =
+                    hasNullableOrNonNullAnnotation(methodNode.invisibleParameterAnnotations[0])
                 val argType = convertTypeNameFromRaw(methodNode.localVariables[1].desc)
                 val formattedMethodName = formatMethodName(methodNode.name, 1)
                 formattedMethodName?.let {
-
-                    nullabilityMap[MethodSignature(className, it.formattedName, argType)] = hasNullable
+                    val signature = MethodSignature(className, it.formattedName, argType)
+                    nullabilityMap[signature] = hasNullable
                 }
             }
         }
     }
 
     private fun convertTypeNameFromRaw(typeName: String): String {
-        return typeName.replace("/", ".").let {
-            if (it.startsWith("L")) {
-                it.replaceFirst("L", "")
-            } else it
-        }.let {
-            if (it.endsWith(";")) {
-                it.replaceFirst(";", "")
-            } else it
-        }
+        return typeName
+            .replace("/", ".")
+            .replace("$", ".")
+            .let {
+                if (it.startsWith("L")) {
+                    it.replaceFirst("L", "")
+                } else it
+            }.let {
+                if (it.endsWith(";")) {
+                    it.replaceFirst(";", "")
+                } else it
+            }
     }
 
     fun hasNullableOrNonNullAnnotation(annotationList: List<*>?): Boolean? {
@@ -81,11 +85,13 @@ class NullabilityHolder(isSourceSdk: Boolean) {
     fun isParameterNullable(m: Method): Boolean? {
         val formattedMethodName = formatMethodName(m.name, 1)
         return formattedMethodName?.let {
-            nullabilityMap[MethodSignature(
+            val signature = MethodSignature(
                 m.declaringClass.canonicalName,
                 it.formattedName,
                 m.parameters[0].type.canonicalName
-            )]
+            )
+
+            nullabilityMap[signature]
         }
     }
 

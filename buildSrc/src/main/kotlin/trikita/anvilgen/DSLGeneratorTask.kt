@@ -1,6 +1,6 @@
 package trikita.anvilgen
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import com.squareup.javapoet.*
 import groovy.lang.Closure
 import org.gradle.api.DefaultTask
@@ -10,21 +10,16 @@ import java.lang.Deprecated
 import java.lang.reflect.Method
 import java.net.URL
 import java.net.URLClassLoader
-import java.util.*
 import java.util.jar.JarFile
 import javax.lang.model.element.Modifier
 import com.squareup.javapoet.AnnotationSpec
-import android.support.annotation.Nullable
-import jdk.internal.org.objectweb.asm.ClassReader
-import jdk.internal.org.objectweb.asm.tree.AnnotationNode
-import jdk.internal.org.objectweb.asm.tree.ClassNode
-import java.io.IOException
-import kotlin.collections.HashMap
+import androidx.annotation.Nullable
+import java.util.jar.JarEntry
 
 open class DSLGeneratorTask : DefaultTask() {
 
-    lateinit var jarFile: File
-    lateinit var nullabilitySourceFile: File
+    lateinit var jarFiles: List<File>
+    lateinit var nullabilitySourceFiles: List<File>
     lateinit var dependencies: List<File>
     lateinit var taskName: String
     lateinit var javadocContains: String
@@ -52,7 +47,7 @@ open class DSLGeneratorTask : DefaultTask() {
         attrsBuilder.addStaticBlock(CodeBlock.of(
                 "Anvil.registerAttributeSetter(new \$L());\n", outputClassName))
 
-        var attrSwitch = MethodSpec.methodBuilder("set")
+        val attrSwitch = MethodSpec.methodBuilder("set")
                 .addParameter(ClassName.get("android.view", "View"), "v")
                 .addParameter(ClassName.get("java.lang", "String"), "name")
                 .addParameter(ParameterSpec.builder(TypeName.OBJECT, "arg")
@@ -62,16 +57,16 @@ open class DSLGeneratorTask : DefaultTask() {
                 .returns(TypeName.BOOLEAN)
                 .addModifiers(Modifier.PUBLIC)
 
-        var attrCases = CodeBlock.builder().beginControlFlow("switch (name)")
+        val attrCases = CodeBlock.builder().beginControlFlow("switch (name)")
 
-        var attrs = mutableListOf<Attr>()
+        val attrs = mutableListOf<Attr>()
 
         nullabilityHolder = NullabilityHolder(outputClassName == "DSL")
 
         forEachView { view ->
             processViews(attrsBuilder, view)
             forEachMethod(view) { m, name, arg, isListener, isNullable ->
-                var attr: Attr?
+                val attr: Attr?
                 if (isListener) {
                     attr = listener(name, m, arg)
                 } else {
@@ -87,9 +82,9 @@ open class DSLGeneratorTask : DefaultTask() {
 
         attrCases.endControlFlow()
 
-        attrSwitch.addCode(attrCases.build()).addCode("return false;\n");
+        attrSwitch.addCode(attrCases.build()).addCode("return false;\n")
 
-        attrsBuilder.addMethod(attrSwitch.build());
+        attrsBuilder.addMethod(attrSwitch.build())
 
         JavaFile.builder(packageName, attrsBuilder.build())
                 .build()
@@ -97,23 +92,24 @@ open class DSLGeneratorTask : DefaultTask() {
     }
 
     fun forEachView(cb: (Class<*>) -> Unit) {
-        val urls = mutableListOf(URL("jar", "", "file:${jarFile.absolutePath}!/"))
+        val urls = jarFiles.map { URL("jar", "", "file:${it.absolutePath}!/")  }.toMutableList()
         for (dep in dependencies) {
             urls.add(URL("jar", "", "file:${dep.absolutePath}!/"))
         }
         val loader = URLClassLoader(urls.toTypedArray(), javaClass.classLoader)
         val viewClass = loader.loadClass("android.view.View")
 
-        val nullabilityClassLoader = URLClassLoader(arrayOf(URL("jar", "", "file:${nullabilitySourceFile.absolutePath}!/")), javaClass.classLoader)
+        val nullabilityClassLoader = URLClassLoader(nullabilitySourceFiles.map { URL("jar", "", "file:${it.absolutePath}!/") }.toTypedArray(), javaClass.classLoader)
 
-        val jar = JarFile(jarFile)
-        val list = Collections.list(jar.entries())
-        list.sortBy { it.name }
+        val jarEntriesList = mutableListOf<JarEntry>()
+        jarFiles.map { JarFile(it).entries() }.forEach {
+            jarEntriesList.addAll(it.toList())
+        }
 
-        for (e in list) {
+        jarEntriesList.sortBy { it.name }
+        for (e in jarEntriesList) {
             if (e.name.endsWith(".class")) {
                 val className = e.name.replace(".class", "").replace("/", ".")
-
                 // Skip inner classes
                 if (className.contains('$')) {
                     continue
@@ -279,7 +275,7 @@ open class DSLGeneratorTask : DefaultTask() {
                     .addStatement("v.${m.name}((\$T) null)", listenerClass)
                     .endControlFlow()
                     .addStatement("return true")
-            attr.unreachableBreak = true;
+            attr.unreachableBreak = true
         } else {
             attr.code.beginControlFlow("if (v instanceof \$T && arg instanceof \$T)", m.declaringClass, listenerClass)
                     .beginControlFlow("if (arg != null)", m.declaringClass)
@@ -334,7 +330,7 @@ open class DSLGeneratorTask : DefaultTask() {
                 .addStatement("return true")
                 .endControlFlow()
         }
-        return attr;
+        return attr
     }
 
     fun addWrapperMethod(builder: TypeSpec.Builder, name: String, argClass: Class<*>, className: String) {
@@ -374,19 +370,19 @@ open class DSLGeneratorTask : DefaultTask() {
             }
 
             cases.add("case \$S:\n", it.key)
-            cases.indent();
+            cases.indent()
             filered.filter { it.setter.declaringClass.canonicalName != "android.view.View" }.forEach {
                 cases.add(it.code.build())
             }
 
-            val common = filered.firstOrNull() { it.setter.declaringClass.canonicalName == "android.view.View" }
+            val common = filered.firstOrNull { it.setter.declaringClass.canonicalName == "android.view.View" }
             if (common != null) {
                 cases.add(common.code.build())
             }
             if (common == null || !common.unreachableBreak) {
                 cases.add("break;\n")
             }
-            cases.unindent();
+            cases.unindent()
         }
 
         attrs.sortedBy { it.name }.groupBy { it.name }.forEach {

@@ -10,7 +10,7 @@ apply plugin: 'trikita.anvilgen'
 apply from: "$rootProject.projectDir/copyDeps.gradle"
 
 android {
-	compileSdkVersion 27
+	compileSdkVersion 28
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -19,7 +19,7 @@ android {
 
 	defaultConfig {
 		minSdkVersion 15
-		targetSdkVersion 27
+		targetSdkVersion 28
 
 		missingDimensionStrategy 'api', 'sdk15'
 	}
@@ -36,28 +36,38 @@ android {
 apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
-	libraryName = "support-core-ui"
+	moduleName = "support-core-ui"
+	libraries = ["legacy-support-core-ui":null,
+				 "drawerlayout":null,
+				 "coordinatorlayout":null,
+				 "slidingpanelayout":null,
+				 "swiperefreshlayout":null,
+			     "core": "1.0.1",
+				 "viewpager":null]
 	camelCaseName = "SupportCoreUi"
-	version = support_version
+	version = androidx_version
 	dependencies = [
-	  "support-core-ui": null,
-	  "support-core-utils": null,
-	  "support-compat": null,
-	  "support-media-compat": null,
-	  "support-fragment": null,
-	  "support-v4": null
+	  "legacy-support-core-ui": null,
+	  "legacy-support-core-utils": null,
+	  "drawerlayout": null,
+	  "core": null,
+	  "customview" : null,
+	  "media": null,
+	  "fragment": null,
+	  "annotation" : null
 	]
 	quirks = QUIRKS
 }
 
 dependencies {
 	implementation project(path : ':anvil')
-	implementation "com.android.support:support-core-ui:$support_version"
-	implementation "com.android.support:support-core-utils:$support_version"
-	implementation "com.android.support:support-compat:$support_version"
-	implementation "com.android.support:support-media-compat:$support_version"
-	implementation "com.android.support:support-fragment:$support_version"
-	implementation "com.android.support:transition:$support_version"
+	implementation "androidx.legacy:legacy-support-core-ui:$androidx_version"
+	implementation "androidx.legacy:legacy-support-core-utils:$androidx_version"
+	implementation "androidx.core:core:1.0.1"
+	implementation "androidx.media:media:1.0.1"
+	implementation "androidx.fragment:fragment:$androidx_version"
+	implementation "androidx.transition:transition:$androidx_version"
+	implementation "androidx.annotation:annotation:$androidx_version"
 
 	testImplementation 'junit:junit:4.12'
 	testImplementation "org.mockito:mockito-core:$mockito_version"
