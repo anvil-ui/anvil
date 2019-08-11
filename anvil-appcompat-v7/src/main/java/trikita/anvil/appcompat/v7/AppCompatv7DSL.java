@@ -1,23 +1,42 @@
 package trikita.anvil.appcompat.v7;
 
+import android.app.SearchableInfo;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.PopupWindow;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.view.menu.ExpandedMenuView;
 import androidx.appcompat.view.menu.ListMenuItemView;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.ActionBarContainer;
 import androidx.appcompat.widget.ActionBarContextView;
+import androidx.appcompat.widget.ActionBarOverlayLayout;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.ActivityChooserView;
 import androidx.appcompat.widget.AlertDialogLayout;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.appcompat.widget.ContentFrameLayout;
 import androidx.appcompat.widget.DialogTitle;
@@ -30,6 +49,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.ViewStubCompat;
+import androidx.core.text.PrecomputedTextCompat;
+import androidx.core.view.ActionProvider;
+import androidx.cursoradapter.widget.CursorAdapter;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -37,6 +59,7 @@ import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
 import java.lang.Void;
+import java.util.concurrent.Future;
 import trikita.anvil.Anvil;
 import trikita.anvil.BaseDSL;
 
@@ -49,6 +72,14 @@ import trikita.anvil.BaseDSL;
 public final class AppCompatv7DSL implements Anvil.AttributeSetter {
   static {
     Anvil.registerAttributeSetter(new AppCompatv7DSL());
+  }
+
+  public static BaseDSL.ViewClassResult actionMenuItemView() {
+    return BaseDSL.v(ActionMenuItemView.class);
+  }
+
+  public static Void actionMenuItemView(Anvil.Renderable r) {
+    return BaseDSL.v(ActionMenuItemView.class, r);
   }
 
   public static BaseDSL.ViewClassResult expandedMenuView() {
@@ -83,6 +114,14 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.v(ActionBarContextView.class, r);
   }
 
+  public static BaseDSL.ViewClassResult actionBarOverlayLayout() {
+    return BaseDSL.v(ActionBarOverlayLayout.class);
+  }
+
+  public static Void actionBarOverlayLayout(Anvil.Renderable r) {
+    return BaseDSL.v(ActionBarOverlayLayout.class, r);
+  }
+
   public static BaseDSL.ViewClassResult actionMenuView() {
     return BaseDSL.v(ActionMenuView.class);
   }
@@ -107,12 +146,76 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.v(AlertDialogLayout.class, r);
   }
 
+  public static BaseDSL.ViewClassResult appCompatAutoCompleteTextView() {
+    return BaseDSL.v(AppCompatAutoCompleteTextView.class);
+  }
+
+  public static Void appCompatAutoCompleteTextView(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatAutoCompleteTextView.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatButton() {
+    return BaseDSL.v(AppCompatButton.class);
+  }
+
+  public static Void appCompatButton(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatButton.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatCheckBox() {
+    return BaseDSL.v(AppCompatCheckBox.class);
+  }
+
+  public static Void appCompatCheckBox(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatCheckBox.class, r);
+  }
+
   public static BaseDSL.ViewClassResult appCompatCheckedTextView() {
     return BaseDSL.v(AppCompatCheckedTextView.class);
   }
 
   public static Void appCompatCheckedTextView(Anvil.Renderable r) {
     return BaseDSL.v(AppCompatCheckedTextView.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatEditText() {
+    return BaseDSL.v(AppCompatEditText.class);
+  }
+
+  public static Void appCompatEditText(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatEditText.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatImageButton() {
+    return BaseDSL.v(AppCompatImageButton.class);
+  }
+
+  public static Void appCompatImageButton(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatImageButton.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatImageView() {
+    return BaseDSL.v(AppCompatImageView.class);
+  }
+
+  public static Void appCompatImageView(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatImageView.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatMultiAutoCompleteTextView() {
+    return BaseDSL.v(AppCompatMultiAutoCompleteTextView.class);
+  }
+
+  public static Void appCompatMultiAutoCompleteTextView(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatMultiAutoCompleteTextView.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatRadioButton() {
+    return BaseDSL.v(AppCompatRadioButton.class);
+  }
+
+  public static Void appCompatRadioButton(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatRadioButton.class, r);
   }
 
   public static BaseDSL.ViewClassResult appCompatRatingBar() {
@@ -129,6 +232,22 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
 
   public static Void appCompatSeekBar(Anvil.Renderable r) {
     return BaseDSL.v(AppCompatSeekBar.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatSpinner() {
+    return BaseDSL.v(AppCompatSpinner.class);
+  }
+
+  public static Void appCompatSpinner(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatSpinner.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult appCompatTextView() {
+    return BaseDSL.v(AppCompatTextView.class);
+  }
+
+  public static Void appCompatTextView(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatTextView.class, r);
   }
 
   public static BaseDSL.ViewClassResult buttonBarLayout() {
@@ -219,12 +338,32 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.v(ViewStubCompat.class, r);
   }
 
+  public static Void actionBarHideOffset(int arg) {
+    return BaseDSL.attr("actionBarHideOffset", arg);
+  }
+
+  public static Void actionBarVisibilityCallback(ActionBarOverlayLayout.ActionBarVisibilityCallback arg) {
+    return BaseDSL.attr("actionBarVisibilityCallback", arg);
+  }
+
+  public static Void allowCollapse(boolean arg) {
+    return BaseDSL.attr("allowCollapse", arg);
+  }
+
   public static Void allowStacking(boolean arg) {
     return BaseDSL.attr("allowStacking", arg);
   }
 
+  public static Void appSearchData(Bundle arg) {
+    return BaseDSL.attr("appSearchData", arg);
+  }
+
   public static Void attachListener(ContentFrameLayout.OnAttachListener arg) {
     return BaseDSL.attr("attachListener", arg);
+  }
+
+  public static Void autoSizeTextTypeWithDefaults(int arg) {
+    return BaseDSL.attr("autoSizeTextTypeWithDefaults", arg);
   }
 
   public static Void baselineAligned(boolean arg) {
@@ -235,6 +374,38 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("baselineAlignedChildIndex", arg);
   }
 
+  public static Void checkable(boolean arg) {
+    return BaseDSL.attr("checkable", arg);
+  }
+
+  public static Void checked(boolean arg) {
+    return BaseDSL.attr("checked", arg);
+  }
+
+  public static Void collapsible(boolean arg) {
+    return BaseDSL.attr("collapsible", arg);
+  }
+
+  public static Void contentHeight(int arg) {
+    return BaseDSL.attr("contentHeight", arg);
+  }
+
+  public static Void contentInsetEndWithActions(int arg) {
+    return BaseDSL.attr("contentInsetEndWithActions", arg);
+  }
+
+  public static Void contentInsetStartWithNavigation(int arg) {
+    return BaseDSL.attr("contentInsetStartWithNavigation", arg);
+  }
+
+  public static Void customView(View arg) {
+    return BaseDSL.attr("customView", arg);
+  }
+
+  public static Void defaultActionButtonContentDescription(int arg) {
+    return BaseDSL.attr("defaultActionButtonContentDescription", arg);
+  }
+
   public static Void dividerDrawable(Drawable arg) {
     return BaseDSL.attr("dividerDrawable", arg);
   }
@@ -243,16 +414,88 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("dividerPadding", arg);
   }
 
+  public static Void expandActivityOverflowButtonContentDescription(int arg) {
+    return BaseDSL.attr("expandActivityOverflowButtonContentDescription", arg);
+  }
+
+  public static Void expandActivityOverflowButtonDrawable(Drawable arg) {
+    return BaseDSL.attr("expandActivityOverflowButtonDrawable", arg);
+  }
+
+  public static Void expandedActionViewsExclusive(boolean arg) {
+    return BaseDSL.attr("expandedActionViewsExclusive", arg);
+  }
+
+  public static Void expandedFormat(boolean arg) {
+    return BaseDSL.attr("expandedFormat", arg);
+  }
+
+  public static Void firstBaselineToTopHeight(int arg) {
+    return BaseDSL.attr("firstBaselineToTopHeight", arg);
+  }
+
+  public static Void forceShowIcon(boolean arg) {
+    return BaseDSL.attr("forceShowIcon", arg);
+  }
+
   public static Void gravity(int arg) {
     return BaseDSL.attr("gravity", arg);
+  }
+
+  public static Void groupDividerEnabled(boolean arg) {
+    return BaseDSL.attr("groupDividerEnabled", arg);
+  }
+
+  public static Void hasNonEmbeddedTabs(boolean arg) {
+    return BaseDSL.attr("hasNonEmbeddedTabs", arg);
+  }
+
+  public static Void hideOnContentScrollEnabled(boolean arg) {
+    return BaseDSL.attr("hideOnContentScrollEnabled", arg);
   }
 
   public static Void horizontalGravity(int arg) {
     return BaseDSL.attr("horizontalGravity", arg);
   }
 
+  public static Void icon(Drawable arg) {
+    return BaseDSL.attr("icon", arg);
+  }
+
+  public static Void icon(int arg) {
+    return BaseDSL.attr("icon", arg);
+  }
+
+  public static Void iconified(boolean arg) {
+    return BaseDSL.attr("iconified", arg);
+  }
+
+  public static Void iconifiedByDefault(boolean arg) {
+    return BaseDSL.attr("iconifiedByDefault", arg);
+  }
+
+  public static Void imeOptions(int arg) {
+    return BaseDSL.attr("imeOptions", arg);
+  }
+
   public static Void inflatedId(int arg) {
     return BaseDSL.attr("inflatedId", arg);
+  }
+
+  public static Void initialActivityCount(int arg) {
+    return BaseDSL.attr("initialActivityCount", arg);
+  }
+
+  public static Void inputType(int arg) {
+    return BaseDSL.attr("inputType", arg);
+  }
+
+  public static Void itemInvoker(MenuBuilder.ItemInvoker arg) {
+    return BaseDSL.attr("itemInvoker", arg);
+  }
+
+  public static Void lastBaselineToBottomHeight(int arg) {
+    return BaseDSL.attr("lastBaselineToBottomHeight", arg);
   }
 
   public static Void layoutInflater(LayoutInflater arg) {
@@ -263,8 +506,60 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("layoutResource", arg);
   }
 
+  public static Void lineHeight(int arg) {
+    return BaseDSL.attr("lineHeight", arg);
+  }
+
+  public static Void logo(Drawable arg) {
+    return BaseDSL.attr("logo", arg);
+  }
+
+  public static Void logo(int arg) {
+    return BaseDSL.attr("logo", arg);
+  }
+
+  public static Void logoDescription(int arg) {
+    return BaseDSL.attr("logoDescription", arg);
+  }
+
+  public static Void logoDescription(CharSequence arg) {
+    return BaseDSL.attr("logoDescription", arg);
+  }
+
+  public static Void maxWidth(int arg) {
+    return BaseDSL.attr("maxWidth", arg);
+  }
+
   public static Void measureWithLargestChildEnabled(boolean arg) {
     return BaseDSL.attr("measureWithLargestChildEnabled", arg);
+  }
+
+  public static Void navigationContentDescription(int arg) {
+    return BaseDSL.attr("navigationContentDescription", arg);
+  }
+
+  public static Void navigationContentDescription(@Nullable CharSequence arg) {
+    return BaseDSL.attr("navigationContentDescription", arg);
+  }
+
+  public static Void navigationIcon(@Nullable Drawable arg) {
+    return BaseDSL.attr("navigationIcon", arg);
+  }
+
+  public static Void navigationIcon(int arg) {
+    return BaseDSL.attr("navigationIcon", arg);
+  }
+
+  public static Void navigationOnClickListener(View.OnClickListener arg) {
+    return BaseDSL.attr("navigationOnClickListener", arg);
+  }
+
+  public static Void onClose(SearchView.OnCloseListener arg) {
+    return BaseDSL.attr("onClose", arg);
+  }
+
+  public static Void onDismiss(PopupWindow.OnDismissListener arg) {
+    return BaseDSL.attr("onDismiss", arg);
   }
 
   public static Void onFitSystemWindows(FitWindowsViewGroup.OnFitSystemWindowsListener arg) {
@@ -275,12 +570,76 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onInflate", arg);
   }
 
+  public static Void onMenuItemClick(ActionMenuView.OnMenuItemClickListener arg) {
+    return BaseDSL.attr("onMenuItemClick", arg);
+  }
+
+  public static Void onMenuItemClick(Toolbar.OnMenuItemClickListener arg) {
+    return BaseDSL.attr("onMenuItemClick", arg);
+  }
+
+  public static Void onQueryText(SearchView.OnQueryTextListener arg) {
+    return BaseDSL.attr("onQueryText", arg);
+  }
+
+  public static Void onQueryTextFocusChange(View.OnFocusChangeListener arg) {
+    return BaseDSL.attr("onQueryTextFocusChange", arg);
+  }
+
+  public static Void onSearchClick(View.OnClickListener arg) {
+    return BaseDSL.attr("onSearchClick", arg);
+  }
+
+  public static Void onSuggestion(SearchView.OnSuggestionListener arg) {
+    return BaseDSL.attr("onSuggestion", arg);
+  }
+
   public static Void orientation(int arg) {
     return BaseDSL.attr("orientation", arg);
   }
 
+  public static Void overflowIcon(@Nullable Drawable arg) {
+    return BaseDSL.attr("overflowIcon", arg);
+  }
+
+  public static Void overflowReserved(boolean arg) {
+    return BaseDSL.attr("overflowReserved", arg);
+  }
+
+  public static Void overlayMode(boolean arg) {
+    return BaseDSL.attr("overlayMode", arg);
+  }
+
+  public static Void popupCallback(ActionMenuItemView.PopupCallback arg) {
+    return BaseDSL.attr("popupCallback", arg);
+  }
+
+  public static Void popupTheme(int arg) {
+    return BaseDSL.attr("popupTheme", arg);
+  }
+
+  public static Void precomputedText(@NonNull PrecomputedTextCompat arg) {
+    return BaseDSL.attr("precomputedText", arg);
+  }
+
   public static Void primaryBackground(Drawable arg) {
     return BaseDSL.attr("primaryBackground", arg);
+  }
+
+  public static Void provider(ActionProvider arg) {
+    return BaseDSL.attr("provider", arg);
+  }
+
+  public static Void queryHint(@Nullable CharSequence arg) {
+    return BaseDSL.attr("queryHint", arg);
+  }
+
+  public static Void queryRefinementEnabled(boolean arg) {
+    return BaseDSL.attr("queryRefinementEnabled", arg);
+  }
+
+  public static Void searchableInfo(SearchableInfo arg) {
+    return BaseDSL.attr("searchableInfo", arg);
   }
 
   public static Void showDividers(int arg) {
@@ -289,6 +648,10 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
 
   public static Void showText(boolean arg) {
     return BaseDSL.attr("showText", arg);
+  }
+
+  public static Void showingForActionMode(boolean arg) {
+    return BaseDSL.attr("showingForActionMode", arg);
   }
 
   public static Void splitBackground(Drawable arg) {
@@ -301,6 +664,54 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
 
   public static Void stackedBackground(Drawable arg) {
     return BaseDSL.attr("stackedBackground", arg);
+  }
+
+  public static Void submitButtonEnabled(boolean arg) {
+    return BaseDSL.attr("submitButtonEnabled", arg);
+  }
+
+  public static Void subtitle(int arg) {
+    return BaseDSL.attr("subtitle", arg);
+  }
+
+  public static Void subtitle(CharSequence arg) {
+    return BaseDSL.attr("subtitle", arg);
+  }
+
+  public static Void subtitleTextColor(int arg) {
+    return BaseDSL.attr("subtitleTextColor", arg);
+  }
+
+  public static Void suggestionsAdapter(CursorAdapter arg) {
+    return BaseDSL.attr("suggestionsAdapter", arg);
+  }
+
+  public static Void supportAllCaps(boolean arg) {
+    return BaseDSL.attr("supportAllCaps", arg);
+  }
+
+  public static Void supportBackgroundTintList(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("supportBackgroundTintList", arg);
+  }
+
+  public static Void supportBackgroundTintMode(PorterDuff.Mode arg) {
+    return BaseDSL.attr("supportBackgroundTintMode", arg);
+  }
+
+  public static Void supportButtonTintList(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("supportButtonTintList", arg);
+  }
+
+  public static Void supportButtonTintMode(PorterDuff.Mode arg) {
+    return BaseDSL.attr("supportButtonTintMode", arg);
+  }
+
+  public static Void supportImageTintList(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("supportImageTintList", arg);
+  }
+
+  public static Void supportImageTintMode(PorterDuff.Mode arg) {
+    return BaseDSL.attr("supportImageTintMode", arg);
   }
 
   public static Void switchMinWidth(int arg) {
@@ -317,6 +728,18 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
 
   public static Void tabContainer(ScrollingTabContainerView arg) {
     return BaseDSL.attr("tabContainer", arg);
+  }
+
+  public static Void tabSelected(int arg) {
+    return BaseDSL.attr("tabSelected", arg);
+  }
+
+  public static Void textFuture(@NonNull Future arg) {
+    return BaseDSL.attr("textFuture", arg);
+  }
+
+  public static Void textMetricsParamsCompat(PrecomputedTextCompat.Params arg) {
+    return BaseDSL.attr("textMetricsParamsCompat", arg);
   }
 
   public static Void textOff(CharSequence arg) {
@@ -347,6 +770,38 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("thumbTintMode", arg);
   }
 
+  public static Void title(int arg) {
+    return BaseDSL.attr("title", arg);
+  }
+
+  public static Void title(CharSequence arg) {
+    return BaseDSL.attr("title", arg);
+  }
+
+  public static Void titleMarginBottom(int arg) {
+    return BaseDSL.attr("titleMarginBottom", arg);
+  }
+
+  public static Void titleMarginEnd(int arg) {
+    return BaseDSL.attr("titleMarginEnd", arg);
+  }
+
+  public static Void titleMarginStart(int arg) {
+    return BaseDSL.attr("titleMarginStart", arg);
+  }
+
+  public static Void titleMarginTop(int arg) {
+    return BaseDSL.attr("titleMarginTop", arg);
+  }
+
+  public static Void titleOptional(boolean arg) {
+    return BaseDSL.attr("titleOptional", arg);
+  }
+
+  public static Void titleTextColor(int arg) {
+    return BaseDSL.attr("titleTextColor", arg);
+  }
+
   public static Void trackDrawable(Drawable arg) {
     return BaseDSL.attr("trackDrawable", arg);
   }
@@ -367,6 +822,10 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("transitioning", arg);
   }
 
+  public static Void uiOptions(int arg) {
+    return BaseDSL.attr("uiOptions", arg);
+  }
+
   public static Void verticalGravity(int arg) {
     return BaseDSL.attr("verticalGravity", arg);
   }
@@ -375,17 +834,59 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("weightSum", arg);
   }
 
+  public static Void windowCallback(Window.Callback arg) {
+    return BaseDSL.attr("windowCallback", arg);
+  }
+
+  public static Void windowTitle(CharSequence arg) {
+    return BaseDSL.attr("windowTitle", arg);
+  }
+
   public boolean set(View v, String name, final Object arg, final Object old) {
     switch (name) {
+      case "actionBarHideOffset":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Integer) {
+          ((ActionBarOverlayLayout) v).setActionBarHideOffset((int) arg);
+          return true;
+        }
+        break;
+      case "actionBarVisibilityCallback":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof ActionBarOverlayLayout.ActionBarVisibilityCallback) {
+          ((ActionBarOverlayLayout) v).setActionBarVisibilityCallback((ActionBarOverlayLayout.ActionBarVisibilityCallback) arg);
+          return true;
+        }
+        break;
+      case "allowCollapse":
+        if (v instanceof ScrollingTabContainerView && arg instanceof Boolean) {
+          ((ScrollingTabContainerView) v).setAllowCollapse((boolean) arg);
+          return true;
+        }
+        break;
       case "allowStacking":
         if (v instanceof ButtonBarLayout && arg instanceof Boolean) {
           ((ButtonBarLayout) v).setAllowStacking((boolean) arg);
           return true;
         }
         break;
+      case "appSearchData":
+        if (v instanceof SearchView && arg instanceof Bundle) {
+          ((SearchView) v).setAppSearchData((Bundle) arg);
+          return true;
+        }
+        break;
       case "attachListener":
         if (v instanceof ContentFrameLayout && arg instanceof ContentFrameLayout.OnAttachListener) {
           ((ContentFrameLayout) v).setAttachListener((ContentFrameLayout.OnAttachListener) arg);
+          return true;
+        }
+        break;
+      case "autoSizeTextTypeWithDefaults":
+        if (v instanceof AppCompatButton && arg instanceof Integer) {
+          ((AppCompatButton) v).setAutoSizeTextTypeWithDefaults((int) arg);
+          return true;
+        }
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setAutoSizeTextTypeWithDefaults((int) arg);
           return true;
         }
         break;
@@ -401,6 +902,62 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "checkable":
+        if (v instanceof ActionMenuItemView && arg instanceof Boolean) {
+          ((ActionMenuItemView) v).setCheckable((boolean) arg);
+          return true;
+        }
+        if (v instanceof ListMenuItemView && arg instanceof Boolean) {
+          ((ListMenuItemView) v).setCheckable((boolean) arg);
+          return true;
+        }
+        break;
+      case "checked":
+        if (v instanceof ActionMenuItemView && arg instanceof Boolean) {
+          ((ActionMenuItemView) v).setChecked((boolean) arg);
+          return true;
+        }
+        if (v instanceof ListMenuItemView && arg instanceof Boolean) {
+          ((ListMenuItemView) v).setChecked((boolean) arg);
+          return true;
+        }
+        break;
+      case "collapsible":
+        if (v instanceof Toolbar && arg instanceof Boolean) {
+          ((Toolbar) v).setCollapsible((boolean) arg);
+          return true;
+        }
+        break;
+      case "contentHeight":
+        if (v instanceof ScrollingTabContainerView && arg instanceof Integer) {
+          ((ScrollingTabContainerView) v).setContentHeight((int) arg);
+          return true;
+        }
+        break;
+      case "contentInsetEndWithActions":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setContentInsetEndWithActions((int) arg);
+          return true;
+        }
+        break;
+      case "contentInsetStartWithNavigation":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setContentInsetStartWithNavigation((int) arg);
+          return true;
+        }
+        break;
+      case "customView":
+        if (v instanceof ActionBarContextView && arg instanceof View) {
+          ((ActionBarContextView) v).setCustomView((View) arg);
+          return true;
+        }
+        break;
+      case "defaultActionButtonContentDescription":
+        if (v instanceof ActivityChooserView && arg instanceof Integer) {
+          ((ActivityChooserView) v).setDefaultActionButtonContentDescription((int) arg);
+          return true;
+        }
+        break;
       case "dividerDrawable":
         if (v instanceof LinearLayoutCompat && arg instanceof Drawable) {
           ((LinearLayoutCompat) v).setDividerDrawable((Drawable) arg);
@@ -413,9 +970,63 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "expandActivityOverflowButtonContentDescription":
+        if (v instanceof ActivityChooserView && arg instanceof Integer) {
+          ((ActivityChooserView) v).setExpandActivityOverflowButtonContentDescription((int) arg);
+          return true;
+        }
+        break;
+      case "expandActivityOverflowButtonDrawable":
+        if (v instanceof ActivityChooserView && arg instanceof Drawable) {
+          ((ActivityChooserView) v).setExpandActivityOverflowButtonDrawable((Drawable) arg);
+          return true;
+        }
+        break;
+      case "expandedActionViewsExclusive":
+        if (v instanceof ActionMenuView && arg instanceof Boolean) {
+          ((ActionMenuView) v).setExpandedActionViewsExclusive((boolean) arg);
+          return true;
+        }
+        break;
+      case "expandedFormat":
+        if (v instanceof ActionMenuItemView && arg instanceof Boolean) {
+          ((ActionMenuItemView) v).setExpandedFormat((boolean) arg);
+          return true;
+        }
+        break;
+      case "firstBaselineToTopHeight":
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setFirstBaselineToTopHeight((int) arg);
+          return true;
+        }
+        break;
+      case "forceShowIcon":
+        if (v instanceof ListMenuItemView && arg instanceof Boolean) {
+          ((ListMenuItemView) v).setForceShowIcon((boolean) arg);
+          return true;
+        }
+        break;
       case "gravity":
         if (v instanceof LinearLayoutCompat && arg instanceof Integer) {
           ((LinearLayoutCompat) v).setGravity((int) arg);
+          return true;
+        }
+        break;
+      case "groupDividerEnabled":
+        if (v instanceof ListMenuItemView && arg instanceof Boolean) {
+          ((ListMenuItemView) v).setGroupDividerEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "hasNonEmbeddedTabs":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Boolean) {
+          ((ActionBarOverlayLayout) v).setHasNonEmbeddedTabs((boolean) arg);
+          return true;
+        }
+        break;
+      case "hideOnContentScrollEnabled":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Boolean) {
+          ((ActionBarOverlayLayout) v).setHideOnContentScrollEnabled((boolean) arg);
           return true;
         }
         break;
@@ -425,9 +1036,69 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "icon":
+        if (v instanceof ActionMenuItemView && arg instanceof Drawable) {
+          ((ActionMenuItemView) v).setIcon((Drawable) arg);
+          return true;
+        }
+        if (v instanceof ListMenuItemView && arg instanceof Drawable) {
+          ((ListMenuItemView) v).setIcon((Drawable) arg);
+          return true;
+        }
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Drawable) {
+          ((ActionBarOverlayLayout) v).setIcon((Drawable) arg);
+          return true;
+        }
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Integer) {
+          ((ActionBarOverlayLayout) v).setIcon((int) arg);
+          return true;
+        }
+        break;
+      case "iconified":
+        if (v instanceof SearchView && arg instanceof Boolean) {
+          ((SearchView) v).setIconified((boolean) arg);
+          return true;
+        }
+        break;
+      case "iconifiedByDefault":
+        if (v instanceof SearchView && arg instanceof Boolean) {
+          ((SearchView) v).setIconifiedByDefault((boolean) arg);
+          return true;
+        }
+        break;
+      case "imeOptions":
+        if (v instanceof SearchView && arg instanceof Integer) {
+          ((SearchView) v).setImeOptions((int) arg);
+          return true;
+        }
+        break;
       case "inflatedId":
         if (v instanceof ViewStubCompat && arg instanceof Integer) {
           ((ViewStubCompat) v).setInflatedId((int) arg);
+          return true;
+        }
+        break;
+      case "initialActivityCount":
+        if (v instanceof ActivityChooserView && arg instanceof Integer) {
+          ((ActivityChooserView) v).setInitialActivityCount((int) arg);
+          return true;
+        }
+        break;
+      case "inputType":
+        if (v instanceof SearchView && arg instanceof Integer) {
+          ((SearchView) v).setInputType((int) arg);
+          return true;
+        }
+        break;
+      case "itemInvoker":
+        if (v instanceof ActionMenuItemView && arg instanceof MenuBuilder.ItemInvoker) {
+          ((ActionMenuItemView) v).setItemInvoker((MenuBuilder.ItemInvoker) arg);
+          return true;
+        }
+        break;
+      case "lastBaselineToBottomHeight":
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setLastBaselineToBottomHeight((int) arg);
           return true;
         }
         break;
@@ -443,9 +1114,102 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "lineHeight":
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setLineHeight((int) arg);
+          return true;
+        }
+        break;
+      case "logo":
+        if (v instanceof Toolbar && arg instanceof Drawable) {
+          ((Toolbar) v).setLogo((Drawable) arg);
+          return true;
+        }
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Integer) {
+          ((ActionBarOverlayLayout) v).setLogo((int) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setLogo((int) arg);
+          return true;
+        }
+        break;
+      case "logoDescription":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setLogoDescription((int) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof CharSequence) {
+          ((Toolbar) v).setLogoDescription((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "maxWidth":
+        if (v instanceof SearchView && arg instanceof Integer) {
+          ((SearchView) v).setMaxWidth((int) arg);
+          return true;
+        }
+        break;
       case "measureWithLargestChildEnabled":
         if (v instanceof LinearLayoutCompat && arg instanceof Boolean) {
           ((LinearLayoutCompat) v).setMeasureWithLargestChildEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "navigationContentDescription":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setNavigationContentDescription((int) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && (arg == null || arg instanceof CharSequence)) {
+          ((Toolbar) v).setNavigationContentDescription((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "navigationIcon":
+        if (v instanceof Toolbar && (arg == null || arg instanceof Drawable)) {
+          ((Toolbar) v).setNavigationIcon((Drawable) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setNavigationIcon((int) arg);
+          return true;
+        }
+        break;
+      case "navigationOnClickListener":
+        if (v instanceof Toolbar && arg instanceof View.OnClickListener) {
+          ((Toolbar) v).setNavigationOnClickListener((View.OnClickListener) arg);
+          return true;
+        }
+        break;
+      case "onClose":
+        if (v instanceof SearchView && arg instanceof SearchView.OnCloseListener) {
+          if (arg != null) {
+            ((SearchView) v).setOnCloseListener(new SearchView.OnCloseListener() {
+              public boolean onClose() {
+                boolean r = ((SearchView.OnCloseListener) arg).onClose();
+                Anvil.render();
+                return r;
+              }
+            });
+          } else {
+            ((SearchView) v).setOnCloseListener((SearchView.OnCloseListener) null);
+          }
+          return true;
+        }
+        break;
+      case "onDismiss":
+        if (v instanceof ActivityChooserView && arg instanceof PopupWindow.OnDismissListener) {
+          if (arg != null) {
+            ((ActivityChooserView) v).setOnDismissListener(new PopupWindow.OnDismissListener() {
+              public void onDismiss() {
+                ((PopupWindow.OnDismissListener) arg).onDismiss();
+                Anvil.render();
+              }
+            });
+          } else {
+            ((ActivityChooserView) v).setOnDismissListener((PopupWindow.OnDismissListener) null);
+          }
           return true;
         }
         break;
@@ -492,15 +1256,187 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "onMenuItemClick":
+        if (v instanceof ActionMenuView && arg instanceof ActionMenuView.OnMenuItemClickListener) {
+          if (arg != null) {
+            ((ActionMenuView) v).setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
+              public boolean onMenuItemClick(MenuItem a0) {
+                boolean r = ((ActionMenuView.OnMenuItemClickListener) arg).onMenuItemClick(a0);
+                Anvil.render();
+                return r;
+              }
+            });
+          } else {
+            ((ActionMenuView) v).setOnMenuItemClickListener((ActionMenuView.OnMenuItemClickListener) null);
+          }
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof Toolbar.OnMenuItemClickListener) {
+          if (arg != null) {
+            ((Toolbar) v).setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+              public boolean onMenuItemClick(MenuItem a0) {
+                boolean r = ((Toolbar.OnMenuItemClickListener) arg).onMenuItemClick(a0);
+                Anvil.render();
+                return r;
+              }
+            });
+          } else {
+            ((Toolbar) v).setOnMenuItemClickListener((Toolbar.OnMenuItemClickListener) null);
+          }
+          return true;
+        }
+        break;
+      case "onQueryText":
+        if (v instanceof SearchView && arg instanceof SearchView.OnQueryTextListener) {
+          if (arg != null) {
+            ((SearchView) v).setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+              public boolean onQueryTextChange(String a0) {
+                boolean r = ((SearchView.OnQueryTextListener) arg).onQueryTextChange(a0);
+                Anvil.render();
+                return r;
+              }
+
+              public boolean onQueryTextSubmit(String a0) {
+                boolean r = ((SearchView.OnQueryTextListener) arg).onQueryTextSubmit(a0);
+                Anvil.render();
+                return r;
+              }
+            });
+          } else {
+            ((SearchView) v).setOnQueryTextListener((SearchView.OnQueryTextListener) null);
+          }
+          return true;
+        }
+        break;
+      case "onQueryTextFocusChange":
+        if (v instanceof SearchView && arg instanceof View.OnFocusChangeListener) {
+          if (arg != null) {
+            ((SearchView) v).setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+              public void onFocusChange(View a0, boolean a1) {
+                ((View.OnFocusChangeListener) arg).onFocusChange(a0, a1);
+                Anvil.render();
+              }
+            });
+          } else {
+            ((SearchView) v).setOnQueryTextFocusChangeListener((View.OnFocusChangeListener) null);
+          }
+          return true;
+        }
+        break;
+      case "onSearchClick":
+        if (v instanceof SearchView && arg instanceof View.OnClickListener) {
+          if (arg != null) {
+            ((SearchView) v).setOnSearchClickListener(new View.OnClickListener() {
+              public void onClick(View a0) {
+                ((View.OnClickListener) arg).onClick(a0);
+                Anvil.render();
+              }
+            });
+          } else {
+            ((SearchView) v).setOnSearchClickListener((View.OnClickListener) null);
+          }
+          return true;
+        }
+        break;
+      case "onSuggestion":
+        if (v instanceof SearchView && arg instanceof SearchView.OnSuggestionListener) {
+          if (arg != null) {
+            ((SearchView) v).setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+              public boolean onSuggestionClick(int a0) {
+                boolean r = ((SearchView.OnSuggestionListener) arg).onSuggestionClick(a0);
+                Anvil.render();
+                return r;
+              }
+
+              public boolean onSuggestionSelect(int a0) {
+                boolean r = ((SearchView.OnSuggestionListener) arg).onSuggestionSelect(a0);
+                Anvil.render();
+                return r;
+              }
+            });
+          } else {
+            ((SearchView) v).setOnSuggestionListener((SearchView.OnSuggestionListener) null);
+          }
+          return true;
+        }
+        break;
       case "orientation":
         if (v instanceof LinearLayoutCompat && arg instanceof Integer) {
           ((LinearLayoutCompat) v).setOrientation((int) arg);
           return true;
         }
         break;
+      case "overflowIcon":
+        if (v instanceof ActionMenuView && (arg == null || arg instanceof Drawable)) {
+          ((ActionMenuView) v).setOverflowIcon((Drawable) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && (arg == null || arg instanceof Drawable)) {
+          ((Toolbar) v).setOverflowIcon((Drawable) arg);
+          return true;
+        }
+        break;
+      case "overflowReserved":
+        if (v instanceof ActionMenuView && arg instanceof Boolean) {
+          ((ActionMenuView) v).setOverflowReserved((boolean) arg);
+          return true;
+        }
+        break;
+      case "overlayMode":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Boolean) {
+          ((ActionBarOverlayLayout) v).setOverlayMode((boolean) arg);
+          return true;
+        }
+        break;
+      case "popupCallback":
+        if (v instanceof ActionMenuItemView && arg instanceof ActionMenuItemView.PopupCallback) {
+          ((ActionMenuItemView) v).setPopupCallback((ActionMenuItemView.PopupCallback) arg);
+          return true;
+        }
+        break;
+      case "popupTheme":
+        if (v instanceof ActionMenuView && arg instanceof Integer) {
+          ((ActionMenuView) v).setPopupTheme((int) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setPopupTheme((int) arg);
+          return true;
+        }
+        break;
+      case "precomputedText":
+        if (v instanceof AppCompatTextView && arg instanceof PrecomputedTextCompat) {
+          ((AppCompatTextView) v).setPrecomputedText((PrecomputedTextCompat) arg);
+          return true;
+        }
+        break;
       case "primaryBackground":
         if (v instanceof ActionBarContainer && arg instanceof Drawable) {
           ((ActionBarContainer) v).setPrimaryBackground((Drawable) arg);
+          return true;
+        }
+        break;
+      case "provider":
+        if (v instanceof ActivityChooserView && arg instanceof ActionProvider) {
+          ((ActivityChooserView) v).setProvider((ActionProvider) arg);
+          return true;
+        }
+        break;
+      case "queryHint":
+        if (v instanceof SearchView && (arg == null || arg instanceof CharSequence)) {
+          ((SearchView) v).setQueryHint((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "queryRefinementEnabled":
+        if (v instanceof SearchView && arg instanceof Boolean) {
+          ((SearchView) v).setQueryRefinementEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "searchableInfo":
+        if (v instanceof SearchView && arg instanceof SearchableInfo) {
+          ((SearchView) v).setSearchableInfo((SearchableInfo) arg);
           return true;
         }
         break;
@@ -513,6 +1449,12 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
       case "showText":
         if (v instanceof SwitchCompat && arg instanceof Boolean) {
           ((SwitchCompat) v).setShowText((boolean) arg);
+          return true;
+        }
+        break;
+      case "showingForActionMode":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Boolean) {
+          ((ActionBarOverlayLayout) v).setShowingForActionMode((boolean) arg);
           return true;
         }
         break;
@@ -531,6 +1473,152 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
       case "stackedBackground":
         if (v instanceof ActionBarContainer && arg instanceof Drawable) {
           ((ActionBarContainer) v).setStackedBackground((Drawable) arg);
+          return true;
+        }
+        break;
+      case "submitButtonEnabled":
+        if (v instanceof SearchView && arg instanceof Boolean) {
+          ((SearchView) v).setSubmitButtonEnabled((boolean) arg);
+          return true;
+        }
+        break;
+      case "subtitle":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setSubtitle((int) arg);
+          return true;
+        }
+        if (v instanceof ActionBarContextView && arg instanceof CharSequence) {
+          ((ActionBarContextView) v).setSubtitle((CharSequence) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof CharSequence) {
+          ((Toolbar) v).setSubtitle((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "subtitleTextColor":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setSubtitleTextColor((int) arg);
+          return true;
+        }
+        break;
+      case "suggestionsAdapter":
+        if (v instanceof SearchView && arg instanceof CursorAdapter) {
+          ((SearchView) v).setSuggestionsAdapter((CursorAdapter) arg);
+          return true;
+        }
+        break;
+      case "supportAllCaps":
+        if (v instanceof AppCompatButton && arg instanceof Boolean) {
+          ((AppCompatButton) v).setSupportAllCaps((boolean) arg);
+          return true;
+        }
+        break;
+      case "supportBackgroundTintList":
+        if (v instanceof AppCompatAutoCompleteTextView && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatAutoCompleteTextView) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatButton && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatButton) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatEditText && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatEditText) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatImageButton) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatImageView) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatMultiAutoCompleteTextView && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatSpinner && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatSpinner) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatTextView && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatTextView) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "supportBackgroundTintMode":
+        if (v instanceof AppCompatAutoCompleteTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatAutoCompleteTextView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatButton && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatButton) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatEditText && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatEditText) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatImageButton) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatImageView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatMultiAutoCompleteTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatSpinner && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatSpinner) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatTextView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        break;
+      case "supportButtonTintList":
+        if (v instanceof AppCompatCheckBox && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatCheckBox) v).setSupportButtonTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatRadioButton && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatRadioButton) v).setSupportButtonTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "supportButtonTintMode":
+        if (v instanceof AppCompatCheckBox && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatCheckBox) v).setSupportButtonTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatRadioButton && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatRadioButton) v).setSupportButtonTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        break;
+      case "supportImageTintList":
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatImageButton) v).setSupportImageTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatImageView) v).setSupportImageTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "supportImageTintMode":
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatImageButton) v).setSupportImageTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatImageView) v).setSupportImageTintMode((PorterDuff.Mode) arg);
           return true;
         }
         break;
@@ -555,6 +1643,24 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
       case "tabContainer":
         if (v instanceof ActionBarContainer && arg instanceof ScrollingTabContainerView) {
           ((ActionBarContainer) v).setTabContainer((ScrollingTabContainerView) arg);
+          return true;
+        }
+        break;
+      case "tabSelected":
+        if (v instanceof ScrollingTabContainerView && arg instanceof Integer) {
+          ((ScrollingTabContainerView) v).setTabSelected((int) arg);
+          return true;
+        }
+        break;
+      case "textFuture":
+        if (v instanceof AppCompatTextView && arg instanceof Future) {
+          ((AppCompatTextView) v).setTextFuture((Future) arg);
+          return true;
+        }
+        break;
+      case "textMetricsParamsCompat":
+        if (v instanceof AppCompatTextView && arg instanceof PrecomputedTextCompat.Params) {
+          ((AppCompatTextView) v).setTextMetricsParamsCompat((PrecomputedTextCompat.Params) arg);
           return true;
         }
         break;
@@ -600,6 +1706,64 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "title":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setTitle((int) arg);
+          return true;
+        }
+        if (v instanceof ActionMenuItemView && arg instanceof CharSequence) {
+          ((ActionMenuItemView) v).setTitle((CharSequence) arg);
+          return true;
+        }
+        if (v instanceof ListMenuItemView && arg instanceof CharSequence) {
+          ((ListMenuItemView) v).setTitle((CharSequence) arg);
+          return true;
+        }
+        if (v instanceof ActionBarContextView && arg instanceof CharSequence) {
+          ((ActionBarContextView) v).setTitle((CharSequence) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof CharSequence) {
+          ((Toolbar) v).setTitle((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "titleMarginBottom":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setTitleMarginBottom((int) arg);
+          return true;
+        }
+        break;
+      case "titleMarginEnd":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setTitleMarginEnd((int) arg);
+          return true;
+        }
+        break;
+      case "titleMarginStart":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setTitleMarginStart((int) arg);
+          return true;
+        }
+        break;
+      case "titleMarginTop":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setTitleMarginTop((int) arg);
+          return true;
+        }
+        break;
+      case "titleOptional":
+        if (v instanceof ActionBarContextView && arg instanceof Boolean) {
+          ((ActionBarContextView) v).setTitleOptional((boolean) arg);
+          return true;
+        }
+        break;
+      case "titleTextColor":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setTitleTextColor((int) arg);
+          return true;
+        }
+        break;
       case "trackDrawable":
         if (v instanceof SwitchCompat && arg instanceof Drawable) {
           ((SwitchCompat) v).setTrackDrawable((Drawable) arg);
@@ -630,6 +1794,12 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "uiOptions":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Integer) {
+          ((ActionBarOverlayLayout) v).setUiOptions((int) arg);
+          return true;
+        }
+        break;
       case "verticalGravity":
         if (v instanceof LinearLayoutCompat && arg instanceof Integer) {
           ((LinearLayoutCompat) v).setVerticalGravity((int) arg);
@@ -639,6 +1809,18 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
       case "weightSum":
         if (v instanceof LinearLayoutCompat && arg instanceof Float) {
           ((LinearLayoutCompat) v).setWeightSum((float) arg);
+          return true;
+        }
+        break;
+      case "windowCallback":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof Window.Callback) {
+          ((ActionBarOverlayLayout) v).setWindowCallback((Window.Callback) arg);
+          return true;
+        }
+        break;
+      case "windowTitle":
+        if (v instanceof ActionBarOverlayLayout && arg instanceof CharSequence) {
+          ((ActionBarOverlayLayout) v).setWindowTitle((CharSequence) arg);
           return true;
         }
         break;

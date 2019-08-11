@@ -43,7 +43,7 @@ anvilgen {
 	dependencies = [
 	  "legacy-support-core-ui": null,
 	  "legacy-support-core-utils": null,
-	  "core": "1.0.1",
+	  "core": null,
 	  "cursoradapter": null,
 	  "customview": null,
 	  "drawerlayout": null,
