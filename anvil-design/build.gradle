@@ -50,7 +50,7 @@ anvilgen {
 	  "lifecycle-viewmodel":  "2.0.0"
 	]
 	quirks = QUIRKS
-	superclass = "BaseDesign"
+	superclass = "BaseMaterial"
 }
 
 dependencies {

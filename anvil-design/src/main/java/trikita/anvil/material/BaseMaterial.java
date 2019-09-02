@@ -1,22 +1,23 @@
-package trikita.anvil.design;
+package trikita.anvil.material;
 
 import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
+import androidx.annotation.RequiresApi;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.view.View;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import trikita.anvil.Anvil;
 
 import static trikita.anvil.BaseDSL.attr;
 
-public class BaseDesign implements Anvil.AttributeSetter {
+public class BaseMaterial implements Anvil.AttributeSetter {
 
     static {
-        Anvil.registerAttributeSetter(new BaseDesign());
+        Anvil.registerAttributeSetter(new BaseMaterial());
     }
 
     public static Void collapseMode(int collapseMode) {
