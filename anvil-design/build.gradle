@@ -1,10 +1,3 @@
-buildscript {
-	dependencies {
-		classpath "com.android.tools.build:gradle:$agp_version"
-		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
-	}
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'trikita.anvilgen'
 apply from: "$rootProject.projectDir/copyDeps.gradle"
@@ -52,6 +45,7 @@ anvilgen {
 	  "viewmodel": "1.1.0"
 	]
 	quirks = QUIRKS
+	superclass = "BaseDesign"
 }
 
 dependencies {

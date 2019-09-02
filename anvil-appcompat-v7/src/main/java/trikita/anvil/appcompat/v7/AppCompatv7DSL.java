@@ -65,7 +65,7 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library appcompat-v7.
  * Please, don't edit it manually unless for debugging.
  */
-public final class AppCompatv7DSL implements Anvil.AttributeSetter {
+public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.AttributeSetter {
   static {
     Anvil.registerAttributeSetter(new AppCompatv7DSL());
   }
