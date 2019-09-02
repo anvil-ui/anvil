@@ -1,12 +1,13 @@
 package trikita.anvil.constraint.layout;
 
-import android.support.constraint.Barrier;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.constraint.Group;
-import android.support.constraint.Guideline;
-import android.support.constraint.Placeholder;
 import android.view.View;
+
+import androidx.constraintlayout.widget.Barrier;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.constraintlayout.widget.Group;
+import androidx.constraintlayout.widget.Guideline;
+import androidx.constraintlayout.widget.Placeholder;
 
 import java.util.LinkedList;
 
