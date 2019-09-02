@@ -1,18 +1,19 @@
 package trikita.anvil.support.core.ui;
 
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.PagerTitleStrip;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SlidingPaneLayout;
-import android.support.v4.widget.Space;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.legacy.widget.Space;
+import androidx.slidingpanelayout.widget.SlidingPaneLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.PagerTabStrip;
+import androidx.viewpager.widget.PagerTitleStrip;
+import androidx.viewpager.widget.ViewPager;
 import java.lang.Boolean;
 import java.lang.Float;
 import java.lang.Integer;
@@ -41,6 +42,54 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.v(CoordinatorLayout.class, r);
   }
 
+  public static BaseDSL.ViewClassResult contentLoadingProgressBar() {
+    return BaseDSL.v(ContentLoadingProgressBar.class);
+  }
+
+  public static Void contentLoadingProgressBar(Anvil.Renderable r) {
+    return BaseDSL.v(ContentLoadingProgressBar.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult nestedScrollView() {
+    return BaseDSL.v(NestedScrollView.class);
+  }
+
+  public static Void nestedScrollView(Anvil.Renderable r) {
+    return BaseDSL.v(NestedScrollView.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult drawerLayout() {
+    return BaseDSL.v(DrawerLayout.class);
+  }
+
+  public static Void drawerLayout(Anvil.Renderable r) {
+    return BaseDSL.v(DrawerLayout.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult space() {
+    return BaseDSL.v(Space.class);
+  }
+
+  public static Void space(Anvil.Renderable r) {
+    return BaseDSL.v(Space.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult slidingPaneLayout() {
+    return BaseDSL.v(SlidingPaneLayout.class);
+  }
+
+  public static Void slidingPaneLayout(Anvil.Renderable r) {
+    return BaseDSL.v(SlidingPaneLayout.class, r);
+  }
+
+  public static BaseDSL.ViewClassResult swipeRefreshLayout() {
+    return BaseDSL.v(SwipeRefreshLayout.class);
+  }
+
+  public static Void swipeRefreshLayout(Anvil.Renderable r) {
+    return BaseDSL.v(SwipeRefreshLayout.class, r);
+  }
+
   public static BaseDSL.ViewClassResult pagerTabStrip() {
     return BaseDSL.v(PagerTabStrip.class);
   }
@@ -63,54 +112,6 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
 
   public static Void viewPager(Anvil.Renderable r) {
     return BaseDSL.v(ViewPager.class, r);
-  }
-
-  public static BaseDSL.ViewClassResult contentLoadingProgressBar() {
-    return BaseDSL.v(ContentLoadingProgressBar.class);
-  }
-
-  public static Void contentLoadingProgressBar(Anvil.Renderable r) {
-    return BaseDSL.v(ContentLoadingProgressBar.class, r);
-  }
-
-  public static BaseDSL.ViewClassResult drawerLayout() {
-    return BaseDSL.v(DrawerLayout.class);
-  }
-
-  public static Void drawerLayout(Anvil.Renderable r) {
-    return BaseDSL.v(DrawerLayout.class, r);
-  }
-
-  public static BaseDSL.ViewClassResult nestedScrollView() {
-    return BaseDSL.v(NestedScrollView.class);
-  }
-
-  public static Void nestedScrollView(Anvil.Renderable r) {
-    return BaseDSL.v(NestedScrollView.class, r);
-  }
-
-  public static BaseDSL.ViewClassResult slidingPaneLayout() {
-    return BaseDSL.v(SlidingPaneLayout.class);
-  }
-
-  public static Void slidingPaneLayout(Anvil.Renderable r) {
-    return BaseDSL.v(SlidingPaneLayout.class, r);
-  }
-
-  public static BaseDSL.ViewClassResult space() {
-    return BaseDSL.v(Space.class);
-  }
-
-  public static Void space(Anvil.Renderable r) {
-    return BaseDSL.v(Space.class, r);
-  }
-
-  public static BaseDSL.ViewClassResult swipeRefreshLayout() {
-    return BaseDSL.v(SwipeRefreshLayout.class);
-  }
-
-  public static Void swipeRefreshLayout(Anvil.Renderable r) {
-    return BaseDSL.v(SwipeRefreshLayout.class, r);
   }
 
   public static Void adapter(PagerAdapter arg) {
@@ -181,7 +182,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("pageMargin", arg);
   }
 
-  public static Void pageMarginDrawable(Drawable arg) {
+  public static Void pageMarginDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("pageMarginDrawable", arg);
   }
 
@@ -213,11 +214,11 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("scrimColor", arg);
   }
 
-  public static Void shadowDrawableLeft(Drawable arg) {
+  public static Void shadowDrawableLeft(@Nullable Drawable arg) {
     return BaseDSL.attr("shadowDrawableLeft", arg);
   }
 
-  public static Void shadowDrawableRight(Drawable arg) {
+  public static Void shadowDrawableRight(@Nullable Drawable arg) {
     return BaseDSL.attr("shadowDrawableRight", arg);
   }
 
@@ -237,11 +238,15 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("sliderFadeColor", arg);
   }
 
+  public static Void slingshotDistance(int arg) {
+    return BaseDSL.attr("slingshotDistance", arg);
+  }
+
   public static Void smoothScrollingEnabled(boolean arg) {
     return BaseDSL.attr("smoothScrollingEnabled", arg);
   }
 
-  public static Void statusBarBackground(Drawable arg) {
+  public static Void statusBarBackground(@Nullable Drawable arg) {
     return BaseDSL.attr("statusBarBackground", arg);
   }
 
@@ -354,7 +359,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "onChildScrollUpCallback":
-        if (v instanceof SwipeRefreshLayout && arg instanceof SwipeRefreshLayout.OnChildScrollUpCallback) {
+        if (v instanceof SwipeRefreshLayout && (arg == null || arg instanceof SwipeRefreshLayout.OnChildScrollUpCallback)) {
           ((SwipeRefreshLayout) v).setOnChildScrollUpCallback((SwipeRefreshLayout.OnChildScrollUpCallback) arg);
           return true;
         }
@@ -396,7 +401,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "pageMarginDrawable":
-        if (v instanceof ViewPager && arg instanceof Drawable) {
+        if (v instanceof ViewPager && (arg == null || arg instanceof Drawable)) {
           ((ViewPager) v).setPageMarginDrawable((Drawable) arg);
           return true;
         }
@@ -406,7 +411,7 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "panelSlideListener":
-        if (v instanceof SlidingPaneLayout && arg instanceof SlidingPaneLayout.PanelSlideListener) {
+        if (v instanceof SlidingPaneLayout && (arg == null || arg instanceof SlidingPaneLayout.PanelSlideListener)) {
           ((SlidingPaneLayout) v).setPanelSlideListener((SlidingPaneLayout.PanelSlideListener) arg);
           return true;
         }
@@ -442,13 +447,13 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "shadowDrawableLeft":
-        if (v instanceof SlidingPaneLayout && arg instanceof Drawable) {
+        if (v instanceof SlidingPaneLayout && (arg == null || arg instanceof Drawable)) {
           ((SlidingPaneLayout) v).setShadowDrawableLeft((Drawable) arg);
           return true;
         }
         break;
       case "shadowDrawableRight":
-        if (v instanceof SlidingPaneLayout && arg instanceof Drawable) {
+        if (v instanceof SlidingPaneLayout && (arg == null || arg instanceof Drawable)) {
           ((SlidingPaneLayout) v).setShadowDrawableRight((Drawable) arg);
           return true;
         }
@@ -477,6 +482,12 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "slingshotDistance":
+        if (v instanceof SwipeRefreshLayout && arg instanceof Integer) {
+          ((SwipeRefreshLayout) v).setSlingshotDistance((int) arg);
+          return true;
+        }
+        break;
       case "smoothScrollingEnabled":
         if (v instanceof NestedScrollView && arg instanceof Boolean) {
           ((NestedScrollView) v).setSmoothScrollingEnabled((boolean) arg);
@@ -484,11 +495,11 @@ public final class SupportCoreUiDSL implements Anvil.AttributeSetter {
         }
         break;
       case "statusBarBackground":
-        if (v instanceof CoordinatorLayout && arg instanceof Drawable) {
+        if (v instanceof CoordinatorLayout && (arg == null || arg instanceof Drawable)) {
           ((CoordinatorLayout) v).setStatusBarBackground((Drawable) arg);
           return true;
         }
-        if (v instanceof DrawerLayout && arg instanceof Drawable) {
+        if (v instanceof DrawerLayout && (arg == null || arg instanceof Drawable)) {
           ((DrawerLayout) v).setStatusBarBackground((Drawable) arg);
           return true;
         }

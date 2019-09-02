@@ -35,8 +35,8 @@ class AnvilGenPlugin : Plugin<Project> {
             )
         } else {
             val supportClosure = getSupportClosure(
-                project, extension.camelCaseName,
-                extension.libraryName, extension.version, extension.superclass, extension.dependencies
+                project, extension.camelCaseName, extension.moduleName,
+                extension.libraries, extension.version, extension.superclass, extension.dependencies
             )
             project.task(
                 mapOf("type" to DSLGeneratorTask::class.java, "dependsOn" to listOf("copyDependenciesRelease")),
@@ -57,7 +57,8 @@ class AnvilGenPlugin : Plugin<Project> {
                     taskName = "generateSDK${apiLevel}DSL"
                     javadocContains = "It contains views and their setters from API level $apiLevel"
                     outputDirectory = "sdk$apiLevel"
-                    jarFile = getAndroidJar(project, apiLevel)
+                    jarFiles = listOf(getAndroidJar(project, apiLevel))
+                    nullabilitySourceFiles = listOf(getAndroidJar(project, 28))
                     dependencies = listOf()
                     outputClassName = "DSL"
                     packageName = "trikita.anvil"
@@ -72,6 +73,7 @@ class AnvilGenPlugin : Plugin<Project> {
         project: Project,
         camelCaseName: String,
         libraryName: String,
+        libraries: Map<String, String?>,
         version: String,
         superclassName: String,
         rawDeps: Map<String, String?>
@@ -86,7 +88,8 @@ class AnvilGenPlugin : Plugin<Project> {
                     taskName = "generate${camelCaseName}DSL"
                     javadocContains = "It contains views and their setters from the library $libraryName"
                     outputDirectory = "main"
-                    jarFile = getSupportJar(project, libraryName, version)
+                    jarFiles = libraries.map { getSupportJar(project, it.key, it.value ?: version) }
+                    nullabilitySourceFiles = libraries.map {  getSupportJar(project, it.key, it.value ?: version) }
                     dependencies = getSupportDependencies(project, version, rawDeps)
                     outputClassName = "${camelCaseName}DSL"
                     packageName = "trikita.anvil." + dashToDot(libraryName)

@@ -3,7 +3,7 @@ apply plugin: 'trikita.anvilgen'
 apply from: "$rootProject.projectDir/copyDeps.gradle"
 
 android {
-	compileSdkVersion 27
+	compileSdkVersion 28
 
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_7
@@ -12,7 +12,7 @@ android {
 
 	defaultConfig {
 		minSdkVersion 15
-		targetSdkVersion 27
+		targetSdkVersion 28
 
 		missingDimensionStrategy 'api', 'sdk21'
 	}
@@ -29,24 +29,29 @@ android {
 apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
-	libraryName = "appcompat-v7"
+	moduleName = "appcompat-v7"
+	libraries = ["appcompat" : null]
 	camelCaseName = "AppCompatv7"
-	version = support_version
+	version = androidx_version
 	dependencies = [
-	  "support-core-ui": null,
-	  "support-core-utils": null,
-	  "support-compat": null,
-	  "support-media-compat": null,
-	  "support-fragment": null,
+	  "legacy-support-core-ui": null,
+	  "legacy-support-core-utils": null,
+	  "core": null,
+	  "cursoradapter": null,
+	  "customview": null,
+	  "drawerlayout": null,
+	  "media": null,
+	  "fragment": null,
 	  "viewmodel": "1.1.0",
-	  "android.arch.lifecycle-common":  "1.1.0",
+	  "androidx.lifecycle-lifecycle-common":  "2.0.0",
+	  "lifecycle-viewmodel":  "2.0.0"
 	]
 	quirks = QUIRKS
 }
 
 dependencies {
 	implementation project(path: ':anvil')
-	implementation "com.android.support:appcompat-v7:$support_version"
+	implementation "androidx.appcompat:appcompat:$androidx_version"
 
 	testImplementation 'junit:junit:4.12'
 	testImplementation "org.mockito:mockito-core:$mockito_version"

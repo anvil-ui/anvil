@@ -1,8 +1,8 @@
 package trikita.anvil.gridlayout.v7;
 
-import android.support.v7.widget.GridLayout;
 import android.util.Printer;
 import android.view.View;
+import androidx.gridlayout.widget.GridLayout;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Object;
