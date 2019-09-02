@@ -58,6 +58,7 @@ class AnvilGenPlugin : Plugin<Project> {
                     javadocContains = "It contains views and their setters from API level $apiLevel"
                     outputDirectory = "sdk$apiLevel"
                     jarFile = getAndroidJar(project, apiLevel)
+                    nullabilitySourceFile = getAndroidJar(project, 28)
                     dependencies = listOf()
                     outputClassName = "DSL"
                     packageName = "trikita.anvil"
@@ -87,6 +88,7 @@ class AnvilGenPlugin : Plugin<Project> {
                     javadocContains = "It contains views and their setters from the library $libraryName"
                     outputDirectory = "main"
                     jarFile = getSupportJar(project, libraryName, version)
+                    nullabilitySourceFile = getSupportJar(project, libraryName, version)
                     dependencies = getSupportDependencies(project, version, rawDeps)
                     outputClassName = "${camelCaseName}DSL"
                     packageName = "trikita.anvil." + dashToDot(libraryName)

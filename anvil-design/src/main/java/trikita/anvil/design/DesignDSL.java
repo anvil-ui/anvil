@@ -4,6 +4,8 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.internal.BaselineLayout;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -212,7 +214,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("collapsedTitleTextAppearance", arg);
   }
 
-  public static Void collapsedTitleTextColor(ColorStateList arg) {
+  public static Void collapsedTitleTextColor(@NonNull ColorStateList arg) {
     return BaseDSL.attr("collapsedTitleTextColor", arg);
   }
 
@@ -220,7 +222,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("collapsedTitleTextColor", arg);
   }
 
-  public static Void collapsedTitleTypeface(Typeface arg) {
+  public static Void collapsedTitleTypeface(@Nullable Typeface arg) {
     return BaseDSL.attr("collapsedTitleTypeface", arg);
   }
 
@@ -228,7 +230,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("compatElevation", arg);
   }
 
-  public static Void contentScrim(Drawable arg) {
+  public static Void contentScrim(@Nullable Drawable arg) {
     return BaseDSL.attr("contentScrim", arg);
   }
 
@@ -252,7 +254,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("customSize", arg);
   }
 
-  public static Void error(CharSequence arg) {
+  public static Void error(@Nullable CharSequence arg) {
     return BaseDSL.attr("error", arg);
   }
 
@@ -296,15 +298,15 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("expandedTitleTextAppearance", arg);
   }
 
-  public static Void expandedTitleTextColor(ColorStateList arg) {
+  public static Void expandedTitleTextColor(@NonNull ColorStateList arg) {
     return BaseDSL.attr("expandedTitleTextColor", arg);
   }
 
-  public static Void expandedTitleTypeface(Typeface arg) {
+  public static Void expandedTitleTypeface(@Nullable Typeface arg) {
     return BaseDSL.attr("expandedTitleTypeface", arg);
   }
 
-  public static Void hint(CharSequence arg) {
+  public static Void hint(@Nullable CharSequence arg) {
     return BaseDSL.attr("hint", arg);
   }
 
@@ -344,7 +346,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("itemBackgroundResource", arg);
   }
 
-  public static Void itemIconTintList(ColorStateList arg) {
+  public static Void itemIconTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("itemIconTintList", arg);
   }
 
@@ -360,7 +362,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("itemTextColor", arg);
   }
 
-  public static Void navigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener arg) {
+  public static Void navigationItemSelectedListener(@Nullable NavigationView.OnNavigationItemSelectedListener arg) {
     return BaseDSL.attr("navigationItemSelectedListener", arg);
   }
 
@@ -368,11 +370,11 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("needsEmptyIcon", arg);
   }
 
-  public static Void onNavigationItemReselected(BottomNavigationView.OnNavigationItemReselectedListener arg) {
+  public static Void onNavigationItemReselected(@Nullable BottomNavigationView.OnNavigationItemReselectedListener arg) {
     return BaseDSL.attr("onNavigationItemReselected", arg);
   }
 
-  public static Void onNavigationItemSelected(BottomNavigationView.OnNavigationItemSelectedListener arg) {
+  public static Void onNavigationItemSelected(@Nullable BottomNavigationView.OnNavigationItemSelectedListener arg) {
     return BaseDSL.attr("onNavigationItemSelected", arg);
   }
 
@@ -380,11 +382,11 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("passwordVisibilityToggleContentDescription", arg);
   }
 
-  public static Void passwordVisibilityToggleContentDescription(CharSequence arg) {
+  public static Void passwordVisibilityToggleContentDescription(@Nullable CharSequence arg) {
     return BaseDSL.attr("passwordVisibilityToggleContentDescription", arg);
   }
 
-  public static Void passwordVisibilityToggleDrawable(Drawable arg) {
+  public static Void passwordVisibilityToggleDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("passwordVisibilityToggleDrawable", arg);
   }
 
@@ -396,11 +398,11 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("passwordVisibilityToggleEnabled", arg);
   }
 
-  public static Void passwordVisibilityToggleTintList(ColorStateList arg) {
+  public static Void passwordVisibilityToggleTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("passwordVisibilityToggleTintList", arg);
   }
 
-  public static Void passwordVisibilityToggleTintMode(PorterDuff.Mode arg) {
+  public static Void passwordVisibilityToggleTintMode(@Nullable PorterDuff.Mode arg) {
     return BaseDSL.attr("passwordVisibilityToggleTintMode", arg);
   }
 
@@ -444,7 +446,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("size", arg);
   }
 
-  public static Void statusBarScrim(Drawable arg) {
+  public static Void statusBarScrim(@Nullable Drawable arg) {
     return BaseDSL.attr("statusBarScrim", arg);
   }
 
@@ -464,7 +466,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("tabMode", arg);
   }
 
-  public static Void tabTextColors(ColorStateList arg) {
+  public static Void tabTextColors(@Nullable ColorStateList arg) {
     return BaseDSL.attr("tabTextColors", arg);
   }
 
@@ -484,11 +486,11 @@ public final class DesignDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("titleEnabled", arg);
   }
 
-  public static Void typeface(Typeface arg) {
+  public static Void typeface(@Nullable Typeface arg) {
     return BaseDSL.attr("typeface", arg);
   }
 
-  public static Void upWithViewPager(ViewPager arg) {
+  public static Void upWithViewPager(@Nullable ViewPager arg) {
     return BaseDSL.attr("upWithViewPager", arg);
   }
 
@@ -551,7 +553,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "collapsedTitleTypeface":
-        if (v instanceof CollapsingToolbarLayout && arg instanceof Typeface) {
+        if (v instanceof CollapsingToolbarLayout && (arg == null || arg instanceof Typeface)) {
           ((CollapsingToolbarLayout) v).setCollapsedTitleTypeface((Typeface) arg);
           return true;
         }
@@ -563,7 +565,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "contentScrim":
-        if (v instanceof CollapsingToolbarLayout && arg instanceof Drawable) {
+        if (v instanceof CollapsingToolbarLayout && (arg == null || arg instanceof Drawable)) {
           ((CollapsingToolbarLayout) v).setContentScrim((Drawable) arg);
           return true;
         }
@@ -599,7 +601,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "error":
-        if (v instanceof TextInputLayout && arg instanceof CharSequence) {
+        if (v instanceof TextInputLayout && (arg == null || arg instanceof CharSequence)) {
           ((TextInputLayout) v).setError((CharSequence) arg);
           return true;
         }
@@ -671,13 +673,13 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "expandedTitleTypeface":
-        if (v instanceof CollapsingToolbarLayout && arg instanceof Typeface) {
+        if (v instanceof CollapsingToolbarLayout && (arg == null || arg instanceof Typeface)) {
           ((CollapsingToolbarLayout) v).setExpandedTitleTypeface((Typeface) arg);
           return true;
         }
         break;
       case "hint":
-        if (v instanceof TextInputLayout && arg instanceof CharSequence) {
+        if (v instanceof TextInputLayout && (arg == null || arg instanceof CharSequence)) {
           ((TextInputLayout) v).setHint((CharSequence) arg);
           return true;
         }
@@ -721,7 +723,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "itemBackground":
-        if (v instanceof NavigationView && arg instanceof Drawable) {
+        if (v instanceof NavigationView && (arg == null || arg instanceof Drawable)) {
           ((NavigationView) v).setItemBackground((Drawable) arg);
           return true;
         }
@@ -747,11 +749,11 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "itemIconTintList":
-        if (v instanceof BottomNavigationView && arg instanceof ColorStateList) {
+        if (v instanceof BottomNavigationView && (arg == null || arg instanceof ColorStateList)) {
           ((BottomNavigationView) v).setItemIconTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof NavigationView && arg instanceof ColorStateList) {
+        if (v instanceof NavigationView && (arg == null || arg instanceof ColorStateList)) {
           ((NavigationView) v).setItemIconTintList((ColorStateList) arg);
           return true;
         }
@@ -773,11 +775,11 @@ public final class DesignDSL implements Anvil.AttributeSetter {
           ((BottomNavigationMenuView) v).setItemTextColor((ColorStateList) arg);
           return true;
         }
-        if (v instanceof BottomNavigationView && arg instanceof ColorStateList) {
+        if (v instanceof BottomNavigationView && (arg == null || arg instanceof ColorStateList)) {
           ((BottomNavigationView) v).setItemTextColor((ColorStateList) arg);
           return true;
         }
-        if (v instanceof NavigationView && arg instanceof ColorStateList) {
+        if (v instanceof NavigationView && (arg == null || arg instanceof ColorStateList)) {
           ((NavigationView) v).setItemTextColor((ColorStateList) arg);
           return true;
         }
@@ -830,13 +832,13 @@ public final class DesignDSL implements Anvil.AttributeSetter {
           ((TextInputLayout) v).setPasswordVisibilityToggleContentDescription((int) arg);
           return true;
         }
-        if (v instanceof TextInputLayout && arg instanceof CharSequence) {
+        if (v instanceof TextInputLayout && (arg == null || arg instanceof CharSequence)) {
           ((TextInputLayout) v).setPasswordVisibilityToggleContentDescription((CharSequence) arg);
           return true;
         }
         break;
       case "passwordVisibilityToggleDrawable":
-        if (v instanceof TextInputLayout && arg instanceof Drawable) {
+        if (v instanceof TextInputLayout && (arg == null || arg instanceof Drawable)) {
           ((TextInputLayout) v).setPasswordVisibilityToggleDrawable((Drawable) arg);
           return true;
         }
@@ -852,7 +854,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "passwordVisibilityToggleTintList":
-        if (v instanceof TextInputLayout && arg instanceof ColorStateList) {
+        if (v instanceof TextInputLayout && (arg == null || arg instanceof ColorStateList)) {
           ((TextInputLayout) v).setPasswordVisibilityToggleTintList((ColorStateList) arg);
           return true;
         }
@@ -924,7 +926,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "statusBarScrim":
-        if (v instanceof CollapsingToolbarLayout && arg instanceof Drawable) {
+        if (v instanceof CollapsingToolbarLayout && (arg == null || arg instanceof Drawable)) {
           ((CollapsingToolbarLayout) v).setStatusBarScrim((Drawable) arg);
           return true;
         }
@@ -954,7 +956,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "tabTextColors":
-        if (v instanceof TabLayout && arg instanceof ColorStateList) {
+        if (v instanceof TabLayout && (arg == null || arg instanceof ColorStateList)) {
           ((TabLayout) v).setTabTextColors((ColorStateList) arg);
           return true;
         }
@@ -984,7 +986,7 @@ public final class DesignDSL implements Anvil.AttributeSetter {
           ((NavigationMenuItemView) v).setTitle((CharSequence) arg);
           return true;
         }
-        if (v instanceof CollapsingToolbarLayout && arg instanceof CharSequence) {
+        if (v instanceof CollapsingToolbarLayout && (arg == null || arg instanceof CharSequence)) {
           ((CollapsingToolbarLayout) v).setTitle((CharSequence) arg);
           return true;
         }
@@ -996,13 +998,13 @@ public final class DesignDSL implements Anvil.AttributeSetter {
         }
         break;
       case "typeface":
-        if (v instanceof TextInputLayout && arg instanceof Typeface) {
+        if (v instanceof TextInputLayout && (arg == null || arg instanceof Typeface)) {
           ((TextInputLayout) v).setTypeface((Typeface) arg);
           return true;
         }
         break;
       case "upWithViewPager":
-        if (v instanceof TabLayout && arg instanceof ViewPager) {
+        if (v instanceof TabLayout && (arg == null || arg instanceof ViewPager)) {
           ((TabLayout) v).setupWithViewPager((ViewPager) arg);
           return true;
         }

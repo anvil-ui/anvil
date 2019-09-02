@@ -24,6 +24,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.opengl.GLSurfaceView;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spannable;
@@ -729,7 +731,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.v(ZoomControls.class, r);
   }
 
-  public static Void accessibilityDelegate(View.AccessibilityDelegate arg) {
+  public static Void accessibilityDelegate(@Nullable View.AccessibilityDelegate arg) {
     return BaseDSL.attr("accessibilityDelegate", arg);
   }
 
@@ -841,7 +843,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("bottom", arg);
   }
 
-  public static Void buttonDrawable(Drawable arg) {
+  public static Void buttonDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("buttonDrawable", arg);
   }
 
@@ -869,7 +871,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("certificate", arg);
   }
 
-  public static Void checkMarkDrawable(Drawable arg) {
+  public static Void checkMarkDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("checkMarkDrawable", arg);
   }
 
@@ -937,11 +939,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("contentDescription", arg);
   }
 
-  public static Void currentHour(Integer arg) {
+  public static Void currentHour(@NonNull Integer arg) {
     return BaseDSL.attr("currentHour", arg);
   }
 
-  public static Void currentMinute(Integer arg) {
+  public static Void currentMinute(@NonNull Integer arg) {
     return BaseDSL.attr("currentMinute", arg);
   }
 
@@ -989,7 +991,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("displayedValues", arg);
   }
 
-  public static Void divider(Drawable arg) {
+  public static Void divider(@Nullable Drawable arg) {
     return BaseDSL.attr("divider", arg);
   }
 
@@ -1397,7 +1399,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("interpolator", arg);
   }
 
-  public static Void is24HourView(Boolean arg) {
+  public static Void is24HourView(@NonNull Boolean arg) {
     return BaseDSL.attr("is24HourView", arg);
   }
 
@@ -1457,7 +1459,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("left", arg);
   }
 
-  public static Void leftStripDrawable(Drawable arg) {
+  public static Void leftStripDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("leftStripDrawable", arg);
   }
 
@@ -1633,7 +1635,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onBreadCrumbClick", arg);
   }
 
-  public static Void onCheckedChange(CompoundButton.OnCheckedChangeListener arg) {
+  public static Void onCheckedChange(@Nullable CompoundButton.OnCheckedChangeListener arg) {
     return BaseDSL.attr("onCheckedChange", arg);
   }
 
@@ -1649,7 +1651,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onChronometerTick", arg);
   }
 
-  public static Void onClick(View.OnClickListener arg) {
+  public static Void onClick(@Nullable View.OnClickListener arg) {
     return BaseDSL.attr("onClick", arg);
   }
 
@@ -1725,7 +1727,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onInflate", arg);
   }
 
-  public static Void onItemClick(AdapterView.OnItemClickListener arg) {
+  public static Void onItemClick(@Nullable AdapterView.OnItemClickListener arg) {
     return BaseDSL.attr("onItemClick", arg);
   }
 
@@ -1733,7 +1735,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onItemLongClick", arg);
   }
 
-  public static Void onItemSelected(AdapterView.OnItemSelectedListener arg) {
+  public static Void onItemSelected(@Nullable AdapterView.OnItemSelectedListener arg) {
     return BaseDSL.attr("onItemSelected", arg);
   }
 
@@ -1745,7 +1747,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("onKeyboardAction", arg);
   }
 
-  public static Void onLongClick(View.OnLongClickListener arg) {
+  public static Void onLongClick(@Nullable View.OnLongClickListener arg) {
     return BaseDSL.attr("onLongClick", arg);
   }
 
@@ -1901,7 +1903,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("proximityCorrectionEnabled", arg);
   }
 
-  public static Void queryHint(CharSequence arg) {
+  public static Void queryHint(@Nullable CharSequence arg) {
     return BaseDSL.attr("queryHint", arg);
   }
 
@@ -1937,7 +1939,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("right", arg);
   }
 
-  public static Void rightStripDrawable(Drawable arg) {
+  public static Void rightStripDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("rightStripDrawable", arg);
   }
 
@@ -2217,7 +2219,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("translationY", arg);
   }
 
-  public static Void typeface(Typeface arg) {
+  public static Void typeface(@Nullable Typeface arg) {
     return BaseDSL.attr("typeface", arg);
   }
 
@@ -2512,7 +2514,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "buttonDrawable":
-        if (v instanceof CompoundButton && arg instanceof Drawable) {
+        if (v instanceof CompoundButton && (arg == null || arg instanceof Drawable)) {
           ((CompoundButton) v).setButtonDrawable((Drawable) arg);
           return true;
         }
@@ -2552,7 +2554,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "checkMarkDrawable":
-        if (v instanceof CheckedTextView && arg instanceof Drawable) {
+        if (v instanceof CheckedTextView && (arg == null || arg instanceof Drawable)) {
           ((CheckedTextView) v).setCheckMarkDrawable((Drawable) arg);
           return true;
         }
@@ -2740,7 +2742,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "divider":
-        if (v instanceof ListView && arg instanceof Drawable) {
+        if (v instanceof ListView && (arg == null || arg instanceof Drawable)) {
           ((ListView) v).setDivider((Drawable) arg);
           return true;
         }
@@ -3284,7 +3286,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
           ((ImageSwitcher) v).setImageDrawable((Drawable) arg);
           return true;
         }
-        if (v instanceof ImageView && arg instanceof Drawable) {
+        if (v instanceof ImageView && (arg == null || arg instanceof Drawable)) {
           ((ImageView) v).setImageDrawable((Drawable) arg);
           return true;
         }
@@ -3316,7 +3318,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
           ((ImageSwitcher) v).setImageURI((Uri) arg);
           return true;
         }
-        if (v instanceof ImageView && arg instanceof Uri) {
+        if (v instanceof ImageView && (arg == null || arg instanceof Uri)) {
           ((ImageView) v).setImageURI((Uri) arg);
           return true;
         }
@@ -3488,7 +3490,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "leftStripDrawable":
-        if (v instanceof TabWidget && arg instanceof Drawable) {
+        if (v instanceof TabWidget && (arg == null || arg instanceof Drawable)) {
           ((TabWidget) v).setLeftStripDrawable((Drawable) arg);
           return true;
         }
@@ -4683,7 +4685,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "queryHint":
-        if (v instanceof SearchView && arg instanceof CharSequence) {
+        if (v instanceof SearchView && (arg == null || arg instanceof CharSequence)) {
           ((SearchView) v).setQueryHint((CharSequence) arg);
           return true;
         }
@@ -4741,7 +4743,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "rightStripDrawable":
-        if (v instanceof TabWidget && arg instanceof Drawable) {
+        if (v instanceof TabWidget && (arg == null || arg instanceof Drawable)) {
           ((TabWidget) v).setRightStripDrawable((Drawable) arg);
           return true;
         }
@@ -5169,7 +5171,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "typeface":
-        if (v instanceof TextView && arg instanceof Typeface) {
+        if (v instanceof TextView && (arg == null || arg instanceof Typeface)) {
           ((TextView) v).setTypeface((Typeface) arg);
           return true;
         }
