@@ -1,8 +1,9 @@
 package trikita.anvil.recyclerview.v7;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerViewAccessibilityDelegate;
 import android.view.View;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Object;
@@ -30,7 +31,7 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
     return BaseDSL.v(RecyclerView.class, r);
   }
 
-  public static Void accessibilityDelegateCompat(RecyclerViewAccessibilityDelegate arg) {
+  public static Void accessibilityDelegateCompat(@Nullable RecyclerViewAccessibilityDelegate arg) {
     return BaseDSL.attr("accessibilityDelegateCompat", arg);
   }
 
@@ -93,19 +94,19 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
   public boolean set(View v, String name, final Object arg, final Object old) {
     switch (name) {
       case "accessibilityDelegateCompat":
-        if (v instanceof RecyclerView && arg instanceof RecyclerViewAccessibilityDelegate) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerViewAccessibilityDelegate)) {
           ((RecyclerView) v).setAccessibilityDelegateCompat((RecyclerViewAccessibilityDelegate) arg);
           return true;
         }
         break;
       case "adapter":
-        if (v instanceof RecyclerView && arg instanceof RecyclerView.Adapter) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerView.Adapter)) {
           ((RecyclerView) v).setAdapter((RecyclerView.Adapter) arg);
           return true;
         }
         break;
       case "childDrawingOrderCallback":
-        if (v instanceof RecyclerView && arg instanceof RecyclerView.ChildDrawingOrderCallback) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerView.ChildDrawingOrderCallback)) {
           ((RecyclerView) v).setChildDrawingOrderCallback((RecyclerView.ChildDrawingOrderCallback) arg);
           return true;
         }
@@ -123,7 +124,7 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
         }
         break;
       case "itemAnimator":
-        if (v instanceof RecyclerView && arg instanceof RecyclerView.ItemAnimator) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerView.ItemAnimator)) {
           ((RecyclerView) v).setItemAnimator((RecyclerView.ItemAnimator) arg);
           return true;
         }
@@ -141,7 +142,7 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
         }
         break;
       case "layoutManager":
-        if (v instanceof RecyclerView && arg instanceof RecyclerView.LayoutManager) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerView.LayoutManager)) {
           ((RecyclerView) v).setLayoutManager((RecyclerView.LayoutManager) arg);
           return true;
         }
@@ -169,13 +170,13 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
         }
         break;
       case "recycledViewPool":
-        if (v instanceof RecyclerView && arg instanceof RecyclerView.RecycledViewPool) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerView.RecycledViewPool)) {
           ((RecyclerView) v).setRecycledViewPool((RecyclerView.RecycledViewPool) arg);
           return true;
         }
         break;
       case "recyclerListener":
-        if (v instanceof RecyclerView && arg instanceof RecyclerView.RecyclerListener) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerView.RecyclerListener)) {
           ((RecyclerView) v).setRecyclerListener((RecyclerView.RecyclerListener) arg);
           return true;
         }
@@ -187,7 +188,7 @@ public final class RecyclerViewv7DSL extends BaseRecyclerView implements Anvil.A
         }
         break;
       case "viewCacheExtension":
-        if (v instanceof RecyclerView && arg instanceof RecyclerView.ViewCacheExtension) {
+        if (v instanceof RecyclerView && (arg == null || arg instanceof RecyclerView.ViewCacheExtension)) {
           ((RecyclerView) v).setViewCacheExtension((RecyclerView.ViewCacheExtension) arg);
           return true;
         }

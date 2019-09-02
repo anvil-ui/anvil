@@ -1,8 +1,9 @@
 package trikita.anvil.cardview.v7;
 
 import android.content.res.ColorStateList;
-import android.support.v7.widget.CardView;
 import android.view.View;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import java.lang.Boolean;
 import java.lang.Float;
 import java.lang.Integer;
@@ -31,7 +32,7 @@ public final class CardViewv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.v(CardView.class, r);
   }
 
-  public static Void cardBackgroundColor(ColorStateList arg) {
+  public static Void cardBackgroundColor(@Nullable ColorStateList arg) {
     return BaseDSL.attr("cardBackgroundColor", arg);
   }
 
@@ -62,7 +63,7 @@ public final class CardViewv7DSL implements Anvil.AttributeSetter {
   public boolean set(View v, String name, final Object arg, final Object old) {
     switch (name) {
       case "cardBackgroundColor":
-        if (v instanceof CardView && arg instanceof ColorStateList) {
+        if (v instanceof CardView && (arg == null || arg instanceof ColorStateList)) {
           ((CardView) v).setCardBackgroundColor((ColorStateList) arg);
           return true;
         }

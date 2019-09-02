@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +88,7 @@ public final class Anvil {
     };
 
     public interface AttributeSetter<T> {
-        boolean set(View v, String name, T value, T prevValue);
+        boolean set(View v, String name, @Nullable T value, @Nullable T prevValue);
     }
 
     private final static List<AttributeSetter> attributeSetters =
