@@ -1,7 +1,7 @@
 package trikita.anvilgen
 
+import androidx.annotation.NonNull
 import com.squareup.javapoet.*
-import com.sun.org.apache.xpath.internal.operations.Bool
 import groovy.lang.Closure
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -10,13 +10,16 @@ import java.lang.Deprecated
 import java.lang.reflect.Method
 import java.net.URL
 import java.net.URLClassLoader
-import java.util.*
 import java.util.jar.JarFile
 import javax.lang.model.element.Modifier
+import com.squareup.javapoet.AnnotationSpec
+import androidx.annotation.Nullable
+import java.util.jar.JarEntry
 
 open class DSLGeneratorTask : DefaultTask() {
 
-    lateinit var jarFile: File
+    lateinit var jarFiles: List<File>
+    lateinit var nullabilitySourceFiles: List<File>
     lateinit var dependencies: List<File>
     lateinit var taskName: String
     lateinit var javadocContains: String
@@ -24,6 +27,7 @@ open class DSLGeneratorTask : DefaultTask() {
     lateinit var outputClassName: String
     lateinit var packageName: String
     var superclass: ClassName? = null
+    lateinit var nullabilityHolder : NullabilityHolder
 
     @TaskAction
     fun generate() {
@@ -43,7 +47,7 @@ open class DSLGeneratorTask : DefaultTask() {
         attrsBuilder.addStaticBlock(CodeBlock.of(
                 "Anvil.registerAttributeSetter(new \$L());\n", outputClassName))
 
-        var attrSwitch = MethodSpec.methodBuilder("set")
+        val attrSwitch = MethodSpec.methodBuilder("set")
                 .addParameter(ClassName.get("android.view", "View"), "v")
                 .addParameter(ClassName.get("java.lang", "String"), "name")
                 .addParameter(ParameterSpec.builder(TypeName.OBJECT, "arg")
@@ -53,18 +57,20 @@ open class DSLGeneratorTask : DefaultTask() {
                 .returns(TypeName.BOOLEAN)
                 .addModifiers(Modifier.PUBLIC)
 
-        var attrCases = CodeBlock.builder().beginControlFlow("switch (name)")
+        val attrCases = CodeBlock.builder().beginControlFlow("switch (name)")
 
-        var attrs = mutableListOf<Attr>()
+        val attrs = mutableListOf<Attr>()
+
+        nullabilityHolder = NullabilityHolder(outputClassName == "DSL")
 
         forEachView { view ->
             processViews(attrsBuilder, view)
-            forEachMethod(view) { m, name, arg, isListener ->
-                var attr: Attr?
+            forEachMethod(view) { m, name, arg, isListener, isNullable ->
+                val attr: Attr?
                 if (isListener) {
                     attr = listener(name, m, arg)
                 } else {
-                    attr = setter(name, m, arg)
+                    attr = setter(name, m, arg, isNullable)
                 }
                 if (attr != null) {
                     attrs.add(attr)
@@ -76,9 +82,9 @@ open class DSLGeneratorTask : DefaultTask() {
 
         attrCases.endControlFlow()
 
-        attrSwitch.addCode(attrCases.build()).addCode("return false;\n");
+        attrSwitch.addCode(attrCases.build()).addCode("return false;\n")
 
-        attrsBuilder.addMethod(attrSwitch.build());
+        attrsBuilder.addMethod(attrSwitch.build())
 
         JavaFile.builder(packageName, attrsBuilder.build())
                 .build()
@@ -86,27 +92,33 @@ open class DSLGeneratorTask : DefaultTask() {
     }
 
     fun forEachView(cb: (Class<*>) -> Unit) {
-        val urls = mutableListOf(URL("jar", "", "file:${jarFile.absolutePath}!/"))
+        val urls = jarFiles.map { URL("jar", "", "file:${it.absolutePath}!/")  }.toMutableList()
         for (dep in dependencies) {
             urls.add(URL("jar", "", "file:${dep.absolutePath}!/"))
         }
         val loader = URLClassLoader(urls.toTypedArray(), javaClass.classLoader)
         val viewClass = loader.loadClass("android.view.View")
 
-        val jar = JarFile(jarFile)
-        val list = Collections.list(jar.entries())
-        list.sortBy { it.name }
+        val nullabilityClassLoader = URLClassLoader(nullabilitySourceFiles.map { URL("jar", "", "file:${it.absolutePath}!/") }.toTypedArray(), javaClass.classLoader)
 
-        for (e in list) {
+        val jarEntriesList = mutableListOf<JarEntry>()
+        jarFiles.map { JarFile(it).entries() }.forEach {
+            jarEntriesList.addAll(it.toList())
+        }
+
+        jarEntriesList.sortBy { it.name }
+        for (e in jarEntriesList) {
             if (e.name.endsWith(".class")) {
                 val className = e.name.replace(".class", "").replace("/", ".")
-
                 // Skip inner classes
                 if (className.contains('$')) {
                     continue
                 }
                 try {
                     val c = loader.loadClass(className)
+
+                    nullabilityHolder.fillClassNullabilityInfo(nullabilityClassLoader, e.name)
+
                     if (viewClass.isAssignableFrom(c) &&
                             java.lang.reflect.Modifier.isPublic(c.modifiers)) {
                         cb(c)
@@ -119,7 +131,7 @@ open class DSLGeneratorTask : DefaultTask() {
         }
     }
 
-    fun forEachMethod(c: Class<*>, cb: (Method, String, Class<*>, Boolean) -> Unit) {
+    fun forEachMethod(c: Class<*>, cb: (Method, String, Class<*>, Boolean, Boolean?) -> Unit) {
         val declaredMethods = c.declaredMethods.clone()
         declaredMethods.sortBy { it.name }
         for (m in declaredMethods) {
@@ -128,13 +140,15 @@ open class DSLGeneratorTask : DefaultTask() {
             }
 
             val parameterType = getMethodParameterType(m) ?: continue
+            val isNullable = nullabilityHolder.isParameterNullable(m)
 
-            if (m.name.matches(Regex("^setOn.*Listener$"))) {
-                val name = m.name
-                cb(m, "on" + name.substring(5, name.length - 8), parameterType, true)
-            } else if (m.name.startsWith("set") && m.parameterCount == 1) {
-                val name = Character.toLowerCase(m.name[3]).toString() + m.name.substring(4)
-                cb(m, name, parameterType, false)
+            val formattedMethodName = formatMethodName(m.name, m.parameterCount)
+            formattedMethodName?.let {
+                if (formattedMethodName.isListener) {
+                    cb(m, formattedMethodName.formattedName, parameterType, formattedMethodName.isListener, true)
+                } else {
+                    cb(m, formattedMethodName.formattedName, parameterType, formattedMethodName.isListener, isNullable)
+                }
             }
         }
     }
@@ -261,7 +275,7 @@ open class DSLGeneratorTask : DefaultTask() {
                     .addStatement("v.${m.name}((\$T) null)", listenerClass)
                     .endControlFlow()
                     .addStatement("return true")
-            attr.unreachableBreak = true;
+            attr.unreachableBreak = true
         } else {
             attr.code.beginControlFlow("if (v instanceof \$T && arg instanceof \$T)", m.declaringClass, listenerClass)
                     .beginControlFlow("if (arg != null)", m.declaringClass)
@@ -279,7 +293,8 @@ open class DSLGeneratorTask : DefaultTask() {
 
     fun setter(name: String,
                m: Method,
-               argClass: Class<*>): Attr? {
+               argClass: Class<*>,
+               isNullable : Boolean?): Attr? {
 
         val viewClass = m.declaringClass.canonicalName
         val attr = Attr(name, argClass, m)
@@ -304,21 +319,43 @@ open class DSLGeneratorTask : DefaultTask() {
                     .addStatement("return true")
                     .endControlFlow()
         } else {
-            attr.code.beginControlFlow("if (v instanceof \$T && arg instanceof \$T)", m.declaringClass, argBoxed)
-                    .addStatement("((\$T) v).${m.name}((\$T) arg)", m.declaringClass, argClass)
-                    .addStatement("return true")
-                    .endControlFlow()
+            val checkArgLiteral = if (isNullable == true) {
+                "(arg == null || arg instanceof \$T)"
+            } else {
+                "arg instanceof \$T"
+            }
+
+            attr.code.beginControlFlow("if (v instanceof \$T && $checkArgLiteral)", m.declaringClass, argBoxed)
+                .addStatement("((\$T) v).${m.name}((\$T) arg)", m.declaringClass, argClass)
+                .addStatement("return true")
+                .endControlFlow()
         }
-        return attr;
+        return attr
     }
 
-    fun addWrapperMethod(builder: TypeSpec.Builder, name: String, argClass: Class<*>) {
+    fun addWrapperMethod(builder: TypeSpec.Builder, name: String, argClass: Class<*>, className: String) {
         val baseDsl = ClassName.get("trikita.anvil", "BaseDSL")
+
+        val nullableAnnotation: AnnotationSpec? = when (nullabilityHolder.isParameterNullable(className, name, argClass.typeName)) {
+            true -> AnnotationSpec
+                        .builder(Nullable::class.java)
+                        .build()
+            false -> AnnotationSpec
+                        .builder(NonNull::class.java)
+                        .build()
+            else -> null
+        }
+
+        val parameterBuilder = ParameterSpec.builder(argClass, "arg")
+        if (nullableAnnotation != null) {
+            parameterBuilder.addAnnotation(nullableAnnotation)
+        }
+
         val wrapperMethod = MethodSpec.methodBuilder(name)
-                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .addParameter(ParameterSpec.builder(argClass, "arg").build())
-                .returns(TypeName.VOID.box())
-                .addStatement("return \$T.attr(\$S, arg)", baseDsl, name)
+            .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+            .addParameter(parameterBuilder.build())
+            .returns(TypeName.VOID.box())
+            .addStatement("return \$T.attr(\$S, arg)", baseDsl, name)
         builder.addMethod(wrapperMethod.build())
     }
 
@@ -333,25 +370,26 @@ open class DSLGeneratorTask : DefaultTask() {
             }
 
             cases.add("case \$S:\n", it.key)
-            cases.indent();
+            cases.indent()
             filered.filter { it.setter.declaringClass.canonicalName != "android.view.View" }.forEach {
                 cases.add(it.code.build())
             }
 
-            val common = filered.firstOrNull() { it.setter.declaringClass.canonicalName == "android.view.View" }
+            val common = filered.firstOrNull { it.setter.declaringClass.canonicalName == "android.view.View" }
             if (common != null) {
                 cases.add(common.code.build())
             }
             if (common == null || !common.unreachableBreak) {
                 cases.add("break;\n")
             }
-            cases.unindent();
+            cases.unindent()
         }
 
         attrs.sortedBy { it.name }.groupBy { it.name }.forEach {
             val name = it.key
+            val className = it.value.firstOrNull()?.setter?.declaringClass?.canonicalName ?: ""
             it.value.sortedBy { it.param.name }.groupBy { it.param }.forEach {
-                addWrapperMethod(dsl, name, it.key)
+                addWrapperMethod(dsl, name, it.key, className)
             }
         }
     }
@@ -365,4 +403,21 @@ open class DSLGeneratorTask : DefaultTask() {
                     val setter: Method,
                     var unreachableBreak: Boolean = false,
                     val code: CodeBlock.Builder = CodeBlock.builder())
+}
+
+data class FormattedMethod(val formattedName : String, val isListener : Boolean)
+
+fun formatMethodName(originalMethodName : String, parameterCount : Int) : FormattedMethod? {
+    return if (originalMethodName.matches(Regex("^setOn.*Listener$"))) {
+        FormattedMethod(
+            "on" + originalMethodName.substring(5, originalMethodName.length - 8),
+            true
+        )
+    } else if (originalMethodName.startsWith("set") && originalMethodName.length > 3 && parameterCount == 1) {
+            FormattedMethod(
+                Character.toLowerCase(originalMethodName[3]).toString() + originalMethodName.substring(
+                    4
+                ), false
+            )
+    } else null
 }

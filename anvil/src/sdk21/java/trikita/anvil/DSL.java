@@ -131,6 +131,8 @@ import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 import android.widget.ZoomButton;
 import android.widget.ZoomControls;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -872,7 +874,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("backgroundResource", arg);
   }
 
-  public static Void backgroundTintList(ColorStateList arg) {
+  public static Void backgroundTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("backgroundTintList", arg);
   }
 
@@ -904,7 +906,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("bottom", arg);
   }
 
-  public static Void buttonDrawable(Drawable arg) {
+  public static Void buttonDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("buttonDrawable", arg);
   }
 
@@ -912,7 +914,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("buttonDrawable", arg);
   }
 
-  public static Void buttonTintList(ColorStateList arg) {
+  public static Void buttonTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("buttonTintList", arg);
   }
 
@@ -944,7 +946,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("captionEnabled", arg);
   }
 
-  public static Void checkMarkDrawable(Drawable arg) {
+  public static Void checkMarkDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("checkMarkDrawable", arg);
   }
 
@@ -952,7 +954,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("checkMarkDrawable", arg);
   }
 
-  public static Void checkMarkTintList(ColorStateList arg) {
+  public static Void checkMarkTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("checkMarkTintList", arg);
   }
 
@@ -1032,11 +1034,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("cropToPadding", arg);
   }
 
-  public static Void currentHour(Integer arg) {
+  public static Void currentHour(@NonNull Integer arg) {
     return BaseDSL.attr("currentHour", arg);
   }
 
-  public static Void currentMinute(Integer arg) {
+  public static Void currentMinute(@NonNull Integer arg) {
     return BaseDSL.attr("currentMinute", arg);
   }
 
@@ -1088,7 +1090,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("displayedValues", arg);
   }
 
-  public static Void divider(Drawable arg) {
+  public static Void divider(@Nullable Drawable arg) {
     return BaseDSL.attr("divider", arg);
   }
 
@@ -1304,7 +1306,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("focusedMonthDateColor", arg);
   }
 
-  public static Void fontFeatureSettings(String arg) {
+  public static Void fontFeatureSettings(@Nullable String arg) {
     return BaseDSL.attr("fontFeatureSettings", arg);
   }
 
@@ -1500,7 +1502,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("imageResource", arg);
   }
 
-  public static Void imageTintList(ColorStateList arg) {
+  public static Void imageTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("imageTintList", arg);
   }
 
@@ -1544,7 +1546,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("indeterminateDrawableTiled", arg);
   }
 
-  public static Void indeterminateTintList(ColorStateList arg) {
+  public static Void indeterminateTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("indeterminateTintList", arg);
   }
 
@@ -1572,7 +1574,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("interpolator", arg);
   }
 
-  public static Void is24HourView(Boolean arg) {
+  public static Void is24HourView(@NonNull Boolean arg) {
     return BaseDSL.attr("is24HourView", arg);
   }
 
@@ -1612,7 +1614,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("labelFor", arg);
   }
 
-  public static Void layerPaint(Paint arg) {
+  public static Void layerPaint(@Nullable Paint arg) {
     return BaseDSL.attr("layerPaint", arg);
   }
 
@@ -1652,7 +1654,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("left", arg);
   }
 
-  public static Void leftStripDrawable(Drawable arg) {
+  public static Void leftStripDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("leftStripDrawable", arg);
   }
 
@@ -1812,11 +1814,11 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("navigationContentDescription", arg);
   }
 
-  public static Void navigationContentDescription(CharSequence arg) {
+  public static Void navigationContentDescription(@Nullable CharSequence arg) {
     return BaseDSL.attr("navigationContentDescription", arg);
   }
 
-  public static Void navigationIcon(Drawable arg) {
+  public static Void navigationIcon(@Nullable Drawable arg) {
     return BaseDSL.attr("navigationIcon", arg);
   }
 
@@ -2164,7 +2166,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("progress", arg);
   }
 
-  public static Void progressBackgroundTintList(ColorStateList arg) {
+  public static Void progressBackgroundTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("progressBackgroundTintList", arg);
   }
 
@@ -2180,7 +2182,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("progressDrawableTiled", arg);
   }
 
-  public static Void progressTintList(ColorStateList arg) {
+  public static Void progressTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("progressTintList", arg);
   }
 
@@ -2200,7 +2202,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("proximityCorrectionEnabled", arg);
   }
 
-  public static Void queryHint(CharSequence arg) {
+  public static Void queryHint(@Nullable CharSequence arg) {
     return BaseDSL.attr("queryHint", arg);
   }
 
@@ -2236,7 +2238,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("right", arg);
   }
 
-  public static Void rightStripDrawable(Drawable arg) {
+  public static Void rightStripDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("rightStripDrawable", arg);
   }
 
@@ -2336,7 +2338,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("secondaryProgress", arg);
   }
 
-  public static Void secondaryProgressTintList(ColorStateList arg) {
+  public static Void secondaryProgressTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("secondaryProgressTintList", arg);
   }
 
@@ -2556,7 +2558,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("textKeepState", arg);
   }
 
-  public static Void textLocale(Locale arg) {
+  public static Void textLocale(@NonNull Locale arg) {
     return BaseDSL.attr("textLocale", arg);
   }
 
@@ -2596,7 +2598,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("thumbTextPadding", arg);
   }
 
-  public static Void thumbTintList(ColorStateList arg) {
+  public static Void thumbTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("thumbTintList", arg);
   }
 
@@ -2676,7 +2678,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("translationZ", arg);
   }
 
-  public static Void typeface(Typeface arg) {
+  public static Void typeface(@Nullable Typeface arg) {
     return BaseDSL.attr("typeface", arg);
   }
 
@@ -3009,7 +3011,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "buttonDrawable":
-        if (v instanceof CompoundButton && arg instanceof Drawable) {
+        if (v instanceof CompoundButton && (arg == null || arg instanceof Drawable)) {
           ((CompoundButton) v).setButtonDrawable((Drawable) arg);
           return true;
         }
@@ -3019,13 +3021,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "buttonTintList":
-        if (v instanceof CompoundButton && arg instanceof ColorStateList) {
+        if (v instanceof CompoundButton && (arg == null || arg instanceof ColorStateList)) {
           ((CompoundButton) v).setButtonTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "buttonTintMode":
-        if (v instanceof CompoundButton && arg instanceof PorterDuff.Mode) {
+        if (v instanceof CompoundButton && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((CompoundButton) v).setButtonTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -3043,7 +3045,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "callback":
-        if (v instanceof TvView && arg instanceof TvView.TvInputCallback) {
+        if (v instanceof TvView && (arg == null || arg instanceof TvView.TvInputCallback)) {
           ((TvView) v).setCallback((TvView.TvInputCallback) arg);
           return true;
         }
@@ -3067,7 +3069,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "checkMarkDrawable":
-        if (v instanceof CheckedTextView && arg instanceof Drawable) {
+        if (v instanceof CheckedTextView && (arg == null || arg instanceof Drawable)) {
           ((CheckedTextView) v).setCheckMarkDrawable((Drawable) arg);
           return true;
         }
@@ -3077,13 +3079,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "checkMarkTintList":
-        if (v instanceof CheckedTextView && arg instanceof ColorStateList) {
+        if (v instanceof CheckedTextView && (arg == null || arg instanceof ColorStateList)) {
           ((CheckedTextView) v).setCheckMarkTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "checkMarkTintMode":
-        if (v instanceof CheckedTextView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof CheckedTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((CheckedTextView) v).setCheckMarkTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -3291,7 +3293,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "divider":
-        if (v instanceof ListView && arg instanceof Drawable) {
+        if (v instanceof ListView && (arg == null || arg instanceof Drawable)) {
           ((ListView) v).setDivider((Drawable) arg);
           return true;
         }
@@ -3635,7 +3637,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "fontFeatureSettings":
-        if (v instanceof TextView && arg instanceof String) {
+        if (v instanceof TextView && (arg == null || arg instanceof String)) {
           ((TextView) v).setFontFeatureSettings((String) arg);
           return true;
         }
@@ -3929,7 +3931,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
           ((ImageSwitcher) v).setImageDrawable((Drawable) arg);
           return true;
         }
-        if (v instanceof ImageView && arg instanceof Drawable) {
+        if (v instanceof ImageView && (arg == null || arg instanceof Drawable)) {
           ((ImageView) v).setImageDrawable((Drawable) arg);
           return true;
         }
@@ -3957,13 +3959,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "imageTintList":
-        if (v instanceof ImageView && arg instanceof ColorStateList) {
+        if (v instanceof ImageView && (arg == null || arg instanceof ColorStateList)) {
           ((ImageView) v).setImageTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "imageTintMode":
-        if (v instanceof ImageView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ImageView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ImageView) v).setImageTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -3973,7 +3975,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
           ((ImageSwitcher) v).setImageURI((Uri) arg);
           return true;
         }
-        if (v instanceof ImageView && arg instanceof Uri) {
+        if (v instanceof ImageView && (arg == null || arg instanceof Uri)) {
           ((ImageView) v).setImageURI((Uri) arg);
           return true;
         }
@@ -4029,13 +4031,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "indeterminateTintList":
-        if (v instanceof ProgressBar && arg instanceof ColorStateList) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof ColorStateList)) {
           ((ProgressBar) v).setIndeterminateTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "indeterminateTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setIndeterminateTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -4199,7 +4201,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "leftStripDrawable":
-        if (v instanceof TabWidget && arg instanceof Drawable) {
+        if (v instanceof TabWidget && (arg == null || arg instanceof Drawable)) {
           ((TabWidget) v).setLeftStripDrawable((Drawable) arg);
           return true;
         }
@@ -4453,13 +4455,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
           ((Toolbar) v).setNavigationContentDescription((int) arg);
           return true;
         }
-        if (v instanceof Toolbar && arg instanceof CharSequence) {
+        if (v instanceof Toolbar && (arg == null || arg instanceof CharSequence)) {
           ((Toolbar) v).setNavigationContentDescription((CharSequence) arg);
           return true;
         }
         break;
       case "navigationIcon":
-        if (v instanceof Toolbar && arg instanceof Drawable) {
+        if (v instanceof Toolbar && (arg == null || arg instanceof Drawable)) {
           ((Toolbar) v).setNavigationIcon((Drawable) arg);
           return true;
         }
@@ -5546,13 +5548,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "progressBackgroundTintList":
-        if (v instanceof ProgressBar && arg instanceof ColorStateList) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof ColorStateList)) {
           ((ProgressBar) v).setProgressBackgroundTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "progressBackgroundTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setProgressBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -5570,13 +5572,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "progressTintList":
-        if (v instanceof ProgressBar && arg instanceof ColorStateList) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof ColorStateList)) {
           ((ProgressBar) v).setProgressTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "progressTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setProgressTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -5600,7 +5602,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "queryHint":
-        if (v instanceof SearchView && arg instanceof CharSequence) {
+        if (v instanceof SearchView && (arg == null || arg instanceof CharSequence)) {
           ((SearchView) v).setQueryHint((CharSequence) arg);
           return true;
         }
@@ -5658,7 +5660,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "rightStripDrawable":
-        if (v instanceof TabWidget && arg instanceof Drawable) {
+        if (v instanceof TabWidget && (arg == null || arg instanceof Drawable)) {
           ((TabWidget) v).setRightStripDrawable((Drawable) arg);
           return true;
         }
@@ -5806,13 +5808,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "secondaryProgressTintList":
-        if (v instanceof ProgressBar && arg instanceof ColorStateList) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof ColorStateList)) {
           ((ProgressBar) v).setSecondaryProgressTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "secondaryProgressTintMode":
-        if (v instanceof ProgressBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof ProgressBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((ProgressBar) v).setSecondaryProgressTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -6206,13 +6208,13 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "thumbTintList":
-        if (v instanceof AbsSeekBar && arg instanceof ColorStateList) {
+        if (v instanceof AbsSeekBar && (arg == null || arg instanceof ColorStateList)) {
           ((AbsSeekBar) v).setThumbTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "thumbTintMode":
-        if (v instanceof AbsSeekBar && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AbsSeekBar && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AbsSeekBar) v).setThumbTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -6324,7 +6326,7 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
         }
         break;
       case "typeface":
-        if (v instanceof TextView && arg instanceof Typeface) {
+        if (v instanceof TextView && (arg == null || arg instanceof Typeface)) {
           ((TextView) v).setTypeface((Typeface) arg);
           return true;
         }

@@ -7,48 +7,51 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.ActionProvider;
-import android.support.v4.widget.CursorAdapter;
-import android.support.v7.view.menu.ActionMenuItemView;
-import android.support.v7.view.menu.ExpandedMenuView;
-import android.support.v7.view.menu.ListMenuItemView;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.ActionBarContainer;
-import android.support.v7.widget.ActionBarContextView;
-import android.support.v7.widget.ActionBarOverlayLayout;
-import android.support.v7.widget.ActionMenuView;
-import android.support.v7.widget.ActivityChooserView;
-import android.support.v7.widget.AlertDialogLayout;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatCheckedTextView;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatImageButton;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
-import android.support.v7.widget.AppCompatRadioButton;
-import android.support.v7.widget.AppCompatRatingBar;
-import android.support.v7.widget.AppCompatSeekBar;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.ButtonBarLayout;
-import android.support.v7.widget.ContentFrameLayout;
-import android.support.v7.widget.DialogTitle;
-import android.support.v7.widget.FitWindowsFrameLayout;
-import android.support.v7.widget.FitWindowsLinearLayout;
-import android.support.v7.widget.FitWindowsViewGroup;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.ScrollingTabContainerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.ViewStubCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.PopupWindow;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.ActionMenuItemView;
+import androidx.appcompat.view.menu.ExpandedMenuView;
+import androidx.appcompat.view.menu.ListMenuItemView;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.ActionBarContainer;
+import androidx.appcompat.widget.ActionBarContextView;
+import androidx.appcompat.widget.ActionBarOverlayLayout;
+import androidx.appcompat.widget.ActionMenuView;
+import androidx.appcompat.widget.ActivityChooserView;
+import androidx.appcompat.widget.AlertDialogLayout;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.ButtonBarLayout;
+import androidx.appcompat.widget.ContentFrameLayout;
+import androidx.appcompat.widget.DialogTitle;
+import androidx.appcompat.widget.FitWindowsFrameLayout;
+import androidx.appcompat.widget.FitWindowsLinearLayout;
+import androidx.appcompat.widget.FitWindowsViewGroup;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.appcompat.widget.ScrollingTabContainerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.ViewStubCompat;
+import androidx.core.text.PrecomputedTextCompat;
+import androidx.core.view.ActionProvider;
+import androidx.cursoradapter.widget.CursorAdapter;
 import java.lang.Boolean;
 import java.lang.CharSequence;
 import java.lang.Float;
@@ -56,6 +59,7 @@ import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
 import java.lang.Void;
+import java.util.concurrent.Future;
 import trikita.anvil.Anvil;
 import trikita.anvil.BaseDSL;
 
@@ -65,7 +69,7 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library appcompat-v7.
  * Please, don't edit it manually unless for debugging.
  */
-public final class AppCompatv7DSL implements Anvil.AttributeSetter {
+public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.AttributeSetter {
   static {
     Anvil.registerAttributeSetter(new AppCompatv7DSL());
   }
@@ -426,12 +430,20 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("expandedFormat", arg);
   }
 
+  public static Void firstBaselineToTopHeight(int arg) {
+    return BaseDSL.attr("firstBaselineToTopHeight", arg);
+  }
+
   public static Void forceShowIcon(boolean arg) {
     return BaseDSL.attr("forceShowIcon", arg);
   }
 
   public static Void gravity(int arg) {
     return BaseDSL.attr("gravity", arg);
+  }
+
+  public static Void groupDividerEnabled(boolean arg) {
+    return BaseDSL.attr("groupDividerEnabled", arg);
   }
 
   public static Void hasNonEmbeddedTabs(boolean arg) {
@@ -482,12 +494,20 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("itemInvoker", arg);
   }
 
+  public static Void lastBaselineToBottomHeight(int arg) {
+    return BaseDSL.attr("lastBaselineToBottomHeight", arg);
+  }
+
   public static Void layoutInflater(LayoutInflater arg) {
     return BaseDSL.attr("layoutInflater", arg);
   }
 
   public static Void layoutResource(int arg) {
     return BaseDSL.attr("layoutResource", arg);
+  }
+
+  public static Void lineHeight(int arg) {
+    return BaseDSL.attr("lineHeight", arg);
   }
 
   public static Void logo(Drawable arg) {
@@ -518,11 +538,11 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("navigationContentDescription", arg);
   }
 
-  public static Void navigationContentDescription(CharSequence arg) {
+  public static Void navigationContentDescription(@Nullable CharSequence arg) {
     return BaseDSL.attr("navigationContentDescription", arg);
   }
 
-  public static Void navigationIcon(Drawable arg) {
+  public static Void navigationIcon(@Nullable Drawable arg) {
     return BaseDSL.attr("navigationIcon", arg);
   }
 
@@ -578,7 +598,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("orientation", arg);
   }
 
-  public static Void overflowIcon(Drawable arg) {
+  public static Void overflowIcon(@Nullable Drawable arg) {
     return BaseDSL.attr("overflowIcon", arg);
   }
 
@@ -598,6 +618,10 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("popupTheme", arg);
   }
 
+  public static Void precomputedText(@NonNull PrecomputedTextCompat arg) {
+    return BaseDSL.attr("precomputedText", arg);
+  }
+
   public static Void primaryBackground(Drawable arg) {
     return BaseDSL.attr("primaryBackground", arg);
   }
@@ -606,7 +630,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("provider", arg);
   }
 
-  public static Void queryHint(CharSequence arg) {
+  public static Void queryHint(@Nullable CharSequence arg) {
     return BaseDSL.attr("queryHint", arg);
   }
 
@@ -666,7 +690,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("supportAllCaps", arg);
   }
 
-  public static Void supportBackgroundTintList(ColorStateList arg) {
+  public static Void supportBackgroundTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("supportBackgroundTintList", arg);
   }
 
@@ -674,7 +698,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("supportBackgroundTintMode", arg);
   }
 
-  public static Void supportButtonTintList(ColorStateList arg) {
+  public static Void supportButtonTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("supportButtonTintList", arg);
   }
 
@@ -682,7 +706,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("supportButtonTintMode", arg);
   }
 
-  public static Void supportImageTintList(ColorStateList arg) {
+  public static Void supportImageTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("supportImageTintList", arg);
   }
 
@@ -710,6 +734,14 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("tabSelected", arg);
   }
 
+  public static Void textFuture(@NonNull Future arg) {
+    return BaseDSL.attr("textFuture", arg);
+  }
+
+  public static Void textMetricsParamsCompat(PrecomputedTextCompat.Params arg) {
+    return BaseDSL.attr("textMetricsParamsCompat", arg);
+  }
+
   public static Void textOff(CharSequence arg) {
     return BaseDSL.attr("textOff", arg);
   }
@@ -730,7 +762,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("thumbTextPadding", arg);
   }
 
-  public static Void thumbTintList(ColorStateList arg) {
+  public static Void thumbTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("thumbTintList", arg);
   }
 
@@ -778,7 +810,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
     return BaseDSL.attr("trackResource", arg);
   }
 
-  public static Void trackTintList(ColorStateList arg) {
+  public static Void trackTintList(@Nullable ColorStateList arg) {
     return BaseDSL.attr("trackTintList", arg);
   }
 
@@ -962,6 +994,12 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "firstBaselineToTopHeight":
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setFirstBaselineToTopHeight((int) arg);
+          return true;
+        }
+        break;
       case "forceShowIcon":
         if (v instanceof ListMenuItemView && arg instanceof Boolean) {
           ((ListMenuItemView) v).setForceShowIcon((boolean) arg);
@@ -971,6 +1009,12 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
       case "gravity":
         if (v instanceof LinearLayoutCompat && arg instanceof Integer) {
           ((LinearLayoutCompat) v).setGravity((int) arg);
+          return true;
+        }
+        break;
+      case "groupDividerEnabled":
+        if (v instanceof ListMenuItemView && arg instanceof Boolean) {
+          ((ListMenuItemView) v).setGroupDividerEnabled((boolean) arg);
           return true;
         }
         break;
@@ -1052,6 +1096,12 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "lastBaselineToBottomHeight":
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setLastBaselineToBottomHeight((int) arg);
+          return true;
+        }
+        break;
       case "layoutInflater":
         if (v instanceof ViewStubCompat && arg instanceof LayoutInflater) {
           ((ViewStubCompat) v).setLayoutInflater((LayoutInflater) arg);
@@ -1061,6 +1111,12 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
       case "layoutResource":
         if (v instanceof ViewStubCompat && arg instanceof Integer) {
           ((ViewStubCompat) v).setLayoutResource((int) arg);
+          return true;
+        }
+        break;
+      case "lineHeight":
+        if (v instanceof AppCompatTextView && arg instanceof Integer) {
+          ((AppCompatTextView) v).setLineHeight((int) arg);
           return true;
         }
         break;
@@ -1105,13 +1161,13 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           ((Toolbar) v).setNavigationContentDescription((int) arg);
           return true;
         }
-        if (v instanceof Toolbar && arg instanceof CharSequence) {
+        if (v instanceof Toolbar && (arg == null || arg instanceof CharSequence)) {
           ((Toolbar) v).setNavigationContentDescription((CharSequence) arg);
           return true;
         }
         break;
       case "navigationIcon":
-        if (v instanceof Toolbar && arg instanceof Drawable) {
+        if (v instanceof Toolbar && (arg == null || arg instanceof Drawable)) {
           ((Toolbar) v).setNavigationIcon((Drawable) arg);
           return true;
         }
@@ -1311,11 +1367,11 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
         }
         break;
       case "overflowIcon":
-        if (v instanceof ActionMenuView && arg instanceof Drawable) {
+        if (v instanceof ActionMenuView && (arg == null || arg instanceof Drawable)) {
           ((ActionMenuView) v).setOverflowIcon((Drawable) arg);
           return true;
         }
-        if (v instanceof Toolbar && arg instanceof Drawable) {
+        if (v instanceof Toolbar && (arg == null || arg instanceof Drawable)) {
           ((Toolbar) v).setOverflowIcon((Drawable) arg);
           return true;
         }
@@ -1348,6 +1404,12 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "precomputedText":
+        if (v instanceof AppCompatTextView && arg instanceof PrecomputedTextCompat) {
+          ((AppCompatTextView) v).setPrecomputedText((PrecomputedTextCompat) arg);
+          return true;
+        }
+        break;
       case "primaryBackground":
         if (v instanceof ActionBarContainer && arg instanceof Drawable) {
           ((ActionBarContainer) v).setPrimaryBackground((Drawable) arg);
@@ -1361,7 +1423,7 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
         }
         break;
       case "queryHint":
-        if (v instanceof SearchView && arg instanceof CharSequence) {
+        if (v instanceof SearchView && (arg == null || arg instanceof CharSequence)) {
           ((SearchView) v).setQueryHint((CharSequence) arg);
           return true;
         }
@@ -1453,109 +1515,109 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
         }
         break;
       case "supportBackgroundTintList":
-        if (v instanceof AppCompatAutoCompleteTextView && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatAutoCompleteTextView && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatAutoCompleteTextView) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatButton && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatButton && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatButton) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatEditText && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatEditText && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatEditText) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatImageButton && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatImageButton) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatImageView && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatImageView) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatMultiAutoCompleteTextView && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatMultiAutoCompleteTextView && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatSpinner && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatSpinner && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatSpinner) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatTextView && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatTextView && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatTextView) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "supportBackgroundTintMode":
-        if (v instanceof AppCompatAutoCompleteTextView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatAutoCompleteTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatAutoCompleteTextView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatButton && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatButton && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatButton) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatEditText && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatEditText && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatEditText) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatImageButton && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatImageButton) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatImageView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatImageView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatMultiAutoCompleteTextView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatMultiAutoCompleteTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatSpinner && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatSpinner && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatSpinner) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatTextView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatTextView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
         break;
       case "supportButtonTintList":
-        if (v instanceof AppCompatCheckBox && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatCheckBox && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatCheckBox) v).setSupportButtonTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatRadioButton && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatRadioButton && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatRadioButton) v).setSupportButtonTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "supportButtonTintMode":
-        if (v instanceof AppCompatCheckBox && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatCheckBox && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatCheckBox) v).setSupportButtonTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatRadioButton && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatRadioButton && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatRadioButton) v).setSupportButtonTintMode((PorterDuff.Mode) arg);
           return true;
         }
         break;
       case "supportImageTintList":
-        if (v instanceof AppCompatImageButton && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatImageButton) v).setSupportImageTintList((ColorStateList) arg);
           return true;
         }
-        if (v instanceof AppCompatImageView && arg instanceof ColorStateList) {
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatImageView) v).setSupportImageTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "supportImageTintMode":
-        if (v instanceof AppCompatImageButton && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatImageButton && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatImageButton) v).setSupportImageTintMode((PorterDuff.Mode) arg);
           return true;
         }
-        if (v instanceof AppCompatImageView && arg instanceof PorterDuff.Mode) {
+        if (v instanceof AppCompatImageView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatImageView) v).setSupportImageTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -1590,6 +1652,18 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
           return true;
         }
         break;
+      case "textFuture":
+        if (v instanceof AppCompatTextView && arg instanceof Future) {
+          ((AppCompatTextView) v).setTextFuture((Future) arg);
+          return true;
+        }
+        break;
+      case "textMetricsParamsCompat":
+        if (v instanceof AppCompatTextView && arg instanceof PrecomputedTextCompat.Params) {
+          ((AppCompatTextView) v).setTextMetricsParamsCompat((PrecomputedTextCompat.Params) arg);
+          return true;
+        }
+        break;
       case "textOff":
         if (v instanceof SwitchCompat && arg instanceof CharSequence) {
           ((SwitchCompat) v).setTextOff((CharSequence) arg);
@@ -1621,13 +1695,13 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
         }
         break;
       case "thumbTintList":
-        if (v instanceof SwitchCompat && arg instanceof ColorStateList) {
+        if (v instanceof SwitchCompat && (arg == null || arg instanceof ColorStateList)) {
           ((SwitchCompat) v).setThumbTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "thumbTintMode":
-        if (v instanceof SwitchCompat && arg instanceof PorterDuff.Mode) {
+        if (v instanceof SwitchCompat && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((SwitchCompat) v).setThumbTintMode((PorterDuff.Mode) arg);
           return true;
         }
@@ -1703,13 +1777,13 @@ public final class AppCompatv7DSL implements Anvil.AttributeSetter {
         }
         break;
       case "trackTintList":
-        if (v instanceof SwitchCompat && arg instanceof ColorStateList) {
+        if (v instanceof SwitchCompat && (arg == null || arg instanceof ColorStateList)) {
           ((SwitchCompat) v).setTrackTintList((ColorStateList) arg);
           return true;
         }
         break;
       case "trackTintMode":
-        if (v instanceof SwitchCompat && arg instanceof PorterDuff.Mode) {
+        if (v instanceof SwitchCompat && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((SwitchCompat) v).setTrackTintMode((PorterDuff.Mode) arg);
           return true;
         }
