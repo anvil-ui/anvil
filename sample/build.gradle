@@ -32,6 +32,8 @@ dependencies {
     implementation project(":anvil")
     implementation project(":anvil-support-v4")
     implementation project(":anvil-appcompat-v7")
+    implementation project(":anvil-constraintlayout")
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
 
     testImplementation 'junit:junit:4.12'

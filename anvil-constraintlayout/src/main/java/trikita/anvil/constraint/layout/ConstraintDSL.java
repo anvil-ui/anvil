@@ -27,8 +27,14 @@ public final class ConstraintDSL implements Anvil.AttributeSetter {
         return BaseDSL.v(ConstraintLayout.class);
     }
 
-    public static Void constraintLayout(Anvil.Renderable r) {
-        return BaseDSL.v(ConstraintLayout.class, r);
+    public static Void constraintLayout(final Anvil.Renderable r) {
+        return BaseDSL.v(ConstraintLayout.class, new Anvil.Renderable() {
+            @Override
+            public void view() {
+                r.view();
+                applyConstraints();
+            }
+        });
     }
 
     public static BaseDSL.ViewClassResult barrier() {
