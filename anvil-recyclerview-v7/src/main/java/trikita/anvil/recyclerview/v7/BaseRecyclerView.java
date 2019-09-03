@@ -1,7 +1,6 @@
 package trikita.anvil.recyclerview.v7;
 
 import static trikita.anvil.BaseDSL.attr;
-
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
