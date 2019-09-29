@@ -1,8 +1,10 @@
 package trikita.anvilgen
 
-import jdk.internal.org.objectweb.asm.ClassReader
-import jdk.internal.org.objectweb.asm.tree.AnnotationNode
-import jdk.internal.org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.ClassReader
+import org.objectweb.asm.tree.AnnotationNode
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.LocalVariableNode
+import org.objectweb.asm.tree.MethodNode
 import java.io.IOException
 import java.lang.reflect.Method
 import java.net.URLClassLoader
@@ -35,7 +37,7 @@ class NullabilityHolder(isSourceSdk: Boolean) {
 
         val className = rawClassName.replace(".class", "").replace("/", ".")
 
-        cn.methods.forEach { methodNode ->
+        (cn.methods as List<MethodNode>).forEach { methodNode : MethodNode ->
             if (methodNode.name != "<init>"
                 && methodNode.invisibleParameterAnnotations?.isNotEmpty() == true
                 && methodNode.localVariables?.size == 2
@@ -43,7 +45,7 @@ class NullabilityHolder(isSourceSdk: Boolean) {
 
                 val hasNullable =
                     hasNullableOrNonNullAnnotation(methodNode.invisibleParameterAnnotations[0])
-                val argType = convertTypeNameFromRaw(methodNode.localVariables[1].desc)
+                val argType = convertTypeNameFromRaw((methodNode.localVariables[1] as LocalVariableNode).desc)
                 val formattedMethodName = formatMethodName(methodNode.name, 1)
                 formattedMethodName?.let {
                     val signature = MethodSignature(className, it.formattedName, argType)

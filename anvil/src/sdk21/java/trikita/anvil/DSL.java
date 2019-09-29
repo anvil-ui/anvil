@@ -6,7 +6,6 @@ import android.animation.StateListAnimator;
 import android.app.Activity;
 import android.app.FragmentBreadCrumbs;
 import android.app.FragmentManager;
-import android.app.LocalActivityManager;
 import android.app.MediaRouteButton;
 import android.app.SearchableInfo;
 import android.appwidget.AppWidgetHostView;
@@ -2692,10 +2691,6 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
 
   public static Void unselectedAlpha(float arg) {
     return BaseDSL.attr("unselectedAlpha", arg);
-  }
-
-  public static Void up(LocalActivityManager arg) {
-    return BaseDSL.attr("up", arg);
   }
 
   public static Void useDefaultMargins(boolean arg) {
@@ -6346,12 +6341,6 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
       case "unselectedAlpha":
         if (v instanceof Gallery && arg instanceof Float) {
           ((Gallery) v).setUnselectedAlpha((float) arg);
-          return true;
-        }
-        break;
-      case "up":
-        if (v instanceof TabHost && arg instanceof LocalActivityManager) {
-          ((TabHost) v).setup((LocalActivityManager) arg);
           return true;
         }
         break;
