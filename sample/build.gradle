@@ -33,7 +33,10 @@ dependencies {
     implementation project(":anvil-support-v4")
     implementation project(":anvil-appcompat-v7")
     implementation project(":anvil-constraintlayout")
+    implementation project(":anvil-yogalayout")
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.facebook.yoga.android:yoga-layout:1.16.0'
+    implementation 'com.facebook.soloader:soloader:0.6.1'
 
 
     testImplementation 'junit:junit:4.12'
