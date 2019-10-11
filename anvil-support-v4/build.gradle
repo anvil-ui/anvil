@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'trikita.anvilgen'
 apply from: "$rootProject.projectDir/copyDeps.gradle"
 
@@ -42,6 +44,8 @@ anvilgen {
 	dependencies = [
 	  "legacy-support-core-ui": null,
 	  "legacy-support-core-utils": null,
+	  "androidx.lifecycle-lifecycle-common":"2.1.0",
+	  "versionedparcelable":"1.1.0",
 	  "drawerlayout": null,
 	  "core": null,
 	  "customview" : null,
@@ -57,10 +61,12 @@ dependencies {
 	implementation "androidx.legacy:legacy-support-core-ui:$androidx_version"
 	implementation "androidx.legacy:legacy-support-core-utils:$androidx_version"
 	implementation "androidx.core:core:1.0.1"
+	implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
 	implementation "androidx.media:media:1.0.1"
 	implementation "androidx.fragment:fragment:$androidx_version"
 	implementation "androidx.transition:transition:$androidx_version"
 	implementation "androidx.annotation:annotation:$androidx_version"
+	implementation "androidx.versionedparcelable:versionedparcelable:1.1.0"
 
 	testImplementation 'junit:junit:4.12'
 	testImplementation "org.mockito:mockito-core:$mockito_version"
