@@ -32,18 +32,17 @@ apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
 	moduleName = "appcompat-v7"
-	libraries = ["appcompat" : null]
+	libraries = ["appcompat" : androidx_version]
 	camelCaseName = "AppCompatv7"
-	version = androidx_version
 	dependencies = [
-	  "legacy-support-core-ui": null,
-	  "legacy-support-core-utils": null,
-	  "core": null,
-	  "cursoradapter": null,
-	  "customview": null,
-	  "drawerlayout": null,
-	  "media": null,
-	  "fragment": null,
+	  "legacy-support-core-ui": androidx_version,
+	  "legacy-support-core-utils": androidx_version,
+	  "core": androidx_version,
+	  "cursoradapter": androidx_version,
+	  "customview": androidx_version,
+	  "drawerlayout": androidx_version,
+	  "media": androidx_version,
+	  "fragment": androidx_version,
 	  "viewmodel": "1.1.0",
 	  "androidx.lifecycle-lifecycle-common":  "2.0.0",
 	  "lifecycle-viewmodel":  "2.0.0"

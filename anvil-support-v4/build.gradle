@@ -32,34 +32,20 @@ apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
 	moduleName = "support-core-ui"
-	libraries = ["legacy-support-core-ui":null,
-				 "drawerlayout":null,
-				 "coordinatorlayout":null,
-				 "slidingpanelayout":null,
-				 "swiperefreshlayout":null,
-			     "core": "1.0.1",
-				 "viewpager":null]
 	camelCaseName = "SupportCoreUi"
-	version = androidx_version
-	dependencies = [
-	  "legacy-support-core-ui": null,
-	  "legacy-support-core-utils": null,
-	  "androidx.lifecycle-lifecycle-common":"2.1.0",
-	  "versionedparcelable":"1.1.0",
-	  "drawerlayout": null,
-	  "core": null,
-	  "customview" : null,
-	  "media": null,
-	  "fragment": null,
-	  "annotation" : null
-	]
 	quirks = QUIRKS
 }
 
 dependencies {
 	implementation project(path : ':anvil')
-	implementation "androidx.legacy:legacy-support-core-ui:$androidx_version"
-	implementation "androidx.legacy:legacy-support-core-utils:$androidx_version"
+	anvilgen "androidx.core:core:1.1.0"
+	anvilgen "androidx.legacy:legacy-support-core-ui:1.0.0"
+	anvilgen "androidx.drawerlayout:drawerlayout:1.0.0"
+	anvilgen "androidx.coordinatorlayout:coordinatorlayout:1.0.0"
+	anvilgen "androidx.slidingpanelayout:slidingpanelayout:1.0.0"
+	anvilgen "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+	anvilgen "androidx.viewpager:viewpager:1.0.0"
+	//implementation "androidx.legacy:legacy-support-core-utils:$androidx_version"
 	implementation "androidx.core:core:1.0.1"
 	implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
 	implementation "androidx.media:media:1.0.1"

@@ -32,10 +32,9 @@ apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
 	moduleName = "cardview-v7"
-	libraries = ["cardview" : null]
+	libraries = ["cardview" : androidx_version]
 	camelCaseName = "CardViewv7"
-	version = androidx_version
-	dependencies = ["cardview-v7": null]
+	dependencies = ["cardview-v7": androidx_version]
 	quirks = QUIRKS
 }
 

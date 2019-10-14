@@ -32,16 +32,15 @@ apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
 	moduleName = "recyclerview-v7"
-	libraries = ["recyclerview" : null]
+	libraries = ["recyclerview" : androidx_version]
 	camelCaseName = "RecyclerViewv7"
-	version = androidx_version
 	dependencies = [
-	  "legacy-support-core-ui": null,
-	  "legacy-core-utils": null,
-	  "media": null,
-	  "core" : null,
-	  "customview" : null,
-	  "fragment": null,
+	  "legacy-support-core-ui": androidx_version,
+	  "legacy-core-utils": androidx_version,
+	  "media": androidx_version,
+	  "core" : androidx_version,
+	  "customview" : androidx_version,
+	  "fragment": androidx_version,
 	]
 	quirks = QUIRKS
 	superclass = "BaseRecyclerView"

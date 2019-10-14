@@ -32,24 +32,23 @@ apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
 	moduleName = "material"
-	libraries = ["material":null]
+	libraries = ["material":androidx_version]
 	camelCaseName = "Material"
-	version = androidx_version
 	dependencies = [
-	  "legacy-support-core-ui": null,
-	  "legacy-support-core-utils": null,
-	  "media": null,
-	  "core": null,
-	  "fragment": null,
-	  "transition": null,
-	  "appcompat": null,
-	  "recyclerview": null,
-	  "cardview": null,
-	  "coordinatorlayout": null,
-	  "viewpager": null,
-	  "customview": null,
-	  "androidx.lifecycle-lifecycle-common":  "2.0.0",
-	  "lifecycle-viewmodel":  "2.0.0"
+	  "legacy-support-core-ui": androidx_version,
+	  "legacy-support-core-utils": androidx_version,
+	  "media": androidx_version,
+	  "core": androidx_version,
+	  "fragment": androidx_version,
+	  "transition": androidx_version,
+	  "appcompat": androidx_version,
+	  "recyclerview": androidx_version,
+	  "cardview": androidx_version,
+	  "coordinatorlayout": androidx_version,
+	  "viewpager": androidx_version,
+	  "customview": androidx_version,
+	  "androidx.lifecycle-lifecycle-common": "2.0.0",
+	  "lifecycle-viewmodel": "2.0.0"
 	]
 	quirks = QUIRKS
 	superclass = "BaseMaterial"

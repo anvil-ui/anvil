@@ -32,12 +32,11 @@ apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
 	moduleName = "gridlayout-v7"
-	libraries = ["gridlayout":null]
+	libraries = ["gridlayout": androidx_version]
 	camelCaseName = "GridLayoutv7"
-	version = androidx_version
 	dependencies = [
-	  "legacy-support-core-ui": null,
-	  "core": null
+	  "legacy-support-core-ui": androidx_version,
+	  "core": androidx_version
 	]
 	quirks = QUIRKS
 }
