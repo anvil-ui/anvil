@@ -20,6 +20,7 @@ import trikita.anvil.RenderableView
 import trikita.anvil.yoga.layout.YogaDSL.alignItems
 import trikita.anvil.yoga.layout.YogaDSL.flex
 import trikita.anvil.yoga.layout.YogaDSL.flexDirection
+import trikita.anvil.yoga.layout.YogaDSL.marginRightPercent
 import trikita.anvil.yoga.layout.YogaDSL.yogaLayout
 
 
@@ -83,6 +84,7 @@ class YogaActivity : AppCompatActivity() {
                             size(dip(50), dip(50))
                             imageResource(R.mipmap.ic_launcher)
                             flex(0f)
+                            marginRightPercent(30f)
                         }
                         textView {
                             size(WRAP, WRAP)

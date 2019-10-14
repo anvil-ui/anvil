@@ -238,6 +238,142 @@ public class YogaDSL implements Anvil.AttributeSetter {
         return BaseDSL.attr("flex", weight);
     }
 
+    public static Void flexBasisPercent(float percent) {
+        return BaseDSL.attr("flexBasisPercent", percent);
+    }
+
+    public static Void heightPercent(float percent) {
+        return BaseDSL.attr("heightPercent", percent);
+    }
+
+    public static Void marginLeftPercent(float percent) {
+        return BaseDSL.attr("marginLeftPercent", percent);
+    }
+
+    public static Void marginRightPercent(float percent) {
+        return BaseDSL.attr("marginRightPercent", percent);
+    }
+
+    public static Void marginTopPercent(float percent) {
+        return BaseDSL.attr("marginTopPercent", percent);
+    }
+
+    public static Void marginBottomPercent(float percent) {
+        return BaseDSL.attr("marginBottomPercent", percent);
+    }
+
+    public static Void marginStartPercent(float percent) {
+        return BaseDSL.attr("marginStartPercent", percent);
+    }
+
+    public static Void marginEndPercent(float percent) {
+        return BaseDSL.attr("marginEndPercent", percent);
+    }
+
+    public static Void marginHorizontalPercent(float percent) {
+        return BaseDSL.attr("marginHorizontalPercent", percent);
+    }
+
+    public static Void marginVerticalPercent(float percent) {
+        return BaseDSL.attr("marginVerticalPercent", percent);
+    }
+
+    public static Void marginAllPercent(float percent) {
+        return BaseDSL.attr("marginAllPercent", percent);
+    }
+
+    public static Void paddingLeftPercent(float percent) {
+        return BaseDSL.attr("paddingLeftPercent", percent);
+    }
+
+    public static Void paddingRightPercent(float percent) {
+        return BaseDSL.attr("paddingRightPercent", percent);
+    }
+
+    public static Void paddingTopPercent(float percent) {
+        return BaseDSL.attr("paddingTopPercent", percent);
+    }
+
+    public static Void paddingBottomPercent(float percent) {
+        return BaseDSL.attr("paddingBottomPercent", percent);
+    }
+
+    public static Void paddingStartPercent(float percent) {
+        return BaseDSL.attr("paddingStartPercent", percent);
+    }
+
+    public static Void paddingEndPercent(float percent) {
+        return BaseDSL.attr("paddingEndPercent", percent);
+    }
+
+    public static Void paddingHorizontalPercent(float percent) {
+        return BaseDSL.attr("paddingHorizontalPercent", percent);
+    }
+
+    public static Void paddingVerticalPercent(float percent) {
+        return BaseDSL.attr("paddingVerticalPercent", percent);
+    }
+
+    public static Void paddingAllPercent(float percent) {
+        return BaseDSL.attr("paddingAllPercent", percent);
+    }
+
+    public static Void positionLeftPercent(float percent) {
+        return BaseDSL.attr("positionLeftPercent", percent);
+    }
+
+    public static Void positionRightPercent(float percent) {
+        return BaseDSL.attr("positionRightPercent", percent);
+    }
+
+    public static Void positionTopPercent(float percent) {
+        return BaseDSL.attr("positionTopPercent", percent);
+    }
+
+    public static Void positionBottomPercent(float percent) {
+        return BaseDSL.attr("positionBottomPercent", percent);
+    }
+
+    public static Void positionStartPercent(float percent) {
+        return BaseDSL.attr("positionStartPercent", percent);
+    }
+
+    public static Void positionEndPercent(float percent) {
+        return BaseDSL.attr("positionEndPercent", percent);
+    }
+
+    public static Void positionHorizontalPercent(float percent) {
+        return BaseDSL.attr("positionHorizontalPercent", percent);
+    }
+
+    public static Void positionVerticalPercent(float percent) {
+        return BaseDSL.attr("positionVerticalPercent", percent);
+    }
+
+    public static Void positionAllPercent(float percent) {
+        return BaseDSL.attr("positionAllPercent", percent);
+    }
+
+    public static Void widthPercent(float percent) {
+        return BaseDSL.attr("widthPercent", percent);
+    }
+
+    public static Void maxWidthPercent(float percent) {
+        return BaseDSL.attr("maxWidthPercent", percent);
+    }
+
+    public static Void maxHeightPercent(float percent) {
+        return BaseDSL.attr("maxHeightPercent", percent);
+    }
+
+    public static Void minHeightPercent(float percent) {
+        return BaseDSL.attr("minHeightPercent", percent);
+    }
+
+    public static Void minWidthPercent(float percent) {
+        return BaseDSL.attr("minWidthPercent", percent);
+    }
+
     @Override
     public boolean set(View v, String name, Object value, Object prevValue) {
         switch (name) {
@@ -556,13 +692,194 @@ public class YogaDSL implements Anvil.AttributeSetter {
                     return true;
                 }
                 break;
+            case "flexBasisPercent":
+                if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+                    ((YogaLayout) v).getYogaNode().setFlexBasisPercent((Float) value);
+                    ViewGroup.LayoutParams lp = v.getLayoutParams();
+                    v.setLayoutParams(lp);
+                    return true;
+                }
+                break;
+            case "heightPercent":
+                if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+                    ((YogaLayout) v).getYogaNode().setHeightPercent((Float) value);
+                    ViewGroup.LayoutParams lp = v.getLayoutParams();
+                    v.setLayoutParams(lp);
+                    return true;
+                }
+                break;
+            case "marginLeftPercent":
+                if (setMarginPercent(v, value, YogaEdge.LEFT)) {
+                    return true;
+                }
+                break;
+            case "marginRightPercent":
+                if (setMarginPercent(v, value, YogaEdge.RIGHT)) {
+                    return true;
+                }
+                break;
+            case "marginTopPercent":
+                if (setMarginPercent(v, value, YogaEdge.TOP)) {
+                    return true;
+                }
+                break;
+            case "marginBottomPercent":
+                if (setMarginPercent(v, value, YogaEdge.BOTTOM)) {
+                    return true;
+                }
+                break;
+            case "marginStartPercent":
+                if (setMarginPercent(v, value, YogaEdge.START)) {
+                    return true;
+                }
+                break;
+            case "marginEndPercent":
+                if (setMarginPercent(v, value, YogaEdge.END)) {
+                    return true;
+                }
+                break;
+            case "marginHorizontalPercent":
+                if (setMarginPercent(v, value, YogaEdge.HORIZONTAL)) {
+                    return true;
+                }
+                break;
+            case "marginVerticalPercent":
+                if (setMarginPercent(v, value, YogaEdge.VERTICAL)) {
+                    return true;
+                }
+                break;
+            case "marginAllPercent":
+                if (setMarginPercent(v, value, YogaEdge.ALL)) {
+                    return true;
+                }
+                break;
+            case "positionLeftPercent":
+                if (setPositionPercent(v, value, YogaEdge.LEFT)) {
+                    return true;
+                }
+                break;
+            case "positionRightPercent":
+                if (setPositionPercent(v, value, YogaEdge.RIGHT)) {
+                    return true;
+                }
+                break;
+            case "positionTopPercent":
+                if (setPositionPercent(v, value, YogaEdge.TOP)) {
+                    return true;
+                }
+                break;
+            case "positionBottomPercent":
+                if (setPositionPercent(v, value, YogaEdge.BOTTOM)) {
+                    return true;
+                }
+                break;
+            case "positionStartPercent":
+                if (setPositionPercent(v, value, YogaEdge.START)) {
+                    return true;
+                }
+                break;
+            case "positionEndPercent":
+                if (setPositionPercent(v, value, YogaEdge.END)) {
+                    return true;
+                }
+                break;
+            case "positionHorizontalPercent":
+                if (setPositionPercent(v, value, YogaEdge.HORIZONTAL)) {
+                    return true;
+                }
+                break;
+            case "positionVerticalPercent":
+                if (setPositionPercent(v, value, YogaEdge.VERTICAL)) {
+                    return true;
+                }
+                break;
+            case "positionAllPercent":
+                if (setPositionPercent(v, value, YogaEdge.ALL)) {
+                    return true;
+                }
+                break;
+            case "paddingLeftPercent":
+                if (setPaddingPercent(v, value, YogaEdge.LEFT)) {
+                    return true;
+                }
+                break;
+            case "paddingRightPercent":
+                if (setPaddingPercent(v, value, YogaEdge.RIGHT)) {
+                    return true;
+                }
+                break;
+            case "paddingTopPercent":
+                if (setPaddingPercent(v, value, YogaEdge.TOP)) {
+                    return true;
+                }
+                break;
+            case "paddingBottomPercent":
+                if (setPaddingPercent(v, value, YogaEdge.BOTTOM)) {
+                    return true;
+                }
+                break;
+            case "paddingStartPercent":
+                if (setPaddingPercent(v, value, YogaEdge.START)) {
+                    return true;
+                }
+                break;
+            case "paddingEndPercent":
+                if (setPaddingPercent(v, value, YogaEdge.END)) {
+                    return true;
+                }
+                break;
+            case "paddingHorizontalPercent":
+                if (setPaddingPercent(v, value, YogaEdge.HORIZONTAL)) {
+                    return true;
+                }
+                break;
+            case "paddingVerticalPercent":
+                if (setPaddingPercent(v, value, YogaEdge.VERTICAL)) {
+                    return true;
+                }
+                break;
+            case "paddingAllPercent":
+                if (setPaddingPercent(v, value, YogaEdge.ALL)) {
+                    return true;
+                }
+                break;
+            case "widthPercent":
+                if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+                    ((YogaLayout) v).getYogaNode().setWidthPercent((Float) value);
+                    return true;
+                }
+                break;
+            case "minWidthPercent":
+                if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+                    ((YogaLayout) v).getYogaNode().setMinWidthPercent((Float) value);
+                    return true;
+                }
+                break;
+            case "minHeightPercent":
+                if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+                    ((YogaLayout) v).getYogaNode().setMinHeightPercent((Float) value);
+                    return true;
+                }
+                break;
+            case "maxWidthPercent":
+                if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+                    ((YogaLayout) v).getYogaNode().setMaxWidthPercent((Float) value);
+                    return true;
+                }
+                break;
+            case "maxHeightPercent":
+                if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+                    ((YogaLayout) v).getYogaNode().setMaxHeightPercent((Float) value);
+                    return true;
+                }
+                break;
         }
         return false;
     }
 
     private boolean setBorder(View v, Object value, YogaEdge edge) {
         if (v.getParent() instanceof YogaLayout && value instanceof Float) {
-            ((YogaLayout) v).getYogaNode().setBorder(edge, (Float) value);
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setBorder(edge, (Float) value);
             return true;
         }
         return false;
@@ -570,7 +887,31 @@ public class YogaDSL implements Anvil.AttributeSetter {
 
     private boolean setMarginAuto(View v, Object value) {
         if (v.getParent() instanceof YogaLayout && value instanceof YogaEdge) {
-            ((YogaLayout) v).getYogaNode().setMarginAuto((YogaEdge) value);
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setMarginAuto((YogaEdge) value);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean setMarginPercent(View v, Object value, YogaEdge edge) {
+        if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setMarginPercent(edge, (Float) value);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean setPaddingPercent(View v, Object value, YogaEdge edge) {
+        if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setPaddingPercent(edge, (Float) value);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean setPositionPercent(View v, Object value, YogaEdge edge) {
+        if (v.getParent() instanceof YogaLayout && value instanceof Float) {
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setPositionPercent(edge, (Float) value);
             return true;
         }
         return false;
@@ -578,7 +919,7 @@ public class YogaDSL implements Anvil.AttributeSetter {
 
     private boolean setMargin(View v, Object value, YogaEdge edge) {
         if (v.getParent() instanceof YogaLayout && value instanceof Float) {
-            ((YogaLayout) v).getYogaNode().setMargin(edge, (Float) value);
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setMargin(edge, (Float) value);
             return true;
         }
         return false;
@@ -586,7 +927,7 @@ public class YogaDSL implements Anvil.AttributeSetter {
 
     private boolean setPadding(View v, Object value, YogaEdge edge) {
         if (v.getParent() instanceof YogaLayout && value instanceof Float) {
-            ((YogaLayout) v).getYogaNode().setPadding(edge, (Float) value);
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setPadding(edge, (Float) value);
             return true;
         }
         return false;
@@ -594,7 +935,7 @@ public class YogaDSL implements Anvil.AttributeSetter {
 
     private boolean setPosition(View v, Object value, YogaEdge edge) {
         if (v.getParent() instanceof YogaLayout && value instanceof Float) {
-            ((YogaLayout) v).getYogaNode().setPosition(edge, (Float) value);
+            ((YogaLayout) v.getParent()).getYogaNodeForView(v).setPosition(edge, (Float) value);
             return true;
         }
         return false;
