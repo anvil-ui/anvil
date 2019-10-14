@@ -95,7 +95,7 @@ def fixPom(pom) {
 		license.appendNode('distribution', POM_LICENCE_DIST)
 	}
 }
-
+/*
 publishing {
 	publications {
 		appcompatv4(MavenPublication) {
@@ -136,7 +136,7 @@ bintray {
 		}
 	}
 }
-
+*/
 task sourcesJar(type: Jar) {
 	from android.sourceSets.main.java.srcDirs
 	classifier = 'sources'
