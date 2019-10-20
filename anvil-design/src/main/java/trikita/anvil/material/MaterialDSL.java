@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.animation.MotionSpec;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -62,7 +61,7 @@ import trikita.anvil.BaseDSL;
  * It contains views and their setters from the library material.
  * Please, don't edit it manually unless for debugging.
  */
-public final class MaterialDSL implements Anvil.AttributeSetter {
+public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSetter {
   static {
     Anvil.registerAttributeSetter(new MaterialDSL());
   }
@@ -981,10 +980,6 @@ public final class MaterialDSL implements Anvil.AttributeSetter {
 
   public static Void unboundedRippleResource(int arg) {
     return BaseDSL.attr("unboundedRippleResource", arg);
-  }
-
-  public static Void upWithViewPager(@Nullable ViewPager arg) {
-    return BaseDSL.attr("upWithViewPager", arg);
   }
 
   public static Void useCompatPadding(boolean arg) {
@@ -2144,12 +2139,6 @@ public final class MaterialDSL implements Anvil.AttributeSetter {
       case "unboundedRippleResource":
         if (v instanceof TabLayout && arg instanceof Integer) {
           ((TabLayout) v).setUnboundedRippleResource((int) arg);
-          return true;
-        }
-        break;
-      case "upWithViewPager":
-        if (v instanceof TabLayout && (arg == null || arg instanceof ViewPager)) {
-          ((TabLayout) v).setupWithViewPager((ViewPager) arg);
           return true;
         }
         break;

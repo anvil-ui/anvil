@@ -24,4 +24,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "androidx.annotation:annotation:1.0.0"
     implementation 'com.squareup:javapoet:1.7.0'
+    implementation 'org.ow2.asm:asm-all:5.2'
 }

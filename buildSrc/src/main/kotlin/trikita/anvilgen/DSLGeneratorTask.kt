@@ -413,7 +413,10 @@ fun formatMethodName(originalMethodName : String, parameterCount : Int) : Format
             "on" + originalMethodName.substring(5, originalMethodName.length - 8),
             true
         )
-    } else if (originalMethodName.startsWith("set") && originalMethodName.length > 3 && parameterCount == 1) {
+    } else if (originalMethodName.startsWith("set")
+        && originalMethodName.length > 3
+        && originalMethodName[3].isUpperCase()
+        && parameterCount == 1) {
             FormattedMethod(
                 Character.toLowerCase(originalMethodName[3]).toString() + originalMethodName.substring(
                     4

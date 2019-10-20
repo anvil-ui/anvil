@@ -21,6 +21,8 @@ import android.widget.SeekBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -382,7 +384,7 @@ public class BaseDSL implements Anvil.AttributeSetter {
         return attr("onTextChanged", w);
     }
 
-    public static Void text(CharSequence arg) {
+    public static Void text(@Nullable CharSequence arg) {
         return attr("text", arg);
     }
 
@@ -583,7 +585,7 @@ public class BaseDSL implements Anvil.AttributeSetter {
                 }
                 break;
             case "text":
-                if (v instanceof TextView && value instanceof CharSequence) {
+                if (v instanceof TextView && (value == null || value instanceof CharSequence)) {
                     if (v != TextWatcherProxy.CURRENT_INPUT_TEXT_VIEW) {
                         ((TextView) v).setText((CharSequence) value);
                     }
