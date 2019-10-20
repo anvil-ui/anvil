@@ -13,11 +13,6 @@ echo "----------- sdk done -----------"
     ./gradlew --stacktrace :anvil-appcompat-v7:bintrayUpload
 echo "----------- appcompat done -----------"
 ./gradlew --stacktrace \
-    :anvil-design:generateMaterialDSL \
-    :anvil-design:assembleRelease && \
-    ./gradlew --stacktrace :anvil-design:bintrayUpload
-echo "----------- design done -----------"
-./gradlew --stacktrace \
     :anvil-gridlayout-v7:generateGridLayoutv7DSL \
     :anvil-gridlayout-v7:assembleRelease && \
     ./gradlew --stacktrace :anvil-gridlayout-v7:bintrayUpload
@@ -32,6 +27,11 @@ echo "----------- recyclerview done -----------"
     :anvil-cardview-v7:assembleRelease && \
     ./gradlew --stacktrace :anvil-cardview-v7:bintrayUpload
 echo "----------- cardview done -----------"
+./gradlew --stacktrace \
+    :anvil-design:generateMaterialDSL \
+    :anvil-design:assembleRelease && \
+    ./gradlew --stacktrace :anvil-design:bintrayUpload
+echo "----------- design done -----------"
 ./gradlew --stacktrace \
     :anvil-support-v4:generateSupportCoreUiDSL \
     :anvil-support-v4:assembleRelease && \

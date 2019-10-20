@@ -4,24 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.Nullable;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.ref.WeakReference;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
-import java.util.WeakHashMap;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 /**
  * Anvil class is a namespace for top-level static methods and interfaces. Most
@@ -262,7 +252,7 @@ public final class Anvil {
                 }
             }
 
-            void start(Class<? extends View> c, int layoutId, Object key) {
+            void start(Class<? extends View> c, int layoutId) {
                 int i = indices.peek();
                 View parentView = views.peek();
                 if (parentView == null) {

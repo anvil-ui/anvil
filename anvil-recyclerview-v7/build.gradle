@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'trikita.module'
 
 android {
@@ -9,10 +9,10 @@ android {
 }
 
 anvilgen {
-	type = "support"
-	moduleName = "recyclerview-v7"
-	camelCaseName = "RecyclerViewv7"
-	superclass = "BaseRecyclerView"
+	type = 'support'
+	moduleName = 'recyclerview-v7'
+	camelCaseName = 'RecyclerViewv7'
+	manualSetterName = 'RecyclerViewDslSetter'
 }
 
 dependencies {

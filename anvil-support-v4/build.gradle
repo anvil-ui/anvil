@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'trikita.module'
 
 android {
@@ -12,6 +12,12 @@ anvilgen {
 	type = "support"
 	moduleName = "support-core-ui"
 	camelCaseName = "SupportCoreUi"
+
+	quirks = [
+		'androidx.core.widget.NestedScrollView' : [
+			'setOnScrollChangeListener': false
+		]
+	]
 }
 
 dependencies {

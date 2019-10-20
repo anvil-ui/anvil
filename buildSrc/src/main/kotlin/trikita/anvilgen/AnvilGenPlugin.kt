@@ -1,6 +1,7 @@
 package trikita.anvilgen
 
-import com.squareup.javapoet.ClassName
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.MemberName
 import org.gradle.api.*
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.transform.*
@@ -48,9 +49,9 @@ class AnvilGenPlugin : Plugin<Project> {
     fun Project.generateTasks(extension: AnvilGenPluginExtension, configuration: Configuration) {
         when {
             extension.isSdk -> {
-                createDslGeneratorTask("SDK21", getSdkConfiguration(21))
-                createDslGeneratorTask("SDK19", getSdkConfiguration(19))
-                createDslGeneratorTask("SDK15", getSdkConfiguration(15))
+                createDslGeneratorTask("SDK21", getSdkConfiguration(21, extension.manualSetterName))
+                createDslGeneratorTask("SDK19", getSdkConfiguration(19, extension.manualSetterName))
+                createDslGeneratorTask("SDK15", getSdkConfiguration(15, extension.manualSetterName))
 
                 project.tasks.register<Task>("generateSDKDSL") {
                     dependsOn("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")
@@ -62,12 +63,12 @@ class AnvilGenPlugin : Plugin<Project> {
                     if(extension.libraries.isNotEmpty()) {
                         getSupportConfiguration(
                             extension.camelCaseName, extension.moduleName,
-                            extension.superclass, extension.libraries, extension.dependencies
+                            extension.manualSetterName, extension.libraries, extension.dependencies
                         )
                     } else {
                         getSupportConfiguration(
                             extension.camelCaseName, extension.moduleName,
-                            extension.superclass, configuration
+                            extension.manualSetterName, configuration
                         )
                     }
                 )
@@ -79,15 +80,15 @@ class AnvilGenPlugin : Plugin<Project> {
     private fun Project.createDslGeneratorTask(dslName: String, configuration: DSLGeneratorTask.() -> Unit) =
         tasks.register("generate${dslName}DSL", configuration)
 
-    private fun getSdkConfiguration(apiLevel: Int): DSLGeneratorTask.() -> Unit = {
+    private fun getSdkConfiguration(apiLevel: Int, manualSetterName: String): DSLGeneratorTask.() -> Unit = {
         javadocContains = "It contains views and their setters from API level $apiLevel"
         outputDirectory = "sdk$apiLevel"
         jarFiles = listOf(project.getAndroidJar(apiLevel))
         nullabilitySourceFiles = listOf(project.getAndroidJar(28))
         isSourceSdk = true
-        outputClassName = "DSL"
+        camelCaseName = "Sdk"
         packageName = "trikita.anvil"
-        superclass = ClassName.get("trikita.anvil", "BaseDSL")
+        manualSetter = MemberName(packageName, manualSetterName)
     }
 
     private fun Project.getSupportConfiguration(
@@ -122,7 +123,7 @@ class AnvilGenPlugin : Plugin<Project> {
     private fun getSupportConfiguration(
         camelCaseName: String,
         libraryName: String,
-        superclassName: String,
+        manualSetterName: String,
         configuration: Configuration?,
         libFiles: List<File> = listOf(),
         depFiles: List<File> = listOf()
@@ -137,11 +138,15 @@ class AnvilGenPlugin : Plugin<Project> {
         jarFiles = libFiles
         nullabilitySourceFiles = libFiles
         dependencies = depFiles
-        outputClassName = "${camelCaseName}DSL"
-        packageName = "trikita.anvil." + dashToDot(libraryName)
+        this.camelCaseName = camelCaseName
 
-        if (superclassName.isNotEmpty()) {
-            superclass = ClassName.get(packageName, superclassName)
+        // FIXME as soon as metadata for generated scopes is present, put proper package name here
+        //packageName = "trikita.anvil." + dashToDot(libraryName)
+        packageName = "trikita.anvil"
+
+        if (manualSetterName.isNotEmpty()) {
+            // TODO append package name
+            manualSetter = MemberName(packageName, manualSetterName)
         }
     }
 

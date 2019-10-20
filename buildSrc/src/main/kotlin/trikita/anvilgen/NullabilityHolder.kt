@@ -1,15 +1,11 @@
 package trikita.anvilgen
 
 import org.objectweb.asm.ClassReader
-import org.objectweb.asm.tree.AnnotationNode
-import org.objectweb.asm.tree.ClassNode
-import org.objectweb.asm.tree.LocalVariableNode
-import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.*
 import java.io.IOException
 import java.lang.reflect.Method
-import java.net.URLClassLoader
 
-class NullabilityHolder(isSourceSdk: Boolean) {
+class NullabilityHolder(isSourceSdk: Boolean, private val classLoader: ClassLoader) {
 
     private val nullabilityMap: MutableMap<MethodSignature, Boolean?> = mutableMapOf()
     private val nullableLiteral: String
@@ -25,10 +21,10 @@ class NullabilityHolder(isSourceSdk: Boolean) {
         }
     }
 
-    fun fillClassNullabilityInfo(loader: URLClassLoader, rawClassName: String) {
+    fun fillClassNullabilityInfo(rawClassName: String) {
         val cn = ClassNode()
         val cr = try {
-            ClassReader(loader.getResourceAsStream(rawClassName))
+            ClassReader(classLoader.getResourceAsStream(rawClassName))
         } catch (io: IOException) {
             return
         }
@@ -37,12 +33,13 @@ class NullabilityHolder(isSourceSdk: Boolean) {
 
         val className = rawClassName.replace(".class", "").replace("/", ".")
 
-        (cn.methods as List<MethodNode>).forEach { methodNode : MethodNode ->
+        cn.methods.forEach { methodNode : MethodNode ->
             if (methodNode.name != "<init>"
                 && methodNode.invisibleParameterAnnotations?.isNotEmpty() == true
                 && methodNode.localVariables?.size == 2
             ) {
 
+                // TODO check if we really can get null for invisibleParameterAnnotations[0]
                 val hasNullable =
                     hasNullableOrNonNullAnnotation(methodNode.invisibleParameterAnnotations[0])
                 val argType = convertTypeNameFromRaw((methodNode.localVariables[1] as LocalVariableNode).desc)
@@ -55,8 +52,8 @@ class NullabilityHolder(isSourceSdk: Boolean) {
         }
     }
 
-    private fun convertTypeNameFromRaw(typeName: String): String {
-        return typeName
+    private fun convertTypeNameFromRaw(typeName: String): String =
+        typeName
             .replace("/", ".")
             .replace("$", ".")
             .let {
@@ -68,21 +65,17 @@ class NullabilityHolder(isSourceSdk: Boolean) {
                     it.replaceFirst(";", "")
                 } else it
             }
-    }
 
-    fun hasNullableOrNonNullAnnotation(annotationList: List<*>?): Boolean? {
-        if (annotationList != null && annotationList.isNotEmpty()) {
-            var anNode: AnnotationNode?
-            for (annotation in annotationList) {
-                anNode = annotation as AnnotationNode
-                when (anNode.desc) {
-                    nullableLiteral -> return true
-                    nonNullableLiteral -> return false
+    fun hasNullableOrNonNullAnnotation(annotationList: List<AnnotationNode>?): Boolean? =
+        annotationList
+            ?.map {
+                when(it.desc) {
+                    nullableLiteral -> true
+                    nonNullableLiteral -> false
+                    else -> null
                 }
             }
-        }
-        return null
-    }
+            ?.firstOrNull()
 
     fun isParameterNullable(m: Method): Boolean? {
         val formattedMethodName = formatMethodName(m.name, 1)

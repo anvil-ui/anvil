@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'trikita.module'
 
 android {
@@ -9,9 +9,9 @@ android {
 }
 
 anvilgen {
-    type = "support"
-    moduleName = "constraintlayout"
-    camelCaseName = "Constraint"
+    type = 'support'
+    moduleName = 'constraintlayout'
+    camelCaseName = 'Constraint'
 }
 
 dependencies {
