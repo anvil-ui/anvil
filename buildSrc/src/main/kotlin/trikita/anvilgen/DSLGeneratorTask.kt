@@ -1,21 +1,26 @@
 package trikita.anvilgen
 
 import androidx.annotation.NonNull
+import androidx.annotation.Nullable
 import com.squareup.javapoet.*
 import groovy.lang.Closure
 import org.gradle.api.DefaultTask
+import org.gradle.api.artifacts.Configuration
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 import java.lang.Deprecated
 import java.lang.reflect.Method
 import java.net.URL
 import java.net.URLClassLoader
+import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import javax.lang.model.element.Modifier
-import com.squareup.javapoet.AnnotationSpec
-import androidx.annotation.Nullable
-import org.gradle.api.artifacts.Configuration
-import java.util.jar.JarEntry
+import kotlin.Boolean
+import kotlin.Char
+import kotlin.Int
+import kotlin.String
+import kotlin.Unit
+import kotlin.let
 
 open class DSLGeneratorTask : DefaultTask() {
 
@@ -41,11 +46,12 @@ open class DSLGeneratorTask : DefaultTask() {
             val resolved = configuration.resolvedConfiguration
             val libs = resolved.firstLevelModuleDependencies.flatMap { it.moduleArtifacts }.map { it.file }.toList()
             val deps = resolved.resolvedArtifacts.map { it.file }.toList()
-            // resolved.firstLevelModuleDependencies.flatMap { it.allModuleArtifacts }.map { it.file }.toList()
-            project.logger.error("doLast for generator task\n$configuration\nlibs:\n" +
-                    libs.joinToString(separator = "\n") { "    ${it.absolutePath}" } +
-                    "\ndeps:\n" +
-                    deps.joinToString(separator = "\n") { "    ${it.absolutePath}" })
+
+            project.logger.info("Generator task resolved $configuration\nLibs:\n" +
+                    libs.map { it.absolutePath }.sorted().joinToString(separator = "\n") { "    $it" } +
+                    "\nDeps ${deps.size}:\n" +
+                    deps.map { it.absolutePath }.sorted().joinToString(separator = "\n") { "    $it" })
+
             jarFiles = libs
             nullabilitySourceFiles = libs
             dependencies = deps + dependencies

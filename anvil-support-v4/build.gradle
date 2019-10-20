@@ -37,10 +37,10 @@ anvilgen {
 
 dependencies {
 	implementation project(path : ':anvil')
-	anvilgen "androidx.core:core:1.1.0"
-	anvilgen "androidx.legacy:legacy-support-core-ui:1.0.0"
-	anvilgen "androidx.drawerlayout:drawerlayout:1.0.0"
 	anvilgen "androidx.coordinatorlayout:coordinatorlayout:1.0.0"
+	anvilgen "androidx.core:core:1.1.0"
+	anvilgen "androidx.drawerlayout:drawerlayout:1.0.0"
+	anvilgen "androidx.legacy:legacy-support-core-ui:1.0.0"
 	anvilgen "androidx.slidingpanelayout:slidingpanelayout:1.0.0"
 	anvilgen "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 	anvilgen "androidx.viewpager:viewpager:1.0.0"
