@@ -6,5 +6,6 @@ include 'anvil-gridlayout-v7'
 include 'anvil-design'
 include 'anvil-recyclerview-v7'
 include 'anvil-constraintlayout'
+include 'anvil-yogalayout'
 include ':sample'
 
