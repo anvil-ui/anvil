@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.circularreveal.CircularRevealFrameLayout;
 import com.google.android.material.circularreveal.CircularRevealGridLayout;
@@ -37,6 +38,7 @@ import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.internal.ScrimInsetsFrameLayout;
 import com.google.android.material.internal.VisibilityAwareImageButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.resources.TextAppearance;
 import com.google.android.material.snackbar.SnackbarContentLayout;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -354,8 +356,28 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("checkable", arg);
   }
 
+  public static Void checkableResource(int arg) {
+    return BaseDSL.attr("checkableResource", arg);
+  }
+
   public static Void checked(boolean arg) {
     return BaseDSL.attr("checked", arg);
+  }
+
+  public static Void checkedIcon(@Nullable Drawable arg) {
+    return BaseDSL.attr("checkedIcon", arg);
+  }
+
+  public static Void checkedIconResource(int arg) {
+    return BaseDSL.attr("checkedIconResource", arg);
+  }
+
+  public static Void checkedIconVisible(boolean arg) {
+    return BaseDSL.attr("checkedIconVisible", arg);
+  }
+
+  public static Void checkedIconVisible(int arg) {
+    return BaseDSL.attr("checkedIconVisible", arg);
   }
 
   public static Void checkedItem(MenuItem arg) {
@@ -364,6 +386,74 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
 
   public static Void checkedItem(int arg) {
     return BaseDSL.attr("checkedItem", arg);
+  }
+
+  public static Void chipBackgroundColor(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("chipBackgroundColor", arg);
+  }
+
+  public static Void chipBackgroundColorResource(int arg) {
+    return BaseDSL.attr("chipBackgroundColorResource", arg);
+  }
+
+  public static Void chipCornerRadius(float arg) {
+    return BaseDSL.attr("chipCornerRadius", arg);
+  }
+
+  public static Void chipCornerRadiusResource(int arg) {
+    return BaseDSL.attr("chipCornerRadiusResource", arg);
+  }
+
+  public static Void chipDrawable(@NonNull ChipDrawable arg) {
+    return BaseDSL.attr("chipDrawable", arg);
+  }
+
+  public static Void chipEndPadding(float arg) {
+    return BaseDSL.attr("chipEndPadding", arg);
+  }
+
+  public static Void chipEndPaddingResource(int arg) {
+    return BaseDSL.attr("chipEndPaddingResource", arg);
+  }
+
+  public static Void chipIcon(@Nullable Drawable arg) {
+    return BaseDSL.attr("chipIcon", arg);
+  }
+
+  public static Void chipIconResource(int arg) {
+    return BaseDSL.attr("chipIconResource", arg);
+  }
+
+  public static Void chipIconSize(float arg) {
+    return BaseDSL.attr("chipIconSize", arg);
+  }
+
+  public static Void chipIconSizeResource(int arg) {
+    return BaseDSL.attr("chipIconSizeResource", arg);
+  }
+
+  public static Void chipIconTint(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("chipIconTint", arg);
+  }
+
+  public static Void chipIconTintResource(int arg) {
+    return BaseDSL.attr("chipIconTintResource", arg);
+  }
+
+  public static Void chipIconVisible(boolean arg) {
+    return BaseDSL.attr("chipIconVisible", arg);
+  }
+
+  public static Void chipIconVisible(int arg) {
+    return BaseDSL.attr("chipIconVisible", arg);
+  }
+
+  public static Void chipMinHeight(float arg) {
+    return BaseDSL.attr("chipMinHeight", arg);
+  }
+
+  public static Void chipMinHeightResource(int arg) {
+    return BaseDSL.attr("chipMinHeightResource", arg);
   }
 
   public static Void chipSpacing(int arg) {
@@ -390,12 +480,88 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("chipSpacingVerticalResource", arg);
   }
 
+  public static Void chipStartPadding(float arg) {
+    return BaseDSL.attr("chipStartPadding", arg);
+  }
+
+  public static Void chipStartPaddingResource(int arg) {
+    return BaseDSL.attr("chipStartPaddingResource", arg);
+  }
+
+  public static Void chipStrokeColor(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("chipStrokeColor", arg);
+  }
+
+  public static Void chipStrokeColorResource(int arg) {
+    return BaseDSL.attr("chipStrokeColorResource", arg);
+  }
+
+  public static Void chipStrokeWidth(float arg) {
+    return BaseDSL.attr("chipStrokeWidth", arg);
+  }
+
+  public static Void chipStrokeWidthResource(int arg) {
+    return BaseDSL.attr("chipStrokeWidthResource", arg);
+  }
+
   public static Void circularRevealOverlayDrawable(@Nullable Drawable arg) {
     return BaseDSL.attr("circularRevealOverlayDrawable", arg);
   }
 
   public static Void circularRevealScrimColor(int arg) {
     return BaseDSL.attr("circularRevealScrimColor", arg);
+  }
+
+  public static Void closeIcon(@Nullable Drawable arg) {
+    return BaseDSL.attr("closeIcon", arg);
+  }
+
+  public static Void closeIconContentDescription(@Nullable CharSequence arg) {
+    return BaseDSL.attr("closeIconContentDescription", arg);
+  }
+
+  public static Void closeIconEndPadding(float arg) {
+    return BaseDSL.attr("closeIconEndPadding", arg);
+  }
+
+  public static Void closeIconEndPaddingResource(int arg) {
+    return BaseDSL.attr("closeIconEndPaddingResource", arg);
+  }
+
+  public static Void closeIconResource(int arg) {
+    return BaseDSL.attr("closeIconResource", arg);
+  }
+
+  public static Void closeIconSize(float arg) {
+    return BaseDSL.attr("closeIconSize", arg);
+  }
+
+  public static Void closeIconSizeResource(int arg) {
+    return BaseDSL.attr("closeIconSizeResource", arg);
+  }
+
+  public static Void closeIconStartPadding(float arg) {
+    return BaseDSL.attr("closeIconStartPadding", arg);
+  }
+
+  public static Void closeIconStartPaddingResource(int arg) {
+    return BaseDSL.attr("closeIconStartPaddingResource", arg);
+  }
+
+  public static Void closeIconTint(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("closeIconTint", arg);
+  }
+
+  public static Void closeIconTintResource(int arg) {
+    return BaseDSL.attr("closeIconTintResource", arg);
+  }
+
+  public static Void closeIconVisible(boolean arg) {
+    return BaseDSL.attr("closeIconVisible", arg);
+  }
+
+  public static Void closeIconVisible(int arg) {
+    return BaseDSL.attr("closeIconVisible", arg);
   }
 
   public static Void collapsedTitleGravity(int arg) {
@@ -570,7 +736,7 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("helperTextTextAppearance", arg);
   }
 
-  public static Void hideMotionSpec(MotionSpec arg) {
+  public static Void hideMotionSpec(@Nullable MotionSpec arg) {
     return BaseDSL.attr("hideMotionSpec", arg);
   }
 
@@ -606,6 +772,14 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("icon", arg);
   }
 
+  public static Void iconEndPadding(float arg) {
+    return BaseDSL.attr("iconEndPadding", arg);
+  }
+
+  public static Void iconEndPaddingResource(int arg) {
+    return BaseDSL.attr("iconEndPaddingResource", arg);
+  }
+
   public static Void iconGravity(int arg) {
     return BaseDSL.attr("iconGravity", arg);
   }
@@ -620,6 +794,14 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
 
   public static Void iconSize(int arg) {
     return BaseDSL.attr("iconSize", arg);
+  }
+
+  public static Void iconStartPadding(float arg) {
+    return BaseDSL.attr("iconStartPadding", arg);
+  }
+
+  public static Void iconStartPaddingResource(int arg) {
+    return BaseDSL.attr("iconStartPaddingResource", arg);
   }
 
   public static Void iconTint(@Nullable ColorStateList arg) {
@@ -742,6 +924,10 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("onCheckedChange", arg);
   }
 
+  public static Void onCloseIconClick(View.OnClickListener arg) {
+    return BaseDSL.attr("onCloseIconClick", arg);
+  }
+
   public static Void onNavigationItemReselected(BottomNavigationView.OnNavigationItemReselectedListener arg) {
     return BaseDSL.attr("onNavigationItemReselected", arg);
   }
@@ -834,7 +1020,7 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("shifting", arg);
   }
 
-  public static Void showMotionSpec(MotionSpec arg) {
+  public static Void showMotionSpec(@Nullable MotionSpec arg) {
     return BaseDSL.attr("showMotionSpec", arg);
   }
 
@@ -942,6 +1128,10 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("tabTextColors", arg);
   }
 
+  public static Void textAppearance(@Nullable TextAppearance arg) {
+    return BaseDSL.attr("textAppearance", arg);
+  }
+
   public static Void textAppearance(int arg) {
     return BaseDSL.attr("textAppearance", arg);
   }
@@ -954,12 +1144,32 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
     return BaseDSL.attr("textAppearanceInactive", arg);
   }
 
+  public static Void textAppearanceResource(int arg) {
+    return BaseDSL.attr("textAppearanceResource", arg);
+  }
+
   public static Void textColor(@Nullable ColorStateList arg) {
     return BaseDSL.attr("textColor", arg);
   }
 
+  public static Void textEndPadding(float arg) {
+    return BaseDSL.attr("textEndPadding", arg);
+  }
+
+  public static Void textEndPaddingResource(int arg) {
+    return BaseDSL.attr("textEndPaddingResource", arg);
+  }
+
   public static Void textInputAccessibilityDelegate(TextInputLayout.AccessibilityDelegate arg) {
     return BaseDSL.attr("textInputAccessibilityDelegate", arg);
+  }
+
+  public static Void textStartPadding(float arg) {
+    return BaseDSL.attr("textStartPadding", arg);
+  }
+
+  public static Void textStartPaddingResource(int arg) {
+    return BaseDSL.attr("textStartPaddingResource", arg);
   }
 
   public static Void title(@Nullable CharSequence arg) {
@@ -1023,8 +1233,18 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
           ((BottomNavigationItemView) v).setCheckable((boolean) arg);
           return true;
         }
+        if (v instanceof Chip && arg instanceof Boolean) {
+          ((Chip) v).setCheckable((boolean) arg);
+          return true;
+        }
         if (v instanceof NavigationMenuItemView && arg instanceof Boolean) {
           ((NavigationMenuItemView) v).setCheckable((boolean) arg);
+          return true;
+        }
+        break;
+      case "checkableResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCheckableResource((int) arg);
           return true;
         }
         break;
@@ -1042,6 +1262,28 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
           return true;
         }
         break;
+      case "checkedIcon":
+        if (v instanceof Chip && (arg == null || arg instanceof Drawable)) {
+          ((Chip) v).setCheckedIcon((Drawable) arg);
+          return true;
+        }
+        break;
+      case "checkedIconResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCheckedIconResource((int) arg);
+          return true;
+        }
+        break;
+      case "checkedIconVisible":
+        if (v instanceof Chip && arg instanceof Boolean) {
+          ((Chip) v).setCheckedIconVisible((boolean) arg);
+          return true;
+        }
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCheckedIconVisible((int) arg);
+          return true;
+        }
+        break;
       case "checkedItem":
         if (v instanceof NavigationView && arg instanceof MenuItem) {
           ((NavigationView) v).setCheckedItem((MenuItem) arg);
@@ -1049,6 +1291,106 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
         }
         if (v instanceof NavigationView && arg instanceof Integer) {
           ((NavigationView) v).setCheckedItem((int) arg);
+          return true;
+        }
+        break;
+      case "chipBackgroundColor":
+        if (v instanceof Chip && (arg == null || arg instanceof ColorStateList)) {
+          ((Chip) v).setChipBackgroundColor((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "chipBackgroundColorResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipBackgroundColorResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipCornerRadius":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setChipCornerRadius((float) arg);
+          return true;
+        }
+        break;
+      case "chipCornerRadiusResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipCornerRadiusResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipDrawable":
+        if (v instanceof Chip && arg instanceof ChipDrawable) {
+          ((Chip) v).setChipDrawable((ChipDrawable) arg);
+          return true;
+        }
+        break;
+      case "chipEndPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setChipEndPadding((float) arg);
+          return true;
+        }
+        break;
+      case "chipEndPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipEndPaddingResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipIcon":
+        if (v instanceof Chip && (arg == null || arg instanceof Drawable)) {
+          ((Chip) v).setChipIcon((Drawable) arg);
+          return true;
+        }
+        break;
+      case "chipIconResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipIconResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipIconSize":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setChipIconSize((float) arg);
+          return true;
+        }
+        break;
+      case "chipIconSizeResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipIconSizeResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipIconTint":
+        if (v instanceof Chip && (arg == null || arg instanceof ColorStateList)) {
+          ((Chip) v).setChipIconTint((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "chipIconTintResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipIconTintResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipIconVisible":
+        if (v instanceof Chip && arg instanceof Boolean) {
+          ((Chip) v).setChipIconVisible((boolean) arg);
+          return true;
+        }
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipIconVisible((int) arg);
+          return true;
+        }
+        break;
+      case "chipMinHeight":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setChipMinHeight((float) arg);
+          return true;
+        }
+        break;
+      case "chipMinHeightResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipMinHeightResource((int) arg);
           return true;
         }
         break;
@@ -1085,6 +1427,42 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
       case "chipSpacingVerticalResource":
         if (v instanceof ChipGroup && arg instanceof Integer) {
           ((ChipGroup) v).setChipSpacingVerticalResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipStartPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setChipStartPadding((float) arg);
+          return true;
+        }
+        break;
+      case "chipStartPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipStartPaddingResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipStrokeColor":
+        if (v instanceof Chip && (arg == null || arg instanceof ColorStateList)) {
+          ((Chip) v).setChipStrokeColor((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "chipStrokeColorResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipStrokeColorResource((int) arg);
+          return true;
+        }
+        break;
+      case "chipStrokeWidth":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setChipStrokeWidth((float) arg);
+          return true;
+        }
+        break;
+      case "chipStrokeWidthResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setChipStrokeWidthResource((int) arg);
           return true;
         }
         break;
@@ -1137,6 +1515,82 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
         }
         if (v instanceof CircularRevealCoordinatorLayout && arg instanceof Integer) {
           ((CircularRevealCoordinatorLayout) v).setCircularRevealScrimColor((int) arg);
+          return true;
+        }
+        break;
+      case "closeIcon":
+        if (v instanceof Chip && (arg == null || arg instanceof Drawable)) {
+          ((Chip) v).setCloseIcon((Drawable) arg);
+          return true;
+        }
+        break;
+      case "closeIconContentDescription":
+        if (v instanceof Chip && (arg == null || arg instanceof CharSequence)) {
+          ((Chip) v).setCloseIconContentDescription((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "closeIconEndPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setCloseIconEndPadding((float) arg);
+          return true;
+        }
+        break;
+      case "closeIconEndPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCloseIconEndPaddingResource((int) arg);
+          return true;
+        }
+        break;
+      case "closeIconResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCloseIconResource((int) arg);
+          return true;
+        }
+        break;
+      case "closeIconSize":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setCloseIconSize((float) arg);
+          return true;
+        }
+        break;
+      case "closeIconSizeResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCloseIconSizeResource((int) arg);
+          return true;
+        }
+        break;
+      case "closeIconStartPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setCloseIconStartPadding((float) arg);
+          return true;
+        }
+        break;
+      case "closeIconStartPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCloseIconStartPaddingResource((int) arg);
+          return true;
+        }
+        break;
+      case "closeIconTint":
+        if (v instanceof Chip && (arg == null || arg instanceof ColorStateList)) {
+          ((Chip) v).setCloseIconTint((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "closeIconTintResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCloseIconTintResource((int) arg);
+          return true;
+        }
+        break;
+      case "closeIconVisible":
+        if (v instanceof Chip && arg instanceof Boolean) {
+          ((Chip) v).setCloseIconVisible((boolean) arg);
+          return true;
+        }
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setCloseIconVisible((int) arg);
           return true;
         }
         break;
@@ -1401,12 +1855,20 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
         }
         break;
       case "hideMotionSpec":
+        if (v instanceof Chip && (arg == null || arg instanceof MotionSpec)) {
+          ((Chip) v).setHideMotionSpec((MotionSpec) arg);
+          return true;
+        }
         if (v instanceof FloatingActionButton && arg instanceof MotionSpec) {
           ((FloatingActionButton) v).setHideMotionSpec((MotionSpec) arg);
           return true;
         }
         break;
       case "hideMotionSpecResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setHideMotionSpecResource((int) arg);
+          return true;
+        }
         if (v instanceof FloatingActionButton && arg instanceof Integer) {
           ((FloatingActionButton) v).setHideMotionSpecResource((int) arg);
           return true;
@@ -1462,6 +1924,18 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
           return true;
         }
         break;
+      case "iconEndPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setIconEndPadding((float) arg);
+          return true;
+        }
+        break;
+      case "iconEndPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setIconEndPaddingResource((int) arg);
+          return true;
+        }
+        break;
       case "iconGravity":
         if (v instanceof MaterialButton && arg instanceof Integer) {
           ((MaterialButton) v).setIconGravity((int) arg);
@@ -1491,6 +1965,18 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
         }
         if (v instanceof MaterialButton && arg instanceof Integer) {
           ((MaterialButton) v).setIconSize((int) arg);
+          return true;
+        }
+        break;
+      case "iconStartPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setIconStartPadding((float) arg);
+          return true;
+        }
+        break;
+      case "iconStartPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setIconStartPaddingResource((int) arg);
           return true;
         }
         break;
@@ -1737,6 +2223,21 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
           return true;
         }
         break;
+      case "onCloseIconClick":
+        if (v instanceof Chip && arg instanceof View.OnClickListener) {
+          if (arg != null) {
+            ((Chip) v).setOnCloseIconClickListener(new View.OnClickListener() {
+              public void onClick(View a0) {
+                ((View.OnClickListener) arg).onClick(a0);
+                Anvil.render();
+              }
+            });
+          } else {
+            ((Chip) v).setOnCloseIconClickListener((View.OnClickListener) null);
+          }
+          return true;
+        }
+        break;
       case "onNavigationItemReselected":
         if (v instanceof BottomNavigationView && arg instanceof BottomNavigationView.OnNavigationItemReselectedListener) {
           if (arg != null) {
@@ -1843,6 +2344,10 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
           ((MaterialButton) v).setRippleColor((ColorStateList) arg);
           return true;
         }
+        if (v instanceof Chip && (arg == null || arg instanceof ColorStateList)) {
+          ((Chip) v).setRippleColor((ColorStateList) arg);
+          return true;
+        }
         if (v instanceof FloatingActionButton && (arg == null || arg instanceof ColorStateList)) {
           ((FloatingActionButton) v).setRippleColor((ColorStateList) arg);
           return true;
@@ -1855,6 +2360,10 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
       case "rippleColorResource":
         if (v instanceof MaterialButton && arg instanceof Integer) {
           ((MaterialButton) v).setRippleColorResource((int) arg);
+          return true;
+        }
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setRippleColorResource((int) arg);
           return true;
         }
         break;
@@ -1911,12 +2420,20 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
         }
         break;
       case "showMotionSpec":
+        if (v instanceof Chip && (arg == null || arg instanceof MotionSpec)) {
+          ((Chip) v).setShowMotionSpec((MotionSpec) arg);
+          return true;
+        }
         if (v instanceof FloatingActionButton && arg instanceof MotionSpec) {
           ((FloatingActionButton) v).setShowMotionSpec((MotionSpec) arg);
           return true;
         }
         break;
       case "showMotionSpecResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setShowMotionSpecResource((int) arg);
+          return true;
+        }
         if (v instanceof FloatingActionButton && arg instanceof Integer) {
           ((FloatingActionButton) v).setShowMotionSpecResource((int) arg);
           return true;
@@ -2071,6 +2588,10 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
         }
         break;
       case "textAppearance":
+        if (v instanceof Chip && (arg == null || arg instanceof TextAppearance)) {
+          ((Chip) v).setTextAppearance((TextAppearance) arg);
+          return true;
+        }
         if (v instanceof NavigationMenuItemView && arg instanceof Integer) {
           ((NavigationMenuItemView) v).setTextAppearance((int) arg);
           return true;
@@ -2088,6 +2609,12 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
           return true;
         }
         break;
+      case "textAppearanceResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setTextAppearanceResource((int) arg);
+          return true;
+        }
+        break;
       case "textColor":
         if (v instanceof BottomNavigationItemView && (arg == null || arg instanceof ColorStateList)) {
           ((BottomNavigationItemView) v).setTextColor((ColorStateList) arg);
@@ -2098,9 +2625,33 @@ public final class MaterialDSL extends BaseMaterial implements Anvil.AttributeSe
           return true;
         }
         break;
+      case "textEndPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setTextEndPadding((float) arg);
+          return true;
+        }
+        break;
+      case "textEndPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setTextEndPaddingResource((int) arg);
+          return true;
+        }
+        break;
       case "textInputAccessibilityDelegate":
         if (v instanceof TextInputLayout && arg instanceof TextInputLayout.AccessibilityDelegate) {
           ((TextInputLayout) v).setTextInputAccessibilityDelegate((TextInputLayout.AccessibilityDelegate) arg);
+          return true;
+        }
+        break;
+      case "textStartPadding":
+        if (v instanceof Chip && arg instanceof Float) {
+          ((Chip) v).setTextStartPadding((float) arg);
+          return true;
+        }
+        break;
+      case "textStartPaddingResource":
+        if (v instanceof Chip && arg instanceof Integer) {
+          ((Chip) v).setTextStartPaddingResource((int) arg);
           return true;
         }
         break;

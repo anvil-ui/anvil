@@ -40,7 +40,7 @@ class AnvilGenPlugin : Plugin<Project> {
         }
 
         // "implementation" extends from "compile", so it's also covered
-        configurations["compile"].extendsFrom(configuration)
+        configurations["api"].extendsFrom(configuration)
 
         afterEvaluate { generateTasks(extension, configuration) }
     }

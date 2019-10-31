@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+set -e
+set -x
+
 ./gradlew :anvil:generateSDK15DSL --stacktrace
 ./gradlew :anvil:generateSDK19DSL --stacktrace
 ./gradlew :anvil:generateSDK21DSL --stacktrace
