@@ -8,3 +8,5 @@ include 'anvil-recyclerview-v7'
 include 'anvil-constraintlayout'
 include 'anvil-yogalayout'
 include 'sample'
+
+rootProject.name = 'anvil-root'

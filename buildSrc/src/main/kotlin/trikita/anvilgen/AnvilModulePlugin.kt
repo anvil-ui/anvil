@@ -152,13 +152,6 @@ class AnvilModulePlugin : Plugin<Project> {
                 appendNode("connection", property("POM_SCM_CONNECTION"))
                 appendNode("developerConnection", property("POM_SCM_DEV_CONNECTION"))
             }
-            with(appendNode("developers")) {
-                with(appendNode("developer")) {
-                    appendNode("id", property("POM_DEVELOPER_ID"))
-                    appendNode("name", property("POM_DEVELOPER_NAME"))
-                    appendNode("email", property("POM_DEVELOPER_EMAIL"))
-                }
-            }
             with(appendNode("licenses")) {
                 with(appendNode("license")) {
                     appendNode("name", property("POM_LICENCE_NAME"))

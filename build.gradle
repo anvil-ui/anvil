@@ -22,7 +22,7 @@ subprojects {
         google()
         jcenter()
     }
-
+    
     group = GROUP
     version = VERSION_NAME
 }

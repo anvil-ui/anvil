@@ -1,13 +1,17 @@
 
 # Anvil - reactive views for Android
 
-[![Join the chat at https://gitter.im/zserge/anvil](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zserge/anvil?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/zserge/anvil.svg?branch=master)](https://travis-ci.org/zserge/anvil)
+[![Build Status](https://travis-ci.org/inkremental/anvil.svg?branch=master)](https://travis-ci.org/inkremental/anvil)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23193-brightgreen.svg)](http://androidweekly.net/issues/issue-193)
+
+[![Join Slack (en)](https://img.shields.io/badge/inkremental-Join%20chat%20%28en%29-4A154B?logo=slack)](https://kotlinlang.slack.com/messages/inkremental)
+[![Join Telegram (ru)](https://img.shields.io/badge/inkremental-Join%20chat%20%28ru%29-2CA5E0?logo=telegram)](https://t.me/inkremental)
+
 
 <br/>
 
 <div>
-<img align="left" src="https://raw.githubusercontent.com/zserge/anvil/master/logo/ic_launcher.png" alt="logo" width="96px" height="96px" />
+<img align="left" src="https://raw.githubusercontent.com/inkremental/anvil/master/logo/ic_launcher.png" alt="logo" width="96px" height="96px" />
 <p>
 Anvil is a small Java library for creating reactive user interfaces. Originally inspired by <a href="https://facebook.github.io/react/">React</a>, it suits well as a view layer for <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel">MVVM</a> or <a href="http://redux.js.org/">Redux</a> design patterns.
 </p>
@@ -137,8 +141,7 @@ public void view() {
 
 You may find more Anvil examples for Java 6, Java 8 and Kotlin at
 
-- [Anvil simple demos in Kotlin](https://github.com/zserge/anvil-kotlin-demos)
-- [Anvil more advanced examples in Java or Kotlin](https://github.com/zserge/anvil-examples)
+- [Anvil examples in Java or Kotlin](https://github.com/inkremental/anvil-examples)
 
 ## How it works
 
@@ -305,7 +308,7 @@ The bottom part of the iceberg is Anvil DSL.
 DSL consists of a few handwritten property setters, but most of it is
 generated from java classes in the android SDK.
 
-See a full list of the DSL methods for each API level [here](https://github.com/zserge/anvil/blob/master/DSL.md).
+See a full list of the DSL methods for each API level [here](https://github.com/inkremental/anvil/blob/master/DSL.md).
 
 ### Property setters
 
@@ -361,7 +364,7 @@ A few bindings have been  written for other use cases which we find useful:
 * `onItemSelected(lambda)` - accepts a functional interface to handle a `Spinner`
     events. `onNothingSelected()` method is omitted, because it's rarely used anyway.
 
-If a binding you need is not in the list - please, check [issue #27](https://github.com/zserge/anvil/issues/27) and report it there.
+If a binding you need is not in the list - please, check [corresponding issue](https://github.com/Inkremental/anvil/issues/24) and report it there.
 
 A special case for animations is added:
 
