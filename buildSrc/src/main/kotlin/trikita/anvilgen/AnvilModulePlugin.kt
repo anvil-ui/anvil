@@ -5,6 +5,7 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.BintrayPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
@@ -23,8 +24,7 @@ class AnvilModulePlugin : Plugin<Project> {
         val minSdk = 15
         val targetSdk = compileSdk
 
-        val artifactId = prop("POM_ARTIFACT_ID")!!
-        val publication = "somestuff"
+        val anvil = extensions.getByType<AnvilGenPluginExtension>()
 
         val android = extensions.getByType<LibraryExtension>()
 
@@ -62,38 +62,42 @@ class AnvilModulePlugin : Plugin<Project> {
             add("archives", javadocJar)
         }
 
-        extensions.getByType<PublishingExtension>().publications.register<MavenPublication>(publication) {
-            this.groupId = project.group.toString()
-            this.artifactId = artifactId
-            this.version = project.version.toString()
-            artifact(buildDir / "outputs" / "aar" / "$artifactId-release.aar")
-            artifact(sourcesJar)
-            artifact(javadocJar)
-            fixPom(this)
-        }
+        val bintrayUser = prop("bintrayUser")
 
-        extensions.getByType<BintrayExtension>().apply {
-            user = prop("bintrayUser") ?: ""
-            key = prop("bintrayApiKey") ?: ""
-            setPublications(publication)
-            pkg.apply {
-                repo = "maven"
-                name = prop("POM_PACKAGE_NAME")
-                websiteUrl = prop("POM_URL")
-                vcsUrl = prop("POM_SCM_URL")
-                setLicenses(prop("POM_LICENCE_SHORT_NAME"))
-                publish = true
-                version.apply {
-                    name = project.version.toString()
-                    gpg.apply {
-                        sign = true
-                        passphrase = prop("bintrayGpgPassword")
-                    }
-                    mavenCentralSync.apply {
-                        sync = true
-                        user = prop("bintrayOssUser")
-                        password = prop("bintrayOssPassword")
-                        close = "1"
+        val bintrayExtension = if(bintrayUser == null) {
+            null
+        } else {
+            extensions.getByType<BintrayExtension>().apply {
+                user = bintrayUser
+                key = prop("bintrayApiKey")!!
+                pkg.apply {
+                    repo = prop("BINTRAY_REPO")!!
+                    userOrg = prop("BINTRAY_ORG")!!
+                    name = prop("POM_PACKAGE_NAME")
+                    websiteUrl = prop("POM_URL")
+                    vcsUrl = prop("POM_SCM_URL")
+                    setLicenses(prop("POM_LICENCE_SHORT_NAME"))
+                    publish = true
+                    version.apply {
+                        name = project.version.toString()
+
+                        val bintrayGpgPassword = prop("bintrayGpgPassword")
+                        if(bintrayGpgPassword != null) {
+                            gpg.apply {
+                                sign = true
+                                passphrase = bintrayGpgPassword
+                            }
+                        }
+
+                        val bintrayOssUser = prop("bintrayOssUser")
+                        if(bintrayOssUser != null) {
+                            mavenCentralSync.apply {
+                                sync = true
+                                user = bintrayOssUser
+                                password = prop("bintrayOssPassword")!!
+                                close = "1"
+                            }
+                        }
                     }
                 }
             }
@@ -113,10 +117,30 @@ class AnvilModulePlugin : Plugin<Project> {
             true
         }
 
-        Unit
+        fun registerAnvilPublication(name: String, artifactId: String) = registerAnvilPublication(
+            extensions.getByType<PublishingExtension>().publications,
+            bintrayExtension,
+            name,
+            artifactId,
+            sourcesJar,
+            javadocJar
+        )
+
+        afterEvaluate {
+            when {
+                anvil.isSdk -> {
+                    registerAnvilPublication("sdk15", prop("POM_ARTIFACT_SDK15_ID")!!)
+                    registerAnvilPublication("sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
+                    registerAnvilPublication("sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
+                }
+                anvil.isSupport -> registerAnvilPublication("lib", prop("POM_ARTIFACT_ID")!!)
+                else -> error("Unknown generator type: \"${anvil.type}\"")
+            }
+        }
     }
 
-    private fun Project.prop(key: String): String? = properties[key]?.toString()
+    private fun Project.prop(key: String): String? =
+        project.findProperty(key)?.let { it as String }
 
     private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {
         with(asNode()) {
@@ -141,6 +165,30 @@ class AnvilModulePlugin : Plugin<Project> {
                     appendNode("url", property("POM_LICENCE_URL"))
                     appendNode("distribution", property("POM_LICENCE_DIST"))
                 }
+            }
+        }
+    }
+
+    private fun Project.registerAnvilPublication(
+        container: PublicationContainer,
+        bintrayExtension: BintrayExtension?,
+        name: String,
+        artifactId: String,
+        sourcesJar: Jar,
+        javadocJar: Jar) = container.register<MavenPublication>(name) {
+        this.groupId = project.group.toString()
+        this.artifactId = artifactId
+        this.version = project.version.toString()
+        artifact(buildDir / "outputs" / "aar" / "$artifactId-release.aar")
+        artifact(sourcesJar)
+        artifact(javadocJar)
+        fixPom(this)
+
+        bintrayExtension?.apply {
+            if(publications == null) {
+                setPublications(name)
+            } else {
+                setPublications(*publications + name)
             }
         }
     }

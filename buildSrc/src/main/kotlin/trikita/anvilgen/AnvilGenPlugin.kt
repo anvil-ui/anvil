@@ -39,15 +39,15 @@ class AnvilGenPlugin : Plugin<Project> {
             to.attribute(ARTIFACT_FORMAT, ArtifactTypeDefinition.JAR_TYPE)
         }
 
-        // "implementation" extends from "compile", so it's also covered
+        // "implementation" extends from "api", so it's also covered
         configurations["api"].extendsFrom(configuration)
 
         afterEvaluate { generateTasks(extension, configuration) }
     }
 
     fun Project.generateTasks(extension: AnvilGenPluginExtension, configuration: Configuration) {
-        when(extension.type) {
-            "sdk" -> {
+        when {
+            extension.isSdk -> {
                 createDslGeneratorTask("SDK21", getSdkConfiguration(21))
                 createDslGeneratorTask("SDK19", getSdkConfiguration(19))
                 createDslGeneratorTask("SDK15", getSdkConfiguration(15))
@@ -56,7 +56,7 @@ class AnvilGenPlugin : Plugin<Project> {
                     dependsOn("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")
                 }
             }
-            "support" -> {
+            extension.isSupport -> {
                 createDslGeneratorTask(extension.camelCaseName,
                     // temporary toggle for supporting both array- and configuration-based libraries declaration
                     if(extension.libraries.isNotEmpty()) {
@@ -72,7 +72,7 @@ class AnvilGenPlugin : Plugin<Project> {
                     }
                 )
             }
-            else -> error("Unknown generator type: ${extension.type}")
+            else -> error("Unknown generator type: \"${extension.type}\"")
         }
     }
 

@@ -2,17 +2,20 @@
 set -e
 set -x
 
-./gradlew :anvil:generateSDK15DSL --stacktrace
-./gradlew :anvil:generateSDK19DSL --stacktrace
-./gradlew :anvil:generateSDK21DSL --stacktrace
+./gradlew --stacktrace :anvil:generateSDKDSL
 echo "----------- sdk done -----------"
-./gradlew :anvil-appcompat-v7:generateAppCompatv7DSL --stacktrace
+./gradlew --stacktrace :anvil-appcompat-v7:generateAppCompatv7DSL
 echo "----------- appcompat done -----------"
-./gradlew :anvil-design:generateMaterialDSL --stacktrace
-echo "----------- material done -----------"
-./gradlew :anvil-gridlayout-v7:generateGridLayoutv7DSL --stacktrace
+./gradlew --stacktrace :anvil-design:generateMaterialDSL
+echo "----------- design done -----------"
+./gradlew --stacktrace :anvil-gridlayout-v7:generateGridLayoutv7DSL
 echo "----------- gridlayout done -----------"
-./gradlew :anvil-recyclerview-v7:generateRecyclerViewv7DSL --stacktrace
+./gradlew --stacktrace :anvil-recyclerview-v7:generateRecyclerViewv7DSL
 echo "----------- recyclerview done -----------"
-./gradlew :anvil-support-v4:generateSupportCoreUiDSL --stacktrace
+./gradlew --stacktrace :anvil-cardview-v7:generateCardViewv7DSL
+echo "----------- cardview done -----------"
+./gradlew --stacktrace :anvil-support-v4:generateSupportCoreUiDSL
 echo "----------- supportv4 done -----------"
+
+# TODO: constraintlayout
+# TODO: yogalayout

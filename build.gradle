@@ -1,20 +1,8 @@
-buildscript {
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.5.1"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
-    }
-
-    repositories {
-        google()
-        jcenter()
-    }
-}
-
 subprojects {
     ext {
         mockito_version = '2.23.0'
         androidx_version = '1.0.0'
-        agp_version = '3.3.2'
+        agp_version = '3.5.2'
     }
 
     buildscript {

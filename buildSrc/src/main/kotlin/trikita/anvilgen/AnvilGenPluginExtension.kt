@@ -9,3 +9,9 @@ open class AnvilGenPluginExtension {
     var dependencies = mutableMapOf<String, String>()
     var superclass = ""
 }
+
+val AnvilGenPluginExtension.isSdk: Boolean
+    get() = type == "sdk"
+
+val AnvilGenPluginExtension.isSupport: Boolean
+    get() = type == "support"
