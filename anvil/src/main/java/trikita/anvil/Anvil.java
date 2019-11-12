@@ -1,4 +1,4 @@
-package co.trikita.anvil;
+package trikita.anvil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
