@@ -1,4 +1,4 @@
-package trikita.anvil;
+package co.trikita.anvil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,15 +12,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 import java.util.WeakHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Anvil class is a namespace for top-level static methods and interfaces. Most
@@ -35,7 +35,8 @@ public final class Anvil {
     private final static Map<View, Mount> mounts = new WeakHashMap<>();
     private static Mount currentMount = null;
 
-    private static Handler anvilUIHandler = null;
+    private static Handler anvilUIHandler = new Handler(Looper.getMainLooper());
+    private static ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
     /** Renderable can be mounted and rendered using Anvil library. */
     public interface Renderable {
@@ -70,7 +71,7 @@ public final class Anvil {
         public View fromXml(ViewGroup parent, int xmlId) {
             return LayoutInflater.from(parent.getContext()).inflate(xmlId, parent, false);
         }
-    };
+    }
 
     public static void registerViewFactory(ViewFactory viewFactory) {
         if (!viewFactories.contains(viewFactory)) {
@@ -79,12 +80,6 @@ public final class Anvil {
     }
 
     private Anvil() {}
-
-    private final static Runnable anvilRenderRunnable = new Runnable() {
-        public void run() {
-            Anvil.render();
-        }
-    };
 
     public interface AttributeSetter<T> {
         boolean set(View v, String name, T value, T prevValue);
@@ -125,22 +120,19 @@ public final class Anvil {
      * views. This method can be called from any thread, so it's safe to use
      * {@code Anvil.render()} in background services. */
     public static void render() {
-        // If Anvil.render() is called on a non-UI thread, use UI Handler
-        if (Looper.myLooper() != Looper.getMainLooper()) {
-            synchronized (Anvil.class) {
-                if (anvilUIHandler == null) {
-                    anvilUIHandler = new Handler(Looper.getMainLooper());
+        singleThreadExecutor.submit(createRenderTask());
+    }
+
+    private static Runnable createRenderTask() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                Set<Mount> set = new HashSet<>(mounts.values());
+                for (Mount m : set) {
+                    render(m);
                 }
             }
-            anvilUIHandler.removeCallbacksAndMessages(null);
-            anvilUIHandler.post(anvilRenderRunnable);
-            return;
-        }
-        Set<Mount> set = new HashSet<>();
-        set.addAll(mounts.values());
-        for (Mount m : set) {
-            render(m);
-        }
+        };
     }
 
     /**
@@ -215,26 +207,23 @@ public final class Anvil {
     }
 
     static void render(Mount m) {
-        if (m.lock) {
-            return;
+        synchronized (m.lock) {
+            Mount prev = currentMount;
+            currentMount = m;
+            m.iterator.start();
+            if (m.renderable != null) {
+                m.renderable.view();
+            }
+            m.iterator.end();
+            currentMount = prev;
         }
-        m.lock = true;
-        Mount prev = currentMount;
-        currentMount = m;
-        m.iterator.start();
-        if (m.renderable != null) {
-            m.renderable.view();
-        }
-        m.iterator.end();
-        currentMount = prev;
-        m.lock = false;
     }
 
     /** Mount describes a mount point. Mount point is a Renderable function
      * attached to some ViewGroup. Mount point keeps track of the virtual layout
      * declared by Renderable */
     static class Mount {
-        private boolean lock = false;
+        private final Object lock = new Object();
 
         private final WeakReference<View> rootView;
         private final Renderable renderable;
@@ -277,23 +266,23 @@ public final class Anvil {
                 }
                 Context context = rootView.get().getContext();
                 if (c != null && (v == null || !v.getClass().equals(c))) {
-                    vg.removeView(v);
+                    removeViewFromViewGroup(v, vg);
                     for (ViewFactory vf : viewFactories) {
                         v = vf.fromClass(context, c);
                         if (v != null) {
                             set(v, "_anvil", 1);
-                            vg.addView(v, i);
+                            addViewToViewGroupAt(v, vg, i);
                             break;
                         }
                     }
                 } else if (c == null && (v == null || !Integer.valueOf(layoutId).equals(get(v, "_layoutId")))) {
-                    vg.removeView(v);
+                    removeViewFromViewGroup(v, vg);
                     for (ViewFactory vf : viewFactories) {
                         v = vf.fromXml(vg, layoutId);
                         if (v != null) {
                             set(v, "_anvil", 1);
                             set(v, "_layoutId", layoutId);
-                            vg.addView(v, i);
+                            addViewToViewGroupAt(v, vg, i);
                             break;
                         }
                     }
@@ -304,10 +293,47 @@ public final class Anvil {
                 indices.push(0);
             }
 
+            private void removeViewFromViewGroup(View v, ViewGroup vg) {
+                if (isRunningOnBackgroundThread())
+                    postViewRemovalOnUIThread(v, vg);
+                else
+                    vg.removeView(v);
+            }
+
+            private boolean isRunningOnBackgroundThread() {
+                return Looper.myLooper() != Looper.getMainLooper();
+            }
+
+            private void postViewRemovalOnUIThread(final View v, final ViewGroup vg) {
+                anvilUIHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        vg.removeView(v);
+                    }
+                });
+            }
+
+            private void addViewToViewGroupAt(View v, ViewGroup vg, int i) {
+                if (isRunningOnBackgroundThread()) {
+                    postViewAdditionOnUIThread(v, vg, i);
+                } else {
+                    vg.addView(v, i);
+                }
+            }
+
+            private void postViewAdditionOnUIThread(final View v, final ViewGroup vg, final int i) {
+                anvilUIHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        vg.addView(v, i);
+                    }
+                });
+            }
+
             void end() {
                 int index = indices.peek();
                 View v = views.peek();
-                if (v != null && v instanceof ViewGroup &&
+                if (v instanceof ViewGroup &&
                         get(v, "_layoutId") == null &&
                         (mounts.get(v) == null || mounts.get(v) == Mount.this)) {
                     ViewGroup vg = (ViewGroup) v;
@@ -321,6 +347,16 @@ public final class Anvil {
                 }
             }
 
+            private void removeNonAnvilViews(ViewGroup vg, int start, int count) {
+                final int end = start + count - 1;
+
+                for (int i = end; i >= start; i--) {
+                    View v = vg.getChildAt(i);
+                    if (get(v, "_anvil") != null)
+                        removeViewFromViewGroup(v, vg);
+                }
+            }
+
             <T> void attr(String name, T value) {
                 View currentView = views.peek();
                 if (currentView == null) {
@@ -329,22 +365,32 @@ public final class Anvil {
                 @SuppressWarnings("unchecked")
                 T currentValue = (T) get(currentView, name);
                 if (currentValue == null || !currentValue.equals(value)) {
-                    for (AttributeSetter setter : attributeSetters) {
-                        if (setter.set(currentView, name, value, currentValue)) {
-                            set(currentView, name, value);
-                            return;
-                        }
-                    }
+                    updateViewAttribute(name, value, currentView, currentValue);
                 }
             }
 
-            private void removeNonAnvilViews(ViewGroup vg, int start, int count) {
-                final int end = start + count - 1;
+            private <T> void updateViewAttribute(String name, T value, View currentView, T currentValue) {
+                if (isRunningOnBackgroundThread())
+                    postViewUpdateOnUIThread(name, value, currentView, currentValue);
+                else
+                    setAttribute(name, value, currentView, currentValue);
+            }
 
-                for (int i = end; i >= start; i--) {
-                    View v = vg.getChildAt(i);
-                    if (get(v, "_anvil") != null) {
-                        vg.removeView(v);
+            private <T> void postViewUpdateOnUIThread(final String name, final T value, final View currentView,
+                                                      final T currentValue) {
+                anvilUIHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setAttribute(name, value, currentView, currentValue);
+                    }
+                });
+            }
+
+            private <T> void setAttribute(String name, T value, View currentView, T currentValue) {
+                for (AttributeSetter setter : attributeSetters) {
+                    if (setter.set(currentView, name, value, currentValue)) {
+                        set(currentView, name, value);
+                        return;
                     }
                 }
             }
