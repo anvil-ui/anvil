@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Anvil class is a namespace for top-level static methods and interfaces. Most
@@ -119,8 +120,8 @@ public final class Anvil {
      * been changed since last rendering cycle will be actually updated in the
      * views. This method can be called from any thread, so it's safe to use
      * {@code Anvil.render()} in background services. */
-    public static void render() {
-        singleThreadExecutor.submit(createRenderTask());
+    public static Future<?> render() {
+        return singleThreadExecutor.submit(createRenderTask());
     }
 
     private static Runnable createRenderTask() {

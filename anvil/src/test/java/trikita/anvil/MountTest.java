@@ -7,6 +7,8 @@ import static trikita.anvil.BaseDSL.*;
 import org.mockito.Mockito;
 
 import java.lang.ref.WeakReference;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import static junit.framework.Assert.*;
 
@@ -69,7 +71,7 @@ public class MountTest extends Utils {
     }
 
     @Test
-    public void testMountGC() {
+    public void testMountGC() throws ExecutionException {
         Anvil.Renderable layout = Mockito.spy(testLayout);
         Anvil.mount(container, layout);
         Mockito.verify(layout, Mockito.times(1)).view();
@@ -80,7 +82,21 @@ public class MountTest extends Utils {
         System.gc();
         assertEquals(null, ref.get());
         // Ensure that the associated renderable is no longer called
-        Anvil.render();
+        renderView();
         Mockito.verify(layout, Mockito.times(1)).view();
+    }
+
+    private void renderView() throws ExecutionException {
+        Future<?> future = Anvil.render();
+        waitTaskToFinish(future);
+    }
+
+    private void waitTaskToFinish(Future<?> future) throws ExecutionException {
+        try {
+            future.get();
+        } catch (ExecutionException executionException) {
+            throw executionException;
+        } catch (Exception e) {
+        }
     }
 }

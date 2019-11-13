@@ -4,6 +4,8 @@ import android.view.ViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import org.junit.Test;
 
@@ -15,7 +17,7 @@ public class InitTest extends Utils {
     Map<String, Boolean> called = new HashMap<>();
 
     @Test
-    public void testInit() {
+    public void testInit() throws ExecutionException {
         System.out.println("============================");
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
@@ -31,7 +33,7 @@ public class InitTest extends Utils {
         assertTrue(called.get("once"));
         assertTrue(called.get("setUpView"));
         called.clear();
-        Anvil.render();
+        renderView();
         assertFalse(called.containsKey("once"));
         assertFalse(called.containsKey("setUpView"));
     }
@@ -46,6 +48,20 @@ public class InitTest extends Utils {
                 called.put(id, true);
             }
         };
+    }
+
+    private void renderView() throws ExecutionException {
+        Future<?> future = Anvil.render();
+        waitTaskToFinish(future);
+    }
+
+    private void waitTaskToFinish(Future<?> future) throws ExecutionException {
+        try {
+            future.get();
+        } catch (ExecutionException executionException) {
+            throw executionException;
+        } catch (Exception e) {
+        }
     }
 }
 
