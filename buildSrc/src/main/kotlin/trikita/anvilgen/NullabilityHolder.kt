@@ -11,9 +11,9 @@ import java.net.URLClassLoader
 
 class NullabilityHolder(isSourceSdk: Boolean) {
 
-    val nullabilityMap: MutableMap<MethodSignature, Boolean?> = HashMap()
-    var nullableLiteral: String
-    var nonNullableLiteral: String
+    private val nullabilityMap: MutableMap<MethodSignature, Boolean?> = mutableMapOf()
+    private val nullableLiteral: String
+    private val nonNullableLiteral: String
 
     init {
         if (isSourceSdk) {

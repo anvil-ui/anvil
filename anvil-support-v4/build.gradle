@@ -1,161 +1,32 @@
 apply plugin: 'com.android.library'
-apply plugin: 'trikita.anvilgen'
-apply from: "$rootProject.projectDir/copyDeps.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'trikita.module'
 
 android {
-	compileSdkVersion 28
-
-	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_7
-		targetCompatibility JavaVersion.VERSION_1_7
-	}
-
 	defaultConfig {
-		minSdkVersion 15
-		targetSdkVersion 28
-
 		missingDimensionStrategy 'api', 'sdk21'
-	}
-
-	lintOptions {
-		abortOnError false
-	}
-
-	testOptions {
-		unitTests.returnDefaultValues = true
 	}
 }
 
-apply from: 'attr-quirks.gradle'
 anvilgen {
 	type = "support"
 	moduleName = "support-core-ui"
-	libraries = ["legacy-support-core-ui":null,
-				 "drawerlayout":null,
-				 "coordinatorlayout":null,
-				 "slidingpanelayout":null,
-				 "swiperefreshlayout":null,
-			     "core": "1.0.1",
-				 "viewpager":null]
 	camelCaseName = "SupportCoreUi"
-	version = androidx_version
-	dependencies = [
-	  "legacy-support-core-ui": null,
-	  "legacy-support-core-utils": null,
-	  "drawerlayout": null,
-	  "core": null,
-	  "customview" : null,
-	  "media": null,
-	  "fragment": null,
-	  "annotation" : null
-	]
-	quirks = QUIRKS
 }
 
 dependencies {
-	implementation project(path : ':anvil')
-	implementation "androidx.legacy:legacy-support-core-ui:$androidx_version"
-	implementation "androidx.legacy:legacy-support-core-utils:$androidx_version"
-	implementation "androidx.core:core:1.0.1"
-	implementation "androidx.media:media:1.0.1"
-	implementation "androidx.fragment:fragment:$androidx_version"
-	implementation "androidx.transition:transition:$androidx_version"
-	implementation "androidx.annotation:annotation:$androidx_version"
+	implementation project(':anvil')
+
+	anvilgen "androidx.coordinatorlayout:coordinatorlayout:1.0.0"
+	anvilgen "androidx.core:core:1.1.0"
+	anvilgen "androidx.drawerlayout:drawerlayout:1.0.0"
+	anvilgen "androidx.legacy:legacy-support-core-ui:1.0.0"
+	anvilgen "androidx.slidingpanelayout:slidingpanelayout:1.0.0"
+	anvilgen "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+	anvilgen "androidx.viewpager:viewpager:1.0.0"
 
 	testImplementation 'junit:junit:4.12'
 	testImplementation "org.mockito:mockito-core:$mockito_version"
 }
 
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
 
-def fixPom(pom) {
-	pom.withXml {
-		def root = asNode()
-		root.appendNode('description', POM_DESCRIPTION)
-		root.appendNode('name', POM_NAME)
-		root.appendNode('url', POM_URL)
-		def scm = root.appendNode('scm')
-		scm.appendNode('url', POM_SCM_URL)
-		scm.appendNode('connection', POM_SCM_CONNECTION)
-		scm.appendNode('developerConnection', POM_SCM_DEV_CONNECTION)
-		def developer = root.appendNode('developers').appendNode('developer')
-		developer.appendNode('id', POM_DEVELOPER_ID)
-		developer.appendNode('name', POM_DEVELOPER_NAME)
-		developer.appendNode('email', POM_DEVELOPER_EMAIL)
-		def license = root.appendNode('licenses').appendNode('license')
-		license.appendNode('name', POM_LICENCE_NAME)
-		license.appendNode('url', POM_LICENCE_URL)
-		license.appendNode('distribution', POM_LICENCE_DIST)
-	}
-}
-
-publishing {
-	publications {
-		appcompatv4(MavenPublication) {
-			groupId project.group
-			version project.version
-			artifactId POM_ARTIFACT_ID
-			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_ID-release.aar"
-			artifact sourcesJar
-			artifact javadocJar
-			fixPom(pom)
-		}
-	}
-}
-
-bintray {
-	user = project.hasProperty('bintrayUser') ? bintrayUser : ''
-	key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
-	publications = ['appcompatv4']
-	pkg {
-		repo = 'maven'
-		name = POM_PACKAGE_NAME
-		websiteUrl = POM_URL
-		vcsUrl = POM_SCM_URL
-		licenses = [POM_LICENCE_SHORT_NAME]
-		publish = true
-		version {
-			name = project.version
-			gpg {
-				sign = true
-				passphrase = project.hasProperty('bintrayGpgPassword') ? bintrayGpgPassword : ''
-			}
-			mavenCentralSync {
-				sync = true
-				user = project.hasProperty('bintrayOssUser') ? bintrayOssUser : ''
-				password = project.hasProperty('bintrayOssPassword') ? bintrayOssPassword : ''
-				close = '1'
-			}
-		}
-	}
-}
-
-task sourcesJar(type: Jar) {
-	from android.sourceSets.main.java.srcDirs
-	classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-	source = android.sourceSets.main.java.srcDirs
-	classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier = 'javadoc'
-	from javadoc.destinationDir
-}
-
-artifacts {
-	archives javadocJar
-	archives sourcesJar
-}
-
-android.libraryVariants.all { variant ->
-	task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-		description "Generates Javadoc for $variant.name."
-		source = variant.getCompileClasspath(null).getAsFileTree()
-		ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-		classpath = files(variant.getCompileClasspath(null)) + files(ext.androidJar)
-	}
-}

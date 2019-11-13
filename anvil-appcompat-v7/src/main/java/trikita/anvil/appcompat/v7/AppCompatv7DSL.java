@@ -37,6 +37,7 @@ import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatToggleButton;
 import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.appcompat.widget.ContentFrameLayout;
 import androidx.appcompat.widget.DialogTitle;
@@ -250,6 +251,14 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
     return BaseDSL.v(AppCompatTextView.class, r);
   }
 
+  public static BaseDSL.ViewClassResult appCompatToggleButton() {
+    return BaseDSL.v(AppCompatToggleButton.class);
+  }
+
+  public static Void appCompatToggleButton(Anvil.Renderable r) {
+    return BaseDSL.v(AppCompatToggleButton.class, r);
+  }
+
   public static BaseDSL.ViewClassResult buttonBarLayout() {
     return BaseDSL.v(ButtonBarLayout.class);
   }
@@ -362,10 +371,6 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
     return BaseDSL.attr("attachListener", arg);
   }
 
-  public static Void autoSizeTextTypeWithDefaults(int arg) {
-    return BaseDSL.attr("autoSizeTextTypeWithDefaults", arg);
-  }
-
   public static Void baselineAligned(boolean arg) {
     return BaseDSL.attr("baselineAligned", arg);
   }
@@ -380,6 +385,22 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
 
   public static Void checked(boolean arg) {
     return BaseDSL.attr("checked", arg);
+  }
+
+  public static Void collapseContentDescription(int arg) {
+    return BaseDSL.attr("collapseContentDescription", arg);
+  }
+
+  public static Void collapseContentDescription(@Nullable CharSequence arg) {
+    return BaseDSL.attr("collapseContentDescription", arg);
+  }
+
+  public static Void collapseIcon(@Nullable Drawable arg) {
+    return BaseDSL.attr("collapseIcon", arg);
+  }
+
+  public static Void collapseIcon(int arg) {
+    return BaseDSL.attr("collapseIcon", arg);
   }
 
   public static Void collapsible(boolean arg) {
@@ -428,10 +449,6 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
 
   public static Void expandedFormat(boolean arg) {
     return BaseDSL.attr("expandedFormat", arg);
-  }
-
-  public static Void firstBaselineToTopHeight(int arg) {
-    return BaseDSL.attr("firstBaselineToTopHeight", arg);
   }
 
   public static Void forceShowIcon(boolean arg) {
@@ -494,20 +511,12 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
     return BaseDSL.attr("itemInvoker", arg);
   }
 
-  public static Void lastBaselineToBottomHeight(int arg) {
-    return BaseDSL.attr("lastBaselineToBottomHeight", arg);
-  }
-
   public static Void layoutInflater(LayoutInflater arg) {
     return BaseDSL.attr("layoutInflater", arg);
   }
 
   public static Void layoutResource(int arg) {
     return BaseDSL.attr("layoutResource", arg);
-  }
-
-  public static Void lineHeight(int arg) {
-    return BaseDSL.attr("lineHeight", arg);
   }
 
   public static Void logo(Drawable arg) {
@@ -678,6 +687,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
     return BaseDSL.attr("subtitle", arg);
   }
 
+  public static Void subtitleTextColor(@NonNull ColorStateList arg) {
+    return BaseDSL.attr("subtitleTextColor", arg);
+  }
+
   public static Void subtitleTextColor(int arg) {
     return BaseDSL.attr("subtitleTextColor", arg);
   }
@@ -704,6 +717,14 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
 
   public static Void supportButtonTintMode(PorterDuff.Mode arg) {
     return BaseDSL.attr("supportButtonTintMode", arg);
+  }
+
+  public static Void supportCompoundDrawablesTintList(@Nullable ColorStateList arg) {
+    return BaseDSL.attr("supportCompoundDrawablesTintList", arg);
+  }
+
+  public static Void supportCompoundDrawablesTintMode(PorterDuff.Mode arg) {
+    return BaseDSL.attr("supportCompoundDrawablesTintMode", arg);
   }
 
   public static Void supportImageTintList(@Nullable ColorStateList arg) {
@@ -734,7 +755,7 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
     return BaseDSL.attr("tabSelected", arg);
   }
 
-  public static Void textFuture(@NonNull Future arg) {
+  public static Void textFuture(@Nullable Future arg) {
     return BaseDSL.attr("textFuture", arg);
   }
 
@@ -796,6 +817,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
 
   public static Void titleOptional(boolean arg) {
     return BaseDSL.attr("titleOptional", arg);
+  }
+
+  public static Void titleTextColor(@NonNull ColorStateList arg) {
+    return BaseDSL.attr("titleTextColor", arg);
   }
 
   public static Void titleTextColor(int arg) {
@@ -880,16 +905,6 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
           return true;
         }
         break;
-      case "autoSizeTextTypeWithDefaults":
-        if (v instanceof AppCompatButton && arg instanceof Integer) {
-          ((AppCompatButton) v).setAutoSizeTextTypeWithDefaults((int) arg);
-          return true;
-        }
-        if (v instanceof AppCompatTextView && arg instanceof Integer) {
-          ((AppCompatTextView) v).setAutoSizeTextTypeWithDefaults((int) arg);
-          return true;
-        }
-        break;
       case "baselineAligned":
         if (v instanceof LinearLayoutCompat && arg instanceof Boolean) {
           ((LinearLayoutCompat) v).setBaselineAligned((boolean) arg);
@@ -919,6 +934,26 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
         }
         if (v instanceof ListMenuItemView && arg instanceof Boolean) {
           ((ListMenuItemView) v).setChecked((boolean) arg);
+          return true;
+        }
+        break;
+      case "collapseContentDescription":
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setCollapseContentDescription((int) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && (arg == null || arg instanceof CharSequence)) {
+          ((Toolbar) v).setCollapseContentDescription((CharSequence) arg);
+          return true;
+        }
+        break;
+      case "collapseIcon":
+        if (v instanceof Toolbar && (arg == null || arg instanceof Drawable)) {
+          ((Toolbar) v).setCollapseIcon((Drawable) arg);
+          return true;
+        }
+        if (v instanceof Toolbar && arg instanceof Integer) {
+          ((Toolbar) v).setCollapseIcon((int) arg);
           return true;
         }
         break;
@@ -991,12 +1026,6 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
       case "expandedFormat":
         if (v instanceof ActionMenuItemView && arg instanceof Boolean) {
           ((ActionMenuItemView) v).setExpandedFormat((boolean) arg);
-          return true;
-        }
-        break;
-      case "firstBaselineToTopHeight":
-        if (v instanceof AppCompatTextView && arg instanceof Integer) {
-          ((AppCompatTextView) v).setFirstBaselineToTopHeight((int) arg);
           return true;
         }
         break;
@@ -1096,12 +1125,6 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
           return true;
         }
         break;
-      case "lastBaselineToBottomHeight":
-        if (v instanceof AppCompatTextView && arg instanceof Integer) {
-          ((AppCompatTextView) v).setLastBaselineToBottomHeight((int) arg);
-          return true;
-        }
-        break;
       case "layoutInflater":
         if (v instanceof ViewStubCompat && arg instanceof LayoutInflater) {
           ((ViewStubCompat) v).setLayoutInflater((LayoutInflater) arg);
@@ -1111,12 +1134,6 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
       case "layoutResource":
         if (v instanceof ViewStubCompat && arg instanceof Integer) {
           ((ViewStubCompat) v).setLayoutResource((int) arg);
-          return true;
-        }
-        break;
-      case "lineHeight":
-        if (v instanceof AppCompatTextView && arg instanceof Integer) {
-          ((AppCompatTextView) v).setLineHeight((int) arg);
           return true;
         }
         break;
@@ -1497,6 +1514,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
         }
         break;
       case "subtitleTextColor":
+        if (v instanceof Toolbar && arg instanceof ColorStateList) {
+          ((Toolbar) v).setSubtitleTextColor((ColorStateList) arg);
+          return true;
+        }
         if (v instanceof Toolbar && arg instanceof Integer) {
           ((Toolbar) v).setSubtitleTextColor((int) arg);
           return true;
@@ -1523,6 +1544,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
           ((AppCompatButton) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
+        if (v instanceof AppCompatCheckBox && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatCheckBox) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
         if (v instanceof AppCompatEditText && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatEditText) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
@@ -1537,6 +1562,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
         }
         if (v instanceof AppCompatMultiAutoCompleteTextView && (arg == null || arg instanceof ColorStateList)) {
           ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintList((ColorStateList) arg);
+          return true;
+        }
+        if (v instanceof AppCompatRadioButton && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatRadioButton) v).setSupportBackgroundTintList((ColorStateList) arg);
           return true;
         }
         if (v instanceof AppCompatSpinner && (arg == null || arg instanceof ColorStateList)) {
@@ -1557,6 +1586,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
           ((AppCompatButton) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
+        if (v instanceof AppCompatCheckBox && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatCheckBox) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
         if (v instanceof AppCompatEditText && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatEditText) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
@@ -1571,6 +1604,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
         }
         if (v instanceof AppCompatMultiAutoCompleteTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatMultiAutoCompleteTextView) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        if (v instanceof AppCompatRadioButton && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatRadioButton) v).setSupportBackgroundTintMode((PorterDuff.Mode) arg);
           return true;
         }
         if (v instanceof AppCompatSpinner && (arg == null || arg instanceof PorterDuff.Mode)) {
@@ -1599,6 +1636,18 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
         }
         if (v instanceof AppCompatRadioButton && (arg == null || arg instanceof PorterDuff.Mode)) {
           ((AppCompatRadioButton) v).setSupportButtonTintMode((PorterDuff.Mode) arg);
+          return true;
+        }
+        break;
+      case "supportCompoundDrawablesTintList":
+        if (v instanceof AppCompatTextView && (arg == null || arg instanceof ColorStateList)) {
+          ((AppCompatTextView) v).setSupportCompoundDrawablesTintList((ColorStateList) arg);
+          return true;
+        }
+        break;
+      case "supportCompoundDrawablesTintMode":
+        if (v instanceof AppCompatTextView && (arg == null || arg instanceof PorterDuff.Mode)) {
+          ((AppCompatTextView) v).setSupportCompoundDrawablesTintMode((PorterDuff.Mode) arg);
           return true;
         }
         break;
@@ -1653,7 +1702,7 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
         }
         break;
       case "textFuture":
-        if (v instanceof AppCompatTextView && arg instanceof Future) {
+        if (v instanceof AppCompatTextView && (arg == null || arg instanceof Future)) {
           ((AppCompatTextView) v).setTextFuture((Future) arg);
           return true;
         }
@@ -1759,6 +1808,10 @@ public final class AppCompatv7DSL extends BaseAppCompat implements Anvil.Attribu
         }
         break;
       case "titleTextColor":
+        if (v instanceof Toolbar && arg instanceof ColorStateList) {
+          ((Toolbar) v).setTitleTextColor((ColorStateList) arg);
+          return true;
+        }
         if (v instanceof Toolbar && arg instanceof Integer) {
           ((Toolbar) v).setTitleTextColor((int) arg);
           return true;

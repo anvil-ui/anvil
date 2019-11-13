@@ -1,23 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'trikita.anvilgen'
+apply plugin: 'kotlin-android'
+apply plugin: 'trikita.module'
 
 android {
-	compileSdkVersion 27
-
-	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_7
-		targetCompatibility JavaVersion.VERSION_1_7
-	}
-
-	defaultConfig {
-		minSdkVersion 15
-		targetSdkVersion 27
-	}
-
-	lintOptions {
-		abortOnError false
-	}
-
 	flavorDimensions "api"
 	productFlavors {
 		sdk15 {
@@ -30,16 +15,72 @@ android {
 			minSdkVersion 21
 		}
 	}
-
-	testOptions {
-		unitTests.returnDefaultValues = true
-	}
 }
 
-apply from: 'attr-quirks.gradle'
+def nop = { attr -> null }
+
 anvilgen {
 	type = 'sdk'
-	quirks = QUIRKS
+	quirks = [
+			// This requires lots of type checks, skipping this factory method for now
+			"android.widget.AutoCompleteTextView" : [
+					"setAdapter": nop
+			],
+
+			// Block setAdapter(ListAdapter) and setAdapter(SpinnerAdapter), leave only parent setAdapter(Adapter) instead
+			"android.widget.AbsListView" : [
+					"setAdapter": nop
+			],
+			"android.widget.ListView" : [
+					"setAdapter": nop
+			],
+			"android.widget.GridView" : [
+					"setAdapter": nop
+			],
+			"android.widget.AbsSpinner" : [
+					"setAdapter": nop
+			],
+			"android.widget.Spinner" : [
+					"setAdapter": nop
+			],
+			"android.widget.ExpandableListView" : [
+					"setAdapter:android.widget.ListAdapter": nop
+			],
+
+			// Exception must be checked in this attribute setter
+			"android.widget.TextView": [
+					"setText:java.lang.CharSequence": nop,
+					"setTextSize": nop, // broken: uses "sp" unit by default, fixed in BaseDSL
+					"setInputExtras": { attr ->
+						attr.code.add(""
+								+ "try {\n"
+								+ "	if (v instanceof android.widget.TextView && arg instanceof Integer)\n"
+								+ "		((android.widget.TextView) v).setInputExtras((int) arg);\n"
+								+ "} catch (org.xmlpull.v1.XmlPullParserException e) {\n"
+								+ "	e.printStackTrace();\n"
+								+ "} catch (java.io.IOException e) {\n"
+								+ "	e.printStackTrace();\n"
+								+ "}\n")
+						return attr
+					}
+			],
+
+			"android.widget.Switch": [
+					"__viewAlias": "SwitchView"
+			],
+
+			// This will remove the whole builder, so no factory method will be generated
+			"android.renderscript.RSSurfaceView": [
+					"__viewAlias": false,
+					"setRenderScriptGL": nop,
+			],
+
+			// This will remove the whole builder, so no factory method will be generated
+			"android.renderscript.RSTextureView": [
+					"__viewAlias": false,
+					"setRenderScriptGL": nop,
+			],
+	]
 }
 
 dependencies {
@@ -47,116 +88,4 @@ dependencies {
 
 	testImplementation 'junit:junit:4.12'
 	testImplementation "org.mockito:mockito-core:$mockito_version"
-}
-
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
-
-def fixPom(pom) {
-	pom.withXml {
-		def root = asNode()
-		root.appendNode('description', POM_DESCRIPTION)
-		root.appendNode('name', POM_NAME)
-		root.appendNode('url', POM_URL)
-		def scm = root.appendNode('scm')
-		scm.appendNode('url', POM_SCM_URL)
-		scm.appendNode('connection', POM_SCM_CONNECTION)
-		scm.appendNode('developerConnection', POM_SCM_DEV_CONNECTION)
-		def developer = root.appendNode('developers').appendNode('developer')
-		developer.appendNode('id', POM_DEVELOPER_ID)
-		developer.appendNode('name', POM_DEVELOPER_NAME)
-		developer.appendNode('email', POM_DEVELOPER_EMAIL)
-		def license = root.appendNode('licenses').appendNode('license')
-		license.appendNode('name', POM_LICENCE_NAME)
-		license.appendNode('url', POM_LICENCE_URL)
-		license.appendNode('distribution', POM_LICENCE_DIST)
-	}
-}
-
-publishing {
-	publications {
-		sdk15(MavenPublication) {
-			groupId project.group
-			version project.version
-			artifactId POM_ARTIFACT_SDK15_ID
-			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK15_ID-release.aar"
-			artifact sourcesJar
-			artifact javadocJar
-			fixPom(pom)
-		}
-		sdk19(MavenPublication) {
-			groupId project.group
-			version project.version
-			artifactId POM_ARTIFACT_SDK19_ID
-			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK19_ID-release.aar"
-			artifact sourcesJar
-			artifact javadocJar
-			fixPom(pom)
-		}
-		sdk21(MavenPublication) {
-			groupId project.group
-			version project.version
-			artifactId POM_ARTIFACT_SDK21_ID
-			artifact "$buildDir/outputs/aar/$POM_ARTIFACT_SDK21_ID-release.aar"
-			artifact sourcesJar
-			artifact javadocJar
-			fixPom(pom)
-		}
-	}
-}
-
-bintray {
-	user = project.hasProperty('bintrayUser') ? bintrayUser : ''
-	key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
-	publications = ['sdk15', 'sdk19', 'sdk21']
-	pkg {
-		repo = 'maven'
-		name = POM_PACKAGE_NAME
-		websiteUrl = POM_URL
-		vcsUrl = POM_SCM_URL
-		licenses = [POM_LICENCE_SHORT_NAME]
-		publish = true
-		version {
-			name = project.version
-			gpg {
-				sign = true
-				passphrase = project.hasProperty('bintrayGpgPassword') ? bintrayGpgPassword : ''
-			}
-			mavenCentralSync {
-				sync = true
-				user = project.hasProperty('bintrayOssUser') ? bintrayOssUser : ''
-				password = project.hasProperty('bintrayOssPassword') ? bintrayOssPassword : ''
-				close = '1'
-			}
-		}
-	}
-}
-
-task sourcesJar(type: Jar) {
-	from android.sourceSets.main.java.srcDirs
-	classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-	source = android.sourceSets.main.java.srcDirs
-	classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier = 'javadoc'
-	from javadoc.destinationDir
-}
-
-artifacts {
-	archives javadocJar
-	archives sourcesJar
-}
-
-android.libraryVariants.all { variant ->
-	task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-		description "Generates Javadoc for $variant.name."
-		source = variant.getCompileClasspath(null).getAsFileTree()
-		ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-		classpath = files(variant.getCompileClasspath(null)) + files(ext.androidJar)
-	}
 }

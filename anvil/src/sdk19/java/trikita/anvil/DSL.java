@@ -4179,7 +4179,8 @@ public final class DSL extends BaseDSL implements Anvil.AttributeSetter {
       case "onCreateContextMenu":
         if (arg != null) {
           v.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-            public void onCreateContextMenu(ContextMenu a0, View a1, ContextMenu.ContextMenuInfo a2) {
+            public void onCreateContextMenu(ContextMenu a0, View a1,
+                ContextMenu.ContextMenuInfo a2) {
               ((View.OnCreateContextMenuListener) arg).onCreateContextMenu(a0, a1, a2);
               Anvil.render();
             }

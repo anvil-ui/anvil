@@ -1,143 +1,207 @@
 package trikita.anvilgen
 
 import com.squareup.javapoet.ClassName
-import groovy.lang.Closure
-import org.gradle.api.Plugin
-import org.gradle.api.Project
+import org.gradle.api.*
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.artifacts.transform.*
+import org.gradle.api.artifacts.type.ArtifactTypeDefinition
+import org.gradle.api.file.FileSystemLocation
+import org.gradle.api.file.FileType
+import org.gradle.api.internal.artifacts.ArtifactAttributes.ARTIFACT_FORMAT
+import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
+import org.gradle.kotlin.dsl.*
+import org.gradle.work.ChangeType
+import org.gradle.work.InputChanges
 import java.io.File
 import java.util.*
+import java.util.zip.ZipFile
+import javax.inject.Inject
 
 class AnvilGenPlugin : Plugin<Project> {
 
-    override fun apply(project: Project) {
-        // Add the 'anvilgen' extension object
-        project.extensions.create("anvilgen", AnvilGenPluginExtension::class.java)
+    override fun apply(project: Project) = with(project) {
+        val extension = extensions.create<AnvilGenPluginExtension>("anvilgen")
 
-        project.afterEvaluate { generateTasks(it) }
-    }
-
-    fun generateTasks(project: Project) {
-        val extension = project.extensions.getByName("anvilgen") as AnvilGenPluginExtension
-
-        val type = extension.type
-        if (type == "sdk") {
-            // Most practical API versions according to Android Dashboards:
-            // - newer than API level 15 (ICS 4.0.3, 97.3% of devices)
-            // - newer than API level 19 (KK 4.0.3, 72.7% of devices)
-            // - newer than API level 21 (LP 5.0, 38.4% of devices)
-            project.task(mapOf("type" to DSLGeneratorTask::class.java), "generateSDK21DSL", getSDKClosure(project, 21))
-            project.task(mapOf("type" to DSLGeneratorTask::class.java), "generateSDK19DSL", getSDKClosure(project, 19))
-            project.task(mapOf("type" to DSLGeneratorTask::class.java), "generateSDK15DSL", getSDKClosure(project, 15))
-
-            project.task(
-                mapOf("dependsOn" to arrayOf("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")),
-                "generateSDKDSL"
-            )
-        } else {
-            val supportClosure = getSupportClosure(
-                project, extension.camelCaseName, extension.moduleName,
-                extension.libraries, extension.version, extension.superclass, extension.dependencies
-            )
-            project.task(
-                mapOf("type" to DSLGeneratorTask::class.java, "dependsOn" to listOf("copyDependenciesRelease")),
-                "generate${extension.camelCaseName}DSL",
-                supportClosure
-            )
-        }
-    }
-
-    fun getSDKClosure(project: Project, apiLevel: Int): Closure<Any> {
-        return object : Closure<Any>(this) {
-            init {
-                maximumNumberOfParameters = 1
+        val configuration = configurations.create("anvilgen") {
+            description = "Artifacts that should be processed by Anvil code generator"
+            isTransitive = true
+            isCanBeResolved = true
+            isCanBeConsumed = false
+            attributes {
+                attribute(ARTIFACT_FORMAT, ArtifactTypeDefinition.JAR_TYPE)
             }
+        }
 
-            override fun call(arguments: Any?): Any? {
-                (arguments as DSLGeneratorTask).apply {
-                    taskName = "generateSDK${apiLevel}DSL"
-                    javadocContains = "It contains views and their setters from API level $apiLevel"
-                    outputDirectory = "sdk$apiLevel"
-                    jarFiles = listOf(getAndroidJar(project, apiLevel))
-                    nullabilitySourceFiles = listOf(getAndroidJar(project, 28))
-                    dependencies = listOf()
-                    outputClassName = "DSL"
-                    packageName = "trikita.anvil"
-                    superclass = ClassName.get("trikita.anvil", "BaseDSL")
+        dependencies.registerTransform(AarToJarTransform::class.java) {
+            from.attribute(ARTIFACT_FORMAT, "aar")
+            to.attribute(ARTIFACT_FORMAT, ArtifactTypeDefinition.JAR_TYPE)
+        }
+
+        // "implementation" extends from "api", so it's also covered
+        configurations["api"].extendsFrom(configuration)
+
+        afterEvaluate { generateTasks(extension, configuration) }
+    }
+
+    fun Project.generateTasks(extension: AnvilGenPluginExtension, configuration: Configuration) {
+        when {
+            extension.isSdk -> {
+                createDslGeneratorTask("SDK21", getSdkConfiguration(21))
+                createDslGeneratorTask("SDK19", getSdkConfiguration(19))
+                createDslGeneratorTask("SDK15", getSdkConfiguration(15))
+
+                project.tasks.register<Task>("generateSDKDSL") {
+                    dependsOn("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")
                 }
-                return null
             }
+            extension.isSupport -> {
+                createDslGeneratorTask(extension.camelCaseName,
+                    // temporary toggle for supporting both array- and configuration-based libraries declaration
+                    if(extension.libraries.isNotEmpty()) {
+                        getSupportConfiguration(
+                            extension.camelCaseName, extension.moduleName,
+                            extension.superclass, extension.libraries, extension.dependencies
+                        )
+                    } else {
+                        getSupportConfiguration(
+                            extension.camelCaseName, extension.moduleName,
+                            extension.superclass, configuration
+                        )
+                    }
+                )
+            }
+            else -> error("Unknown generator type: \"${extension.type}\"")
         }
     }
 
-    fun getSupportClosure(
-        project: Project,
+    private fun Project.createDslGeneratorTask(dslName: String, configuration: DSLGeneratorTask.() -> Unit) =
+        tasks.register("generate${dslName}DSL", configuration)
+
+    private fun getSdkConfiguration(apiLevel: Int): DSLGeneratorTask.() -> Unit = {
+        javadocContains = "It contains views and their setters from API level $apiLevel"
+        outputDirectory = "sdk$apiLevel"
+        jarFiles = listOf(project.getAndroidJar(apiLevel))
+        nullabilitySourceFiles = listOf(project.getAndroidJar(28))
+        isSourceSdk = true
+        outputClassName = "DSL"
+        packageName = "trikita.anvil"
+        superclass = ClassName.get("trikita.anvil", "BaseDSL")
+    }
+
+    private fun Project.getSupportConfiguration(
         camelCaseName: String,
         libraryName: String,
-        libraries: Map<String, String?>,
-        version: String,
         superclassName: String,
-        rawDeps: Map<String, String?>
-    ): Closure<Any> {
-        return object : Closure<Any>(this) {
-            init {
-                maximumNumberOfParameters = 1
+        configuration: Configuration
+    ) = getSupportConfiguration(
+        camelCaseName,
+        libraryName,
+        superclassName,
+        configuration,
+        listOf(),
+        listOf(getAndroidJar(28))
+    )
+
+    private fun Project.getSupportConfiguration(
+        camelCaseName: String,
+        libraryName: String,
+        superclassName: String,
+        libraries: Map<String, String>,
+        rawDeps: Map<String, String>
+    ) = getSupportConfiguration(
+        camelCaseName,
+        libraryName,
+        superclassName,
+        null,
+        libraries.map { getDependencyJar(it.key, it.value) },
+        rawDeps.map { getDependencyJar(it.key, it.value) } + getAndroidJar(28)
+    )
+
+    private fun getSupportConfiguration(
+        camelCaseName: String,
+        libraryName: String,
+        superclassName: String,
+        configuration: Configuration?,
+        libFiles: List<File> = listOf(),
+        depFiles: List<File> = listOf()
+    ): DSLGeneratorTask.() -> Unit = {
+        if(configuration == null) {
+            dependsOn("copyDependenciesRelease")
+        }
+
+        this.configuration = configuration
+        javadocContains = "It contains views and their setters from the library $libraryName"
+        outputDirectory = "main"
+        jarFiles = libFiles
+        nullabilitySourceFiles = libFiles
+        dependencies = depFiles
+        outputClassName = "${camelCaseName}DSL"
+        packageName = "trikita.anvil." + dashToDot(libraryName)
+
+        if (superclassName.isNotEmpty()) {
+            superclass = ClassName.get(packageName, superclassName)
+        }
+    }
+
+    private fun Project.getAndroidJar(api: Int): File {
+        val localProperties = File(rootDir, "local.properties")
+        val sdkDir = if (localProperties.exists()) {
+            loadPropertiesFromFile(localProperties).getProperty("sdk.dir")
+        } else {
+            System.getenv("ANDROID_HOME")
+        }
+        val jarFile = File("$sdkDir/platforms/android-$api/android.jar")
+        if(!jarFile.exists()) error("Jar file for SDK $api is not found at ${jarFile.absolutePath}")
+        return jarFile
+    }
+
+    private fun Project.getDependencyJar(libraryName: String, version: String): File =
+        File(buildDir.absoluteFile, "dependencies/release/$libraryName-$version.jar")
+}
+
+@Suppress("UnstableApiUsage")
+abstract class AarToJarTransform : TransformAction<TransformParameters.None> {
+    @get:Inject
+    abstract val inputChanges: InputChanges
+
+    @get:InputArtifact
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val input: Provider<FileSystemLocation>
+
+    override fun transform(outputs: TransformOutputs) {
+        inputChanges.getFileChanges(input).forEach { change ->
+            val changedFile = change.file
+            val outFile = outputs.file("${changedFile.nameWithoutExtension}.jar")
+            if (change.fileType != FileType.FILE) {
+                return@forEach
             }
-
-            override fun call(arguments: Any?): Any? {
-                (arguments as DSLGeneratorTask).apply {
-                    taskName = "generate${camelCaseName}DSL"
-                    javadocContains = "It contains views and their setters from the library $libraryName"
-                    outputDirectory = "main"
-                    jarFiles = libraries.map { getSupportJar(project, it.key, it.value ?: version) }
-                    nullabilitySourceFiles = libraries.map {  getSupportJar(project, it.key, it.value ?: version) }
-                    dependencies = getSupportDependencies(project, version, rawDeps)
-                    outputClassName = "${camelCaseName}DSL"
-                    packageName = "trikita.anvil." + dashToDot(libraryName)
-
-                    if (superclassName.isNotEmpty()) {
-                        superclass = ClassName.get(packageName, superclassName)
+            when (change.changeType) {
+                ChangeType.ADDED, ChangeType.MODIFIED -> {
+                    outFile.parentFile.mkdirs()
+                    ZipFile(changedFile).use { zipFile ->
+                        zipFile.entries()
+                            .toList()
+                            .first { it.name == "classes.jar" }
+                            .let(zipFile::getInputStream)
+                            .use { input ->
+                                outFile.outputStream().use { output ->
+                                    input.copyTo(output)
+                                }
+                            }
                     }
                 }
-                return null
+                ChangeType.REMOVED -> {
+                    outFile.delete()
+                }
             }
         }
     }
-
-    fun dashToDot(libraryName: String?): String {
-        if (libraryName == null || libraryName.isBlank()) {
-            return ""
-        }
-        return libraryName.replace('-', '.')
-    }
-
-    fun getSupportDependencies(project: Project, version: String, rawDeps: Map<String, String?>): List<File> {
-        val list = rawDeps.map { entry ->
-            getDependencyJar(project, entry.key, entry.value ?: version)
-        }.toMutableList()
-
-        list.add(getAndroidJar(project, 23))
-        return list
-    }
-
-    fun getAndroidJar(project: Project, api: Int): File {
-        val rootDir = project.rootDir
-        val localProperties = File(rootDir, "local.properties")
-        val sdkDir: String
-        if (localProperties.exists()) {
-            val properties = Properties()
-            localProperties.inputStream().use { properties.load(it) }
-            sdkDir = properties.getProperty("sdk.dir")
-        } else {
-            sdkDir = System.getenv("ANDROID_HOME")
-        }
-        return File("$sdkDir/platforms/android-$api/android.jar")
-    }
-
-    fun getSupportJar(project: Project, libraryName: String, version: String): File {
-        return File(project.buildDir.absoluteFile, "dependencies/release/$libraryName-$version.jar")
-    }
-
-    fun getDependencyJar(project: Project, libraryName: String, version: String): File {
-        return File(project.buildDir.absoluteFile, "dependencies/release/$libraryName-$version.jar")
-    }
 }
+
+fun loadPropertiesFromFile(file: File): Properties = Properties().apply {
+    file.inputStream().use { load(it) }
+}
+
+fun dashToDot(libraryName: String?): String = libraryName?.replace('-', '.') ?: ""
