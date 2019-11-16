@@ -2,6 +2,9 @@ package trikita.anvil;
 
 import org.junit.Test;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 import static org.junit.Assert.assertEquals;
 import static trikita.anvil.BaseDSL.*;
 
@@ -25,24 +28,24 @@ public class IncrementalRenderTest extends Utils {
     }
 
     @Test
-    public void testDynamicAttributeRenderedLazily() {
+    public void testDynamicAttributeRenderedLazily() throws ExecutionException {
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
                 o(v(MockLayout.class), attr("text", fooValue));
             }
         });
         assertEquals(1, (int) changedAttrs.get("text"));
-        Anvil.render();
+        renderView();
         assertEquals(1, (int) changedAttrs.get("text"));
         fooValue = "b";
-        Anvil.render();
+        renderView();
         assertEquals(2, (int) changedAttrs.get("text"));
-        Anvil.render();
+        renderView();
         assertEquals(2, (int) changedAttrs.get("text"));
     }
 
     @Test
-    public void testDynamicViewRenderedLazily() {
+    public void testDynamicViewRenderedLazily() throws ExecutionException {
         Anvil.mount(container, new Anvil.Renderable() {
             public void view() {
                 o(v(MockLayout.class),
@@ -55,19 +58,19 @@ public class IncrementalRenderTest extends Utils {
         MockLayout layout = (MockLayout) container.getChildAt(0);
         assertEquals(2, layout.getChildCount());
         assertEquals(1, (int) createdViews.get(MockView.class));
-        Anvil.render();
+        renderView();
         assertEquals(1, (int) createdViews.get(MockView.class));
         showView = false;
-        Anvil.render();
+        renderView();
         assertEquals(1, layout.getChildCount());
         assertEquals(1, (int) createdViews.get(MockView.class));
-        Anvil.render();
+        renderView();
         assertEquals(1, (int) createdViews.get(MockView.class));
         showView = true;
-        Anvil.render();
+        renderView();
         assertEquals(2, layout.getChildCount());
         assertEquals(2, (int) createdViews.get(MockView.class));
-        Anvil.render();
+        renderView();
         assertEquals(2, (int) createdViews.get(MockView.class));
     }
 
@@ -75,7 +78,7 @@ public class IncrementalRenderTest extends Utils {
     private String secondMountValue = "bar";
 
     @Test
-    public void testRenderUpdatesAllMounts() {
+    public void testRenderUpdatesAllMounts() throws ExecutionException {
         MockLayout rootA = new MockLayout(getContext());
         MockLayout rootB = new MockLayout(getContext());
         Anvil.mount(rootA, new Anvil.Renderable() {
@@ -93,9 +96,23 @@ public class IncrementalRenderTest extends Utils {
 
         firstMountValue = "baz";
         secondMountValue = "qux";
-        Anvil.render();
+        renderView();
 
         assertEquals("baz", rootA.getText());
         assertEquals("qux", rootB.getTag());
+    }
+
+    private void renderView() throws ExecutionException {
+        Future<?> future = Anvil.render();
+        waitTaskToFinish(future);
+    }
+
+    private void waitTaskToFinish(Future<?> future) throws ExecutionException {
+        try {
+            future.get();
+        } catch (ExecutionException executionException) {
+            throw executionException;
+        } catch (Exception e) {
+        }
     }
 }

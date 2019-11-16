@@ -2,6 +2,9 @@ package trikita.anvil;
 
 import org.junit.Test;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 import static trikita.anvil.BaseDSL.v;
 import static trikita.anvil.DSL.id;
 import static trikita.anvil.DSL.tag;
@@ -12,7 +15,7 @@ public class BenchmarkTest extends Utils {
     private int mode;
 
     @Test
-    public void testRenderBenchmark() {
+    public void testRenderBenchmark() throws ExecutionException {
         long start;
 
         Anvil.Renderable r = new Anvil.Renderable() {
@@ -34,7 +37,7 @@ public class BenchmarkTest extends Utils {
         Anvil.mount(container, r);
         start = System.currentTimeMillis();
         for (int i = 0; i < N; i++) {
-            Anvil.render();
+            renderView(i);
         }
         System.out.println("render/no-changes: " + (System.currentTimeMillis() - start)*1000/N + "us");
         Anvil.unmount(container, true);
@@ -43,7 +46,7 @@ public class BenchmarkTest extends Utils {
         Anvil.mount(container, r);
         start = System.currentTimeMillis();
         for (int i = 0; i < N; i++) {
-            Anvil.render();
+            renderView(i);
         }
         System.out.println("render/small-changes: " + (System.currentTimeMillis() - start)*1000/N +"us");
         Anvil.unmount(container, true);
@@ -52,7 +55,7 @@ public class BenchmarkTest extends Utils {
         Anvil.mount(container, r);
         start = System.currentTimeMillis();
         for (int i = 0; i < N; i++) {
-            Anvil.render();
+            renderView(i);
         }
         System.out.println("render/big-changes: " + (System.currentTimeMillis() - start)*1000/N+"us");
     }
@@ -83,5 +86,20 @@ public class BenchmarkTest extends Utils {
                 tag("item"+i);
             }
         });
+    }
+
+    private void renderView(int i) throws ExecutionException {
+        Future<?> future = Anvil.render();
+        if (i == N-1)
+            waitTaskToFinish(future);
+    }
+
+    private void waitTaskToFinish(Future<?> future) throws ExecutionException {
+        try {
+            future.get();
+        } catch (ExecutionException executionException) {
+            throw executionException;
+        } catch (Exception e) {
+        }
     }
 }
