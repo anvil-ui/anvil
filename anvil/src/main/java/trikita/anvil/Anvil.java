@@ -10,15 +10,7 @@ import android.view.ViewGroup;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.ref.WeakReference;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -33,7 +25,7 @@ import java.util.concurrent.Future;
  */
 public final class Anvil {
 
-    private final static Map<View, Mount> mounts = new WeakHashMap<>();
+    private final static Map<View, Mount> mounts = Collections.synchronizedMap(new WeakHashMap<View, Mount>());
     private static Mount currentMount = null;
 
     private static Handler anvilUIHandler = new Handler(Looper.getMainLooper());
@@ -128,9 +120,11 @@ public final class Anvil {
         return new Runnable() {
             @Override
             public void run() {
-                Set<Mount> set = new HashSet<>(mounts.values());
-                for (Mount m : set) {
-                    render(m);
+                synchronized (mounts) {
+                    Set<Mount> set = new HashSet<>(mounts.values());
+                    for (Mount m : set) {
+                        render(m);
+                    }
                 }
             }
         };
@@ -144,10 +138,12 @@ public final class Anvil {
      * @param r a Renderable to mount into a View
      */
     public static <T extends View> T mount(T v, Renderable r) {
-        Mount m = new Mount(v, r);
-        mounts.put(v, m);
-        render(v);
-        return v;
+        synchronized (mounts) {
+            Mount m = new Mount(v, r);
+            mounts.put(v, m);
+            render(v);
+            return v;
+        }
     }
 
     /**
@@ -160,18 +156,20 @@ public final class Anvil {
     }
 
     public static void unmount(View v, boolean removeChildren) {
-        Mount m = mounts.get(v);
-        if (m != null) {
-            mounts.remove(v);
-            if (v instanceof ViewGroup) {
-                ViewGroup viewGroup = (ViewGroup) v;
+        synchronized (mounts) {
+            Mount m = mounts.get(v);
+            if (m != null) {
+                mounts.remove(v);
+                if (v instanceof ViewGroup) {
+                    ViewGroup viewGroup = (ViewGroup) v;
 
-                int childCount = viewGroup.getChildCount();
-                for (int i = 0; i < childCount; i++) {
-                    unmount(viewGroup.getChildAt(i));
-                }
-                if (removeChildren) {
-                    viewGroup.removeViews(0, childCount);
+                    int childCount = viewGroup.getChildCount();
+                    for (int i = 0; i < childCount; i++) {
+                        unmount(viewGroup.getChildAt(i));
+                    }
+                    if (removeChildren) {
+                        viewGroup.removeViews(0, childCount);
+                    }
                 }
             }
         }
@@ -334,12 +332,14 @@ public final class Anvil {
             void end() {
                 int index = indices.peek();
                 View v = views.peek();
-                if (v instanceof ViewGroup &&
-                        get(v, "_layoutId") == null &&
-                        (mounts.get(v) == null || mounts.get(v) == Mount.this)) {
-                    ViewGroup vg = (ViewGroup) v;
-                    if (index < vg.getChildCount()) {
-                        removeNonAnvilViews(vg, index, vg.getChildCount() - index);
+                synchronized (mounts) {
+                    if (v instanceof ViewGroup &&
+                            get(v, "_layoutId") == null &&
+                            (mounts.get(v) == null || mounts.get(v) == Mount.this)) {
+                        ViewGroup vg = (ViewGroup) v;
+                        if (index < vg.getChildCount()) {
+                            removeNonAnvilViews(vg, index, vg.getChildCount() - index);
+                        }
                     }
                 }
                 indices.pop();
