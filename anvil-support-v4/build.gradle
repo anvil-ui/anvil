@@ -14,6 +14,10 @@ anvilgen {
 	camelCaseName = "SupportCoreUi"
 
 	quirks = [
+		// Deprecated view; framework nas android.widget.Space since API 14
+		'androidx.legacy.widget.Space' : [
+			'__viewAlias': false,
+		],
 		'androidx.core.widget.NestedScrollView' : [
 			'setOnScrollChangeListener': false
 		]

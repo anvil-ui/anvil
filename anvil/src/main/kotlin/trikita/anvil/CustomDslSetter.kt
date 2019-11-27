@@ -73,6 +73,7 @@ fun ViewScope.align(verb: Int, subject: Int) = attr("align", verb to subject)
 
 fun ViewScope.anim(animator: Animator, trigger: Boolean) = attr("anim", AnimatorPair(animator, trigger))
 
+fun TextViewScope.textSize(sizePx: Float) = attr("textSize", sizePx)
 fun TextViewScope.typeface(assetPath: String) = attr("typeface", assetPath)
 fun TextViewScope.typeface(assetPath: String?, style: Int) = attr("typeface", assetPath to style)
 

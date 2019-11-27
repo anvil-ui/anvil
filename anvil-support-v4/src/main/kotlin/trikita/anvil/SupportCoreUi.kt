@@ -1,4 +1,4 @@
-@file:Suppress("DEPRECATION", "UNCHECKED_CAST")
+@file:Suppress("DEPRECATION", "UNCHECKED_CAST", "MemberVisibilityCanBePrivate", "unused")
 
 package trikita.anvil
 
@@ -8,7 +8,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.core.widget.NestedScrollView
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.legacy.widget.Space
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.PagerAdapter
@@ -67,14 +66,6 @@ abstract class DrawerLayoutScope : ViewGroupScope() {
   fun statusBarBackground(arg: Drawable?): Unit = attr("statusBarBackground", arg)
   fun statusBarBackgroundColor(arg: Int): Unit = attr("statusBarBackgroundColor", arg)
   companion object : DrawerLayoutScope() {
-    init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
-  }
-}
-
-fun space(configure: SpaceScope.() -> Unit = {}) = v<Space>(configure.bind(SpaceScope))
-abstract class SpaceScope : ViewScope() {
-  companion object : SpaceScope() {
     init {
       Anvil.registerAttributeSetter(SupportCoreUiSetter)}
   }

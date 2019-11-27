@@ -1,7 +1,12 @@
 package trikita.anvil
 
+import android.app.Activity
+import android.app.Fragment
+import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
+import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.annotation.IdRes
@@ -60,3 +65,33 @@ fun withId(@IdRes id: Int, r: () -> Unit): View {
 
 val isPortrait: Boolean
     get() = r.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+
+fun renderable(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    r: () -> Unit
+): View =
+    object : RenderableView(context, attrs, defStyleAttr) {
+        override fun view() {
+            r()
+        }
+    }
+
+fun Activity.renderable(
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    r: () -> Unit
+): View = renderable(this, attrs, defStyleAttr, r)
+
+fun Activity.renderableContentView(
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    r: () -> Unit
+): View = renderable(attrs, defStyleAttr, r).also { setContentView(it) }
+
+fun Fragment.renderable(
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    r: () -> Unit
+): View = renderable(if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) context else activity, attrs, defStyleAttr, r)

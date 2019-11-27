@@ -1,7 +1,6 @@
 package trikita.anvil
 
 import android.view.View
-import trikita.anvil.dsl.init
 import kotlin.test.*
 
 

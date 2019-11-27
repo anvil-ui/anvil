@@ -1,4 +1,4 @@
-@file:Suppress("DEPRECATION", "UNCHECKED_CAST")
+@file:Suppress("DEPRECATION", "UNCHECKED_CAST", "MemberVisibilityCanBePrivate", "unused")
 
 package trikita.anvil
 

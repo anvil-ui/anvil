@@ -237,7 +237,7 @@ open class DSLGeneratorTask : DefaultTask() {
         fileSpec
             .addType(setterObject)
             .addAnnotation(AnnotationSpec.builder(Suppress::class)
-                .addMember("\"DEPRECATION\", \"UNCHECKED_CAST\"")
+                .addMember("\"DEPRECATION\", \"UNCHECKED_CAST\", \"MemberVisibilityCanBePrivate\", \"unused\"")
                 .useSiteTarget(AnnotationSpec.UseSiteTarget.FILE)
                 .build())
             .build()

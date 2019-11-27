@@ -1,5 +1,6 @@
 build/
 .gradle/
+/captures
 local.properties
 .env
 *.class
