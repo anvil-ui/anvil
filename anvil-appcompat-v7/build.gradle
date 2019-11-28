@@ -4,7 +4,7 @@ apply plugin: 'trikita.module'
 
 android {
 	defaultConfig {
-		missingDimensionStrategy 'api', 'sdk21'
+		missingDimensionStrategy 'api', 'sdk15'
 	}
 }
 
