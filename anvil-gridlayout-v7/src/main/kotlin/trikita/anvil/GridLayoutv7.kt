@@ -14,7 +14,7 @@ import kotlin.Unit
 
 fun gridLayout(configure: GridLayoutScope.() -> Unit = {}) =
     v<GridLayout>(configure.bind(GridLayoutScope))
-abstract class GridLayoutScope : ViewGroupScope() {
+abstract class GridLayoutScope {
   fun alignmentMode(arg: Int): Unit = attr("alignmentMode", arg)
   fun columnCount(arg: Int): Unit = attr("columnCount", arg)
   fun columnOrderPreserved(arg: Boolean): Unit = attr("columnOrderPreserved", arg)
@@ -25,7 +25,8 @@ abstract class GridLayoutScope : ViewGroupScope() {
   fun useDefaultMargins(arg: Boolean): Unit = attr("useDefaultMargins", arg)
   companion object : GridLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(GridLayoutv7Setter)}
+      Anvil.registerAttributeSetter(GridLayoutv7Setter)
+    }
   }
 }
 
@@ -37,10 +38,6 @@ abstract class GridLayoutScope : ViewGroupScope() {
  * Please, don't edit it manually unless for debugging.
  */
 object GridLayoutv7Setter : Anvil.AttributeSetter<Any?> {
-  init {
-    Anvil.registerAttributeSetter(this)
-  }
-
   override fun set(
     v: View,
     name: String,

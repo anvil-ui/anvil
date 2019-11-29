@@ -57,20 +57,22 @@ import kotlin.Unit
 
 fun appBarLayout(configure: AppBarLayoutScope.() -> Unit = {}) =
     v<AppBarLayout>(configure.bind(AppBarLayoutScope))
-abstract class AppBarLayoutScope : LinearLayoutScope() {
+abstract class AppBarLayoutScope {
   fun expanded(arg: Boolean): Unit = attr("expanded", arg)
   fun liftOnScroll(arg: Boolean): Unit = attr("liftOnScroll", arg)
   fun liftable(arg: Boolean): Unit = attr("liftable", arg)
   fun lifted(arg: Boolean): Unit = attr("lifted", arg)
   companion object : AppBarLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun collapsingToolbarLayout(configure: CollapsingToolbarLayoutScope.() -> Unit = {}) =
     v<CollapsingToolbarLayout>(configure.bind(CollapsingToolbarLayoutScope))
-abstract class CollapsingToolbarLayoutScope : FrameLayoutScope() {
+abstract class CollapsingToolbarLayoutScope {
   fun collapsedTitleGravity(arg: Int): Unit = attr("collapsedTitleGravity", arg)
   fun collapsedTitleTextAppearance(arg: Int): Unit = attr("collapsedTitleTextAppearance", arg)
   fun collapsedTitleTextColor(arg: ColorStateList): Unit = attr("collapsedTitleTextColor", arg)
@@ -98,13 +100,15 @@ abstract class CollapsingToolbarLayoutScope : FrameLayoutScope() {
   fun titleEnabled(arg: Boolean): Unit = attr("titleEnabled", arg)
   companion object : CollapsingToolbarLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun bottomAppBar(configure: BottomAppBarScope.() -> Unit = {}) =
     v<BottomAppBar>(configure.bind(BottomAppBarScope))
-abstract class BottomAppBarScope : ToolbarScope() {
+abstract class BottomAppBarScope {
   fun backgroundTint(arg: ColorStateList?): Unit = attr("backgroundTint", arg)
   fun cradleVerticalOffset(arg: Float): Unit = attr("cradleVerticalOffset", arg)
   fun fabAlignmentMode(arg: Int): Unit = attr("fabAlignmentMode", arg)
@@ -113,31 +117,37 @@ abstract class BottomAppBarScope : ToolbarScope() {
   fun hideOnScroll(arg: Boolean): Unit = attr("hideOnScroll", arg)
   companion object : BottomAppBarScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun bottomNavigationItemView(configure: BottomNavigationItemViewScope.() -> Unit = {}) =
     v<BottomNavigationItemView>(configure.bind(BottomNavigationItemViewScope))
-abstract class BottomNavigationItemViewScope : FrameLayoutScope() {
+abstract class BottomNavigationItemViewScope {
   companion object : BottomNavigationItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun bottomNavigationMenuView(configure: BottomNavigationMenuViewScope.() -> Unit = {}) =
     v<BottomNavigationMenuView>(configure.bind(BottomNavigationMenuViewScope))
-abstract class BottomNavigationMenuViewScope : ViewGroupScope() {
+abstract class BottomNavigationMenuViewScope {
   companion object : BottomNavigationMenuViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun bottomNavigationView(configure: BottomNavigationViewScope.() -> Unit = {}) =
     v<BottomNavigationView>(configure.bind(BottomNavigationViewScope))
-abstract class BottomNavigationViewScope : FrameLayoutScope() {
+abstract class BottomNavigationViewScope {
   fun itemBackground(arg: Drawable?): Unit = attr("itemBackground", arg)
   fun itemBackgroundResource(arg: Int): Unit = attr("itemBackgroundResource", arg)
   fun itemHorizontalTranslationEnabled(arg: Boolean): Unit =
@@ -156,13 +166,15 @@ abstract class BottomNavigationViewScope : FrameLayoutScope() {
   fun selectedItemId(arg: Int): Unit = attr("selectedItemId", arg)
   companion object : BottomNavigationViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun materialButton(configure: MaterialButtonScope.() -> Unit = {}) =
     v<MaterialButton>(configure.bind(MaterialButtonScope))
-abstract class MaterialButtonScope : AppCompatButtonScope() {
+abstract class MaterialButtonScope {
   fun cornerRadius(arg: Int): Unit = attr("cornerRadius", arg)
   fun cornerRadiusResource(arg: Int): Unit = attr("cornerRadiusResource", arg)
   fun icon(arg: Drawable): Unit = attr("icon", arg)
@@ -181,29 +193,33 @@ abstract class MaterialButtonScope : AppCompatButtonScope() {
   fun strokeWidthResource(arg: Int): Unit = attr("strokeWidthResource", arg)
   companion object : MaterialButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun materialCardView(configure: MaterialCardViewScope.() -> Unit = {}) =
     v<MaterialCardView>(configure.bind(MaterialCardViewScope))
-abstract class MaterialCardViewScope : CardViewScope() {
+abstract class MaterialCardViewScope {
   fun strokeColor(arg: Int): Unit = attr("strokeColor", arg)
   fun strokeWidth(arg: Int): Unit = attr("strokeWidth", arg)
   companion object : MaterialCardViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun chip(configure: ChipScope.() -> Unit = {}) = v<Chip>(configure.bind(ChipScope))
-abstract class ChipScope : AppCompatCheckBoxScope() {
+abstract class ChipScope {
   fun checkable(arg: Boolean): Unit = attr("checkable", arg)
   fun checkableResource(arg: Int): Unit = attr("checkableResource", arg)
   fun checkedIcon(arg: Drawable?): Unit = attr("checkedIcon", arg)
   fun checkedIconResource(arg: Int): Unit = attr("checkedIconResource", arg)
-  fun checkedIconVisible(arg: Int): Unit = attr("checkedIconVisible", arg)
   fun checkedIconVisible(arg: Boolean): Unit = attr("checkedIconVisible", arg)
+  fun checkedIconVisible(arg: Int): Unit = attr("checkedIconVisible", arg)
   fun chipBackgroundColor(arg: ColorStateList?): Unit = attr("chipBackgroundColor", arg)
   fun chipBackgroundColorResource(arg: Int): Unit = attr("chipBackgroundColorResource", arg)
   fun chipCornerRadius(arg: Float): Unit = attr("chipCornerRadius", arg)
@@ -217,8 +233,8 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun chipIconSizeResource(arg: Int): Unit = attr("chipIconSizeResource", arg)
   fun chipIconTint(arg: ColorStateList?): Unit = attr("chipIconTint", arg)
   fun chipIconTintResource(arg: Int): Unit = attr("chipIconTintResource", arg)
-  fun chipIconVisible(arg: Int): Unit = attr("chipIconVisible", arg)
   fun chipIconVisible(arg: Boolean): Unit = attr("chipIconVisible", arg)
+  fun chipIconVisible(arg: Int): Unit = attr("chipIconVisible", arg)
   fun chipMinHeight(arg: Float): Unit = attr("chipMinHeight", arg)
   fun chipMinHeightResource(arg: Int): Unit = attr("chipMinHeightResource", arg)
   fun chipStartPadding(arg: Float): Unit = attr("chipStartPadding", arg)
@@ -239,8 +255,8 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun closeIconStartPaddingResource(arg: Int): Unit = attr("closeIconStartPaddingResource", arg)
   fun closeIconTint(arg: ColorStateList?): Unit = attr("closeIconTint", arg)
   fun closeIconTintResource(arg: Int): Unit = attr("closeIconTintResource", arg)
-  fun closeIconVisible(arg: Int): Unit = attr("closeIconVisible", arg)
   fun closeIconVisible(arg: Boolean): Unit = attr("closeIconVisible", arg)
+  fun closeIconVisible(arg: Int): Unit = attr("closeIconVisible", arg)
   fun hideMotionSpec(arg: MotionSpec?): Unit = attr("hideMotionSpec", arg)
   fun hideMotionSpecResource(arg: Int): Unit = attr("hideMotionSpecResource", arg)
   fun iconEndPadding(arg: Float): Unit = attr("iconEndPadding", arg)
@@ -260,7 +276,9 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun textStartPaddingResource(arg: Int): Unit = attr("textStartPaddingResource", arg)
   companion object : ChipScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
@@ -280,72 +298,84 @@ abstract class ChipGroupScope : FlowLayoutScope() {
   fun singleSelection(arg: Int): Unit = attr("singleSelection", arg)
   companion object : ChipGroupScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun circularRevealFrameLayout(configure: CircularRevealFrameLayoutScope.() -> Unit = {}) =
     v<CircularRevealFrameLayout>(configure.bind(CircularRevealFrameLayoutScope))
-abstract class CircularRevealFrameLayoutScope : FrameLayoutScope() {
+abstract class CircularRevealFrameLayoutScope {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
   fun revealInfo(arg: CircularRevealWidget.RevealInfo?): Unit = attr("revealInfo", arg)
   companion object : CircularRevealFrameLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun circularRevealGridLayout(configure: CircularRevealGridLayoutScope.() -> Unit = {}) =
     v<CircularRevealGridLayout>(configure.bind(CircularRevealGridLayoutScope))
-abstract class CircularRevealGridLayoutScope : GridLayoutScope() {
+abstract class CircularRevealGridLayoutScope {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
   fun revealInfo(arg: CircularRevealWidget.RevealInfo?): Unit = attr("revealInfo", arg)
   companion object : CircularRevealGridLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun circularRevealLinearLayout(configure: CircularRevealLinearLayoutScope.() -> Unit = {}) =
     v<CircularRevealLinearLayout>(configure.bind(CircularRevealLinearLayoutScope))
-abstract class CircularRevealLinearLayoutScope : LinearLayoutScope() {
+abstract class CircularRevealLinearLayoutScope {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
   fun revealInfo(arg: CircularRevealWidget.RevealInfo?): Unit = attr("revealInfo", arg)
   companion object : CircularRevealLinearLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun circularRevealRelativeLayout(configure: CircularRevealRelativeLayoutScope.() -> Unit = {}) =
     v<CircularRevealRelativeLayout>(configure.bind(CircularRevealRelativeLayoutScope))
-abstract class CircularRevealRelativeLayoutScope : RelativeLayoutScope() {
+abstract class CircularRevealRelativeLayoutScope {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
   fun revealInfo(arg: CircularRevealWidget.RevealInfo?): Unit = attr("revealInfo", arg)
   companion object : CircularRevealRelativeLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun circularRevealCardView(configure: CircularRevealCardViewScope.() -> Unit = {}) =
     v<CircularRevealCardView>(configure.bind(CircularRevealCardViewScope))
-abstract class CircularRevealCardViewScope : CardViewScope() {
+abstract class CircularRevealCardViewScope {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
   fun revealInfo(arg: CircularRevealWidget.RevealInfo?): Unit = attr("revealInfo", arg)
   companion object : CircularRevealCardViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
@@ -379,44 +409,54 @@ abstract class FloatingActionButtonScope : VisibilityAwareImageButtonScope() {
   fun useCompatPadding(arg: Boolean): Unit = attr("useCompatPadding", arg)
   companion object : FloatingActionButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun baselineLayout(configure: BaselineLayoutScope.() -> Unit = {}) =
     v<BaselineLayout>(configure.bind(BaselineLayoutScope))
-abstract class BaselineLayoutScope : ViewGroupScope() {
+abstract class BaselineLayoutScope {
   companion object : BaselineLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun checkableImageButton(configure: CheckableImageButtonScope.() -> Unit = {}) =
     v<CheckableImageButton>(configure.bind(CheckableImageButtonScope))
-abstract class CheckableImageButtonScope : AppCompatImageButtonScope() {
+abstract class CheckableImageButtonScope {
   companion object : CheckableImageButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun flowLayout(configure: FlowLayoutScope.() -> Unit = {}) =
     v<FlowLayout>(configure.bind(FlowLayoutScope))
-abstract class FlowLayoutScope : ViewGroupScope() {
+abstract class FlowLayoutScope {
   fun singleLine(arg: Boolean): Unit = attr("singleLine", arg)
   companion object : FlowLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun foregroundLinearLayout(configure: ForegroundLinearLayoutScope.() -> Unit = {}) =
     v<ForegroundLinearLayout>(configure.bind(ForegroundLinearLayoutScope))
-abstract class ForegroundLinearLayoutScope : LinearLayoutCompatScope() {
+abstract class ForegroundLinearLayoutScope {
   companion object : ForegroundLinearLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
@@ -428,42 +468,50 @@ abstract class NavigationMenuItemViewScope : ForegroundLinearLayoutScope() {
   fun textAppearance(arg: Int): Unit = attr("textAppearance", arg)
   companion object : NavigationMenuItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun navigationMenuView(configure: NavigationMenuViewScope.() -> Unit = {}) =
     v<NavigationMenuView>(configure.bind(NavigationMenuViewScope))
-abstract class NavigationMenuViewScope : RecyclerViewScope() {
+abstract class NavigationMenuViewScope {
   companion object : NavigationMenuViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun scrimInsetsFrameLayout(configure: ScrimInsetsFrameLayoutScope.() -> Unit = {}) =
     v<ScrimInsetsFrameLayout>(configure.bind(ScrimInsetsFrameLayoutScope))
-abstract class ScrimInsetsFrameLayoutScope : FrameLayoutScope() {
+abstract class ScrimInsetsFrameLayoutScope {
   companion object : ScrimInsetsFrameLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun visibilityAwareImageButton(configure: VisibilityAwareImageButtonScope.() -> Unit = {}) =
     v<VisibilityAwareImageButton>(configure.bind(VisibilityAwareImageButtonScope))
-abstract class VisibilityAwareImageButtonScope : ImageButtonScope() {
+abstract class VisibilityAwareImageButtonScope {
   companion object : VisibilityAwareImageButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun navigationView(configure: NavigationViewScope.() -> Unit = {}) =
     v<NavigationView>(configure.bind(NavigationViewScope))
 abstract class NavigationViewScope : ScrimInsetsFrameLayoutScope() {
-  fun checkedItem(arg: Int): Unit = attr("checkedItem", arg)
   fun checkedItem(arg: MenuItem): Unit = attr("checkedItem", arg)
+  fun checkedItem(arg: Int): Unit = attr("checkedItem", arg)
   fun itemBackground(arg: Drawable?): Unit = attr("itemBackground", arg)
   fun itemBackgroundResource(arg: Int): Unit = attr("itemBackgroundResource", arg)
   fun itemHorizontalPadding(arg: Int): Unit = attr("itemHorizontalPadding", arg)
@@ -477,30 +525,36 @@ abstract class NavigationViewScope : ScrimInsetsFrameLayoutScope() {
       attr("navigationItemSelectedListener", arg)
   companion object : NavigationViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun snackbarContentLayout(configure: SnackbarContentLayoutScope.() -> Unit = {}) =
     v<SnackbarContentLayout>(configure.bind(SnackbarContentLayoutScope))
-abstract class SnackbarContentLayoutScope : LinearLayoutScope() {
+abstract class SnackbarContentLayoutScope {
   companion object : SnackbarContentLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun tabItem(configure: TabItemScope.() -> Unit = {}) = v<TabItem>(configure.bind(TabItemScope))
-abstract class TabItemScope : ViewScope() {
+abstract class TabItemScope {
   companion object : TabItemScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun tabLayout(configure: TabLayoutScope.() -> Unit = {}) =
     v<TabLayout>(configure.bind(TabLayoutScope))
-abstract class TabLayoutScope : HorizontalScrollViewScope() {
+abstract class TabLayoutScope {
   fun inlineLabel(arg: Boolean): Unit = attr("inlineLabel", arg)
   fun inlineLabelResource(arg: Int): Unit = attr("inlineLabelResource", arg)
   fun selectedTabIndicator(arg: Drawable?): Unit = attr("selectedTabIndicator", arg)
@@ -519,22 +573,26 @@ abstract class TabLayoutScope : HorizontalScrollViewScope() {
   fun unboundedRippleResource(arg: Int): Unit = attr("unboundedRippleResource", arg)
   companion object : TabLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun textInputEditText(configure: TextInputEditTextScope.() -> Unit = {}) =
     v<TextInputEditText>(configure.bind(TextInputEditTextScope))
-abstract class TextInputEditTextScope : AppCompatEditTextScope() {
+abstract class TextInputEditTextScope {
   companion object : TextInputEditTextScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
 fun textInputLayout(configure: TextInputLayoutScope.() -> Unit = {}) =
     v<TextInputLayout>(configure.bind(TextInputLayoutScope))
-abstract class TextInputLayoutScope : LinearLayoutScope() {
+abstract class TextInputLayoutScope {
   fun boxBackgroundColor(arg: Int): Unit = attr("boxBackgroundColor", arg)
   fun boxBackgroundColorResource(arg: Int): Unit = attr("boxBackgroundColorResource", arg)
   fun boxBackgroundMode(arg: Int): Unit = attr("boxBackgroundMode", arg)
@@ -554,14 +612,14 @@ abstract class TextInputLayoutScope : LinearLayoutScope() {
   fun hintAnimationEnabled(arg: Boolean): Unit = attr("hintAnimationEnabled", arg)
   fun hintEnabled(arg: Boolean): Unit = attr("hintEnabled", arg)
   fun hintTextAppearance(arg: Int): Unit = attr("hintTextAppearance", arg)
-  fun passwordVisibilityToggleContentDescription(arg: Int): Unit =
-      attr("passwordVisibilityToggleContentDescription", arg)
   fun passwordVisibilityToggleContentDescription(arg: CharSequence?): Unit =
       attr("passwordVisibilityToggleContentDescription", arg)
-  fun passwordVisibilityToggleDrawable(arg: Int): Unit = attr("passwordVisibilityToggleDrawable",
-      arg)
+  fun passwordVisibilityToggleContentDescription(arg: Int): Unit =
+      attr("passwordVisibilityToggleContentDescription", arg)
   fun passwordVisibilityToggleDrawable(arg: Drawable?): Unit =
       attr("passwordVisibilityToggleDrawable", arg)
+  fun passwordVisibilityToggleDrawable(arg: Int): Unit = attr("passwordVisibilityToggleDrawable",
+      arg)
   fun passwordVisibilityToggleEnabled(arg: Boolean): Unit = attr("passwordVisibilityToggleEnabled",
       arg)
   fun passwordVisibilityToggleTintList(arg: ColorStateList?): Unit =
@@ -573,7 +631,9 @@ abstract class TextInputLayoutScope : LinearLayoutScope() {
   fun typeface(arg: Typeface?): Unit = attr("typeface", arg)
   companion object : TextInputLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
@@ -582,7 +642,9 @@ fun transformationChildCard(configure: TransformationChildCardScope.() -> Unit =
 abstract class TransformationChildCardScope : CircularRevealCardViewScope() {
   companion object : TransformationChildCardScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
@@ -591,7 +653,9 @@ fun transformationChildLayout(configure: TransformationChildLayoutScope.() -> Un
 abstract class TransformationChildLayoutScope : CircularRevealFrameLayoutScope() {
   companion object : TransformationChildLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)}
+      Anvil.registerAttributeSetter(MaterialSetter)
+      Anvil.registerAttributeSetter(MaterialDslSetter)
+    }
   }
 }
 
@@ -603,11 +667,6 @@ abstract class TransformationChildLayoutScope : CircularRevealFrameLayoutScope()
  * Please, don't edit it manually unless for debugging.
  */
 object MaterialSetter : Anvil.AttributeSetter<Any?> {
-  init {
-    Anvil.registerAttributeSetter(this)
-    Anvil.registerAttributeSetter(MaterialDslSetter)
-  }
-
   override fun set(
     v: View,
     name: String,
@@ -672,14 +731,14 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "collapsedTitleTypeface" -> when {
-      v is CollapsingToolbarLayout && (arg == null || arg is Typeface) -> {
+      v is CollapsingToolbarLayout && arg is Typeface? -> {
         v.setCollapsedTitleTypeface(arg as Typeface)
         true
       }
       else -> false
     }
     "contentScrim" -> when {
-      v is CollapsingToolbarLayout && (arg == null || arg is Drawable) -> {
+      v is CollapsingToolbarLayout && arg is Drawable? -> {
         v.setContentScrim(arg as Drawable)
         true
       }
@@ -756,7 +815,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "expandedTitleTypeface" -> when {
-      v is CollapsingToolbarLayout && (arg == null || arg is Typeface) -> {
+      v is CollapsingToolbarLayout && arg is Typeface? -> {
         v.setExpandedTitleTypeface(arg as Typeface)
         true
       }
@@ -784,7 +843,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "statusBarScrim" -> when {
-      v is CollapsingToolbarLayout && (arg == null || arg is Drawable) -> {
+      v is CollapsingToolbarLayout && arg is Drawable? -> {
         v.setStatusBarScrim(arg as Drawable)
         true
       }
@@ -805,7 +864,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "title" -> when {
-      v is CollapsingToolbarLayout && (arg == null || arg is CharSequence) -> {
+      v is CollapsingToolbarLayout && arg is CharSequence? -> {
         v.setTitle(arg as CharSequence)
         true
       }
@@ -819,7 +878,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "backgroundTint" -> when {
-      v is BottomAppBar && (arg == null || arg is ColorStateList) -> {
+      v is BottomAppBar && arg is ColorStateList? -> {
         v.setBackgroundTint(arg as ColorStateList)
         true
       }
@@ -861,11 +920,11 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "itemBackground" -> when {
-      v is BottomNavigationView && (arg == null || arg is Drawable) -> {
+      v is BottomNavigationView && arg is Drawable? -> {
         v.setItemBackground(arg as Drawable)
         true
       }
-      v is NavigationView && (arg == null || arg is Drawable) -> {
+      v is NavigationView && arg is Drawable? -> {
         v.setItemBackground(arg as Drawable)
         true
       }
@@ -904,11 +963,11 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "itemIconTintList" -> when {
-      v is BottomNavigationView && (arg == null || arg is ColorStateList) -> {
+      v is BottomNavigationView && arg is ColorStateList? -> {
         v.setItemIconTintList(arg as ColorStateList)
         true
       }
-      v is NavigationView && (arg == null || arg is ColorStateList) -> {
+      v is NavigationView && arg is ColorStateList? -> {
         v.setItemIconTintList(arg as ColorStateList)
         true
       }
@@ -929,11 +988,11 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "itemTextColor" -> when {
-      v is BottomNavigationView && (arg == null || arg is ColorStateList) -> {
+      v is BottomNavigationView && arg is ColorStateList? -> {
         v.setItemTextColor(arg as ColorStateList)
         true
       }
-      v is NavigationView && (arg == null || arg is ColorStateList) -> {
+      v is NavigationView && arg is ColorStateList? -> {
         v.setItemTextColor(arg as ColorStateList)
         true
       }
@@ -954,7 +1013,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MenuItem) -> Unit
+          arg as ((arg0: MenuItem) -> Unit)?
           v.setOnNavigationItemReselectedListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -972,7 +1031,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MenuItem) -> Boolean
+          arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnNavigationItemSelectedListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -1039,7 +1098,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "iconTint" -> when {
-      v is MaterialButton && (arg == null || arg is ColorStateList) -> {
+      v is MaterialButton && arg is ColorStateList? -> {
         v.setIconTint(arg as ColorStateList)
         true
       }
@@ -1060,15 +1119,15 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "rippleColor" -> when {
-      v is MaterialButton && (arg == null || arg is ColorStateList) -> {
+      v is MaterialButton && arg is ColorStateList? -> {
         v.setRippleColor(arg as ColorStateList)
         true
       }
-      v is Chip && (arg == null || arg is ColorStateList) -> {
+      v is Chip && arg is ColorStateList? -> {
         v.setRippleColor(arg as ColorStateList)
         true
       }
-      v is FloatingActionButton && (arg == null || arg is ColorStateList) -> {
+      v is FloatingActionButton && arg is ColorStateList? -> {
         v.setRippleColor(arg as ColorStateList)
         true
       }
@@ -1090,7 +1149,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "strokeColor" -> when {
-      v is MaterialButton && (arg == null || arg is ColorStateList) -> {
+      v is MaterialButton && arg is ColorStateList? -> {
         v.setStrokeColor(arg as ColorStateList)
         true
       }
@@ -1140,7 +1199,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "checkedIcon" -> when {
-      v is Chip && (arg == null || arg is Drawable) -> {
+      v is Chip && arg is Drawable? -> {
         v.setCheckedIcon(arg as Drawable)
         true
       }
@@ -1165,7 +1224,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "chipBackgroundColor" -> when {
-      v is Chip && (arg == null || arg is ColorStateList) -> {
+      v is Chip && arg is ColorStateList? -> {
         v.setChipBackgroundColor(arg as ColorStateList)
         true
       }
@@ -1214,7 +1273,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "chipIcon" -> when {
-      v is Chip && (arg == null || arg is Drawable) -> {
+      v is Chip && arg is Drawable? -> {
         v.setChipIcon(arg as Drawable)
         true
       }
@@ -1242,7 +1301,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "chipIconTint" -> when {
-      v is Chip && (arg == null || arg is ColorStateList) -> {
+      v is Chip && arg is ColorStateList? -> {
         v.setChipIconTint(arg as ColorStateList)
         true
       }
@@ -1295,7 +1354,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "chipStrokeColor" -> when {
-      v is Chip && (arg == null || arg is ColorStateList) -> {
+      v is Chip && arg is ColorStateList? -> {
         v.setChipStrokeColor(arg as ColorStateList)
         true
       }
@@ -1323,14 +1382,14 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "closeIcon" -> when {
-      v is Chip && (arg == null || arg is Drawable) -> {
+      v is Chip && arg is Drawable? -> {
         v.setCloseIcon(arg as Drawable)
         true
       }
       else -> false
     }
     "closeIconContentDescription" -> when {
-      v is Chip && (arg == null || arg is CharSequence) -> {
+      v is Chip && arg is CharSequence? -> {
         v.setCloseIconContentDescription(arg as CharSequence)
         true
       }
@@ -1386,7 +1445,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "closeIconTint" -> when {
-      v is Chip && (arg == null || arg is ColorStateList) -> {
+      v is Chip && arg is ColorStateList? -> {
         v.setCloseIconTint(arg as ColorStateList)
         true
       }
@@ -1411,7 +1470,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "hideMotionSpec" -> when {
-      v is Chip && (arg == null || arg is MotionSpec) -> {
+      v is Chip && arg is MotionSpec? -> {
         v.setHideMotionSpec(arg as MotionSpec)
         true
       }
@@ -1467,7 +1526,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: View) -> Unit
+          arg as ((arg0: View) -> Unit)?
           v.setOnCloseIconClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -1478,7 +1537,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "showMotionSpec" -> when {
-      v is Chip && (arg == null || arg is MotionSpec) -> {
+      v is Chip && arg is MotionSpec? -> {
         v.setShowMotionSpec(arg as MotionSpec)
         true
       }
@@ -1500,12 +1559,12 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "textAppearance" -> when {
-      v is NavigationMenuItemView && arg is Int -> {
-        v.setTextAppearance(arg)
+      v is Chip && arg is TextAppearance? -> {
+        v.setTextAppearance(arg as TextAppearance)
         true
       }
-      v is Chip && (arg == null || arg is TextAppearance) -> {
-        v.setTextAppearance(arg as TextAppearance)
+      v is NavigationMenuItemView && arg is Int -> {
+        v.setTextAppearance(arg)
         true
       }
       else -> false
@@ -1594,7 +1653,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: ChipGroup, arg1: Int) -> Unit
+          arg as ((arg0: ChipGroup, arg1: Int) -> Unit)?
           v.setOnCheckedChangeListener { arg0, arg1 ->
             arg(arg0, arg1).also { Anvil.render() }
           }
@@ -1627,23 +1686,23 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "circularRevealOverlayDrawable" -> when {
-      v is CircularRevealFrameLayout && (arg == null || arg is Drawable) -> {
+      v is CircularRevealFrameLayout && arg is Drawable? -> {
         v.setCircularRevealOverlayDrawable(arg as Drawable)
         true
       }
-      v is CircularRevealGridLayout && (arg == null || arg is Drawable) -> {
+      v is CircularRevealGridLayout && arg is Drawable? -> {
         v.setCircularRevealOverlayDrawable(arg as Drawable)
         true
       }
-      v is CircularRevealLinearLayout && (arg == null || arg is Drawable) -> {
+      v is CircularRevealLinearLayout && arg is Drawable? -> {
         v.setCircularRevealOverlayDrawable(arg as Drawable)
         true
       }
-      v is CircularRevealRelativeLayout && (arg == null || arg is Drawable) -> {
+      v is CircularRevealRelativeLayout && arg is Drawable? -> {
         v.setCircularRevealOverlayDrawable(arg as Drawable)
         true
       }
-      v is CircularRevealCardView && (arg == null || arg is Drawable) -> {
+      v is CircularRevealCardView && arg is Drawable? -> {
         v.setCircularRevealOverlayDrawable(arg as Drawable)
         true
       }
@@ -1673,25 +1732,23 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "revealInfo" -> when {
-      v is CircularRevealFrameLayout && (arg == null || arg is CircularRevealWidget.RevealInfo) -> {
+      v is CircularRevealFrameLayout && arg is CircularRevealWidget.RevealInfo? -> {
         v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
         true
       }
-      v is CircularRevealGridLayout && (arg == null || arg is CircularRevealWidget.RevealInfo) -> {
+      v is CircularRevealGridLayout && arg is CircularRevealWidget.RevealInfo? -> {
         v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
         true
       }
-      v is CircularRevealLinearLayout && (arg == null || arg is
-          CircularRevealWidget.RevealInfo) -> {
+      v is CircularRevealLinearLayout && arg is CircularRevealWidget.RevealInfo? -> {
         v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
         true
       }
-      v is CircularRevealRelativeLayout && (arg == null || arg is
-          CircularRevealWidget.RevealInfo) -> {
+      v is CircularRevealRelativeLayout && arg is CircularRevealWidget.RevealInfo? -> {
         v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
         true
       }
-      v is CircularRevealCardView && (arg == null || arg is CircularRevealWidget.RevealInfo) -> {
+      v is CircularRevealCardView && arg is CircularRevealWidget.RevealInfo? -> {
         v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
         true
       }
@@ -1761,28 +1818,28 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "supportBackgroundTintList" -> when {
-      v is FloatingActionButton && (arg == null || arg is ColorStateList) -> {
+      v is FloatingActionButton && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "supportBackgroundTintMode" -> when {
-      v is FloatingActionButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is FloatingActionButton && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
       else -> false
     }
     "supportImageTintList" -> when {
-      v is FloatingActionButton && (arg == null || arg is ColorStateList) -> {
+      v is FloatingActionButton && arg is ColorStateList? -> {
         v.setSupportImageTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "supportImageTintMode" -> when {
-      v is FloatingActionButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is FloatingActionButton && arg is PorterDuff.Mode? -> {
         v.setSupportImageTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -1810,11 +1867,11 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "checkedItem" -> when {
-      v is NavigationView && arg is Int -> {
+      v is NavigationView && arg is MenuItem -> {
         v.setCheckedItem(arg)
         true
       }
-      v is NavigationView && arg is MenuItem -> {
+      v is NavigationView && arg is Int -> {
         v.setCheckedItem(arg)
         true
       }
@@ -1856,8 +1913,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "navigationItemSelectedListener" -> when {
-      v is NavigationView && (arg == null || arg is
-          NavigationView.OnNavigationItemSelectedListener) -> {
+      v is NavigationView && arg is NavigationView.OnNavigationItemSelectedListener? -> {
         v.setNavigationItemSelectedListener(arg as NavigationView.OnNavigationItemSelectedListener)
         true
       }
@@ -1878,7 +1934,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "selectedTabIndicator" -> when {
-      v is TabLayout && (arg == null || arg is Drawable) -> {
+      v is TabLayout && arg is Drawable? -> {
         v.setSelectedTabIndicator(arg as Drawable)
         true
       }
@@ -1910,7 +1966,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "tabIconTint" -> when {
-      v is TabLayout && (arg == null || arg is ColorStateList) -> {
+      v is TabLayout && arg is ColorStateList? -> {
         v.setTabIconTint(arg as ColorStateList)
         true
       }
@@ -1952,7 +2008,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "tabTextColors" -> when {
-      v is TabLayout && (arg == null || arg is ColorStateList) -> {
+      v is TabLayout && arg is ColorStateList? -> {
         v.setTabTextColors(arg as ColorStateList)
         true
       }
@@ -2015,14 +2071,14 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "defaultHintTextColor" -> when {
-      v is TextInputLayout && (arg == null || arg is ColorStateList) -> {
+      v is TextInputLayout && arg is ColorStateList? -> {
         v.setDefaultHintTextColor(arg as ColorStateList)
         true
       }
       else -> false
     }
     "error" -> when {
-      v is TextInputLayout && (arg == null || arg is CharSequence) -> {
+      v is TextInputLayout && arg is CharSequence? -> {
         v.setError(arg as CharSequence)
         true
       }
@@ -2043,21 +2099,21 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "errorTextColor" -> when {
-      v is TextInputLayout && (arg == null || arg is ColorStateList) -> {
+      v is TextInputLayout && arg is ColorStateList? -> {
         v.setErrorTextColor(arg as ColorStateList)
         true
       }
       else -> false
     }
     "helperText" -> when {
-      v is TextInputLayout && (arg == null || arg is CharSequence) -> {
+      v is TextInputLayout && arg is CharSequence? -> {
         v.setHelperText(arg as CharSequence)
         true
       }
       else -> false
     }
     "helperTextColor" -> when {
-      v is TextInputLayout && (arg == null || arg is ColorStateList) -> {
+      v is TextInputLayout && arg is ColorStateList? -> {
         v.setHelperTextColor(arg as ColorStateList)
         true
       }
@@ -2078,7 +2134,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "hint" -> when {
-      v is TextInputLayout && (arg == null || arg is CharSequence) -> {
+      v is TextInputLayout && arg is CharSequence? -> {
         v.setHint(arg as CharSequence)
         true
       }
@@ -2106,7 +2162,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "passwordVisibilityToggleContentDescription" -> when {
-      v is TextInputLayout && (arg == null || arg is CharSequence) -> {
+      v is TextInputLayout && arg is CharSequence? -> {
         v.setPasswordVisibilityToggleContentDescription(arg as CharSequence)
         true
       }
@@ -2117,7 +2173,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "passwordVisibilityToggleDrawable" -> when {
-      v is TextInputLayout && (arg == null || arg is Drawable) -> {
+      v is TextInputLayout && arg is Drawable? -> {
         v.setPasswordVisibilityToggleDrawable(arg as Drawable)
         true
       }
@@ -2135,14 +2191,14 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "passwordVisibilityToggleTintList" -> when {
-      v is TextInputLayout && (arg == null || arg is ColorStateList) -> {
+      v is TextInputLayout && arg is ColorStateList? -> {
         v.setPasswordVisibilityToggleTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "passwordVisibilityToggleTintMode" -> when {
-      v is TextInputLayout && (arg == null || arg is PorterDuff.Mode) -> {
+      v is TextInputLayout && arg is PorterDuff.Mode? -> {
         v.setPasswordVisibilityToggleTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -2156,7 +2212,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "typeface" -> when {
-      v is TextInputLayout && (arg == null || arg is Typeface) -> {
+      v is TextInputLayout && arg is Typeface? -> {
         v.setTypeface(arg as Typeface)
         true
       }

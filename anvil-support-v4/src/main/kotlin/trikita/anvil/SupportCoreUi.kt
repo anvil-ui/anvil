@@ -26,39 +26,42 @@ import kotlin.Unit
 
 fun coordinatorLayout(configure: CoordinatorLayoutScope.() -> Unit = {}) =
     v<CoordinatorLayout>(configure.bind(CoordinatorLayoutScope))
-abstract class CoordinatorLayoutScope : ViewGroupScope() {
+abstract class CoordinatorLayoutScope {
   fun statusBarBackground(arg: Drawable?): Unit = attr("statusBarBackground", arg)
   fun statusBarBackgroundColor(arg: Int): Unit = attr("statusBarBackgroundColor", arg)
   fun statusBarBackgroundResource(arg: Int): Unit = attr("statusBarBackgroundResource", arg)
   companion object : CoordinatorLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
 fun contentLoadingProgressBar(configure: ContentLoadingProgressBarScope.() -> Unit = {}) =
     v<ContentLoadingProgressBar>(configure.bind(ContentLoadingProgressBarScope))
-abstract class ContentLoadingProgressBarScope : ProgressBarScope() {
+abstract class ContentLoadingProgressBarScope {
   companion object : ContentLoadingProgressBarScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
 fun nestedScrollView(configure: NestedScrollViewScope.() -> Unit = {}) =
     v<NestedScrollView>(configure.bind(NestedScrollViewScope))
-abstract class NestedScrollViewScope : FrameLayoutScope() {
+abstract class NestedScrollViewScope {
   fun fillViewport(arg: Boolean): Unit = attr("fillViewport", arg)
   fun smoothScrollingEnabled(arg: Boolean): Unit = attr("smoothScrollingEnabled", arg)
   companion object : NestedScrollViewScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
 fun drawerLayout(configure: DrawerLayoutScope.() -> Unit = {}) =
     v<DrawerLayout>(configure.bind(DrawerLayoutScope))
-abstract class DrawerLayoutScope : ViewGroupScope() {
+abstract class DrawerLayoutScope {
   fun drawerElevation(arg: Float): Unit = attr("drawerElevation", arg)
   fun drawerLockMode(arg: Int): Unit = attr("drawerLockMode", arg)
   fun scrimColor(arg: Int): Unit = attr("scrimColor", arg)
@@ -67,13 +70,14 @@ abstract class DrawerLayoutScope : ViewGroupScope() {
   fun statusBarBackgroundColor(arg: Int): Unit = attr("statusBarBackgroundColor", arg)
   companion object : DrawerLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
 fun slidingPaneLayout(configure: SlidingPaneLayoutScope.() -> Unit = {}) =
     v<SlidingPaneLayout>(configure.bind(SlidingPaneLayoutScope))
-abstract class SlidingPaneLayoutScope : ViewGroupScope() {
+abstract class SlidingPaneLayoutScope {
   fun coveredFadeColor(arg: Int): Unit = attr("coveredFadeColor", arg)
   fun panelSlideListener(arg: SlidingPaneLayout.PanelSlideListener?): Unit =
       attr("panelSlideListener", arg)
@@ -85,13 +89,14 @@ abstract class SlidingPaneLayoutScope : ViewGroupScope() {
   fun sliderFadeColor(arg: Int): Unit = attr("sliderFadeColor", arg)
   companion object : SlidingPaneLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
 fun swipeRefreshLayout(configure: SwipeRefreshLayoutScope.() -> Unit = {}) =
     v<SwipeRefreshLayout>(configure.bind(SwipeRefreshLayoutScope))
-abstract class SwipeRefreshLayoutScope : ViewGroupScope() {
+abstract class SwipeRefreshLayoutScope {
   fun colorSchemeColors(arg: IntArray): Unit = attr("colorSchemeColors", arg)
   fun colorSchemeResources(arg: IntArray): Unit = attr("colorSchemeResources", arg)
   fun distanceToTriggerSync(arg: Int): Unit = attr("distanceToTriggerSync", arg)
@@ -107,7 +112,8 @@ abstract class SwipeRefreshLayoutScope : ViewGroupScope() {
   fun slingshotDistance(arg: Int): Unit = attr("slingshotDistance", arg)
   companion object : SwipeRefreshLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
@@ -119,26 +125,28 @@ abstract class PagerTabStripScope : PagerTitleStripScope() {
   fun tabIndicatorColorResource(arg: Int): Unit = attr("tabIndicatorColorResource", arg)
   companion object : PagerTabStripScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
 fun pagerTitleStrip(configure: PagerTitleStripScope.() -> Unit = {}) =
     v<PagerTitleStrip>(configure.bind(PagerTitleStripScope))
-abstract class PagerTitleStripScope : ViewGroupScope() {
+abstract class PagerTitleStripScope {
   fun gravity(arg: Int): Unit = attr("gravity", arg)
   fun nonPrimaryAlpha(arg: Float): Unit = attr("nonPrimaryAlpha", arg)
   fun textColor(arg: Int): Unit = attr("textColor", arg)
   fun textSpacing(arg: Int): Unit = attr("textSpacing", arg)
   companion object : PagerTitleStripScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
 fun viewPager(configure: ViewPagerScope.() -> Unit = {}) =
     v<ViewPager>(configure.bind(ViewPagerScope))
-abstract class ViewPagerScope : ViewGroupScope() {
+abstract class ViewPagerScope {
   fun adapter(arg: PagerAdapter): Unit = attr("adapter", arg)
   fun currentItem(arg: Int): Unit = attr("currentItem", arg)
   fun offscreenPageLimit(arg: Int): Unit = attr("offscreenPageLimit", arg)
@@ -147,7 +155,8 @@ abstract class ViewPagerScope : ViewGroupScope() {
   fun pageMarginDrawable(arg: Int): Unit = attr("pageMarginDrawable", arg)
   companion object : ViewPagerScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)}
+      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+    }
   }
 }
 
@@ -159,10 +168,6 @@ abstract class ViewPagerScope : ViewGroupScope() {
  * Please, don't edit it manually unless for debugging.
  */
 object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
-  init {
-    Anvil.registerAttributeSetter(this)
-  }
-
   override fun set(
     v: View,
     name: String,
@@ -170,11 +175,11 @@ object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
     old: Any?
   ): Boolean = when (name) {
     "statusBarBackground" -> when {
-      v is CoordinatorLayout && (arg == null || arg is Drawable) -> {
+      v is CoordinatorLayout && arg is Drawable? -> {
         v.setStatusBarBackground(arg as Drawable)
         true
       }
-      v is DrawerLayout && (arg == null || arg is Drawable) -> {
+      v is DrawerLayout && arg is Drawable? -> {
         v.setStatusBarBackground(arg as Drawable)
         true
       }
@@ -245,7 +250,7 @@ object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "panelSlideListener" -> when {
-      v is SlidingPaneLayout && (arg == null || arg is SlidingPaneLayout.PanelSlideListener) -> {
+      v is SlidingPaneLayout && arg is SlidingPaneLayout.PanelSlideListener? -> {
         v.setPanelSlideListener(arg as SlidingPaneLayout.PanelSlideListener)
         true
       }
@@ -259,14 +264,14 @@ object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "shadowDrawableLeft" -> when {
-      v is SlidingPaneLayout && (arg == null || arg is Drawable) -> {
+      v is SlidingPaneLayout && arg is Drawable? -> {
         v.setShadowDrawableLeft(arg as Drawable)
         true
       }
       else -> false
     }
     "shadowDrawableRight" -> when {
-      v is SlidingPaneLayout && (arg == null || arg is Drawable) -> {
+      v is SlidingPaneLayout && arg is Drawable? -> {
         v.setShadowDrawableRight(arg as Drawable)
         true
       }
@@ -315,8 +320,7 @@ object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "onChildScrollUpCallback" -> when {
-      v is SwipeRefreshLayout && (arg == null || arg is
-          SwipeRefreshLayout.OnChildScrollUpCallback) -> {
+      v is SwipeRefreshLayout && arg is SwipeRefreshLayout.OnChildScrollUpCallback? -> {
         v.setOnChildScrollUpCallback(arg as SwipeRefreshLayout.OnChildScrollUpCallback)
         true
       }
@@ -329,7 +333,7 @@ object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as () -> Unit
+          arg as (() -> Unit)?
           v.setOnRefreshListener {  ->
             arg().also { Anvil.render() }
           }
@@ -452,7 +456,7 @@ object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "pageMarginDrawable" -> when {
-      v is ViewPager && (arg == null || arg is Drawable) -> {
+      v is ViewPager && arg is Drawable? -> {
         v.setPageMarginDrawable(arg as Drawable)
         true
       }

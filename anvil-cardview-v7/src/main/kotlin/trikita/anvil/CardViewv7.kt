@@ -14,7 +14,7 @@ import kotlin.Suppress
 import kotlin.Unit
 
 fun cardView(configure: CardViewScope.() -> Unit = {}) = v<CardView>(configure.bind(CardViewScope))
-abstract class CardViewScope : FrameLayoutScope() {
+abstract class CardViewScope {
   fun cardBackgroundColor(arg: ColorStateList?): Unit = attr("cardBackgroundColor", arg)
   fun cardBackgroundColor(arg: Int): Unit = attr("cardBackgroundColor", arg)
   fun cardElevation(arg: Float): Unit = attr("cardElevation", arg)
@@ -24,7 +24,8 @@ abstract class CardViewScope : FrameLayoutScope() {
   fun useCompatPadding(arg: Boolean): Unit = attr("useCompatPadding", arg)
   companion object : CardViewScope() {
     init {
-      Anvil.registerAttributeSetter(CardViewv7Setter)}
+      Anvil.registerAttributeSetter(CardViewv7Setter)
+    }
   }
 }
 
@@ -36,10 +37,6 @@ abstract class CardViewScope : FrameLayoutScope() {
  * Please, don't edit it manually unless for debugging.
  */
 object CardViewv7Setter : Anvil.AttributeSetter<Any?> {
-  init {
-    Anvil.registerAttributeSetter(this)
-  }
-
   override fun set(
     v: View,
     name: String,
@@ -47,7 +44,7 @@ object CardViewv7Setter : Anvil.AttributeSetter<Any?> {
     old: Any?
   ): Boolean = when (name) {
     "cardBackgroundColor" -> when {
-      v is CardView && (arg == null || arg is ColorStateList) -> {
+      v is CardView && arg is ColorStateList? -> {
         v.setCardBackgroundColor(arg as ColorStateList)
         true
       }

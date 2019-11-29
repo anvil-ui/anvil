@@ -70,22 +70,26 @@ abstract class ActionMenuItemViewScope : AppCompatTextViewScope() {
   fun title(arg: CharSequence): Unit = attr("title", arg)
   companion object : ActionMenuItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun expandedMenuView(configure: ExpandedMenuViewScope.() -> Unit = {}) =
     v<ExpandedMenuView>(configure.bind(ExpandedMenuViewScope))
-abstract class ExpandedMenuViewScope : ListViewScope() {
+abstract class ExpandedMenuViewScope {
   companion object : ExpandedMenuViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun listMenuItemView(configure: ListMenuItemViewScope.() -> Unit = {}) =
     v<ListMenuItemView>(configure.bind(ListMenuItemViewScope))
-abstract class ListMenuItemViewScope : LinearLayoutScope() {
+abstract class ListMenuItemViewScope {
   fun checkable(arg: Boolean): Unit = attr("checkable", arg)
   fun checked(arg: Boolean): Unit = attr("checked", arg)
   fun forceShowIcon(arg: Boolean): Unit = attr("forceShowIcon", arg)
@@ -94,13 +98,15 @@ abstract class ListMenuItemViewScope : LinearLayoutScope() {
   fun title(arg: CharSequence): Unit = attr("title", arg)
   companion object : ListMenuItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun actionBarContainer(configure: ActionBarContainerScope.() -> Unit = {}) =
     v<ActionBarContainer>(configure.bind(ActionBarContainerScope))
-abstract class ActionBarContainerScope : FrameLayoutScope() {
+abstract class ActionBarContainerScope {
   fun primaryBackground(arg: Drawable): Unit = attr("primaryBackground", arg)
   fun splitBackground(arg: Drawable): Unit = attr("splitBackground", arg)
   fun stackedBackground(arg: Drawable): Unit = attr("stackedBackground", arg)
@@ -108,13 +114,15 @@ abstract class ActionBarContainerScope : FrameLayoutScope() {
   fun transitioning(arg: Boolean): Unit = attr("transitioning", arg)
   companion object : ActionBarContainerScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun actionBarOverlayLayout(configure: ActionBarOverlayLayoutScope.() -> Unit = {}) =
     v<ActionBarOverlayLayout>(configure.bind(ActionBarOverlayLayoutScope))
-abstract class ActionBarOverlayLayoutScope : ViewGroupScope() {
+abstract class ActionBarOverlayLayoutScope {
   fun actionBarHideOffset(arg: Int): Unit = attr("actionBarHideOffset", arg)
   fun actionBarVisibilityCallback(arg: ActionBarOverlayLayout.ActionBarVisibilityCallback): Unit =
       attr("actionBarVisibilityCallback", arg)
@@ -130,7 +138,9 @@ abstract class ActionBarOverlayLayoutScope : ViewGroupScope() {
   fun windowTitle(arg: CharSequence): Unit = attr("windowTitle", arg)
   companion object : ActionBarOverlayLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
@@ -144,13 +154,15 @@ abstract class ActionMenuViewScope : LinearLayoutCompatScope() {
   fun popupTheme(arg: Int): Unit = attr("popupTheme", arg)
   companion object : ActionMenuViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun activityChooserView(configure: ActivityChooserViewScope.() -> Unit = {}) =
     v<ActivityChooserView>(configure.bind(ActivityChooserViewScope))
-abstract class ActivityChooserViewScope : ViewGroupScope() {
+abstract class ActivityChooserViewScope {
   fun defaultActionButtonContentDescription(arg: Int): Unit =
       attr("defaultActionButtonContentDescription", arg)
   fun expandActivityOverflowButtonContentDescription(arg: Int): Unit =
@@ -162,7 +174,9 @@ abstract class ActivityChooserViewScope : ViewGroupScope() {
   fun provider(arg: ActionProvider): Unit = attr("provider", arg)
   companion object : ActivityChooserViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
@@ -171,38 +185,44 @@ fun alertDialogLayout(configure: AlertDialogLayoutScope.() -> Unit = {}) =
 abstract class AlertDialogLayoutScope : LinearLayoutCompatScope() {
   companion object : AlertDialogLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatAutoCompleteTextView(configure: AppCompatAutoCompleteTextViewScope.() -> Unit = {}) =
     v<AppCompatAutoCompleteTextView>(configure.bind(AppCompatAutoCompleteTextViewScope))
-abstract class AppCompatAutoCompleteTextViewScope : AutoCompleteTextViewScope() {
+abstract class AppCompatAutoCompleteTextViewScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
   companion object : AppCompatAutoCompleteTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatButton(configure: AppCompatButtonScope.() -> Unit = {}) =
     v<AppCompatButton>(configure.bind(AppCompatButtonScope))
-abstract class AppCompatButtonScope : ButtonScope() {
+abstract class AppCompatButtonScope {
   fun supportAllCaps(arg: Boolean): Unit = attr("supportAllCaps", arg)
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
   companion object : AppCompatButtonScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatCheckBox(configure: AppCompatCheckBoxScope.() -> Unit = {}) =
     v<AppCompatCheckBox>(configure.bind(AppCompatCheckBoxScope))
-abstract class AppCompatCheckBoxScope : CheckBoxScope() {
+abstract class AppCompatCheckBoxScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
@@ -210,34 +230,40 @@ abstract class AppCompatCheckBoxScope : CheckBoxScope() {
   fun supportButtonTintMode(arg: PorterDuff.Mode?): Unit = attr("supportButtonTintMode", arg)
   companion object : AppCompatCheckBoxScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatCheckedTextView(configure: AppCompatCheckedTextViewScope.() -> Unit = {}) =
     v<AppCompatCheckedTextView>(configure.bind(AppCompatCheckedTextViewScope))
-abstract class AppCompatCheckedTextViewScope : CheckedTextViewScope() {
+abstract class AppCompatCheckedTextViewScope {
   companion object : AppCompatCheckedTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatEditText(configure: AppCompatEditTextScope.() -> Unit = {}) =
     v<AppCompatEditText>(configure.bind(AppCompatEditTextScope))
-abstract class AppCompatEditTextScope : EditTextScope() {
+abstract class AppCompatEditTextScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
   companion object : AppCompatEditTextScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatImageButton(configure: AppCompatImageButtonScope.() -> Unit = {}) =
     v<AppCompatImageButton>(configure.bind(AppCompatImageButtonScope))
-abstract class AppCompatImageButtonScope : ImageButtonScope() {
+abstract class AppCompatImageButtonScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
@@ -245,13 +271,15 @@ abstract class AppCompatImageButtonScope : ImageButtonScope() {
   fun supportImageTintMode(arg: PorterDuff.Mode?): Unit = attr("supportImageTintMode", arg)
   companion object : AppCompatImageButtonScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatImageView(configure: AppCompatImageViewScope.() -> Unit = {}) =
     v<AppCompatImageView>(configure.bind(AppCompatImageViewScope))
-abstract class AppCompatImageViewScope : ImageViewScope() {
+abstract class AppCompatImageViewScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
@@ -259,26 +287,30 @@ abstract class AppCompatImageViewScope : ImageViewScope() {
   fun supportImageTintMode(arg: PorterDuff.Mode?): Unit = attr("supportImageTintMode", arg)
   companion object : AppCompatImageViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatMultiAutoCompleteTextView(configure: AppCompatMultiAutoCompleteTextViewScope.() -> Unit
     = {}) =
     v<AppCompatMultiAutoCompleteTextView>(configure.bind(AppCompatMultiAutoCompleteTextViewScope))
-abstract class AppCompatMultiAutoCompleteTextViewScope : MultiAutoCompleteTextViewScope() {
+abstract class AppCompatMultiAutoCompleteTextViewScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
   companion object : AppCompatMultiAutoCompleteTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatRadioButton(configure: AppCompatRadioButtonScope.() -> Unit = {}) =
     v<AppCompatRadioButton>(configure.bind(AppCompatRadioButtonScope))
-abstract class AppCompatRadioButtonScope : RadioButtonScope() {
+abstract class AppCompatRadioButtonScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
@@ -286,43 +318,51 @@ abstract class AppCompatRadioButtonScope : RadioButtonScope() {
   fun supportButtonTintMode(arg: PorterDuff.Mode?): Unit = attr("supportButtonTintMode", arg)
   companion object : AppCompatRadioButtonScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatRatingBar(configure: AppCompatRatingBarScope.() -> Unit = {}) =
     v<AppCompatRatingBar>(configure.bind(AppCompatRatingBarScope))
-abstract class AppCompatRatingBarScope : RatingBarScope() {
+abstract class AppCompatRatingBarScope {
   companion object : AppCompatRatingBarScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatSeekBar(configure: AppCompatSeekBarScope.() -> Unit = {}) =
     v<AppCompatSeekBar>(configure.bind(AppCompatSeekBarScope))
-abstract class AppCompatSeekBarScope : SeekBarScope() {
+abstract class AppCompatSeekBarScope {
   companion object : AppCompatSeekBarScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatSpinner(configure: AppCompatSpinnerScope.() -> Unit = {}) =
     v<AppCompatSpinner>(configure.bind(AppCompatSpinnerScope))
-abstract class AppCompatSpinnerScope : SpinnerScope() {
+abstract class AppCompatSpinnerScope {
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
       arg)
   companion object : AppCompatSpinnerScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatTextView(configure: AppCompatTextViewScope.() -> Unit = {}) =
     v<AppCompatTextView>(configure.bind(AppCompatTextViewScope))
-abstract class AppCompatTextViewScope : TextViewScope() {
+abstract class AppCompatTextViewScope {
   fun precomputedText(arg: PrecomputedTextCompat): Unit = attr("precomputedText", arg)
   fun supportBackgroundTintList(arg: ColorStateList?): Unit = attr("supportBackgroundTintList", arg)
   fun supportBackgroundTintMode(arg: PorterDuff.Mode?): Unit = attr("supportBackgroundTintMode",
@@ -335,35 +375,43 @@ abstract class AppCompatTextViewScope : TextViewScope() {
       attr("textMetricsParamsCompat", arg)
   companion object : AppCompatTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun appCompatToggleButton(configure: AppCompatToggleButtonScope.() -> Unit = {}) =
     v<AppCompatToggleButton>(configure.bind(AppCompatToggleButtonScope))
-abstract class AppCompatToggleButtonScope : ToggleButtonScope() {
+abstract class AppCompatToggleButtonScope {
   companion object : AppCompatToggleButtonScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun buttonBarLayout(configure: ButtonBarLayoutScope.() -> Unit = {}) =
     v<ButtonBarLayout>(configure.bind(ButtonBarLayoutScope))
-abstract class ButtonBarLayoutScope : LinearLayoutScope() {
+abstract class ButtonBarLayoutScope {
   fun allowStacking(arg: Boolean): Unit = attr("allowStacking", arg)
   companion object : ButtonBarLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun contentFrameLayout(configure: ContentFrameLayoutScope.() -> Unit = {}) =
     v<ContentFrameLayout>(configure.bind(ContentFrameLayoutScope))
-abstract class ContentFrameLayoutScope : FrameLayoutScope() {
+abstract class ContentFrameLayoutScope {
   companion object : ContentFrameLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
@@ -372,33 +420,39 @@ fun dialogTitle(configure: DialogTitleScope.() -> Unit = {}) =
 abstract class DialogTitleScope : AppCompatTextViewScope() {
   companion object : DialogTitleScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun fitWindowsFrameLayout(configure: FitWindowsFrameLayoutScope.() -> Unit = {}) =
     v<FitWindowsFrameLayout>(configure.bind(FitWindowsFrameLayoutScope))
-abstract class FitWindowsFrameLayoutScope : FrameLayoutScope() {
+abstract class FitWindowsFrameLayoutScope {
   fun onFitSystemWindows(arg: ((arg0: Rect) -> Unit)?): Unit = attr("onFitSystemWindows", arg)
   companion object : FitWindowsFrameLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun fitWindowsLinearLayout(configure: FitWindowsLinearLayoutScope.() -> Unit = {}) =
     v<FitWindowsLinearLayout>(configure.bind(FitWindowsLinearLayoutScope))
-abstract class FitWindowsLinearLayoutScope : LinearLayoutScope() {
+abstract class FitWindowsLinearLayoutScope {
   fun onFitSystemWindows(arg: ((arg0: Rect) -> Unit)?): Unit = attr("onFitSystemWindows", arg)
   companion object : FitWindowsLinearLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun linearLayoutCompat(configure: LinearLayoutCompatScope.() -> Unit = {}) =
     v<LinearLayoutCompat>(configure.bind(LinearLayoutCompatScope))
-abstract class LinearLayoutCompatScope : ViewGroupScope() {
+abstract class LinearLayoutCompatScope {
   fun baselineAligned(arg: Boolean): Unit = attr("baselineAligned", arg)
   fun baselineAlignedChildIndex(arg: Int): Unit = attr("baselineAlignedChildIndex", arg)
   fun dividerDrawable(arg: Drawable): Unit = attr("dividerDrawable", arg)
@@ -413,25 +467,29 @@ abstract class LinearLayoutCompatScope : ViewGroupScope() {
   fun weightSum(arg: Float): Unit = attr("weightSum", arg)
   companion object : LinearLayoutCompatScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun scrollingTabContainerView(configure: ScrollingTabContainerViewScope.() -> Unit = {}) =
     v<ScrollingTabContainerView>(configure.bind(ScrollingTabContainerViewScope))
-abstract class ScrollingTabContainerViewScope : HorizontalScrollViewScope() {
+abstract class ScrollingTabContainerViewScope {
   fun allowCollapse(arg: Boolean): Unit = attr("allowCollapse", arg)
   fun contentHeight(arg: Int): Unit = attr("contentHeight", arg)
   fun tabSelected(arg: Int): Unit = attr("tabSelected", arg)
   companion object : ScrollingTabContainerViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun switchCompat(configure: SwitchCompatScope.() -> Unit = {}) =
     v<SwitchCompat>(configure.bind(SwitchCompatScope))
-abstract class SwitchCompatScope : CompoundButtonScope() {
+abstract class SwitchCompatScope {
   fun showText(arg: Boolean): Unit = attr("showText", arg)
   fun splitTrack(arg: Boolean): Unit = attr("splitTrack", arg)
   fun switchMinWidth(arg: Int): Unit = attr("switchMinWidth", arg)
@@ -450,26 +508,28 @@ abstract class SwitchCompatScope : CompoundButtonScope() {
   fun trackTintMode(arg: PorterDuff.Mode?): Unit = attr("trackTintMode", arg)
   companion object : SwitchCompatScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun toolbar(configure: ToolbarScope.() -> Unit = {}) = v<Toolbar>(configure.bind(ToolbarScope))
-abstract class ToolbarScope : ViewGroupScope() {
-  fun collapseContentDescription(arg: Int): Unit = attr("collapseContentDescription", arg)
+abstract class ToolbarScope {
   fun collapseContentDescription(arg: CharSequence?): Unit = attr("collapseContentDescription", arg)
+  fun collapseContentDescription(arg: Int): Unit = attr("collapseContentDescription", arg)
   fun collapseIcon(arg: Drawable?): Unit = attr("collapseIcon", arg)
   fun collapseIcon(arg: Int): Unit = attr("collapseIcon", arg)
   fun collapsible(arg: Boolean): Unit = attr("collapsible", arg)
   fun contentInsetEndWithActions(arg: Int): Unit = attr("contentInsetEndWithActions", arg)
   fun contentInsetStartWithNavigation(arg: Int): Unit = attr("contentInsetStartWithNavigation", arg)
-  fun logo(arg: Int): Unit = attr("logo", arg)
   fun logo(arg: Drawable): Unit = attr("logo", arg)
-  fun logoDescription(arg: Int): Unit = attr("logoDescription", arg)
+  fun logo(arg: Int): Unit = attr("logo", arg)
   fun logoDescription(arg: CharSequence): Unit = attr("logoDescription", arg)
-  fun navigationContentDescription(arg: Int): Unit = attr("navigationContentDescription", arg)
+  fun logoDescription(arg: Int): Unit = attr("logoDescription", arg)
   fun navigationContentDescription(arg: CharSequence?): Unit = attr("navigationContentDescription",
       arg)
+  fun navigationContentDescription(arg: Int): Unit = attr("navigationContentDescription", arg)
   fun navigationIcon(arg: Drawable?): Unit = attr("navigationIcon", arg)
   fun navigationIcon(arg: Int): Unit = attr("navigationIcon", arg)
   fun navigationOnClickListener(arg: View.OnClickListener): Unit = attr("navigationOnClickListener",
@@ -477,34 +537,38 @@ abstract class ToolbarScope : ViewGroupScope() {
   fun onMenuItemClick(arg: ((arg0: MenuItem) -> Boolean)?): Unit = attr("onMenuItemClick", arg)
   fun overflowIcon(arg: Drawable?): Unit = attr("overflowIcon", arg)
   fun popupTheme(arg: Int): Unit = attr("popupTheme", arg)
-  fun subtitle(arg: Int): Unit = attr("subtitle", arg)
   fun subtitle(arg: CharSequence): Unit = attr("subtitle", arg)
-  fun subtitleTextColor(arg: Int): Unit = attr("subtitleTextColor", arg)
+  fun subtitle(arg: Int): Unit = attr("subtitle", arg)
   fun subtitleTextColor(arg: ColorStateList): Unit = attr("subtitleTextColor", arg)
+  fun subtitleTextColor(arg: Int): Unit = attr("subtitleTextColor", arg)
   fun title(arg: CharSequence): Unit = attr("title", arg)
   fun title(arg: Int): Unit = attr("title", arg)
   fun titleMarginBottom(arg: Int): Unit = attr("titleMarginBottom", arg)
   fun titleMarginEnd(arg: Int): Unit = attr("titleMarginEnd", arg)
   fun titleMarginStart(arg: Int): Unit = attr("titleMarginStart", arg)
   fun titleMarginTop(arg: Int): Unit = attr("titleMarginTop", arg)
-  fun titleTextColor(arg: Int): Unit = attr("titleTextColor", arg)
   fun titleTextColor(arg: ColorStateList): Unit = attr("titleTextColor", arg)
+  fun titleTextColor(arg: Int): Unit = attr("titleTextColor", arg)
   companion object : ToolbarScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
 fun viewStubCompat(configure: ViewStubCompatScope.() -> Unit = {}) =
     v<ViewStubCompat>(configure.bind(ViewStubCompatScope))
-abstract class ViewStubCompatScope : ViewScope() {
+abstract class ViewStubCompatScope {
   fun inflatedId(arg: Int): Unit = attr("inflatedId", arg)
   fun layoutInflater(arg: LayoutInflater): Unit = attr("layoutInflater", arg)
   fun layoutResource(arg: Int): Unit = attr("layoutResource", arg)
   fun onInflate(arg: ((arg0: ViewStubCompat, arg1: View) -> Unit)?): Unit = attr("onInflate", arg)
   companion object : ViewStubCompatScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
+      Anvil.registerAttributeSetter(AppCompatv7Setter)
+      Anvil.registerAttributeSetter(AppcompatV7DslSetter)
+    }
   }
 }
 
@@ -516,11 +580,6 @@ abstract class ViewStubCompatScope : ViewScope() {
  * Please, don't edit it manually unless for debugging.
  */
 object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
-  init {
-    Anvil.registerAttributeSetter(this)
-    Anvil.registerAttributeSetter(AppcompatV7DslSetter)
-  }
-
   override fun set(
     v: View,
     name: String,
@@ -749,7 +808,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MenuItem) -> Boolean
+          arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -763,7 +822,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MenuItem) -> Boolean
+          arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -774,11 +833,11 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "overflowIcon" -> when {
-      v is ActionMenuView && (arg == null || arg is Drawable) -> {
+      v is ActionMenuView && arg is Drawable? -> {
         v.setOverflowIcon(arg as Drawable)
         true
       }
-      v is Toolbar && (arg == null || arg is Drawable) -> {
+      v is Toolbar && arg is Drawable? -> {
         v.setOverflowIcon(arg as Drawable)
         true
       }
@@ -837,7 +896,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as () -> Unit
+          arg as (() -> Unit)?
           v.setOnDismissListener {  ->
             arg().also { Anvil.render() }
           }
@@ -855,86 +914,86 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "supportBackgroundTintList" -> when {
-      v is AppCompatAutoCompleteTextView && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatAutoCompleteTextView && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatButton && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatButton && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatCheckBox && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatCheckBox && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatEditText && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatEditText && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatImageButton && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatImageButton && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatImageView && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatImageView && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatMultiAutoCompleteTextView && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatMultiAutoCompleteTextView && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatRadioButton && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatRadioButton && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatSpinner && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatSpinner && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatTextView && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatTextView && arg is ColorStateList? -> {
         v.setSupportBackgroundTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "supportBackgroundTintMode" -> when {
-      v is AppCompatAutoCompleteTextView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatAutoCompleteTextView && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatButton && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatCheckBox && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatCheckBox && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatEditText && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatEditText && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatImageButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatImageButton && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatImageView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatImageView && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatMultiAutoCompleteTextView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatMultiAutoCompleteTextView && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatRadioButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatRadioButton && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatSpinner && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatSpinner && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatTextView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatTextView && arg is PorterDuff.Mode? -> {
         v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -948,44 +1007,44 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "supportButtonTintList" -> when {
-      v is AppCompatCheckBox && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatCheckBox && arg is ColorStateList? -> {
         v.setSupportButtonTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatRadioButton && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatRadioButton && arg is ColorStateList? -> {
         v.setSupportButtonTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "supportButtonTintMode" -> when {
-      v is AppCompatCheckBox && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatCheckBox && arg is PorterDuff.Mode? -> {
         v.setSupportButtonTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatRadioButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatRadioButton && arg is PorterDuff.Mode? -> {
         v.setSupportButtonTintMode(arg as PorterDuff.Mode)
         true
       }
       else -> false
     }
     "supportImageTintList" -> when {
-      v is AppCompatImageButton && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatImageButton && arg is ColorStateList? -> {
         v.setSupportImageTintList(arg as ColorStateList)
         true
       }
-      v is AppCompatImageView && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatImageView && arg is ColorStateList? -> {
         v.setSupportImageTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "supportImageTintMode" -> when {
-      v is AppCompatImageButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatImageButton && arg is PorterDuff.Mode? -> {
         v.setSupportImageTintMode(arg as PorterDuff.Mode)
         true
       }
-      v is AppCompatImageView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatImageView && arg is PorterDuff.Mode? -> {
         v.setSupportImageTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -999,14 +1058,14 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "supportCompoundDrawablesTintList" -> when {
-      v is AppCompatTextView && (arg == null || arg is ColorStateList) -> {
+      v is AppCompatTextView && arg is ColorStateList? -> {
         v.setSupportCompoundDrawablesTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "supportCompoundDrawablesTintMode" -> when {
-      v is AppCompatTextView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AppCompatTextView && arg is PorterDuff.Mode? -> {
         v.setSupportCompoundDrawablesTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -1033,7 +1092,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: Rect) -> Unit
+          arg as ((arg0: Rect) -> Unit)?
           v.setOnFitSystemWindowsListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -1047,7 +1106,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: Rect) -> Unit
+          arg as ((arg0: Rect) -> Unit)?
           v.setOnFitSystemWindowsListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -1226,14 +1285,14 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "thumbTintList" -> when {
-      v is SwitchCompat && (arg == null || arg is ColorStateList) -> {
+      v is SwitchCompat && arg is ColorStateList? -> {
         v.setThumbTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "thumbTintMode" -> when {
-      v is SwitchCompat && (arg == null || arg is PorterDuff.Mode) -> {
+      v is SwitchCompat && arg is PorterDuff.Mode? -> {
         v.setThumbTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -1254,21 +1313,21 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "trackTintList" -> when {
-      v is SwitchCompat && (arg == null || arg is ColorStateList) -> {
+      v is SwitchCompat && arg is ColorStateList? -> {
         v.setTrackTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "trackTintMode" -> when {
-      v is SwitchCompat && (arg == null || arg is PorterDuff.Mode) -> {
+      v is SwitchCompat && arg is PorterDuff.Mode? -> {
         v.setTrackTintMode(arg as PorterDuff.Mode)
         true
       }
       else -> false
     }
     "collapseContentDescription" -> when {
-      v is Toolbar && (arg == null || arg is CharSequence) -> {
+      v is Toolbar && arg is CharSequence? -> {
         v.setCollapseContentDescription(arg as CharSequence)
         true
       }
@@ -1279,7 +1338,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "collapseIcon" -> when {
-      v is Toolbar && (arg == null || arg is Drawable) -> {
+      v is Toolbar && arg is Drawable? -> {
         v.setCollapseIcon(arg as Drawable)
         true
       }
@@ -1322,7 +1381,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "navigationContentDescription" -> when {
-      v is Toolbar && (arg == null || arg is CharSequence) -> {
+      v is Toolbar && arg is CharSequence? -> {
         v.setNavigationContentDescription(arg as CharSequence)
         true
       }
@@ -1333,7 +1392,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "navigationIcon" -> when {
-      v is Toolbar && (arg == null || arg is Drawable) -> {
+      v is Toolbar && arg is Drawable? -> {
         v.setNavigationIcon(arg as Drawable)
         true
       }
@@ -1439,7 +1498,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: ViewStubCompat, arg1: View) -> Unit
+          arg as ((arg0: ViewStubCompat, arg1: View) -> Unit)?
           v.setOnInflateListener { arg0, arg1 ->
             arg(arg0, arg1).also { Anvil.render() }
           }

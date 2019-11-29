@@ -155,7 +155,9 @@ abstract class FragmentBreadCrumbsScope : ViewGroupScope() {
       = attr("onBreadCrumbClick", arg)
   companion object : FragmentBreadCrumbsScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -167,7 +169,9 @@ abstract class MediaRouteButtonScope : ViewScope() {
   fun routeTypes(arg: Int): Unit = attr("routeTypes", arg)
   companion object : MediaRouteButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -176,7 +180,9 @@ fun appWidgetHostView(configure: AppWidgetHostViewScope.() -> Unit = {}) =
 abstract class AppWidgetHostViewScope : FrameLayoutScope() {
   companion object : AppWidgetHostViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -199,7 +205,9 @@ abstract class GestureOverlayViewScope : FrameLayoutScope() {
   fun uncertainGestureColor(arg: Int): Unit = attr("uncertainGestureColor", arg)
   companion object : GestureOverlayViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -208,7 +216,9 @@ fun extractEditText(configure: ExtractEditTextScope.() -> Unit = {}) =
 abstract class ExtractEditTextScope : EditTextScope() {
   companion object : ExtractEditTextScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -225,7 +235,9 @@ abstract class KeyboardViewScope : ViewScope() {
   fun verticalCorrection(arg: Int): Unit = attr("verticalCorrection", arg)
   companion object : KeyboardViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -238,7 +250,9 @@ abstract class TvViewScope : ViewGroupScope() {
   fun streamVolume(arg: Float): Unit = attr("streamVolume", arg)
   companion object : TvViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -246,8 +260,8 @@ fun gLSurfaceView(configure: GLSurfaceViewScope.() -> Unit = {}) =
     v<GLSurfaceView>(configure.bind(GLSurfaceViewScope))
 abstract class GLSurfaceViewScope : SurfaceViewScope() {
   fun debugFlags(arg: Int): Unit = attr("debugFlags", arg)
-  fun eGLConfigChooser(arg: Boolean): Unit = attr("eGLConfigChooser", arg)
   fun eGLConfigChooser(arg: GLSurfaceView.EGLConfigChooser): Unit = attr("eGLConfigChooser", arg)
+  fun eGLConfigChooser(arg: Boolean): Unit = attr("eGLConfigChooser", arg)
   fun eGLContextClientVersion(arg: Int): Unit = attr("eGLContextClientVersion", arg)
   fun eGLContextFactory(arg: GLSurfaceView.EGLContextFactory): Unit = attr("eGLContextFactory", arg)
   fun eGLWindowSurfaceFactory(arg: GLSurfaceView.EGLWindowSurfaceFactory): Unit =
@@ -258,7 +272,9 @@ abstract class GLSurfaceViewScope : SurfaceViewScope() {
   fun renderer(arg: GLSurfaceView.Renderer): Unit = attr("renderer", arg)
   companion object : GLSurfaceViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -270,7 +286,9 @@ abstract class SurfaceViewScope : ViewScope() {
   fun zOrderOnTop(arg: Boolean): Unit = attr("zOrderOnTop", arg)
   companion object : SurfaceViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -284,7 +302,9 @@ abstract class TextureViewScope : ViewScope() {
   fun transform(arg: Matrix): Unit = attr("transform", arg)
   companion object : TextureViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -407,7 +427,9 @@ abstract class ViewScope : RootViewScope() {
   fun z(arg: Float): Unit = attr("z", arg)
   companion object : ViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -433,7 +455,9 @@ abstract class ViewGroupScope : ViewScope() {
   fun transitionGroup(arg: Boolean): Unit = attr("transitionGroup", arg)
   companion object : ViewGroupScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -445,7 +469,9 @@ abstract class ViewStubScope : ViewScope() {
   fun onInflate(arg: ((arg0: ViewStub, arg1: View) -> Unit)?): Unit = attr("onInflate", arg)
   companion object : ViewStubScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -461,7 +487,9 @@ abstract class WebViewScope : AbsoluteLayoutScope() {
   fun webViewClient(arg: WebViewClient): Unit = attr("webViewClient", arg)
   companion object : WebViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -482,8 +510,8 @@ abstract class AbsListViewScope : AdapterViewScope() {
   fun recyclerListener(arg: AbsListView.RecyclerListener): Unit = attr("recyclerListener", arg)
   fun remoteViewsAdapter(arg: Intent): Unit = attr("remoteViewsAdapter", arg)
   fun scrollingCacheEnabled(arg: Boolean): Unit = attr("scrollingCacheEnabled", arg)
-  fun selector(arg: Int): Unit = attr("selector", arg)
   fun selector(arg: Drawable): Unit = attr("selector", arg)
+  fun selector(arg: Int): Unit = attr("selector", arg)
   fun smoothScrollbarEnabled(arg: Boolean): Unit = attr("smoothScrollbarEnabled", arg)
   fun stackFromBottom(arg: Boolean): Unit = attr("stackFromBottom", arg)
   fun textFilterEnabled(arg: Boolean): Unit = attr("textFilterEnabled", arg)
@@ -491,7 +519,9 @@ abstract class AbsListViewScope : AdapterViewScope() {
   fun velocityScale(arg: Float): Unit = attr("velocityScale", arg)
   companion object : AbsListViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -506,7 +536,9 @@ abstract class AbsSeekBarScope : ProgressBarScope() {
   fun thumbTintMode(arg: PorterDuff.Mode?): Unit = attr("thumbTintMode", arg)
   companion object : AbsSeekBarScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -515,7 +547,9 @@ fun absSpinner(configure: AbsSpinnerScope.() -> Unit = {}) =
 abstract class AbsSpinnerScope : AdapterViewScope() {
   companion object : AbsSpinnerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -524,7 +558,9 @@ fun absoluteLayout(configure: AbsoluteLayoutScope.() -> Unit = {}) =
 abstract class AbsoluteLayoutScope : ViewGroupScope() {
   companion object : AbsoluteLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -535,7 +571,9 @@ abstract class ActionMenuViewScope : LinearLayoutScope() {
   fun popupTheme(arg: Int): Unit = attr("popupTheme", arg)
   companion object : ActionMenuViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -560,7 +598,9 @@ abstract class AdapterViewScope : ViewGroupScope() {
   fun selection(arg: Int): Unit = attr("selection", arg)
   companion object : AdapterViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -574,7 +614,9 @@ abstract class AdapterViewAnimatorScope : AdapterViewScope() {
   fun remoteViewsAdapter(arg: Intent): Unit = attr("remoteViewsAdapter", arg)
   companion object : AdapterViewAnimatorScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -585,7 +627,9 @@ abstract class AdapterViewFlipperScope : AdapterViewAnimatorScope() {
   fun flipInterval(arg: Int): Unit = attr("flipInterval", arg)
   companion object : AdapterViewFlipperScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -594,7 +638,9 @@ fun analogClock(configure: AnalogClockScope.() -> Unit = {}) =
 abstract class AnalogClockScope : ViewScope() {
   companion object : AnalogClockScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -622,7 +668,9 @@ abstract class AutoCompleteTextViewScope : EditTextScope() {
   fun validator(arg: AutoCompleteTextView.Validator): Unit = attr("validator", arg)
   companion object : AutoCompleteTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -630,7 +678,9 @@ fun button(configure: ButtonScope.() -> Unit = {}) = v<Button>(configure.bind(Bu
 abstract class ButtonScope : TextViewScope() {
   companion object : ButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -660,7 +710,9 @@ abstract class CalendarViewScope : FrameLayoutScope() {
   fun weekSeparatorLineColor(arg: Int): Unit = attr("weekSeparatorLineColor", arg)
   companion object : CalendarViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -668,21 +720,25 @@ fun checkBox(configure: CheckBoxScope.() -> Unit = {}) = v<CheckBox>(configure.b
 abstract class CheckBoxScope : CompoundButtonScope() {
   companion object : CheckBoxScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
 fun checkedTextView(configure: CheckedTextViewScope.() -> Unit = {}) =
     v<CheckedTextView>(configure.bind(CheckedTextViewScope))
 abstract class CheckedTextViewScope : TextViewScope() {
-  fun checkMarkDrawable(arg: Int): Unit = attr("checkMarkDrawable", arg)
   fun checkMarkDrawable(arg: Drawable?): Unit = attr("checkMarkDrawable", arg)
+  fun checkMarkDrawable(arg: Int): Unit = attr("checkMarkDrawable", arg)
   fun checkMarkTintList(arg: ColorStateList?): Unit = attr("checkMarkTintList", arg)
   fun checkMarkTintMode(arg: PorterDuff.Mode?): Unit = attr("checkMarkTintMode", arg)
   fun checked(arg: Boolean): Unit = attr("checked", arg)
   companion object : CheckedTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -694,7 +750,9 @@ abstract class ChronometerScope : TextViewScope() {
   fun onChronometerTick(arg: ((arg0: Chronometer) -> Unit)?): Unit = attr("onChronometerTick", arg)
   companion object : ChronometerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -710,7 +768,9 @@ abstract class CompoundButtonScope : ButtonScope() {
       attr("onCheckedChange", arg)
   companion object : CompoundButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -724,7 +784,9 @@ abstract class DatePickerScope : FrameLayoutScope() {
   fun spinnersShown(arg: Boolean): Unit = attr("spinnersShown", arg)
   companion object : DatePickerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -737,7 +799,9 @@ abstract class DialerFilterScope : RelativeLayoutScope() {
   fun mode(arg: Int): Unit = attr("mode", arg)
   companion object : DialerFilterScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -746,7 +810,9 @@ fun digitalClock(configure: DigitalClockScope.() -> Unit = {}) =
 abstract class DigitalClockScope : TextViewScope() {
   companion object : DigitalClockScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -755,7 +821,9 @@ abstract class EditTextScope : TextViewScope() {
   fun selection(arg: Int): Unit = attr("selection", arg)
   companion object : EditTextScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -784,7 +852,9 @@ abstract class ExpandableListViewScope : ListViewScope() {
   fun selectedGroup(arg: Int): Unit = attr("selectedGroup", arg)
   companion object : ExpandableListViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -798,7 +868,9 @@ abstract class FrameLayoutScope : ViewGroupScope() {
   fun measureAllChildren(arg: Boolean): Unit = attr("measureAllChildren", arg)
   companion object : FrameLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -811,7 +883,9 @@ abstract class GalleryScope : AbsSpinnerScope() {
   fun unselectedAlpha(arg: Float): Unit = attr("unselectedAlpha", arg)
   companion object : GalleryScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -827,7 +901,9 @@ abstract class GridLayoutScope : ViewGroupScope() {
   fun useDefaultMargins(arg: Boolean): Unit = attr("useDefaultMargins", arg)
   companion object : GridLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -841,7 +917,9 @@ abstract class GridViewScope : AbsListViewScope() {
   fun verticalSpacing(arg: Int): Unit = attr("verticalSpacing", arg)
   companion object : GridViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -852,7 +930,9 @@ abstract class HorizontalScrollViewScope : FrameLayoutScope() {
   fun smoothScrollingEnabled(arg: Boolean): Unit = attr("smoothScrollingEnabled", arg)
   companion object : HorizontalScrollViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -861,7 +941,9 @@ fun imageButton(configure: ImageButtonScope.() -> Unit = {}) =
 abstract class ImageButtonScope : ImageViewScope() {
   companion object : ImageButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -873,7 +955,9 @@ abstract class ImageSwitcherScope : ViewSwitcherScope() {
   fun imageURI(arg: Uri): Unit = attr("imageURI", arg)
   companion object : ImageSwitcherScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -900,7 +984,9 @@ abstract class ImageViewScope : ViewScope() {
   fun scaleType(arg: ImageView.ScaleType): Unit = attr("scaleType", arg)
   companion object : ImageViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -921,7 +1007,9 @@ abstract class LinearLayoutScope : ViewGroupScope() {
   fun weightSum(arg: Float): Unit = attr("weightSum", arg)
   companion object : LinearLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -936,7 +1024,9 @@ abstract class ListViewScope : AbsListViewScope() {
   fun overscrollHeader(arg: Drawable): Unit = attr("overscrollHeader", arg)
   companion object : ListViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -947,7 +1037,9 @@ abstract class MediaControllerScope : FrameLayoutScope() {
   fun mediaPlayer(arg: MediaController.MediaPlayerControl): Unit = attr("mediaPlayer", arg)
   companion object : MediaControllerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -957,7 +1049,9 @@ abstract class MultiAutoCompleteTextViewScope : AutoCompleteTextViewScope() {
   fun tokenizer(arg: MultiAutoCompleteTextView.Tokenizer): Unit = attr("tokenizer", arg)
   companion object : MultiAutoCompleteTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -979,7 +1073,9 @@ abstract class NumberPickerScope : LinearLayoutScope() {
   fun wrapSelectorWheel(arg: Boolean): Unit = attr("wrapSelectorWheel", arg)
   companion object : NumberPickerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1008,7 +1104,9 @@ abstract class ProgressBarScope : ViewScope() {
       arg)
   companion object : ProgressBarScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1020,7 +1118,9 @@ abstract class QuickContactBadgeScope : ImageViewScope() {
   fun overlay(arg: Drawable): Unit = attr("overlay", arg)
   companion object : QuickContactBadgeScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1029,7 +1129,9 @@ fun radioButton(configure: RadioButtonScope.() -> Unit = {}) =
 abstract class RadioButtonScope : CompoundButtonScope() {
   companion object : RadioButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1040,7 +1142,9 @@ abstract class RadioGroupScope : LinearLayoutScope() {
       arg)
   companion object : RadioGroupScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1058,7 +1162,9 @@ abstract class RatingBarScope : AbsSeekBarScope() {
   fun stepSize(arg: Float): Unit = attr("stepSize", arg)
   companion object : RatingBarScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1071,7 +1177,9 @@ abstract class RelativeLayoutScope : ViewGroupScope() {
   fun verticalGravity(arg: Int): Unit = attr("verticalGravity", arg)
   companion object : RelativeLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1082,7 +1190,9 @@ abstract class ScrollViewScope : FrameLayoutScope() {
   fun smoothScrollingEnabled(arg: Boolean): Unit = attr("smoothScrollingEnabled", arg)
   companion object : ScrollViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1095,9 +1205,9 @@ abstract class SearchViewScope : LinearLayoutScope() {
   fun inputType(arg: Int): Unit = attr("inputType", arg)
   fun maxWidth(arg: Int): Unit = attr("maxWidth", arg)
   fun onClose(arg: (() -> Boolean)?): Unit = attr("onClose", arg)
+  fun onQueryText(arg: SearchView.OnQueryTextListener?): Unit = attr("onQueryText", arg)
   fun onQueryTextFocusChange(arg: ((arg0: View, arg1: Boolean) -> Unit)?): Unit =
       attr("onQueryTextFocusChange", arg)
-  fun onQueryText(arg: SearchView.OnQueryTextListener?): Unit = attr("onQueryText", arg)
   fun onSearchClick(arg: ((arg0: View) -> Unit)?): Unit = attr("onSearchClick", arg)
   fun onSuggestion(arg: SearchView.OnSuggestionListener?): Unit = attr("onSuggestion", arg)
   fun queryHint(arg: CharSequence?): Unit = attr("queryHint", arg)
@@ -1107,7 +1217,9 @@ abstract class SearchViewScope : LinearLayoutScope() {
   fun suggestionsAdapter(arg: CursorAdapter): Unit = attr("suggestionsAdapter", arg)
   companion object : SearchViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1116,7 +1228,9 @@ abstract class SeekBarScope : AbsSeekBarScope() {
   fun onSeekBarChange(arg: SeekBar.OnSeekBarChangeListener?): Unit = attr("onSeekBarChange", arg)
   companion object : SeekBarScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1128,7 +1242,9 @@ abstract class SlidingDrawerScope : ViewGroupScope() {
   fun onDrawerScroll(arg: SlidingDrawer.OnDrawerScrollListener?): Unit = attr("onDrawerScroll", arg)
   companion object : SlidingDrawerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1136,7 +1252,9 @@ fun space(configure: SpaceScope.() -> Unit = {}) = v<Space>(configure.bind(Space
 abstract class SpaceScope : ViewScope() {
   companion object : SpaceScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1152,7 +1270,9 @@ abstract class SpinnerScope : AbsSpinnerScope() {
   fun promptId(arg: Int): Unit = attr("promptId", arg)
   companion object : SpinnerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1161,7 +1281,9 @@ fun stackView(configure: StackViewScope.() -> Unit = {}) =
 abstract class StackViewScope : AdapterViewAnimatorScope() {
   companion object : StackViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1182,7 +1304,9 @@ abstract class SwitchViewScope : CompoundButtonScope() {
   fun trackResource(arg: Int): Unit = attr("trackResource", arg)
   companion object : SwitchViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1193,7 +1317,9 @@ abstract class TabHostScope : FrameLayoutScope() {
   fun onTabChanged(arg: ((arg0: String) -> Unit)?): Unit = attr("onTabChanged", arg)
   companion object : TabHostScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1204,12 +1330,14 @@ abstract class TabWidgetScope : LinearLayoutScope() {
   fun dividerDrawable(arg: Int): Unit = attr("dividerDrawable", arg)
   fun leftStripDrawable(arg: Drawable?): Unit = attr("leftStripDrawable", arg)
   fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
-  fun rightStripDrawable(arg: Int): Unit = attr("rightStripDrawable", arg)
   fun rightStripDrawable(arg: Drawable?): Unit = attr("rightStripDrawable", arg)
+  fun rightStripDrawable(arg: Int): Unit = attr("rightStripDrawable", arg)
   fun stripEnabled(arg: Boolean): Unit = attr("stripEnabled", arg)
   companion object : TabWidgetScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1220,7 +1348,9 @@ abstract class TableLayoutScope : LinearLayoutScope() {
   fun stretchAllColumns(arg: Boolean): Unit = attr("stretchAllColumns", arg)
   companion object : TableLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1228,7 +1358,9 @@ fun tableRow(configure: TableRowScope.() -> Unit = {}) = v<TableRow>(configure.b
 abstract class TableRowScope : LinearLayoutScope() {
   companion object : TableRowScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1240,7 +1372,9 @@ abstract class TextClockScope : TextViewScope() {
   fun timeZone(arg: String): Unit = attr("timeZone", arg)
   companion object : TextClockScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1251,7 +1385,9 @@ abstract class TextSwitcherScope : ViewSwitcherScope() {
   fun text(arg: CharSequence): Unit = attr("text", arg)
   companion object : TextSwitcherScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1275,10 +1411,10 @@ abstract class TextViewScope : ViewScope() {
   fun gravity(arg: Int): Unit = attr("gravity", arg)
   fun height(arg: Int): Unit = attr("height", arg)
   fun highlightColor(arg: Int): Unit = attr("highlightColor", arg)
-  fun hint(arg: Int): Unit = attr("hint", arg)
   fun hint(arg: CharSequence): Unit = attr("hint", arg)
-  fun hintTextColor(arg: Int): Unit = attr("hintTextColor", arg)
+  fun hint(arg: Int): Unit = attr("hint", arg)
   fun hintTextColor(arg: ColorStateList): Unit = attr("hintTextColor", arg)
+  fun hintTextColor(arg: Int): Unit = attr("hintTextColor", arg)
   fun horizontallyScrolling(arg: Boolean): Unit = attr("horizontallyScrolling", arg)
   fun imeOptions(arg: Int): Unit = attr("imeOptions", arg)
   fun includeFontPadding(arg: Boolean): Unit = attr("includeFontPadding", arg)
@@ -1286,8 +1422,8 @@ abstract class TextViewScope : ViewScope() {
   fun keyListener(arg: KeyListener): Unit = attr("keyListener", arg)
   fun letterSpacing(arg: Float): Unit = attr("letterSpacing", arg)
   fun lines(arg: Int): Unit = attr("lines", arg)
-  fun linkTextColor(arg: Int): Unit = attr("linkTextColor", arg)
   fun linkTextColor(arg: ColorStateList): Unit = attr("linkTextColor", arg)
+  fun linkTextColor(arg: Int): Unit = attr("linkTextColor", arg)
   fun linksClickable(arg: Boolean): Unit = attr("linksClickable", arg)
   fun marqueeRepeatLimit(arg: Int): Unit = attr("marqueeRepeatLimit", arg)
   fun maxEms(arg: Int): Unit = attr("maxEms", arg)
@@ -1313,8 +1449,8 @@ abstract class TextViewScope : ViewScope() {
   fun singleLine(arg: Boolean): Unit = attr("singleLine", arg)
   fun spannableFactory(arg: Spannable.Factory): Unit = attr("spannableFactory", arg)
   fun text(arg: Int): Unit = attr("text", arg)
-  fun textColor(arg: Int): Unit = attr("textColor", arg)
   fun textColor(arg: ColorStateList): Unit = attr("textColor", arg)
+  fun textColor(arg: Int): Unit = attr("textColor", arg)
   fun textIsSelectable(arg: Boolean): Unit = attr("textIsSelectable", arg)
   fun textKeepState(arg: CharSequence): Unit = attr("textKeepState", arg)
   fun textLocale(arg: Locale): Unit = attr("textLocale", arg)
@@ -1324,7 +1460,9 @@ abstract class TextViewScope : ViewScope() {
   fun width(arg: Int): Unit = attr("width", arg)
   companion object : TextViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1341,7 +1479,9 @@ abstract class TimePickerScope : FrameLayoutScope() {
   ) -> Unit)?): Unit = attr("onTimeChanged", arg)
   companion object : TimePickerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1352,7 +1492,9 @@ abstract class ToggleButtonScope : CompoundButtonScope() {
   fun textOn(arg: CharSequence): Unit = attr("textOn", arg)
   companion object : ToggleButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1360,11 +1502,11 @@ fun toolbar(configure: ToolbarScope.() -> Unit = {}) = v<Toolbar>(configure.bind
 abstract class ToolbarScope : ViewGroupScope() {
   fun logo(arg: Drawable): Unit = attr("logo", arg)
   fun logo(arg: Int): Unit = attr("logo", arg)
-  fun logoDescription(arg: Int): Unit = attr("logoDescription", arg)
   fun logoDescription(arg: CharSequence): Unit = attr("logoDescription", arg)
-  fun navigationContentDescription(arg: Int): Unit = attr("navigationContentDescription", arg)
+  fun logoDescription(arg: Int): Unit = attr("logoDescription", arg)
   fun navigationContentDescription(arg: CharSequence?): Unit = attr("navigationContentDescription",
       arg)
+  fun navigationContentDescription(arg: Int): Unit = attr("navigationContentDescription", arg)
   fun navigationIcon(arg: Drawable?): Unit = attr("navigationIcon", arg)
   fun navigationIcon(arg: Int): Unit = attr("navigationIcon", arg)
   fun navigationOnClickListener(arg: View.OnClickListener): Unit = attr("navigationOnClickListener",
@@ -1379,7 +1521,9 @@ abstract class ToolbarScope : ViewGroupScope() {
   fun titleTextColor(arg: Int): Unit = attr("titleTextColor", arg)
   companion object : ToolbarScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1388,7 +1532,9 @@ fun twoLineListItem(configure: TwoLineListItemScope.() -> Unit = {}) =
 abstract class TwoLineListItemScope : RelativeLayoutScope() {
   companion object : TwoLineListItemScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1412,7 +1558,9 @@ abstract class VideoViewScope : SurfaceViewScope() {
   fun videoURI(arg: Uri): Unit = attr("videoURI", arg)
   companion object : VideoViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1425,7 +1573,9 @@ abstract class ViewAnimatorScope : FrameLayoutScope() {
   fun outAnimation(arg: Animation): Unit = attr("outAnimation", arg)
   companion object : ViewAnimatorScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1436,7 +1586,9 @@ abstract class ViewFlipperScope : ViewAnimatorScope() {
   fun flipInterval(arg: Int): Unit = attr("flipInterval", arg)
   companion object : ViewFlipperScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1446,7 +1598,9 @@ abstract class ViewSwitcherScope : ViewAnimatorScope() {
   fun factory(arg: ViewSwitcher.ViewFactory): Unit = attr("factory", arg)
   companion object : ViewSwitcherScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1456,7 +1610,9 @@ abstract class ZoomButtonScope : ImageButtonScope() {
   fun zoomSpeed(arg: Long): Unit = attr("zoomSpeed", arg)
   companion object : ZoomButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1470,7 +1626,9 @@ abstract class ZoomControlsScope : LinearLayoutScope() {
   fun zoomSpeed(arg: Long): Unit = attr("zoomSpeed", arg)
   companion object : ZoomControlsScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)}
+      Anvil.registerAttributeSetter(SdkSetter)
+      Anvil.registerAttributeSetter(CustomDslSetter)
+    }
   }
 }
 
@@ -1482,11 +1640,6 @@ abstract class ZoomControlsScope : LinearLayoutScope() {
  * Please, don't edit it manually unless for debugging.
  */
 object SdkSetter : Anvil.AttributeSetter<Any?> {
-  init {
-    Anvil.registerAttributeSetter(this)
-    Anvil.registerAttributeSetter(CustomDslSetter)
-  }
-
   override fun set(
     v: View,
     name: String,
@@ -1514,7 +1667,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: FragmentManager.BackStackEntry, arg1: Int) -> Boolean
+          arg as ((arg0: FragmentManager.BackStackEntry, arg1: Int) -> Boolean)?
           v.setOnBreadCrumbClickListener { arg0, arg1 ->
             arg(arg0, arg1).also { Anvil.render() }
           }
@@ -1711,7 +1864,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "callback" -> when {
-      v is TvView && (arg == null || arg is TvView.TvInputCallback) -> {
+      v is TvView && arg is TvView.TvInputCallback? -> {
         v.setCallback(arg as TvView.TvInputCallback)
         true
       }
@@ -1731,7 +1884,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: InputEvent) -> Boolean
+          arg as ((arg0: InputEvent) -> Boolean)?
           v.setOnUnhandledInputEventListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -1756,11 +1909,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "eGLConfigChooser" -> when {
-      v is GLSurfaceView && arg is Boolean -> {
+      v is GLSurfaceView && arg is GLSurfaceView.EGLConfigChooser -> {
         v.setEGLConfigChooser(arg)
         true
       }
-      v is GLSurfaceView && arg is GLSurfaceView.EGLConfigChooser -> {
+      v is GLSurfaceView && arg is Boolean -> {
         v.setEGLConfigChooser(arg)
         true
       }
@@ -1865,7 +2018,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "accessibilityDelegate" -> when {
-      (arg == null || arg is View.AccessibilityDelegate) -> {
+      arg is View.AccessibilityDelegate? -> {
         v.setAccessibilityDelegate(arg as View.AccessibilityDelegate)
         true
       }
@@ -1921,14 +2074,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "backgroundTintList" -> when {
-      (arg == null || arg is ColorStateList) -> {
+      arg is ColorStateList? -> {
         v.setBackgroundTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "backgroundTintMode" -> when {
-      (arg == null || arg is PorterDuff.Mode) -> {
+      arg is PorterDuff.Mode? -> {
         v.setBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -2117,7 +2270,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "layerPaint" -> when {
-      (arg == null || arg is Paint) -> {
+      arg is Paint? -> {
         v.setLayerPaint(arg as Paint)
         true
       }
@@ -2213,7 +2366,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View, arg1: WindowInsets) -> WindowInsets
+        arg as ((arg0: View, arg1: WindowInsets) -> WindowInsets)?
         v.setOnApplyWindowInsetsListener { arg0, arg1 ->
           arg(arg0, arg1).also { Anvil.render() }
         }
@@ -2227,7 +2380,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View) -> Unit
+        arg as ((arg0: View) -> Unit)?
         v.setOnClickListener { arg0 ->
           arg(arg0).also { Anvil.render() }
         }
@@ -2241,11 +2394,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (
+        arg as ((
           arg0: ContextMenu,
           arg1: View,
           arg2: ContextMenu.ContextMenuInfo
-        ) -> Unit
+        ) -> Unit)?
         v.setOnCreateContextMenuListener { arg0, arg1, arg2 ->
           arg(arg0, arg1, arg2).also { Anvil.render() }
         }
@@ -2259,7 +2412,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View, arg1: DragEvent) -> Boolean
+        arg as ((arg0: View, arg1: DragEvent) -> Boolean)?
         v.setOnDragListener { arg0, arg1 ->
           arg(arg0, arg1).also { Anvil.render() }
         }
@@ -2273,7 +2426,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View, arg1: Boolean) -> Unit
+        arg as ((arg0: View, arg1: Boolean) -> Unit)?
         v.setOnFocusChangeListener { arg0, arg1 ->
           arg(arg0, arg1).also { Anvil.render() }
         }
@@ -2287,7 +2440,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View, arg1: MotionEvent) -> Boolean
+        arg as ((arg0: View, arg1: MotionEvent) -> Boolean)?
         v.setOnGenericMotionListener { arg0, arg1 ->
           arg(arg0, arg1).also { Anvil.render() }
         }
@@ -2301,7 +2454,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View, arg1: MotionEvent) -> Boolean
+        arg as ((arg0: View, arg1: MotionEvent) -> Boolean)?
         v.setOnHoverListener { arg0, arg1 ->
           arg(arg0, arg1).also { Anvil.render() }
         }
@@ -2315,11 +2468,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (
+        arg as ((
           arg0: View,
           arg1: Int,
           arg2: KeyEvent
-        ) -> Boolean
+        ) -> Boolean)?
         v.setOnKeyListener { arg0, arg1, arg2 ->
           arg(arg0, arg1, arg2).also { Anvil.render() }
         }
@@ -2333,7 +2486,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View) -> Boolean
+        arg as ((arg0: View) -> Boolean)?
         v.setOnLongClickListener { arg0 ->
           arg(arg0).also { Anvil.render() }
         }
@@ -2347,7 +2500,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: Int) -> Unit
+        arg as ((arg0: Int) -> Unit)?
         v.setOnSystemUiVisibilityChangeListener { arg0 ->
           arg(arg0).also { Anvil.render() }
         }
@@ -2361,7 +2514,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         true
       }
       arg is Function<*> -> {
-        arg as (arg0: View, arg1: MotionEvent) -> Boolean
+        arg as ((arg0: View, arg1: MotionEvent) -> Boolean)?
         v.setOnTouchListener { arg0, arg1 ->
           arg(arg0, arg1).also { Anvil.render() }
         }
@@ -2816,7 +2969,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: ViewStub, arg1: View) -> Unit
+          arg as ((arg0: ViewStub, arg1: View) -> Unit)?
           v.setOnInflateListener { arg0, arg1 ->
             arg(arg0, arg1).also { Anvil.render() }
           }
@@ -2973,7 +3126,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: NumberPicker, arg1: Int) -> Unit
+          arg as ((arg0: NumberPicker, arg1: Int) -> Unit)?
           v.setOnScrollListener { arg0, arg1 ->
             arg(arg0, arg1).also { Anvil.render() }
           }
@@ -3087,14 +3240,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "thumbTintList" -> when {
-      v is AbsSeekBar && (arg == null || arg is ColorStateList) -> {
+      v is AbsSeekBar && arg is ColorStateList? -> {
         v.setThumbTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "thumbTintMode" -> when {
-      v is AbsSeekBar && (arg == null || arg is PorterDuff.Mode) -> {
+      v is AbsSeekBar && arg is PorterDuff.Mode? -> {
         v.setThumbTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -3107,7 +3260,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MenuItem) -> Boolean
+          arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -3121,7 +3274,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MenuItem) -> Boolean
+          arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -3168,12 +3321,12 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: AdapterView<*>,
             arg1: View,
             arg2: Int,
             arg3: Long
-          ) -> Unit
+          ) -> Unit)?
           v.setOnItemClickListener { arg0, arg1, arg2, arg3 ->
             arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
           }
@@ -3187,12 +3340,12 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: AdapterView<*>,
             arg1: View,
             arg2: Int,
             arg3: Long
-          ) -> Unit
+          ) -> Unit)?
           v.setOnItemClickListener { arg0, arg1, arg2, arg3 ->
             arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
           }
@@ -3210,12 +3363,12 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: AdapterView<*>,
             arg1: View,
             arg2: Int,
             arg3: Long
-          ) -> Boolean
+          ) -> Boolean)?
           v.setOnItemLongClickListener { arg0, arg1, arg2, arg3 ->
             arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
           }
@@ -3430,7 +3583,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as () -> Unit
+          arg as (() -> Unit)?
           v.setOnDismissListener {  ->
             arg().also { Anvil.render() }
           }
@@ -3515,12 +3668,12 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: CalendarView,
             arg1: Int,
             arg2: Int,
             arg3: Int
-          ) -> Unit
+          ) -> Unit)?
           v.setOnDateChangeListener { arg0, arg1, arg2, arg3 ->
             arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
           }
@@ -3591,7 +3744,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "checkMarkDrawable" -> when {
-      v is CheckedTextView && (arg == null || arg is Drawable) -> {
+      v is CheckedTextView && arg is Drawable? -> {
         v.setCheckMarkDrawable(arg as Drawable)
         true
       }
@@ -3602,14 +3755,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "checkMarkTintList" -> when {
-      v is CheckedTextView && (arg == null || arg is ColorStateList) -> {
+      v is CheckedTextView && arg is ColorStateList? -> {
         v.setCheckMarkTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "checkMarkTintMode" -> when {
-      v is CheckedTextView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is CheckedTextView && arg is PorterDuff.Mode? -> {
         v.setCheckMarkTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -3647,7 +3800,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: Chronometer) -> Unit
+          arg as ((arg0: Chronometer) -> Unit)?
           v.setOnChronometerTickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -3658,7 +3811,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "buttonDrawable" -> when {
-      v is CompoundButton && (arg == null || arg is Drawable) -> {
+      v is CompoundButton && arg is Drawable? -> {
         v.setButtonDrawable(arg as Drawable)
         true
       }
@@ -3669,14 +3822,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "buttonTintList" -> when {
-      v is CompoundButton && (arg == null || arg is ColorStateList) -> {
+      v is CompoundButton && arg is ColorStateList? -> {
         v.setButtonTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "buttonTintMode" -> when {
-      v is CompoundButton && (arg == null || arg is PorterDuff.Mode) -> {
+      v is CompoundButton && arg is PorterDuff.Mode? -> {
         v.setButtonTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -3689,7 +3842,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: CompoundButton, arg1: Boolean) -> Unit
+          arg as ((arg0: CompoundButton, arg1: Boolean) -> Unit)?
           v.setOnCheckedChangeListener { arg0, arg1 ->
             arg(arg0, arg1).also { Anvil.render() }
           }
@@ -3703,7 +3856,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: RadioGroup, arg1: Int) -> Unit
+          arg as ((arg0: RadioGroup, arg1: Int) -> Unit)?
           v.setOnCheckedChangeListener { arg0, arg1 ->
             arg(arg0, arg1).also { Anvil.render() }
           }
@@ -3787,13 +3940,13 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: ExpandableListView,
             arg1: View,
             arg2: Int,
             arg3: Int,
             arg4: Long
-          ) -> Boolean
+          ) -> Boolean)?
           v.setOnChildClickListener { arg0, arg1, arg2, arg3, arg4 ->
             arg(arg0, arg1, arg2, arg3, arg4).also { Anvil.render() }
           }
@@ -3810,12 +3963,12 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: ExpandableListView,
             arg1: View,
             arg2: Int,
             arg3: Long
-          ) -> Boolean
+          ) -> Boolean)?
           v.setOnGroupClickListener { arg0, arg1, arg2, arg3 ->
             arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
           }
@@ -3832,7 +3985,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: Int) -> Unit
+          arg as ((arg0: Int) -> Unit)?
           v.setOnGroupCollapseListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -3849,7 +4002,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: Int) -> Unit
+          arg as ((arg0: Int) -> Unit)?
           v.setOnGroupExpandListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -4060,7 +4213,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         v.setImageDrawable(arg)
         true
       }
-      v is ImageView && (arg == null || arg is Drawable) -> {
+      v is ImageView && arg is Drawable? -> {
         v.setImageDrawable(arg as Drawable)
         true
       }
@@ -4082,7 +4235,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         v.setImageURI(arg)
         true
       }
-      v is ImageView && (arg == null || arg is Uri) -> {
+      v is ImageView && arg is Uri? -> {
         v.setImageURI(arg as Uri)
         true
       }
@@ -4156,14 +4309,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "imageTintList" -> when {
-      v is ImageView && (arg == null || arg is ColorStateList) -> {
+      v is ImageView && arg is ColorStateList? -> {
         v.setImageTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "imageTintMode" -> when {
-      v is ImageView && (arg == null || arg is PorterDuff.Mode) -> {
+      v is ImageView && arg is PorterDuff.Mode? -> {
         v.setImageTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -4278,7 +4431,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "divider" -> when {
-      v is ListView && (arg == null || arg is Drawable) -> {
+      v is ListView && arg is Drawable? -> {
         v.setDivider(arg as Drawable)
         true
       }
@@ -4389,11 +4542,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: NumberPicker,
             arg1: Int,
             arg2: Int
-          ) -> Unit
+          ) -> Unit)?
           v.setOnValueChangedListener { arg0, arg1, arg2 ->
             arg(arg0, arg1, arg2).also { Anvil.render() }
           }
@@ -4439,14 +4592,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "indeterminateTintList" -> when {
-      v is ProgressBar && (arg == null || arg is ColorStateList) -> {
+      v is ProgressBar && arg is ColorStateList? -> {
         v.setIndeterminateTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "indeterminateTintMode" -> when {
-      v is ProgressBar && (arg == null || arg is PorterDuff.Mode) -> {
+      v is ProgressBar && arg is PorterDuff.Mode? -> {
         v.setIndeterminateTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -4474,14 +4627,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "progressBackgroundTintList" -> when {
-      v is ProgressBar && (arg == null || arg is ColorStateList) -> {
+      v is ProgressBar && arg is ColorStateList? -> {
         v.setProgressBackgroundTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "progressBackgroundTintMode" -> when {
-      v is ProgressBar && (arg == null || arg is PorterDuff.Mode) -> {
+      v is ProgressBar && arg is PorterDuff.Mode? -> {
         v.setProgressBackgroundTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -4502,14 +4655,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "progressTintList" -> when {
-      v is ProgressBar && (arg == null || arg is ColorStateList) -> {
+      v is ProgressBar && arg is ColorStateList? -> {
         v.setProgressTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "progressTintMode" -> when {
-      v is ProgressBar && (arg == null || arg is PorterDuff.Mode) -> {
+      v is ProgressBar && arg is PorterDuff.Mode? -> {
         v.setProgressTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -4523,14 +4676,14 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "secondaryProgressTintList" -> when {
-      v is ProgressBar && (arg == null || arg is ColorStateList) -> {
+      v is ProgressBar && arg is ColorStateList? -> {
         v.setSecondaryProgressTintList(arg as ColorStateList)
         true
       }
       else -> false
     }
     "secondaryProgressTintMode" -> when {
-      v is ProgressBar && (arg == null || arg is PorterDuff.Mode) -> {
+      v is ProgressBar && arg is PorterDuff.Mode? -> {
         v.setSecondaryProgressTintMode(arg as PorterDuff.Mode)
         true
       }
@@ -4571,11 +4724,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: RatingBar,
             arg1: Float,
             arg2: Boolean
-          ) -> Unit
+          ) -> Unit)?
           v.setOnRatingBarChangeListener { arg0, arg1, arg2 ->
             arg(arg0, arg1, arg2).also { Anvil.render() }
           }
@@ -4649,26 +4802,9 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as () -> Boolean
+          arg as (() -> Boolean)?
           v.setOnCloseListener {  ->
             arg().also { Anvil.render() }
-          }
-          true
-        }
-        else -> false
-      }
-      else -> false
-    }
-    "onQueryTextFocusChange" -> when {
-      v is SearchView -> when {
-        arg == null -> {
-          v.setOnQueryTextFocusChangeListener(null as? View.OnFocusChangeListener?)
-          true
-        }
-        arg is Function<*> -> {
-          arg as (arg0: View, arg1: Boolean) -> Unit
-          v.setOnQueryTextFocusChangeListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
           }
           true
         }
@@ -4696,6 +4832,23 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       }
       else -> false
     }
+    "onQueryTextFocusChange" -> when {
+      v is SearchView -> when {
+        arg == null -> {
+          v.setOnQueryTextFocusChangeListener(null as? View.OnFocusChangeListener?)
+          true
+        }
+        arg is Function<*> -> {
+          arg as ((arg0: View, arg1: Boolean) -> Unit)?
+          v.setOnQueryTextFocusChangeListener { arg0, arg1 ->
+            arg(arg0, arg1).also { Anvil.render() }
+          }
+          true
+        }
+        else -> false
+      }
+      else -> false
+    }
     "onSearchClick" -> when {
       v is SearchView -> when {
         arg == null -> {
@@ -4703,7 +4856,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: View) -> Unit
+          arg as ((arg0: View) -> Unit)?
           v.setOnSearchClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -4734,7 +4887,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "queryHint" -> when {
-      v is SearchView && (arg == null || arg is CharSequence) -> {
+      v is SearchView && arg is CharSequence? -> {
         v.setQueryHint(arg as CharSequence)
         true
       }
@@ -4801,7 +4954,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as () -> Unit
+          arg as (() -> Unit)?
           v.setOnDrawerCloseListener {  ->
             arg().also { Anvil.render() }
           }
@@ -4818,7 +4971,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as () -> Unit
+          arg as (() -> Unit)?
           v.setOnDrawerOpenListener {  ->
             arg().also { Anvil.render() }
           }
@@ -4984,7 +5137,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: String) -> Unit
+          arg as ((arg0: String) -> Unit)?
           v.setOnTabChangedListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -4995,7 +5148,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "leftStripDrawable" -> when {
-      v is TabWidget && (arg == null || arg is Drawable) -> {
+      v is TabWidget && arg is Drawable? -> {
         v.setLeftStripDrawable(arg as Drawable)
         true
       }
@@ -5006,7 +5159,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "rightStripDrawable" -> when {
-      v is TabWidget && (arg == null || arg is Drawable) -> {
+      v is TabWidget && arg is Drawable? -> {
         v.setRightStripDrawable(arg as Drawable)
         true
       }
@@ -5161,7 +5314,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "fontFeatureSettings" -> when {
-      v is TextView && (arg == null || arg is String) -> {
+      v is TextView && arg is String? -> {
         v.setFontFeatureSettings(arg as String)
         true
       }
@@ -5326,11 +5479,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: TextView,
             arg1: Int,
             arg2: KeyEvent
-          ) -> Boolean
+          ) -> Boolean)?
           v.setOnEditorActionListener { arg0, arg1, arg2 ->
             arg(arg0, arg1, arg2).also { Anvil.render() }
           }
@@ -5443,7 +5596,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "typeface" -> when {
-      v is TextView && (arg == null || arg is Typeface) -> {
+      v is TextView && arg is Typeface? -> {
         v.setTypeface(arg as Typeface)
         true
       }
@@ -5484,11 +5637,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: TimePicker,
             arg1: Int,
             arg2: Int
-          ) -> Unit
+          ) -> Unit)?
           v.setOnTimeChangedListener { arg0, arg1, arg2 ->
             arg(arg0, arg1, arg2).also { Anvil.render() }
           }
@@ -5521,7 +5674,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "navigationContentDescription" -> when {
-      v is Toolbar && (arg == null || arg is CharSequence) -> {
+      v is Toolbar && arg is CharSequence? -> {
         v.setNavigationContentDescription(arg as CharSequence)
         true
       }
@@ -5532,7 +5685,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "navigationIcon" -> when {
-      v is Toolbar && (arg == null || arg is Drawable) -> {
+      v is Toolbar && arg is Drawable? -> {
         v.setNavigationIcon(arg as Drawable)
         true
       }
@@ -5599,7 +5752,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MediaPlayer) -> Unit
+          arg as ((arg0: MediaPlayer) -> Unit)?
           v.setOnCompletionListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -5616,11 +5769,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: MediaPlayer,
             arg1: Int,
             arg2: Int
-          ) -> Boolean
+          ) -> Boolean)?
           v.setOnErrorListener { arg0, arg1, arg2 ->
             arg(arg0, arg1, arg2).also { Anvil.render() }
           }
@@ -5637,11 +5790,11 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (
+          arg as ((
             arg0: MediaPlayer,
             arg1: Int,
             arg2: Int
-          ) -> Boolean
+          ) -> Boolean)?
           v.setOnInfoListener { arg0, arg1, arg2 ->
             arg(arg0, arg1, arg2).also { Anvil.render() }
           }
@@ -5658,7 +5811,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: MediaPlayer) -> Unit
+          arg as ((arg0: MediaPlayer) -> Unit)?
           v.setOnPreparedListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -5721,7 +5874,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: View) -> Unit
+          arg as ((arg0: View) -> Unit)?
           v.setOnZoomInClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }
@@ -5738,7 +5891,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: View) -> Unit
+          arg as ((arg0: View) -> Unit)?
           v.setOnZoomOutClickListener { arg0 ->
             arg(arg0).also { Anvil.render() }
           }

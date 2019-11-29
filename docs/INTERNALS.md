@@ -16,7 +16,7 @@ generation for views. `AnvilGenPlugin` configures generator tasks
 using parameters noted in corresponding extension, and `DSLGeneratorTask`
 is a task which manages the process.
 
-* `trikita.module` is the companion plugin which unifies accompanying
+* `dev.inkremental.module` is the companion plugin which unifies accompanying
 tasks of setting up publishing and basic configuration of the project.
 
 Let's walk through the process of code generation.

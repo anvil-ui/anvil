@@ -15,7 +15,7 @@ import kotlin.Unit
 
 fun recyclerView(configure: RecyclerViewScope.() -> Unit = {}) =
     v<RecyclerView>(configure.bind(RecyclerViewScope))
-abstract class RecyclerViewScope : ViewGroupScope() {
+abstract class RecyclerViewScope {
   fun accessibilityDelegateCompat(arg: RecyclerViewAccessibilityDelegate?): Unit =
       attr("accessibilityDelegateCompat", arg)
   fun adapter(arg: RecyclerView.Adapter<RecyclerView.ViewHolder>?): Unit = attr("adapter", arg)
@@ -25,7 +25,6 @@ abstract class RecyclerViewScope : ViewGroupScope() {
   fun hasFixedSize(arg: Boolean): Unit = attr("hasFixedSize", arg)
   fun itemAnimator(arg: RecyclerView.ItemAnimator?): Unit = attr("itemAnimator", arg)
   fun itemViewCacheSize(arg: Int): Unit = attr("itemViewCacheSize", arg)
-  fun layoutFrozen(arg: Boolean): Unit = attr("layoutFrozen", arg)
   fun layoutManager(arg: RecyclerView.LayoutManager?): Unit = attr("layoutManager", arg)
   fun onFling(arg: ((arg0: Int, arg1: Int) -> Boolean)?): Unit = attr("onFling", arg)
   fun preserveFocusAfterLayout(arg: Boolean): Unit = attr("preserveFocusAfterLayout", arg)
@@ -36,7 +35,9 @@ abstract class RecyclerViewScope : ViewGroupScope() {
       arg)
   companion object : RecyclerViewScope() {
     init {
-      Anvil.registerAttributeSetter(RecyclerViewv7Setter)}
+      Anvil.registerAttributeSetter(RecyclerViewv7Setter)
+      Anvil.registerAttributeSetter(RecyclerViewDslSetter)
+    }
   }
 }
 
@@ -48,11 +49,6 @@ abstract class RecyclerViewScope : ViewGroupScope() {
  * Please, don't edit it manually unless for debugging.
  */
 object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
-  init {
-    Anvil.registerAttributeSetter(this)
-    Anvil.registerAttributeSetter(RecyclerViewDslSetter)
-  }
-
   override fun set(
     v: View,
     name: String,
@@ -60,21 +56,21 @@ object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
     old: Any?
   ): Boolean = when (name) {
     "accessibilityDelegateCompat" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerViewAccessibilityDelegate) -> {
+      v is RecyclerView && arg is RecyclerViewAccessibilityDelegate? -> {
         v.setAccessibilityDelegateCompat(arg as RecyclerViewAccessibilityDelegate)
         true
       }
       else -> false
     }
     "adapter" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerView.Adapter<*>) -> {
+      v is RecyclerView && arg is RecyclerView.Adapter<*>? -> {
         v.setAdapter(arg as RecyclerView.Adapter<RecyclerView.ViewHolder>)
         true
       }
       else -> false
     }
     "childDrawingOrderCallback" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerView.ChildDrawingOrderCallback) -> {
+      v is RecyclerView && arg is RecyclerView.ChildDrawingOrderCallback? -> {
         v.setChildDrawingOrderCallback(arg as RecyclerView.ChildDrawingOrderCallback)
         true
       }
@@ -95,7 +91,7 @@ object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "itemAnimator" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerView.ItemAnimator) -> {
+      v is RecyclerView && arg is RecyclerView.ItemAnimator? -> {
         v.setItemAnimator(arg as RecyclerView.ItemAnimator)
         true
       }
@@ -108,15 +104,8 @@ object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
       }
       else -> false
     }
-    "layoutFrozen" -> when {
-      v is RecyclerView && arg is Boolean -> {
-        v.setLayoutFrozen(arg)
-        true
-      }
-      else -> false
-    }
     "layoutManager" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerView.LayoutManager) -> {
+      v is RecyclerView && arg is RecyclerView.LayoutManager? -> {
         v.setLayoutManager(arg as RecyclerView.LayoutManager)
         true
       }
@@ -129,7 +118,7 @@ object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
           true
         }
         arg is Function<*> -> {
-          arg as (arg0: Int, arg1: Int) -> Boolean
+          arg as ((arg0: Int, arg1: Int) -> Boolean)?
           v.setOnFlingListener(object : RecyclerView.OnFlingListener() {
             override fun onFling(arg0: Int, arg1: Int): Boolean = arg(arg0, arg1).also {
                 Anvil.render() }
@@ -148,14 +137,14 @@ object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "recycledViewPool" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerView.RecycledViewPool) -> {
+      v is RecyclerView && arg is RecyclerView.RecycledViewPool? -> {
         v.setRecycledViewPool(arg as RecyclerView.RecycledViewPool)
         true
       }
       else -> false
     }
     "recyclerListener" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerView.RecyclerListener) -> {
+      v is RecyclerView && arg is RecyclerView.RecyclerListener? -> {
         v.setRecyclerListener(arg as RecyclerView.RecyclerListener)
         true
       }
@@ -169,7 +158,7 @@ object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
       else -> false
     }
     "viewCacheExtension" -> when {
-      v is RecyclerView && (arg == null || arg is RecyclerView.ViewCacheExtension) -> {
+      v is RecyclerView && arg is RecyclerView.ViewCacheExtension? -> {
         v.setViewCacheExtension(arg as RecyclerView.ViewCacheExtension)
         true
       }
