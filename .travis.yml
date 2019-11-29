@@ -1,6 +1,6 @@
 language: android
 sudo: required
-jdk: oraclejdk8
+jdk: openjdk8
 
 env:
   global:
@@ -21,6 +21,15 @@ android:
     - tools
   licenses:
     - 'android-sdk-license-.+'
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
 script:
   - ./gradlew assemble anvil:check --stacktrace
