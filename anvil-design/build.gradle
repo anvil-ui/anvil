@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'trikita.module'
 
 android {
@@ -9,14 +9,64 @@ android {
 }
 
 anvilgen {
-	type = "support"
-	moduleName = "material"
-	camelCaseName = "Material"
-	superclass = "BaseMaterial"
+	type = 'support'
+	moduleName = 'material'
+	camelCaseName = 'Material'
+	manualSetterName = 'MaterialDslSetter'
+	quirks = [
+		// Depends on coordinatorlayout which is not covered yet
+		'com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout': [
+			'__viewAlias': false,
+		],
+
+		// Access limited to the same library
+		'com.google.android.material.bottomnavigation.BottomNavigationItemView': [
+			'setCheckable:kotlin.Boolean': false,
+			'setChecked:kotlin.Boolean': false,
+			'setIcon:android.graphics.drawable.Drawable': false,
+			'setIconSize:kotlin.Int': false,
+			'setIconTintList:android.content.res.ColorStateList': false,
+			'setItemBackground:android.graphics.drawable.Drawable': false,
+			'setItemBackground:kotlin.Int': false,
+			'setItemPosition:kotlin.Int': false,
+			'setLabelVisibilityMode:kotlin.Int': false,
+			'setShifting:kotlin.Boolean': false,
+			'setTextAppearanceActive:kotlin.Int': false,
+			'setTextAppearanceInactive:kotlin.Int': false,
+			'setTextColor:android.content.res.ColorStateList': false,
+			'setTitle:kotlin.CharSequence': false,
+		],
+		'com.google.android.material.bottomnavigation.BottomNavigationMenuView': [
+			'setIconTintList:android.content.res.ColorStateList': false,
+			'setItemBackground:android.graphics.drawable.Drawable': false,
+			'setItemBackgroundRes:kotlin.Int': false,
+			'setItemHorizontalTranslationEnabled:kotlin.Boolean': false,
+			'setItemIconSize:kotlin.Int': false,
+			'setItemTextAppearanceActive:kotlin.Int': false,
+			'setItemTextAppearanceInactive:kotlin.Int': false,
+			'setItemTextColor:android.content.res.ColorStateList': false,
+			'setLabelVisibilityMode:kotlin.Int': false,
+			'setPresenter:com.google.android.material.bottomnavigation.BottomNavigationPresenter': false,
+		],
+		'com.google.android.material.internal.CheckableImageButton': [
+			'setChecked:kotlin.Boolean': false,
+		],
+		'com.google.android.material.internal.NavigationMenuItemView': [
+			'setCheckable:kotlin.Boolean': false,
+			'setChecked:kotlin.Boolean': false,
+			'setIcon:android.graphics.drawable.Drawable': false,
+			'setIconPadding:kotlin.Int': false,
+			'setTextColor:android.content.res.ColorStateList': false,
+			'setTitle:kotlin.CharSequence': false,
+		],
+	]
 }
 
 dependencies {
-	implementation project(path: ':anvil')
+	implementation project(':anvil')
+	implementation project(':anvil-appcompat-v7')
+	implementation project(':anvil-cardview-v7')
+	implementation project(':anvil-recyclerview-v7')
 
 	anvilgen "com.google.android.material:material:$androidx_version"
 

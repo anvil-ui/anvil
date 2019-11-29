@@ -1,18 +1,39 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'trikita.module'
 
 android {
 	defaultConfig {
-		missingDimensionStrategy 'api', 'sdk21'
+		missingDimensionStrategy 'api', 'sdk15'
 	}
 }
 
 anvilgen {
-	type = "support"
-	moduleName = "appcompat-v7"
-	camelCaseName = "AppCompatv7"
-	superclass = "BaseAppCompat"
+	type = 'support'
+	moduleName = 'appcompat-v7'
+	camelCaseName = 'AppCompatv7'
+	manualSetterName = 'AppcompatV7DslSetter'
+	quirks = [
+		// Depends on internal class, can be re-enabled when metadata is implemented
+		'androidx.appcompat.widget.ActionBarContextView': [
+			'__viewAlias': false,
+		],
+
+		// Unknown issues
+		'androidx.appcompat.widget.AppCompatTextView': [
+			'setTextFuture:java.util.concurrent.Future': false,
+		],
+
+		// Access limited to the same library
+		'androidx.appcompat.widget.ContentFrameLayout': [
+			'setAttachListener:androidx.appcompat.widget.ContentFrameLayout.OnAttachListener': false,
+		],
+
+		// Deprecated view; framework nas android.widget.SearchView since API 11
+		'androidx.appcompat.widget.SearchView': [
+			'__viewAlias': false,
+		],
+	]
 }
 
 dependencies {

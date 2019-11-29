@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'trikita.module'
 
 android {
 	defaultConfig {
-		missingDimensionStrategy 'api', 'sdk21'
+		missingDimensionStrategy 'api', 'sdk15'
 	}
 }
 
@@ -12,6 +12,16 @@ anvilgen {
 	type = "support"
 	moduleName = "support-core-ui"
 	camelCaseName = "SupportCoreUi"
+
+	quirks = [
+		// Deprecated view; framework nas android.widget.Space since API 14
+		'androidx.legacy.widget.Space' : [
+			'__viewAlias': false,
+		],
+		'androidx.core.widget.NestedScrollView' : [
+			'setOnScrollChangeListener': false
+		]
+	]
 }
 
 dependencies {

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdkVersion 28
@@ -11,8 +11,12 @@ android {
         versionCode 1
         versionName "1.0"
 
-        missingDimensionStrategy 'api', 'sdk21'
+        missingDimensionStrategy 'api', 'sdk15'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets.all {
+        it.java.srcDirs += file("src/${it.name}/kotlin")
     }
 
     buildTypes {
@@ -26,7 +30,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation project(":anvil")
     implementation project(":anvil-support-v4")

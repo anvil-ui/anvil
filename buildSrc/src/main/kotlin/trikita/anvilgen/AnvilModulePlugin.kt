@@ -42,6 +42,12 @@ class AnvilModulePlugin : Plugin<Project> {
             testOptions.unitTests.isReturnDefaultValues = true
         }
 
+        dependencies {
+            "api"("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
+            "testImplementation"("org.jetbrains.kotlin:kotlin-test")
+            "testImplementation"("org.jetbrains.kotlin:kotlin-test-junit")
+        }
+
         val sourcesJar by tasks.creating(Jar::class) {
             from(android.sourceSets["main"].java.srcDirs)
             archiveClassifier.set("sources")
