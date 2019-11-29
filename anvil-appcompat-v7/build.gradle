@@ -28,6 +28,11 @@ anvilgen {
 		'androidx.appcompat.widget.ContentFrameLayout': [
 			'setAttachListener:androidx.appcompat.widget.ContentFrameLayout.OnAttachListener': false,
 		],
+
+		// Deprecated view; framework nas android.widget.SearchView since API 11
+		'androidx.appcompat.widget.SearchView': [
+			'__viewAlias': false,
+		],
 	]
 }
 

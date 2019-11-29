@@ -2,13 +2,11 @@
 
 package trikita.anvil
 
-import android.app.SearchableInfo
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -45,13 +43,11 @@ import androidx.appcompat.widget.FitWindowsLinearLayout
 import androidx.appcompat.widget.FitWindowsViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.ScrollingTabContainerView
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.ViewStubCompat
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.view.ActionProvider
-import androidx.cursoradapter.widget.CursorAdapter
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -433,32 +429,6 @@ abstract class ScrollingTabContainerViewScope : HorizontalScrollViewScope() {
   }
 }
 
-fun searchView(configure: SearchViewScope.() -> Unit = {}) =
-    v<SearchView>(configure.bind(SearchViewScope))
-abstract class SearchViewScope : LinearLayoutCompatScope() {
-  fun appSearchData(arg: Bundle): Unit = attr("appSearchData", arg)
-  fun iconified(arg: Boolean): Unit = attr("iconified", arg)
-  fun iconifiedByDefault(arg: Boolean): Unit = attr("iconifiedByDefault", arg)
-  fun imeOptions(arg: Int): Unit = attr("imeOptions", arg)
-  fun inputType(arg: Int): Unit = attr("inputType", arg)
-  fun maxWidth(arg: Int): Unit = attr("maxWidth", arg)
-  fun onClose(arg: (() -> Boolean)?): Unit = attr("onClose", arg)
-  fun onQueryTextFocusChange(arg: ((arg0: View, arg1: Boolean) -> Unit)?): Unit =
-      attr("onQueryTextFocusChange", arg)
-  fun onQueryText(arg: SearchView.OnQueryTextListener?): Unit = attr("onQueryText", arg)
-  fun onSearchClick(arg: ((arg0: View) -> Unit)?): Unit = attr("onSearchClick", arg)
-  fun onSuggestion(arg: SearchView.OnSuggestionListener?): Unit = attr("onSuggestion", arg)
-  fun queryHint(arg: CharSequence?): Unit = attr("queryHint", arg)
-  fun queryRefinementEnabled(arg: Boolean): Unit = attr("queryRefinementEnabled", arg)
-  fun searchableInfo(arg: SearchableInfo): Unit = attr("searchableInfo", arg)
-  fun submitButtonEnabled(arg: Boolean): Unit = attr("submitButtonEnabled", arg)
-  fun suggestionsAdapter(arg: CursorAdapter): Unit = attr("suggestionsAdapter", arg)
-  companion object : SearchViewScope() {
-    init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)}
-  }
-}
-
 fun switchCompat(configure: SwitchCompatScope.() -> Unit = {}) =
     v<SwitchCompat>(configure.bind(SwitchCompatScope))
 abstract class SwitchCompatScope : CompoundButtonScope() {
@@ -509,16 +479,16 @@ abstract class ToolbarScope : ViewGroupScope() {
   fun popupTheme(arg: Int): Unit = attr("popupTheme", arg)
   fun subtitle(arg: Int): Unit = attr("subtitle", arg)
   fun subtitle(arg: CharSequence): Unit = attr("subtitle", arg)
-  fun subtitleTextColor(arg: ColorStateList): Unit = attr("subtitleTextColor", arg)
   fun subtitleTextColor(arg: Int): Unit = attr("subtitleTextColor", arg)
+  fun subtitleTextColor(arg: ColorStateList): Unit = attr("subtitleTextColor", arg)
   fun title(arg: CharSequence): Unit = attr("title", arg)
   fun title(arg: Int): Unit = attr("title", arg)
   fun titleMarginBottom(arg: Int): Unit = attr("titleMarginBottom", arg)
   fun titleMarginEnd(arg: Int): Unit = attr("titleMarginEnd", arg)
   fun titleMarginStart(arg: Int): Unit = attr("titleMarginStart", arg)
   fun titleMarginTop(arg: Int): Unit = attr("titleMarginTop", arg)
-  fun titleTextColor(arg: ColorStateList): Unit = attr("titleTextColor", arg)
   fun titleTextColor(arg: Int): Unit = attr("titleTextColor", arg)
+  fun titleTextColor(arg: ColorStateList): Unit = attr("titleTextColor", arg)
   companion object : ToolbarScope() {
     init {
       Anvil.registerAttributeSetter(AppCompatv7Setter)}
@@ -1181,174 +1151,6 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
     "tabSelected" -> when {
       v is ScrollingTabContainerView && arg is Int -> {
         v.setTabSelected(arg)
-        true
-      }
-      else -> false
-    }
-    "appSearchData" -> when {
-      v is SearchView && arg is Bundle -> {
-        v.setAppSearchData(arg)
-        true
-      }
-      else -> false
-    }
-    "iconified" -> when {
-      v is SearchView && arg is Boolean -> {
-        v.setIconified(arg)
-        true
-      }
-      else -> false
-    }
-    "iconifiedByDefault" -> when {
-      v is SearchView && arg is Boolean -> {
-        v.setIconifiedByDefault(arg)
-        true
-      }
-      else -> false
-    }
-    "imeOptions" -> when {
-      v is SearchView && arg is Int -> {
-        v.setImeOptions(arg)
-        true
-      }
-      else -> false
-    }
-    "inputType" -> when {
-      v is SearchView && arg is Int -> {
-        v.setInputType(arg)
-        true
-      }
-      else -> false
-    }
-    "maxWidth" -> when {
-      v is SearchView && arg is Int -> {
-        v.setMaxWidth(arg)
-        true
-      }
-      else -> false
-    }
-    "onClose" -> when {
-      v is SearchView -> when {
-        arg == null -> {
-          v.setOnCloseListener(null as? SearchView.OnCloseListener?)
-          true
-        }
-        arg is Function<*> -> {
-          arg as () -> Boolean
-          v.setOnCloseListener {  ->
-            arg().also { Anvil.render() }
-          }
-          true
-        }
-        else -> false
-      }
-      else -> false
-    }
-    "onQueryTextFocusChange" -> when {
-      v is SearchView -> when {
-        arg == null -> {
-          v.setOnQueryTextFocusChangeListener(null as? View.OnFocusChangeListener?)
-          true
-        }
-        arg is Function<*> -> {
-          arg as (arg0: View, arg1: Boolean) -> Unit
-          v.setOnQueryTextFocusChangeListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
-          }
-          true
-        }
-        else -> false
-      }
-      else -> false
-    }
-    "onQueryText" -> when {
-      v is SearchView -> when {
-        arg == null -> {
-          v.setOnQueryTextListener(null as? SearchView.OnQueryTextListener?)
-          true
-        }
-        arg is SearchView.OnQueryTextListener -> {
-          v.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(arg0: String): Boolean =
-                arg.onQueryTextChange(arg0).also { Anvil.render() }
-
-            override fun onQueryTextSubmit(arg0: String): Boolean =
-                arg.onQueryTextSubmit(arg0).also { Anvil.render() }
-          })
-          true
-        }
-        else -> false
-      }
-      else -> false
-    }
-    "onSearchClick" -> when {
-      v is SearchView -> when {
-        arg == null -> {
-          v.setOnSearchClickListener(null as? View.OnClickListener?)
-          true
-        }
-        arg is Function<*> -> {
-          arg as (arg0: View) -> Unit
-          v.setOnSearchClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
-          }
-          true
-        }
-        else -> false
-      }
-      else -> false
-    }
-    "onSuggestion" -> when {
-      v is SearchView -> when {
-        arg == null -> {
-          v.setOnSuggestionListener(null as? SearchView.OnSuggestionListener?)
-          true
-        }
-        arg is SearchView.OnSuggestionListener -> {
-          v.setOnSuggestionListener(object : SearchView.OnSuggestionListener {
-            override fun onSuggestionClick(arg0: Int): Boolean = arg.onSuggestionClick(arg0).also {
-                Anvil.render() }
-
-            override fun onSuggestionSelect(arg0: Int): Boolean =
-                arg.onSuggestionSelect(arg0).also { Anvil.render() }
-          })
-          true
-        }
-        else -> false
-      }
-      else -> false
-    }
-    "queryHint" -> when {
-      v is SearchView && (arg == null || arg is CharSequence) -> {
-        v.setQueryHint(arg as CharSequence)
-        true
-      }
-      else -> false
-    }
-    "queryRefinementEnabled" -> when {
-      v is SearchView && arg is Boolean -> {
-        v.setQueryRefinementEnabled(arg)
-        true
-      }
-      else -> false
-    }
-    "searchableInfo" -> when {
-      v is SearchView && arg is SearchableInfo -> {
-        v.setSearchableInfo(arg)
-        true
-      }
-      else -> false
-    }
-    "submitButtonEnabled" -> when {
-      v is SearchView && arg is Boolean -> {
-        v.setSubmitButtonEnabled(arg)
-        true
-      }
-      else -> false
-    }
-    "suggestionsAdapter" -> when {
-      v is SearchView && arg is CursorAdapter -> {
-        v.setSuggestionsAdapter(arg)
         true
       }
       else -> false

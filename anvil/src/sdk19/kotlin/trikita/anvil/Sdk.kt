@@ -598,8 +598,8 @@ abstract class CalendarViewScope : FrameLayoutScope() {
     arg2: Int,
     arg3: Int
   ) -> Unit)?): Unit = attr("onDateChange", arg)
-  fun selectedDateVerticalBar(arg: Int): Unit = attr("selectedDateVerticalBar", arg)
   fun selectedDateVerticalBar(arg: Drawable): Unit = attr("selectedDateVerticalBar", arg)
+  fun selectedDateVerticalBar(arg: Int): Unit = attr("selectedDateVerticalBar", arg)
   fun selectedWeekBackgroundColor(arg: Int): Unit = attr("selectedWeekBackgroundColor", arg)
   fun showWeekNumber(arg: Boolean): Unit = attr("showWeekNumber", arg)
   fun shownWeekCount(arg: Int): Unit = attr("shownWeekCount", arg)
@@ -648,8 +648,8 @@ abstract class ChronometerScope : TextViewScope() {
 fun compoundButton(configure: CompoundButtonScope.() -> Unit = {}) =
     v<CompoundButton>(configure.bind(CompoundButtonScope))
 abstract class CompoundButtonScope : ButtonScope() {
-  fun buttonDrawable(arg: Int): Unit = attr("buttonDrawable", arg)
   fun buttonDrawable(arg: Drawable?): Unit = attr("buttonDrawable", arg)
+  fun buttonDrawable(arg: Int): Unit = attr("buttonDrawable", arg)
   fun checked(arg: Boolean): Unit = attr("checked", arg)
   fun onCheckedChange(arg: ((arg0: CompoundButton, arg1: Boolean) -> Unit)?): Unit =
       attr("onCheckedChange", arg)
@@ -1126,8 +1126,8 @@ fun tabWidget(configure: TabWidgetScope.() -> Unit = {}) =
 abstract class TabWidgetScope : LinearLayoutScope() {
   fun currentTab(arg: Int): Unit = attr("currentTab", arg)
   fun dividerDrawable(arg: Int): Unit = attr("dividerDrawable", arg)
-  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun leftStripDrawable(arg: Drawable?): Unit = attr("leftStripDrawable", arg)
+  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun rightStripDrawable(arg: Drawable?): Unit = attr("rightStripDrawable", arg)
   fun rightStripDrawable(arg: Int): Unit = attr("rightStripDrawable", arg)
   fun stripEnabled(arg: Boolean): Unit = attr("stripEnabled", arg)
@@ -1233,8 +1233,8 @@ abstract class TextViewScope : ViewScope() {
   fun singleLine(arg: Boolean): Unit = attr("singleLine", arg)
   fun spannableFactory(arg: Spannable.Factory): Unit = attr("spannableFactory", arg)
   fun text(arg: Int): Unit = attr("text", arg)
-  fun textColor(arg: Int): Unit = attr("textColor", arg)
   fun textColor(arg: ColorStateList): Unit = attr("textColor", arg)
+  fun textColor(arg: Int): Unit = attr("textColor", arg)
   fun textIsSelectable(arg: Boolean): Unit = attr("textIsSelectable", arg)
   fun textKeepState(arg: CharSequence): Unit = attr("textKeepState", arg)
   fun textLocale(arg: Locale): Unit = attr("textLocale", arg)

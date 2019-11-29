@@ -62,8 +62,8 @@ abstract class DrawerLayoutScope : ViewGroupScope() {
   fun drawerElevation(arg: Float): Unit = attr("drawerElevation", arg)
   fun drawerLockMode(arg: Int): Unit = attr("drawerLockMode", arg)
   fun scrimColor(arg: Int): Unit = attr("scrimColor", arg)
-  fun statusBarBackground(arg: Int): Unit = attr("statusBarBackground", arg)
   fun statusBarBackground(arg: Drawable?): Unit = attr("statusBarBackground", arg)
+  fun statusBarBackground(arg: Int): Unit = attr("statusBarBackground", arg)
   fun statusBarBackgroundColor(arg: Int): Unit = attr("statusBarBackgroundColor", arg)
   companion object : DrawerLayoutScope() {
     init {

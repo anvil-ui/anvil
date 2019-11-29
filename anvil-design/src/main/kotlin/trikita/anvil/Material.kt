@@ -73,8 +73,8 @@ fun collapsingToolbarLayout(configure: CollapsingToolbarLayoutScope.() -> Unit =
 abstract class CollapsingToolbarLayoutScope : FrameLayoutScope() {
   fun collapsedTitleGravity(arg: Int): Unit = attr("collapsedTitleGravity", arg)
   fun collapsedTitleTextAppearance(arg: Int): Unit = attr("collapsedTitleTextAppearance", arg)
-  fun collapsedTitleTextColor(arg: Int): Unit = attr("collapsedTitleTextColor", arg)
   fun collapsedTitleTextColor(arg: ColorStateList): Unit = attr("collapsedTitleTextColor", arg)
+  fun collapsedTitleTextColor(arg: Int): Unit = attr("collapsedTitleTextColor", arg)
   fun collapsedTitleTypeface(arg: Typeface?): Unit = attr("collapsedTitleTypeface", arg)
   fun contentScrim(arg: Drawable?): Unit = attr("contentScrim", arg)
   fun contentScrimColor(arg: Int): Unit = attr("contentScrimColor", arg)
@@ -217,8 +217,8 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun chipIconSizeResource(arg: Int): Unit = attr("chipIconSizeResource", arg)
   fun chipIconTint(arg: ColorStateList?): Unit = attr("chipIconTint", arg)
   fun chipIconTintResource(arg: Int): Unit = attr("chipIconTintResource", arg)
-  fun chipIconVisible(arg: Boolean): Unit = attr("chipIconVisible", arg)
   fun chipIconVisible(arg: Int): Unit = attr("chipIconVisible", arg)
+  fun chipIconVisible(arg: Boolean): Unit = attr("chipIconVisible", arg)
   fun chipMinHeight(arg: Float): Unit = attr("chipMinHeight", arg)
   fun chipMinHeightResource(arg: Int): Unit = attr("chipMinHeightResource", arg)
   fun chipStartPadding(arg: Float): Unit = attr("chipStartPadding", arg)
@@ -276,8 +276,8 @@ abstract class ChipGroupScope : FlowLayoutScope() {
   fun onCheckedChange(arg: ((arg0: ChipGroup, arg1: Int) -> Unit)?): Unit = attr("onCheckedChange",
       arg)
   fun singleLine(arg: Int): Unit = attr("singleLine", arg)
-  fun singleSelection(arg: Int): Unit = attr("singleSelection", arg)
   fun singleSelection(arg: Boolean): Unit = attr("singleSelection", arg)
+  fun singleSelection(arg: Int): Unit = attr("singleSelection", arg)
   companion object : ChipGroupScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)}
@@ -554,14 +554,14 @@ abstract class TextInputLayoutScope : LinearLayoutScope() {
   fun hintAnimationEnabled(arg: Boolean): Unit = attr("hintAnimationEnabled", arg)
   fun hintEnabled(arg: Boolean): Unit = attr("hintEnabled", arg)
   fun hintTextAppearance(arg: Int): Unit = attr("hintTextAppearance", arg)
-  fun passwordVisibilityToggleContentDescription(arg: CharSequence?): Unit =
-      attr("passwordVisibilityToggleContentDescription", arg)
   fun passwordVisibilityToggleContentDescription(arg: Int): Unit =
       attr("passwordVisibilityToggleContentDescription", arg)
-  fun passwordVisibilityToggleDrawable(arg: Drawable?): Unit =
-      attr("passwordVisibilityToggleDrawable", arg)
+  fun passwordVisibilityToggleContentDescription(arg: CharSequence?): Unit =
+      attr("passwordVisibilityToggleContentDescription", arg)
   fun passwordVisibilityToggleDrawable(arg: Int): Unit = attr("passwordVisibilityToggleDrawable",
       arg)
+  fun passwordVisibilityToggleDrawable(arg: Drawable?): Unit =
+      attr("passwordVisibilityToggleDrawable", arg)
   fun passwordVisibilityToggleEnabled(arg: Boolean): Unit = attr("passwordVisibilityToggleEnabled",
       arg)
   fun passwordVisibilityToggleTintList(arg: ColorStateList?): Unit =
