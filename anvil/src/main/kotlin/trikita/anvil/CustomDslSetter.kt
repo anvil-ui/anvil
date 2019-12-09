@@ -3,14 +3,16 @@
 package trikita.anvil
 
 import android.animation.Animator
+import android.animation.AnimatorSet
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
-import android.view.*
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import trikita.anvil.*
 import java.util.*
 
 // weight constants
@@ -72,6 +74,7 @@ fun ViewScope.toStartOf(subject: Int) = align(RelativeLayout.START_OF, subject)
 fun ViewScope.align(verb: Int, subject: Int) = attr("align", verb to subject)
 
 fun ViewScope.anim(animator: Animator, trigger: Boolean) = attr("anim", AnimatorPair(animator, trigger))
+fun ViewScope.animBi(trigger: Boolean, start: Animator, finish: Animator) = attr("animBidirectional", AnimatorTriple(start, finish, trigger))
 
 fun TextViewScope.textSize(sizePx: Float) = attr("textSize", sizePx)
 fun TextViewScope.typeface(assetPath: String) = attr("typeface", assetPath)
@@ -163,10 +166,33 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         "anim" -> when {
             value is AnimatorPair -> {
                 if(value.trigger) {
-                    value.animator?.let {
-                        it.setTarget(v)
-                        it.start()
+                    value.animator.apply {
+                        if (this !is AnimatorSet){
+                            setTarget(v)
+                        }
+                        start()
                     }
+                } else {
+                    value.animator.cancel()
+                }
+                true
+            }
+            else -> false
+        }
+        "animBidirectional" -> when (value) {
+            is AnimatorTriple -> {
+                if (value.trigger) {
+                    if (value.animatorStart !is AnimatorSet) {
+                        value.animatorStart.setTarget(v)
+                    }
+                    value.animatorFinish.cancel()
+                    value.animatorStart.start()
+                } else {
+                    if (value.animatorFinish !is AnimatorSet) {
+                        value.animatorFinish.setTarget(v)
+                    }
+                    value.animatorStart.cancel()
+                    value.animatorFinish.start()
                 }
                 true
             }
@@ -324,12 +350,39 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
     }
 }
 
-private class AnimatorPair(var animator: Animator?, var trigger: Boolean) {
+private class AnimatorTriple(var animatorStart: Animator, var animatorFinish: Animator, val trigger: Boolean) {
+
+    override fun hashCode(): Int {
+        return if (trigger) 0 else 1
+    }
+
+    override fun equals(o: Any?): Boolean {
+        if (o == null || javaClass != o.javaClass) {
+            return false
+        }
+        val triple = o as AnimatorTriple
+        if (triple.trigger != trigger) {
+            if (triple.animatorStart.isRunning) {
+                triple.animatorStart.cancel()
+            }
+            if (triple.animatorFinish.isRunning) {
+                triple.animatorFinish.cancel()
+            }
+            return false
+        }
+        animatorStart = triple.animatorStart
+        animatorFinish = triple.animatorFinish
+        return true
+    }
+
+}
+
+private class AnimatorPair(var animator: Animator, var trigger: Boolean) {
     override fun hashCode(): Int = if(trigger) 1 else 0
     override fun equals(other: Any?): Boolean {
         if(other == null || other !is AnimatorPair) return false
         if(this.trigger != other.trigger) {
-            other.animator?.takeIf { it.isRunning }?.cancel()
+            other.animator.takeIf { it.isRunning }?.cancel()
             return false
         }
         this.animator = other.animator
