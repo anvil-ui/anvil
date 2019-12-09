@@ -221,6 +221,8 @@ open class DSLGeneratorTask : DefaultTask() {
                         val superView = superType.simpleName
                         it.superclass(ClassName(packageName, "${superView}Scope"))*/
                         it.superclass(ClassName(packageName, "${view.type.superclasses[0].simpleName}Scope"))
+                    } else {
+                        it.superclass(ClassName(packageName, ROOT_VIEW_SCOPE))
                     }
                 }
                 .addType(
@@ -564,6 +566,7 @@ private fun ClassName.parameterizedBy(typeParameters: List<KTypeParameter>) =
 
 private const val PACKAGE = "trikita.anvil"
 private const val VIEW_CNAME = "android.view.View"
+private const val ROOT_VIEW_SCOPE = "RootViewScope"
 
 private val ANY_N: ClassName = ANY.copy(nullable = true)
 private val FUNCTION_STAR: TypeName = ClassName("kotlin", "Function").parameterizedBy(STAR)
