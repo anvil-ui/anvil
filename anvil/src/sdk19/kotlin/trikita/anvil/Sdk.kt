@@ -648,8 +648,8 @@ abstract class ChronometerScope : TextViewScope() {
 fun compoundButton(configure: CompoundButtonScope.() -> Unit = {}) =
     v<CompoundButton>(configure.bind(CompoundButtonScope))
 abstract class CompoundButtonScope : ButtonScope() {
-  fun buttonDrawable(arg: Int): Unit = attr("buttonDrawable", arg)
   fun buttonDrawable(arg: Drawable?): Unit = attr("buttonDrawable", arg)
+  fun buttonDrawable(arg: Int): Unit = attr("buttonDrawable", arg)
   fun checked(arg: Boolean): Unit = attr("checked", arg)
   fun onCheckedChange(arg: ((arg0: CompoundButton, arg1: Boolean) -> Unit)?): Unit =
       attr("onCheckedChange", arg)
@@ -825,8 +825,8 @@ abstract class ImageViewScope : ViewScope() {
   fun adjustViewBounds(arg: Boolean): Unit = attr("adjustViewBounds", arg)
   fun baseline(arg: Int): Unit = attr("baseline", arg)
   fun baselineAlignBottom(arg: Boolean): Unit = attr("baselineAlignBottom", arg)
-  fun colorFilter(arg: Int): Unit = attr("colorFilter", arg)
   fun colorFilter(arg: ColorFilter): Unit = attr("colorFilter", arg)
+  fun colorFilter(arg: Int): Unit = attr("colorFilter", arg)
   fun cropToPadding(arg: Boolean): Unit = attr("cropToPadding", arg)
   fun imageAlpha(arg: Int): Unit = attr("imageAlpha", arg)
   fun imageBitmap(arg: Bitmap): Unit = attr("imageBitmap", arg)
@@ -1126,10 +1126,10 @@ fun tabWidget(configure: TabWidgetScope.() -> Unit = {}) =
 abstract class TabWidgetScope : LinearLayoutScope() {
   fun currentTab(arg: Int): Unit = attr("currentTab", arg)
   fun dividerDrawable(arg: Int): Unit = attr("dividerDrawable", arg)
-  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun leftStripDrawable(arg: Drawable?): Unit = attr("leftStripDrawable", arg)
-  fun rightStripDrawable(arg: Int): Unit = attr("rightStripDrawable", arg)
+  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun rightStripDrawable(arg: Drawable?): Unit = attr("rightStripDrawable", arg)
+  fun rightStripDrawable(arg: Int): Unit = attr("rightStripDrawable", arg)
   fun stripEnabled(arg: Boolean): Unit = attr("stripEnabled", arg)
   companion object : TabWidgetScope() {
     init {
@@ -1199,16 +1199,16 @@ abstract class TextViewScope : ViewScope() {
   fun highlightColor(arg: Int): Unit = attr("highlightColor", arg)
   fun hint(arg: CharSequence): Unit = attr("hint", arg)
   fun hint(arg: Int): Unit = attr("hint", arg)
-  fun hintTextColor(arg: ColorStateList): Unit = attr("hintTextColor", arg)
   fun hintTextColor(arg: Int): Unit = attr("hintTextColor", arg)
+  fun hintTextColor(arg: ColorStateList): Unit = attr("hintTextColor", arg)
   fun horizontallyScrolling(arg: Boolean): Unit = attr("horizontallyScrolling", arg)
   fun imeOptions(arg: Int): Unit = attr("imeOptions", arg)
   fun includeFontPadding(arg: Boolean): Unit = attr("includeFontPadding", arg)
   fun inputType(arg: Int): Unit = attr("inputType", arg)
   fun keyListener(arg: KeyListener): Unit = attr("keyListener", arg)
   fun lines(arg: Int): Unit = attr("lines", arg)
-  fun linkTextColor(arg: ColorStateList): Unit = attr("linkTextColor", arg)
   fun linkTextColor(arg: Int): Unit = attr("linkTextColor", arg)
+  fun linkTextColor(arg: ColorStateList): Unit = attr("linkTextColor", arg)
   fun linksClickable(arg: Boolean): Unit = attr("linksClickable", arg)
   fun marqueeRepeatLimit(arg: Int): Unit = attr("marqueeRepeatLimit", arg)
   fun maxEms(arg: Int): Unit = attr("maxEms", arg)

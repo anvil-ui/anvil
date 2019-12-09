@@ -206,8 +206,8 @@ fun gLSurfaceView(configure: GLSurfaceViewScope.() -> Unit = {}) =
     v<GLSurfaceView>(configure.bind(GLSurfaceViewScope))
 abstract class GLSurfaceViewScope : SurfaceViewScope() {
   fun debugFlags(arg: Int): Unit = attr("debugFlags", arg)
-  fun eGLConfigChooser(arg: Boolean): Unit = attr("eGLConfigChooser", arg)
   fun eGLConfigChooser(arg: GLSurfaceView.EGLConfigChooser): Unit = attr("eGLConfigChooser", arg)
+  fun eGLConfigChooser(arg: Boolean): Unit = attr("eGLConfigChooser", arg)
   fun eGLContextClientVersion(arg: Int): Unit = attr("eGLContextClientVersion", arg)
   fun eGLContextFactory(arg: GLSurfaceView.EGLContextFactory): Unit = attr("eGLContextFactory", arg)
   fun eGLWindowSurfaceFactory(arg: GLSurfaceView.EGLWindowSurfaceFactory): Unit =
@@ -580,8 +580,8 @@ abstract class CheckBoxScope : CompoundButtonScope() {
 fun checkedTextView(configure: CheckedTextViewScope.() -> Unit = {}) =
     v<CheckedTextView>(configure.bind(CheckedTextViewScope))
 abstract class CheckedTextViewScope : TextViewScope() {
-  fun checkMarkDrawable(arg: Int): Unit = attr("checkMarkDrawable", arg)
   fun checkMarkDrawable(arg: Drawable?): Unit = attr("checkMarkDrawable", arg)
+  fun checkMarkDrawable(arg: Int): Unit = attr("checkMarkDrawable", arg)
   fun checked(arg: Boolean): Unit = attr("checked", arg)
   companion object : CheckedTextViewScope() {
     init {
@@ -782,8 +782,8 @@ abstract class ImageViewScope : ViewScope() {
   fun alpha(arg: Int): Unit = attr("alpha", arg)
   fun baseline(arg: Int): Unit = attr("baseline", arg)
   fun baselineAlignBottom(arg: Boolean): Unit = attr("baselineAlignBottom", arg)
-  fun colorFilter(arg: Int): Unit = attr("colorFilter", arg)
   fun colorFilter(arg: ColorFilter): Unit = attr("colorFilter", arg)
+  fun colorFilter(arg: Int): Unit = attr("colorFilter", arg)
   fun imageBitmap(arg: Bitmap): Unit = attr("imageBitmap", arg)
   fun imageDrawable(arg: Drawable?): Unit = attr("imageDrawable", arg)
   fun imageLevel(arg: Int): Unit = attr("imageLevel", arg)
@@ -1069,8 +1069,8 @@ fun tabWidget(configure: TabWidgetScope.() -> Unit = {}) =
 abstract class TabWidgetScope : LinearLayoutScope() {
   fun currentTab(arg: Int): Unit = attr("currentTab", arg)
   fun dividerDrawable(arg: Int): Unit = attr("dividerDrawable", arg)
-  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun leftStripDrawable(arg: Drawable?): Unit = attr("leftStripDrawable", arg)
+  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun rightStripDrawable(arg: Int): Unit = attr("rightStripDrawable", arg)
   fun rightStripDrawable(arg: Drawable?): Unit = attr("rightStripDrawable", arg)
   fun stripEnabled(arg: Boolean): Unit = attr("stripEnabled", arg)
@@ -1164,8 +1164,8 @@ abstract class TextViewScope : ViewScope() {
   fun singleLine(arg: Boolean): Unit = attr("singleLine", arg)
   fun spannableFactory(arg: Spannable.Factory): Unit = attr("spannableFactory", arg)
   fun text(arg: Int): Unit = attr("text", arg)
-  fun textColor(arg: ColorStateList): Unit = attr("textColor", arg)
   fun textColor(arg: Int): Unit = attr("textColor", arg)
+  fun textColor(arg: ColorStateList): Unit = attr("textColor", arg)
   fun textIsSelectable(arg: Boolean): Unit = attr("textIsSelectable", arg)
   fun textKeepState(arg: CharSequence): Unit = attr("textKeepState", arg)
   fun textScaleX(arg: Float): Unit = attr("textScaleX", arg)

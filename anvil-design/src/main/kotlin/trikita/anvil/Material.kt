@@ -202,8 +202,8 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun checkableResource(arg: Int): Unit = attr("checkableResource", arg)
   fun checkedIcon(arg: Drawable?): Unit = attr("checkedIcon", arg)
   fun checkedIconResource(arg: Int): Unit = attr("checkedIconResource", arg)
-  fun checkedIconVisible(arg: Boolean): Unit = attr("checkedIconVisible", arg)
   fun checkedIconVisible(arg: Int): Unit = attr("checkedIconVisible", arg)
+  fun checkedIconVisible(arg: Boolean): Unit = attr("checkedIconVisible", arg)
   fun chipBackgroundColor(arg: ColorStateList?): Unit = attr("chipBackgroundColor", arg)
   fun chipBackgroundColorResource(arg: Int): Unit = attr("chipBackgroundColorResource", arg)
   fun chipCornerRadius(arg: Float): Unit = attr("chipCornerRadius", arg)
@@ -217,8 +217,8 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun chipIconSizeResource(arg: Int): Unit = attr("chipIconSizeResource", arg)
   fun chipIconTint(arg: ColorStateList?): Unit = attr("chipIconTint", arg)
   fun chipIconTintResource(arg: Int): Unit = attr("chipIconTintResource", arg)
-  fun chipIconVisible(arg: Boolean): Unit = attr("chipIconVisible", arg)
   fun chipIconVisible(arg: Int): Unit = attr("chipIconVisible", arg)
+  fun chipIconVisible(arg: Boolean): Unit = attr("chipIconVisible", arg)
   fun chipMinHeight(arg: Float): Unit = attr("chipMinHeight", arg)
   fun chipMinHeightResource(arg: Int): Unit = attr("chipMinHeightResource", arg)
   fun chipStartPadding(arg: Float): Unit = attr("chipStartPadding", arg)
@@ -239,8 +239,8 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun closeIconStartPaddingResource(arg: Int): Unit = attr("closeIconStartPaddingResource", arg)
   fun closeIconTint(arg: ColorStateList?): Unit = attr("closeIconTint", arg)
   fun closeIconTintResource(arg: Int): Unit = attr("closeIconTintResource", arg)
-  fun closeIconVisible(arg: Boolean): Unit = attr("closeIconVisible", arg)
   fun closeIconVisible(arg: Int): Unit = attr("closeIconVisible", arg)
+  fun closeIconVisible(arg: Boolean): Unit = attr("closeIconVisible", arg)
   fun hideMotionSpec(arg: MotionSpec?): Unit = attr("hideMotionSpec", arg)
   fun hideMotionSpecResource(arg: Int): Unit = attr("hideMotionSpecResource", arg)
   fun iconEndPadding(arg: Float): Unit = attr("iconEndPadding", arg)
@@ -462,8 +462,8 @@ abstract class VisibilityAwareImageButtonScope : ImageButtonScope() {
 fun navigationView(configure: NavigationViewScope.() -> Unit = {}) =
     v<NavigationView>(configure.bind(NavigationViewScope))
 abstract class NavigationViewScope : ScrimInsetsFrameLayoutScope() {
-  fun checkedItem(arg: MenuItem): Unit = attr("checkedItem", arg)
   fun checkedItem(arg: Int): Unit = attr("checkedItem", arg)
+  fun checkedItem(arg: MenuItem): Unit = attr("checkedItem", arg)
   fun itemBackground(arg: Drawable?): Unit = attr("itemBackground", arg)
   fun itemBackgroundResource(arg: Int): Unit = attr("itemBackgroundResource", arg)
   fun itemHorizontalPadding(arg: Int): Unit = attr("itemHorizontalPadding", arg)
@@ -554,9 +554,9 @@ abstract class TextInputLayoutScope : LinearLayoutScope() {
   fun hintAnimationEnabled(arg: Boolean): Unit = attr("hintAnimationEnabled", arg)
   fun hintEnabled(arg: Boolean): Unit = attr("hintEnabled", arg)
   fun hintTextAppearance(arg: Int): Unit = attr("hintTextAppearance", arg)
-  fun passwordVisibilityToggleContentDescription(arg: CharSequence?): Unit =
-      attr("passwordVisibilityToggleContentDescription", arg)
   fun passwordVisibilityToggleContentDescription(arg: Int): Unit =
+      attr("passwordVisibilityToggleContentDescription", arg)
+  fun passwordVisibilityToggleContentDescription(arg: CharSequence?): Unit =
       attr("passwordVisibilityToggleContentDescription", arg)
   fun passwordVisibilityToggleDrawable(arg: Int): Unit = attr("passwordVisibilityToggleDrawable",
       arg)

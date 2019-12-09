@@ -482,8 +482,8 @@ abstract class AbsListViewScope : AdapterViewScope() {
   fun recyclerListener(arg: AbsListView.RecyclerListener): Unit = attr("recyclerListener", arg)
   fun remoteViewsAdapter(arg: Intent): Unit = attr("remoteViewsAdapter", arg)
   fun scrollingCacheEnabled(arg: Boolean): Unit = attr("scrollingCacheEnabled", arg)
-  fun selector(arg: Drawable): Unit = attr("selector", arg)
   fun selector(arg: Int): Unit = attr("selector", arg)
+  fun selector(arg: Drawable): Unit = attr("selector", arg)
   fun smoothScrollbarEnabled(arg: Boolean): Unit = attr("smoothScrollbarEnabled", arg)
   fun stackFromBottom(arg: Boolean): Unit = attr("stackFromBottom", arg)
   fun textFilterEnabled(arg: Boolean): Unit = attr("textFilterEnabled", arg)
@@ -675,8 +675,8 @@ abstract class CheckBoxScope : CompoundButtonScope() {
 fun checkedTextView(configure: CheckedTextViewScope.() -> Unit = {}) =
     v<CheckedTextView>(configure.bind(CheckedTextViewScope))
 abstract class CheckedTextViewScope : TextViewScope() {
-  fun checkMarkDrawable(arg: Drawable?): Unit = attr("checkMarkDrawable", arg)
   fun checkMarkDrawable(arg: Int): Unit = attr("checkMarkDrawable", arg)
+  fun checkMarkDrawable(arg: Drawable?): Unit = attr("checkMarkDrawable", arg)
   fun checkMarkTintList(arg: ColorStateList?): Unit = attr("checkMarkTintList", arg)
   fun checkMarkTintMode(arg: PorterDuff.Mode?): Unit = attr("checkMarkTintMode", arg)
   fun checked(arg: Boolean): Unit = attr("checked", arg)
@@ -701,8 +701,8 @@ abstract class ChronometerScope : TextViewScope() {
 fun compoundButton(configure: CompoundButtonScope.() -> Unit = {}) =
     v<CompoundButton>(configure.bind(CompoundButtonScope))
 abstract class CompoundButtonScope : ButtonScope() {
-  fun buttonDrawable(arg: Int): Unit = attr("buttonDrawable", arg)
   fun buttonDrawable(arg: Drawable?): Unit = attr("buttonDrawable", arg)
+  fun buttonDrawable(arg: Int): Unit = attr("buttonDrawable", arg)
   fun buttonTintList(arg: ColorStateList?): Unit = attr("buttonTintList", arg)
   fun buttonTintMode(arg: PorterDuff.Mode?): Unit = attr("buttonTintMode", arg)
   fun checked(arg: Boolean): Unit = attr("checked", arg)
@@ -883,8 +883,8 @@ abstract class ImageViewScope : ViewScope() {
   fun adjustViewBounds(arg: Boolean): Unit = attr("adjustViewBounds", arg)
   fun baseline(arg: Int): Unit = attr("baseline", arg)
   fun baselineAlignBottom(arg: Boolean): Unit = attr("baselineAlignBottom", arg)
-  fun colorFilter(arg: Int): Unit = attr("colorFilter", arg)
   fun colorFilter(arg: ColorFilter): Unit = attr("colorFilter", arg)
+  fun colorFilter(arg: Int): Unit = attr("colorFilter", arg)
   fun cropToPadding(arg: Boolean): Unit = attr("cropToPadding", arg)
   fun imageAlpha(arg: Int): Unit = attr("imageAlpha", arg)
   fun imageBitmap(arg: Bitmap): Unit = attr("imageBitmap", arg)
@@ -1202,8 +1202,8 @@ fun tabWidget(configure: TabWidgetScope.() -> Unit = {}) =
 abstract class TabWidgetScope : LinearLayoutScope() {
   fun currentTab(arg: Int): Unit = attr("currentTab", arg)
   fun dividerDrawable(arg: Int): Unit = attr("dividerDrawable", arg)
-  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun leftStripDrawable(arg: Drawable?): Unit = attr("leftStripDrawable", arg)
+  fun leftStripDrawable(arg: Int): Unit = attr("leftStripDrawable", arg)
   fun rightStripDrawable(arg: Int): Unit = attr("rightStripDrawable", arg)
   fun rightStripDrawable(arg: Drawable?): Unit = attr("rightStripDrawable", arg)
   fun stripEnabled(arg: Boolean): Unit = attr("stripEnabled", arg)
@@ -1277,8 +1277,8 @@ abstract class TextViewScope : ViewScope() {
   fun highlightColor(arg: Int): Unit = attr("highlightColor", arg)
   fun hint(arg: Int): Unit = attr("hint", arg)
   fun hint(arg: CharSequence): Unit = attr("hint", arg)
-  fun hintTextColor(arg: ColorStateList): Unit = attr("hintTextColor", arg)
   fun hintTextColor(arg: Int): Unit = attr("hintTextColor", arg)
+  fun hintTextColor(arg: ColorStateList): Unit = attr("hintTextColor", arg)
   fun horizontallyScrolling(arg: Boolean): Unit = attr("horizontallyScrolling", arg)
   fun imeOptions(arg: Int): Unit = attr("imeOptions", arg)
   fun includeFontPadding(arg: Boolean): Unit = attr("includeFontPadding", arg)
@@ -1286,8 +1286,8 @@ abstract class TextViewScope : ViewScope() {
   fun keyListener(arg: KeyListener): Unit = attr("keyListener", arg)
   fun letterSpacing(arg: Float): Unit = attr("letterSpacing", arg)
   fun lines(arg: Int): Unit = attr("lines", arg)
-  fun linkTextColor(arg: ColorStateList): Unit = attr("linkTextColor", arg)
   fun linkTextColor(arg: Int): Unit = attr("linkTextColor", arg)
+  fun linkTextColor(arg: ColorStateList): Unit = attr("linkTextColor", arg)
   fun linksClickable(arg: Boolean): Unit = attr("linksClickable", arg)
   fun marqueeRepeatLimit(arg: Int): Unit = attr("marqueeRepeatLimit", arg)
   fun maxEms(arg: Int): Unit = attr("maxEms", arg)
@@ -1358,15 +1358,15 @@ abstract class ToggleButtonScope : CompoundButtonScope() {
 
 fun toolbar(configure: ToolbarScope.() -> Unit = {}) = v<Toolbar>(configure.bind(ToolbarScope))
 abstract class ToolbarScope : ViewGroupScope() {
-  fun logo(arg: Int): Unit = attr("logo", arg)
   fun logo(arg: Drawable): Unit = attr("logo", arg)
-  fun logoDescription(arg: CharSequence): Unit = attr("logoDescription", arg)
+  fun logo(arg: Int): Unit = attr("logo", arg)
   fun logoDescription(arg: Int): Unit = attr("logoDescription", arg)
+  fun logoDescription(arg: CharSequence): Unit = attr("logoDescription", arg)
+  fun navigationContentDescription(arg: Int): Unit = attr("navigationContentDescription", arg)
   fun navigationContentDescription(arg: CharSequence?): Unit = attr("navigationContentDescription",
       arg)
-  fun navigationContentDescription(arg: Int): Unit = attr("navigationContentDescription", arg)
-  fun navigationIcon(arg: Int): Unit = attr("navigationIcon", arg)
   fun navigationIcon(arg: Drawable?): Unit = attr("navigationIcon", arg)
+  fun navigationIcon(arg: Int): Unit = attr("navigationIcon", arg)
   fun navigationOnClickListener(arg: View.OnClickListener): Unit = attr("navigationOnClickListener",
       arg)
   fun onMenuItemClick(arg: ((arg0: MenuItem) -> Boolean)?): Unit = attr("onMenuItemClick", arg)
@@ -1374,8 +1374,8 @@ abstract class ToolbarScope : ViewGroupScope() {
   fun subtitle(arg: CharSequence): Unit = attr("subtitle", arg)
   fun subtitle(arg: Int): Unit = attr("subtitle", arg)
   fun subtitleTextColor(arg: Int): Unit = attr("subtitleTextColor", arg)
-  fun title(arg: Int): Unit = attr("title", arg)
   fun title(arg: CharSequence): Unit = attr("title", arg)
+  fun title(arg: Int): Unit = attr("title", arg)
   fun titleTextColor(arg: Int): Unit = attr("titleTextColor", arg)
   companion object : ToolbarScope() {
     init {
