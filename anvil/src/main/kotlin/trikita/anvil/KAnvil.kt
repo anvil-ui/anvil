@@ -68,11 +68,11 @@ val isPortrait: Boolean
 
 abstract class RootViewScope {
     fun Int.dp() : Dip {
-        return Dip(dip(this))
+        return Dip(this)
     }
 
     fun Float.sp() : Sp {
-        return Sp(sip(this))
+        return Sp(this)
     }
 
     fun Int.px() : Px {
@@ -80,7 +80,7 @@ abstract class RootViewScope {
     }
 
     fun Int.dpSize() : Size.DIP {
-        return Size.DIP(dip(this))
+        return Size.DIP(this)
     }
 }
 

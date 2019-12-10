@@ -10,15 +10,13 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
-import trikita.anvil.*
 import java.util.*
 
 // weight constants
-sealed class Size(val value: Int) {
-    object FILL : Size(ViewGroup.LayoutParams.MATCH_PARENT)
-    object MATCH : Size(ViewGroup.LayoutParams.MATCH_PARENT)
-    object WRAP : Size(ViewGroup.LayoutParams.WRAP_CONTENT)
-    class DIP(value: Int) : Size(value)
+sealed class Size {
+    object MATCH : Size()
+    object WRAP : Size()
+    class DIP(val value: Int) : Size()
 }
 
 // gravity constants
@@ -82,6 +80,7 @@ fun ViewScope.anim(animator: Animator, trigger: Boolean) = attr("anim", Animator
 
 fun TextViewScope.textSize(size: Sp) = attr("textSize", size)
 fun TextViewScope.textSize(size: Dip) = attr("textSize", size)
+fun TextViewScope.textSize(size: Px) = attr("textSize", size)
 fun TextViewScope.typeface(assetPath: String) = attr("typeface", assetPath)
 fun TextViewScope.typeface(assetPath: String?, style: Int) = attr("typeface", assetPath to style)
 
@@ -133,8 +132,30 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         "size" -> when {
             value is Pair<*, *> -> {
                 val p = v.layoutParams
-                p.width = (value.first as Size).value
-                p.height = (value.second as Size).value
+                val width = value.first
+                val height = value.second
+                when(width) {
+                    is Size.DIP -> {
+                        p.width = dip(width.value)
+                    }
+                    is Size.MATCH -> {
+                        p.width = ViewGroup.LayoutParams.MATCH_PARENT
+                    }
+                    is Size.WRAP -> {
+                        p.width = ViewGroup.LayoutParams.WRAP_CONTENT
+                    }
+                }
+                when(height) {
+                    is Size.DIP -> {
+                        p.height = dip(height.value)
+                    }
+                    is Size.MATCH -> {
+                        p.height = ViewGroup.LayoutParams.MATCH_PARENT
+                    }
+                    is Size.WRAP -> {
+                        p.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    }
+                }
                 v.layoutParams = p
                 true
             }
@@ -143,7 +164,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         "padding" -> when {
             value is List<*> -> {
                 val (l, t, r, b) = value as List<Dip>
-                v.setPadding(l.value, t.value, r.value, b.value)
+                v.setPadding(dip(l.value), dip(t.value), dip(r.value), dip(b.value))
                 true
             }
             else -> false
@@ -152,10 +173,10 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             v.layoutParams is ViewGroup.MarginLayoutParams && value is List<*> -> {
                 val p = v.layoutParams as ViewGroup.MarginLayoutParams
                 val (l, t, r, b) = value as List<Dip>
-                p.leftMargin = l.value
-                p.topMargin = t.value
-                p.rightMargin = r.value
-                p.bottomMargin = b.value
+                p.leftMargin = dip(l.value)
+                p.topMargin = dip(t.value)
+                p.rightMargin = dip(r.value)
+                p.bottomMargin = dip(b.value)
                 v.layoutParams = p
                 true
             }
@@ -186,10 +207,14 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             v is TextView -> {
                 when (value) {
                     is Sp -> {
-                        v.setTextSize(TypedValue.COMPLEX_UNIT_PX, value.value)
+                        v.setTextSize(TypedValue.COMPLEX_UNIT_SP, value.value)
                         true
                     }
                     is Dip -> {
+                        v.setTextSize(TypedValue.COMPLEX_UNIT_DIP, value.value.toFloat())
+                        true
+                    }
+                    is Px -> {
                         v.setTextSize(TypedValue.COMPLEX_UNIT_PX, value.value.toFloat())
                         true
                     }
