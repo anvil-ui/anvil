@@ -73,8 +73,8 @@ fun ViewScope.toRightOf(subject: Int) = align(RelativeLayout.RIGHT_OF, subject)
 fun ViewScope.toStartOf(subject: Int) = align(RelativeLayout.START_OF, subject)
 fun ViewScope.align(verb: Int, subject: Int) = attr("align", verb to subject)
 
-fun ViewScope.anim(animator: Animator, trigger: Boolean) = attr("anim", AnimatorPair(animator, trigger))
-fun ViewScope.animBi(trigger: Boolean, start: Animator, finish: Animator) = attr("animBidirectional", AnimatorTriple(start, finish, trigger))
+fun ViewScope.anim(trigger: Boolean, animator: Animator) = attr("anim", AnimatorPair(animator, trigger))
+fun ViewScope.anim(trigger: Boolean, animatorIn: Animator, animatorOut: Animator) = attr("animInOut", AnimatorTriple(animatorIn, animatorOut, trigger))
 
 fun TextViewScope.textSize(sizePx: Float) = attr("textSize", sizePx)
 fun TextViewScope.typeface(assetPath: String) = attr("typeface", assetPath)
@@ -179,20 +179,20 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             }
             else -> false
         }
-        "animBidirectional" -> when (value) {
+        "animInOut" -> when (value) {
             is AnimatorTriple -> {
                 if (value.trigger) {
-                    if (value.animatorStart !is AnimatorSet) {
-                        value.animatorStart.setTarget(v)
+                    if (value.animatorIn !is AnimatorSet) {
+                        value.animatorIn.setTarget(v)
                     }
-                    value.animatorFinish.cancel()
-                    value.animatorStart.start()
+                    value.animatorOut.cancel()
+                    value.animatorIn.start()
                 } else {
-                    if (value.animatorFinish !is AnimatorSet) {
-                        value.animatorFinish.setTarget(v)
+                    if (value.animatorOut !is AnimatorSet) {
+                        value.animatorOut.setTarget(v)
                     }
-                    value.animatorStart.cancel()
-                    value.animatorFinish.start()
+                    value.animatorIn.cancel()
+                    value.animatorOut.start()
                 }
                 true
             }
@@ -350,7 +350,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
     }
 }
 
-private class AnimatorTriple(var animatorStart: Animator, var animatorFinish: Animator, val trigger: Boolean) {
+private class AnimatorTriple(var animatorIn: Animator, var animatorOut: Animator, val trigger: Boolean) {
 
     override fun hashCode(): Int {
         return if (trigger) 0 else 1
@@ -362,16 +362,16 @@ private class AnimatorTriple(var animatorStart: Animator, var animatorFinish: An
         }
         val triple = o as AnimatorTriple
         if (triple.trigger != trigger) {
-            if (triple.animatorStart.isRunning) {
-                triple.animatorStart.cancel()
+            if (triple.animatorIn.isRunning) {
+                triple.animatorIn.cancel()
             }
-            if (triple.animatorFinish.isRunning) {
-                triple.animatorFinish.cancel()
+            if (triple.animatorOut.isRunning) {
+                triple.animatorOut.cancel()
             }
             return false
         }
-        animatorStart = triple.animatorStart
-        animatorFinish = triple.animatorFinish
+        animatorIn = triple.animatorIn
+        animatorOut = triple.animatorOut
         return true
     }
 
