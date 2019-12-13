@@ -1,7 +1,8 @@
 import java.util.Properties
 
 plugins {
-    kotlin("multiplatform") version "1.3.60" apply false
+    kotlin("jvm") version "1.3.60" apply false
+    kotlin("plugin.serialization") version "1.3.60" apply false
 }
 
 Properties()

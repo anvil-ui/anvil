@@ -1,4 +1,4 @@
-package dev.inkremental.gradle
+package dev.inkremental.meta.gradle
 
 import com.squareup.kotlinpoet.MemberName
 import org.gradle.api.*

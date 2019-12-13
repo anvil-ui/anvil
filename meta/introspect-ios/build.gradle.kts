@@ -1,30 +1,18 @@
 plugins {
-    kotlin("multiplatform")
+    kotlin("jvm")
     application
 }
 
 kotlin {
-    jvm {
-        withJava()
-    }
-
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation(kotlin("stdlib"))
-                implementation(kotlin("util-klib"))
-            }
-        }
-
-        getByName("jvmMain") {
-            dependencies {
-                implementation(kotlin("stdlib-jdk8"))
-                implementation(kotlin("native-library-reader"))
-            }
-        }
+    dependencies {
+        implementation(kotlin("stdlib"))
+        implementation(kotlin("util-klib"))
+        implementation(kotlin("stdlib-jdk8"))
+        implementation(kotlin("native-library-reader"))
     }
 }
 
 application {
-    mainClassName = "dev.inkremental.introspect.ios.MainKt"
+    mainClassName = "dev.inkremental.meta.introspect.ios.MainKt"
 }
+

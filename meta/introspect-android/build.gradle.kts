@@ -1,22 +1,11 @@
 plugins {
-    kotlin("multiplatform")
+    kotlin("jvm")
 }
 
 kotlin {
-    jvm()
-
-    sourceSets {
-        commonMain {
-            dependencies {
-                api(project(":model"))
-                implementation(kotlin("stdlib"))
-            }
-        }
-
-        getByName("jvmMain") {
-            dependencies {
-                implementation(kotlin("stdlib-jdk8"))
-            }
-        }
+    dependencies {
+        api(project(":model"))
+        implementation(kotlin("stdlib"))
+        testImplementation(kotlin("stdlib-jdk8"))
     }
 }

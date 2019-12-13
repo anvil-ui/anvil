@@ -1,4 +1,4 @@
-package dev.inkremental.gradle
+package dev.inkremental.meta.gradle
 
 import com.android.build.gradle.LibraryExtension
 import com.jfrog.bintray.gradle.BintrayExtension

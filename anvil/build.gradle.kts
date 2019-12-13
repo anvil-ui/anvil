@@ -1,4 +1,4 @@
-import dev.inkremental.gradle.InkrementalType
+import dev.inkremental.meta.gradle.InkrementalType
 
 plugins {
 	id("com.android.library")

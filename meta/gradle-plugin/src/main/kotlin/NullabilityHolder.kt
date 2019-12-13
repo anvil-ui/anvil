@@ -1,4 +1,4 @@
-package dev.inkremental.gradle
+package dev.inkremental.meta.gradle
 
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.tree.*

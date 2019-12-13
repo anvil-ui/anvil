@@ -1,4 +1,4 @@
-package dev.inkremental.gradle
+package dev.inkremental.meta.gradle
 
 open class InkrementalMetaExtension {
     var type: InkrementalType = InkrementalType.LIBRARY

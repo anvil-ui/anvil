@@ -1,4 +1,4 @@
-package dev.inkremental.introspect
+package dev.inkremental.meta.introspect.ios
 
 import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.descriptors.*
