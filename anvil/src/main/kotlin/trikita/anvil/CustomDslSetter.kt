@@ -16,7 +16,7 @@ import java.util.*
 sealed class Size {
     object MATCH : Size()
     object WRAP : Size()
-    class DIP(val value: Int) : Size()
+    class EXACT(val size: Dimen) : Size()
 }
 
 // gravity constants
@@ -35,9 +35,14 @@ const val CLIP_HORIZONTAL = Gravity.CLIP_HORIZONTAL
 const val START = Gravity.START
 const val END = Gravity.END
 
-inline class Px(val value: Int)
+sealed class Dimen {
+    class DipDimen(val size: Dip) : Dimen()
+    class PxDimen(val size: Px) : Dimen()
+}
+
 inline class Sp(val value: Float)
 inline class Dip(val value: Int)
+inline class Px(val value: Int)
 
 fun ViewScope.init(action: (View) -> Unit) = attr("init", action)
 fun ViewScope.size(w: Size, h: Size) = attr("size", w to h)
@@ -134,9 +139,10 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
                 val p = v.layoutParams
                 val width = value.first
                 val height = value.second
-                when(width) {
-                    is Size.DIP -> {
-                        p.width = dip(width.value)
+                when (width) {
+                    is Size.EXACT -> {
+                        val pixels = exactPx(width.size)
+                        p.width = pixels
                     }
                     is Size.MATCH -> {
                         p.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -145,9 +151,10 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
                         p.width = ViewGroup.LayoutParams.WRAP_CONTENT
                     }
                 }
-                when(height) {
-                    is Size.DIP -> {
-                        p.height = dip(height.value)
+                when (height) {
+                    is Size.EXACT -> {
+                        val pixels = exactPx(height.size)
+                        p.height = pixels
                     }
                     is Size.MATCH -> {
                         p.height = ViewGroup.LayoutParams.MATCH_PARENT
@@ -365,6 +372,13 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             else -> false
         }
         else -> false
+    }
+
+    private fun exactPx(size: Dimen): Int {
+        return when (size) {
+            is Dimen.DipDimen -> dip(size.size.value)
+            is Dimen.PxDimen -> size.size.value
+        }
     }
 }
 

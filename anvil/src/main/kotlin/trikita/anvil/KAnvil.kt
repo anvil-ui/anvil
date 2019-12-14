@@ -79,8 +79,12 @@ abstract class RootViewScope {
         return Px(this)
     }
 
-    fun Int.dpSize() : Size.DIP {
-        return Size.DIP(this)
+    fun Int.dpSize() : Size.EXACT {
+        return Size.EXACT(Dimen.DipDimen(this.dp()))
+    }
+
+    fun Int.pxSize() : Size.EXACT {
+        return Size.EXACT(Dimen.PxDimen(this.px()))
     }
 }
 
