@@ -11,18 +11,18 @@ android {
 }
 
 inkremental {
-	moduleName = "support-core-ui"
-	camelCaseName = "SupportCoreUi"
-
-	quirks = mutableMapOf(
-		// Deprecated view; framework nas android.widget.Space since API 14
-		"androidx.legacy.widget.Space" to mapOf(
-			"__viewAlias" to false
-		),
-		"androidx.core.widget.NestedScrollView" to mapOf(
-			"setOnScrollChangeListener" to false
+	module("support-core-ui") {
+		camelCaseName = "SupportCoreUi"
+		quirks = mutableMapOf(
+			// Deprecated view; framework nas android.widget.Space since API 14
+			"androidx.legacy.widget.Space" to mapOf(
+				"__viewAlias" to false
+			),
+			"androidx.core.widget.NestedScrollView" to mapOf(
+				"setOnScrollChangeListener" to false
+			)
 		)
-	)
+	}
 }
 
 dependencies {

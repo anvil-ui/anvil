@@ -3,8 +3,7 @@ package dev.inkremental.meta.gradle
 import com.android.build.gradle.LibraryExtension
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.BintrayPlugin
-import org.gradle.api.Plugin
-import org.gradle.api.Project
+import org.gradle.api.*
 import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -23,8 +22,6 @@ class InkrementalModulePlugin : Plugin<Project> {
         val compileSdk = 28
         val minSdk = 15
         val targetSdk = compileSdk
-
-        val anvil = extensions.getByType<InkrementalMetaExtension>()
 
         val android = extensions.getByType<LibraryExtension>()
 
@@ -133,14 +130,15 @@ class InkrementalModulePlugin : Plugin<Project> {
         )
 
         afterEvaluate {
-            when {
-                anvil.isSdk -> {
-                    registerAnvilPublication("sdk15", prop("POM_ARTIFACT_SDK15_ID")!!)
-                    registerAnvilPublication("sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
-                    registerAnvilPublication("sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
+            (extensions["inkremental"] as? NamedDomainObjectCollection<InkrementalMetaModule>)?.forEach {
+                when(it.type) {
+                    InkrementalType.SDK -> {
+                        registerAnvilPublication("sdk15", prop("POM_ARTIFACT_SDK15_ID")!!)
+                        registerAnvilPublication("sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
+                        registerAnvilPublication("sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
+                    }
+                    InkrementalType.LIBRARY -> registerAnvilPublication("lib", prop("POM_ARTIFACT_ID")!!)
                 }
-                anvil.isSupport -> registerAnvilPublication("lib", prop("POM_ARTIFACT_ID")!!)
-                else -> error("Unknown generator type: \"${anvil.type}\"")
             }
         }
     }

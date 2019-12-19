@@ -11,30 +11,31 @@ android {
 }
 
 inkremental {
-	moduleName = "appcompat-v7"
-	camelCaseName = "AppCompatv7"
-	manualSetterName = "AppcompatV7DslSetter"
-	quirks = mutableMapOf(
-		// Depends on internal class, can be re-enabled when metadata is implemented
-		"androidx.appcompat.widget.ActionBarContextView" to mapOf(
-			"__viewAlias" to false
-		),
+	module("appcompat-v7") {
+		camelCaseName = "AppCompatv7"
+		manualSetterName = "AppcompatV7DslSetter"
+		quirks = mutableMapOf(
+			// Depends on internal class, can be re-enabled when metadata is implemented
+			"androidx.appcompat.widget.ActionBarContextView" to mapOf(
+				"__viewAlias" to false
+			),
 
-		// Unknown issues
-		"androidx.appcompat.widget.AppCompatTextView" to mapOf(
-			"setTextFuture:java.util.concurrent.Future" to false
-		),
+			// Unknown issues
+			"androidx.appcompat.widget.AppCompatTextView" to mapOf(
+				"setTextFuture:java.util.concurrent.Future" to false
+			),
 
-		// Access limited to the same library
-		"androidx.appcompat.widget.ContentFrameLayout" to mapOf(
-			"setAttachListener:androidx.appcompat.widget.ContentFrameLayout.OnAttachListener" to false
-		),
+			// Access limited to the same library
+			"androidx.appcompat.widget.ContentFrameLayout" to mapOf(
+				"setAttachListener:androidx.appcompat.widget.ContentFrameLayout.OnAttachListener" to false
+			),
 
-		// Deprecated view; framework nas android.widget.SearchView since API 11
-		"androidx.appcompat.widget.SearchView" to mapOf(
-			"__viewAlias" to false
+			// Deprecated view; framework nas android.widget.SearchView since API 11
+			"androidx.appcompat.widget.SearchView" to mapOf(
+				"__viewAlias" to false
+			)
 		)
-	)
+	}
 }
 
 dependencies {

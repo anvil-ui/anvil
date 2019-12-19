@@ -11,8 +11,9 @@ android {
 }
 
 inkremental {
-	moduleName = "cardview-v7"
-	camelCaseName = "CardViewv7"
+	module("cardview-v7") {
+		camelCaseName = "CardViewv7"
+	}
 }
 
 dependencies {

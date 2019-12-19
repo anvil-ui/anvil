@@ -42,46 +42,53 @@ class InkrementalGenPlugin : Plugin<Project> {
         // "implementation" extends from "api", so it's also covered
         configurations["api"].extendsFrom(configuration)
 
-        afterEvaluate { generateTasks(extension, configuration) }
+        afterEvaluate {
+            extension.modules.forEach {
+                generateTasks(it, configuration)
+            }
+        }
     }
 
-    fun Project.generateTasks(extension: InkrementalMetaExtension, configuration: Configuration) {
-        when {
-            extension.isSdk -> {
-                createDslGeneratorTask("SDK21", getSdkConfiguration(21, extension.manualSetterName))
-                createDslGeneratorTask("SDK19", getSdkConfiguration(19, extension.manualSetterName))
-                createDslGeneratorTask("SDK15", getSdkConfiguration(15, extension.manualSetterName))
+    fun Project.generateTasks(module: InkrementalMetaModule, configuration: Configuration) {
+        when(module.type) {
+            InkrementalType.SDK -> {
+                createDslGeneratorTask("SDK21", getSdkConfiguration(21, module.manualSetterName, module.quirks))
+                createDslGeneratorTask("SDK19", getSdkConfiguration(19, module.manualSetterName, module.quirks))
+                createDslGeneratorTask("SDK15", getSdkConfiguration(15, module.manualSetterName, module.quirks))
 
                 project.tasks.register<Task>("generateSDKDSL") {
                     dependsOn("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")
                 }
             }
-            extension.isSupport -> {
-                createDslGeneratorTask(extension.camelCaseName,
+            InkrementalType.LIBRARY -> {
+                createDslGeneratorTask(module.camelCaseName,
                     // temporary toggle for supporting both array- and configuration-based libraries declaration
-                    if(extension.libraries.isNotEmpty()) {
-                        getSupportConfiguration(
-                            extension.camelCaseName, extension.moduleName,
-                            extension.manualSetterName, extension.libraries, extension.dependencies
-                        )
+                    if(module.libraries.isNotEmpty()) {
+                        error("You should use configuration to setup generator")
+                        /*getSupportConfiguration(
+                            module.camelCaseName, module.name,
+                            module.manualSetterName, module.libraries, module.dependencies,
+                            module.quirks
+                        )*/
                     } else {
                         getSupportConfiguration(
-                            extension.camelCaseName, extension.moduleName,
-                            extension.manualSetterName, configuration
+                            module.camelCaseName, module.name,
+                            module.manualSetterName, configuration,
+                            module.quirks
                         )
                     }
                 )
             }
-            else -> error("Unknown generator type: \"${extension.type}\"")
         }
     }
 
     private fun Project.createDslGeneratorTask(dslName: String, configuration: DSLGeneratorTask.() -> Unit) =
         tasks.register("generate${dslName}DSL", configuration)
 
-    private fun getSdkConfiguration(apiLevel: Int, manualSetterName: String): DSLGeneratorTask.() -> Unit = {
+    private fun getSdkConfiguration(apiLevel: Int, manualSetterName: String, quirks: InkrementalQuirks): DSLGeneratorTask.() -> Unit = {
         javadocContains = "It contains views and their setters from API level $apiLevel"
         outputDirectory = "sdk$apiLevel"
+        this.quirks = quirks
         jarFiles = listOf(project.getAndroidJar(apiLevel))
         nullabilitySourceFiles = listOf(project.getAndroidJar(28))
         isSourceSdk = true
@@ -94,12 +101,14 @@ class InkrementalGenPlugin : Plugin<Project> {
         camelCaseName: String,
         libraryName: String,
         superclassName: String,
-        configuration: Configuration
+        configuration: Configuration,
+        quirks: InkrementalQuirks
     ) = getSupportConfiguration(
         camelCaseName,
         libraryName,
         superclassName,
         configuration,
+        quirks,
         listOf(),
         listOf(getAndroidJar(28))
     )
@@ -109,12 +118,14 @@ class InkrementalGenPlugin : Plugin<Project> {
         libraryName: String,
         superclassName: String,
         libraries: Map<String, String>,
-        rawDeps: Map<String, String>
+        rawDeps: Map<String, String>,
+        quirks: InkrementalQuirks
     ) = getSupportConfiguration(
         camelCaseName,
         libraryName,
         superclassName,
         null,
+        quirks,
         libraries.map { getDependencyJar(it.key, it.value) },
         rawDeps.map { getDependencyJar(it.key, it.value) } + getAndroidJar(28)
     )
@@ -124,6 +135,7 @@ class InkrementalGenPlugin : Plugin<Project> {
         libraryName: String,
         manualSetterName: String,
         configuration: Configuration?,
+        quirks: InkrementalQuirks,
         libFiles: List<File> = listOf(),
         depFiles: List<File> = listOf()
     ): DSLGeneratorTask.() -> Unit = {
@@ -131,6 +143,7 @@ class InkrementalGenPlugin : Plugin<Project> {
             dependsOn("copyDependenciesRelease")
         }
 
+        this.quirks = quirks
         this.configuration = configuration
         javadocContains = "It contains views and their setters from the library $libraryName"
         outputDirectory = "main"

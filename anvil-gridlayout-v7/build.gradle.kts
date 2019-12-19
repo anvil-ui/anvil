@@ -11,8 +11,9 @@ android {
 }
 
 inkremental {
-	moduleName = "gridlayout-v7"
-	camelCaseName = "GridLayoutv7"
+	module("gridlayout-v7") {
+		camelCaseName = "GridLayoutv7"
+	}
 }
 
 dependencies {

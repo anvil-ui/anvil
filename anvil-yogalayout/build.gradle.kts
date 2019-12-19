@@ -11,8 +11,9 @@ android {
 }
 
 inkremental {
-    moduleName = "yogalayout"
-    camelCaseName = "Yoga"
+    module("yogalayout") {
+        camelCaseName = "Yoga"
+    }
 }
 
 dependencies {
