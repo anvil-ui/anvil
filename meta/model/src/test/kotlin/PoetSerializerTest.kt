@@ -10,9 +10,8 @@ import kotlin.test.assertEquals
 class PoetSerializerTest {
     private val json = Json {
         prettyPrint = false
-        serialModule = poetModule()
+        serialModule = PoetModule
     }
-    private val typeNameSerializer = PolymorphicSerializer(TypeName::class)
 
     @Test fun className() {
         val stringRepr =
@@ -21,9 +20,9 @@ class PoetSerializerTest {
             """"canonicalName":"dev.inkremental.meta.model.PoetSerializerTest"""" +
             """}"""
         val input = PoetSerializerTest::class.asClassName()
-        val serialized = json.toJson(typeNameSerializer, input)
+        val serialized = json.toJson(TypeNameSerializer, input)
         assertEquals(stringRepr, serialized.toString())
-        val output = json.fromJson(typeNameSerializer, serialized)
+        val output = json.fromJson(TypeNameSerializer, serialized)
         assertEquals(input, output)
     }
 
@@ -35,9 +34,9 @@ class PoetSerializerTest {
             """"typeArguments":[{"type":"class","canonicalName":"kotlin.Int"}]""" +
             """}"""
         val input = PoetSerializerTest::class.asClassName().parameterizedBy(Int::class.asTypeName())
-        val serialized = json.toJson(typeNameSerializer, input)
+        val serialized = json.toJson(TypeNameSerializer, input)
         assertEquals(stringRepr, serialized.toString())
-        val output = json.fromJson(typeNameSerializer, serialized)
+        val output = json.fromJson(TypeNameSerializer, serialized)
         assertEquals(input, output)
     }
 }

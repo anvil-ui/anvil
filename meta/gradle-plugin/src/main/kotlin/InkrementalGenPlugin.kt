@@ -1,6 +1,5 @@
 package dev.inkremental.meta.gradle
 
-import com.squareup.kotlinpoet.MemberName
 import org.gradle.api.*
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.transform.*
@@ -52,115 +51,65 @@ class InkrementalGenPlugin : Plugin<Project> {
     fun Project.generateTasks(module: InkrementalMetaModule, configuration: Configuration) {
         when(module.type) {
             InkrementalType.SDK -> {
-                createDslGeneratorTask("SDK21", getSdkConfiguration(21, module.manualSetterName, module.quirks))
-                createDslGeneratorTask("SDK19", getSdkConfiguration(19, module.manualSetterName, module.quirks))
-                createDslGeneratorTask("SDK15", getSdkConfiguration(15, module.manualSetterName, module.quirks))
+                createDslTasks("Sdk21", getSdkOutputDir(21), getSdkConfiguration(21, module))
+                createDslTasks("Sdk19", getSdkOutputDir(19), getSdkConfiguration(19, module))
+                createDslTasks("Sdk15", getSdkOutputDir(15), getSdkConfiguration(15, module))
 
-                project.tasks.register<Task>("generateSDKDSL") {
-                    dependsOn("generateSDK15DSL", "generateSDK19DSL", "generateSDK21DSL")
+                project.tasks.register<Task>("generateSdkModel") {
+                    dependsOn("generateSdk15Model", "generateSdk19Model", "generateSdk21Model")
+                }
+                project.tasks.register<Task>("generateSdkDsl") {
+                    dependsOn("generateSdk15Dsl", "generateSdk19Dsl", "generateSdk21Dsl")
                 }
             }
             InkrementalType.LIBRARY -> {
-                createDslGeneratorTask(module.camelCaseName,
-                    // temporary toggle for supporting both array- and configuration-based libraries declaration
-                    if(module.libraries.isNotEmpty()) {
+                createDslTasks(module.camelCaseName, getOutputDir("main")) {
+                    if (module.libraries.isNotEmpty()) {
                         error("You should use configuration to setup generator")
-                        /*getSupportConfiguration(
-                            module.camelCaseName, module.name,
-                            module.manualSetterName, module.libraries, module.dependencies,
-                            module.quirks
-                        )*/
                     } else {
-                        getSupportConfiguration(
-                            module.camelCaseName, module.name,
-                            module.manualSetterName, configuration,
-                            module.quirks
-                        )
+                        this.configuration = configuration
+                        quirks = module.quirks
+                        javadocContains = "It contains views and their setters from the library ${module.name}"
+                        jarFiles = listOf()
+                        nullabilitySourceFiles = listOf()
+                        dependencies = listOf(getAndroidJar(28))
+                        camelCaseName = module.camelCaseName
+
+                        // FIXME as soon as metadata for generated scopes is present, put proper package name here
+                        //packageName = "trikita.anvil." + dashToDot(module.name)
+                        packageName = "trikita.anvil"
+                        manualSetterName = module.manualSetterName
+                        outputFile = file(getModelOutputFile(module.name))
                     }
-                )
+                }
             }
         }
     }
 
-    private fun Project.createDslGeneratorTask(dslName: String, configuration: DSLGeneratorTask.() -> Unit) =
-        tasks.register("generate${dslName}DSL", configuration)
+    private fun Project.createDslTasks(dslName: String, outputDir: File, configuration: GenerateModelTask.() -> Unit) {
+        val modelTask = tasks.register("generate${dslName}Model", configuration)
+        tasks.register<GenerateDslTask>("generate${dslName}Dsl") {
+            dependsOn(modelTask)
+            modelFile = modelTask.get().outputFile
+            outputDirectory = outputDir
+        }
+    }
 
-    private fun getSdkConfiguration(apiLevel: Int, manualSetterName: String, quirks: InkrementalQuirks): DSLGeneratorTask.() -> Unit = {
+    private fun Project.getSdkConfiguration(apiLevel: Int, module: InkrementalMetaModule): GenerateModelTask.() -> Unit = {
         javadocContains = "It contains views and their setters from API level $apiLevel"
-        outputDirectory = "sdk$apiLevel"
-        this.quirks = quirks
+        quirks = module.quirks
         jarFiles = listOf(project.getAndroidJar(apiLevel))
         nullabilitySourceFiles = listOf(project.getAndroidJar(28))
         isSourceSdk = true
         camelCaseName = "Sdk"
+        dependencies = listOf()
         packageName = "trikita.anvil"
-        manualSetter = MemberName(packageName, manualSetterName)
+        manualSetterName = module.manualSetterName
+        outputFile = file(getModelOutputFile("${module.name}$apiLevel"))
     }
-
-    private fun Project.getSupportConfiguration(
-        camelCaseName: String,
-        libraryName: String,
-        superclassName: String,
-        configuration: Configuration,
-        quirks: InkrementalQuirks
-    ) = getSupportConfiguration(
-        camelCaseName,
-        libraryName,
-        superclassName,
-        configuration,
-        quirks,
-        listOf(),
-        listOf(getAndroidJar(28))
-    )
-
-    private fun Project.getSupportConfiguration(
-        camelCaseName: String,
-        libraryName: String,
-        superclassName: String,
-        libraries: Map<String, String>,
-        rawDeps: Map<String, String>,
-        quirks: InkrementalQuirks
-    ) = getSupportConfiguration(
-        camelCaseName,
-        libraryName,
-        superclassName,
-        null,
-        quirks,
-        libraries.map { getDependencyJar(it.key, it.value) },
-        rawDeps.map { getDependencyJar(it.key, it.value) } + getAndroidJar(28)
-    )
-
-    private fun getSupportConfiguration(
-        camelCaseName: String,
-        libraryName: String,
-        manualSetterName: String,
-        configuration: Configuration?,
-        quirks: InkrementalQuirks,
-        libFiles: List<File> = listOf(),
-        depFiles: List<File> = listOf()
-    ): DSLGeneratorTask.() -> Unit = {
-        if(configuration == null) {
-            dependsOn("copyDependenciesRelease")
-        }
-
-        this.quirks = quirks
-        this.configuration = configuration
-        javadocContains = "It contains views and their setters from the library $libraryName"
-        outputDirectory = "main"
-        jarFiles = libFiles
-        nullabilitySourceFiles = libFiles
-        dependencies = depFiles
-        this.camelCaseName = camelCaseName
-
-        // FIXME as soon as metadata for generated scopes is present, put proper package name here
-        //packageName = "trikita.anvil." + dashToDot(libraryName)
-        packageName = "trikita.anvil"
-
-        if (manualSetterName.isNotEmpty()) {
-            // TODO append package name
-            manualSetter = MemberName(packageName, manualSetterName)
-        }
-    }
+    private fun Project.getModelOutputFile(modelName: String) = buildDir / "inkremental" / "$modelName.json"
+    private fun Project.getOutputDir(sourceSetName: String) = projectDir / "src" / sourceSetName / "kotlin"
+    private fun Project.getSdkOutputDir(apiLevel: Int) = getOutputDir("sdk$apiLevel")
 
     private fun Project.getAndroidJar(api: Int): File {
         val localProperties = File(rootDir, "local.properties")

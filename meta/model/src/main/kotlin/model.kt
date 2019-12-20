@@ -1,23 +1,43 @@
+@file:UseSerializers(
+    MemberNameSerializer::class,
+    ClassNameSerializer::class,
+    ParameterizedTypeNameSerializer::class,
+    LambdaTypeNameSerializer::class
+)
+
 package dev.inkremental.meta.model
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import kotlinx.serialization.*
+import kotlinx.serialization.modules.SerialModule
+import kotlinx.serialization.modules.SerializersModule
+
+val ModelModule: SerialModule = SerializersModule {
+    include(PoetModule)
+}
 
 @Serializable
 data class ModuleModel(
     val name: String,
-    val views: List<ViewModel>
+    val javadocContains: String,
+    val packageName: String,
+    val manualSetter: MemberName? = null,
+    val views: List<ViewModel> = listOf()
 )
 
 @Serializable
 data class ViewModel(
     val name: String,
     val plainType: @Polymorphic TypeName,
-    val parametrizedType: @Polymorphic ParameterizedTypeName?,
-    val attrs: List<AttrModel>,
+    val parametrizedType: ParameterizedTypeName? = null,
+    val attrs: List<AttrModel> = listOf(),
     var superType: ViewModel? = null
 )
+
+fun ViewModel.backlinkAttrs() {
+    attrs.forEach { it.owner = this }
+}
 
 val ViewModel.starProjectedType: TypeName
     get() = parametrizedType?.starProjected ?: plainType
@@ -35,23 +55,23 @@ data class AttrModel(
     val name: String,
     val setterName: String,
     val type: TypeModel,
-    val isArray: Boolean,
-    val isVarArg: Boolean,
-    val isListener: Boolean,
-    val isNullable: Boolean
+    val isArray: Boolean = false,
+    val isVarArg: Boolean = false,
+    val isListener: Boolean = false,
+    val isNullable: Boolean = false
 ) {
-    lateinit var owner: ViewModel
+    @Transient lateinit var owner: ViewModel
 }
 
 @Serializable
 data class TypeModel(
     val name: String,
-    val isSamLike: Boolean,
-    val isInterface: Boolean,
-    val plainType: @Polymorphic ClassName,
-    val lambdaType: @Polymorphic LambdaTypeName?,
-    val parametrizedTypeUnsafe: @Polymorphic ParameterizedTypeName?,
-    val functions: List<FunctionModel>
+    val isSamLike: Boolean = false,
+    val isInterface: Boolean = false,
+    val plainType: ClassName,
+    val lambdaType: LambdaTypeName? = null,
+    val parametrizedTypeUnsafe: ParameterizedTypeName? = null,
+    val functions: List<FunctionModel> = listOf()
 ) {
     override fun equals(other: Any?): Boolean = other is TypeModel && parametrizedType == other.parametrizedType
     override fun hashCode(): Int = parametrizedType.hashCode()

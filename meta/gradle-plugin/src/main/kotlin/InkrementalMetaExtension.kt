@@ -43,7 +43,7 @@ class InkrementalMetaModule(
     var camelCaseName: String = "",
     var quirks: InkrementalQuirks = mutableMapOf(),
     var dependencies: MutableMap<String, String> = mutableMapOf(),
-    var manualSetterName: String = ""
+    var manualSetterName: String? = null
 )
 
 // Inner Any can be String and Boolean for __viewAlias and Boolean for others
