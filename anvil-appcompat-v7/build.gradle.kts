@@ -11,7 +11,7 @@ android {
 }
 
 inkremental {
-	module("appcompat-v7") {
+	androidLibrary("appcompat-v7") {
 		camelCaseName = "AppCompatv7"
 		manualSetterName = "AppcompatV7DslSetter"
 		quirks = mutableMapOf(

@@ -11,7 +11,7 @@ android {
 }
 
 inkremental {
-	module("cardview-v7") {
+	androidLibrary("cardview-v7") {
 		camelCaseName = "CardViewv7"
 	}
 }

@@ -11,7 +11,7 @@ android {
 }
 
 inkremental {
-	module("support-core-ui") {
+	androidLibrary("support-core-ui") {
 		camelCaseName = "SupportCoreUi"
 		quirks = mutableMapOf(
 			// Deprecated view; framework nas android.widget.Space since API 14

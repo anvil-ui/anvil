@@ -11,7 +11,7 @@ android {
 }
 
 inkremental {
-    module("constraintlayout") {
+    androidLibrary("constraintlayout") {
         camelCaseName = "Constraint"
     }
 }

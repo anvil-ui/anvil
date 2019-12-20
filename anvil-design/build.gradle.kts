@@ -11,7 +11,7 @@ android {
 }
 
 inkremental {
-	module("material") {
+	androidLibrary("material") {
 		camelCaseName = "Material"
 		manualSetterName = "MaterialDslSetter"
 		quirks = mutableMapOf(

@@ -11,7 +11,7 @@ android {
 }
 
 inkremental {
-	module("recyclerview-v7") {
+	androidLibrary("recyclerview-v7") {
 		camelCaseName = "RecyclerViewv7"
 		manualSetterName = "RecyclerViewDslSetter"
 	}

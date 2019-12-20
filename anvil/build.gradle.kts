@@ -1,5 +1,3 @@
-import dev.inkremental.meta.gradle.InkrementalType
-
 plugins {
 	id("com.android.library")
 	id("org.jetbrains.kotlin.android")
@@ -22,8 +20,7 @@ android {
 }
 
 inkremental {
-	module("sdk") {
-		type = InkrementalType.SDK
+	androidSdk {
 		manualSetterName = "CustomDslSetter"
 		quirks = mutableMapOf(
 			// This requires lots of type checks, skipping this factory method for now

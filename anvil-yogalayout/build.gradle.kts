@@ -11,7 +11,7 @@ android {
 }
 
 inkremental {
-    module("yogalayout") {
+    androidLibrary("yogalayout") {
         camelCaseName = "Yoga"
     }
 }
