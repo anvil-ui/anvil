@@ -101,11 +101,9 @@ fun ViewScope.weight(weight: Float) = attr("weight", weight)
 fun ViewScope.layoutGravity(gravity: Int) = attr("layoutGravity", gravity)
 
 typealias SeekBarChangeListener = (seekBar: SeekBar, progress: Int, fromUser: Boolean) -> Unit
-
 fun SeekBarScope.onSeekBarChange(listener: SeekBarChangeListener) = attr("onSeekBarChange", listener)
 
 typealias ItemSelectedListener = (parent: AdapterView<*>, view: View?, position: Int, id: Long) -> Unit
-
 fun AdapterViewScope.onItemSelected(listener: ItemSelectedListener) = attr("onItemSelected", listener)
 fun AutoCompleteTextViewScope.onItemSelected(listener: ItemSelectedListener) = attr("onItemSelected", listener)
 
