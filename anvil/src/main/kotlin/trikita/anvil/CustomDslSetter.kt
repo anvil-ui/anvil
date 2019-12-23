@@ -16,7 +16,7 @@ import java.util.*
 sealed class Size {
     object MATCH : Size()
     object WRAP : Size()
-    class EXACT(val size: Dimen) : Size()
+    class EXACT(val size: Px) : Size()
 }
 
 // gravity constants
@@ -35,24 +35,23 @@ const val CLIP_HORIZONTAL = Gravity.CLIP_HORIZONTAL
 const val START = Gravity.START
 const val END = Gravity.END
 
-sealed class Dimen {
-    class DipDimen(val size: Dip) : Dimen()
-    class PxDimen(val size: Px) : Dimen()
-}
-
 inline class Sp(val value: Float)
 inline class Dip(val value: Int)
 inline class Px(val value: Int)
+
+fun Dip.toPx() : Px {
+    return Px(dip(this.value))
+}
 
 fun ViewScope.init(action: (View) -> Unit) = attr("init", action)
 fun ViewScope.size(w: Size, h: Size) = attr("size", w to h)
 fun ViewScope.tag(key: Int, value: Any?) = attr("tag", key to value)
 
-fun ViewScope.padding(l: Dip, t: Dip, r: Dip, b: Dip) = attr("padding", listOf(l, t, r, b))
+fun ViewScope.padding(l: Dip, t: Dip, r: Dip, b: Dip) = attr("padding", listOf(l.value, t.value, r.value, b.value))
 fun ViewScope.padding(p: Dip) = padding(p, p, p, p)
 fun ViewScope.padding(h: Dip, v: Dip) = padding(h, v, h, v)
 
-fun ViewScope.margin(l: Dip, t: Dip, r: Dip, b: Dip) = attr("margin", listOf(l, t, r, b))
+fun ViewScope.margin(l: Dip, t: Dip, r: Dip, b: Dip) = attr("margin", listOf(l.value, t.value, r.value, b.value))
 fun ViewScope.margin(m: Dip) = margin(m, m, m, m)
 fun ViewScope.margin(h: Dip, v: Dip) = margin(h, v, h, v)
 
@@ -83,9 +82,9 @@ fun ViewScope.align(verb: Int, subject: Int) = attr("align", verb to subject)
 
 fun ViewScope.anim(animator: Animator, trigger: Boolean) = attr("anim", AnimatorPair(animator, trigger))
 
-fun TextViewScope.textSize(size: Sp) = attr("textSize", size)
-fun TextViewScope.textSize(size: Dip) = attr("textSize", size)
-fun TextViewScope.textSize(size: Px) = attr("textSize", size)
+fun TextViewScope.textSize(size: Sp) = attr("textSizeSp", size)
+fun TextViewScope.textSize(size: Dip) = attr("textSizeDip", size)
+fun TextViewScope.textSize(size: Px) = attr("textSizePx", size)
 fun TextViewScope.typeface(assetPath: String) = attr("typeface", assetPath)
 fun TextViewScope.typeface(assetPath: String?, style: Int) = attr("typeface", assetPath to style)
 
@@ -141,8 +140,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
                 val height = value.second
                 when (width) {
                     is Size.EXACT -> {
-                        val pixels = exactPx(width.size)
-                        p.width = pixels
+                        p.width = width.size.value
                     }
                     is Size.MATCH -> {
                         p.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -153,8 +151,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
                 }
                 when (height) {
                     is Size.EXACT -> {
-                        val pixels = exactPx(height.size)
-                        p.height = pixels
+                        p.height = height.size.value
                     }
                     is Size.MATCH -> {
                         p.height = ViewGroup.LayoutParams.MATCH_PARENT
@@ -170,8 +167,8 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         }
         "padding" -> when {
             value is List<*> -> {
-                val (l, t, r, b) = value as List<Dip>
-                v.setPadding(dip(l.value), dip(t.value), dip(r.value), dip(b.value))
+                val (l, t, r, b) = value as List<Int>
+                v.setPadding(dip(l), dip(t), dip(r), dip(b))
                 true
             }
             else -> false
@@ -179,11 +176,11 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         "margin" -> when {
             v.layoutParams is ViewGroup.MarginLayoutParams && value is List<*> -> {
                 val p = v.layoutParams as ViewGroup.MarginLayoutParams
-                val (l, t, r, b) = value as List<Dip>
-                p.leftMargin = dip(l.value)
-                p.topMargin = dip(t.value)
-                p.rightMargin = dip(r.value)
-                p.bottomMargin = dip(b.value)
+                val (l, t, r, b) = value as List<Int>
+                p.leftMargin = dip(l)
+                p.topMargin = dip(t)
+                p.rightMargin = dip(r)
+                p.bottomMargin = dip(b)
                 v.layoutParams = p
                 true
             }
@@ -210,23 +207,24 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             }
             else -> false
         }
-        "textSize" -> when {
-            v is TextView -> {
-                when (value) {
-                    is Sp -> {
-                        v.setTextSize(TypedValue.COMPLEX_UNIT_SP, value.value)
-                        true
-                    }
-                    is Dip -> {
-                        v.setTextSize(TypedValue.COMPLEX_UNIT_DIP, value.value.toFloat())
-                        true
-                    }
-                    is Px -> {
-                        v.setTextSize(TypedValue.COMPLEX_UNIT_PX, value.value.toFloat())
-                        true
-                    }
-                    else -> false
-                }
+        "textSizeSp" -> when {
+            v is TextView &&  value is Float-> {
+                v.setTextSize(TypedValue.COMPLEX_UNIT_SP, value)
+                true
+            }
+            else -> false
+        }
+        "textSizeDip" -> when {
+            v is TextView && value is Int -> {
+                v.setTextSize(TypedValue.COMPLEX_UNIT_DIP, value.toFloat())
+                true
+            }
+            else -> false
+        }
+        "textSizePx" -> when {
+            v is TextView && value is Int -> {
+                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, value.toFloat())
+                true
             }
             else -> false
         }
@@ -372,13 +370,6 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             else -> false
         }
         else -> false
-    }
-
-    private fun exactPx(size: Dimen): Int {
-        return when (size) {
-            is Dimen.DipDimen -> dip(size.size.value)
-            is Dimen.PxDimen -> size.size.value
-        }
     }
 }
 

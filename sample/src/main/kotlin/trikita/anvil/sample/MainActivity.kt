@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         button {
-                            size(WRAP, 50.dpSize())
+                            size(WRAP, 50.sizeDp())
                             margin(8.dp(), 0.dp())
 
                             text("Tock")
