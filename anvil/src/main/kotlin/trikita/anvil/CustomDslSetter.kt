@@ -42,10 +42,6 @@ inline class Sp(val value: Float)
 inline class Dip(val value: Int)
 inline class Px(val value: Int)
 
-fun Dip.toPx() : Px {
-    return Px(dip(this.value))
-}
-
 fun ViewScope.init(action: (View) -> Unit) = attr("init", action)
 fun ViewScope.size(w: Size, h: Size) = attr("size", w to h)
 fun ViewScope.tag(key: Int, value: Any?) = attr("tag", key to value)

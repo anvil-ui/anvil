@@ -46,13 +46,13 @@ class ConstraintActivity : AppCompatActivity() {
             constraintLayout {
                 id(layoutId)
                 size(MATCH, MATCH)
-                padding(8.dp())
+                padding(8.dp)
 
                 textView {
                     constraintId(chainTitle)
                     size(WRAP, WRAP)
                     text("Chain")
-                    textSize(24f.sp())
+                    textSize(24f.sp)
                     backgroundColor(0xffff7f7fL.toInt())
                     leftConstraintToParent()
                     topConstraintToParent()
@@ -94,7 +94,7 @@ class ConstraintActivity : AppCompatActivity() {
                 textView {
                     constraintId(barrierTitle)
                     text("Barrier")
-                    textSize(24f.sp())
+                    textSize(24f.sp)
 
                     leftConstraintToParent()
                     topConstraintToBottom(txt1Id)
@@ -136,7 +136,7 @@ class ConstraintActivity : AppCompatActivity() {
                 textView {
                     constraintId(guidelineTitle)
                     text("Guideline")
-                    textSize(24f.sp())
+                    textSize(24f.sp)
 
                     leftConstraintToParent()
                     topConstraintToBottom(txt6Id)
@@ -152,7 +152,7 @@ class ConstraintActivity : AppCompatActivity() {
                     constraintId(btnId)
                     size(WRAP, WRAP)
                     text("Button")
-                    margin(16.dp())
+                    margin(16.dp)
 
                     leftConstraintToRight(guidelineId)
                     topConstraintToBottom(guidelineTitle)
@@ -165,7 +165,7 @@ class ConstraintActivity : AppCompatActivity() {
                 textView {
                     constraintId(circleTitle)
                     text("Circle")
-                    textSize(24f.sp())
+                    textSize(24f.sp)
 
                     leftConstraintToParent()
                     topConstraintToBottom(btnId)
@@ -245,7 +245,7 @@ class ConstraintActivity : AppCompatActivity() {
                 placeholder {
                     constraintId(placeholderId)
                     contentId(angle270)
-                    margin(100.dp(), 0.dp(), 0.dp(), 100.dp())
+                    margin(100.dp, 0.dp, 0.dp, 100.dp)
 
                     leftConstraintToParent()
                     bottomConstraintToParent()

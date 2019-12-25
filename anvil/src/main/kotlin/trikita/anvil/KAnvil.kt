@@ -67,25 +67,26 @@ val isPortrait: Boolean
     get() = r.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
 abstract class RootViewScope {
-    fun Int.dp() : Dip {
-        return Dip(this)
+
+    val Int.dp : Dip
+        get() = Dip(this)
+
+    val Float.sp : Sp
+        get() = Sp(this)
+
+    val Int.px : Px
+        get() = Px(this)
+
+    val Int.sizeDp : Size.EXACT
+        get() = Size.EXACT(this.dp.toPx())
+
+    val Int.sizePx : Size.EXACT
+        get() = Size.EXACT(this.px)
+
+    fun Dip.toPx() : Px {
+        return Px(dip(this.value))
     }
 
-    fun Float.sp() : Sp {
-        return Sp(this)
-    }
-
-    fun Int.px() : Px {
-        return Px(this)
-    }
-
-    fun Int.sizeDp() : Size.EXACT {
-        return Size.EXACT(this.dp().toPx())
-    }
-
-    fun Int.sizePx() : Size.EXACT {
-        return Size.EXACT(this.px())
-    }
 }
 
 fun renderable(
