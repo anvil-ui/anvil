@@ -5,20 +5,8 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import dev.inkremental.meta.model.*
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
-import org.gradle.api.Project
-import org.gradle.api.artifacts.Configuration
 import org.gradle.api.tasks.*
-import org.gradle.kotlin.dsl.getByType
 import java.io.File
-import java.lang.reflect.*
-import java.net.URL
-import java.net.URLClassLoader
-import java.util.*
-import java.util.jar.JarFile
-import kotlin.reflect.KFunction
-import kotlin.reflect.KTypeParameter
-import kotlin.reflect.full.*
-import kotlin.reflect.jvm.kotlinFunction
 
 abstract class GenerateDslTask : DefaultTask() {
     @get:Input abstract var modelFile: File
@@ -121,7 +109,7 @@ abstract class GenerateDslTask : DefaultTask() {
                     val superType = view.superType
                     if(superType != null) {
                         it.superclass(ClassName(model.packageName, "${superType.name}Scope"))
-                    } else {
+                    } else if(view.isRootType) {
                         it.superclass(ClassName(PACKAGE, ROOT_VIEW_SCOPE))
                     }
                 }
@@ -151,7 +139,7 @@ abstract class GenerateDslTask : DefaultTask() {
     }
 
     private fun AttrModel.buildListener(): CodeBlock {
-        val viewClass = owner.plainType.toString()
+        val isRootType = owner.isRootType
 
         val body = buildCodeBlock {
             if(type.isSamLike) {
@@ -186,7 +174,7 @@ abstract class GenerateDslTask : DefaultTask() {
                 type.plainType
             }
 
-            if (viewClass == VIEW_CNAME) {
+            if (isRootType) {
                 // @formatter:off
                 beginControlFlow("arg == null ->")
                     addStatement("v.$setterName(null as? %T?)", type.plainType)
@@ -238,7 +226,7 @@ abstract class GenerateDslTask : DefaultTask() {
     }
 
     private fun AttrModel.buildSetter(): CodeBlock {
-        val viewClass = owner.plainType.toString()
+        val isRootType = owner.isRootType
 
         val argAsParam = when {
             isVarArg -> "*arg"
@@ -248,7 +236,7 @@ abstract class GenerateDslTask : DefaultTask() {
 
         // TODO check if getter is present and if so, use property assignment, else use setter call
         return buildCodeBlock {
-            if (viewClass == VIEW_CNAME) {
+            if (isRootType) {
                 beginControlFlow("arg is %T ->", type.starProjectedType.copy(nullable = isNullable))
                 addStatement("v.$setterName($argAsParam)", type.parametrizedType)
                 addStatement("true")

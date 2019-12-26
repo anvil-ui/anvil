@@ -3,6 +3,8 @@ package dev.inkremental.meta.gradle
 import com.android.build.gradle.LibraryExtension
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.BintrayPlugin
+import dev.inkremental.meta.model.InkrementalType
+import dev.inkremental.meta.model.div
 import org.gradle.api.*
 import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension

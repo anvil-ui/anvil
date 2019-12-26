@@ -4,7 +4,8 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.SerialClassDescImpl
-import kotlinx.serialization.modules.*
+import kotlinx.serialization.modules.SerialModule
+import kotlinx.serialization.modules.SerializersModule
 
 val PoetModule: SerialModule = SerializersModule {
     // TODO set classDiscriminator to "kind" instead of default "type" when available:

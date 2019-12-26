@@ -1,4 +1,4 @@
-package dev.inkremental.meta.gradle
+package dev.inkremental.meta.android
 
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.tree.*
@@ -49,10 +49,8 @@ class NullabilityHolder(
                 && methodNode.invisibleParameterAnnotations?.isNotEmpty() == true
                 && methodNode.localVariables?.size == 2
             ) {
-
                 // TODO check if we really can get null for invisibleParameterAnnotations[0]
-                val hasNullable =
-                    hasNullableOrNonNullAnnotation(methodNode.invisibleParameterAnnotations[0])
+                val hasNullable = hasNullableOrNonNullAnnotation(methodNode.invisibleParameterAnnotations[0])
                 val argType = convertTypeNameFromRaw((methodNode.localVariables[1] as LocalVariableNode).desc)
                 val (attrName, _) = parseAttrName(methodNode.name, 1) ?: return@forEach
                 val signature = MethodSignature(className, attrName, argType)
@@ -88,3 +86,16 @@ class NullabilityHolder(
 }
 
 data class MethodSignature(val className: String, val methodName: String, val firstArgType: String)
+
+internal fun parseAttrName(input : String, parameterCount: Int): Pair<String, Boolean>? = when {
+    input.matches(Regex("^setOn.*Listener$")) -> {
+        "on" + input.substring(5, input.length - 8) to true
+    }
+    input.startsWith("set")
+            && input.length > 3
+            && input[3].isUpperCase()
+            && parameterCount == 1 -> {
+        input[3].toLowerCase() + input.substring(4) to false
+    }
+    else -> null
+}

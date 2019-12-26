@@ -1,5 +1,6 @@
-package dev.inkremental.meta.gradle
+package dev.inkremental.meta.android
 
+import dev.inkremental.meta.model.VIEW
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 
@@ -25,7 +26,7 @@ internal fun Method.getParameterType(): Class<*>? {
 
     if (isDeprecated) {
         return null
-    } else if (declaringClass.canonicalName == VIEW_CNAME) {
+    } else if (declaringClass.canonicalName == VIEW.canonicalName) {
         return parameterType
     }
 
@@ -42,7 +43,7 @@ internal fun Method.getParameterType(): Class<*>? {
             // Intended to occur
         }
 
-        if (supClass.canonicalName == VIEW_CNAME) {
+        if (supClass.canonicalName == VIEW.canonicalName) {
             break
         }
         supClass = supClass.superclass

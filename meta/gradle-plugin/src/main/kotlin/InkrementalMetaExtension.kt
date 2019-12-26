@@ -1,5 +1,6 @@
 package dev.inkremental.meta.gradle
 
+import dev.inkremental.meta.model.*
 import org.gradle.api.model.ObjectFactory
 import javax.inject.Inject
 
@@ -39,15 +40,8 @@ class InkrementalMetaModule(
     var name: String = "",
     var type: InkrementalType = InkrementalType.LIBRARY,
     var platform: InkrementalPlatform? = null,
-    var libraries: MutableMap<String, String> = mutableMapOf(),
     var camelCaseName: String = "",
     var quirks: InkrementalQuirks = mutableMapOf(),
     var dependencies: MutableMap<String, String> = mutableMapOf(),
     var manualSetterName: String? = null
 )
-
-// Inner Any can be String and Boolean for __viewAlias and Boolean for others
-typealias InkrementalQuirks = MutableMap<String, Map<String, Any?>>
-
-enum class InkrementalType { SDK, LIBRARY }
-enum class InkrementalPlatform { ANDROID, IOS }

@@ -32,7 +32,8 @@ data class ViewModel(
     val plainType: @Polymorphic TypeName,
     val parametrizedType: ParameterizedTypeName? = null,
     val attrs: List<AttrModel> = listOf(),
-    var superType: ViewModel? = null
+    var superType: ViewModel? = null,
+    val isRootType: Boolean = false // TODO replace with `superType == null` as soon as module deps are working
 )
 
 fun ViewModel.backlinkAttrs() {

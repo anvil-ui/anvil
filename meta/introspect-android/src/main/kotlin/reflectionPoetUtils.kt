@@ -1,4 +1,4 @@
-package dev.inkremental.meta.gradle
+package dev.inkremental.meta.android
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -17,15 +17,6 @@ internal fun KFunction<*>.toFunctionModel(): FunctionModel = FunctionModel(
     returnType = returnType.asTypeName()
 )
 
-internal fun ParameterModel.toParameterSpec(): ParameterSpec = ParameterSpec.builder(name, type).build()
-
-internal fun FunctionModel.asLambdaTypeName(): LambdaTypeName =
-    LambdaTypeName.get(
-        null,
-        parameters.map(ParameterModel::toParameterSpec),
-        returnType
-    )
-
 internal fun Class<*>.asParameterizedType(): ParameterizedTypeName? = when {
     isArray && !componentType.isPrimitive -> kotlin.parameterizedBy(componentType.kotlin)
     typeParameters.isEmpty() -> null
@@ -37,8 +28,3 @@ internal fun ClassName.parameterizedBy(typeParameters: List<KTypeParameter>): Pa
 
 internal fun ClassName.parameterizedBy(typeParameters: Array<out TypeVariable<out Class<*>>>): ParameterizedTypeName =
     parameterizedBy(*typeParameters.map { it.bounds[0].asTypeName() }.toTypedArray())
-
-internal val ANY_N: ClassName = ANY.copy(nullable = true)
-internal val FUNCTION_STAR: TypeName = ClassName("kotlin", "Function").parameterizedBy(STAR)
-internal val ANVIL: ClassName = ClassName(PACKAGE, "Anvil")
-internal val VIEW: ClassName = ClassName("android.view", "View")
