@@ -10,6 +10,7 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import trikita.anvil.*
+import trikita.anvil.Size.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,11 +29,12 @@ class MainActivity : AppCompatActivity() {
 
                 linearLayout {
                     size(MATCH, MATCH)
-                    padding(dip(8))
+                    padding(8.dp)
                     orientation(LinearLayout.VERTICAL)
 
                     textView {
                         size(MATCH, WRAP)
+                        textSize(20f.sp)
                         text("Tick-tock: $ticktock")
                     }
 
@@ -51,8 +53,8 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         button {
-                            size(WRAP, WRAP)
-                            margin(dip(8), dip(0))
+                            size(WRAP, 50.sizeDp)
+                            margin(8.dp, 0.dp)
 
                             text("Tock")
                             // You can have more advanced logic here
@@ -66,13 +68,15 @@ class MainActivity : AppCompatActivity() {
                     for (i in 1..ticktock) {
                         textView {
                             size(MATCH, WRAP)
-                            padding(dip(4))
+                            padding(4.dp)
                             text("$i")
                             // And conditionals too!
-                            if (i % 2 == 1) {
-                                backgroundColor(color(R.color.colorAccent))
+                            if (i % 2 == 1 && i % 5 == 0) {
+                                primaryStyle()
+                            } else if (i % 2 == 1) { //And do dynamic styling!
+                                accentStyle()
                             } else {
-                                backgroundColor(Color.TRANSPARENT)
+                                standardStyle()
                             }
                         }
                     }
@@ -85,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     size(WRAP, WRAP)
-                    padding(16)
+                    padding(16.dp)
 
                     alignParentBottom()
                     alignParentStart()
@@ -101,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     size(WRAP, WRAP)
-                    padding(16)
+                    padding(16.dp)
 
                     alignParentBottom()
                     alignParentEnd()
@@ -112,6 +116,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+}
 
-    private fun color(@ColorRes color: Int) = ResourcesCompat.getColor(resources, color, null)
+fun color(@ColorRes color: Int) = ResourcesCompat.getColor(r, color, null)
+
+fun TextViewScope.standardStyle() {
+    backgroundColor(Color.TRANSPARENT)
+}
+
+fun TextViewScope.accentStyle() {
+    textColor(color(R.color.white))
+    backgroundColor(color(R.color.colorAccent))
+}
+
+fun TextViewScope.primaryStyle() {
+    textColor(color(R.color.white))
+    backgroundColor(color(R.color.colorPrimary))
 }

@@ -6,6 +6,8 @@ import com.facebook.soloader.SoLoader
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaFlexDirection
 import trikita.anvil.*
+import trikita.anvil.Dip
+import trikita.anvil.Size.*
 
 
 class YogaActivity : AppCompatActivity() {
@@ -23,13 +25,13 @@ class YogaActivity : AppCompatActivity() {
                 flexDirection(if (reversed) YogaFlexDirection.COLUMN_REVERSE else YogaFlexDirection.COLUMN)
 
                 yogaLayout {
-                    size(MATCH, dip(50))
+                    size(MATCH, 50.sizeDp)
                     backgroundResource(R.drawable.children_background)
                     flexDirection(YogaFlexDirection.ROW)
                     alignItems(YogaAlign.CENTER)
 
                     imageView {
-                        size(dip(50), dip(50))
+                        size(50.sizeDp, 50.sizeDp)
                         imageResource(R.mipmap.ic_launcher)
                         flex(1f)
                     }
@@ -40,13 +42,13 @@ class YogaActivity : AppCompatActivity() {
                     }
                 }
                 yogaLayout {
-                    size(MATCH, dip(50))
+                    size(MATCH, 50.sizeDp)
                     backgroundResource(R.drawable.children_background)
                     flexDirection(YogaFlexDirection.ROW_REVERSE)
                     alignItems(YogaAlign.FLEX_START)
 
                     imageView {
-                        size(dip(50), dip(50))
+                        size(50.sizeDp, 50.sizeDp)
                         imageResource(R.mipmap.ic_launcher)
                         flex(0f)
                     }
@@ -57,13 +59,13 @@ class YogaActivity : AppCompatActivity() {
                     }
                 }
                 yogaLayout {
-                    size(MATCH, dip(50))
+                    size(MATCH, 50.sizeDp)
                     backgroundResource(R.drawable.children_background)
                     flexDirection(YogaFlexDirection.ROW_REVERSE)
                     alignItems(YogaAlign.FLEX_START)
 
                     imageView {
-                        size(dip(50), dip(50))
+                        size(50.sizeDp, 50.sizeDp)
                         imageResource(R.mipmap.ic_launcher)
                         flex(0f)
                         marginRightPercent(30f)

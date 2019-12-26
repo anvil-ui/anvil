@@ -66,6 +66,29 @@ fun withId(@IdRes id: Int, r: () -> Unit): View {
 val isPortrait: Boolean
     get() = r.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
+abstract class RootViewScope {
+
+    val Int.dp : Dip
+        get() = Dip(this)
+
+    val Float.sp : Sp
+        get() = Sp(this)
+
+    val Int.px : Px
+        get() = Px(this)
+
+    val Int.sizeDp : Size.EXACT
+        get() = Size.EXACT(this.dp.toPx())
+
+    val Int.sizePx : Size.EXACT
+        get() = Size.EXACT(this.px)
+
+    fun Dip.toPx() : Px {
+        return Px(dip(this.value))
+    }
+
+}
+
 fun renderable(
     context: Context,
     attrs: AttributeSet? = null,

@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.ConstraintSet.VERTICAL_GUIDELINE
 import androidx.core.view.ViewCompat
 import trikita.anvil.*
+import trikita.anvil.Size.*
 
 class ConstraintActivity : AppCompatActivity() {
 
@@ -45,13 +46,13 @@ class ConstraintActivity : AppCompatActivity() {
             constraintLayout {
                 id(layoutId)
                 size(MATCH, MATCH)
-                padding(dip(8))
+                padding(8.dp)
 
                 textView {
                     constraintId(chainTitle)
                     size(WRAP, WRAP)
                     text("Chain")
-                    textSize(sip(24f))
+                    textSize(24f.sp)
                     backgroundColor(0xffff7f7fL.toInt())
                     leftConstraintToParent()
                     topConstraintToParent()
@@ -93,7 +94,7 @@ class ConstraintActivity : AppCompatActivity() {
                 textView {
                     constraintId(barrierTitle)
                     text("Barrier")
-                    textSize(sip(24f))
+                    textSize(24f.sp)
 
                     leftConstraintToParent()
                     topConstraintToBottom(txt1Id)
@@ -135,7 +136,7 @@ class ConstraintActivity : AppCompatActivity() {
                 textView {
                     constraintId(guidelineTitle)
                     text("Guideline")
-                    textSize(sip(24f))
+                    textSize(24f.sp)
 
                     leftConstraintToParent()
                     topConstraintToBottom(txt6Id)
@@ -151,7 +152,7 @@ class ConstraintActivity : AppCompatActivity() {
                     constraintId(btnId)
                     size(WRAP, WRAP)
                     text("Button")
-                    margin(dip(16))
+                    margin(16.dp)
 
                     leftConstraintToRight(guidelineId)
                     topConstraintToBottom(guidelineTitle)
@@ -164,7 +165,7 @@ class ConstraintActivity : AppCompatActivity() {
                 textView {
                     constraintId(circleTitle)
                     text("Circle")
-                    textSize(sip(24f))
+                    textSize(24f.sp)
 
                     leftConstraintToParent()
                     topConstraintToBottom(btnId)
@@ -244,7 +245,7 @@ class ConstraintActivity : AppCompatActivity() {
                 placeholder {
                     constraintId(placeholderId)
                     contentId(angle270)
-                    margin(dip(100), 0, 0, dip(100))
+                    margin(100.dp, 0.dp, 0.dp, 100.dp)
 
                     leftConstraintToParent()
                     bottomConstraintToParent()

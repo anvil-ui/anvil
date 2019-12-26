@@ -289,7 +289,7 @@ abstract class TextureViewScope : ViewScope() {
 }
 
 fun view(configure: ViewScope.() -> Unit = {}) = v<View>(configure.bind(ViewScope))
-abstract class ViewScope {
+abstract class ViewScope : RootViewScope() {
   fun accessibilityDelegate(arg: View.AccessibilityDelegate?): Unit = attr("accessibilityDelegate",
       arg)
   fun accessibilityLiveRegion(arg: Int): Unit = attr("accessibilityLiveRegion", arg)

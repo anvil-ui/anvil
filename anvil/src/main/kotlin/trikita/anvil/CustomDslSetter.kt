@@ -16,9 +16,11 @@ import android.widget.*
 import java.util.*
 
 // weight constants
-const val FILL = ViewGroup.LayoutParams.MATCH_PARENT
-const val MATCH = ViewGroup.LayoutParams.MATCH_PARENT
-const val WRAP = ViewGroup.LayoutParams.WRAP_CONTENT
+sealed class Size {
+    object MATCH : Size()
+    object WRAP : Size()
+    class EXACT(val size: Px) : Size()
+}
 
 // gravity constants
 const val TOP = Gravity.TOP
@@ -36,17 +38,21 @@ const val CLIP_HORIZONTAL = Gravity.CLIP_HORIZONTAL
 const val START = Gravity.START
 const val END = Gravity.END
 
+inline class Sp(val value: Float)
+inline class Dip(val value: Int)
+inline class Px(val value: Int)
+
 fun ViewScope.init(action: (View) -> Unit) = attr("init", action)
-fun ViewScope.size(w: Int, h: Int) = attr("size", w to h)
+fun ViewScope.size(w: Size, h: Size) = attr("size", w to h)
 fun ViewScope.tag(key: Int, value: Any?) = attr("tag", key to value)
 
-fun ViewScope.padding(l: Int, t: Int, r: Int, b: Int) = attr("padding", listOf(l, t, r, b))
-fun ViewScope.padding(p: Int) = padding(p, p, p, p)
-fun ViewScope.padding(h: Int, v: Int) = padding(h, v, h, v)
+fun ViewScope.padding(l: Dip, t: Dip, r: Dip, b: Dip) = attr("padding", listOf(l.value, t.value, r.value, b.value))
+fun ViewScope.padding(p: Dip) = padding(p, p, p, p)
+fun ViewScope.padding(h: Dip, v: Dip) = padding(h, v, h, v)
 
-fun ViewScope.margin(l: Int, t: Int, r: Int, b: Int) = attr("margin", listOf(l, t, r, b))
-fun ViewScope.margin(m: Int) = margin(m, m, m, m)
-fun ViewScope.margin(h: Int, v: Int) = margin(h, v, h, v)
+fun ViewScope.margin(l: Dip, t: Dip, r: Dip, b: Dip) = attr("margin", listOf(l.value, t.value, r.value, b.value))
+fun ViewScope.margin(m: Dip) = margin(m, m, m, m)
+fun ViewScope.margin(h: Dip, v: Dip) = margin(h, v, h, v)
 
 fun ViewScope.align(verb: Int) = align(verb, -1)
 fun ViewScope.above(subject: Int) = align(RelativeLayout.ABOVE, subject)
@@ -76,7 +82,9 @@ fun ViewScope.align(verb: Int, subject: Int) = attr("align", verb to subject)
 fun ViewScope.anim(trigger: Boolean, animator: Animator) = attr("anim", AnimatorPair(animator, trigger))
 fun ViewScope.anim(trigger: Boolean, animatorIn: Animator, animatorOut: Animator) = attr("animInOut", AnimatorTriple(animatorIn, animatorOut, trigger))
 
-fun TextViewScope.textSize(sizePx: Float) = attr("textSize", sizePx)
+fun TextViewScope.textSize(size: Sp) = attr("textSizeSp", size)
+fun TextViewScope.textSize(size: Dip) = attr("textSizeDip", size)
+fun TextViewScope.textSize(size: Px) = attr("textSizePx", size)
 fun TextViewScope.typeface(assetPath: String) = attr("typeface", assetPath)
 fun TextViewScope.typeface(assetPath: String?, style: Int) = attr("typeface", assetPath to style)
 
@@ -85,7 +93,7 @@ fun TextViewScope.compoundDrawablesWithIntrinsicBounds(l: Drawable, t: Drawable,
 fun TextViewScope.compoundDrawablesWithIntrinsicBounds(l: Int, t: Int, r: Int, b: Int) = attr("compoundDrawablesWithIntrinsicBoundsResource", listOf(l, t, r, b))
 fun TextViewScope.shadowLayer(radius: Float, dx: Float, dy: Float, color: Int) = attr("shadowLayer", listOf<Number>(radius, dx, dy, color))
 
-fun ViewScope.visibility(visible: Boolean) = visibility(if(visible) View.VISIBLE else View.GONE)
+fun ViewScope.visibility(visible: Boolean) = visibility(if (visible) View.VISIBLE else View.GONE)
 
 fun RadioGroupScope.check(id: Int) = attr("check", id)
 
@@ -105,7 +113,7 @@ fun TextViewScope.onTextChanged(watcher: TextWatcher) = attr("onTextChanged", wa
 fun TextViewScope.inputExtras(extras: Int) = attr("inputExtras", extras)
 
 object CustomDslSetter : Anvil.AttributeSetter<Any?> {
-    override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when(name) {
+    override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
         "init" -> when {
             value is Function<*> -> {
                 if (Anvil.get(v, "_initialized") == null) {
@@ -126,8 +134,30 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         "size" -> when {
             value is Pair<*, *> -> {
                 val p = v.layoutParams
-                p.width = value.first as Int
-                p.height = value.second as Int
+                val width = value.first
+                val height = value.second
+                when (width) {
+                    is Size.EXACT -> {
+                        p.width = width.size.value
+                    }
+                    is Size.MATCH -> {
+                        p.width = ViewGroup.LayoutParams.MATCH_PARENT
+                    }
+                    is Size.WRAP -> {
+                        p.width = ViewGroup.LayoutParams.WRAP_CONTENT
+                    }
+                }
+                when (height) {
+                    is Size.EXACT -> {
+                        p.height = height.size.value
+                    }
+                    is Size.MATCH -> {
+                        p.height = ViewGroup.LayoutParams.MATCH_PARENT
+                    }
+                    is Size.WRAP -> {
+                        p.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    }
+                }
                 v.layoutParams = p
                 true
             }
@@ -136,7 +166,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         "padding" -> when {
             value is List<*> -> {
                 val (l, t, r, b) = value as List<Int>
-                v.setPadding(l, t, r, b)
+                v.setPadding(dip(l), dip(t), dip(r), dip(b))
                 true
             }
             else -> false
@@ -145,10 +175,10 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             v.layoutParams is ViewGroup.MarginLayoutParams && value is List<*> -> {
                 val p = v.layoutParams as ViewGroup.MarginLayoutParams
                 val (l, t, r, b) = value as List<Int>
-                p.leftMargin = l
-                p.topMargin = t
-                p.rightMargin = r
-                p.bottomMargin = b
+                p.leftMargin = dip(l)
+                p.topMargin = dip(t)
+                p.rightMargin = dip(r)
+                p.bottomMargin = dip(b)
                 v.layoutParams = p
                 true
             }
@@ -198,9 +228,23 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             }
             else -> false
         }
-        "textSize" -> when {
-            v is TextView && value is Float -> {
-                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, value)
+        "textSizeSp" -> when {
+            v is TextView &&  value is Float-> {
+                v.setTextSize(TypedValue.COMPLEX_UNIT_SP, value)
+                true
+            }
+            else -> false
+        }
+        "textSizeDip" -> when {
+            v is TextView && value is Int -> {
+                v.setTextSize(TypedValue.COMPLEX_UNIT_DIP, value.toFloat())
+                true
+            }
+            else -> false
+        }
+        "textSizePx" -> when {
+            v is TextView && value is Int -> {
+                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, value.toFloat())
                 true
             }
             else -> false
@@ -297,7 +341,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
         }
         "text" -> when {
             v is TextView && value is CharSequence? -> {
-                if(v != TextWatcherProxy.currentInputTextView) {
+                if (v != TextWatcherProxy.currentInputTextView) {
                     v.text = value
                 }
                 true
@@ -309,7 +353,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             v is TextView && value is Function<*> -> {
                 value as (CharSequence) -> Unit
                 val existing = TextWatcherProxy.watchers.keys.firstOrNull { it.hasImpl(prevValue) }
-                if(existing != null) {
+                if (existing != null) {
                     existing.setImpl(value)
                 } else {
                     val proxy = TextWatcherProxy(v).setImpl(value)
@@ -320,7 +364,7 @@ object CustomDslSetter : Anvil.AttributeSetter<Any?> {
             }
             v is TextView && value is TextWatcher -> {
                 val existing = TextWatcherProxy.watchers.keys.firstOrNull { it.hasImpl(prevValue) }
-                if(existing != null) {
+                if (existing != null) {
                     existing.setImpl(value)
                 } else {
                     val proxy = TextWatcherProxy(v).setImpl(value)
@@ -395,6 +439,7 @@ private class SeekBarChangeWrapper(private val listener: SeekBarChangeListener) 
         listener(seekBar, progress, fromUser)
         Anvil.render()
     }
+
     override fun onStartTrackingTouch(seekBar: SeekBar?) {}
     override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
@@ -407,6 +452,7 @@ private class ItemSelectedWrapper(private val listener: ItemSelectedListener) : 
         listener(parent, view, position, id)
         Anvil.render()
     }
+
     override fun onNothingSelected(parent: AdapterView<*>?) {}
 
     override fun hashCode(): Int = listener.hashCode()
@@ -435,7 +481,7 @@ class TextWatcherProxy(private val view: TextView) : TextWatcher {
         val string = s.toString()
         val old = currentInputTextView
         currentInputTextView = view
-        if(text != string) {
+        if (text != string) {
             watcher?.onTextChanged(s, start, before, count)
             simpleWatcher(s)
             text = string
