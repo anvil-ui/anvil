@@ -2,6 +2,12 @@ package dev.inkremental.meta.model
 
 import com.squareup.kotlinpoet.*
 
+inline fun buildFile(packageName: String, fileName: String, builderAction: FileSpec.Builder.() -> Unit): FileSpec =
+    FileSpec.builder(packageName, fileName).apply(builderAction).build()
+
+inline fun buildFile(mainClassName: ClassName, builderAction: FileSpec.Builder.() -> Unit): FileSpec =
+    buildFile(mainClassName.packageName, mainClassName.simpleName, builderAction)
+
 inline fun FunSpec.Builder.addCode(builderAction: CodeBlock.Builder.() -> Unit) =
     addCode(buildCodeBlock(builderAction))
 

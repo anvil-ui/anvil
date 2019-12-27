@@ -13,7 +13,9 @@ android {
 inkremental {
 	androidLibrary("appcompat-v7") {
 		camelCaseName = "AppCompatv7"
-		manualSetterName = "AppcompatV7DslSetter"
+        srcPackage = "androidx.appcompat"
+        modulePackage = "dev.inkremental.dsl.androidx.appcompat"
+		manualSetterName = "CustomAppCompatv7Setter"
 		quirks = mutableMapOf(
 			// Depends on internal class, can be re-enabled when metadata is implemented
 			"androidx.appcompat.widget.ActionBarContextView" to mapOf(

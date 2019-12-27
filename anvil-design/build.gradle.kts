@@ -13,7 +13,9 @@ android {
 inkremental {
 	androidLibrary("material") {
 		camelCaseName = "Material"
-		manualSetterName = "MaterialDslSetter"
+        srcPackage = "com.google.android.material"
+        modulePackage = "dev.inkremental.dsl.google.android.material"
+		manualSetterName = "CustomMaterialSetter"
 		quirks = mutableMapOf(
 			// Depends on coordinatorlayout which is not covered yet
 			"com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout" to mapOf(

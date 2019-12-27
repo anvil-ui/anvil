@@ -13,6 +13,8 @@ android {
 inkremental {
 	androidLibrary("cardview-v7") {
 		camelCaseName = "CardViewv7"
+        srcPackage = "androidx.cardview"
+        modulePackage = "dev.inkremental.dsl.androidx.cardview"
 	}
 }
 

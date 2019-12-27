@@ -13,6 +13,8 @@ android {
 inkremental {
     androidLibrary("constraintlayout") {
         camelCaseName = "Constraint"
+        srcPackage = "androidx.constraintlayout"
+        modulePackage = "dev.inkremental.dsl.androidx.constraintlayout"
     }
 }
 
@@ -23,7 +25,8 @@ dependencies {
 	implementation(project(":anvil"))
 	inkremental(project(":anvil", "inkrementalDefSdk15"))
 
-    inkrementalGen("androidx.constraintlayout:constraintlayout:1.1.3")
+    //inkrementalGen("androidx.constraintlayout:constraintlayout:1.1.3")
+    api("androidx.constraintlayout:constraintlayout:1.1.3")
     api("androidx.constraintlayout:constraintlayout-solver:1.1.3")
 
     testImplementation("junit:junit:$junit_version")

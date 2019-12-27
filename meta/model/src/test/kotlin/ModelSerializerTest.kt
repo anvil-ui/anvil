@@ -12,7 +12,8 @@ class ModelSerializerTest {
         val input = ModuleModel(
             name = "test-module",
             javadocContains = "",
-            packageName = "dev.inkremental",
+            srcPackage = "dev.inkremental.test.src",
+            modulePackage = "dev.inkremental.test.dsl",
             views = listOf(
                 ViewModel(
                     name = "TestView",
@@ -30,7 +31,8 @@ class ModelSerializerTest {
         val input = ModuleModel(
             name = "test-module",
             javadocContains = "",
-            packageName = "dev.inkremental",
+            srcPackage = "dev.inkremental.test.src",
+            modulePackage = "dev.inkremental.test.dsl",
             views = listOf(
                 ViewModel(
                     name = "TestView",

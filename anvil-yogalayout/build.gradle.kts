@@ -13,6 +13,8 @@ android {
 inkremental {
     androidLibrary("yogalayout") {
         camelCaseName = "Yoga"
+        srcPackage = "com.facebook.yoga"
+        modulePackage = "dev.inkremental.dsl.yoga"
     }
 }
 

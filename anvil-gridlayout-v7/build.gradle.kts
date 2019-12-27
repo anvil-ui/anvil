@@ -13,6 +13,8 @@ android {
 inkremental {
 	androidLibrary("gridlayout-v7") {
 		camelCaseName = "GridLayoutv7"
+        srcPackage = "androidx.gridlayout"
+        modulePackage = "dev.inkremental.dsl.androidx.gridlayout"
 	}
 }
 

@@ -84,17 +84,15 @@ fun Project.generateAndroidTasks(
 
             for(apiLevel in listOf(15, 19, 21)) {
                 val (modelTask, dslTask) = createDslTasks<GenerateAndroidSdkModelTask>(
+                    module,
                     "Sdk$apiLevel",
                     "Sdk$apiLevel",
                     getOutputDir("sdk$apiLevel"),
                     componentFactory,
                     null
                 ) {
-                    quirks = module.quirks
                     camelCaseName = "Sdk"
                     javadocContains = "It contains views and their setters for Android SDK (API level $apiLevel)"
-                    packageName = "trikita.anvil"
-                    manualSetterName = module.manualSetterName
                     outputFile = file(getModelOutputFile("${module.name}$apiLevel"))
 
                     jarFiles = listOf(getAndroidJar(apiLevel))
@@ -106,18 +104,14 @@ fun Project.generateAndroidTasks(
         }
         InkrementalType.LIBRARY -> {
             createDslTasks<GenerateAndroidLibraryModelTask>(
+                module,
                 module.camelCaseName,
                 "",
                 getOutputDir("main"),
                 componentFactory,
                 moduleConfiguration
             ) {
-                quirks = module.quirks
-                camelCaseName = module.camelCaseName
                 javadocContains = "It contains views and their setters for the library ${module.name}"
-                packageName = "trikita.anvil"
-                manualSetterName = module.manualSetterName
-                outputFile = file(getModelOutputFile(module.name))
 
                 this.configuration = configuration
                 sdkDependencies = listOf(getAndroidJar(28))
@@ -127,6 +121,7 @@ fun Project.generateAndroidTasks(
 }
 
 private inline fun <reified T: GenerateModelTask> Project.createDslTasks(
+    module: InkrementalMetaModule,
     dslName: String,
     variantName: String,
     outputDir: File,
@@ -152,7 +147,15 @@ private inline fun <reified T: GenerateModelTask> Project.createDslTasks(
         mapToMavenScope("inkremental")
     }
 
-    val modelTask = tasks.register("generate${dslName}Model", configuration)
+    val modelTask = tasks.register<T>("generate${dslName}Model") {
+        quirks = module.quirks
+        camelCaseName = module.camelCaseName
+        srcPackage = module.srcPackage
+        modulePackage = module.modulePackage
+        manualSetterName = module.manualSetterName
+        outputFile = file(getModelOutputFile(module.name))
+        configuration()
+    }
 
     val modelFile = modelTask.get().outputFile
     artifacts.add(outConfName, modelFile) {

@@ -25,7 +25,8 @@ fun ModelJson(): Json = Json(JsonConfiguration.Stable.copy(encodeDefaults = fals
 data class ModuleModel(
     val name: String,
     val javadocContains: String,
-    val packageName: String,
+    val srcPackage: String,
+    val modulePackage: String,
     val manualSetter: MemberName? = null,
     val views: List<ViewModel> = listOf()
 )
@@ -43,14 +44,27 @@ data class ViewModel(
     val plainType: ClassName,
     val parametrizedType: ParameterizedTypeName? = null,
     val attrs: List<AttrModel> = listOf(),
-    var superType: ViewModelSupertype? = null,
-    val isRootType: Boolean = false // TODO replace with `superType == null` as soon as module deps are working
+    var superType: ViewModelSupertype? = null
 ) {
     @Transient lateinit var owner: ModuleModel
 }
 
+val ViewModel.isRoot: Boolean
+    get() = superType == null
+
 val ViewModel.scopeType: ClassName
-    get() = ClassName(owner.packageName, "${name}Scope")
+    get() {
+        val srcPackage = owner.srcPackage
+        val modulePackage = owner.modulePackage
+        val viewSrcPackage = plainType.packageName
+        val viewModulePackage = if(!viewSrcPackage.startsWith(srcPackage)) {
+            println("$plainType does not belong to source package $srcPackage")
+            viewSrcPackage
+        } else {
+            modulePackage + viewSrcPackage.substring(srcPackage.length)
+        }
+        return ClassName(viewModulePackage, "${name}Scope")
+    }
 
 @Serializable
 sealed class ViewModelSupertype {

@@ -21,7 +21,9 @@ android {
 
 inkremental {
 	androidSdk {
-		manualSetterName = "CustomDslSetter"
+		srcPackage = "android"
+		modulePackage = "dev.inkremental.dsl.android"
+		manualSetterName = "CustomSdkSetter"
 		quirks = mutableMapOf(
 			// This requires lots of type checks, skipping this factory method for now
 			"android.widget.AutoCompleteTextView" to mapOf(

@@ -11,7 +11,8 @@ abstract class GenerateModelTask : DefaultTask() {
     @get:Input abstract var quirks: InkrementalQuirks
     @get:Input abstract var camelCaseName: String
     @get:Input abstract var javadocContains: String
-    @get:Input abstract var packageName: String
+    @get:Input abstract var srcPackage: String
+    @get:Input abstract var modulePackage: String
     @get:Input @get:Optional abstract var manualSetterName: String?
     @get:OutputFile abstract var outputFile: File
 
@@ -30,8 +31,9 @@ abstract class GenerateModelTask : DefaultTask() {
     private fun createModel(introspector: Introspector): ModuleModel = ModuleModel(
         name = camelCaseName,
         javadocContains = javadocContains,
-        packageName = packageName,
-        manualSetter = manualSetterName?.let { MemberName(packageName, it) },
+        srcPackage = srcPackage,
+        modulePackage = modulePackage,
+        manualSetter = manualSetterName?.let { MemberName(modulePackage, it) },
         views = introspector.provideViewModels(quirks)
     )
 

@@ -13,7 +13,9 @@ android {
 inkremental {
 	androidLibrary("recyclerview-v7") {
 		camelCaseName = "RecyclerViewv7"
-		manualSetterName = "RecyclerViewDslSetter"
+        srcPackage = "androidx.recyclerview"
+        modulePackage = "dev.inkremental.dsl.androidx.recyclerview"
+		manualSetterName = "CustomRecyclerViewv7Setter"
 	}
 }
 

@@ -41,8 +41,7 @@ class AndroidIntrospector(
             plainType = plainType,
             parametrizedType = asParameterizedType(),
             attrs = attrs,
-            superType = superType,
-            isRootType = plainType == VIEW
+            superType = superType
         )
     }
 

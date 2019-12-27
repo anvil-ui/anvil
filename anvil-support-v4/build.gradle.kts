@@ -13,6 +13,8 @@ android {
 inkremental {
 	androidLibrary("support-core-ui") {
 		camelCaseName = "SupportCoreUi"
+        srcPackage = "androidx.core"
+        modulePackage = "dev.inkremental.dsl.androidx.core"
 		quirks = mutableMapOf(
 			// Deprecated view; framework nas android.widget.Space since API 14
 			"androidx.legacy.widget.Space" to mapOf(

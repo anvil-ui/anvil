@@ -36,12 +36,14 @@ open class InkrementalMetaExtension @Inject constructor(objectFactory: ObjectFac
         }
 }
 
-class InkrementalMetaModule(
+data class InkrementalMetaModule(
     var name: String = "",
     var type: InkrementalType = InkrementalType.LIBRARY,
     var platform: InkrementalPlatform? = null,
     var camelCaseName: String = "",
     var quirks: InkrementalQuirks = mutableMapOf(),
     var dependencies: MutableMap<String, String> = mutableMapOf(),
+    var srcPackage: String = "",
+    var modulePackage: String = "",
     var manualSetterName: String? = null
 )

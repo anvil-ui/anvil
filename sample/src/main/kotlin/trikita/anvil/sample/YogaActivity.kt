@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.facebook.soloader.SoLoader
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaFlexDirection
-import trikita.anvil.*
-import trikita.anvil.Dip
-import trikita.anvil.Size.*
+import dev.inkremental.dsl.android.Size.MATCH
+import dev.inkremental.dsl.android.Size.WRAP
+import dev.inkremental.dsl.android.size
+import dev.inkremental.dsl.android.text
+import dev.inkremental.dsl.android.widget.*
+import dev.inkremental.dsl.yoga.yogaLayout
+import trikita.anvil.renderableContentView
 
 
 class YogaActivity : AppCompatActivity() {
