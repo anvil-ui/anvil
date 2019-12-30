@@ -5,6 +5,8 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
 fun ParameterModel.toParameterSpec(): ParameterSpec = ParameterSpec.builder(name, type).build()
 
+fun FunctionModel.parameterSpecs() = this.parameters.map(ParameterModel::toParameterSpec)
+
 fun FunctionModel.asLambdaTypeName(): LambdaTypeName =
     LambdaTypeName.get(
         null,

@@ -1,17 +1,12 @@
 package dev.inkremental.meta.model
 
-import com.squareup.kotlinpoet.*
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import kotlinx.serialization.PolymorphicSerializer
-import kotlinx.serialization.json.Json
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.INT
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ModelSerializerTest {
-    private val json = Json {
-        prettyPrint = true
-        serialModule = ModelModule
-    }
+    private val json = ModelJson()
 
     @Test fun simpleModule() {
         val input = ModuleModel(

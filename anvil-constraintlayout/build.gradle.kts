@@ -21,8 +21,9 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
+	inkremental(project(":anvil", "inkrementalDefSdk15"))
 
-    inkremental("androidx.constraintlayout:constraintlayout:1.1.3")
+    inkrementalGen("androidx.constraintlayout:constraintlayout:1.1.3")
     api("androidx.constraintlayout:constraintlayout-solver:1.1.3")
 
     testImplementation("junit:junit:$junit_version")

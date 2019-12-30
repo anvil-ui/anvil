@@ -1,12 +1,10 @@
 package dev.inkremental.meta.gradle
 
 import com.android.build.gradle.LibraryExtension
-import com.jfrog.bintray.gradle.BintrayExtension
-import com.jfrog.bintray.gradle.BintrayPlugin
 import dev.inkremental.meta.model.InkrementalType
 import dev.inkremental.meta.model.div
-import org.gradle.api.*
-import org.gradle.api.publish.PublicationContainer
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
@@ -19,7 +17,6 @@ class InkrementalModulePlugin : Plugin<Project> {
     override fun apply(project: Project) = with(project) {
         apply<InkrementalGenPlugin>()
         apply<MavenPublishPlugin>()
-        apply<BintrayPlugin>()
 
         val compileSdk = 28
         val minSdk = 15
@@ -54,7 +51,7 @@ class InkrementalModulePlugin : Plugin<Project> {
 
         val javadoc by tasks.creating(Javadoc::class) {
             source(android.sourceSets["main"].java.srcDirs)
-            classpath += project.files(android.bootClasspath) //.join(File.pathSeparator))
+            classpath += project.files(android.bootClasspath)
         }
 
         val javadocJar by tasks.creating(Jar::class) {
@@ -68,50 +65,30 @@ class InkrementalModulePlugin : Plugin<Project> {
         }
 
         val bintrayUser = prop("bintrayUser")
-
-        val bintrayExtension = if(bintrayUser == null) {
-            null
-        } else {
-            extensions.getByType<BintrayExtension>().apply {
-                user = bintrayUser
-                key = prop("bintrayApiKey")!!
-                pkg.apply {
-                    repo = prop("BINTRAY_REPO")!!
-                    userOrg = prop("BINTRAY_ORG")!!
-                    name = prop("POM_PACKAGE_NAME")
-                    websiteUrl = prop("POM_URL")
-                    vcsUrl = prop("POM_SCM_URL")
-                    setLicenses(prop("POM_LICENCE_SHORT_NAME"))
-                    publish = true
-                    version.apply {
-                        name = project.version.toString()
-
-                        val bintrayGpgPassword = prop("bintrayGpgPassword")
-                        if(bintrayGpgPassword != null) {
-                            gpg.apply {
-                                sign = true
-                                passphrase = bintrayGpgPassword
-                            }
-                        }
-
-                        val bintrayOssUser = prop("bintrayOssUser")
-                        if(bintrayOssUser != null) {
-                            mavenCentralSync.apply {
-                                sync = true
-                                user = bintrayOssUser
-                                password = prop("bintrayOssPassword")!!
-                                close = "1"
-                            }
+        val bintrayApiKey = prop("bintrayApiKey")
+        if(bintrayUser != null && bintrayApiKey != null) {
+            extensions.configure<PublishingExtension> {
+                repositories {
+                    maven {
+                        name = "Bintray"
+                        url = uri("https://api.bintray.com/content/" +
+                            "${prop("BINTRAY_ORG")}/" +
+                            "${prop("BINTRAY_REPO")}/" +
+                            "${prop("POM_PACKAGE_NAME")}/" +
+                            "${project.version}/" +
+                            ";publish=1;override=1")
+                        credentials {
+                            username = bintrayUser
+                            password = bintrayApiKey
                         }
                     }
                 }
             }
         }
 
-        android.libraryVariants.all { variant ->
-            val name = variant.name
+        android.libraryVariants.configureEach {
             val androidJar = android.sdkDirectory / "platforms" / compileSdk.toString() / "android.jar"
-            val compileClasspath = variant.getCompileClasspath(null)
+            val compileClasspath = getCompileClasspath(null)
 
             tasks.register<Javadoc>("generate${name.capitalize()}Javadoc") {
                 description = "Generates Javadoc for $name."
@@ -119,75 +96,72 @@ class InkrementalModulePlugin : Plugin<Project> {
                 classpath = files(compileClasspath, androidJar)
                 extra["androidJar"] = androidJar
             }
-            true
         }
 
-        fun registerAnvilPublication(name: String, artifactId: String) = registerAnvilPublication(
-            extensions.getByType<PublishingExtension>().publications,
-            bintrayExtension,
-            name,
-            artifactId,
-            sourcesJar,
-            javadocJar
-        )
+        fun registerAnvilPublications(name: String, bundleName: String, artifactId: String) {
+            registerAnvilPublication(
+                name,
+                artifactId,
+                tasks.getByName("bundle${bundleName}ReleaseAar"),
+                sourcesJar,
+                javadocJar
+            )
+            registerAnvilPublication(
+                "${name}Module",
+                artifactId,
+                *configurations.getByName(CONFIGURATION_MODULE_DEF + name).artifacts.toTypedArray()
+            )
+        }
 
         afterEvaluate {
-            (extensions["inkremental"] as? NamedDomainObjectCollection<InkrementalMetaModule>)?.forEach {
+            extensions.getByType<InkrementalMetaExtension>().modules.forEach {
                 when(it.type) {
                     InkrementalType.SDK -> {
-                        registerAnvilPublication("sdk15", prop("POM_ARTIFACT_SDK15_ID")!!)
-                        registerAnvilPublication("sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
-                        registerAnvilPublication("sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
+                        registerAnvilPublications("Sdk15", "Sdk15", prop("POM_ARTIFACT_SDK15_ID")!!)
+                        registerAnvilPublications("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
+                        registerAnvilPublications("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
                     }
-                    InkrementalType.LIBRARY -> registerAnvilPublication("lib", prop("POM_ARTIFACT_ID")!!)
-                }
-            }
-        }
-    }
-
-    private fun Project.prop(key: String): String? =
-        project.findProperty(key)?.let { it as String }
-
-    private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {
-        with(asNode()) {
-            appendNode("description", property("POM_DESCRIPTION"))
-            appendNode("name", property("POM_NAME"))
-            appendNode("url", property("POM_URL"))
-            with(appendNode("scm")) {
-                appendNode("url", property("POM_SCM_URL"))
-                appendNode("connection", property("POM_SCM_CONNECTION"))
-                appendNode("developerConnection", property("POM_SCM_DEV_CONNECTION"))
-            }
-            with(appendNode("licenses")) {
-                with(appendNode("license")) {
-                    appendNode("name", property("POM_LICENCE_NAME"))
-                    appendNode("url", property("POM_LICENCE_URL"))
-                    appendNode("distribution", property("POM_LICENCE_DIST"))
+                    InkrementalType.LIBRARY ->
+                        registerAnvilPublications(it.camelCaseName, "", prop("POM_ARTIFACT_ID")!!)
                 }
             }
         }
     }
 
     private fun Project.registerAnvilPublication(
-        container: PublicationContainer,
-        bintrayExtension: BintrayExtension?,
         name: String,
         artifactId: String,
-        sourcesJar: Jar,
-        javadocJar: Jar) = container.register<MavenPublication>(name) {
-        this.groupId = project.group.toString()
-        this.artifactId = artifactId
-        this.version = project.version.toString()
-        artifact(buildDir / "outputs" / "aar" / "$artifactId-release.aar")
-        artifact(sourcesJar)
-        artifact(javadocJar)
-        fixPom(this)
+        vararg artifacts: Any) =
+        project.extensions.getByType<PublishingExtension>()
+            .publications
+            .register<MavenPublication>(name) {
+                this.groupId = project.group.toString()
+                this.artifactId = artifactId
+                this.version = project.version.toString()
+                artifacts.forEach { artifact(it) }
+                fixPom(this)
+            }
+}
 
-        bintrayExtension?.apply {
-            if(publications == null) {
-                setPublications(name)
-            } else {
-                setPublications(*publications + name)
+
+private fun Project.prop(key: String): String? =
+    findProperty(key)?.let { it as String }
+
+private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {
+    with(asNode()) {
+        appendNode("description", property("POM_DESCRIPTION"))
+        appendNode("name", property("POM_NAME"))
+        appendNode("url", property("POM_URL"))
+        with(appendNode("scm")) {
+            appendNode("url", property("POM_SCM_URL"))
+            appendNode("connection", property("POM_SCM_CONNECTION"))
+            appendNode("developerConnection", property("POM_SCM_DEV_CONNECTION"))
+        }
+        with(appendNode("licenses")) {
+            with(appendNode("license")) {
+                appendNode("name", property("POM_LICENCE_NAME"))
+                appendNode("url", property("POM_LICENCE_URL"))
+                appendNode("distribution", property("POM_LICENCE_DIST"))
             }
         }
     }

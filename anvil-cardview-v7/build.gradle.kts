@@ -21,8 +21,9 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
+	inkremental(project(":anvil", "inkrementalDefSdk15"))
 
-	inkremental("androidx.cardview:cardview:1.0.0")
+	inkrementalGen("androidx.cardview:cardview:1.0.0")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

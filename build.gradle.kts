@@ -6,6 +6,17 @@ plugins {
     id("dev.inkremental.module") version "0.7.1" apply false
 }
 
+fun loadProperties(fileName: String) =
+    java.util.Properties()
+        .also { props ->
+            file("$rootDir/$fileName").inputStream().use {
+                props.load(it)
+            }
+        }
+        .forEach { name, value -> rootProject.extra[name as String] = value }
+
+loadProperties("local.properties")
+
 subprojects {
     extra["junit_version"] = "4.12"
     extra["mockito_version"] = "2.23.0"
@@ -23,6 +34,7 @@ subprojects {
 
     repositories {
         mavenLocal()
+        maven(url = "https://dl.bintray.com/inkremental/maven")
         google()
         jcenter()
     }
@@ -32,23 +44,4 @@ subprojects {
 
     group = GROUP
     version = VERSION_NAME
-}
-
-tasks.register("generateAndBuild") {
-    dependsOn(
-        ":anvil:generateSdkDsl",
-        ":anvil:assembleRelease",
-        ":anvil-appcompat-v7:generateAppCompatv7Dsl",
-        ":anvil-appcompat-v7:assembleRelease",
-        ":anvil-gridlayout-v7:generateGridLayoutv7Dsl",
-        ":anvil-gridlayout-v7:assembleRelease",
-        ":anvil-recyclerview-v7:generateRecyclerViewv7Dsl",
-        ":anvil-recyclerview-v7:assembleRelease",
-        ":anvil-cardview-v7:generateCardViewv7Dsl",
-        ":anvil-cardview-v7:assembleRelease",
-        ":anvil-design:generateMaterialDsl",
-        ":anvil-design:assembleRelease",
-        ":anvil-support-v4:generateSupportCoreUiDsl",
-        ":anvil-support-v4:assembleRelease"
-    )
 }

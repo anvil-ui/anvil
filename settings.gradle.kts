@@ -1,6 +1,7 @@
 pluginManagement {
     repositories {
         mavenLocal()
+        maven(url = "https://dl.bintray.com/inkremental/maven")
         gradlePluginPortal()
         google()
         jcenter()

@@ -30,14 +30,15 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
+	inkremental(project(":anvil", "inkrementalDefSdk15"))
 
-	inkremental("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
-	inkremental("androidx.core:core:1.1.0")
-	inkremental("androidx.drawerlayout:drawerlayout:1.0.0")
-	inkremental("androidx.legacy:legacy-support-core-ui:1.0.0")
-	inkremental("androidx.slidingpanelayout:slidingpanelayout:1.0.0")
-	inkremental("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
-	inkremental("androidx.viewpager:viewpager:1.0.0")
+	inkrementalGen("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
+	inkrementalGen("androidx.core:core:1.1.0")
+	inkrementalGen("androidx.drawerlayout:drawerlayout:1.0.0")
+	inkrementalGen("androidx.legacy:legacy-support-core-ui:1.0.0")
+	inkrementalGen("androidx.slidingpanelayout:slidingpanelayout:1.0.0")
+	inkrementalGen("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+	inkrementalGen("androidx.viewpager:viewpager:1.0.0")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

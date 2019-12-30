@@ -5,17 +5,22 @@ plugins {
     kotlin("plugin.serialization") version "1.3.60" apply false
 }
 
-Properties()
-    .also { props ->
-        file("$rootDir/../gradle.properties").inputStream().use {
-            props.load(it)
+fun loadProperties(fileName: String) =
+    Properties()
+        .also { props ->
+            file("$rootDir/../$fileName").inputStream().use {
+                props.load(it)
+            }
         }
-    }
-    .forEach { name, value -> rootProject.extra[name as String] = value }
+        .forEach { name, value -> rootProject.extra[name as String] = value }
+
+loadProperties("gradle.properties")
+loadProperties("local.properties")
 
 subprojects {
     repositories {
         mavenLocal()
+        maven(url = "https://dl.bintray.com/inkremental/maven")
         google()
         jcenter()
     }

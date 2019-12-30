@@ -17,10 +17,12 @@ abstract class GenerateAndroidLibraryModelTask : GenerateModelTask() {
         val libs = resolved.firstLevelModuleDependencies
             .flatMap { it.moduleArtifacts }
             .map { it.file }
+            .distinct()
         val deps = resolved.resolvedArtifacts
             .map { it.file }
+            .distinct()
 
-        project.logger.info("Generator task resolved $configuration\nLibs:\n" +
+        project.logger.debug("Generator task resolved $configuration\nLibs:\n" +
                 libs.map { it.absolutePath }.sorted().joinToString(separator = "\n") { "    $it" } +
                 "\nDeps ${deps.size}:\n" +
                 deps.map { it.absolutePath }.sorted().joinToString(separator = "\n") { "    $it" })

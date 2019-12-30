@@ -12,8 +12,8 @@ import java.util.zip.ZipFile
 import javax.inject.Inject
 
 @Suppress("UnstableApiUsage")
-abstract class AarToJarTransform :
-    TransformAction<TransformParameters.None> {
+@CacheableTransform
+abstract class AarToJarTransform : TransformAction<TransformParameters.None> {
     @get:Inject
     abstract val inputChanges: InputChanges
 
@@ -28,7 +28,7 @@ abstract class AarToJarTransform :
             if (change.fileType != FileType.FILE) {
                 return@forEach
             }
-            when (change.changeType) {
+            when (change.changeType!!) {
                 ChangeType.ADDED, ChangeType.MODIFIED -> {
                     outFile.parentFile.mkdirs()
                     ZipFile(changedFile).use { zipFile ->

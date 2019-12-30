@@ -10,12 +10,16 @@ package dev.inkremental.meta.model
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import kotlinx.serialization.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.modules.SerialModule
 import kotlinx.serialization.modules.SerializersModule
 
 val ModelModule: SerialModule = SerializersModule {
     include(PoetModule)
 }
+
+fun ModelJson(): Json = Json(JsonConfiguration.Stable.copy(encodeDefaults = false), context = ModelModule)
 
 @Serializable
 data class ModuleModel(
@@ -26,17 +30,37 @@ data class ModuleModel(
     val views: List<ViewModel> = listOf()
 )
 
+fun ModuleModel.backlink(): ModuleModel = apply {
+    views.forEach {
+        it.owner = this
+        it.backlink()
+    }
+}
+
 @Serializable
 data class ViewModel(
     val name: String,
-    val plainType: @Polymorphic TypeName,
+    val plainType: ClassName,
     val parametrizedType: ParameterizedTypeName? = null,
     val attrs: List<AttrModel> = listOf(),
-    var superType: ViewModel? = null,
+    var superType: ViewModelSupertype? = null,
     val isRootType: Boolean = false // TODO replace with `superType == null` as soon as module deps are working
-)
+) {
+    @Transient lateinit var owner: ModuleModel
+}
 
-fun ViewModel.backlinkAttrs() {
+val ViewModel.scopeType: ClassName
+    get() = ClassName(owner.packageName, "${name}Scope")
+
+@Serializable
+sealed class ViewModelSupertype {
+    @Serializable
+    class Resolved(val type: ViewModel) : ViewModelSupertype()
+    @Serializable
+    class Unresolved(val references: List<String>) : ViewModelSupertype()
+}
+
+fun ViewModel.backlink(): ViewModel = apply {
     attrs.forEach { it.owner = this }
 }
 
@@ -46,7 +70,14 @@ val ViewModel.starProjectedType: TypeName
 fun ViewModel.isAssignableFrom(other: ViewModel): Boolean {
     var vm: ViewModel? = this
     while(vm != null && vm != other) {
-        vm = vm.superType
+        when(val superType = vm.superType) {
+            null -> return false
+            is ViewModelSupertype.Unresolved -> return false
+            is ViewModelSupertype.Resolved ->  {
+                vm = superType.type
+            }
+        }
+
     }
     return vm != null
 }

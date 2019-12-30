@@ -69,11 +69,18 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	implementation(project(":anvil-appcompat-v7"))
-	implementation(project(":anvil-cardview-v7"))
-	implementation(project(":anvil-recyclerview-v7"))
+	inkremental(project(":anvil", "inkrementalDefSdk15"))
 
-	inkremental("com.google.android.material:material:1.0.0")
+	implementation(project(":anvil-appcompat-v7"))
+	inkremental(project(":anvil-appcompat-v7", "inkrementalDefAppCompatv7"))
+
+	implementation(project(":anvil-cardview-v7"))
+	inkremental(project(":anvil-cardview-v7", "inkrementalDefCardViewv7"))
+
+	implementation(project(":anvil-recyclerview-v7"))
+	inkremental(project(":anvil-recyclerview-v7", "inkrementalDefRecyclerViewv7"))
+
+	inkrementalGen("com.google.android.material:material:1.0.0")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

@@ -21,6 +21,7 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
+	inkremental(project(":anvil", "inkrementalDefSdk15"))
 
     api("com.facebook.yoga.android:yoga-layout:1.16.0")
     api("com.facebook.soloader:soloader:0.6.1")

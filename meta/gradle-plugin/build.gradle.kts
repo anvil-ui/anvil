@@ -16,9 +16,10 @@ dependencies {
         exclude("org.jetbrains.kotlin", "kotlin-native-library-reader")
     }
 
-    implementation("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4")
-    compileClasspath("com.android.tools.build:gradle:3.5.2")
-    runtimeClasspath("com.android.tools.build:gradle:3.5.2")
+    //compileClasspath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.60")
+    //runtimeClasspath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.60")
+    compileClasspath("com.android.tools.build:gradle:3.5.3")
+    runtimeClasspath("com.android.tools.build:gradle:3.5.3")
 }
 
 gradlePlugin {

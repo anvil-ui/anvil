@@ -13,10 +13,10 @@ class AndroidIntrospector(
     val dependencies: Iterable<File>,
     val nullabilityHolder: NullabilityHolder
 ): Introspector {
-    override fun viewModelSequence(quirks: InkrementalQuirks): Sequence<Pair<ViewModel, List<String>>> =
-        viewsSequence().mapNotNull { it.createViewModel(quirks) }
+    override fun provideViewModels(quirks: InkrementalQuirks): List<ViewModel> =
+        viewsSequence().mapNotNull { it.createViewModel(quirks) }.toList()
 
-    private fun Class<*>.createViewModel(quirks: InkrementalQuirks): Pair<ViewModel, List<String>>? {
+    private fun Class<*>.createViewModel(quirks: InkrementalQuirks): ViewModel? {
         val quirk = quirks[canonicalName]
 
         val name = when(val alias = quirk?.get("__viewAlias")) {
@@ -31,14 +31,19 @@ class AndroidIntrospector(
 
         val plainType = kotlin.asClassName()
 
-        val viewModel = ViewModel(
+        val superType = if(plainType == VIEW)
+            null
+        else
+            ViewModelSupertype.Unresolved(kotlin.superclasses.mapNotNull { it.qualifiedName })
+
+        return ViewModel(
             name = name,
             plainType = plainType,
             parametrizedType = asParameterizedType(),
             attrs = attrs,
+            superType = superType,
             isRootType = plainType == VIEW
-        ).also { it.backlinkAttrs() }
-        return viewModel to kotlin.superclasses.mapNotNull { it.qualifiedName }
+        )
     }
 
     private fun viewsSequence(): Sequence<Class<*>> {
@@ -106,7 +111,7 @@ class AndroidIntrospector(
                                 it.kotlinFunction
                             } catch (e: Throwable) {
                                 // https://youtrack.jetbrains.com/issue/KT-17064
-                                println("Unable to process method: ${it.declaringClass.canonicalName}.${it.name}")
+                                //println("Unable to process method: ${it.declaringClass.canonicalName}.${it.name}")
                                 null
                             }
                         }

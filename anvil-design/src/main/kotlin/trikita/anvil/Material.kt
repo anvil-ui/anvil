@@ -57,7 +57,7 @@ import kotlin.Unit
 
 fun appBarLayout(configure: AppBarLayoutScope.() -> Unit = {}) =
     v<AppBarLayout>(configure.bind(AppBarLayoutScope))
-abstract class AppBarLayoutScope {
+abstract class AppBarLayoutScope : LinearLayoutScope() {
   fun expanded(arg: Boolean): Unit = attr("expanded", arg)
   fun liftOnScroll(arg: Boolean): Unit = attr("liftOnScroll", arg)
   fun liftable(arg: Boolean): Unit = attr("liftable", arg)
@@ -72,7 +72,7 @@ abstract class AppBarLayoutScope {
 
 fun collapsingToolbarLayout(configure: CollapsingToolbarLayoutScope.() -> Unit = {}) =
     v<CollapsingToolbarLayout>(configure.bind(CollapsingToolbarLayoutScope))
-abstract class CollapsingToolbarLayoutScope {
+abstract class CollapsingToolbarLayoutScope : FrameLayoutScope() {
   fun collapsedTitleGravity(arg: Int): Unit = attr("collapsedTitleGravity", arg)
   fun collapsedTitleTextAppearance(arg: Int): Unit = attr("collapsedTitleTextAppearance", arg)
   fun collapsedTitleTextColor(arg: ColorStateList): Unit = attr("collapsedTitleTextColor", arg)
@@ -108,7 +108,7 @@ abstract class CollapsingToolbarLayoutScope {
 
 fun bottomAppBar(configure: BottomAppBarScope.() -> Unit = {}) =
     v<BottomAppBar>(configure.bind(BottomAppBarScope))
-abstract class BottomAppBarScope {
+abstract class BottomAppBarScope : ToolbarScope() {
   fun backgroundTint(arg: ColorStateList?): Unit = attr("backgroundTint", arg)
   fun cradleVerticalOffset(arg: Float): Unit = attr("cradleVerticalOffset", arg)
   fun fabAlignmentMode(arg: Int): Unit = attr("fabAlignmentMode", arg)
@@ -125,7 +125,7 @@ abstract class BottomAppBarScope {
 
 fun bottomNavigationItemView(configure: BottomNavigationItemViewScope.() -> Unit = {}) =
     v<BottomNavigationItemView>(configure.bind(BottomNavigationItemViewScope))
-abstract class BottomNavigationItemViewScope {
+abstract class BottomNavigationItemViewScope : FrameLayoutScope() {
   companion object : BottomNavigationItemViewScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -136,7 +136,7 @@ abstract class BottomNavigationItemViewScope {
 
 fun bottomNavigationMenuView(configure: BottomNavigationMenuViewScope.() -> Unit = {}) =
     v<BottomNavigationMenuView>(configure.bind(BottomNavigationMenuViewScope))
-abstract class BottomNavigationMenuViewScope {
+abstract class BottomNavigationMenuViewScope : ViewGroupScope() {
   companion object : BottomNavigationMenuViewScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -147,7 +147,7 @@ abstract class BottomNavigationMenuViewScope {
 
 fun bottomNavigationView(configure: BottomNavigationViewScope.() -> Unit = {}) =
     v<BottomNavigationView>(configure.bind(BottomNavigationViewScope))
-abstract class BottomNavigationViewScope {
+abstract class BottomNavigationViewScope : FrameLayoutScope() {
   fun itemBackground(arg: Drawable?): Unit = attr("itemBackground", arg)
   fun itemBackgroundResource(arg: Int): Unit = attr("itemBackgroundResource", arg)
   fun itemHorizontalTranslationEnabled(arg: Boolean): Unit =
@@ -174,7 +174,7 @@ abstract class BottomNavigationViewScope {
 
 fun materialButton(configure: MaterialButtonScope.() -> Unit = {}) =
     v<MaterialButton>(configure.bind(MaterialButtonScope))
-abstract class MaterialButtonScope {
+abstract class MaterialButtonScope : AppCompatButtonScope() {
   fun cornerRadius(arg: Int): Unit = attr("cornerRadius", arg)
   fun cornerRadiusResource(arg: Int): Unit = attr("cornerRadiusResource", arg)
   fun icon(arg: Drawable): Unit = attr("icon", arg)
@@ -201,7 +201,7 @@ abstract class MaterialButtonScope {
 
 fun materialCardView(configure: MaterialCardViewScope.() -> Unit = {}) =
     v<MaterialCardView>(configure.bind(MaterialCardViewScope))
-abstract class MaterialCardViewScope {
+abstract class MaterialCardViewScope : CardViewScope() {
   fun strokeColor(arg: Int): Unit = attr("strokeColor", arg)
   fun strokeWidth(arg: Int): Unit = attr("strokeWidth", arg)
   companion object : MaterialCardViewScope() {
@@ -213,7 +213,7 @@ abstract class MaterialCardViewScope {
 }
 
 fun chip(configure: ChipScope.() -> Unit = {}) = v<Chip>(configure.bind(ChipScope))
-abstract class ChipScope {
+abstract class ChipScope : AppCompatCheckBoxScope() {
   fun checkable(arg: Boolean): Unit = attr("checkable", arg)
   fun checkableResource(arg: Int): Unit = attr("checkableResource", arg)
   fun checkedIcon(arg: Drawable?): Unit = attr("checkedIcon", arg)
@@ -306,7 +306,7 @@ abstract class ChipGroupScope : FlowLayoutScope() {
 
 fun circularRevealFrameLayout(configure: CircularRevealFrameLayoutScope.() -> Unit = {}) =
     v<CircularRevealFrameLayout>(configure.bind(CircularRevealFrameLayoutScope))
-abstract class CircularRevealFrameLayoutScope {
+abstract class CircularRevealFrameLayoutScope : FrameLayoutScope() {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
@@ -321,7 +321,7 @@ abstract class CircularRevealFrameLayoutScope {
 
 fun circularRevealGridLayout(configure: CircularRevealGridLayoutScope.() -> Unit = {}) =
     v<CircularRevealGridLayout>(configure.bind(CircularRevealGridLayoutScope))
-abstract class CircularRevealGridLayoutScope {
+abstract class CircularRevealGridLayoutScope : GridLayoutScope() {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
@@ -336,7 +336,7 @@ abstract class CircularRevealGridLayoutScope {
 
 fun circularRevealLinearLayout(configure: CircularRevealLinearLayoutScope.() -> Unit = {}) =
     v<CircularRevealLinearLayout>(configure.bind(CircularRevealLinearLayoutScope))
-abstract class CircularRevealLinearLayoutScope {
+abstract class CircularRevealLinearLayoutScope : LinearLayoutScope() {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
@@ -351,7 +351,7 @@ abstract class CircularRevealLinearLayoutScope {
 
 fun circularRevealRelativeLayout(configure: CircularRevealRelativeLayoutScope.() -> Unit = {}) =
     v<CircularRevealRelativeLayout>(configure.bind(CircularRevealRelativeLayoutScope))
-abstract class CircularRevealRelativeLayoutScope {
+abstract class CircularRevealRelativeLayoutScope : RelativeLayoutScope() {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
@@ -366,7 +366,7 @@ abstract class CircularRevealRelativeLayoutScope {
 
 fun circularRevealCardView(configure: CircularRevealCardViewScope.() -> Unit = {}) =
     v<CircularRevealCardView>(configure.bind(CircularRevealCardViewScope))
-abstract class CircularRevealCardViewScope {
+abstract class CircularRevealCardViewScope : CardViewScope() {
   fun circularRevealOverlayDrawable(arg: Drawable?): Unit = attr("circularRevealOverlayDrawable",
       arg)
   fun circularRevealScrimColor(arg: Int): Unit = attr("circularRevealScrimColor", arg)
@@ -417,7 +417,7 @@ abstract class FloatingActionButtonScope : VisibilityAwareImageButtonScope() {
 
 fun baselineLayout(configure: BaselineLayoutScope.() -> Unit = {}) =
     v<BaselineLayout>(configure.bind(BaselineLayoutScope))
-abstract class BaselineLayoutScope {
+abstract class BaselineLayoutScope : ViewGroupScope() {
   companion object : BaselineLayoutScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -428,7 +428,7 @@ abstract class BaselineLayoutScope {
 
 fun checkableImageButton(configure: CheckableImageButtonScope.() -> Unit = {}) =
     v<CheckableImageButton>(configure.bind(CheckableImageButtonScope))
-abstract class CheckableImageButtonScope {
+abstract class CheckableImageButtonScope : AppCompatImageButtonScope() {
   companion object : CheckableImageButtonScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -439,7 +439,7 @@ abstract class CheckableImageButtonScope {
 
 fun flowLayout(configure: FlowLayoutScope.() -> Unit = {}) =
     v<FlowLayout>(configure.bind(FlowLayoutScope))
-abstract class FlowLayoutScope {
+abstract class FlowLayoutScope : ViewGroupScope() {
   fun singleLine(arg: Boolean): Unit = attr("singleLine", arg)
   companion object : FlowLayoutScope() {
     init {
@@ -451,7 +451,7 @@ abstract class FlowLayoutScope {
 
 fun foregroundLinearLayout(configure: ForegroundLinearLayoutScope.() -> Unit = {}) =
     v<ForegroundLinearLayout>(configure.bind(ForegroundLinearLayoutScope))
-abstract class ForegroundLinearLayoutScope {
+abstract class ForegroundLinearLayoutScope : LinearLayoutCompatScope() {
   companion object : ForegroundLinearLayoutScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -476,7 +476,7 @@ abstract class NavigationMenuItemViewScope : ForegroundLinearLayoutScope() {
 
 fun navigationMenuView(configure: NavigationMenuViewScope.() -> Unit = {}) =
     v<NavigationMenuView>(configure.bind(NavigationMenuViewScope))
-abstract class NavigationMenuViewScope {
+abstract class NavigationMenuViewScope : RecyclerViewScope() {
   companion object : NavigationMenuViewScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -487,7 +487,7 @@ abstract class NavigationMenuViewScope {
 
 fun scrimInsetsFrameLayout(configure: ScrimInsetsFrameLayoutScope.() -> Unit = {}) =
     v<ScrimInsetsFrameLayout>(configure.bind(ScrimInsetsFrameLayoutScope))
-abstract class ScrimInsetsFrameLayoutScope {
+abstract class ScrimInsetsFrameLayoutScope : FrameLayoutScope() {
   companion object : ScrimInsetsFrameLayoutScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -498,7 +498,7 @@ abstract class ScrimInsetsFrameLayoutScope {
 
 fun visibilityAwareImageButton(configure: VisibilityAwareImageButtonScope.() -> Unit = {}) =
     v<VisibilityAwareImageButton>(configure.bind(VisibilityAwareImageButtonScope))
-abstract class VisibilityAwareImageButtonScope {
+abstract class VisibilityAwareImageButtonScope : ImageButtonScope() {
   companion object : VisibilityAwareImageButtonScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -533,7 +533,7 @@ abstract class NavigationViewScope : ScrimInsetsFrameLayoutScope() {
 
 fun snackbarContentLayout(configure: SnackbarContentLayoutScope.() -> Unit = {}) =
     v<SnackbarContentLayout>(configure.bind(SnackbarContentLayoutScope))
-abstract class SnackbarContentLayoutScope {
+abstract class SnackbarContentLayoutScope : LinearLayoutScope() {
   companion object : SnackbarContentLayoutScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -543,7 +543,7 @@ abstract class SnackbarContentLayoutScope {
 }
 
 fun tabItem(configure: TabItemScope.() -> Unit = {}) = v<TabItem>(configure.bind(TabItemScope))
-abstract class TabItemScope {
+abstract class TabItemScope : ViewScope() {
   companion object : TabItemScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -554,7 +554,7 @@ abstract class TabItemScope {
 
 fun tabLayout(configure: TabLayoutScope.() -> Unit = {}) =
     v<TabLayout>(configure.bind(TabLayoutScope))
-abstract class TabLayoutScope {
+abstract class TabLayoutScope : HorizontalScrollViewScope() {
   fun inlineLabel(arg: Boolean): Unit = attr("inlineLabel", arg)
   fun inlineLabelResource(arg: Int): Unit = attr("inlineLabelResource", arg)
   fun selectedTabIndicator(arg: Drawable?): Unit = attr("selectedTabIndicator", arg)
@@ -581,7 +581,7 @@ abstract class TabLayoutScope {
 
 fun textInputEditText(configure: TextInputEditTextScope.() -> Unit = {}) =
     v<TextInputEditText>(configure.bind(TextInputEditTextScope))
-abstract class TextInputEditTextScope {
+abstract class TextInputEditTextScope : AppCompatEditTextScope() {
   companion object : TextInputEditTextScope() {
     init {
       Anvil.registerAttributeSetter(MaterialSetter)
@@ -592,7 +592,7 @@ abstract class TextInputEditTextScope {
 
 fun textInputLayout(configure: TextInputLayoutScope.() -> Unit = {}) =
     v<TextInputLayout>(configure.bind(TextInputLayoutScope))
-abstract class TextInputLayoutScope {
+abstract class TextInputLayoutScope : LinearLayoutScope() {
   fun boxBackgroundColor(arg: Int): Unit = attr("boxBackgroundColor", arg)
   fun boxBackgroundColorResource(arg: Int): Unit = attr("boxBackgroundColorResource", arg)
   fun boxBackgroundMode(arg: Int): Unit = attr("boxBackgroundMode", arg)
@@ -663,7 +663,7 @@ abstract class TransformationChildLayoutScope : CircularRevealFrameLayoutScope()
  * DSL for creating views and settings their attributes.
  * This file has been generated by
  * {@code gradle generateMaterialDsl}
- * It contains views and their setters from the library material.
+ * It contains views and their setters for the library material.
  * Please, don't edit it manually unless for debugging.
  */
 object MaterialSetter : Anvil.AttributeSetter<Any?> {
