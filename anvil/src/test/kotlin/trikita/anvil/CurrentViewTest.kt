@@ -2,6 +2,8 @@ package trikita.anvil
 
 import android.view.View
 import android.view.ViewGroup
+import dev.inkremental.dsl.android.view.ViewScope
+import dev.inkremental.dsl.android.widget.FrameLayoutScope
 import kotlin.test.*
 
 
@@ -11,7 +13,7 @@ class CurrentViewTest : Utils() {
         assertNull(Anvil.currentView())
         Anvil.mount(container) {
             assertTrue(Anvil.currentView<View>() is ViewGroup)
-            v<MockLayout, ViewGroupScope>(ViewGroupScope) {
+            v<MockLayout, FrameLayoutScope>(FrameLayoutScope) {
                 assertTrue(Anvil.currentView<View>() is MockLayout)
                 v<MockView, ViewScope>(ViewScope) {
                     assertTrue(Anvil.currentView<View>() is MockView)

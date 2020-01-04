@@ -1,6 +1,8 @@
 package trikita.anvil
 
 import android.view.View
+import dev.inkremental.dsl.android.init
+import dev.inkremental.dsl.android.view.ViewScope
 import kotlin.test.*
 
 

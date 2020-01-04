@@ -1,5 +1,6 @@
 package trikita.anvil
 
+import dev.inkremental.dsl.android.view.ViewScope
 import org.junit.Assert
 import kotlin.test.Test
 

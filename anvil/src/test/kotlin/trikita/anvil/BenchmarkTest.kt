@@ -1,5 +1,7 @@
 package trikita.anvil
 
+import dev.inkremental.dsl.android.view.ViewScope
+import dev.inkremental.dsl.android.widget.FrameLayoutScope
 import trikita.anvil.Anvil.Renderable
 import kotlin.test.Test
 
@@ -52,7 +54,7 @@ class BenchmarkTest : Utils() {
     }
 
     private fun group(i: Int, r: () -> Unit) {
-        v<MockLayout, ViewScope>(ViewScope) {
+        v<MockLayout, FrameLayoutScope>(FrameLayoutScope) {
             id(i * 100)
             tag("layout")
             r()

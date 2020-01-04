@@ -1,5 +1,6 @@
 package trikita.anvil
 
+import dev.inkremental.dsl.android.view.ViewScope
 import org.mockito.Mockito
 import trikita.anvil.Anvil.Renderable
 import java.lang.ref.WeakReference
