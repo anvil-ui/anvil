@@ -68,7 +68,11 @@ const val FORMAT_AAR = "aar"
 const val FORMAT_JSON = "json"
 
 fun loadPropertiesFromFile(file: File): Properties = Properties().apply {
-    file.inputStream().use { load(it) }
+    try {
+        file.inputStream().use { load(it) }
+    } catch(e: java.io.FileNotFoundException) {
+        // do nothing
+    }
 }
 
 fun Project.generateAndroidTasks(

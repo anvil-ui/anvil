@@ -1,4 +1,4 @@
-import java.util.Properties
+import java.util.*
 
 plugins {
     kotlin("jvm") version "1.3.60" apply false
@@ -8,8 +8,12 @@ plugins {
 fun loadProperties(fileName: String) =
     Properties()
         .also { props ->
-            file("$rootDir/../$fileName").inputStream().use {
-                props.load(it)
+            try {
+                file("$rootDir/../$fileName").inputStream().use {
+                    props.load(it)
+                }
+            } catch(e: java.io.FileNotFoundException) {
+                // do nothing
             }
         }
         .forEach { name, value -> rootProject.extra[name as String] = value }
