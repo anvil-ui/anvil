@@ -9,8 +9,12 @@ import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import trikita.anvil.*
-import trikita.anvil.Size.*
+import dev.inkremental.dsl.android.*
+import dev.inkremental.dsl.android.Size.MATCH
+import dev.inkremental.dsl.android.Size.WRAP
+import dev.inkremental.dsl.android.widget.*
+import trikita.anvil.r
+import trikita.anvil.renderableContentView
 
 class MainActivity : AppCompatActivity() {
 
