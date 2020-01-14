@@ -7,8 +7,8 @@ plugins {
 android {
 	flavorDimensions("api")
 	productFlavors {
-		create("sdk15") {
-			minSdkVersion(15)
+		create("sdk17") {
+			minSdkVersion(17)
 		}
 		create("sdk19") {
 			minSdkVersion(19)

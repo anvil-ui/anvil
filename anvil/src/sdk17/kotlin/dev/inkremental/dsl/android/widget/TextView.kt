@@ -19,6 +19,7 @@ import android.widget.TextView
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
 import dev.inkremental.dsl.android.view.ViewScope
+import java.util.Locale
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -90,6 +91,7 @@ abstract class TextViewScope : ViewScope() {
   fun textColor(arg: Int): Unit = attr("textColor", arg)
   fun textIsSelectable(arg: Boolean): Unit = attr("textIsSelectable", arg)
   fun textKeepState(arg: CharSequence): Unit = attr("textKeepState", arg)
+  fun textLocale(arg: Locale): Unit = attr("textLocale", arg)
   fun textScaleX(arg: Float): Unit = attr("textScaleX", arg)
   fun transformationMethod(arg: TransformationMethod): Unit = attr("transformationMethod", arg)
   fun typeface(arg: Typeface?): Unit = attr("typeface", arg)

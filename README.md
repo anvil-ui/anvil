@@ -34,23 +34,25 @@ same thing, so no performance loss here).
 
 ## Installation
 
-``` gradle
-// build.gradle
+```kotlin
+// build.gradle.kts
 repositories {
-    jcenter()
+    maven(url = "https://dl.bintray.com/inkremental/maven")
 }
 dependencies {
-    compile 'co.trikita:anvil-sdk15:0.5.0'
+    implementation("dev.inkremental:anvil-sdk17:0.8.0")
 }
 ```
 Anvil comes in multiple builds for different minimal SDK versions:
 
-* anvil-sdk15 (ICS, 99.7% of devices)
-* anvil-sdk19 (Kitkat, 94.3% of devices)
-* anvil-sdk21 (Lollipop, 82.3% of devices)
+* anvil-sdk17 (ICS, 98.1% of devices)
+* anvil-sdk19 (Kitkat, 95.3% of devices)
+* anvil-sdk21 (Lollipop, 80.2% of devices)
 
-API levels 16, 17, 18, 22 or 23 are not added because they had very few
-UI-related methods added.
+Other API levels are not added because they had very few UI-related methods added.
+
+Note that minimal supported SDK level is **subject to change in future**. Let us know
+if you are still using API levels 17 or 18!
 
 ## Examples
 

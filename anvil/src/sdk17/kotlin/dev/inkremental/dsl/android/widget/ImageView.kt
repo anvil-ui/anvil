@@ -24,11 +24,12 @@ fun imageView(configure: ImageViewScope.() -> Unit = {}) =
     v<ImageView>(configure.bind(ImageViewScope))
 abstract class ImageViewScope : ViewScope() {
   fun adjustViewBounds(arg: Boolean): Unit = attr("adjustViewBounds", arg)
-  fun alpha(arg: Int): Unit = attr("alpha", arg)
   fun baseline(arg: Int): Unit = attr("baseline", arg)
   fun baselineAlignBottom(arg: Boolean): Unit = attr("baselineAlignBottom", arg)
   fun colorFilter(arg: ColorFilter): Unit = attr("colorFilter", arg)
   fun colorFilter(arg: Int): Unit = attr("colorFilter", arg)
+  fun cropToPadding(arg: Boolean): Unit = attr("cropToPadding", arg)
+  fun imageAlpha(arg: Int): Unit = attr("imageAlpha", arg)
   fun imageBitmap(arg: Bitmap): Unit = attr("imageBitmap", arg)
   fun imageDrawable(arg: Drawable?): Unit = attr("imageDrawable", arg)
   fun imageLevel(arg: Int): Unit = attr("imageLevel", arg)

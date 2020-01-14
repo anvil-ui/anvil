@@ -11,7 +11,7 @@ env:
 
 android:
   components:
-    - android-15
+    - android-17
     - android-19
     - android-21
     - android-28

@@ -86,7 +86,7 @@ fun Project.generateAndroidTasks(
             val allModelsTask = tasks.register<DefaultTask>("generateSdkModel")
             val allDslsTask = tasks.register<DefaultTask>("generateSdkDsl")
 
-            for(apiLevel in listOf(15, 19, 21)) {
+            for(apiLevel in listOf(17, 19, 21)) {
                 val (modelTask, dslTask) = createDslTasks<GenerateAndroidSdkModelTask>(
                     module,
                     "Sdk$apiLevel",
@@ -189,8 +189,9 @@ private fun Project.getAndroidJar(api: Int): File {
                 "Please put SDK path to either local.properties file to property sdk.dir " +
                 "or pass it via ANDROID_SDK_ROOT environment variable.")
     val jarFile = File("$sdkDir/platforms/android-$api/android.jar")
-    if(!jarFile.exists()) error("Jar file for SDK $api is not found at ${jarFile.absolutePath}." +
+    if(!jarFile.exists()) error("Jar file for SDK $api is not found at ${jarFile.absolutePath}. " +
             "Please download platform $api via SDK manager or by invoking " +
-            "\"sdkmanager platforms;android-$api\" from shell.")
+            "the following command from shell: " +
+            "sdkmanager \"platforms;android-$api\"")
     return jarFile
 }
