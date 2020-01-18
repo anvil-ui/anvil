@@ -5,8 +5,8 @@ package dev.inkremental.dsl.androidx.recyclerview
 import android.view.View
 import androidx.recyclerview.widget.*
 import dev.inkremental.dsl.androidx.recyclerview.widget.RecyclerViewScope
-import trikita.anvil.Anvil
-import trikita.anvil.attr
+import dev.inkremental.Anvil
+import dev.inkremental.attr
 
 fun RecyclerViewScope.linearLayoutManager(
     orientation: Int = LinearLayoutManager.VERTICAL,
@@ -26,7 +26,7 @@ fun RecyclerViewScope.gridLayoutManAppBarLayoutager(
         LayoutManagerParams(orientation, reverseLayout, spanCount, spanSizeLookup)
     )
 
-object CustomRecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
+object CustomRecyclerViewv7Setter : Anvil.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when(name) {
         "linearLayoutManager" -> when {
             v is RecyclerView && value is LayoutManagerParams -> {

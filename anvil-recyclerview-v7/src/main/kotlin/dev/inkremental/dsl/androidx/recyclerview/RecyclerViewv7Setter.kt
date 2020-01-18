@@ -5,13 +5,13 @@ package dev.inkremental.dsl.androidx.recyclerview
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
+import dev.inkremental.Anvil
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Function
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
-import trikita.anvil.Anvil
 
 /**
  * DSL for creating views and settings their attributes.
@@ -20,7 +20,7 @@ import trikita.anvil.Anvil
  * It contains views and their setters for the library recyclerview-v7.
  * Please, don't edit it manually unless for debugging.
  */
-object RecyclerViewv7Setter : Anvil.AttributeSetter<Any?> {
+object RecyclerViewv7Setter : Anvil.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,

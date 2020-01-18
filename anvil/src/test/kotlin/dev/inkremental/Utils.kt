@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import android.annotation.TargetApi
 import android.content.Context
@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import org.junit.After
 import org.junit.Before
-import trikita.anvil.Anvil.Renderable
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
 open class Utils {
     var createdViews: MutableMap<Class<*>, Int?> = mutableMapOf()
     var changedAttrs: MutableMap<String, Int?> = mutableMapOf()
-    var empty = Renderable { }
-    var container: MockLayout? = null
+    var empty = Renderable {  }
+    lateinit var container: MockLayout
     @Before
     fun setUp() {
         changedAttrs.clear()
@@ -115,12 +114,14 @@ open class Utils {
     }
 
     init {
-        Anvil.registerAttributeSetter { v, name, value, prevValue ->
-            changedAttrs[name] = if (!changedAttrs.containsKey(name)) 1 else changedAttrs[name]!! + 1
-            false
-        }
+        Anvil.registerAttributeSetter(object : Anvil.AttributeSetter<Any> {
+            override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean {
+                changedAttrs[name] = if (!changedAttrs.containsKey(name)) 1 else changedAttrs[name]!! + 1
+                return false
+            }
+        })
         Anvil.registerViewFactory(object : Anvil.ViewFactory {
-            override fun fromClass(c: Context?, v: Class<out View>): View? {
+            override fun fromClass(c: Context?, v: Class<out View?>): View? {
                 createdViews[v] = if (!createdViews.containsKey(v)) 1 else createdViews[v]!! + 1
                 return null
             }

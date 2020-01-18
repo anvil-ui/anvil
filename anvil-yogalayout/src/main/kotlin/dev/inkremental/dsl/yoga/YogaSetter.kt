@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.yoga
 
 import android.view.View
-import trikita.anvil.Anvil
+import dev.inkremental.Anvil
 
 /**
  * DSL for creating views and settings their attributes.

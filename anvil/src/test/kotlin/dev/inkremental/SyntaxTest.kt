@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import dev.inkremental.dsl.android.view.ViewScope
 import org.junit.Assert
@@ -10,7 +10,7 @@ class SyntaxTest : Utils() {
 
     @Test
     fun testSyntax() {
-        Anvil.mount(container) {
+        Anvil.mount(container, Renderable {
             v<MockLayout> {
                 attr("tag", 1)
                 v<MockView> { attr("tag", 2) }
@@ -22,8 +22,8 @@ class SyntaxTest : Utils() {
                     }
                 }
             }
-        }
-        val layout = container!!.getChildAt(0) as MockLayout
+        })
+        val layout = container.getChildAt(0) as MockLayout
         Assert.assertEquals(1, layout.tag)
         val header = layout.getChildAt(0) as MockView
         Assert.assertEquals(2, header.tag)

@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import android.content.Context
 import android.view.View
@@ -10,14 +10,14 @@ class XmlTest : Utils() {
     private var inflateCount = 0
     @Test
     fun testXml() {
-        Anvil.mount(container) {
+        Anvil.mount(container, Renderable {
             xml(LAYOUT) {
                 attr("text", "foo")
                 v<MockView> { attr("tag", "bar") }
             }
-        }
+        })
         assertEquals(1, inflateCount)
-        val layout = container!!.getChildAt(0) as MockLayout
+        val layout = container.getChildAt(0) as MockLayout
         assertEquals("foo", layout.text)
         assertEquals(1, layout.childCount)
         assertEquals(ID_HEADER, layout.getChildAt(0).id)
@@ -31,7 +31,8 @@ class XmlTest : Utils() {
 
     init {
         Anvil.registerViewFactory(object : Anvil.ViewFactory {
-            override fun fromClass(c: Context?, v: Class<out View>): View? = null
+            override fun fromClass(c: Context?, v: Class<out View?>): View? = null
+
             override fun fromXml(parent: ViewGroup, xmlId: Int): View? {
                 if (xmlId == LAYOUT) {
                     inflateCount++

@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import android.view.View
 import android.view.ViewGroup
@@ -11,20 +11,20 @@ class CurrentViewTest : Utils() {
     @Test
     fun testCurrentView() {
         assertNull(Anvil.currentView())
-        Anvil.mount(container) {
+        Anvil.mount(container, Renderable {
             assertTrue(Anvil.currentView<View>() is ViewGroup)
             v<MockLayout, FrameLayoutScope>(FrameLayoutScope) {
                 assertTrue(Anvil.currentView<View>() is MockLayout)
                 v<MockView, ViewScope>(ViewScope) {
                     assertTrue(Anvil.currentView<View>() is MockView)
                     attr("text", "bar")
-                    val view: MockView = Anvil.currentView() // should cast automatically
-                    assertEquals("bar", view.text)
+                    val view: MockView? = Anvil.currentView<MockView>()// should cast automatically
+                    assertEquals("bar", view?.text)
                 }
                 assertTrue(Anvil.currentView<View>() is MockLayout)
             }
             assertTrue(Anvil.currentView<View>() is ViewGroup)
-        }
+        })
         assertNull(Anvil.currentView())
     }
 }

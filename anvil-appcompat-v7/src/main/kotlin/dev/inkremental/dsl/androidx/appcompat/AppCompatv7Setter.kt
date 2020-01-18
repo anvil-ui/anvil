@@ -40,6 +40,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.ViewStubCompat
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.view.ActionProvider
+import dev.inkremental.Anvil
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -49,7 +50,6 @@ import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
 
 /**
  * DSL for creating views and settings their attributes.
@@ -58,7 +58,7 @@ import trikita.anvil.Anvil
  * It contains views and their setters for the library appcompat-v7.
  * Please, don't edit it manually unless for debugging.
  */
-object AppCompatv7Setter : Anvil.AttributeSetter<Any?> {
+object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,

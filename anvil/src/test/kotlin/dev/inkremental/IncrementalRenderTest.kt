@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import kotlin.test.*
 
@@ -8,9 +8,7 @@ class IncrementalRenderTest: Utils() {
 
     @Test
     fun testConstantsRenderedOnce() {
-        Anvil.mount(container) {
-            v<MockLayout> { attr("text", "bar") }
-        }
+        Anvil.mount(container, Renderable { v<MockLayout> { attr("text", "bar") } })
         assertEquals(1, createdViews[MockLayout::class.java])
         assertEquals(1, changedAttrs["text"])
         Anvil.render()
@@ -20,9 +18,7 @@ class IncrementalRenderTest: Utils() {
 
     @Test
     fun testDynamicAttributeRenderedLazily() {
-        Anvil.mount(container) {
-            v<MockLayout> { attr("text", fooValue) }
-        }
+        Anvil.mount(container, Renderable { v<MockLayout> { attr("text", fooValue) } })
         assertEquals(1, changedAttrs["text"])
         Anvil.render()
         assertEquals(1, changedAttrs["text"])
@@ -35,15 +31,15 @@ class IncrementalRenderTest: Utils() {
 
     @Test
     fun testDynamicViewRenderedLazily() {
-        Anvil.mount(container) {
+        Anvil.mount(container, Renderable {
             v<MockLayout> {
                 v<MockLayout>()
                 if(showView) {
                     v<MockView>()
                 }
             }
-        }
-        val layout = container!!.getChildAt(0) as MockLayout
+        })
+        val layout = container.getChildAt(0) as MockLayout
         assertEquals(2, layout.childCount)
         assertEquals(1, createdViews[MockView::class.java])
         Anvil.render()
@@ -69,12 +65,8 @@ class IncrementalRenderTest: Utils() {
     fun testRenderUpdatesAllMounts() {
         val rootA = MockLayout(context)
         val rootB = MockLayout(context)
-        Anvil.mount(rootA) {
-            attr("text", firstMountValue)
-        }
-        Anvil.mount(rootB) {
-            attr("tag", secondMountValue)
-        }
+        Anvil.mount(rootA, Renderable { attr("text", firstMountValue) })
+        Anvil.mount(rootB, Renderable { attr("tag", secondMountValue) })
         assertEquals("foo", rootA.text)
         assertEquals("bar", rootB.tag)
 

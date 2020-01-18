@@ -11,9 +11,11 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.dip
 import dev.inkremental.dsl.android.view.ViewScope
 import dev.inkremental.dsl.android.widget.*
-import trikita.anvil.*
 import java.util.*
 
 // weight constants
@@ -113,7 +115,7 @@ fun TextViewScope.onTextChanged(watcher: (CharSequence) -> Unit) = attr("onTextC
 fun TextViewScope.onTextChanged(watcher: TextWatcher) = attr("onTextChanged", watcher)
 fun TextViewScope.inputExtras(extras: Int) = attr("inputExtras", extras)
 
-object CustomSdkSetter : Anvil.AttributeSetter<Any?> {
+object CustomSdkSetter : Anvil.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
         "init" -> when {
             value is Function<*> -> {

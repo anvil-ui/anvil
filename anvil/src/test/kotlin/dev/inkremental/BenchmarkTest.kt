@@ -1,8 +1,7 @@
-package trikita.anvil
+package dev.inkremental
 
 import dev.inkremental.dsl.android.view.ViewScope
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
-import trikita.anvil.Anvil.Renderable
 import kotlin.test.Test
 
 class BenchmarkTest : Utils() {

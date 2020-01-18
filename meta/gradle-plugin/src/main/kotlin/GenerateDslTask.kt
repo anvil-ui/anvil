@@ -50,8 +50,8 @@ abstract class GenerateDslTask : DefaultTask() {
                 addFunction("set") {
                     addParameter("v", VIEW)
                     addParameter("name", STRING)
-                    addParameter("arg", ANY_N)
-                    addParameter("old", ANY_N)
+                    addParameter("arg", ANY_N_NULLABLE)
+                    addParameter("old", ANY_N_NULLABLE)
                     returns(BOOLEAN)
                     addModifiers(KModifier.PUBLIC, KModifier.OVERRIDE)
 

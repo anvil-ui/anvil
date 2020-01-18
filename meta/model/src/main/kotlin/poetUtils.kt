@@ -14,10 +14,11 @@ fun FunctionModel.asLambdaTypeName(): LambdaTypeName =
         returnType
     )
 
-const val PACKAGE = "trikita.anvil"
+const val PACKAGE = "dev.inkremental"
 const val ROOT_VIEW_SCOPE = "RootViewScope"
 
-val ANY_N: ClassName = ANY.copy(nullable = true)
+val ANY_N_NULLABLE: ClassName = ANY.copy(nullable = true)
+val ANY_N: ClassName = ANY.copy(nullable = false)
 val FUNCTION_STAR: TypeName = ClassName("kotlin", "Function").parameterizedBy(STAR)
 val ANVIL: ClassName = ClassName(PACKAGE, "Anvil")
 val VIEW: ClassName = ClassName("android.view", "View")

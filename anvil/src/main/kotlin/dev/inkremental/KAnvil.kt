@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import android.app.Activity
 import android.app.Fragment
@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 import kotlin.reflect.KClass
 
 fun v(c: KClass<out View>, r: () -> Unit = {}) {
-    Anvil.currentMount().iterator.start(c.java, 0)
+    Anvil.currentMount()?.iterator?.start(c.java, 0)
     r()
     end()
 }
@@ -26,17 +26,17 @@ inline fun <reified T: View> v(noinline r: () -> Unit = {}) = v(T::class, r)
 inline fun <reified T: View, reified S: ViewScope> v(s: S, noinline r: S.() -> Unit = {}) = v(T::class, r.bind(s))
 
 fun xml(@LayoutRes layoutId: Int, r: () -> Unit = {}) {
-    Anvil.currentMount().iterator.start(null, layoutId)
+    Anvil.currentMount()?.iterator?.start(null, layoutId)
     r()
     end()
 }
-fun end() = Anvil.currentMount().iterator.end()
-fun skip() = Anvil.currentMount().iterator.skip()
+fun end() = Anvil.currentMount()?.iterator?.end()
+fun skip() = Anvil.currentMount()?.iterator?.skip()
 
 fun <T, U> ((T) -> U).bind(value: T): () -> U = { this(value) }
 
-fun <T> attr(name: String, value: T?) {
-    Anvil.currentMount().iterator.attr<T>(name, value)
+fun <T : Any> attr(name: String, value: T?) {
+    Anvil.currentMount()?.iterator?.attr<T>(name, value)
 }
 
 val r: Resources
@@ -56,7 +56,7 @@ fun sip(value: Float): Float = TypedValue.applyDimension(
 
 fun sip(value: Int): Int = sip(value.toFloat()).roundToInt()
 
-fun withId(@IdRes id: Int, r: () -> Unit): View {
+fun withId(@IdRes id: Int, r: Renderable): View {
     var v = Anvil.currentView<View>()
     requireNotNull(v) { "Anvil.currentView() is null" }
     v = v.findViewById(id)

@@ -12,8 +12,8 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import dev.inkremental.dsl.android.view.ViewScope
 import dev.inkremental.dsl.google.android.material.appbar.AppBarLayoutScope
-import trikita.anvil.Anvil
-import trikita.anvil.attr
+import dev.inkremental.Anvil
+import dev.inkremental.attr
 
 fun ViewScope.collapseMode(collapseMode: Int) = attr("collapseMode", collapseMode)
 fun ViewScope.scrollFlags(scrollFlags: Int) = attr("scrollFlags", scrollFlags)
@@ -21,7 +21,7 @@ fun ViewScope.behavior(behavior: CoordinatorLayout.Behavior<*>) = attr("behavior
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 fun AppBarLayoutScope.appBarElevation(elevation: Float) = attr("appBarElevation", elevation)
 
-object CustomMaterialSetter : Anvil.AttributeSetter<Any?> {
+object CustomMaterialSetter : Anvil.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when(name) {
         "collapseMode" -> when {
             v.layoutParams is CollapsingToolbarLayout.LayoutParams && value is Int -> {

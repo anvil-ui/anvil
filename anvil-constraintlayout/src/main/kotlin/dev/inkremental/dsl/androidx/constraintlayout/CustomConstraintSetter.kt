@@ -4,10 +4,10 @@ package dev.inkremental.dsl.androidx.constraintlayout
 
 import android.view.View
 import androidx.constraintlayout.widget.*
-import trikita.anvil.Anvil
+import dev.inkremental.Anvil
 import java.util.*
 
-object CustomConstraintSetter : Anvil.AttributeSetter<Any?> {
+object CustomConstraintSetter : Anvil.AttributeSetter<Any> {
     override fun set(
         v: View,
         name: String,
