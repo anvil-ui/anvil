@@ -5,16 +5,16 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import androidx.appcompat.widget.AppCompatButton
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.ButtonScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun appCompatButton(configure: AppCompatButtonScope.() -> Unit = {}) =
     v<AppCompatButton>(configure.bind(AppCompatButtonScope))

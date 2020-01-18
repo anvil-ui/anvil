@@ -3,14 +3,14 @@
 package dev.inkremental.dsl.androidx.appcompat.widget
 
 import androidx.appcompat.widget.AppCompatSeekBar
+import dev.inkremental.Anvil
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.SeekBarScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun appCompatSeekBar(configure: AppCompatSeekBarScope.() -> Unit = {}) =
     v<AppCompatSeekBar>(configure.bind(AppCompatSeekBarScope))

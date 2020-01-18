@@ -3,15 +3,15 @@
 package androidx.coordinatorlayout.widget
 
 import android.graphics.drawable.Drawable
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
+import dev.inkremental.v
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun coordinatorLayout(configure: CoordinatorLayoutScope.() -> Unit = {}) =
     v<CoordinatorLayout>(configure.bind(CoordinatorLayoutScope))

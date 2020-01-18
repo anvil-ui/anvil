@@ -3,16 +3,16 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.Chronometer
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Long
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun chronometer(configure: ChronometerScope.() -> Unit = {}) =
     v<Chronometer>(configure.bind(ChronometerScope))

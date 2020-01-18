@@ -3,14 +3,14 @@
 package dev.inkremental.dsl.google.android.material.textfield
 
 import com.google.android.material.textfield.TextInputEditText
+import dev.inkremental.Anvil
+import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.widget.AppCompatEditTextScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
+import dev.inkremental.v
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun textInputEditText(configure: TextInputEditTextScope.() -> Unit = {}) =
     v<TextInputEditText>(configure.bind(TextInputEditTextScope))

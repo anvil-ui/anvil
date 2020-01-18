@@ -118,6 +118,7 @@ import android.widget.ViewFlipper
 import android.widget.ViewSwitcher
 import android.widget.ZoomButton
 import android.widget.ZoomControls
+import dev.inkremental.Anvil
 import java.util.Locale
 import kotlin.Any
 import kotlin.Array
@@ -131,7 +132,6 @@ import kotlin.Long
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
 
 /**
  * DSL for creating views and settings their attributes.
@@ -140,7 +140,7 @@ import trikita.anvil.Anvil
  * It contains views and their setters for Android SDK (API level 21).
  * Please, don't edit it manually unless for debugging.
  */
-object SdkSetter : Anvil.AttributeSetter<Any?> {
+object SdkSetter : Anvil.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,

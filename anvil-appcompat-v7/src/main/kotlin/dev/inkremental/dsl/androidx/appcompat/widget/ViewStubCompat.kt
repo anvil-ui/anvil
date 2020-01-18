@@ -5,16 +5,16 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.ViewStubCompat
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun viewStubCompat(configure: ViewStubCompatScope.() -> Unit = {}) =
     v<ViewStubCompat>(configure.bind(ViewStubCompatScope))

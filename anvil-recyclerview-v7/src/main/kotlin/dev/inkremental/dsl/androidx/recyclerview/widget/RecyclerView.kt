@@ -4,17 +4,17 @@ package dev.inkremental.dsl.androidx.recyclerview.widget
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.recyclerview.CustomRecyclerViewv7Setter
 import dev.inkremental.dsl.androidx.recyclerview.RecyclerViewv7Setter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun recyclerView(configure: RecyclerViewScope.() -> Unit = {}) =
     v<RecyclerView>(configure.bind(RecyclerViewScope))

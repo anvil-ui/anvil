@@ -5,16 +5,16 @@ package dev.inkremental.dsl.google.android.material.circularreveal
 import android.graphics.drawable.Drawable
 import com.google.android.material.circularreveal.CircularRevealGridLayout
 import com.google.android.material.circularreveal.CircularRevealWidget
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.GridLayoutScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
+import dev.inkremental.v
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun circularRevealGridLayout(configure: CircularRevealGridLayoutScope.() -> Unit = {}) =
     v<CircularRevealGridLayout>(configure.bind(CircularRevealGridLayoutScope))

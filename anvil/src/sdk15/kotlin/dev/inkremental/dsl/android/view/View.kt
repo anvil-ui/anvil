@@ -11,8 +11,13 @@ import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
+import dev.inkremental.Anvil
+import dev.inkremental.RootViewScope
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -20,11 +25,6 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.RootViewScope
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun view(configure: ViewScope.() -> Unit = {}) = v<View>(configure.bind(ViewScope))
 abstract class ViewScope : RootViewScope() {

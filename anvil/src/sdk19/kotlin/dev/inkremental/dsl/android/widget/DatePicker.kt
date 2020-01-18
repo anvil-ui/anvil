@@ -3,16 +3,16 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.DatePicker
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun datePicker(configure: DatePickerScope.() -> Unit = {}) =
     v<DatePicker>(configure.bind(DatePickerScope))

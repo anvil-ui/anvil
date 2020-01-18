@@ -4,18 +4,18 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.LinearLayoutCompat
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Float
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun linearLayoutCompat(configure: LinearLayoutCompatScope.() -> Unit = {}) =
     v<LinearLayoutCompat>(configure.bind(LinearLayoutCompatScope))

@@ -3,16 +3,16 @@
 package dev.inkremental.dsl.google.android.material.appbar
 
 import com.google.android.material.appbar.AppBarLayout
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.LinearLayoutScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun appBarLayout(configure: AppBarLayoutScope.() -> Unit = {}) =
     v<AppBarLayout>(configure.bind(AppBarLayoutScope))

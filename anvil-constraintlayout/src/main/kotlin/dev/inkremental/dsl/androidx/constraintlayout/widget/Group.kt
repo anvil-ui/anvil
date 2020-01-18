@@ -3,8 +3,8 @@
 package dev.inkremental.dsl.androidx.constraintlayout.widget
 
 import androidx.constraintlayout.widget.Group
-import trikita.anvil.bind
-import trikita.anvil.v
+import dev.inkremental.bind
+import dev.inkremental.v
 
 fun group(configure: GroupScope.() -> Unit = {}) =
     v<Group>(configure.bind(GroupScope))

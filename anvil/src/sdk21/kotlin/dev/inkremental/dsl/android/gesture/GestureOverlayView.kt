@@ -4,19 +4,19 @@ package dev.inkremental.dsl.android.gesture
 
 import android.gesture.Gesture
 import android.gesture.GestureOverlayView
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun gestureOverlayView(configure: GestureOverlayViewScope.() -> Unit = {}) =
     v<GestureOverlayView>(configure.bind(GestureOverlayViewScope))

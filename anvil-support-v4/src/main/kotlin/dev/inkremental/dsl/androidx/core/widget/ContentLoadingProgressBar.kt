@@ -3,13 +3,13 @@
 package dev.inkremental.dsl.androidx.core.widget
 
 import androidx.core.widget.ContentLoadingProgressBar
+import dev.inkremental.Anvil
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.ProgressBarScope
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
+import dev.inkremental.v
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun contentLoadingProgressBar(configure: ContentLoadingProgressBarScope.() -> Unit = {}) =
     v<ContentLoadingProgressBar>(configure.bind(ContentLoadingProgressBarScope))

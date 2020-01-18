@@ -5,17 +5,17 @@ package dev.inkremental.dsl.androidx.appcompat.view.menu
 import android.graphics.drawable.Drawable
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.appcompat.view.menu.MenuBuilder
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.widget.AppCompatTextViewScope
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun actionMenuItemView(configure: ActionMenuItemViewScope.() -> Unit = {}) =
     v<ActionMenuItemView>(configure.bind(ActionMenuItemViewScope))

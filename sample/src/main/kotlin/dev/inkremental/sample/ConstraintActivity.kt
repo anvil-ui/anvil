@@ -1,4 +1,4 @@
-package trikita.anvil.sample
+package dev.inkremental.sample
 
 import android.os.Bundle
 import android.widget.Toast
@@ -13,7 +13,7 @@ import dev.inkremental.dsl.android.Size.WRAP
 import dev.inkremental.dsl.android.widget.button
 import dev.inkremental.dsl.android.widget.textView
 import dev.inkremental.dsl.androidx.constraintlayout.widget.*
-import trikita.anvil.renderableContentView
+import dev.inkremental.renderableContentView
 
 class ConstraintActivity : AppCompatActivity() {
 

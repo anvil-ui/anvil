@@ -4,16 +4,16 @@ package dev.inkremental.dsl.androidx.gridlayout.widget
 
 import android.util.Printer
 import androidx.gridlayout.widget.GridLayout
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.gridlayout.GridLayoutv7Setter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun gridLayout(configure: GridLayoutScope.() -> Unit = {}) =
     v<GridLayout>(configure.bind(GridLayoutScope))

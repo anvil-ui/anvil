@@ -3,8 +3,10 @@
 package dev.inkremental.dsl.androidx.constraintlayout.widget
 
 import androidx.constraintlayout.widget.Guideline
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
-import trikita.anvil.*
+import dev.inkremental.v
 
 fun guideline(configure: GuidelineScope.() -> Unit = {}) =
     v<Guideline>(configure.bind(GuidelineScope))

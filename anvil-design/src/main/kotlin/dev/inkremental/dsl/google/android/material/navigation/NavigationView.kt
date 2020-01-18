@@ -6,16 +6,16 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
 import dev.inkremental.dsl.google.android.material.internal.ScrimInsetsFrameLayoutScope
+import dev.inkremental.v
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun navigationView(configure: NavigationViewScope.() -> Unit = {}) =
     v<NavigationView>(configure.bind(NavigationViewScope))

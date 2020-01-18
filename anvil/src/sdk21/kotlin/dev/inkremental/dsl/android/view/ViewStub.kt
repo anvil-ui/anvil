@@ -5,15 +5,15 @@ package dev.inkremental.dsl.android.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewStub
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun viewStub(configure: ViewStubScope.() -> Unit = {}) = v<ViewStub>(configure.bind(ViewStubScope))
 abstract class ViewStubScope : ViewScope() {

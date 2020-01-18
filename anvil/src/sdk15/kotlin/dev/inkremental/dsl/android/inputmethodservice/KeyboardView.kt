@@ -5,17 +5,17 @@ package dev.inkremental.dsl.android.inputmethodservice
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
 import android.view.View
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
 import dev.inkremental.dsl.android.view.ViewScope
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun keyboardView(configure: KeyboardViewScope.() -> Unit = {}) =
     v<KeyboardView>(configure.bind(KeyboardViewScope))

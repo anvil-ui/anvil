@@ -6,19 +6,19 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import dev.inkremental.Anvil
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Int
 import kotlin.Long
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun collapsingToolbarLayout(configure: CollapsingToolbarLayoutScope.() -> Unit = {}) =
     v<CollapsingToolbarLayout>(configure.bind(CollapsingToolbarLayoutScope))
