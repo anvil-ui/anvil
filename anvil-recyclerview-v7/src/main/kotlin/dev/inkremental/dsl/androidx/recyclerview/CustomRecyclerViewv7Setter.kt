@@ -16,13 +16,13 @@ fun RecyclerViewScope.linearLayoutManager(
         LayoutManagerParams(orientation, reverseLayout)
     )
 
-fun RecyclerViewScope.gridLayoutManAppBarLayoutager(
+fun RecyclerViewScope.gridLayoutManager(
     spanCount: Int,
     orientation: Int = LinearLayoutManager.VERTICAL,
     reverseLayout: Boolean = false,
     spanSizeLookup: GridLayoutManager.SpanSizeLookup? = null) =
     attr(
-        "linearLayoutManager",
+        "gridLayoutManager",
         LayoutManagerParams(orientation, reverseLayout, spanCount, spanSizeLookup)
     )
 
