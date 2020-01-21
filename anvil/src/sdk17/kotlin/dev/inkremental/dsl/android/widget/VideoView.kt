@@ -29,6 +29,11 @@ abstract class VideoViewScope : SurfaceViewScope() {
     arg1: Int,
     arg2: Int
   ) -> Boolean)?): Unit = attr("onError", arg)
+  fun onInfo(arg: ((
+    arg0: MediaPlayer,
+    arg1: Int,
+    arg2: Int
+  ) -> Boolean)?): Unit = attr("onInfo", arg)
   fun onPrepared(arg: ((arg0: MediaPlayer) -> Unit)?): Unit = attr("onPrepared", arg)
   fun videoPath(arg: String): Unit = attr("videoPath", arg)
   fun videoURI(arg: Uri): Unit = attr("videoURI", arg)

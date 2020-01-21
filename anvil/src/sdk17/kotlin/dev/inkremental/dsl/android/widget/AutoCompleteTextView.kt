@@ -30,6 +30,7 @@ abstract class AutoCompleteTextViewScope : EditTextScope() {
   fun dropDownVerticalOffset(arg: Int): Unit = attr("dropDownVerticalOffset", arg)
   fun dropDownWidth(arg: Int): Unit = attr("dropDownWidth", arg)
   fun listSelection(arg: Int): Unit = attr("listSelection", arg)
+  fun onDismiss(arg: (() -> Unit)?): Unit = attr("onDismiss", arg)
   fun onItemClick(arg: ((
     arg0: AdapterView<*>,
     arg1: View,

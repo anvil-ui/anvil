@@ -6,7 +6,7 @@ plugins {
 
 android {
 	defaultConfig {
-		missingDimensionStrategy("api", "sdk15")
+		missingDimensionStrategy("api", "sdk17")
 	}
 }
 
@@ -32,7 +32,7 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk15"))
+	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
 	inkrementalGen("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
 	inkrementalGen("androidx.core:core:1.1.0")

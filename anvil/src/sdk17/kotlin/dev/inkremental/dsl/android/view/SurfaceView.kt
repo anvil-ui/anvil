@@ -16,6 +16,7 @@ import trikita.anvil.v
 fun surfaceView(configure: SurfaceViewScope.() -> Unit = {}) =
     v<SurfaceView>(configure.bind(SurfaceViewScope))
 abstract class SurfaceViewScope : ViewScope() {
+  fun secure(arg: Boolean): Unit = attr("secure", arg)
   fun zOrderMediaOverlay(arg: Boolean): Unit = attr("zOrderMediaOverlay", arg)
   fun zOrderOnTop(arg: Boolean): Unit = attr("zOrderOnTop", arg)
   companion object : SurfaceViewScope() {

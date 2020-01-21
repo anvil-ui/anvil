@@ -19,7 +19,7 @@ class InkrementalModulePlugin : Plugin<Project> {
         apply<MavenPublishPlugin>()
 
         val compileSdk = 28
-        val minSdk = 15
+        val minSdk = 17
         val targetSdk = compileSdk
 
         val android = extensions.getByType<LibraryExtension>()
@@ -64,19 +64,19 @@ class InkrementalModulePlugin : Plugin<Project> {
             add("archives", javadocJar)
         }
 
-        val bintrayUser = prop("bintrayUser")
-        val bintrayApiKey = prop("bintrayApiKey")
+        val bintrayUser = prop("bintrayUser") ?: System.getenv("BINTRAY_USER")
+        val bintrayApiKey = prop("bintrayApiKey") ?: System.getenv("BINTRAY_API_KEY")
         if(bintrayUser != null && bintrayApiKey != null) {
             extensions.configure<PublishingExtension> {
                 repositories {
                     maven {
                         name = "Bintray"
-                        url = uri("https://api.bintray.com/content/" +
+                        url = uri("https://api.bintray.com/maven/" +
                             "${prop("BINTRAY_ORG")}/" +
                             "${prop("BINTRAY_REPO")}/" +
                             "${prop("POM_PACKAGE_NAME")}/" +
-                            "${project.version}/" +
-                            ";publish=1;override=1")
+                            //"${project.version}/" +
+                            ";publish=1;override=0")
                         credentials {
                             username = bintrayUser
                             password = bintrayApiKey
@@ -117,7 +117,7 @@ class InkrementalModulePlugin : Plugin<Project> {
             extensions.getByType<InkrementalMetaExtension>().modules.forEach {
                 when(it.type) {
                     InkrementalType.SDK -> {
-                        registerAnvilPublications("Sdk15", "Sdk15", prop("POM_ARTIFACT_SDK15_ID")!!)
+                        registerAnvilPublications("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!)
                         registerAnvilPublications("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
                         registerAnvilPublications("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
                     }
@@ -144,7 +144,7 @@ class InkrementalModulePlugin : Plugin<Project> {
 }
 
 
-private fun Project.prop(key: String): String? =
+internal fun Project.prop(key: String): String? =
     findProperty(key)?.let { it as String }
 
 private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {

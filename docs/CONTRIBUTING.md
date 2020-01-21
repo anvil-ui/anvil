@@ -23,3 +23,11 @@ sdkmanager \
     "platform-tools" \
     "tools"
 ```
+
+# Notes
+
+* To disable code generation on every build, you can run Gradle
+  with the following parameter: `-PdontGenerateCodeOnBuild=true`. You
+  can also add `dontGenerateCodeOnBuild=true` to your `local.properties`
+  as a permanent solution.
+  **Please** don't forget to disable this flag when preparing PR.
