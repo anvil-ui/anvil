@@ -172,8 +172,10 @@ private inline fun <reified T: GenerateModelTask> Project.createDslTasks(
         this.configuration = moduleConfiguration
         this.outputDir = outputDir
     }
-    //moduleDefConfiguration.artifacts.add(arti)
-    listOf("Debug", "Release").forEach { tasks.getByName("compile${variantName}${it}Kotlin").dependsOn(dslTask) }
+
+    if(prop("dontGenerateCodeOnBuild") != "true") {
+        listOf("Debug", "Release").forEach { tasks.getByName("compile${variantName}${it}Kotlin").dependsOn(dslTask) }
+    }
     return modelTask to dslTask
 }
 

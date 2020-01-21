@@ -144,7 +144,7 @@ class InkrementalModulePlugin : Plugin<Project> {
 }
 
 
-private fun Project.prop(key: String): String? =
+internal fun Project.prop(key: String): String? =
     findProperty(key)?.let { it as String }
 
 private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {
