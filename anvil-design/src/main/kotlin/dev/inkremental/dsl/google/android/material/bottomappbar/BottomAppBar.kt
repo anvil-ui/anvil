@@ -4,7 +4,7 @@ package dev.inkremental.dsl.google.android.material.bottomappbar
 
 import android.content.res.ColorStateList
 import com.google.android.material.bottomappbar.BottomAppBar
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.widget.ToolbarScope
@@ -28,8 +28,8 @@ abstract class BottomAppBarScope : ToolbarScope() {
   fun hideOnScroll(arg: Boolean): Unit = attr("hideOnScroll", arg)
   companion object : BottomAppBarScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

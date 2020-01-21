@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.cardview
 import android.content.res.ColorStateList
 import android.view.View
 import androidx.cardview.widget.CardView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Float
@@ -20,7 +20,7 @@ import kotlin.Suppress
  * It contains views and their setters for the library cardview-v7.
  * Please, don't edit it manually unless for debugging.
  */
-object CardViewv7Setter : Anvil.AttributeSetter<Any> {
+object CardViewv7Setter : Inkremental.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,

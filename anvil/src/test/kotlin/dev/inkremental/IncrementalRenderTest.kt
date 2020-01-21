@@ -8,30 +8,30 @@ class IncrementalRenderTest: Utils() {
 
     @Test
     fun testConstantsRenderedOnce() {
-        Anvil.mount(container, Renderable { v<MockLayout> { attr("text", "bar") } })
+        Inkremental.mount(container, Renderable { v<MockLayout> { attr("text", "bar") } })
         assertEquals(1, createdViews[MockLayout::class.java])
         assertEquals(1, changedAttrs["text"])
-        Anvil.render()
+        Inkremental.render()
         assertEquals(1, createdViews[MockLayout::class.java])
         assertEquals(1, changedAttrs["text"])
     }
 
     @Test
     fun testDynamicAttributeRenderedLazily() {
-        Anvil.mount(container, Renderable { v<MockLayout> { attr("text", fooValue) } })
+        Inkremental.mount(container, Renderable { v<MockLayout> { attr("text", fooValue) } })
         assertEquals(1, changedAttrs["text"])
-        Anvil.render()
+        Inkremental.render()
         assertEquals(1, changedAttrs["text"])
         fooValue = "b"
-        Anvil.render()
+        Inkremental.render()
         assertEquals(2, changedAttrs["text"])
-        Anvil.render()
+        Inkremental.render()
         assertEquals(2, changedAttrs["text"])
     }
 
     @Test
     fun testDynamicViewRenderedLazily() {
-        Anvil.mount(container, Renderable {
+        Inkremental.mount(container, Renderable {
             v<MockLayout> {
                 v<MockLayout>()
                 if(showView) {
@@ -42,19 +42,19 @@ class IncrementalRenderTest: Utils() {
         val layout = container.getChildAt(0) as MockLayout
         assertEquals(2, layout.childCount)
         assertEquals(1, createdViews[MockView::class.java])
-        Anvil.render()
+        Inkremental.render()
         assertEquals(1, createdViews[MockView::class.java])
         showView = false
-        Anvil.render()
+        Inkremental.render()
         assertEquals(1, layout.getChildCount())
         assertEquals(1, createdViews[MockView::class.java])
-        Anvil.render()
+        Inkremental.render()
         assertEquals(1, createdViews[MockView::class.java])
         showView = true
-        Anvil.render()
+        Inkremental.render()
         assertEquals(2, layout.getChildCount())
         assertEquals(2, createdViews[MockView::class.java])
-        Anvil.render()
+        Inkremental.render()
         assertEquals(2, createdViews[MockView::class.java])
     }
 
@@ -65,14 +65,14 @@ class IncrementalRenderTest: Utils() {
     fun testRenderUpdatesAllMounts() {
         val rootA = MockLayout(context)
         val rootB = MockLayout(context)
-        Anvil.mount(rootA, Renderable { attr("text", firstMountValue) })
-        Anvil.mount(rootB, Renderable { attr("tag", secondMountValue) })
+        Inkremental.mount(rootA, Renderable { attr("text", firstMountValue) })
+        Inkremental.mount(rootB, Renderable { attr("tag", secondMountValue) })
         assertEquals("foo", rootA.text)
         assertEquals("bar", rootB.tag)
 
         firstMountValue = "baz"
         secondMountValue = "qux"
-        Anvil.render()
+        Inkremental.render()
 
         assertEquals("baz", rootA.text)
         assertEquals("qux", rootB.tag)

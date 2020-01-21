@@ -6,7 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.PrecomputedTextCompat
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.TextViewScope
@@ -31,8 +31,8 @@ abstract class AppCompatTextViewScope : TextViewScope() {
       attr("textMetricsParamsCompat", arg)
   companion object : AppCompatTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

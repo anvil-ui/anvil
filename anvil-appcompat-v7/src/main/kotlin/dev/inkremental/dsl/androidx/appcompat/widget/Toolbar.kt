@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -57,8 +57,8 @@ abstract class ToolbarScope : ViewGroupScope() {
   fun titleTextColor(arg: Int): Unit = attr("titleTextColor", arg)
   companion object : ToolbarScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

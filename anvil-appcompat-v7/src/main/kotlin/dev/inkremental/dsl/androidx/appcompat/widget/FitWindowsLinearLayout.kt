@@ -4,7 +4,7 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 
 import android.graphics.Rect
 import androidx.appcompat.widget.FitWindowsLinearLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.LinearLayoutScope
@@ -20,8 +20,8 @@ abstract class FitWindowsLinearLayoutScope : LinearLayoutScope() {
   fun onFitSystemWindows(arg: ((arg0: Rect) -> Unit)?): Unit = attr("onFitSystemWindows", arg)
   companion object : FitWindowsLinearLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

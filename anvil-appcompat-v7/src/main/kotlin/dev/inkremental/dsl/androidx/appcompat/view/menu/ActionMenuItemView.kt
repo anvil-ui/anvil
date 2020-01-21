@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.appcompat.view.menu
 import android.graphics.drawable.Drawable
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.appcompat.view.menu.MenuBuilder
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
@@ -29,8 +29,8 @@ abstract class ActionMenuItemViewScope : AppCompatTextViewScope() {
   fun title(arg: CharSequence): Unit = attr("title", arg)
   companion object : ActionMenuItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.internal
 
 import com.google.android.material.internal.FlowLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -20,8 +20,8 @@ abstract class FlowLayoutScope : ViewGroupScope() {
   fun singleLine(arg: Boolean): Unit = attr("singleLine", arg)
   companion object : FlowLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

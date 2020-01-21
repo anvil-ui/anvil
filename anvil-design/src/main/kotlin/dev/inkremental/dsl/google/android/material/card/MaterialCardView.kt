@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.card
 
 import com.google.android.material.card.MaterialCardView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.cardview.widget.CardViewScope
@@ -21,8 +21,8 @@ abstract class MaterialCardViewScope : CardViewScope() {
   fun strokeWidth(arg: Int): Unit = attr("strokeWidth", arg)
   companion object : MaterialCardViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.ActionBarContainer
 import androidx.appcompat.widget.ScrollingTabContainerView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
@@ -26,8 +26,8 @@ abstract class ActionBarContainerScope : FrameLayoutScope() {
   fun transitioning(arg: Boolean): Unit = attr("transitioning", arg)
   companion object : ActionBarContainerScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.bottomnavigation
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
@@ -17,8 +17,8 @@ fun bottomNavigationItemView(configure: BottomNavigationItemViewScope.() -> Unit
 abstract class BottomNavigationItemViewScope : FrameLayoutScope() {
   companion object : BottomNavigationItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

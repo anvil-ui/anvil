@@ -40,7 +40,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.ViewStubCompat
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.view.ActionProvider
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -58,7 +58,7 @@ import kotlin.Unit
  * It contains views and their setters for the library appcompat-v7.
  * Please, don't edit it manually unless for debugging.
  */
-object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
+object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,
@@ -289,7 +289,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -303,7 +303,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -377,7 +377,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as (() -> Unit)?
           v.setOnDismissListener {  ->
-            arg().also { Anvil.render() }
+            arg().also { Inkremental.render() }
           }
           true
         }
@@ -573,7 +573,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: Rect) -> Unit)?
           v.setOnFitSystemWindowsListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -587,7 +587,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: Rect) -> Unit)?
           v.setOnFitSystemWindowsListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -979,7 +979,7 @@ object AppCompatv7Setter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: ViewStubCompat, arg1: View) -> Unit)?
           v.setOnInflateListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }

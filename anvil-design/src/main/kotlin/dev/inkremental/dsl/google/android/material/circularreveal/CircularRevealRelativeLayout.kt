@@ -5,7 +5,7 @@ package dev.inkremental.dsl.google.android.material.circularreveal
 import android.graphics.drawable.Drawable
 import com.google.android.material.circularreveal.CircularRevealRelativeLayout
 import com.google.android.material.circularreveal.CircularRevealWidget
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.RelativeLayoutScope
@@ -25,8 +25,8 @@ abstract class CircularRevealRelativeLayoutScope : RelativeLayoutScope() {
   fun revealInfo(arg: CircularRevealWidget.RevealInfo?): Unit = attr("revealInfo", arg)
   companion object : CircularRevealRelativeLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

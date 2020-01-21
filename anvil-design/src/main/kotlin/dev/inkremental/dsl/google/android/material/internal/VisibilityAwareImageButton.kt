@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.internal
 
 import com.google.android.material.internal.VisibilityAwareImageButton
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.ImageButtonScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
@@ -17,8 +17,8 @@ fun visibilityAwareImageButton(configure: VisibilityAwareImageButtonScope.() -> 
 abstract class VisibilityAwareImageButtonScope : ImageButtonScope() {
   companion object : VisibilityAwareImageButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

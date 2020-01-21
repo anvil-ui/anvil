@@ -2,7 +2,7 @@
 
 package androidx.viewpager.widget
 
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
@@ -20,7 +20,7 @@ abstract class PagerTabStripScope : PagerTitleStripScope() {
   fun tabIndicatorColorResource(arg: Int): Unit = attr("tabIndicatorColorResource", arg)
   companion object : PagerTabStripScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

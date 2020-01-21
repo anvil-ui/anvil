@@ -10,21 +10,21 @@ import kotlin.test.*
 class CurrentViewTest : Utils() {
     @Test
     fun testCurrentView() {
-        assertNull(Anvil.currentView())
-        Anvil.mount(container, Renderable {
-            assertTrue(Anvil.currentView<View>() is ViewGroup)
+        assertNull(Inkremental.currentView())
+        Inkremental.mount(container, Renderable {
+            assertTrue(Inkremental.currentView<View>() is ViewGroup)
             v<MockLayout, FrameLayoutScope>(FrameLayoutScope) {
-                assertTrue(Anvil.currentView<View>() is MockLayout)
+                assertTrue(Inkremental.currentView<View>() is MockLayout)
                 v<MockView, ViewScope>(ViewScope) {
-                    assertTrue(Anvil.currentView<View>() is MockView)
+                    assertTrue(Inkremental.currentView<View>() is MockView)
                     attr("text", "bar")
-                    val view: MockView? = Anvil.currentView<MockView>()// should cast automatically
+                    val view: MockView? = Inkremental.currentView<MockView>()// should cast automatically
                     assertEquals("bar", view?.text)
                 }
-                assertTrue(Anvil.currentView<View>() is MockLayout)
+                assertTrue(Inkremental.currentView<View>() is MockLayout)
             }
-            assertTrue(Anvil.currentView<View>() is ViewGroup)
+            assertTrue(Inkremental.currentView<View>() is ViewGroup)
         })
-        assertNull(Anvil.currentView())
+        assertNull(Inkremental.currentView())
     }
 }

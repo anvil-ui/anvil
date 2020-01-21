@@ -102,11 +102,11 @@ abstract class YogaLayoutScope : ViewGroupScope() {
 
     companion object : YogaLayoutScope() {
         init {
-            Anvil.registerAttributeSetter(YogaDslSetter)}
+            Inkremental.registerAttributeSetter(YogaDslSetter)}
     }
 }
 
-object YogaDslSetter : Anvil.AttributeSetter<Any> {
+object YogaDslSetter : Inkremental.AttributeSetter<Any> {
     override fun set(
         v: View,
         name: String,

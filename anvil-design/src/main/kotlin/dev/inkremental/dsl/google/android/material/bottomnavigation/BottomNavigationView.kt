@@ -6,7 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
@@ -39,8 +39,8 @@ abstract class BottomNavigationViewScope : FrameLayoutScope() {
   fun selectedItemId(arg: Int): Unit = attr("selectedItemId", arg)
   companion object : BottomNavigationViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

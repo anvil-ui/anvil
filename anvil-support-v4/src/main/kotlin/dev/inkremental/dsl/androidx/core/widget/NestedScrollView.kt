@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.androidx.core.widget
 
 import androidx.core.widget.NestedScrollView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
@@ -20,7 +20,7 @@ abstract class NestedScrollViewScope : FrameLayoutScope() {
   fun smoothScrollingEnabled(arg: Boolean): Unit = attr("smoothScrollingEnabled", arg)
   companion object : NestedScrollViewScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

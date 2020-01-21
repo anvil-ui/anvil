@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.androidx.appcompat.widget
 
 import androidx.appcompat.widget.AlertDialogLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
@@ -16,8 +16,8 @@ fun alertDialogLayout(configure: AlertDialogLayoutScope.() -> Unit = {}) =
 abstract class AlertDialogLayoutScope : LinearLayoutCompatScope() {
   companion object : AlertDialogLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

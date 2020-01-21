@@ -4,7 +4,7 @@ package dev.inkremental.dsl.android.app
 
 import android.app.MediaRouteButton
 import android.view.View
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -23,8 +23,8 @@ abstract class MediaRouteButtonScope : ViewScope() {
   fun routeTypes(arg: Int): Unit = attr("routeTypes", arg)
   companion object : MediaRouteButtonScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

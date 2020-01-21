@@ -31,7 +31,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.resources.TextAppearance
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -50,7 +50,7 @@ import kotlin.Unit
  * It contains views and their setters for the library material.
  * Please, don't edit it manually unless for debugging.
  */
-object MaterialSetter : Anvil.AttributeSetter<Any> {
+object MaterialSetter : Inkremental.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,
@@ -399,7 +399,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: MenuItem) -> Unit)?
           v.setOnNavigationItemReselectedListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -417,7 +417,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnNavigationItemSelectedListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -912,7 +912,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: View) -> Unit)?
           v.setOnCloseIconClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -1039,7 +1039,7 @@ object MaterialSetter : Anvil.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as ((arg0: ChipGroup, arg1: Int) -> Unit)?
           v.setOnCheckedChangeListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }

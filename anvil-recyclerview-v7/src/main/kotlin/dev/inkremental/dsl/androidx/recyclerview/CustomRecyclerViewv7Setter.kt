@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.recyclerview
 import android.view.View
 import androidx.recyclerview.widget.*
 import dev.inkremental.dsl.androidx.recyclerview.widget.RecyclerViewScope
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 
 fun RecyclerViewScope.linearLayoutManager(
@@ -26,7 +26,7 @@ fun RecyclerViewScope.gridLayoutManager(
         LayoutManagerParams(orientation, reverseLayout, spanCount, spanSizeLookup)
     )
 
-object CustomRecyclerViewv7Setter : Anvil.AttributeSetter<Any> {
+object CustomRecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when(name) {
         "linearLayoutManager" -> when {
             v is RecyclerView && value is LayoutManagerParams -> {

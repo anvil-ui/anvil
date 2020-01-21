@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.androidx.appcompat.widget
 
 import androidx.appcompat.widget.ScrollingTabContainerView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.HorizontalScrollViewScope
@@ -23,8 +23,8 @@ abstract class ScrollingTabContainerViewScope : HorizontalScrollViewScope() {
   fun tabSelected(arg: Int): Unit = attr("tabSelected", arg)
   companion object : ScrollingTabContainerViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

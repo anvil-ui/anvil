@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.transformation
 
 import com.google.android.material.transformation.TransformationChildLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
@@ -17,8 +17,8 @@ fun transformationChildLayout(configure: TransformationChildLayoutScope.() -> Un
 abstract class TransformationChildLayoutScope : CircularRevealFrameLayoutScope() {
   companion object : TransformationChildLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

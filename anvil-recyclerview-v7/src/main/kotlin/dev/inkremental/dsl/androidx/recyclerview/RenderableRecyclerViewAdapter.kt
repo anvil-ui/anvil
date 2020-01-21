@@ -3,8 +3,8 @@ package dev.inkremental.dsl.androidx.recyclerview
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
-import dev.inkremental.Anvil.Mount
-import dev.inkremental.Anvil.render
+import dev.inkremental.Inkremental.Mount
+import dev.inkremental.Inkremental.render
 import dev.inkremental.Renderable
 import dev.inkremental.RenderableAdapter
 

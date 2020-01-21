@@ -7,7 +7,7 @@ import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import com.google.android.material.textfield.TextInputLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.LinearLayoutScope
@@ -61,8 +61,8 @@ abstract class TextInputLayoutScope : LinearLayoutScope() {
   fun typeface(arg: Typeface?): Unit = attr("typeface", arg)
   companion object : TextInputLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

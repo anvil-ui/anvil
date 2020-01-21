@@ -5,7 +5,7 @@ package dev.inkremental.dsl.android.widget
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.widget.AbsListView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -44,8 +44,8 @@ abstract class AbsListViewScope : AdapterViewScope() {
   fun velocityScale(arg: Float): Unit = attr("velocityScale", arg)
   companion object : AbsListViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

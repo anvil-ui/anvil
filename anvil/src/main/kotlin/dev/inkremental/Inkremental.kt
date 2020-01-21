@@ -7,7 +7,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.inkremental.Anvil.Mount
 import java.lang.ref.WeakReference
 import java.lang.reflect.InvocationTargetException
 import java.util.*
@@ -20,7 +19,7 @@ import java.util.*
  * and how they are lazily rendered, and this is the key functionality of the
  * Anvil library.
  */
-object Anvil {
+object Inkremental {
     private val mounts: MutableMap<View, Mount> = WeakHashMap()
     private var currentMount: Mount? = null
     private var anvilUIHandler: Handler? = null
@@ -69,7 +68,7 @@ object Anvil {
      * `Anvil.render()` in background services.  */
     fun render() { // If Anvil.render() is called on a non-UI thread, use UI Handler
         if (Looper.myLooper() != Looper.getMainLooper()) {
-            synchronized(Anvil::class.java) {
+            synchronized(Inkremental::class.java) {
                 if (anvilUIHandler == null) {
                     anvilUIHandler = Handler(Looper.getMainLooper())
                 }
@@ -205,7 +204,7 @@ object Anvil {
      * declared by Renderable  */
     class Mount(v: View, val renderable: Renderable?) {
         var lock = false
-        private val rootView: WeakReference<View>
+        private val rootView: WeakReference<View> = WeakReference(v)
         internal val iterator = Iterator()
 
         @SuppressLint("Assert")
@@ -319,8 +318,5 @@ object Anvil {
             }
         }
 
-        init {
-            rootView = WeakReference(v)
-        }
     }
 }

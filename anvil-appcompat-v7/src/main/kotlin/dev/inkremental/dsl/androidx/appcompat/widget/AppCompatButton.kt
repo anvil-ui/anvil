@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import androidx.appcompat.widget.AppCompatButton
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.ButtonScope
@@ -25,8 +25,8 @@ abstract class AppCompatButtonScope : ButtonScope() {
       arg)
   companion object : AppCompatButtonScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

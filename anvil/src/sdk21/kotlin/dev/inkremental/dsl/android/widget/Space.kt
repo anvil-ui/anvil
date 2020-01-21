@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.Space
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
@@ -16,8 +16,8 @@ fun space(configure: SpaceScope.() -> Unit = {}) = v<Space>(configure.bind(Space
 abstract class SpaceScope : ViewScope() {
   companion object : SpaceScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

@@ -4,7 +4,7 @@ package dev.inkremental.dsl.androidx.constraintlayout.widget
 
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.constraintlayout.*
@@ -62,7 +62,7 @@ abstract class ConstraintLayoutScope : ViewGroupScope() {
 
     companion object : ConstraintLayoutScope() {
         init {
-            Anvil.registerAttributeSetter(CustomConstraintSetter)
+            Inkremental.registerAttributeSetter(CustomConstraintSetter)
         }
     }
 }

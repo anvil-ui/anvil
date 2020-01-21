@@ -3,7 +3,7 @@
 package androidx.coordinatorlayout.widget
 
 import android.graphics.drawable.Drawable
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -21,7 +21,7 @@ abstract class CoordinatorLayoutScope : ViewGroupScope() {
   fun statusBarBackgroundResource(arg: Int): Unit = attr("statusBarBackgroundResource", arg)
   companion object : CoordinatorLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.FrameLayout
-import dev.inkremental.Anvil.Mount
+import dev.inkremental.Inkremental.Mount
 
 abstract class RenderableAdapter : BaseAdapter() {
     private var currentPosition = -1
@@ -19,13 +19,13 @@ abstract class RenderableAdapter : BaseAdapter() {
             currentPosition = pos
             val vg = FrameLayout(parent.context)
             val m = Mount(vg, Renderable { view(currentPosition) })
-            Anvil.render(m)
+            Inkremental.render(m)
             vg.tag = m
             v = vg
         } else {
             val m = v.tag as Mount
             currentPosition = pos
-            Anvil.render(m)
+            Inkremental.render(m)
         }
         return v
     }

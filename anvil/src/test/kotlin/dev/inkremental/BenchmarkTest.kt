@@ -19,26 +19,26 @@ class BenchmarkTest : Utils() {
             }
         }
         mode = 0
-        Anvil.mount(container, r)
+        Inkremental.mount(container, r)
         start = System.currentTimeMillis()
         for (i in 0 until N) {
-            Anvil.render()
+            Inkremental.render()
         }
         println("render/no-changes: " + (System.currentTimeMillis() - start) * 1000 / N + "us")
-        Anvil.unmount(container, true)
+        Inkremental.unmount(container, true)
         mode = 1
-        Anvil.mount(container, r)
+        Inkremental.mount(container, r)
         start = System.currentTimeMillis()
         for (i in 0 until N) {
-            Anvil.render()
+            Inkremental.render()
         }
         println("render/small-changes: " + (System.currentTimeMillis() - start) * 1000 / N + "us")
-        Anvil.unmount(container, true)
+        Inkremental.unmount(container, true)
         mode = 2
-        Anvil.mount(container, r)
+        Inkremental.mount(container, r)
         start = System.currentTimeMillis()
         for (i in 0 until N) {
-            Anvil.render()
+            Inkremental.render()
         }
         println("render/big-changes: " + (System.currentTimeMillis() - start) * 1000 / N + "us")
     }

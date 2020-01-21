@@ -18,7 +18,7 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.view.WindowInsets
 import android.view.animation.Animation
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.RootViewScope
 import dev.inkremental.attr
 import dev.inkremental.bind
@@ -153,8 +153,8 @@ abstract class ViewScope : RootViewScope() {
   fun z(arg: Float): Unit = attr("z", arg)
   companion object : ViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

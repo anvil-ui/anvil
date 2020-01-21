@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import androidx.appcompat.widget.AppCompatEditText
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.EditTextScope
@@ -23,8 +23,8 @@ abstract class AppCompatEditTextScope : EditTextScope() {
       arg)
   companion object : AppCompatEditTextScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.appbar
 
 import com.google.android.material.appbar.AppBarLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.LinearLayoutScope
@@ -23,8 +23,8 @@ abstract class AppBarLayoutScope : LinearLayoutScope() {
   fun lifted(arg: Boolean): Unit = attr("lifted", arg)
   companion object : AppBarLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

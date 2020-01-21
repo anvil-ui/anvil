@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.view
 
 import android.view.SurfaceView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -21,8 +21,8 @@ abstract class SurfaceViewScope : ViewScope() {
   fun zOrderOnTop(arg: Boolean): Unit = attr("zOrderOnTop", arg)
   companion object : SurfaceViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

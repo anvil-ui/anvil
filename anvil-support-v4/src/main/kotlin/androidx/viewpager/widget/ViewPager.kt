@@ -3,7 +3,7 @@
 package androidx.viewpager.widget
 
 import android.graphics.drawable.Drawable
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -24,7 +24,7 @@ abstract class ViewPagerScope : ViewGroupScope() {
   fun pageMarginDrawable(arg: Int): Unit = attr("pageMarginDrawable", arg)
   companion object : ViewPagerScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

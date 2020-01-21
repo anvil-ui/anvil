@@ -4,7 +4,7 @@ package dev.inkremental.dsl.androidx.gridlayout.widget
 
 import android.util.Printer
 import androidx.gridlayout.widget.GridLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -28,7 +28,7 @@ abstract class GridLayoutScope : ViewGroupScope() {
   fun useDefaultMargins(arg: Boolean): Unit = attr("useDefaultMargins", arg)
   companion object : GridLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(GridLayoutv7Setter)
+      Inkremental.registerAttributeSetter(GridLayoutv7Setter)
     }
   }
 }

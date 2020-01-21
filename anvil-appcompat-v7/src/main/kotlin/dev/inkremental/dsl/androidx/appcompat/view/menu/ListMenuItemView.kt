@@ -4,7 +4,7 @@ package dev.inkremental.dsl.androidx.appcompat.view.menu
 
 import android.graphics.drawable.Drawable
 import androidx.appcompat.view.menu.ListMenuItemView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.LinearLayoutScope
@@ -27,8 +27,8 @@ abstract class ListMenuItemViewScope : LinearLayoutScope() {
   fun title(arg: CharSequence): Unit = attr("title", arg)
   companion object : ListMenuItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

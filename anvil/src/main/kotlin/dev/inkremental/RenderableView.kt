@@ -13,12 +13,12 @@ abstract class RenderableView : FrameLayout, Renderable {
 
     public override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        Anvil.mount(this, this)
+        Inkremental.mount(this, this)
     }
 
     public override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        Anvil.unmount(this)
+        Inkremental.unmount(this)
     }
 
     abstract override fun view()

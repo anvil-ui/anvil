@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.chip
 
 import com.google.android.material.chip.ChipGroup
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
@@ -31,8 +31,8 @@ abstract class ChipGroupScope : FlowLayoutScope() {
   fun singleSelection(arg: Int): Unit = attr("singleSelection", arg)
   companion object : ChipGroupScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

@@ -24,7 +24,7 @@ open class Utils {
 
     @After
     fun tearDown() {
-        Anvil.unmount(container)
+        Inkremental.unmount(container)
     }
 
     val context: Context?
@@ -114,13 +114,13 @@ open class Utils {
     }
 
     init {
-        Anvil.registerAttributeSetter(object : Anvil.AttributeSetter<Any> {
+        Inkremental.registerAttributeSetter(object : Inkremental.AttributeSetter<Any> {
             override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean {
                 changedAttrs[name] = if (!changedAttrs.containsKey(name)) 1 else changedAttrs[name]!! + 1
                 return false
             }
         })
-        Anvil.registerViewFactory(object : Anvil.ViewFactory {
+        Inkremental.registerViewFactory(object : Inkremental.ViewFactory {
             override fun fromClass(c: Context?, v: Class<out View?>): View? {
                 createdViews[v] = if (!createdViews.containsKey(v)) 1 else createdViews[v]!! + 1
                 return null

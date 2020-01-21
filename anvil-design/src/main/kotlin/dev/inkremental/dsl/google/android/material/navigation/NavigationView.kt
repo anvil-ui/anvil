@@ -6,7 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
@@ -35,8 +35,8 @@ abstract class NavigationViewScope : ScrimInsetsFrameLayoutScope() {
       attr("navigationItemSelectedListener", arg)
   companion object : NavigationViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

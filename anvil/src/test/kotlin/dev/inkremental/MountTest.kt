@@ -11,12 +11,12 @@ class MountTest : Utils() {
 
     @Test
     fun testMountReturnsMountPoint() {
-        assertEquals(container, Anvil.mount(container, empty))
+        assertEquals(container, Inkremental.mount(container, empty))
     }
 
     @Test
     fun testMountRendersViews() {
-        Anvil.mount(container, testLayout)
+        Inkremental.mount(container, testLayout)
         assertEquals(1, container.childCount)
         assertTrue(container.getChildAt(0) is MockView)
         val v = container.getChildAt(0) as MockView
@@ -25,25 +25,25 @@ class MountTest : Utils() {
 
     @Test
     fun testUnmountRemovesViews() {
-        Anvil.mount(container, testLayout)
+        Inkremental.mount(container, testLayout)
         assertEquals(1, container.childCount)
-        Anvil.unmount(container)
+        Inkremental.unmount(container)
         assertEquals(0, container.childCount)
     }
 
     @Test
     fun testMountReplacesViews() {
-        Anvil.mount(container, testLayout)
+        Inkremental.mount(container, testLayout)
         assertEquals(1, container.childCount)
-        Anvil.mount(container, empty)
+        Inkremental.mount(container, empty)
         assertEquals(0, container.childCount)
-        Anvil.mount(container, testLayout)
+        Inkremental.mount(container, testLayout)
         assertEquals(1, container.childCount)
     }
 
     @Test
     fun testMountInfoView() {
-        val v = Anvil.mount(MockView(context), Renderable {
+        val v = Inkremental.mount(MockView(context), Renderable {
             attr("id", 100)
             attr("text", "bar")
             attr("tag", "foo")
@@ -57,7 +57,7 @@ class MountTest : Utils() {
     @Test
     fun testMountGC() {
         val layout = Mockito.spy(testLayout)
-        Anvil.mount(mountContainer, layout)
+        Inkremental.mount(mountContainer, layout)
         Mockito.verify(layout, Mockito.times(1)).view()
         assertEquals(1, mountContainer.childCount)
         // Once the container is garbage collection all other views should be removed, too
@@ -66,7 +66,7 @@ class MountTest : Utils() {
         System.gc()
         assertEquals(null, ref.get())
         // Ensure that the associated renderable is no longer called
-        Anvil.render()
+        Inkremental.render()
         Mockito.verify(layout, Mockito.times(1)).view()
     }
 }

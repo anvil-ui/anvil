@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 import kotlin.reflect.KClass
 
 fun v(c: KClass<out View>, r: () -> Unit = {}) {
-    Anvil.currentMount()?.iterator?.start(c.java, 0)
+    Inkremental.currentMount()?.iterator?.start(c.java, 0)
     r()
     end()
 }
@@ -26,21 +26,21 @@ inline fun <reified T: View> v(noinline r: () -> Unit = {}) = v(T::class, r)
 inline fun <reified T: View, reified S: ViewScope> v(s: S, noinline r: S.() -> Unit = {}) = v(T::class, r.bind(s))
 
 fun xml(@LayoutRes layoutId: Int, r: () -> Unit = {}) {
-    Anvil.currentMount()?.iterator?.start(null, layoutId)
+    Inkremental.currentMount()?.iterator?.start(null, layoutId)
     r()
     end()
 }
-fun end() = Anvil.currentMount()?.iterator?.end()
-fun skip() = Anvil.currentMount()?.iterator?.skip()
+fun end() = Inkremental.currentMount()?.iterator?.end()
+fun skip() = Inkremental.currentMount()?.iterator?.skip()
 
 fun <T, U> ((T) -> U).bind(value: T): () -> U = { this(value) }
 
 fun <T : Any> attr(name: String, value: T?) {
-    Anvil.currentMount()?.iterator?.attr<T>(name, value)
+    Inkremental.currentMount()?.iterator?.attr<T>(name, value)
 }
 
 val r: Resources
-    get() = Anvil.currentView<View>()!!.resources
+    get() = Inkremental.currentView<View>()!!.resources
 
 fun dip(value: Float): Float = TypedValue.applyDimension(
     TypedValue.COMPLEX_UNIT_DIP, value,
@@ -57,11 +57,11 @@ fun sip(value: Float): Float = TypedValue.applyDimension(
 fun sip(value: Int): Int = sip(value.toFloat()).roundToInt()
 
 fun withId(@IdRes id: Int, r: Renderable): View {
-    var v = Anvil.currentView<View>()
+    var v = Inkremental.currentView<View>()
     requireNotNull(v) { "Anvil.currentView() is null" }
     v = v.findViewById(id)
     requireNotNull(v) { "No view found for ID $id" } // TODO convert id to string
-    return Anvil.mount(v, r)
+    return Inkremental.mount(v, r)
 }
 
 val isPortrait: Boolean

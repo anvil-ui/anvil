@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.androidx.core.widget
 
 import androidx.core.widget.ContentLoadingProgressBar
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.ProgressBarScope
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
@@ -16,7 +16,7 @@ fun contentLoadingProgressBar(configure: ContentLoadingProgressBarScope.() -> Un
 abstract class ContentLoadingProgressBarScope : ProgressBarScope() {
   companion object : ContentLoadingProgressBarScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

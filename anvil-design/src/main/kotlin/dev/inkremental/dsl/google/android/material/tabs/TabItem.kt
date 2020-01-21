@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.tabs
 
 import com.google.android.material.tabs.TabItem
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
@@ -16,8 +16,8 @@ fun tabItem(configure: TabItemScope.() -> Unit = {}) = v<TabItem>(configure.bind
 abstract class TabItemScope : ViewScope() {
   companion object : TabItemScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

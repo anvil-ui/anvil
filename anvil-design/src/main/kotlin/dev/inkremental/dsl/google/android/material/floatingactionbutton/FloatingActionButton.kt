@@ -6,7 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import com.google.android.material.animation.MotionSpec
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
@@ -49,8 +49,8 @@ abstract class FloatingActionButtonScope : VisibilityAwareImageButtonScope() {
   fun useCompatPadding(arg: Boolean): Unit = attr("useCompatPadding", arg)
   companion object : FloatingActionButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

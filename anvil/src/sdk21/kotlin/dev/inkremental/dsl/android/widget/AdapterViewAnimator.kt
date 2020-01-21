@@ -5,7 +5,7 @@ package dev.inkremental.dsl.android.widget
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.widget.AdapterViewAnimator
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -26,8 +26,8 @@ abstract class AdapterViewAnimatorScope : AdapterViewScope() {
   fun remoteViewsAdapter(arg: Intent): Unit = attr("remoteViewsAdapter", arg)
   companion object : AdapterViewAnimatorScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

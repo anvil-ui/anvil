@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.androidx.appcompat.widget
 
 import androidx.appcompat.widget.AppCompatCheckedTextView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.CheckedTextViewScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
@@ -17,8 +17,8 @@ fun appCompatCheckedTextView(configure: AppCompatCheckedTextViewScope.() -> Unit
 abstract class AppCompatCheckedTextViewScope : CheckedTextViewScope() {
   companion object : AppCompatCheckedTextViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

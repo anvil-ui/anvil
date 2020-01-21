@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.androidx.appcompat.widget
 
 import androidx.appcompat.widget.DialogTitle
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
@@ -16,8 +16,8 @@ fun dialogTitle(configure: DialogTitleScope.() -> Unit = {}) =
 abstract class DialogTitleScope : AppCompatTextViewScope() {
   companion object : DialogTitleScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

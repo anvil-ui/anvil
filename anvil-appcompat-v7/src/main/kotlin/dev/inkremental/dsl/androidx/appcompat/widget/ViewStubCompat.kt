@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.ViewStubCompat
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewScope
@@ -25,8 +25,8 @@ abstract class ViewStubCompatScope : ViewScope() {
   fun onInflate(arg: ((arg0: ViewStubCompat, arg1: View) -> Unit)?): Unit = attr("onInflate", arg)
   companion object : ViewStubCompatScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

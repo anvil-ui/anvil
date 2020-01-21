@@ -2,7 +2,7 @@
 
 package androidx.swiperefreshlayout.widget
 
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -32,7 +32,7 @@ abstract class SwipeRefreshLayoutScope : ViewGroupScope() {
   fun slingshotDistance(arg: Int): Unit = attr("slingshotDistance", arg)
   companion object : SwipeRefreshLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

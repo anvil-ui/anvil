@@ -6,7 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
@@ -50,8 +50,8 @@ abstract class CollapsingToolbarLayoutScope : FrameLayoutScope() {
   fun titleEnabled(arg: Boolean): Unit = attr("titleEnabled", arg)
   companion object : CollapsingToolbarLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

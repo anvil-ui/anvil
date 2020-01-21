@@ -5,7 +5,7 @@ package dev.inkremental.dsl.android.app
 import android.app.Activity
 import android.app.FragmentBreadCrumbs
 import android.app.FragmentManager
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -26,8 +26,8 @@ abstract class FragmentBreadCrumbsScope : ViewGroupScope() {
       = attr("onBreadCrumbClick", arg)
   companion object : FragmentBreadCrumbsScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

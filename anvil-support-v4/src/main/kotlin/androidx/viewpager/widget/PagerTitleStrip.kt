@@ -2,7 +2,7 @@
 
 package androidx.viewpager.widget
 
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -22,7 +22,7 @@ abstract class PagerTitleStripScope : ViewGroupScope() {
   fun textSpacing(arg: Int): Unit = attr("textSpacing", arg)
   companion object : PagerTitleStripScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

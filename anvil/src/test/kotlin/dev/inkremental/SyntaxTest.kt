@@ -10,7 +10,7 @@ class SyntaxTest : Utils() {
 
     @Test
     fun testSyntax() {
-        Anvil.mount(container, Renderable {
+        Inkremental.mount(container, Renderable {
             v<MockLayout> {
                 attr("tag", 1)
                 v<MockView> { attr("tag", 2) }

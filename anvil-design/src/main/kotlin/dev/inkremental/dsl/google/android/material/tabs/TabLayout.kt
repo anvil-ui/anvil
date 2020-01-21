@@ -5,7 +5,7 @@ package dev.inkremental.dsl.google.android.material.tabs
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import com.google.android.material.tabs.TabLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.HorizontalScrollViewScope
@@ -38,8 +38,8 @@ abstract class TabLayoutScope : HorizontalScrollViewScope() {
   fun unboundedRippleResource(arg: Int): Unit = attr("unboundedRippleResource", arg)
   companion object : TabLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

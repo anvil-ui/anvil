@@ -4,7 +4,7 @@ package dev.inkremental.dsl.android.gesture
 
 import android.gesture.Gesture
 import android.gesture.GestureOverlayView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -37,8 +37,8 @@ abstract class GestureOverlayViewScope : FrameLayoutScope() {
   fun uncertainGestureColor(arg: Int): Unit = attr("uncertainGestureColor", arg)
   companion object : GestureOverlayViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

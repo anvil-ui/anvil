@@ -5,7 +5,7 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.ActivityChooserView
 import androidx.core.view.ActionProvider
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -30,8 +30,8 @@ abstract class ActivityChooserViewScope : ViewGroupScope() {
   fun provider(arg: ActionProvider): Unit = attr("provider", arg)
   companion object : ActivityChooserViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

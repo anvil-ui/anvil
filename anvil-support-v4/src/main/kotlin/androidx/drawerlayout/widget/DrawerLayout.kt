@@ -3,7 +3,7 @@
 package androidx.drawerlayout.widget
 
 import android.graphics.drawable.Drawable
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -25,7 +25,7 @@ abstract class DrawerLayoutScope : ViewGroupScope() {
   fun statusBarBackgroundColor(arg: Int): Unit = attr("statusBarBackgroundColor", arg)
   companion object : DrawerLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

@@ -2,10 +2,9 @@ package dev.inkremental
 
 import android.view.View
 import java.lang.reflect.InvocationTargetException
-import java.util.*
 import kotlin.reflect.KClass
 
-internal class PropertySetter : Anvil.AttributeSetter<Any> {
+internal class PropertySetter : Inkremental.AttributeSetter<Any> {
 
     private fun assignable(a: KClass<*>?, b: KClass<*>?): Boolean {
         if (a == null) {

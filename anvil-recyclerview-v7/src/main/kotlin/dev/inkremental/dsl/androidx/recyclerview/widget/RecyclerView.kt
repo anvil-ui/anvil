@@ -4,7 +4,7 @@ package dev.inkremental.dsl.androidx.recyclerview.widget
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
@@ -38,8 +38,8 @@ abstract class RecyclerViewScope : ViewGroupScope() {
       arg)
   companion object : RecyclerViewScope() {
     init {
-      Anvil.registerAttributeSetter(RecyclerViewv7Setter)
-      Anvil.registerAttributeSetter(CustomRecyclerViewv7Setter)
+      Inkremental.registerAttributeSetter(RecyclerViewv7Setter)
+      Inkremental.registerAttributeSetter(CustomRecyclerViewv7Setter)
     }
   }
 }

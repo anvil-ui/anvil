@@ -10,7 +10,7 @@ class XmlTest : Utils() {
     private var inflateCount = 0
     @Test
     fun testXml() {
-        Anvil.mount(container, Renderable {
+        Inkremental.mount(container, Renderable {
             xml(LAYOUT) {
                 attr("text", "foo")
                 v<MockView> { attr("tag", "bar") }
@@ -30,7 +30,7 @@ class XmlTest : Utils() {
     }
 
     init {
-        Anvil.registerViewFactory(object : Anvil.ViewFactory {
+        Inkremental.registerViewFactory(object : Inkremental.ViewFactory {
             override fun fromClass(c: Context?, v: Class<out View?>): View? = null
 
             override fun fromXml(parent: ViewGroup, xmlId: Int): View? {

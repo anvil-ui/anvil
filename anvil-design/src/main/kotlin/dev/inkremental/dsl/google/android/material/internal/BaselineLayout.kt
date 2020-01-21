@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.google.android.material.internal
 
 import com.google.android.material.internal.BaselineLayout
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
@@ -17,8 +17,8 @@ fun baselineLayout(configure: BaselineLayoutScope.() -> Unit = {}) =
 abstract class BaselineLayoutScope : ViewGroupScope() {
   companion object : BaselineLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

@@ -4,7 +4,7 @@ package dev.inkremental.dsl.android.media.tv
 
 import android.media.tv.TvView
 import android.view.InputEvent
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -25,8 +25,8 @@ abstract class TvViewScope : ViewGroupScope() {
   fun streamVolume(arg: Float): Unit = attr("streamVolume", arg)
   companion object : TvViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

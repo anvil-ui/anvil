@@ -4,7 +4,7 @@ package dev.inkremental.dsl.androidx.cardview.widget
 
 import android.content.res.ColorStateList
 import androidx.cardview.widget.CardView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
@@ -27,7 +27,7 @@ abstract class CardViewScope : FrameLayoutScope() {
   fun useCompatPadding(arg: Boolean): Unit = attr("useCompatPadding", arg)
   companion object : CardViewScope() {
     init {
-      Anvil.registerAttributeSetter(CardViewv7Setter)
+      Inkremental.registerAttributeSetter(CardViewv7Setter)
     }
   }
 }

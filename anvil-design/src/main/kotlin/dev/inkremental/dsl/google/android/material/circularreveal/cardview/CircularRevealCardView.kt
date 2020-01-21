@@ -5,7 +5,7 @@ package dev.inkremental.dsl.google.android.material.circularreveal.cardview
 import android.graphics.drawable.Drawable
 import com.google.android.material.circularreveal.CircularRevealWidget
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.cardview.widget.CardViewScope
@@ -25,8 +25,8 @@ abstract class CircularRevealCardViewScope : CardViewScope() {
   fun revealInfo(arg: CircularRevealWidget.RevealInfo?): Unit = attr("revealInfo", arg)
   companion object : CircularRevealCardViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

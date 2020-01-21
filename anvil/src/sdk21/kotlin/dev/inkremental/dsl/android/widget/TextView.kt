@@ -16,7 +16,7 @@ import android.view.KeyEvent
 import android.view.inputmethod.ExtractedText
 import android.widget.Scroller
 import android.widget.TextView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -102,8 +102,8 @@ abstract class TextViewScope : ViewScope() {
   fun width(arg: Int): Unit = attr("width", arg)
   companion object : TextViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

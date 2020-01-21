@@ -7,7 +7,7 @@ import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.SwitchCompat
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.CompoundButtonScope
@@ -41,8 +41,8 @@ abstract class SwitchCompatScope : CompoundButtonScope() {
   fun trackTintMode(arg: PorterDuff.Mode?): Unit = attr("trackTintMode", arg)
   companion object : SwitchCompatScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

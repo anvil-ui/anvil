@@ -6,7 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import com.google.android.material.button.MaterialButton
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.widget.AppCompatButtonScope
@@ -38,8 +38,8 @@ abstract class MaterialButtonScope : AppCompatButtonScope() {
   fun strokeWidthResource(arg: Int): Unit = attr("strokeWidthResource", arg)
   companion object : MaterialButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

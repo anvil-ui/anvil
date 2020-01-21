@@ -11,7 +11,7 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.dip
 import dev.inkremental.dsl.android.view.ViewScope
@@ -115,12 +115,12 @@ fun TextViewScope.onTextChanged(watcher: (CharSequence) -> Unit) = attr("onTextC
 fun TextViewScope.onTextChanged(watcher: TextWatcher) = attr("onTextChanged", watcher)
 fun TextViewScope.inputExtras(extras: Int) = attr("inputExtras", extras)
 
-object CustomSdkSetter : Anvil.AttributeSetter<Any> {
+object CustomSdkSetter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
         "init" -> when {
             value is Function<*> -> {
-                if (Anvil.get(v, "_initialized") == null) {
-                    Anvil.set(v, "_initialized", true)
+                if (Inkremental.get(v, "_initialized") == null) {
+                    Inkremental.set(v, "_initialized", true)
                     (value as (View) -> Any?)(v)
                 }
                 true
@@ -447,7 +447,7 @@ private class AnimatorPair(var animator: Animator, var trigger: Boolean) {
 private class SeekBarChangeWrapper(private val listener: SeekBarChangeListener) : SeekBar.OnSeekBarChangeListener {
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
         listener(seekBar, progress, fromUser)
-        Anvil.render()
+        Inkremental.render()
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -460,7 +460,7 @@ private class SeekBarChangeWrapper(private val listener: SeekBarChangeListener) 
 private class ItemSelectedWrapper(private val listener: ItemSelectedListener) : AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
         listener(parent, view, position, id)
-        Anvil.render()
+        Inkremental.render()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -495,7 +495,7 @@ class TextWatcherProxy(private val view: TextView) : TextWatcher {
             watcher?.onTextChanged(s, start, before, count)
             simpleWatcher(s)
             text = string
-            Anvil.render()
+            Inkremental.render()
         }
         currentInputTextView = old
     }
