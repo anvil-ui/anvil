@@ -25,17 +25,6 @@ subprojects {
     extra["junit_version"] = "4.12"
     extra["mockito_version"] = "2.23.0"
 
-    /*buildscript {
-        dependencies {
-            classpath "com.android.tools.build:gradle:3.5.2"
-        }
-
-        repositories {
-            google()
-            jcenter()
-        }
-    }*/
-
     repositories {
         mavenLocal()
         maven(url = "https://dl.bintray.com/inkremental/maven")
@@ -48,4 +37,42 @@ subprojects {
 
     group = GROUP
     version = VERSION_NAME
+}
+
+// TODO constraintlayout and yogalayout
+
+tasks.register("generateAndCheck") {
+    dependsOn(
+        ":anvil:check",
+        ":anvil-appcompat-v7:check",
+        ":anvil-gridlayout-v7:check",
+        ":anvil-recyclerview-v7:check",
+        ":anvil-cardview-v7:check",
+        ":anvil-design:check",
+        ":anvil-support-v4:check"
+    )
+}
+
+tasks.register("generateAndPublishLocally") {
+    dependsOn(
+        ":anvil:publishToMavenLocal",
+        ":anvil-appcompat-v7:publishToMavenLocal",
+        ":anvil-gridlayout-v7:publishToMavenLocal",
+        ":anvil-recyclerview-v7:publishToMavenLocal",
+        ":anvil-cardview-v7:publishToMavenLocal",
+        ":anvil-design:publishToMavenLocal",
+        ":anvil-support-v4:publishToMavenLocal"
+    )
+}
+
+tasks.register("generateAndPublish") {
+    dependsOn(
+        ":anvil:publish",
+        ":anvil-appcompat-v7:publish",
+        ":anvil-gridlayout-v7:publish",
+        ":anvil-recyclerview-v7:publish",
+        ":anvil-cardview-v7:publish",
+        ":anvil-design:publish",
+        ":anvil-support-v4:publish"
+    )
 }

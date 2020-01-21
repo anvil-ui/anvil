@@ -9,15 +9,18 @@ functionality.
 
 # Code generation
 
+***TODO rewrite this describing new meta. Stuff below is outdated.***
+
 The project has two Gradle plugins in `buildSrc`.
 
-* `trikita.anvilgen` is the plugin which does heavylifting of DSL
-generation for views. `AnvilGenPlugin` configures generator tasks
-using parameters noted in corresponding extension, and `DSLGeneratorTask`
-is a task which manages the process.
+* `dev.inkremental.meta.gradle.InkrementalGenPlugin` is the plugin which
+does heavylifting of DSL generation for views. `AnvilGenPlugin` configures
+generator tasks using parameters noted in corresponding extension,
+and `DSLGeneratorTask` is a task which manages the process.
 
-* `dev.inkremental.module` is the companion plugin which unifies accompanying
-tasks of setting up publishing and basic configuration of the project.
+* `dev.inkremental.module` (`dev.inkremental.meta.gradle.InkrementalModulePlugin`)
+is the companion plugin which unifies accompanying tasks of setting up
+publishing and basic configuration of the project.
 
 Let's walk through the process of code generation.
 

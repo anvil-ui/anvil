@@ -64,19 +64,19 @@ class InkrementalModulePlugin : Plugin<Project> {
             add("archives", javadocJar)
         }
 
-        val bintrayUser = prop("bintrayUser")
-        val bintrayApiKey = prop("bintrayApiKey")
+        val bintrayUser = prop("bintrayUser") ?: System.getenv("BINTRAY_USER")
+        val bintrayApiKey = prop("bintrayApiKey") ?: System.getenv("BINTRAY_API_KEY")
         if(bintrayUser != null && bintrayApiKey != null) {
             extensions.configure<PublishingExtension> {
                 repositories {
                     maven {
                         name = "Bintray"
-                        url = uri("https://api.bintray.com/content/" +
+                        url = uri("https://api.bintray.com/maven/" +
                             "${prop("BINTRAY_ORG")}/" +
                             "${prop("BINTRAY_REPO")}/" +
                             "${prop("POM_PACKAGE_NAME")}/" +
-                            "${project.version}/" +
-                            ";publish=1;override=1")
+                            //"${project.version}/" +
+                            ";publish=1;override=0")
                         credentials {
                             username = bintrayUser
                             password = bintrayApiKey
