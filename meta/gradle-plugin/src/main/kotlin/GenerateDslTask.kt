@@ -45,13 +45,13 @@ abstract class GenerateDslTask : DefaultTask() {
                     |Please, don't edit it manually unless for debugging.""".trimMargin()
                 )
                 addModifiers(KModifier.PUBLIC)
-                addSuperinterface(ANVIL.nestedClass("AttributeSetter").parameterizedBy(ANY_N))
+                addSuperinterface(ANVIL.nestedClass("AttributeSetter").parameterizedBy(ANY))
 
                 addFunction("set") {
                     addParameter("v", VIEW)
                     addParameter("name", STRING)
-                    addParameter("arg", ANY_N_NULLABLE)
-                    addParameter("old", ANY_N_NULLABLE)
+                    addParameter("arg", ANY_N)
+                    addParameter("old", ANY_N)
                     returns(BOOLEAN)
                     addModifiers(KModifier.PUBLIC, KModifier.OVERRIDE)
 

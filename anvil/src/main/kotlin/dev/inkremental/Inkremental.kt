@@ -132,8 +132,7 @@ object Inkremental {
 
     /**
      * Returns currently rendered View. It allows to access the real view from
-     * inside the Renderable.
-     * @return currently rendered View
+     * inside the [Renderable].
      */
     fun <T : View?> currentView(): T? {
         return if (currentMount == null) {
