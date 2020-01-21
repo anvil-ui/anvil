@@ -4,7 +4,7 @@ package dev.inkremental.dsl.android.widget
 
 import android.text.TextWatcher
 import android.widget.DialerFilter
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -23,8 +23,8 @@ abstract class DialerFilterScope : RelativeLayoutScope() {
   fun mode(arg: Int): Unit = attr("mode", arg)
   companion object : DialerFilterScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

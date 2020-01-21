@@ -4,7 +4,7 @@ package dev.inkremental.dsl.android.widget
 
 import android.graphics.Typeface
 import android.widget.Switch
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -22,8 +22,8 @@ abstract class SwitchViewScope : CompoundButtonScope() {
   fun textOn(arg: CharSequence): Unit = attr("textOn", arg)
   companion object : SwitchViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

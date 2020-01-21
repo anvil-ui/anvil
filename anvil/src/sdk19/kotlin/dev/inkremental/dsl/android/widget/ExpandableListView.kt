@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -43,8 +43,8 @@ abstract class ExpandableListViewScope : ListViewScope() {
   fun selectedGroup(arg: Int): Unit = attr("selectedGroup", arg)
   companion object : ExpandableListViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

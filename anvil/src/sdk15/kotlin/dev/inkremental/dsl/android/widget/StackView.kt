@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.StackView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
@@ -16,8 +16,8 @@ fun stackView(configure: StackViewScope.() -> Unit = {}) =
 abstract class StackViewScope : AdapterViewAnimatorScope() {
   companion object : StackViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

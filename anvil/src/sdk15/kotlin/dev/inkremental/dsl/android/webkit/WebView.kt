@@ -7,7 +7,7 @@ import android.webkit.DownloadListener
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -32,8 +32,8 @@ abstract class WebViewScope : AbsoluteLayoutScope() {
   fun webViewClient(arg: WebViewClient): Unit = attr("webViewClient", arg)
   companion object : WebViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

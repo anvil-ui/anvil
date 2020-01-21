@@ -119,7 +119,7 @@ abstract class GenerateDslTask : DefaultTask() {
                         addInitializerBlock {
                             add("%T.registerAttributeSetter(%T)\n", ANVIL, setterType)
                             if (model.manualSetter != null) {
-                                add("Anvil.registerAttributeSetter(%M)\n", model.manualSetter)
+                                add("${ANVIL.simpleName}.registerAttributeSetter(%M)\n", model.manualSetter)
                             }
                         }
                     }

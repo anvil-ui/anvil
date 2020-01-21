@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.Chronometer
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -22,8 +22,8 @@ abstract class ChronometerScope : TextViewScope() {
   fun onChronometerTick(arg: ((arg0: Chronometer) -> Unit)?): Unit = attr("onChronometerTick", arg)
   companion object : ChronometerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

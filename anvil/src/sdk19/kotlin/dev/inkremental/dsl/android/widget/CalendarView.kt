@@ -4,7 +4,7 @@ package dev.inkremental.dsl.android.widget
 
 import android.graphics.drawable.Drawable
 import android.widget.CalendarView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -42,8 +42,8 @@ abstract class CalendarViewScope : FrameLayoutScope() {
   fun weekSeparatorLineColor(arg: Int): Unit = attr("weekSeparatorLineColor", arg)
   companion object : CalendarViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

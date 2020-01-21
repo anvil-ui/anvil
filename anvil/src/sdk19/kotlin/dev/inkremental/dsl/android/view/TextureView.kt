@@ -5,7 +5,7 @@ package dev.inkremental.dsl.android.view
 import android.graphics.Matrix
 import android.graphics.SurfaceTexture
 import android.view.TextureView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -25,8 +25,8 @@ abstract class TextureViewScope : ViewScope() {
   fun transform(arg: Matrix): Unit = attr("transform", arg)
   companion object : TextureViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

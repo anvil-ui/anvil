@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.AnalogClock
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
@@ -17,8 +17,8 @@ fun analogClock(configure: AnalogClockScope.() -> Unit = {}) =
 abstract class AnalogClockScope : ViewScope() {
   companion object : AnalogClockScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

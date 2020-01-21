@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.appwidget
 
 import android.appwidget.AppWidgetHostView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
@@ -17,8 +17,8 @@ fun appWidgetHostView(configure: AppWidgetHostViewScope.() -> Unit = {}) =
 abstract class AppWidgetHostViewScope : FrameLayoutScope() {
   companion object : AppWidgetHostViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

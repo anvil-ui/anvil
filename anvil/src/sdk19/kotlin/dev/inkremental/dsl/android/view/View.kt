@@ -13,7 +13,7 @@ import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.RootViewScope
 import dev.inkremental.attr
 import dev.inkremental.bind
@@ -135,8 +135,8 @@ abstract class ViewScope : RootViewScope() {
   fun y(arg: Float): Unit = attr("y", arg)
   companion object : ViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

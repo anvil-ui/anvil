@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.NumberPicker
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -35,8 +35,8 @@ abstract class NumberPickerScope : LinearLayoutScope() {
   fun wrapSelectorWheel(arg: Boolean): Unit = attr("wrapSelectorWheel", arg)
   companion object : NumberPickerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

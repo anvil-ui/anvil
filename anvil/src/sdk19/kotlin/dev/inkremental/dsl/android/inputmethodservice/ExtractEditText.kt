@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.android.inputmethodservice
 
 import android.inputmethodservice.ExtractEditText
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
@@ -17,8 +17,8 @@ fun extractEditText(configure: ExtractEditTextScope.() -> Unit = {}) =
 abstract class ExtractEditTextScope : EditTextScope() {
   companion object : ExtractEditTextScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

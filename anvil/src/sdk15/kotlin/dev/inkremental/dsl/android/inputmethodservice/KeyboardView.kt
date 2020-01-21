@@ -5,7 +5,7 @@ package dev.inkremental.dsl.android.inputmethodservice
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
 import android.view.View
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -30,8 +30,8 @@ abstract class KeyboardViewScope : ViewScope() {
   fun verticalCorrection(arg: Int): Unit = attr("verticalCorrection", arg)
   companion object : KeyboardViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

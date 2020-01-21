@@ -6,7 +6,7 @@ import android.app.SearchableInfo
 import android.view.View
 import android.widget.CursorAdapter
 import android.widget.SearchView
-import dev.inkremental.Anvil
+import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
@@ -39,8 +39,8 @@ abstract class SearchViewScope : LinearLayoutScope() {
   fun suggestionsAdapter(arg: CursorAdapter): Unit = attr("suggestionsAdapter", arg)
   companion object : SearchViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

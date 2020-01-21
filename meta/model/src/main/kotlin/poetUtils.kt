@@ -19,5 +19,5 @@ const val ROOT_VIEW_SCOPE = "RootViewScope"
 
 val ANY_N: ClassName = ANY.copy(nullable = true)
 val FUNCTION_STAR: TypeName = ClassName("kotlin", "Function").parameterizedBy(STAR)
-val ANVIL: ClassName = ClassName(PACKAGE, "Anvil")
+val ANVIL: ClassName = ClassName(PACKAGE, "Inkremental")
 val VIEW: ClassName = ClassName("android.view", "View")

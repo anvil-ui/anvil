@@ -311,9 +311,11 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
 
             override fun onPress(arg0: Int): Unit = arg.onPress(arg0).also { Inkremental.render() }
 
-            override fun onRelease(arg0: Int): Unit = arg.onRelease(arg0).also { Inkremental.render() }
+            override fun onRelease(arg0: Int): Unit = arg.onRelease(arg0).also {
+                Inkremental.render() }
 
-            override fun onText(arg0: CharSequence): Unit = arg.onText(arg0).also { Inkremental.render() }
+            override fun onText(arg0: CharSequence): Unit = arg.onText(arg0).also {
+                Inkremental.render() }
 
             override fun swipeDown(): Unit = arg.swipeDown().also { Inkremental.render() }
 
@@ -3492,7 +3494,8 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
           v.setOnDrawerScrollListener(object : SlidingDrawer.OnDrawerScrollListener {
             override fun onScrollEnded(): Unit = arg.onScrollEnded().also { Inkremental.render() }
 
-            override fun onScrollStarted(): Unit = arg.onScrollStarted().also { Inkremental.render() }
+            override fun onScrollStarted(): Unit = arg.onScrollStarted().also { Inkremental.render()
+                }
           })
           true
         }
