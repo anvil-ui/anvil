@@ -12,7 +12,7 @@ class InitTest : Utils() {
     @Test
     fun testInit() {
         println("============================")
-        Inkremental.mount(container, Renderable {
+        Inkremental.mount(container, {
             //init(makeFunc("once"))
             v<MockView, ViewScope>(ViewScope) { init(makeFunc("setUpView")) }
         })

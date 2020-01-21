@@ -6,7 +6,7 @@ import java.lang.ref.WeakReference
 import kotlin.test.*
 
 class MountTest : Utils() {
-    var testLayout = TestRenderable()
+    var testLayout = TestRenderable
     var mountContainer : MockLayout = MockLayout(context)
 
     @Test
@@ -43,7 +43,7 @@ class MountTest : Utils() {
 
     @Test
     fun testMountInfoView() {
-        val v = Inkremental.mount(MockView(context), Renderable {
+        val v = Inkremental.mount(MockView(context), {
             attr("id", 100)
             attr("text", "bar")
             attr("tag", "foo")
@@ -58,7 +58,7 @@ class MountTest : Utils() {
     fun testMountGC() {
         val layout = Mockito.spy(testLayout)
         Inkremental.mount(mountContainer, layout)
-        Mockito.verify(layout, Mockito.times(1)).view()
+        Mockito.verify(layout, Mockito.times(1)).invoke()
         assertEquals(1, mountContainer.childCount)
         // Once the container is garbage collection all other views should be removed, too
         val ref = WeakReference(mountContainer.getChildAt(0))
@@ -67,12 +67,10 @@ class MountTest : Utils() {
         assertEquals(null, ref.get())
         // Ensure that the associated renderable is no longer called
         Inkremental.render()
-        Mockito.verify(layout, Mockito.times(1)).view()
+        Mockito.verify(layout, Mockito.times(1)).invoke()
     }
 }
 
-open class TestRenderable : Renderable {
-    override fun view() {
-        v<Utils.MockView, ViewScope>(ViewScope) { attr("text", "bar") }
-    }
+val TestRenderable =  {
+    v<Utils.MockView, ViewScope>(ViewScope) { attr("text", "bar") }
 }

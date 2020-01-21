@@ -13,7 +13,7 @@ import org.junit.Before
 open class Utils {
     var createdViews: MutableMap<Class<*>, Int?> = mutableMapOf()
     var changedAttrs: MutableMap<String, Int?> = mutableMapOf()
-    var empty = Renderable {  }
+    var empty = {  }
     lateinit var container: MockLayout
     @Before
     fun setUp() {

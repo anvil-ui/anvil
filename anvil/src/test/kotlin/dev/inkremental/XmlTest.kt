@@ -10,7 +10,7 @@ class XmlTest : Utils() {
     private var inflateCount = 0
     @Test
     fun testXml() {
-        Inkremental.mount(container, Renderable {
+        Inkremental.mount(container, {
             xml(LAYOUT) {
                 attr("text", "foo")
                 v<MockView> { attr("tag", "bar") }

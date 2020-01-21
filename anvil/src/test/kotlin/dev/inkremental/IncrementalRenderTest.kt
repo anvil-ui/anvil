@@ -8,7 +8,7 @@ class IncrementalRenderTest: Utils() {
 
     @Test
     fun testConstantsRenderedOnce() {
-        Inkremental.mount(container, Renderable { v<MockLayout> { attr("text", "bar") } })
+        Inkremental.mount(container, { v<MockLayout> { attr("text", "bar") } })
         assertEquals(1, createdViews[MockLayout::class.java])
         assertEquals(1, changedAttrs["text"])
         Inkremental.render()
@@ -18,7 +18,7 @@ class IncrementalRenderTest: Utils() {
 
     @Test
     fun testDynamicAttributeRenderedLazily() {
-        Inkremental.mount(container, Renderable { v<MockLayout> { attr("text", fooValue) } })
+        Inkremental.mount(container, { v<MockLayout> { attr("text", fooValue) } })
         assertEquals(1, changedAttrs["text"])
         Inkremental.render()
         assertEquals(1, changedAttrs["text"])
@@ -31,7 +31,7 @@ class IncrementalRenderTest: Utils() {
 
     @Test
     fun testDynamicViewRenderedLazily() {
-        Inkremental.mount(container, Renderable {
+        Inkremental.mount(container, {
             v<MockLayout> {
                 v<MockLayout>()
                 if(showView) {
@@ -65,8 +65,8 @@ class IncrementalRenderTest: Utils() {
     fun testRenderUpdatesAllMounts() {
         val rootA = MockLayout(context)
         val rootB = MockLayout(context)
-        Inkremental.mount(rootA, Renderable { attr("text", firstMountValue) })
-        Inkremental.mount(rootB, Renderable { attr("tag", secondMountValue) })
+        Inkremental.mount(rootA, { attr("text", firstMountValue) })
+        Inkremental.mount(rootB, { attr("tag", secondMountValue) })
         assertEquals("foo", rootA.text)
         assertEquals("bar", rootB.tag)
 

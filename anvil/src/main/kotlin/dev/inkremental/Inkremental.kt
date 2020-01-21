@@ -91,7 +91,7 @@ object Inkremental {
      * @param v a View into which the renderable r will be mounted
      * @param r a Renderable to mount into a View
      */
-    fun <T : View> mount(v: T, r: Renderable): T {
+    fun <T : View> mount(v: T, r: () -> Unit): T {
         val m = Mount(v, r)
         mounts[v] = m
         render(v)
@@ -153,21 +153,11 @@ object Inkremental {
         val prev = currentMount
         currentMount = m
         m.iterator.start()
-        if (m.renderable != null) {
-            m.renderable.view()
-        }
+        m.renderable()
         m.iterator.end()
         currentMount = prev
         m.lock = false
     }
-
-    //waiting for Kotlin 1.4
-//    /** Renderable can be mounted and rendered using Anvil library.  */
-//    interface Renderable {
-//        /** This method is a place to define the structure of your layout, its view
-//         * properties and data bindings.  */
-//        fun view()
-//    }
 
     interface ViewFactory {
         fun fromClass(c: Context?, v: Class<out View?>): View?
@@ -201,7 +191,7 @@ object Inkremental {
     /** Mount describes a mount point. Mount point is a Renderable function
      * attached to some ViewGroup. Mount point keeps track of the virtual layout
      * declared by Renderable  */
-    class Mount(v: View, val renderable: Renderable?) {
+    class Mount(v: View, val renderable: () -> Unit) {
         var lock = false
         private val rootView: WeakReference<View> = WeakReference(v)
         internal val iterator = Iterator()

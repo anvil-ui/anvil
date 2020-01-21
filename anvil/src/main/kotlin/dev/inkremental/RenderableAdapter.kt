@@ -18,7 +18,7 @@ abstract class RenderableAdapter : BaseAdapter() {
         if (v == null) {
             currentPosition = pos
             val vg = FrameLayout(parent.context)
-            val m = Mount(vg, Renderable { view(currentPosition) })
+            val m = Mount(vg) { view(currentPosition) }
             Inkremental.render(m)
             vg.tag = m
             v = vg

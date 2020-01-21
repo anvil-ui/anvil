@@ -5,7 +5,6 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import dev.inkremental.Inkremental.Mount
 import dev.inkremental.Inkremental.render
-import dev.inkremental.Renderable
 import dev.inkremental.RenderableAdapter
 
 
@@ -20,7 +19,7 @@ abstract class RenderableRecyclerViewAdapter : RecyclerView.Adapter<RenderableRe
 
     override fun onBindViewHolder(h: MountHolder, position: Int) {
         if (h.mount == null) {
-            h.mount = Mount(h.itemView as ViewGroup, Renderable { view(h) })
+            h.mount = Mount(h.itemView as ViewGroup) { view(h) }
             render(h.mount!!)
         } else {
             render(h.mount!!)

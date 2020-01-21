@@ -9,7 +9,7 @@ class BenchmarkTest : Utils() {
     @Test
     fun testRenderBenchmark() {
         var start: Long
-        val r = Renderable {
+        val r =  {
             for (i in 0..9) {
                 group(transform(i)) {
                     for (j in 0..9) {

@@ -11,7 +11,7 @@ class CurrentViewTest : Utils() {
     @Test
     fun testCurrentView() {
         assertNull(Inkremental.currentView())
-        Inkremental.mount(container, Renderable {
+        Inkremental.mount(container, {
             assertTrue(Inkremental.currentView<View>() is ViewGroup)
             v<MockLayout, FrameLayoutScope>(FrameLayoutScope) {
                 assertTrue(Inkremental.currentView<View>() is MockLayout)

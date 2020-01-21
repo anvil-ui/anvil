@@ -56,7 +56,7 @@ fun sip(value: Float): Float = TypedValue.applyDimension(
 
 fun sip(value: Int): Int = sip(value.toFloat()).roundToInt()
 
-fun withId(@IdRes id: Int, r: Renderable): View {
+fun withId(@IdRes id: Int, r: () -> Unit): View {
     var v = Inkremental.currentView<View>()
     requireNotNull(v) { "Anvil.currentView() is null" }
     v = v.findViewById(id)
@@ -92,30 +92,21 @@ abstract class RootViewScope {
 
 fun renderable(
     context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
     r: () -> Unit
-): View =
-    object : RenderableView(context, attrs, defStyleAttr) {
-        override fun view() {
-            r()
-        }
+): View = object : RenderableView(context) {
+    override var renderable: () -> Unit = {
+        r()
     }
+}
 
 fun Activity.renderable(
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
     r: () -> Unit
-): View = renderable(this, attrs, defStyleAttr, r)
+): View = renderable(this, r)
 
 fun Activity.renderableContentView(
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
     r: () -> Unit
-): View = renderable(attrs, defStyleAttr, r).also { setContentView(it) }
+): View = renderable(r).also { setContentView(it) }
 
 fun Fragment.renderable(
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
     r: () -> Unit
-): View = renderable(if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) context else activity, attrs, defStyleAttr, r)
+): View = renderable(if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) context else activity, r)
