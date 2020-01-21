@@ -2,7 +2,6 @@
 
 package dev.inkremental.dsl.android.webkit
 
-import android.net.http.SslCertificate
 import android.webkit.DownloadListener
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -21,11 +20,10 @@ import kotlin.Unit
 
 fun webView(configure: WebViewScope.() -> Unit = {}) = v<WebView>(configure.bind(WebViewScope))
 abstract class WebViewScope : AbsoluteLayoutScope() {
-  fun certificate(arg: SslCertificate): Unit = attr("certificate", arg)
   fun downloadListener(arg: DownloadListener): Unit = attr("downloadListener", arg)
+  fun findListener(arg: WebView.FindListener): Unit = attr("findListener", arg)
   fun horizontalScrollbarOverlay(arg: Boolean): Unit = attr("horizontalScrollbarOverlay", arg)
   fun initialScale(arg: Int): Unit = attr("initialScale", arg)
-  fun mapTrackballToArrowKeys(arg: Boolean): Unit = attr("mapTrackballToArrowKeys", arg)
   fun networkAvailable(arg: Boolean): Unit = attr("networkAvailable", arg)
   fun verticalScrollbarOverlay(arg: Boolean): Unit = attr("verticalScrollbarOverlay", arg)
   fun webChromeClient(arg: WebChromeClient): Unit = attr("webChromeClient", arg)

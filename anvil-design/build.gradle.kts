@@ -6,7 +6,7 @@ plugins {
 
 android {
 	defaultConfig {
-		missingDimensionStrategy("api", "sdk15")
+		missingDimensionStrategy("api", "sdk17")
 	}
 }
 
@@ -71,7 +71,7 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk15"))
+	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
 	implementation(project(":anvil-appcompat-v7"))
 	inkremental(project(":anvil-appcompat-v7", "inkrementalDefAppCompatv7"))

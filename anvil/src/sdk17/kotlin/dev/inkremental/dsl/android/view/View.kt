@@ -2,6 +2,7 @@
 
 package dev.inkremental.dsl.android.view
 
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.view.ContextMenu
 import android.view.DragEvent
@@ -33,8 +34,8 @@ abstract class ViewScope : RootViewScope() {
   fun activated(arg: Boolean): Unit = attr("activated", arg)
   fun alpha(arg: Float): Unit = attr("alpha", arg)
   fun animation(arg: Animation): Unit = attr("animation", arg)
+  fun background(arg: Drawable): Unit = attr("background", arg)
   fun backgroundColor(arg: Int): Unit = attr("backgroundColor", arg)
-  fun backgroundDrawable(arg: Drawable): Unit = attr("backgroundDrawable", arg)
   fun backgroundResource(arg: Int): Unit = attr("backgroundResource", arg)
   fun bottom(arg: Int): Unit = attr("bottom", arg)
   fun cameraDistance(arg: Float): Unit = attr("cameraDistance", arg)
@@ -51,11 +52,16 @@ abstract class ViewScope : RootViewScope() {
   fun focusable(arg: Boolean): Unit = attr("focusable", arg)
   fun focusableInTouchMode(arg: Boolean): Unit = attr("focusableInTouchMode", arg)
   fun hapticFeedbackEnabled(arg: Boolean): Unit = attr("hapticFeedbackEnabled", arg)
+  fun hasTransientState(arg: Boolean): Unit = attr("hasTransientState", arg)
   fun horizontalFadingEdgeEnabled(arg: Boolean): Unit = attr("horizontalFadingEdgeEnabled", arg)
   fun horizontalScrollBarEnabled(arg: Boolean): Unit = attr("horizontalScrollBarEnabled", arg)
   fun hovered(arg: Boolean): Unit = attr("hovered", arg)
   fun id(arg: Int): Unit = attr("id", arg)
+  fun importantForAccessibility(arg: Int): Unit = attr("importantForAccessibility", arg)
   fun keepScreenOn(arg: Boolean): Unit = attr("keepScreenOn", arg)
+  fun labelFor(arg: Int): Unit = attr("labelFor", arg)
+  fun layerPaint(arg: Paint?): Unit = attr("layerPaint", arg)
+  fun layoutDirection(arg: Int): Unit = attr("layoutDirection", arg)
   fun layoutParams(arg: ViewGroup.LayoutParams): Unit = attr("layoutParams", arg)
   fun left(arg: Int): Unit = attr("left", arg)
   fun longClickable(arg: Boolean): Unit = attr("longClickable", arg)
@@ -98,6 +104,9 @@ abstract class ViewScope : RootViewScope() {
   fun saveFromParentEnabled(arg: Boolean): Unit = attr("saveFromParentEnabled", arg)
   fun scaleX(arg: Float): Unit = attr("scaleX", arg)
   fun scaleY(arg: Float): Unit = attr("scaleY", arg)
+  fun scrollBarDefaultDelayBeforeFade(arg: Int): Unit = attr("scrollBarDefaultDelayBeforeFade", arg)
+  fun scrollBarFadeDuration(arg: Int): Unit = attr("scrollBarFadeDuration", arg)
+  fun scrollBarSize(arg: Int): Unit = attr("scrollBarSize", arg)
   fun scrollBarStyle(arg: Int): Unit = attr("scrollBarStyle", arg)
   fun scrollContainer(arg: Boolean): Unit = attr("scrollContainer", arg)
   fun scrollX(arg: Int): Unit = attr("scrollX", arg)
@@ -107,6 +116,8 @@ abstract class ViewScope : RootViewScope() {
   fun soundEffectsEnabled(arg: Boolean): Unit = attr("soundEffectsEnabled", arg)
   fun systemUiVisibility(arg: Int): Unit = attr("systemUiVisibility", arg)
   fun tag(arg: Any): Unit = attr("tag", arg)
+  fun textAlignment(arg: Int): Unit = attr("textAlignment", arg)
+  fun textDirection(arg: Int): Unit = attr("textDirection", arg)
   fun top(arg: Int): Unit = attr("top", arg)
   fun touchDelegate(arg: TouchDelegate): Unit = attr("touchDelegate", arg)
   fun translationX(arg: Float): Unit = attr("translationX", arg)

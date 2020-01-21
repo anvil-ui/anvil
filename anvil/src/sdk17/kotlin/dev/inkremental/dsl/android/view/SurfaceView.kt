@@ -2,8 +2,7 @@
 
 package dev.inkremental.dsl.android.view
 
-import android.graphics.Matrix
-import android.view.TextureView
+import android.view.SurfaceView
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
@@ -14,14 +13,13 @@ import kotlin.Boolean
 import kotlin.Suppress
 import kotlin.Unit
 
-fun textureView(configure: TextureViewScope.() -> Unit = {}) =
-    v<TextureView>(configure.bind(TextureViewScope))
-abstract class TextureViewScope : ViewScope() {
-  fun opaque(arg: Boolean): Unit = attr("opaque", arg)
-  fun surfaceTextureListener(arg: TextureView.SurfaceTextureListener): Unit =
-      attr("surfaceTextureListener", arg)
-  fun transform(arg: Matrix): Unit = attr("transform", arg)
-  companion object : TextureViewScope() {
+fun surfaceView(configure: SurfaceViewScope.() -> Unit = {}) =
+    v<SurfaceView>(configure.bind(SurfaceViewScope))
+abstract class SurfaceViewScope : ViewScope() {
+  fun secure(arg: Boolean): Unit = attr("secure", arg)
+  fun zOrderMediaOverlay(arg: Boolean): Unit = attr("zOrderMediaOverlay", arg)
+  fun zOrderOnTop(arg: Boolean): Unit = attr("zOrderOnTop", arg)
+  companion object : SurfaceViewScope() {
     init {
       Inkremental.registerAttributeSetter(SdkSetter)
       Inkremental.registerAttributeSetter(CustomSdkSetter)
