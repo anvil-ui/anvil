@@ -45,7 +45,7 @@ abstract class GenerateDslTask : DefaultTask() {
                     |Please, don't edit it manually unless for debugging.""".trimMargin()
                 )
                 addModifiers(KModifier.PUBLIC)
-                addSuperinterface(ANVIL.nestedClass("AttributeSetter").parameterizedBy(ANY))
+                addSuperinterface(INKREMENTAL.nestedClass("AttributeSetter").parameterizedBy(ANY))
 
                 addFunction("set") {
                     addParameter("v", VIEW)
@@ -117,9 +117,9 @@ abstract class GenerateDslTask : DefaultTask() {
                     addCompanionObject {
                         superclass(scopeType)
                         addInitializerBlock {
-                            add("%T.registerAttributeSetter(%T)\n", ANVIL, setterType)
+                            add("%T.registerAttributeSetter(%T)\n", INKREMENTAL, setterType)
                             if (model.manualSetter != null) {
-                                add("${ANVIL.simpleName}.registerAttributeSetter(%M)\n", model.manualSetter)
+                                add("${INKREMENTAL.simpleName}.registerAttributeSetter(%M)\n", model.manualSetter)
                             }
                         }
                     }
@@ -236,7 +236,7 @@ abstract class GenerateDslTask : DefaultTask() {
         if(!functionalType) {
             add(".%L", name)
         }
-        add("($argsString).also·{ %T.render() }\n", ANVIL)
+        add("($argsString).also·{ %T.render() }\n", INKREMENTAL)
     }
 
     private fun AttrModel.buildSetter(): CodeBlock {

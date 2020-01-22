@@ -12,10 +12,10 @@ class InitTest : Utils() {
     @Test
     fun testInit() {
         println("============================")
-        Inkremental.mount(container, {
+        Inkremental.mount(container) {
             //init(makeFunc("once"))
             v<MockView, ViewScope>(ViewScope) { init(makeFunc("setUpView")) }
-        })
+        }
         println("============================")
         //assertTrue(called["once"]!!)
         assertTrue(called["setUpView"]!!)

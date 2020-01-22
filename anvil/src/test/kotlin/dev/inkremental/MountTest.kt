@@ -43,11 +43,11 @@ class MountTest : Utils() {
 
     @Test
     fun testMountInfoView() {
-        val v = Inkremental.mount(MockView(context), {
+        val v = Inkremental.mount(MockView(context)) {
             attr("id", 100)
             attr("text", "bar")
             attr("tag", "foo")
-        })
+        }
         assertEquals(100, v.id)
         assertEquals("foo", v.tag)
         assertEquals("bar", v.text)

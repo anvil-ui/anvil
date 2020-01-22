@@ -10,12 +10,12 @@ class XmlTest : Utils() {
     private var inflateCount = 0
     @Test
     fun testXml() {
-        Inkremental.mount(container, {
+        Inkremental.mount(container) {
             xml(LAYOUT) {
                 attr("text", "foo")
                 v<MockView> { attr("tag", "bar") }
             }
-        })
+        }
         assertEquals(1, inflateCount)
         val layout = container.getChildAt(0) as MockLayout
         assertEquals("foo", layout.text)
