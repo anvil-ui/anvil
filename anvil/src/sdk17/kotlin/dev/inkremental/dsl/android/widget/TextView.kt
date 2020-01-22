@@ -16,9 +16,13 @@ import android.view.KeyEvent
 import android.view.inputmethod.ExtractedText
 import android.widget.Scroller
 import android.widget.TextView
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
 import dev.inkremental.dsl.android.view.ViewScope
+import dev.inkremental.v
 import java.util.Locale
 import kotlin.Array
 import kotlin.Boolean
@@ -28,10 +32,6 @@ import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun textView(configure: TextViewScope.() -> Unit = {}) = v<TextView>(configure.bind(TextViewScope))
 abstract class TextViewScope : ViewScope() {
@@ -98,8 +98,8 @@ abstract class TextViewScope : ViewScope() {
   fun width(arg: Int): Unit = attr("width", arg)
   companion object : TextViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

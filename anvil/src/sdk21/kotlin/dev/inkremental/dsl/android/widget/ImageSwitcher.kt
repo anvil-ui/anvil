@@ -5,15 +5,15 @@ package dev.inkremental.dsl.android.widget
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageSwitcher
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun imageSwitcher(configure: ImageSwitcherScope.() -> Unit = {}) =
     v<ImageSwitcher>(configure.bind(ImageSwitcherScope))
@@ -23,8 +23,8 @@ abstract class ImageSwitcherScope : ViewSwitcherScope() {
   fun imageURI(arg: Uri): Unit = attr("imageURI", arg)
   companion object : ImageSwitcherScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

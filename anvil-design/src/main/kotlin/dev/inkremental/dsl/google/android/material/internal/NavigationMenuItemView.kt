@@ -3,16 +3,16 @@
 package dev.inkremental.dsl.google.android.material.internal
 
 import com.google.android.material.internal.NavigationMenuItemView
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun navigationMenuItemView(configure: NavigationMenuItemViewScope.() -> Unit = {}) =
     v<NavigationMenuItemView>(configure.bind(NavigationMenuItemViewScope))
@@ -22,8 +22,8 @@ abstract class NavigationMenuItemViewScope : ForegroundLinearLayoutScope() {
   fun textAppearance(arg: Int): Unit = attr("textAppearance", arg)
   companion object : NavigationMenuItemViewScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

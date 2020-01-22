@@ -3,15 +3,15 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.SlidingDrawer
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
 import dev.inkremental.dsl.android.view.ViewGroupScope
+import dev.inkremental.v
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun slidingDrawer(configure: SlidingDrawerScope.() -> Unit = {}) =
     v<SlidingDrawer>(configure.bind(SlidingDrawerScope))
@@ -21,8 +21,8 @@ abstract class SlidingDrawerScope : ViewGroupScope() {
   fun onDrawerScroll(arg: SlidingDrawer.OnDrawerScrollListener?): Unit = attr("onDrawerScroll", arg)
   companion object : SlidingDrawerScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

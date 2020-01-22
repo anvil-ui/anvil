@@ -6,7 +6,8 @@ import android.view.View
 import com.facebook.yoga.*
 import com.facebook.yoga.android.YogaLayout
 import dev.inkremental.dsl.android.view.ViewGroupScope
-import trikita.anvil.*
+import dev.inkremental.*
+import dev.inkremental.attr
 
 fun yogaLayout(configure: YogaLayoutScope.() -> Unit = {}) =
     v<YogaLayout>(configure.bind(YogaLayoutScope))
@@ -101,11 +102,11 @@ abstract class YogaLayoutScope : ViewGroupScope() {
 
     companion object : YogaLayoutScope() {
         init {
-            Anvil.registerAttributeSetter(YogaDslSetter)}
+            Inkremental.registerAttributeSetter(YogaDslSetter)}
     }
 }
 
-object YogaDslSetter : Anvil.AttributeSetter<Any?> {
+object YogaDslSetter : Inkremental.AttributeSetter<Any> {
     override fun set(
         v: View,
         name: String,

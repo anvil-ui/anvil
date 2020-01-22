@@ -4,16 +4,16 @@ package dev.inkremental.dsl.android.widget
 
 import android.view.View
 import android.widget.ZoomControls
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun zoomControls(configure: ZoomControlsScope.() -> Unit = {}) =
     v<ZoomControls>(configure.bind(ZoomControlsScope))
@@ -25,8 +25,8 @@ abstract class ZoomControlsScope : LinearLayoutScope() {
   fun zoomSpeed(arg: Long): Unit = attr("zoomSpeed", arg)
   companion object : ZoomControlsScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

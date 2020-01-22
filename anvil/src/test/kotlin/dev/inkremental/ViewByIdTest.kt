@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import android.content.Context
 import kotlin.test.Test

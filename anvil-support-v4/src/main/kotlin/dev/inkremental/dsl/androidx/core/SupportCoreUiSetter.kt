@@ -13,6 +13,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.PagerTabStrip
 import androidx.viewpager.widget.PagerTitleStrip
 import androidx.viewpager.widget.ViewPager
+import dev.inkremental.Inkremental
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Float
@@ -22,7 +23,6 @@ import kotlin.IntArray
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
 
 /**
  * DSL for creating views and settings their attributes.
@@ -31,7 +31,7 @@ import trikita.anvil.Anvil
  * It contains views and their setters for the library support-core-ui.
  * Please, don't edit it manually unless for debugging.
  */
-object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
+object SupportCoreUiSetter : Inkremental.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,
@@ -199,7 +199,7 @@ object SupportCoreUiSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as (() -> Unit)?
           v.setOnRefreshListener {  ->
-            arg().also { Anvil.render() }
+            arg().also { Inkremental.render() }
           }
           true
         }

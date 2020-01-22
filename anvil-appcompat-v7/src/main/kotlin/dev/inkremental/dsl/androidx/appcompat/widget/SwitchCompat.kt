@@ -7,18 +7,18 @@ import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.SwitchCompat
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.CompoundButtonScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun switchCompat(configure: SwitchCompatScope.() -> Unit = {}) =
     v<SwitchCompat>(configure.bind(SwitchCompatScope))
@@ -41,8 +41,8 @@ abstract class SwitchCompatScope : CompoundButtonScope() {
   fun trackTintMode(arg: PorterDuff.Mode?): Unit = attr("trackTintMode", arg)
   companion object : SwitchCompatScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

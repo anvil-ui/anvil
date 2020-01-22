@@ -1,4 +1,4 @@
-package trikita.anvil.sample
+package dev.inkremental.sample
 
 import android.content.Context
 import android.content.Intent
@@ -13,8 +13,8 @@ import dev.inkremental.dsl.android.*
 import dev.inkremental.dsl.android.Size.MATCH
 import dev.inkremental.dsl.android.Size.WRAP
 import dev.inkremental.dsl.android.widget.*
-import trikita.anvil.r
-import trikita.anvil.renderableContentView
+import dev.inkremental.r
+import dev.inkremental.renderableContentView
 
 class MainActivity : AppCompatActivity() {
 

@@ -5,18 +5,18 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.graphics.drawable.Drawable
 import android.view.Window
 import androidx.appcompat.widget.ActionBarOverlayLayout
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun actionBarOverlayLayout(configure: ActionBarOverlayLayoutScope.() -> Unit = {}) =
     v<ActionBarOverlayLayout>(configure.bind(ActionBarOverlayLayoutScope))
@@ -36,8 +36,8 @@ abstract class ActionBarOverlayLayoutScope : ViewGroupScope() {
   fun windowTitle(arg: CharSequence): Unit = attr("windowTitle", arg)
   companion object : ActionBarOverlayLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

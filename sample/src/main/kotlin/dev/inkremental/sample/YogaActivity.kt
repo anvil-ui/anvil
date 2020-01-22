@@ -1,4 +1,4 @@
-package trikita.anvil.sample
+package dev.inkremental.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +11,7 @@ import dev.inkremental.dsl.android.size
 import dev.inkremental.dsl.android.text
 import dev.inkremental.dsl.android.widget.*
 import dev.inkremental.dsl.yoga.yogaLayout
-import trikita.anvil.renderableContentView
+import dev.inkremental.renderableContentView
 
 
 class YogaActivity : AppCompatActivity() {

@@ -5,16 +5,16 @@ package dev.inkremental.dsl.android.widget
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.widget.Switch
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.CharSequence
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun switchView(configure: SwitchViewScope.() -> Unit = {}) =
     v<Switch>(configure.bind(SwitchViewScope))
@@ -31,8 +31,8 @@ abstract class SwitchViewScope : CompoundButtonScope() {
   fun trackResource(arg: Int): Unit = attr("trackResource", arg)
   companion object : SwitchViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

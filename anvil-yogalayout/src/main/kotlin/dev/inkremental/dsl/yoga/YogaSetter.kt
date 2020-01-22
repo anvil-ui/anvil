@@ -3,7 +3,7 @@
 package dev.inkremental.dsl.yoga
 
 import android.view.View
-import trikita.anvil.Anvil
+import dev.inkremental.Inkremental
 
 /**
  * DSL for creating views and settings their attributes.
@@ -12,7 +12,7 @@ import trikita.anvil.Anvil
  * It contains views and their setters for the library yogalayout.
  * Please, don't edit it manually unless for debugging.
  */
-object YogaSetter : Anvil.AttributeSetter<Any?> {
+object YogaSetter : Inkremental.AttributeSetter<Any?> {
   override fun set(
     v: View,
     name: String,

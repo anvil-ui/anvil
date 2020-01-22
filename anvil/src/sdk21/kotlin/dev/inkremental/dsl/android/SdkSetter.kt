@@ -118,6 +118,7 @@ import android.widget.ViewFlipper
 import android.widget.ViewSwitcher
 import android.widget.ZoomButton
 import android.widget.ZoomControls
+import dev.inkremental.Inkremental
 import java.util.Locale
 import kotlin.Any
 import kotlin.Array
@@ -131,7 +132,6 @@ import kotlin.Long
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
 
 /**
  * DSL for creating views and settings their attributes.
@@ -140,7 +140,7 @@ import trikita.anvil.Anvil
  * It contains views and their setters for Android SDK (API level 21).
  * Please, don't edit it manually unless for debugging.
  */
-object SdkSetter : Anvil.AttributeSetter<Any?> {
+object SdkSetter : Inkremental.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,
@@ -170,7 +170,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: FragmentManager.BackStackEntry, arg1: Int) -> Boolean)?
           v.setOnBreadCrumbClickListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }
@@ -307,21 +307,23 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is KeyboardView.OnKeyboardActionListener -> {
           v.setOnKeyboardActionListener(object : KeyboardView.OnKeyboardActionListener {
             override fun onKey(arg0: Int, arg1: IntArray): Unit = arg.onKey(arg0, arg1).also {
-                Anvil.render() }
+                Inkremental.render() }
 
-            override fun onPress(arg0: Int): Unit = arg.onPress(arg0).also { Anvil.render() }
+            override fun onPress(arg0: Int): Unit = arg.onPress(arg0).also { Inkremental.render() }
 
-            override fun onRelease(arg0: Int): Unit = arg.onRelease(arg0).also { Anvil.render() }
+            override fun onRelease(arg0: Int): Unit = arg.onRelease(arg0).also {
+                Inkremental.render() }
 
-            override fun onText(arg0: CharSequence): Unit = arg.onText(arg0).also { Anvil.render() }
+            override fun onText(arg0: CharSequence): Unit = arg.onText(arg0).also {
+                Inkremental.render() }
 
-            override fun swipeDown(): Unit = arg.swipeDown().also { Anvil.render() }
+            override fun swipeDown(): Unit = arg.swipeDown().also { Inkremental.render() }
 
-            override fun swipeLeft(): Unit = arg.swipeLeft().also { Anvil.render() }
+            override fun swipeLeft(): Unit = arg.swipeLeft().also { Inkremental.render() }
 
-            override fun swipeRight(): Unit = arg.swipeRight().also { Anvil.render() }
+            override fun swipeRight(): Unit = arg.swipeRight().also { Inkremental.render() }
 
-            override fun swipeUp(): Unit = arg.swipeUp().also { Anvil.render() }
+            override fun swipeUp(): Unit = arg.swipeUp().also { Inkremental.render() }
           })
           true
         }
@@ -387,7 +389,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: InputEvent) -> Boolean)?
           v.setOnUnhandledInputEventListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -869,7 +871,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View, arg1: WindowInsets) -> WindowInsets)?
         v.setOnApplyWindowInsetsListener { arg0, arg1 ->
-          arg(arg0, arg1).also { Anvil.render() }
+          arg(arg0, arg1).also { Inkremental.render() }
         }
         true
       }
@@ -883,7 +885,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View) -> Unit)?
         v.setOnClickListener { arg0 ->
-          arg(arg0).also { Anvil.render() }
+          arg(arg0).also { Inkremental.render() }
         }
         true
       }
@@ -901,7 +903,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           arg2: ContextMenu.ContextMenuInfo
         ) -> Unit)?
         v.setOnCreateContextMenuListener { arg0, arg1, arg2 ->
-          arg(arg0, arg1, arg2).also { Anvil.render() }
+          arg(arg0, arg1, arg2).also { Inkremental.render() }
         }
         true
       }
@@ -915,7 +917,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View, arg1: DragEvent) -> Boolean)?
         v.setOnDragListener { arg0, arg1 ->
-          arg(arg0, arg1).also { Anvil.render() }
+          arg(arg0, arg1).also { Inkremental.render() }
         }
         true
       }
@@ -929,7 +931,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View, arg1: Boolean) -> Unit)?
         v.setOnFocusChangeListener { arg0, arg1 ->
-          arg(arg0, arg1).also { Anvil.render() }
+          arg(arg0, arg1).also { Inkremental.render() }
         }
         true
       }
@@ -943,7 +945,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View, arg1: MotionEvent) -> Boolean)?
         v.setOnGenericMotionListener { arg0, arg1 ->
-          arg(arg0, arg1).also { Anvil.render() }
+          arg(arg0, arg1).also { Inkremental.render() }
         }
         true
       }
@@ -957,7 +959,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View, arg1: MotionEvent) -> Boolean)?
         v.setOnHoverListener { arg0, arg1 ->
-          arg(arg0, arg1).also { Anvil.render() }
+          arg(arg0, arg1).also { Inkremental.render() }
         }
         true
       }
@@ -975,7 +977,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
           arg2: KeyEvent
         ) -> Boolean)?
         v.setOnKeyListener { arg0, arg1, arg2 ->
-          arg(arg0, arg1, arg2).also { Anvil.render() }
+          arg(arg0, arg1, arg2).also { Inkremental.render() }
         }
         true
       }
@@ -989,7 +991,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View) -> Boolean)?
         v.setOnLongClickListener { arg0 ->
-          arg(arg0).also { Anvil.render() }
+          arg(arg0).also { Inkremental.render() }
         }
         true
       }
@@ -1003,7 +1005,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: Int) -> Unit)?
         v.setOnSystemUiVisibilityChangeListener { arg0 ->
-          arg(arg0).also { Anvil.render() }
+          arg(arg0).also { Inkremental.render() }
         }
         true
       }
@@ -1017,7 +1019,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
       arg is Function<*> -> {
         arg as ((arg0: View, arg1: MotionEvent) -> Boolean)?
         v.setOnTouchListener { arg0, arg1 ->
-          arg(arg0, arg1).also { Anvil.render() }
+          arg(arg0, arg1).also { Inkremental.render() }
         }
         true
       }
@@ -1410,10 +1412,10 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is ViewGroup.OnHierarchyChangeListener -> {
           v.setOnHierarchyChangeListener(object : ViewGroup.OnHierarchyChangeListener {
             override fun onChildViewAdded(arg0: View, arg1: View): Unit = arg.onChildViewAdded(arg0,
-                arg1).also { Anvil.render() }
+                arg1).also { Inkremental.render() }
 
             override fun onChildViewRemoved(arg0: View, arg1: View): Unit =
-                arg.onChildViewRemoved(arg0, arg1).also { Anvil.render() }
+                arg.onChildViewRemoved(arg0, arg1).also { Inkremental.render() }
           })
           true
         }
@@ -1472,7 +1474,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: ViewStub, arg1: View) -> Unit)?
           v.setOnInflateListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }
@@ -1612,10 +1614,10 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
               arg1: Int,
               arg2: Int,
               arg3: Int
-            ): Unit = arg.onScroll(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            ): Unit = arg.onScroll(arg0, arg1, arg2, arg3).also { Inkremental.render() }
 
             override fun onScrollStateChanged(arg0: AbsListView, arg1: Int): Unit =
-                arg.onScrollStateChanged(arg0, arg1).also { Anvil.render() }
+                arg.onScrollStateChanged(arg0, arg1).also { Inkremental.render() }
           })
           true
         }
@@ -1629,7 +1631,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: NumberPicker, arg1: Int) -> Unit)?
           v.setOnScrollListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }
@@ -1763,7 +1765,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -1777,7 +1779,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: MenuItem) -> Boolean)?
           v.setOnMenuItemClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -1829,7 +1831,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg3: Long
           ) -> Unit)?
           v.setOnItemClickListener { arg0, arg1, arg2, arg3 ->
-            arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            arg(arg0, arg1, arg2, arg3).also { Inkremental.render() }
           }
           true
         }
@@ -1848,7 +1850,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg3: Long
           ) -> Unit)?
           v.setOnItemClickListener { arg0, arg1, arg2, arg3 ->
-            arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            arg(arg0, arg1, arg2, arg3).also { Inkremental.render() }
           }
           true
         }
@@ -1871,7 +1873,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg3: Long
           ) -> Boolean)?
           v.setOnItemLongClickListener { arg0, arg1, arg2, arg3 ->
-            arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            arg(arg0, arg1, arg2, arg3).also { Inkremental.render() }
           }
           true
         }
@@ -1893,10 +1895,10 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
               arg1: View,
               arg2: Int,
               arg3: Long
-            ): Unit = arg.onItemSelected(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            ): Unit = arg.onItemSelected(arg0, arg1, arg2, arg3).also { Inkremental.render() }
 
             override fun onNothingSelected(arg0: AdapterView<*>): Unit =
-                arg.onNothingSelected(arg0).also { Anvil.render() }
+                arg.onNothingSelected(arg0).also { Inkremental.render() }
           })
           true
         }
@@ -1914,10 +1916,10 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
               arg1: View,
               arg2: Int,
               arg3: Long
-            ): Unit = arg.onItemSelected(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            ): Unit = arg.onItemSelected(arg0, arg1, arg2, arg3).also { Inkremental.render() }
 
             override fun onNothingSelected(arg0: AdapterView<*>): Unit =
-                arg.onNothingSelected(arg0).also { Anvil.render() }
+                arg.onNothingSelected(arg0).also { Inkremental.render() }
           })
           true
         }
@@ -2086,7 +2088,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as (() -> Unit)?
           v.setOnDismissListener {  ->
-            arg().also { Anvil.render() }
+            arg().also { Inkremental.render() }
           }
           true
         }
@@ -2176,7 +2178,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg3: Int
           ) -> Unit)?
           v.setOnDateChangeListener { arg0, arg1, arg2, arg3 ->
-            arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            arg(arg0, arg1, arg2, arg3).also { Inkremental.render() }
           }
           true
         }
@@ -2303,7 +2305,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: Chronometer) -> Unit)?
           v.setOnChronometerTickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -2345,7 +2347,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: CompoundButton, arg1: Boolean) -> Unit)?
           v.setOnCheckedChangeListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }
@@ -2359,7 +2361,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: RadioGroup, arg1: Int) -> Unit)?
           v.setOnCheckedChangeListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }
@@ -2449,7 +2451,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg4: Long
           ) -> Boolean)?
           v.setOnChildClickListener { arg0, arg1, arg2, arg3, arg4 ->
-            arg(arg0, arg1, arg2, arg3, arg4).also { Anvil.render() }
+            arg(arg0, arg1, arg2, arg3, arg4).also { Inkremental.render() }
           }
           true
         }
@@ -2471,7 +2473,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg3: Long
           ) -> Boolean)?
           v.setOnGroupClickListener { arg0, arg1, arg2, arg3 ->
-            arg(arg0, arg1, arg2, arg3).also { Anvil.render() }
+            arg(arg0, arg1, arg2, arg3).also { Inkremental.render() }
           }
           true
         }
@@ -2488,7 +2490,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: Int) -> Unit)?
           v.setOnGroupCollapseListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -2505,7 +2507,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: Int) -> Unit)?
           v.setOnGroupExpandListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -3049,7 +3051,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg2: Int
           ) -> Unit)?
           v.setOnValueChangedListener { arg0, arg1, arg2 ->
-            arg(arg0, arg1, arg2).also { Anvil.render() }
+            arg(arg0, arg1, arg2).also { Inkremental.render() }
           }
           true
         }
@@ -3231,7 +3233,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg2: Boolean
           ) -> Unit)?
           v.setOnRatingBarChangeListener { arg0, arg1, arg2 ->
-            arg(arg0, arg1, arg2).also { Anvil.render() }
+            arg(arg0, arg1, arg2).also { Inkremental.render() }
           }
           true
         }
@@ -3305,7 +3307,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as (() -> Boolean)?
           v.setOnCloseListener {  ->
-            arg().also { Anvil.render() }
+            arg().also { Inkremental.render() }
           }
           true
         }
@@ -3322,10 +3324,10 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is SearchView.OnQueryTextListener -> {
           v.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(arg0: String): Boolean =
-                arg.onQueryTextChange(arg0).also { Anvil.render() }
+                arg.onQueryTextChange(arg0).also { Inkremental.render() }
 
             override fun onQueryTextSubmit(arg0: String): Boolean =
-                arg.onQueryTextSubmit(arg0).also { Anvil.render() }
+                arg.onQueryTextSubmit(arg0).also { Inkremental.render() }
           })
           true
         }
@@ -3342,7 +3344,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: View, arg1: Boolean) -> Unit)?
           v.setOnQueryTextFocusChangeListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Anvil.render() }
+            arg(arg0, arg1).also { Inkremental.render() }
           }
           true
         }
@@ -3359,7 +3361,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: View) -> Unit)?
           v.setOnSearchClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -3376,10 +3378,10 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is SearchView.OnSuggestionListener -> {
           v.setOnSuggestionListener(object : SearchView.OnSuggestionListener {
             override fun onSuggestionClick(arg0: Int): Boolean = arg.onSuggestionClick(arg0).also {
-                Anvil.render() }
+                Inkremental.render() }
 
             override fun onSuggestionSelect(arg0: Int): Boolean =
-                arg.onSuggestionSelect(arg0).also { Anvil.render() }
+                arg.onSuggestionSelect(arg0).also { Inkremental.render() }
           })
           true
         }
@@ -3434,13 +3436,13 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
               arg0: SeekBar,
               arg1: Int,
               arg2: Boolean
-            ): Unit = arg.onProgressChanged(arg0, arg1, arg2).also { Anvil.render() }
+            ): Unit = arg.onProgressChanged(arg0, arg1, arg2).also { Inkremental.render() }
 
             override fun onStartTrackingTouch(arg0: SeekBar): Unit =
-                arg.onStartTrackingTouch(arg0).also { Anvil.render() }
+                arg.onStartTrackingTouch(arg0).also { Inkremental.render() }
 
             override fun onStopTrackingTouch(arg0: SeekBar): Unit =
-                arg.onStopTrackingTouch(arg0).also { Anvil.render() }
+                arg.onStopTrackingTouch(arg0).also { Inkremental.render() }
           })
           true
         }
@@ -3457,7 +3459,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as (() -> Unit)?
           v.setOnDrawerCloseListener {  ->
-            arg().also { Anvil.render() }
+            arg().also { Inkremental.render() }
           }
           true
         }
@@ -3474,7 +3476,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as (() -> Unit)?
           v.setOnDrawerOpenListener {  ->
-            arg().also { Anvil.render() }
+            arg().also { Inkremental.render() }
           }
           true
         }
@@ -3490,9 +3492,10 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         }
         arg is SlidingDrawer.OnDrawerScrollListener -> {
           v.setOnDrawerScrollListener(object : SlidingDrawer.OnDrawerScrollListener {
-            override fun onScrollEnded(): Unit = arg.onScrollEnded().also { Anvil.render() }
+            override fun onScrollEnded(): Unit = arg.onScrollEnded().also { Inkremental.render() }
 
-            override fun onScrollStarted(): Unit = arg.onScrollStarted().also { Anvil.render() }
+            override fun onScrollStarted(): Unit = arg.onScrollStarted().also { Inkremental.render()
+                }
           })
           true
         }
@@ -3640,7 +3643,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: String) -> Unit)?
           v.setOnTabChangedListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -3986,7 +3989,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg2: KeyEvent
           ) -> Boolean)?
           v.setOnEditorActionListener { arg0, arg1, arg2 ->
-            arg(arg0, arg1, arg2).also { Anvil.render() }
+            arg(arg0, arg1, arg2).also { Inkremental.render() }
           }
           true
         }
@@ -4144,7 +4147,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg2: Int
           ) -> Unit)?
           v.setOnTimeChangedListener { arg0, arg1, arg2 ->
-            arg(arg0, arg1, arg2).also { Anvil.render() }
+            arg(arg0, arg1, arg2).also { Inkremental.render() }
           }
           true
         }
@@ -4255,7 +4258,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: MediaPlayer) -> Unit)?
           v.setOnCompletionListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -4276,7 +4279,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg2: Int
           ) -> Boolean)?
           v.setOnErrorListener { arg0, arg1, arg2 ->
-            arg(arg0, arg1, arg2).also { Anvil.render() }
+            arg(arg0, arg1, arg2).also { Inkremental.render() }
           }
           true
         }
@@ -4297,7 +4300,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
             arg2: Int
           ) -> Boolean)?
           v.setOnInfoListener { arg0, arg1, arg2 ->
-            arg(arg0, arg1, arg2).also { Anvil.render() }
+            arg(arg0, arg1, arg2).also { Inkremental.render() }
           }
           true
         }
@@ -4314,7 +4317,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: MediaPlayer) -> Unit)?
           v.setOnPreparedListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -4377,7 +4380,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: View) -> Unit)?
           v.setOnZoomInClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }
@@ -4394,7 +4397,7 @@ object SdkSetter : Anvil.AttributeSetter<Any?> {
         arg is Function<*> -> {
           arg as ((arg0: View) -> Unit)?
           v.setOnZoomOutClickListener { arg0 ->
-            arg(arg0).also { Anvil.render() }
+            arg(arg0).also { Inkremental.render() }
           }
           true
         }

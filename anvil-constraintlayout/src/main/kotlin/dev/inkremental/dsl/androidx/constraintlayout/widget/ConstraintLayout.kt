@@ -4,9 +4,11 @@ package dev.inkremental.dsl.androidx.constraintlayout.widget
 
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.constraintlayout.*
-import trikita.anvil.*
+import dev.inkremental.v
 
 /*
  * TODO many of these methods should be available for children of ConstraintLayout but not ConstraintLayout itself.
@@ -60,7 +62,7 @@ abstract class ConstraintLayoutScope : ViewGroupScope() {
 
     companion object : ConstraintLayoutScope() {
         init {
-            Anvil.registerAttributeSetter(CustomConstraintSetter)
+            Inkremental.registerAttributeSetter(CustomConstraintSetter)
         }
     }
 }

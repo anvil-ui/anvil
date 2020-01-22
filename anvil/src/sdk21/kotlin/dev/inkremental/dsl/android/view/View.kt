@@ -18,8 +18,13 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.view.WindowInsets
 import android.view.animation.Animation
+import dev.inkremental.Inkremental
+import dev.inkremental.RootViewScope
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -28,11 +33,6 @@ import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.RootViewScope
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun view(configure: ViewScope.() -> Unit = {}) = v<View>(configure.bind(ViewScope))
 abstract class ViewScope : RootViewScope() {
@@ -153,8 +153,8 @@ abstract class ViewScope : RootViewScope() {
   fun z(arg: Float): Unit = attr("z", arg)
   companion object : ViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

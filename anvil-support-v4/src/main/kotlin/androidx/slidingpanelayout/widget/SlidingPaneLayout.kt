@@ -3,15 +3,15 @@
 package androidx.slidingpanelayout.widget
 
 import android.graphics.drawable.Drawable
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
+import dev.inkremental.v
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun slidingPaneLayout(configure: SlidingPaneLayoutScope.() -> Unit = {}) =
     v<SlidingPaneLayout>(configure.bind(SlidingPaneLayoutScope))
@@ -27,7 +27,7 @@ abstract class SlidingPaneLayoutScope : ViewGroupScope() {
   fun sliderFadeColor(arg: Int): Unit = attr("sliderFadeColor", arg)
   companion object : SlidingPaneLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

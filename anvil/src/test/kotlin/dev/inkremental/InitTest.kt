@@ -1,4 +1,4 @@
-package trikita.anvil
+package dev.inkremental
 
 import android.view.View
 import dev.inkremental.dsl.android.init
@@ -12,7 +12,7 @@ class InitTest : Utils() {
     @Test
     fun testInit() {
         println("============================")
-        Anvil.mount(container) {
+        Inkremental.mount(container) {
             //init(makeFunc("once"))
             v<MockView, ViewScope>(ViewScope) { init(makeFunc("setUpView")) }
         }
@@ -20,7 +20,7 @@ class InitTest : Utils() {
         //assertTrue(called["once"]!!)
         assertTrue(called["setUpView"]!!)
         called.clear()
-        Anvil.render()
+        Inkremental.render()
         //assertFalse(called.containsKey("once"))
         assertFalse(called.containsKey("setUpView"))
     }

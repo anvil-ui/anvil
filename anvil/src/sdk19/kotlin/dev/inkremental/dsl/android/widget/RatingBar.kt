@@ -3,17 +3,17 @@
 package dev.inkremental.dsl.android.widget
 
 import android.widget.RatingBar
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Float
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun ratingBar(configure: RatingBarScope.() -> Unit = {}) =
     v<RatingBar>(configure.bind(RatingBarScope))
@@ -29,8 +29,8 @@ abstract class RatingBarScope : AbsSeekBarScope() {
   fun stepSize(arg: Float): Unit = attr("stepSize", arg)
   companion object : RatingBarScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

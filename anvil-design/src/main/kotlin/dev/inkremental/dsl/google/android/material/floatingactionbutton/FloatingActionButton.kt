@@ -6,18 +6,18 @@ import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import com.google.android.material.animation.MotionSpec
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
 import dev.inkremental.dsl.google.android.material.internal.VisibilityAwareImageButtonScope
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Float
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun floatingActionButton(configure: FloatingActionButtonScope.() -> Unit = {}) =
     v<FloatingActionButton>(configure.bind(FloatingActionButtonScope))
@@ -49,8 +49,8 @@ abstract class FloatingActionButtonScope : VisibilityAwareImageButtonScope() {
   fun useCompatPadding(arg: Boolean): Unit = attr("useCompatPadding", arg)
   companion object : FloatingActionButtonScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

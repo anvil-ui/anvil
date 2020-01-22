@@ -2,17 +2,17 @@
 
 package androidx.swiperefreshlayout.widget
 
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.IntArray
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun swipeRefreshLayout(configure: SwipeRefreshLayoutScope.() -> Unit = {}) =
     v<SwipeRefreshLayout>(configure.bind(SwipeRefreshLayoutScope))
@@ -32,7 +32,7 @@ abstract class SwipeRefreshLayoutScope : ViewGroupScope() {
   fun slingshotDistance(arg: Int): Unit = attr("slingshotDistance", arg)
   companion object : SwipeRefreshLayoutScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

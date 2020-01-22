@@ -6,16 +6,16 @@ import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.widget.AbsSeekBar
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun absSeekBar(configure: AbsSeekBarScope.() -> Unit = {}) =
     v<AbsSeekBar>(configure.bind(AbsSeekBarScope))
@@ -28,8 +28,8 @@ abstract class AbsSeekBarScope : ProgressBarScope() {
   fun thumbTintMode(arg: PorterDuff.Mode?): Unit = attr("thumbTintMode", arg)
   companion object : AbsSeekBarScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

@@ -9,19 +9,19 @@ import com.google.android.material.animation.MotionSpec
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.resources.TextAppearance
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.widget.AppCompatCheckBoxScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Float
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun chip(configure: ChipScope.() -> Unit = {}) = v<Chip>(configure.bind(ChipScope))
 abstract class ChipScope : AppCompatCheckBoxScope() {
@@ -87,8 +87,8 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun textStartPaddingResource(arg: Int): Unit = attr("textStartPaddingResource", arg)
   companion object : ChipScope() {
     init {
-      Anvil.registerAttributeSetter(MaterialSetter)
-      Anvil.registerAttributeSetter(CustomMaterialSetter)
+      Inkremental.registerAttributeSetter(MaterialSetter)
+      Inkremental.registerAttributeSetter(CustomMaterialSetter)
     }
   }
 }

@@ -5,12 +5,12 @@ package dev.inkremental.dsl.androidx.gridlayout
 import android.util.Printer
 import android.view.View
 import androidx.gridlayout.widget.GridLayout
+import dev.inkremental.Inkremental
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
-import trikita.anvil.Anvil
 
 /**
  * DSL for creating views and settings their attributes.
@@ -19,7 +19,7 @@ import trikita.anvil.Anvil
  * It contains views and their setters for the library gridlayout-v7.
  * Please, don't edit it manually unless for debugging.
  */
-object GridLayoutv7Setter : Anvil.AttributeSetter<Any?> {
+object GridLayoutv7Setter : Inkremental.AttributeSetter<Any> {
   override fun set(
     v: View,
     name: String,

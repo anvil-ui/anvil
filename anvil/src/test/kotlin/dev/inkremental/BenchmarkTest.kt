@@ -1,8 +1,7 @@
-package trikita.anvil
+package dev.inkremental
 
 import dev.inkremental.dsl.android.view.ViewScope
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
-import trikita.anvil.Anvil.Renderable
 import kotlin.test.Test
 
 class BenchmarkTest : Utils() {
@@ -10,7 +9,7 @@ class BenchmarkTest : Utils() {
     @Test
     fun testRenderBenchmark() {
         var start: Long
-        val r = Renderable {
+        val r =  {
             for (i in 0..9) {
                 group(transform(i)) {
                     for (j in 0..9) {
@@ -20,26 +19,26 @@ class BenchmarkTest : Utils() {
             }
         }
         mode = 0
-        Anvil.mount(container, r)
+        Inkremental.mount(container, r)
         start = System.currentTimeMillis()
         for (i in 0 until N) {
-            Anvil.render()
+            Inkremental.render()
         }
         println("render/no-changes: " + (System.currentTimeMillis() - start) * 1000 / N + "us")
-        Anvil.unmount(container, true)
+        Inkremental.unmount(container, true)
         mode = 1
-        Anvil.mount(container, r)
+        Inkremental.mount(container, r)
         start = System.currentTimeMillis()
         for (i in 0 until N) {
-            Anvil.render()
+            Inkremental.render()
         }
         println("render/small-changes: " + (System.currentTimeMillis() - start) * 1000 / N + "us")
-        Anvil.unmount(container, true)
+        Inkremental.unmount(container, true)
         mode = 2
-        Anvil.mount(container, r)
+        Inkremental.mount(container, r)
         start = System.currentTimeMillis()
         for (i in 0 until N) {
-            Anvil.render()
+            Inkremental.render()
         }
         println("render/big-changes: " + (System.currentTimeMillis() - start) * 1000 / N + "us")
     }

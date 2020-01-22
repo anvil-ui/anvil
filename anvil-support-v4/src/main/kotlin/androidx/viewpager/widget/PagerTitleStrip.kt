@@ -2,16 +2,16 @@
 
 package androidx.viewpager.widget
 
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
+import dev.inkremental.v
 import kotlin.Float
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun pagerTitleStrip(configure: PagerTitleStripScope.() -> Unit = {}) =
     v<PagerTitleStrip>(configure.bind(PagerTitleStripScope))
@@ -22,7 +22,7 @@ abstract class PagerTitleStripScope : ViewGroupScope() {
   fun textSpacing(arg: Int): Unit = attr("textSpacing", arg)
   companion object : PagerTitleStripScope() {
     init {
-      Anvil.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(SupportCoreUiSetter)
     }
   }
 }

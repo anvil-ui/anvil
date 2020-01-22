@@ -5,16 +5,16 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import androidx.appcompat.widget.ActionMenuView
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun actionMenuView(configure: ActionMenuViewScope.() -> Unit = {}) =
     v<ActionMenuView>(configure.bind(ActionMenuViewScope))
@@ -26,8 +26,8 @@ abstract class ActionMenuViewScope : LinearLayoutCompatScope() {
   fun popupTheme(arg: Int): Unit = attr("popupTheme", arg)
   companion object : ActionMenuViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }

@@ -6,18 +6,18 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.widget.MediaController
 import android.widget.VideoView
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
 import dev.inkremental.dsl.android.SdkSetter
 import dev.inkremental.dsl.android.view.SurfaceViewScope
+import dev.inkremental.v
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun videoView(configure: VideoViewScope.() -> Unit = {}) =
     v<VideoView>(configure.bind(VideoViewScope))
@@ -39,8 +39,8 @@ abstract class VideoViewScope : SurfaceViewScope() {
   fun videoURI(arg: Uri): Unit = attr("videoURI", arg)
   companion object : VideoViewScope() {
     init {
-      Anvil.registerAttributeSetter(SdkSetter)
-      Anvil.registerAttributeSetter(CustomSdkSetter)
+      Inkremental.registerAttributeSetter(SdkSetter)
+      Inkremental.registerAttributeSetter(CustomSdkSetter)
     }
   }
 }

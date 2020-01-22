@@ -5,15 +5,15 @@ package dev.inkremental.dsl.androidx.appcompat.widget
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import androidx.appcompat.widget.AppCompatImageView
+import dev.inkremental.Inkremental
+import dev.inkremental.attr
+import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.ImageViewScope
 import dev.inkremental.dsl.androidx.appcompat.AppCompatv7Setter
 import dev.inkremental.dsl.androidx.appcompat.CustomAppCompatv7Setter
+import dev.inkremental.v
 import kotlin.Suppress
 import kotlin.Unit
-import trikita.anvil.Anvil
-import trikita.anvil.attr
-import trikita.anvil.bind
-import trikita.anvil.v
 
 fun appCompatImageView(configure: AppCompatImageViewScope.() -> Unit = {}) =
     v<AppCompatImageView>(configure.bind(AppCompatImageViewScope))
@@ -25,8 +25,8 @@ abstract class AppCompatImageViewScope : ImageViewScope() {
   fun supportImageTintMode(arg: PorterDuff.Mode?): Unit = attr("supportImageTintMode", arg)
   companion object : AppCompatImageViewScope() {
     init {
-      Anvil.registerAttributeSetter(AppCompatv7Setter)
-      Anvil.registerAttributeSetter(CustomAppCompatv7Setter)
+      Inkremental.registerAttributeSetter(AppCompatv7Setter)
+      Inkremental.registerAttributeSetter(CustomAppCompatv7Setter)
     }
   }
 }
