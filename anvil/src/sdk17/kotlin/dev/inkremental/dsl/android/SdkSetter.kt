@@ -1847,7 +1847,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
         arg is Function<*> -> {
           arg as (() -> Unit)?
           v.setOnDismissListener {  ->
-            arg().also { Anvil.render() }
+            arg().also { Inkremental.render() }
           }
           true
         }
@@ -3800,7 +3800,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
             arg2: Int
           ) -> Boolean)?
           v.setOnInfoListener { arg0, arg1, arg2 ->
-            arg(arg0, arg1, arg2).also { Anvil.render() }
+            arg(arg0, arg1, arg2).also { Inkremental.render() }
           }
           true
         }
