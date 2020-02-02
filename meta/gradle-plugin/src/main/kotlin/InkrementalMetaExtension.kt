@@ -42,6 +42,7 @@ data class InkrementalMetaModule(
     var platform: InkrementalPlatform? = null,
     var camelCaseName: String = "",
     var quirks: InkrementalQuirks = mutableMapOf(),
+    var transformers : InkrementalTransformers = mutableMapOf(),
     var dependencies: MutableMap<String, String> = mutableMapOf(),
     var srcPackage: String = "",
     var modulePackage: String = "",

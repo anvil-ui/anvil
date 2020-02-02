@@ -24,8 +24,6 @@ fun ViewScope.scrollFlags(scrollFlags: Int) = attr("scrollFlags", scrollFlags)
 fun ViewScope.behavior(behavior: CoordinatorLayout.Behavior<*>) = attr("behavior", behavior)
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 fun AppBarLayoutScope.appBarElevation(elevation: Dip) = attr("appBarElevation", elevation.value)
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-fun FloatingActionButtonScope.compatElevation(arg: Dip): Unit = attr("compatElevation", arg.value)
 
 object CustomMaterialSetter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when(name) {
@@ -57,13 +55,6 @@ object CustomMaterialSetter : Inkremental.AttributeSetter<Any> {
                         addState(IntArray(0), ObjectAnimator.ofFloat(v, "elevation", dip(value).toFloat()))
                     }
                 }
-                true
-            }
-            else -> false
-        }
-        "compatElevation" -> when {
-            v is FloatingActionButton && value is Int -> {
-                v.compatElevation = dip(value).toFloat()
                 true
             }
             else -> false

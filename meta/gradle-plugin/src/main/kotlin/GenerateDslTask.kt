@@ -46,6 +46,10 @@ abstract class GenerateDslTask : DefaultTask() {
                 )
                 addModifiers(KModifier.PUBLIC)
                 addSuperinterface(INKREMENTAL.nestedClass("AttributeSetter").parameterizedBy(ANY))
+                val hasPixelTransformer = model.views.mapNotNull { it.attrs.firstOrNull { it.transformers?.contains(DslTransformer.FLoatPixelToDipSizeTransformer) ?: false  } }
+                if (hasPixelTransformer.isNotEmpty()){
+                    addImport("dev.inkremental.dip",  "")
+                }
 
                 addFunction("set") {
                     addParameter("v", VIEW)
@@ -124,16 +128,43 @@ abstract class GenerateDslTask : DefaultTask() {
                         }
                     }
                     view.attrs
-                        .map {
-                            addFunction(it.name) {
-                                addParameter("arg", it.type.argType.copy(nullable = it.isNullable))
-                                returns(UNIT)
-                                addCode(CodeBlock.of("return %M(%S, arg)", attr, it.name))
+                        .map { attrModel ->
+                            addFunction(attrModel.name) {
+                                if (!handleTransformersForDsl(this, attrModel, attr)) {
+                                    addParameter("arg", attrModel.type.argType.copy(nullable = attrModel.isNullable))
+                                    returns(UNIT)
+                                    addCode(CodeBlock.of("return %M(%S, arg)", attr, attrModel.name))
+                                }
                             }
                         }
                 }
             }
         }
+    }
+
+    private fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
+        val transformers = attrModel.transformers ?: return false
+        if (transformers.isEmpty()) return false
+
+        var needsToBreak = false
+        transformers.forEach { dslTransformer ->
+            when (dslTransformer) {
+                DslTransformer.FLoatPixelToDipSizeTransformer -> {
+                    if (attrModel.type.argType.toString() == "kotlin.Float"){
+                        builder.addParameter("arg", ClassName.bestGuess("dev.inkremental.dsl.android.Dip"))
+                        builder.returns(UNIT)
+                        builder.addCode(CodeBlock.of("return %M(%S, arg.value)", attr, attrModel.name))
+                        needsToBreak = true
+                    }
+                }
+                DslTransformer.RequiresApi21Transformer -> {
+                    builder.addAnnotation(AnnotationSpec.builder(androidx.annotation.RequiresApi::class)
+                            .addMember("api = android.os.Build.VERSION_CODES.LOLLIPOP")
+                            .build())
+                }
+            }
+        }
+        return needsToBreak
     }
 
     private fun FileSpec.Builder.addDefaultAnnotations() =
@@ -257,16 +288,44 @@ abstract class GenerateDslTask : DefaultTask() {
             } else {
                 val v = owner.parametrizedType?.let { "(v as $it)" } ?: "v"
 
-                beginControlFlow(
-                   "v is %T && arg is %T ->",
-                    owner.starProjectedType,
-                    type.starProjectedType.copy(nullable = isNullable)
-                )
-                addStatement("$v.$setterName($argAsParam)", type.parametrizedType)
+                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam, type)) {
+                    beginControlFlow(
+                            "v is %T && arg is %T ->",
+                            owner.starProjectedType,
+                            type.starProjectedType.copy(nullable = isNullable)
+                    )
+                    addStatement("$v.$setterName($argAsParam)", type.parametrizedType)
+                }
                 addStatement("true")
                 endControlFlow()
             }
         }
+    }
+
+    private fun handleTransformersForAttrSetter(transformers: List<DslTransformer>?,
+                                                builder: CodeBlock.Builder,
+                                                owner: ViewModel,
+                                                v: String,
+                                                setterName: String,
+                                                argAsParam: String,
+                                                type: TypeModel): Boolean {
+        val transformers = transformers ?: return false
+        if (transformers.isEmpty()) return false
+
+        var needsToBreak = false
+        transformers.forEach { transformer ->
+            when (transformer) {
+                DslTransformer.FLoatPixelToDipSizeTransformer -> {
+                    builder.beginControlFlow(
+                            "v is %T && arg is Int ->",
+                            owner.starProjectedType
+                    )
+                    builder.addStatement("$v.$setterName(dip($argAsParam).toFloat())", type.parametrizedType)
+                    needsToBreak = true
+                }
+            }
+        }
+        return needsToBreak
     }
 }
 

@@ -32,6 +32,7 @@ import com.google.android.material.resources.TextAppearance
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 import dev.inkremental.Inkremental
+import dev.inkremental.dip
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.CharSequence
@@ -1134,6 +1135,13 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       v is CircularRevealCardView && arg is CircularRevealWidget.RevealInfo? -> {
         v.setRevealInfo(arg)
+        true
+      }
+      else -> false
+    }
+    "compatElevation" -> when {
+      v is FloatingActionButton && arg is Int -> {
+        v.setCompatElevation(dip(arg).toFloat())
         true
       }
       else -> false

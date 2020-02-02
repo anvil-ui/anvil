@@ -104,7 +104,8 @@ data class AttrModel(
     val isArray: Boolean = false,
     val isVarArg: Boolean = false,
     val isListener: Boolean = false,
-    val isNullable: Boolean = false
+    val isNullable: Boolean = false,
+    val transformers: List<DslTransformer>? = null
 ) {
     @Transient lateinit var owner: ViewModel
 }

@@ -1,3 +1,5 @@
+import dev.inkremental.meta.model.DslTransformer.*
+
 plugins {
 	id("com.android.library")
 	id("org.jetbrains.kotlin.android")
@@ -15,12 +17,11 @@ inkremental {
 		camelCaseName = "CardViewv7"
         srcPackage = "androidx.cardview"
         modulePackage = "dev.inkremental.dsl.androidx.cardview"
-		manualSetterName = "CustomCardViewv7Setter"
-		quirks = mutableMapOf(
+		transformers = mapOf(
 				"androidx.cardview.widget.CardView" to mapOf(
-						"setCardElevation" to false,
-						"setMaxCardElevation" to false,
-						"setRadius" to false
+						"setCardElevation" to listOf(FLoatPixelToDipSizeTransformer),
+						"setMaxCardElevation" to listOf(FLoatPixelToDipSizeTransformer),
+						"setRadius" to listOf(FLoatPixelToDipSizeTransformer)
 				)
 		)
 	}

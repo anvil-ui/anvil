@@ -19,6 +19,7 @@ dependencies {
     //compileClasspath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.60")
     //runtimeClasspath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.60")
     compileClasspath("com.android.tools.build:gradle:3.5.3")
+    compileClasspath("androidx.annotation:annotation:1.1.0")
     runtimeClasspath("com.android.tools.build:gradle:3.5.3")
 }
 
