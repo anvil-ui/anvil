@@ -40,11 +40,11 @@ object SupportCoreUiSetter : Inkremental.AttributeSetter<Any> {
   ): Boolean = when (name) {
     "statusBarBackground" -> when {
       v is CoordinatorLayout && arg is Drawable? -> {
-        v.setStatusBarBackground(arg as Drawable)
+        v.setStatusBarBackground(arg)
         true
       }
       v is DrawerLayout && arg is Drawable? -> {
-        v.setStatusBarBackground(arg as Drawable)
+        v.setStatusBarBackground(arg)
         true
       }
       v is DrawerLayout && arg is Int -> {
@@ -115,7 +115,7 @@ object SupportCoreUiSetter : Inkremental.AttributeSetter<Any> {
     }
     "panelSlideListener" -> when {
       v is SlidingPaneLayout && arg is SlidingPaneLayout.PanelSlideListener? -> {
-        v.setPanelSlideListener(arg as SlidingPaneLayout.PanelSlideListener)
+        v.setPanelSlideListener(arg)
         true
       }
       else -> false
@@ -129,14 +129,14 @@ object SupportCoreUiSetter : Inkremental.AttributeSetter<Any> {
     }
     "shadowDrawableLeft" -> when {
       v is SlidingPaneLayout && arg is Drawable? -> {
-        v.setShadowDrawableLeft(arg as Drawable)
+        v.setShadowDrawableLeft(arg)
         true
       }
       else -> false
     }
     "shadowDrawableRight" -> when {
       v is SlidingPaneLayout && arg is Drawable? -> {
-        v.setShadowDrawableRight(arg as Drawable)
+        v.setShadowDrawableRight(arg)
         true
       }
       else -> false
@@ -185,7 +185,7 @@ object SupportCoreUiSetter : Inkremental.AttributeSetter<Any> {
     }
     "onChildScrollUpCallback" -> when {
       v is SwipeRefreshLayout && arg is SwipeRefreshLayout.OnChildScrollUpCallback? -> {
-        v.setOnChildScrollUpCallback(arg as SwipeRefreshLayout.OnChildScrollUpCallback)
+        v.setOnChildScrollUpCallback(arg)
         true
       }
       else -> false
@@ -321,7 +321,7 @@ object SupportCoreUiSetter : Inkremental.AttributeSetter<Any> {
     }
     "pageMarginDrawable" -> when {
       v is ViewPager && arg is Drawable? -> {
-        v.setPageMarginDrawable(arg as Drawable)
+        v.setPageMarginDrawable(arg)
         true
       }
       v is ViewPager && arg is Int -> {

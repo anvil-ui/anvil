@@ -38,7 +38,7 @@ abstract class RenderableRecyclerViewAdapter : RecyclerView.Adapter<RenderableRe
 
     companion object {
         fun <T> withItems(items: List<T>,
-                          r: RenderableAdapter.Item<T>): RenderableRecyclerViewAdapter {
+                          r: (index: Int, item: T) -> Unit): RenderableRecyclerViewAdapter {
             return object : RenderableRecyclerViewAdapter() {
 
                 override fun getItemCount(): Int {
@@ -53,7 +53,7 @@ abstract class RenderableRecyclerViewAdapter : RecyclerView.Adapter<RenderableRe
                 override fun view(holder: RecyclerView.ViewHolder?) {
                     holder?.let {
                         val i = it.layoutPosition
-                        r.view(i, items[i])
+                        r(i, items[i])
                     }
                 }
 

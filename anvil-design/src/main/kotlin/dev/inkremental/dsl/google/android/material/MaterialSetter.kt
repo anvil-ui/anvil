@@ -116,14 +116,14 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "collapsedTitleTypeface" -> when {
       v is CollapsingToolbarLayout && arg is Typeface? -> {
-        v.setCollapsedTitleTypeface(arg as Typeface)
+        v.setCollapsedTitleTypeface(arg)
         true
       }
       else -> false
     }
     "contentScrim" -> when {
       v is CollapsingToolbarLayout && arg is Drawable? -> {
-        v.setContentScrim(arg as Drawable)
+        v.setContentScrim(arg)
         true
       }
       else -> false
@@ -200,7 +200,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "expandedTitleTypeface" -> when {
       v is CollapsingToolbarLayout && arg is Typeface? -> {
-        v.setExpandedTitleTypeface(arg as Typeface)
+        v.setExpandedTitleTypeface(arg)
         true
       }
       else -> false
@@ -228,7 +228,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "statusBarScrim" -> when {
       v is CollapsingToolbarLayout && arg is Drawable? -> {
-        v.setStatusBarScrim(arg as Drawable)
+        v.setStatusBarScrim(arg)
         true
       }
       else -> false
@@ -249,7 +249,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "title" -> when {
       v is CollapsingToolbarLayout && arg is CharSequence? -> {
-        v.setTitle(arg as CharSequence)
+        v.setTitle(arg)
         true
       }
       else -> false
@@ -263,7 +263,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "backgroundTint" -> when {
       v is BottomAppBar && arg is ColorStateList? -> {
-        v.setBackgroundTint(arg as ColorStateList)
+        v.setBackgroundTint(arg)
         true
       }
       else -> false
@@ -305,11 +305,11 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "itemBackground" -> when {
       v is BottomNavigationView && arg is Drawable? -> {
-        v.setItemBackground(arg as Drawable)
+        v.setItemBackground(arg)
         true
       }
       v is NavigationView && arg is Drawable? -> {
-        v.setItemBackground(arg as Drawable)
+        v.setItemBackground(arg)
         true
       }
       else -> false
@@ -348,11 +348,11 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "itemIconTintList" -> when {
       v is BottomNavigationView && arg is ColorStateList? -> {
-        v.setItemIconTintList(arg as ColorStateList)
+        v.setItemIconTintList(arg)
         true
       }
       v is NavigationView && arg is ColorStateList? -> {
-        v.setItemIconTintList(arg as ColorStateList)
+        v.setItemIconTintList(arg)
         true
       }
       else -> false
@@ -373,11 +373,11 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "itemTextColor" -> when {
       v is BottomNavigationView && arg is ColorStateList? -> {
-        v.setItemTextColor(arg as ColorStateList)
+        v.setItemTextColor(arg)
         true
       }
       v is NavigationView && arg is ColorStateList? -> {
-        v.setItemTextColor(arg as ColorStateList)
+        v.setItemTextColor(arg)
         true
       }
       else -> false
@@ -483,7 +483,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "iconTint" -> when {
       v is MaterialButton && arg is ColorStateList? -> {
-        v.setIconTint(arg as ColorStateList)
+        v.setIconTint(arg)
         true
       }
       else -> false
@@ -504,15 +504,15 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "rippleColor" -> when {
       v is MaterialButton && arg is ColorStateList? -> {
-        v.setRippleColor(arg as ColorStateList)
+        v.setRippleColor(arg)
         true
       }
       v is Chip && arg is ColorStateList? -> {
-        v.setRippleColor(arg as ColorStateList)
+        v.setRippleColor(arg)
         true
       }
       v is FloatingActionButton && arg is ColorStateList? -> {
-        v.setRippleColor(arg as ColorStateList)
+        v.setRippleColor(arg)
         true
       }
       v is FloatingActionButton && arg is Int -> {
@@ -534,7 +534,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "strokeColor" -> when {
       v is MaterialButton && arg is ColorStateList? -> {
-        v.setStrokeColor(arg as ColorStateList)
+        v.setStrokeColor(arg)
         true
       }
       v is MaterialCardView && arg is Int -> {
@@ -584,7 +584,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "checkedIcon" -> when {
       v is Chip && arg is Drawable? -> {
-        v.setCheckedIcon(arg as Drawable)
+        v.setCheckedIcon(arg)
         true
       }
       else -> false
@@ -609,7 +609,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "chipBackgroundColor" -> when {
       v is Chip && arg is ColorStateList? -> {
-        v.setChipBackgroundColor(arg as ColorStateList)
+        v.setChipBackgroundColor(arg)
         true
       }
       else -> false
@@ -658,7 +658,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "chipIcon" -> when {
       v is Chip && arg is Drawable? -> {
-        v.setChipIcon(arg as Drawable)
+        v.setChipIcon(arg)
         true
       }
       else -> false
@@ -686,7 +686,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "chipIconTint" -> when {
       v is Chip && arg is ColorStateList? -> {
-        v.setChipIconTint(arg as ColorStateList)
+        v.setChipIconTint(arg)
         true
       }
       else -> false
@@ -739,7 +739,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "chipStrokeColor" -> when {
       v is Chip && arg is ColorStateList? -> {
-        v.setChipStrokeColor(arg as ColorStateList)
+        v.setChipStrokeColor(arg)
         true
       }
       else -> false
@@ -767,14 +767,14 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "closeIcon" -> when {
       v is Chip && arg is Drawable? -> {
-        v.setCloseIcon(arg as Drawable)
+        v.setCloseIcon(arg)
         true
       }
       else -> false
     }
     "closeIconContentDescription" -> when {
       v is Chip && arg is CharSequence? -> {
-        v.setCloseIconContentDescription(arg as CharSequence)
+        v.setCloseIconContentDescription(arg)
         true
       }
       else -> false
@@ -830,7 +830,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "closeIconTint" -> when {
       v is Chip && arg is ColorStateList? -> {
-        v.setCloseIconTint(arg as ColorStateList)
+        v.setCloseIconTint(arg)
         true
       }
       else -> false
@@ -855,7 +855,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "hideMotionSpec" -> when {
       v is Chip && arg is MotionSpec? -> {
-        v.setHideMotionSpec(arg as MotionSpec)
+        v.setHideMotionSpec(arg)
         true
       }
       v is FloatingActionButton && arg is MotionSpec -> {
@@ -922,7 +922,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "showMotionSpec" -> when {
       v is Chip && arg is MotionSpec? -> {
-        v.setShowMotionSpec(arg as MotionSpec)
+        v.setShowMotionSpec(arg)
         true
       }
       v is FloatingActionButton && arg is MotionSpec -> {
@@ -944,7 +944,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "textAppearance" -> when {
       v is Chip && arg is TextAppearance? -> {
-        v.setTextAppearance(arg as TextAppearance)
+        v.setTextAppearance(arg)
         true
       }
       v is NavigationMenuItemView && arg is Int -> {
@@ -1071,23 +1071,23 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "circularRevealOverlayDrawable" -> when {
       v is CircularRevealFrameLayout && arg is Drawable? -> {
-        v.setCircularRevealOverlayDrawable(arg as Drawable)
+        v.setCircularRevealOverlayDrawable(arg)
         true
       }
       v is CircularRevealGridLayout && arg is Drawable? -> {
-        v.setCircularRevealOverlayDrawable(arg as Drawable)
+        v.setCircularRevealOverlayDrawable(arg)
         true
       }
       v is CircularRevealLinearLayout && arg is Drawable? -> {
-        v.setCircularRevealOverlayDrawable(arg as Drawable)
+        v.setCircularRevealOverlayDrawable(arg)
         true
       }
       v is CircularRevealRelativeLayout && arg is Drawable? -> {
-        v.setCircularRevealOverlayDrawable(arg as Drawable)
+        v.setCircularRevealOverlayDrawable(arg)
         true
       }
       v is CircularRevealCardView && arg is Drawable? -> {
-        v.setCircularRevealOverlayDrawable(arg as Drawable)
+        v.setCircularRevealOverlayDrawable(arg)
         true
       }
       else -> false
@@ -1117,30 +1117,23 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "revealInfo" -> when {
       v is CircularRevealFrameLayout && arg is CircularRevealWidget.RevealInfo? -> {
-        v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
+        v.setRevealInfo(arg)
         true
       }
       v is CircularRevealGridLayout && arg is CircularRevealWidget.RevealInfo? -> {
-        v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
+        v.setRevealInfo(arg)
         true
       }
       v is CircularRevealLinearLayout && arg is CircularRevealWidget.RevealInfo? -> {
-        v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
+        v.setRevealInfo(arg)
         true
       }
       v is CircularRevealRelativeLayout && arg is CircularRevealWidget.RevealInfo? -> {
-        v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
+        v.setRevealInfo(arg)
         true
       }
       v is CircularRevealCardView && arg is CircularRevealWidget.RevealInfo? -> {
-        v.setRevealInfo(arg as CircularRevealWidget.RevealInfo)
-        true
-      }
-      else -> false
-    }
-    "compatElevation" -> when {
-      v is FloatingActionButton && arg is Float -> {
-        v.setCompatElevation(arg)
+        v.setRevealInfo(arg)
         true
       }
       else -> false
@@ -1203,28 +1196,28 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "supportBackgroundTintList" -> when {
       v is FloatingActionButton && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       else -> false
     }
     "supportBackgroundTintMode" -> when {
       v is FloatingActionButton && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       else -> false
     }
     "supportImageTintList" -> when {
       v is FloatingActionButton && arg is ColorStateList? -> {
-        v.setSupportImageTintList(arg as ColorStateList)
+        v.setSupportImageTintList(arg)
         true
       }
       else -> false
     }
     "supportImageTintMode" -> when {
       v is FloatingActionButton && arg is PorterDuff.Mode? -> {
-        v.setSupportImageTintMode(arg as PorterDuff.Mode)
+        v.setSupportImageTintMode(arg)
         true
       }
       else -> false
@@ -1298,7 +1291,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "navigationItemSelectedListener" -> when {
       v is NavigationView && arg is NavigationView.OnNavigationItemSelectedListener? -> {
-        v.setNavigationItemSelectedListener(arg as NavigationView.OnNavigationItemSelectedListener)
+        v.setNavigationItemSelectedListener(arg)
         true
       }
       else -> false
@@ -1319,7 +1312,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "selectedTabIndicator" -> when {
       v is TabLayout && arg is Drawable? -> {
-        v.setSelectedTabIndicator(arg as Drawable)
+        v.setSelectedTabIndicator(arg)
         true
       }
       v is TabLayout && arg is Int -> {
@@ -1351,7 +1344,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "tabIconTint" -> when {
       v is TabLayout && arg is ColorStateList? -> {
-        v.setTabIconTint(arg as ColorStateList)
+        v.setTabIconTint(arg)
         true
       }
       else -> false
@@ -1393,7 +1386,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "tabTextColors" -> when {
       v is TabLayout && arg is ColorStateList? -> {
-        v.setTabTextColors(arg as ColorStateList)
+        v.setTabTextColors(arg)
         true
       }
       else -> false
@@ -1456,14 +1449,14 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "defaultHintTextColor" -> when {
       v is TextInputLayout && arg is ColorStateList? -> {
-        v.setDefaultHintTextColor(arg as ColorStateList)
+        v.setDefaultHintTextColor(arg)
         true
       }
       else -> false
     }
     "error" -> when {
       v is TextInputLayout && arg is CharSequence? -> {
-        v.setError(arg as CharSequence)
+        v.setError(arg)
         true
       }
       else -> false
@@ -1484,21 +1477,21 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "errorTextColor" -> when {
       v is TextInputLayout && arg is ColorStateList? -> {
-        v.setErrorTextColor(arg as ColorStateList)
+        v.setErrorTextColor(arg)
         true
       }
       else -> false
     }
     "helperText" -> when {
       v is TextInputLayout && arg is CharSequence? -> {
-        v.setHelperText(arg as CharSequence)
+        v.setHelperText(arg)
         true
       }
       else -> false
     }
     "helperTextColor" -> when {
       v is TextInputLayout && arg is ColorStateList? -> {
-        v.setHelperTextColor(arg as ColorStateList)
+        v.setHelperTextColor(arg)
         true
       }
       else -> false
@@ -1519,7 +1512,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "hint" -> when {
       v is TextInputLayout && arg is CharSequence? -> {
-        v.setHint(arg as CharSequence)
+        v.setHint(arg)
         true
       }
       else -> false
@@ -1547,7 +1540,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "passwordVisibilityToggleContentDescription" -> when {
       v is TextInputLayout && arg is CharSequence? -> {
-        v.setPasswordVisibilityToggleContentDescription(arg as CharSequence)
+        v.setPasswordVisibilityToggleContentDescription(arg)
         true
       }
       v is TextInputLayout && arg is Int -> {
@@ -1558,7 +1551,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "passwordVisibilityToggleDrawable" -> when {
       v is TextInputLayout && arg is Drawable? -> {
-        v.setPasswordVisibilityToggleDrawable(arg as Drawable)
+        v.setPasswordVisibilityToggleDrawable(arg)
         true
       }
       v is TextInputLayout && arg is Int -> {
@@ -1576,14 +1569,14 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "passwordVisibilityToggleTintList" -> when {
       v is TextInputLayout && arg is ColorStateList? -> {
-        v.setPasswordVisibilityToggleTintList(arg as ColorStateList)
+        v.setPasswordVisibilityToggleTintList(arg)
         true
       }
       else -> false
     }
     "passwordVisibilityToggleTintMode" -> when {
       v is TextInputLayout && arg is PorterDuff.Mode? -> {
-        v.setPasswordVisibilityToggleTintMode(arg as PorterDuff.Mode)
+        v.setPasswordVisibilityToggleTintMode(arg)
         true
       }
       else -> false
@@ -1597,7 +1590,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "typeface" -> when {
       v is TextInputLayout && arg is Typeface? -> {
-        v.setTypeface(arg as Typeface)
+        v.setTypeface(arg)
         true
       }
       else -> false

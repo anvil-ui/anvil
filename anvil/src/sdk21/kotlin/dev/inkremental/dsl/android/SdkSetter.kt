@@ -368,7 +368,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "callback" -> when {
       v is TvView && arg is TvView.TvInputCallback? -> {
-        v.setCallback(arg as TvView.TvInputCallback)
+        v.setCallback(arg)
         true
       }
       else -> false
@@ -522,7 +522,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "accessibilityDelegate" -> when {
       arg is View.AccessibilityDelegate? -> {
-        v.setAccessibilityDelegate(arg as View.AccessibilityDelegate)
+        v.setAccessibilityDelegate(arg)
         true
       }
       else -> false
@@ -578,14 +578,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "backgroundTintList" -> when {
       arg is ColorStateList? -> {
-        v.setBackgroundTintList(arg as ColorStateList)
+        v.setBackgroundTintList(arg)
         true
       }
       else -> false
     }
     "backgroundTintMode" -> when {
       arg is PorterDuff.Mode? -> {
-        v.setBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setBackgroundTintMode(arg)
         true
       }
       else -> false
@@ -656,13 +656,6 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     "duplicateParentStateEnabled" -> when {
       arg is Boolean -> {
         v.setDuplicateParentStateEnabled(arg)
-        true
-      }
-      else -> false
-    }
-    "elevation" -> when {
-      arg is Float -> {
-        v.setElevation(arg)
         true
       }
       else -> false
@@ -774,7 +767,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "layerPaint" -> when {
       arg is Paint? -> {
-        v.setLayerPaint(arg as Paint)
+        v.setLayerPaint(arg)
         true
       }
       else -> false
@@ -1744,14 +1737,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "thumbTintList" -> when {
       v is AbsSeekBar && arg is ColorStateList? -> {
-        v.setThumbTintList(arg as ColorStateList)
+        v.setThumbTintList(arg)
         true
       }
       else -> false
     }
     "thumbTintMode" -> when {
       v is AbsSeekBar && arg is PorterDuff.Mode? -> {
-        v.setThumbTintMode(arg as PorterDuff.Mode)
+        v.setThumbTintMode(arg)
         true
       }
       else -> false
@@ -2248,7 +2241,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "checkMarkDrawable" -> when {
       v is CheckedTextView && arg is Drawable? -> {
-        v.setCheckMarkDrawable(arg as Drawable)
+        v.setCheckMarkDrawable(arg)
         true
       }
       v is CheckedTextView && arg is Int -> {
@@ -2259,14 +2252,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "checkMarkTintList" -> when {
       v is CheckedTextView && arg is ColorStateList? -> {
-        v.setCheckMarkTintList(arg as ColorStateList)
+        v.setCheckMarkTintList(arg)
         true
       }
       else -> false
     }
     "checkMarkTintMode" -> when {
       v is CheckedTextView && arg is PorterDuff.Mode? -> {
-        v.setCheckMarkTintMode(arg as PorterDuff.Mode)
+        v.setCheckMarkTintMode(arg)
         true
       }
       else -> false
@@ -2315,7 +2308,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "buttonDrawable" -> when {
       v is CompoundButton && arg is Drawable? -> {
-        v.setButtonDrawable(arg as Drawable)
+        v.setButtonDrawable(arg)
         true
       }
       v is CompoundButton && arg is Int -> {
@@ -2326,14 +2319,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "buttonTintList" -> when {
       v is CompoundButton && arg is ColorStateList? -> {
-        v.setButtonTintList(arg as ColorStateList)
+        v.setButtonTintList(arg)
         true
       }
       else -> false
     }
     "buttonTintMode" -> when {
       v is CompoundButton && arg is PorterDuff.Mode? -> {
-        v.setButtonTintMode(arg as PorterDuff.Mode)
+        v.setButtonTintMode(arg)
         true
       }
       else -> false
@@ -2717,7 +2710,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
         true
       }
       v is ImageView && arg is Drawable? -> {
-        v.setImageDrawable(arg as Drawable)
+        v.setImageDrawable(arg)
         true
       }
       else -> false
@@ -2739,7 +2732,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
         true
       }
       v is ImageView && arg is Uri? -> {
-        v.setImageURI(arg as Uri)
+        v.setImageURI(arg)
         true
       }
       else -> false
@@ -2813,14 +2806,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "imageTintList" -> when {
       v is ImageView && arg is ColorStateList? -> {
-        v.setImageTintList(arg as ColorStateList)
+        v.setImageTintList(arg)
         true
       }
       else -> false
     }
     "imageTintMode" -> when {
       v is ImageView && arg is PorterDuff.Mode? -> {
-        v.setImageTintMode(arg as PorterDuff.Mode)
+        v.setImageTintMode(arg)
         true
       }
       else -> false
@@ -2935,7 +2928,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "divider" -> when {
       v is ListView && arg is Drawable? -> {
-        v.setDivider(arg as Drawable)
+        v.setDivider(arg)
         true
       }
       else -> false
@@ -3005,7 +2998,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "displayedValues" -> when {
       v is NumberPicker && arg is Array<*> -> {
-        v.setDisplayedValues(arg as Array<String>)
+        v.setDisplayedValues(arg as? Array<String>)
         true
       }
       else -> false
@@ -3096,14 +3089,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "indeterminateTintList" -> when {
       v is ProgressBar && arg is ColorStateList? -> {
-        v.setIndeterminateTintList(arg as ColorStateList)
+        v.setIndeterminateTintList(arg)
         true
       }
       else -> false
     }
     "indeterminateTintMode" -> when {
       v is ProgressBar && arg is PorterDuff.Mode? -> {
-        v.setIndeterminateTintMode(arg as PorterDuff.Mode)
+        v.setIndeterminateTintMode(arg)
         true
       }
       else -> false
@@ -3131,14 +3124,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "progressBackgroundTintList" -> when {
       v is ProgressBar && arg is ColorStateList? -> {
-        v.setProgressBackgroundTintList(arg as ColorStateList)
+        v.setProgressBackgroundTintList(arg)
         true
       }
       else -> false
     }
     "progressBackgroundTintMode" -> when {
       v is ProgressBar && arg is PorterDuff.Mode? -> {
-        v.setProgressBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setProgressBackgroundTintMode(arg)
         true
       }
       else -> false
@@ -3159,14 +3152,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "progressTintList" -> when {
       v is ProgressBar && arg is ColorStateList? -> {
-        v.setProgressTintList(arg as ColorStateList)
+        v.setProgressTintList(arg)
         true
       }
       else -> false
     }
     "progressTintMode" -> when {
       v is ProgressBar && arg is PorterDuff.Mode? -> {
-        v.setProgressTintMode(arg as PorterDuff.Mode)
+        v.setProgressTintMode(arg)
         true
       }
       else -> false
@@ -3180,21 +3173,21 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "secondaryProgressTintList" -> when {
       v is ProgressBar && arg is ColorStateList? -> {
-        v.setSecondaryProgressTintList(arg as ColorStateList)
+        v.setSecondaryProgressTintList(arg)
         true
       }
       else -> false
     }
     "secondaryProgressTintMode" -> when {
       v is ProgressBar && arg is PorterDuff.Mode? -> {
-        v.setSecondaryProgressTintMode(arg as PorterDuff.Mode)
+        v.setSecondaryProgressTintMode(arg)
         true
       }
       else -> false
     }
     "excludeMimes" -> when {
       v is QuickContactBadge && arg is Array<*> -> {
-        v.setExcludeMimes(arg as Array<String>)
+        v.setExcludeMimes(arg as? Array<String>)
         true
       }
       else -> false
@@ -3391,7 +3384,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "queryHint" -> when {
       v is SearchView && arg is CharSequence? -> {
-        v.setQueryHint(arg as CharSequence)
+        v.setQueryHint(arg)
         true
       }
       else -> false
@@ -3538,13 +3531,6 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "switchMinWidth" -> when {
-      v is Switch && arg is Int -> {
-        v.setSwitchMinWidth(arg)
-        true
-      }
-      else -> false
-    }
     "switchPadding" -> when {
       v is Switch && arg is Int -> {
         v.setSwitchPadding(arg)
@@ -3653,7 +3639,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "leftStripDrawable" -> when {
       v is TabWidget && arg is Drawable? -> {
-        v.setLeftStripDrawable(arg as Drawable)
+        v.setLeftStripDrawable(arg)
         true
       }
       v is TabWidget && arg is Int -> {
@@ -3664,7 +3650,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "rightStripDrawable" -> when {
       v is TabWidget && arg is Drawable? -> {
-        v.setRightStripDrawable(arg as Drawable)
+        v.setRightStripDrawable(arg)
         true
       }
       v is TabWidget && arg is Int -> {
@@ -3812,14 +3798,14 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "filters" -> when {
       v is TextView && arg is Array<*> -> {
-        v.setFilters(arg as Array<InputFilter>)
+        v.setFilters(arg as? Array<InputFilter>)
         true
       }
       else -> false
     }
     "fontFeatureSettings" -> when {
       v is TextView && arg is String? -> {
-        v.setFontFeatureSettings(arg as String)
+        v.setFontFeatureSettings(arg)
         true
       }
       else -> false
@@ -3962,13 +3948,6 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "minWidth" -> when {
-      v is TextView && arg is Int -> {
-        v.setMinWidth(arg)
-        true
-      }
-      else -> false
-    }
     "movementMethod" -> when {
       v is TextView && arg is MovementMethod -> {
         v.setMovementMethod(arg)
@@ -4101,7 +4080,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "typeface" -> when {
       v is TextView && arg is Typeface? -> {
-        v.setTypeface(arg as Typeface)
+        v.setTypeface(arg)
         true
       }
       else -> false
@@ -4179,7 +4158,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "navigationContentDescription" -> when {
       v is Toolbar && arg is CharSequence? -> {
-        v.setNavigationContentDescription(arg as CharSequence)
+        v.setNavigationContentDescription(arg)
         true
       }
       v is Toolbar && arg is Int -> {
@@ -4190,7 +4169,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "navigationIcon" -> when {
       v is Toolbar && arg is Drawable? -> {
-        v.setNavigationIcon(arg as Drawable)
+        v.setNavigationIcon(arg)
         true
       }
       v is Toolbar && arg is Int -> {

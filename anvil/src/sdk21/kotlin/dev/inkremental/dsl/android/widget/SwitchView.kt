@@ -22,7 +22,6 @@ fun switchView(configure: SwitchViewScope.() -> Unit = {}) =
 abstract class SwitchViewScope : CompoundButtonScope() {
   fun showText(arg: Boolean): Unit = attr("showText", arg)
   fun splitTrack(arg: Boolean): Unit = attr("splitTrack", arg)
-  fun switchMinWidth(arg: Int): Unit = attr("switchMinWidth", arg)
   fun switchPadding(arg: Int): Unit = attr("switchPadding", arg)
   fun switchTypeface(arg: Typeface): Unit = attr("switchTypeface", arg)
   fun textOff(arg: CharSequence): Unit = attr("textOff", arg)

@@ -72,7 +72,6 @@ abstract class TextViewScope : ViewScope() {
   fun minEms(arg: Int): Unit = attr("minEms", arg)
   fun minHeight(arg: Int): Unit = attr("minHeight", arg)
   fun minLines(arg: Int): Unit = attr("minLines", arg)
-  fun minWidth(arg: Int): Unit = attr("minWidth", arg)
   fun movementMethod(arg: MovementMethod): Unit = attr("movementMethod", arg)
   fun onEditorAction(arg: ((
     arg0: TextView,

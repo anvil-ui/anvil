@@ -9,9 +9,9 @@ import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
 import dev.inkremental.dsl.androidx.cardview.CardViewv7Setter
+import dev.inkremental.dsl.androidx.cardview.CustomCardViewv7Setter
 import dev.inkremental.v
 import kotlin.Boolean
-import kotlin.Float
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.Unit
@@ -20,14 +20,12 @@ fun cardView(configure: CardViewScope.() -> Unit = {}) = v<CardView>(configure.b
 abstract class CardViewScope : FrameLayoutScope() {
   fun cardBackgroundColor(arg: ColorStateList?): Unit = attr("cardBackgroundColor", arg)
   fun cardBackgroundColor(arg: Int): Unit = attr("cardBackgroundColor", arg)
-  fun cardElevation(arg: Float): Unit = attr("cardElevation", arg)
-  fun maxCardElevation(arg: Float): Unit = attr("maxCardElevation", arg)
   fun preventCornerOverlap(arg: Boolean): Unit = attr("preventCornerOverlap", arg)
-  fun radius(arg: Float): Unit = attr("radius", arg)
   fun useCompatPadding(arg: Boolean): Unit = attr("useCompatPadding", arg)
   companion object : CardViewScope() {
     init {
       Inkremental.registerAttributeSetter(CardViewv7Setter)
+      Inkremental.registerAttributeSetter(CustomCardViewv7Setter)
     }
   }
 }

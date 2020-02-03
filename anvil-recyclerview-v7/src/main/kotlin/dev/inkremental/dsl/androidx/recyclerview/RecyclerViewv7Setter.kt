@@ -29,21 +29,14 @@ object RecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
   ): Boolean = when (name) {
     "accessibilityDelegateCompat" -> when {
       v is RecyclerView && arg is RecyclerViewAccessibilityDelegate? -> {
-        v.setAccessibilityDelegateCompat(arg as RecyclerViewAccessibilityDelegate)
-        true
-      }
-      else -> false
-    }
-    "adapter" -> when {
-      v is RecyclerView && arg is RecyclerView.Adapter<*>? -> {
-        v.setAdapter(arg as RecyclerView.Adapter<RecyclerView.ViewHolder>)
+        v.setAccessibilityDelegateCompat(arg)
         true
       }
       else -> false
     }
     "childDrawingOrderCallback" -> when {
       v is RecyclerView && arg is RecyclerView.ChildDrawingOrderCallback? -> {
-        v.setChildDrawingOrderCallback(arg as RecyclerView.ChildDrawingOrderCallback)
+        v.setChildDrawingOrderCallback(arg)
         true
       }
       else -> false
@@ -64,7 +57,7 @@ object RecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "itemAnimator" -> when {
       v is RecyclerView && arg is RecyclerView.ItemAnimator? -> {
-        v.setItemAnimator(arg as RecyclerView.ItemAnimator)
+        v.setItemAnimator(arg)
         true
       }
       else -> false
@@ -78,7 +71,7 @@ object RecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "layoutManager" -> when {
       v is RecyclerView && arg is RecyclerView.LayoutManager? -> {
-        v.setLayoutManager(arg as RecyclerView.LayoutManager)
+        v.setLayoutManager(arg)
         true
       }
       else -> false
@@ -110,14 +103,14 @@ object RecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "recycledViewPool" -> when {
       v is RecyclerView && arg is RecyclerView.RecycledViewPool? -> {
-        v.setRecycledViewPool(arg as RecyclerView.RecycledViewPool)
+        v.setRecycledViewPool(arg)
         true
       }
       else -> false
     }
     "recyclerListener" -> when {
       v is RecyclerView && arg is RecyclerView.RecyclerListener? -> {
-        v.setRecyclerListener(arg as RecyclerView.RecyclerListener)
+        v.setRecyclerListener(arg)
         true
       }
       else -> false
@@ -131,7 +124,7 @@ object RecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "viewCacheExtension" -> when {
       v is RecyclerView && arg is RecyclerView.ViewCacheExtension? -> {
-        v.setViewCacheExtension(arg as RecyclerView.ViewCacheExtension)
+        v.setViewCacheExtension(arg)
         true
       }
       else -> false

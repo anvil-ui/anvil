@@ -15,6 +15,14 @@ inkremental {
 		camelCaseName = "CardViewv7"
         srcPackage = "androidx.cardview"
         modulePackage = "dev.inkremental.dsl.androidx.cardview"
+		manualSetterName = "CustomCardViewv7Setter"
+		quirks = mutableMapOf(
+				"androidx.cardview.widget.CardView" to mapOf(
+						"setCardElevation" to false,
+						"setMaxCardElevation" to false,
+						"setRadius" to false
+				)
+		)
 	}
 }
 

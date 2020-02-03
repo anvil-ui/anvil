@@ -475,7 +475,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "accessibilityDelegate" -> when {
       arg is View.AccessibilityDelegate? -> {
-        v.setAccessibilityDelegate(arg as View.AccessibilityDelegate)
+        v.setAccessibilityDelegate(arg)
         true
       }
       else -> false
@@ -699,7 +699,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "layerPaint" -> when {
       arg is Paint? -> {
-        v.setLayerPaint(arg as Paint)
+        v.setLayerPaint(arg)
         true
       }
       else -> false
@@ -2025,7 +2025,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "checkMarkDrawable" -> when {
       v is CheckedTextView && arg is Drawable? -> {
-        v.setCheckMarkDrawable(arg as Drawable)
+        v.setCheckMarkDrawable(arg)
         true
       }
       v is CheckedTextView && arg is Int -> {
@@ -2078,7 +2078,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "buttonDrawable" -> when {
       v is CompoundButton && arg is Drawable? -> {
-        v.setButtonDrawable(arg as Drawable)
+        v.setButtonDrawable(arg)
         true
       }
       v is CompoundButton && arg is Int -> {
@@ -2452,7 +2452,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
         true
       }
       v is ImageView && arg is Drawable? -> {
-        v.setImageDrawable(arg as Drawable)
+        v.setImageDrawable(arg)
         true
       }
       else -> false
@@ -2474,7 +2474,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
         true
       }
       v is ImageView && arg is Uri? -> {
-        v.setImageURI(arg as Uri)
+        v.setImageURI(arg)
         true
       }
       else -> false
@@ -2656,7 +2656,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "divider" -> when {
       v is ListView && arg is Drawable? -> {
-        v.setDivider(arg as Drawable)
+        v.setDivider(arg)
         true
       }
       else -> false
@@ -2726,7 +2726,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "displayedValues" -> when {
       v is NumberPicker && arg is Array<*> -> {
-        v.setDisplayedValues(arg as Array<String>)
+        v.setDisplayedValues(arg as? Array<String>)
         true
       }
       else -> false
@@ -2845,7 +2845,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "excludeMimes" -> when {
       v is QuickContactBadge && arg is Array<*> -> {
-        v.setExcludeMimes(arg as Array<String>)
+        v.setExcludeMimes(arg as? Array<String>)
         true
       }
       else -> false
@@ -3035,7 +3035,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "queryHint" -> when {
       v is SearchView && arg is CharSequence? -> {
-        v.setQueryHint(arg as CharSequence)
+        v.setQueryHint(arg)
         true
       }
       else -> false
@@ -3175,13 +3175,6 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "switchMinWidth" -> when {
-      v is Switch && arg is Int -> {
-        v.setSwitchMinWidth(arg)
-        true
-      }
-      else -> false
-    }
     "switchPadding" -> when {
       v is Switch && arg is Int -> {
         v.setSwitchPadding(arg)
@@ -3290,7 +3283,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "leftStripDrawable" -> when {
       v is TabWidget && arg is Drawable? -> {
-        v.setLeftStripDrawable(arg as Drawable)
+        v.setLeftStripDrawable(arg)
         true
       }
       v is TabWidget && arg is Int -> {
@@ -3301,7 +3294,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "rightStripDrawable" -> when {
       v is TabWidget && arg is Drawable? -> {
-        v.setRightStripDrawable(arg as Drawable)
+        v.setRightStripDrawable(arg)
         true
       }
       v is TabWidget && arg is Int -> {
@@ -3442,7 +3435,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "filters" -> when {
       v is TextView && arg is Array<*> -> {
-        v.setFilters(arg as Array<InputFilter>)
+        v.setFilters(arg as? Array<InputFilter>)
         true
       }
       else -> false
@@ -3578,13 +3571,6 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "minWidth" -> when {
-      v is TextView && arg is Int -> {
-        v.setMinWidth(arg)
-        true
-      }
-      else -> false
-    }
     "movementMethod" -> when {
       v is TextView && arg is MovementMethod -> {
         v.setMovementMethod(arg)
@@ -3710,7 +3696,7 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
     }
     "typeface" -> when {
       v is TextView && arg is Typeface? -> {
-        v.setTypeface(arg as Typeface)
+        v.setTypeface(arg)
         true
       }
       else -> false

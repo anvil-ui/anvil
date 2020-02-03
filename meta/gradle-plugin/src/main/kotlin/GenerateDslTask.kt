@@ -242,7 +242,8 @@ abstract class GenerateDslTask : DefaultTask() {
     private fun AttrModel.buildSetter(): CodeBlock {
         val argAsParam = when {
             isVarArg -> "*arg"
-            isNullable || isArray -> "arg as %T"
+            isNullable -> "arg"
+            isArray -> "arg as? %T"
             else -> "arg"
         }
 

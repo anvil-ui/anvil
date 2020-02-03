@@ -19,7 +19,6 @@ import kotlin.Unit
 fun switchView(configure: SwitchViewScope.() -> Unit = {}) =
     v<Switch>(configure.bind(SwitchViewScope))
 abstract class SwitchViewScope : CompoundButtonScope() {
-  fun switchMinWidth(arg: Int): Unit = attr("switchMinWidth", arg)
   fun switchPadding(arg: Int): Unit = attr("switchPadding", arg)
   fun switchTypeface(arg: Typeface): Unit = attr("switchTypeface", arg)
   fun textOff(arg: CharSequence): Unit = attr("textOff", arg)

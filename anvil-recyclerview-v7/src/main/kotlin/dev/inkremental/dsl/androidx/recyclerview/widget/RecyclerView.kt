@@ -21,7 +21,6 @@ fun recyclerView(configure: RecyclerViewScope.() -> Unit = {}) =
 abstract class RecyclerViewScope : ViewGroupScope() {
   fun accessibilityDelegateCompat(arg: RecyclerViewAccessibilityDelegate?): Unit =
       attr("accessibilityDelegateCompat", arg)
-  fun adapter(arg: RecyclerView.Adapter<RecyclerView.ViewHolder>?): Unit = attr("adapter", arg)
   fun childDrawingOrderCallback(arg: RecyclerView.ChildDrawingOrderCallback?): Unit =
       attr("childDrawingOrderCallback", arg)
   fun edgeEffectFactory(arg: RecyclerView.EdgeEffectFactory): Unit = attr("edgeEffectFactory", arg)

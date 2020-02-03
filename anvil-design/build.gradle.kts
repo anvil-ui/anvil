@@ -61,7 +61,10 @@ inkremental {
 				"setIconPadding:kotlin.Int" to false,
 				"setTextColor:android.content.res.ColorStateList" to false,
 				"setTitle:kotlin.CharSequence" to false
-			)
+			),
+				"com.google.android.material.floatingactionbutton.FloatingActionButton" to mapOf(
+						"setCompatElevation" to false
+				)
 		)
 	}
 }

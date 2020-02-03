@@ -8,7 +8,6 @@ import androidx.cardview.widget.CardView
 import dev.inkremental.Inkremental
 import kotlin.Any
 import kotlin.Boolean
-import kotlin.Float
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
@@ -29,7 +28,7 @@ object CardViewv7Setter : Inkremental.AttributeSetter<Any> {
   ): Boolean = when (name) {
     "cardBackgroundColor" -> when {
       v is CardView && arg is ColorStateList? -> {
-        v.setCardBackgroundColor(arg as ColorStateList)
+        v.setCardBackgroundColor(arg)
         true
       }
       v is CardView && arg is Int -> {
@@ -38,30 +37,9 @@ object CardViewv7Setter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "cardElevation" -> when {
-      v is CardView && arg is Float -> {
-        v.setCardElevation(arg)
-        true
-      }
-      else -> false
-    }
-    "maxCardElevation" -> when {
-      v is CardView && arg is Float -> {
-        v.setMaxCardElevation(arg)
-        true
-      }
-      else -> false
-    }
     "preventCornerOverlap" -> when {
       v is CardView && arg is Boolean -> {
         v.setPreventCornerOverlap(arg)
-        true
-      }
-      else -> false
-    }
-    "radius" -> when {
-      v is CardView && arg is Float -> {
-        v.setRadius(arg)
         true
       }
       else -> false

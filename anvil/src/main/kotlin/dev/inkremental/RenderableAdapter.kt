@@ -9,10 +9,6 @@ import dev.inkremental.Inkremental.Mount
 abstract class RenderableAdapter : BaseAdapter() {
     private var currentPosition = -1
 
-    interface Item<T> {
-        fun view(index: Int, item: T)
-    }
-
     override fun getView(pos: Int, convertView: View?, parent: ViewGroup): View {
         var v = convertView
         if (v == null) {
@@ -37,7 +33,7 @@ abstract class RenderableAdapter : BaseAdapter() {
     abstract fun view(index: Int)
 
     companion object {
-        fun <T> withItems(items: List<T>, r: Item<T>): RenderableAdapter {
+        fun <T> withItems(items: List<T>, r : (index: Int, item: T) -> Unit): RenderableAdapter {
             return object : RenderableAdapter() {
                 override fun getCount(): Int {
                     return items.size
@@ -48,7 +44,7 @@ abstract class RenderableAdapter : BaseAdapter() {
                 }
 
                 override fun view(pos: Int) {
-                    r.view(pos, getItem(pos))
+                    r(pos, getItem(pos))
                 }
             }
         }

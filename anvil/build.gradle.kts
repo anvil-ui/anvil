@@ -54,11 +54,17 @@ inkremental {
 			"android.widget.TextView" to mapOf(
 				"setText:kotlin.CharSequence" to false,
 				"setTextSize" to false, // broken: uses "sp" unit by default
-				"setInputExtras" to false
+				"setInputExtras" to false,
+				"setMinWidth" to false	// we handle it
+			),
+			// Exception must be checked in this attribute setter
+			"android.view.View" to mapOf(
+				"setElevation" to false // we handle it
 			),
 
 			"android.widget.Switch" to mapOf(
-				"__viewAlias" to "SwitchView"
+				"__viewAlias" to "SwitchView",
+				"setSwitchMinWidth" to false	// we handle it
 			),
 
 			// This will remove the whole builder, so no factory method will be generated

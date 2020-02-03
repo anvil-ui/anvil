@@ -313,11 +313,11 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "overflowIcon" -> when {
       v is ActionMenuView && arg is Drawable? -> {
-        v.setOverflowIcon(arg as Drawable)
+        v.setOverflowIcon(arg)
         true
       }
       v is Toolbar && arg is Drawable? -> {
-        v.setOverflowIcon(arg as Drawable)
+        v.setOverflowIcon(arg)
         true
       }
       else -> false
@@ -394,86 +394,86 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "supportBackgroundTintList" -> when {
       v is AppCompatAutoCompleteTextView && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatButton && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatCheckBox && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatEditText && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatImageButton && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatImageView && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatMultiAutoCompleteTextView && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatRadioButton && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatSpinner && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       v is AppCompatTextView && arg is ColorStateList? -> {
-        v.setSupportBackgroundTintList(arg as ColorStateList)
+        v.setSupportBackgroundTintList(arg)
         true
       }
       else -> false
     }
     "supportBackgroundTintMode" -> when {
       v is AppCompatAutoCompleteTextView && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatButton && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatCheckBox && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatEditText && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatImageButton && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatImageView && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatMultiAutoCompleteTextView && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatRadioButton && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatSpinner && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       v is AppCompatTextView && arg is PorterDuff.Mode? -> {
-        v.setSupportBackgroundTintMode(arg as PorterDuff.Mode)
+        v.setSupportBackgroundTintMode(arg)
         true
       }
       else -> false
@@ -487,44 +487,44 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "supportButtonTintList" -> when {
       v is AppCompatCheckBox && arg is ColorStateList? -> {
-        v.setSupportButtonTintList(arg as ColorStateList)
+        v.setSupportButtonTintList(arg)
         true
       }
       v is AppCompatRadioButton && arg is ColorStateList? -> {
-        v.setSupportButtonTintList(arg as ColorStateList)
+        v.setSupportButtonTintList(arg)
         true
       }
       else -> false
     }
     "supportButtonTintMode" -> when {
       v is AppCompatCheckBox && arg is PorterDuff.Mode? -> {
-        v.setSupportButtonTintMode(arg as PorterDuff.Mode)
+        v.setSupportButtonTintMode(arg)
         true
       }
       v is AppCompatRadioButton && arg is PorterDuff.Mode? -> {
-        v.setSupportButtonTintMode(arg as PorterDuff.Mode)
+        v.setSupportButtonTintMode(arg)
         true
       }
       else -> false
     }
     "supportImageTintList" -> when {
       v is AppCompatImageButton && arg is ColorStateList? -> {
-        v.setSupportImageTintList(arg as ColorStateList)
+        v.setSupportImageTintList(arg)
         true
       }
       v is AppCompatImageView && arg is ColorStateList? -> {
-        v.setSupportImageTintList(arg as ColorStateList)
+        v.setSupportImageTintList(arg)
         true
       }
       else -> false
     }
     "supportImageTintMode" -> when {
       v is AppCompatImageButton && arg is PorterDuff.Mode? -> {
-        v.setSupportImageTintMode(arg as PorterDuff.Mode)
+        v.setSupportImageTintMode(arg)
         true
       }
       v is AppCompatImageView && arg is PorterDuff.Mode? -> {
-        v.setSupportImageTintMode(arg as PorterDuff.Mode)
+        v.setSupportImageTintMode(arg)
         true
       }
       else -> false
@@ -538,14 +538,14 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "supportCompoundDrawablesTintList" -> when {
       v is AppCompatTextView && arg is ColorStateList? -> {
-        v.setSupportCompoundDrawablesTintList(arg as ColorStateList)
+        v.setSupportCompoundDrawablesTintList(arg)
         true
       }
       else -> false
     }
     "supportCompoundDrawablesTintMode" -> when {
       v is AppCompatTextView && arg is PorterDuff.Mode? -> {
-        v.setSupportCompoundDrawablesTintMode(arg as PorterDuff.Mode)
+        v.setSupportCompoundDrawablesTintMode(arg)
         true
       }
       else -> false
@@ -765,14 +765,14 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "thumbTintList" -> when {
       v is SwitchCompat && arg is ColorStateList? -> {
-        v.setThumbTintList(arg as ColorStateList)
+        v.setThumbTintList(arg)
         true
       }
       else -> false
     }
     "thumbTintMode" -> when {
       v is SwitchCompat && arg is PorterDuff.Mode? -> {
-        v.setThumbTintMode(arg as PorterDuff.Mode)
+        v.setThumbTintMode(arg)
         true
       }
       else -> false
@@ -793,21 +793,21 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "trackTintList" -> when {
       v is SwitchCompat && arg is ColorStateList? -> {
-        v.setTrackTintList(arg as ColorStateList)
+        v.setTrackTintList(arg)
         true
       }
       else -> false
     }
     "trackTintMode" -> when {
       v is SwitchCompat && arg is PorterDuff.Mode? -> {
-        v.setTrackTintMode(arg as PorterDuff.Mode)
+        v.setTrackTintMode(arg)
         true
       }
       else -> false
     }
     "collapseContentDescription" -> when {
       v is Toolbar && arg is CharSequence? -> {
-        v.setCollapseContentDescription(arg as CharSequence)
+        v.setCollapseContentDescription(arg)
         true
       }
       v is Toolbar && arg is Int -> {
@@ -818,7 +818,7 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "collapseIcon" -> when {
       v is Toolbar && arg is Drawable? -> {
-        v.setCollapseIcon(arg as Drawable)
+        v.setCollapseIcon(arg)
         true
       }
       v is Toolbar && arg is Int -> {
@@ -861,7 +861,7 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "navigationContentDescription" -> when {
       v is Toolbar && arg is CharSequence? -> {
-        v.setNavigationContentDescription(arg as CharSequence)
+        v.setNavigationContentDescription(arg)
         true
       }
       v is Toolbar && arg is Int -> {
@@ -872,7 +872,7 @@ object AppCompatv7Setter : Inkremental.AttributeSetter<Any> {
     }
     "navigationIcon" -> when {
       v is Toolbar && arg is Drawable? -> {
-        v.setNavigationIcon(arg as Drawable)
+        v.setNavigationIcon(arg)
         true
       }
       v is Toolbar && arg is Int -> {

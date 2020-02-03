@@ -16,6 +16,10 @@ inkremental {
         srcPackage = "androidx.recyclerview"
         modulePackage = "dev.inkremental.dsl.androidx.recyclerview"
 		manualSetterName = "CustomRecyclerViewv7Setter"
+		quirks = mutableMapOf(
+				"androidx.recyclerview.widget.RecyclerView" to mapOf(
+						"setAdapter" to false) //needs covariant in ViewHolder type, so we handle it
+		)
 	}
 }
 

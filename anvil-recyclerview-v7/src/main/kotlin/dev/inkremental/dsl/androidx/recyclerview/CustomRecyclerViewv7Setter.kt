@@ -26,6 +26,8 @@ fun RecyclerViewScope.gridLayoutManager(
         LayoutManagerParams(orientation, reverseLayout, spanCount, spanSizeLookup)
     )
 
+fun RecyclerViewScope.adapter(arg: RecyclerView.Adapter<out RecyclerView.ViewHolder>?): Unit = attr("adapter", arg)
+
 object CustomRecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when(name) {
         "linearLayoutManager" -> when {
@@ -43,8 +45,17 @@ object CustomRecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
                     value.orientation,
                     value.reverseLayout
                 ).also {
-                    it.spanSizeLookup = value.spanSizeLookup
+                    value.spanSizeLookup?.let { spanSizeLookup ->
+                        it.spanSizeLookup = spanSizeLookup
+                    }
                 }
+                true
+            }
+            else -> false
+        }
+        "adapter" -> when {
+            v is RecyclerView && value is RecyclerView.Adapter<*>? -> {
+                v.adapter = value
                 true
             }
             else -> false

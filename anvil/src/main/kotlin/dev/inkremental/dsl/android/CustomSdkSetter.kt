@@ -6,11 +6,13 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
+import androidx.annotation.RequiresApi
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.dip
@@ -102,6 +104,8 @@ fun RadioGroupScope.check(id: Int) = attr("check", id)
 
 fun ViewScope.weight(weight: Float) = attr("weight", weight)
 fun ViewScope.layoutGravity(gravity: Int) = attr("layoutGravity", gravity)
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+fun ViewScope.elevate(arg: Dip): Unit = attr("elevation", arg.value)
 
 typealias SeekBarChangeListener = (seekBar: SeekBar, progress: Int, fromUser: Boolean) -> Unit
 fun SeekBarScope.onSeekBarChange(listener: SeekBarChangeListener) = attr("onSeekBarChange", listener)
@@ -114,6 +118,9 @@ fun TextViewScope.text(text: CharSequence?) = attr("text", text)
 fun TextViewScope.onTextChanged(watcher: (CharSequence) -> Unit) = attr("onTextChanged", watcher)
 fun TextViewScope.onTextChanged(watcher: TextWatcher) = attr("onTextChanged", watcher)
 fun TextViewScope.inputExtras(extras: Int) = attr("inputExtras", extras)
+fun TextViewScope.minWidth(arg: Dip): Unit = attr("minWidth", arg.value)
+
+fun SwitchViewScope.switchMinWidth(arg: Dip): Unit = attr("switchMinWidth", arg.value)
 
 object CustomSdkSetter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
@@ -397,6 +404,27 @@ object CustomSdkSetter : Inkremental.AttributeSetter<Any> {
                     e.printStackTrace()
                     false
                 }
+            }
+            else -> false
+        }
+        "minWidth" -> when {
+            v is TextView && value is Int -> {
+                v.minWidth = dip(value)
+                true
+            }
+            else -> false
+        }
+        "switchMinWidth" -> when {
+            v is Switch && value is Int -> {
+                v.switchMinWidth = dip(value)
+                true
+            }
+            else -> false
+        }
+        "elevation" -> when {
+            value is Int -> {
+                v.elevation = dip(value).toFloat()
+                true
             }
             else -> false
         }

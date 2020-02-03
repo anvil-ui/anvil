@@ -57,7 +57,6 @@ abstract class ViewScope : RootViewScope() {
   fun drawingCacheEnabled(arg: Boolean): Unit = attr("drawingCacheEnabled", arg)
   fun drawingCacheQuality(arg: Int): Unit = attr("drawingCacheQuality", arg)
   fun duplicateParentStateEnabled(arg: Boolean): Unit = attr("duplicateParentStateEnabled", arg)
-  fun elevation(arg: Float): Unit = attr("elevation", arg)
   fun enabled(arg: Boolean): Unit = attr("enabled", arg)
   fun fadingEdgeLength(arg: Int): Unit = attr("fadingEdgeLength", arg)
   fun filterTouchesWhenObscured(arg: Boolean): Unit = attr("filterTouchesWhenObscured", arg)
