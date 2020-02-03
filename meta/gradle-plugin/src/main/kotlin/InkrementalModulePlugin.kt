@@ -64,8 +64,9 @@ class InkrementalModulePlugin : Plugin<Project> {
             add("archives", javadocJar)
         }
 
-        val bintrayUser = prop("bintrayUser") ?: System.getenv("BINTRAY_USER")
-        val bintrayApiKey = prop("bintrayApiKey") ?: System.getenv("BINTRAY_API_KEY")
+        val bintrayUser = System.getenv("BINTRAY_USER") ?: prop("bintrayUser")
+        val bintrayApiKey = System.getenv("BINTRAY_API_KEY") ?: prop("bintrayApiKey")
+        val bintrayRepo = System.getenv("BINTRAY_REPO") ?: prop("BINTRAY_REPO")
         if(bintrayUser != null && bintrayApiKey != null) {
             extensions.configure<PublishingExtension> {
                 repositories {
@@ -73,10 +74,10 @@ class InkrementalModulePlugin : Plugin<Project> {
                         name = "Bintray"
                         url = uri("https://api.bintray.com/maven/" +
                             "${prop("BINTRAY_ORG")}/" +
-                            "${prop("BINTRAY_REPO")}/" +
-                            "${prop("POM_PACKAGE_NAME")}/" +
+                            bintrayRepo +
+                            "/${prop("POM_PACKAGE_NAME")}/" +
                             //"${project.version}/" +
-                            ";publish=1;override=0")
+                            ";publish=1")
                         credentials {
                             username = bintrayUser
                             password = bintrayApiKey
@@ -98,31 +99,26 @@ class InkrementalModulePlugin : Plugin<Project> {
             }
         }
 
-        fun registerAnvilPublications(name: String, bundleName: String, artifactId: String) {
+        fun registerAnvilPublication(name: String, bundleName: String, artifactId: String) =
             registerAnvilPublication(
                 name,
                 artifactId,
                 tasks.getByName("bundle${bundleName}ReleaseAar"),
                 sourcesJar,
-                javadocJar
-            )
-            registerAnvilPublication(
-                "${name}Module",
-                artifactId,
+                javadocJar,
                 *configurations.getByName(CONFIGURATION_MODULE_DEF + name).artifacts.toTypedArray()
             )
-        }
 
         afterEvaluate {
             extensions.getByType<InkrementalMetaExtension>().modules.forEach {
                 when(it.type) {
                     InkrementalType.SDK -> {
-                        registerAnvilPublications("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!)
-                        registerAnvilPublications("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
-                        registerAnvilPublications("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
+                        registerAnvilPublication("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!)
+                        registerAnvilPublication("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
+                        registerAnvilPublication("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
                     }
                     InkrementalType.LIBRARY ->
-                        registerAnvilPublications(it.camelCaseName, "", prop("POM_ARTIFACT_ID")!!)
+                        registerAnvilPublication(it.camelCaseName, "", prop("POM_ARTIFACT_ID")!!)
                 }
             }
         }
@@ -144,7 +140,7 @@ class InkrementalModulePlugin : Plugin<Project> {
 }
 
 
-internal fun Project.prop(key: String): String? =
+fun Project.prop(key: String): String? =
     findProperty(key)?.let { it as String }
 
 private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {

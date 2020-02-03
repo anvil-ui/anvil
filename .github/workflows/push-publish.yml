@@ -3,13 +3,12 @@ name: Publish on master push
 on:
   push:
     branches: master
+  repository_dispatch:
+    types: publish
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # Latest version can be found here: https://developer.android.com/studio#command-tools
-      ANDROID_SDK_TOOLS: "4333796"
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -41,4 +40,5 @@ jobs:
       env:
         BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
         BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
+        BINTRAY_REPO: ${{ secrets.BINTRAY_REPO }}
       continue-on-error: true

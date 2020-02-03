@@ -7,9 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # Latest version can be found here: https://developer.android.com/studio#command-tools
-      ANDROID_SDK_TOOLS: "4333796"
     steps:
     - name: Checkout
       uses: actions/checkout@v2

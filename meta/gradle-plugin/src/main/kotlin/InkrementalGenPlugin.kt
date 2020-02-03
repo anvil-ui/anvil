@@ -65,7 +65,6 @@ const val CONFIGURATION_MODULE = "inkremental"
 const val CONFIGURATION_MODULE_DEF = "inkrementalDef"
 const val USAGE = "inkremental-meta"
 const val FORMAT_AAR = "aar"
-const val FORMAT_JSON = "json"
 
 fun loadPropertiesFromFile(file: File): Properties = Properties().apply {
     try {
