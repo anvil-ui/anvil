@@ -46,6 +46,7 @@ abstract class GenerateDslTask : DefaultTask() {
                 )
                 addModifiers(KModifier.PUBLIC)
                 addSuperinterface(INKREMENTAL.nestedClass("AttributeSetter").parameterizedBy(ANY))
+                //TODO: figure out why this import is not being added automatically by KotlinPoet as usual
                 val hasPixelTransformer = model.views.mapNotNull { it.attrs.firstOrNull { it.transformers?.contains(DslTransformer.FLoatPixelToDipSizeTransformer) ?: false  } }
                 if (hasPixelTransformer.isNotEmpty()){
                     addImport("dev.inkremental.dip",  "")
