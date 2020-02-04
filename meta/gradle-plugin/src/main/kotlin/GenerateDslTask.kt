@@ -46,11 +46,6 @@ abstract class GenerateDslTask : DefaultTask() {
                 )
                 addModifiers(KModifier.PUBLIC)
                 addSuperinterface(INKREMENTAL.nestedClass("AttributeSetter").parameterizedBy(ANY))
-                //TODO: figure out why this import is not being added automatically by KotlinPoet as usual
-                val hasPixelTransformer = model.views.mapNotNull { it.attrs.firstOrNull { it.transformers?.contains(DslTransformer.FLoatPixelToDipSizeTransformer) ?: false  } }
-                if (hasPixelTransformer.isNotEmpty()){
-                    addImport("dev.inkremental.dip",  "")
-                }
 
                 addFunction("set") {
                     addParameter("v", VIEW)
@@ -321,7 +316,7 @@ abstract class GenerateDslTask : DefaultTask() {
                             "v is %T && arg is Int ->",
                             owner.starProjectedType
                     )
-                    builder.addStatement("$v.$setterName(dip($argAsParam).toFloat())", type.parametrizedType)
+                    builder.addStatement("$v.$setterName(%M($argAsParam).toFloat())", MemberName(PACKAGE, "dip"))
                     needsToBreak = true
                 }
             }
