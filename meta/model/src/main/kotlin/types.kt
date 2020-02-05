@@ -30,7 +30,7 @@ sealed class DslTransformer : JvmSerializable {
     object FloatPixelToDipSizeTransformer : DslTransformer() {
 
         override fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
-            if (attrModel.type.argType.toString() == "kotlin.Float"){
+            if (attrModel.type.argType.toString() == Float::class.qualifiedName){
                 builder.addParameter("arg", ClassName.bestGuess("dev.inkremental.dsl.android.Dip"))
                 builder.returns(UNIT)
                 builder.addCode(CodeBlock.of("return %M(%S, arg.value)", attr, attrModel.name))
