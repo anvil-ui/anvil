@@ -10,14 +10,12 @@ import androidx.annotation.RequiresApi
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import dev.inkremental.dsl.android.view.ViewScope
-import dev.inkremental.dsl.google.android.material.appbar.AppBarLayoutScope
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.dip
 import dev.inkremental.dsl.android.Dip
-import dev.inkremental.dsl.google.android.material.floatingactionbutton.FloatingActionButtonScope
+import dev.inkremental.dsl.android.view.ViewScope
+import dev.inkremental.dsl.google.android.material.appbar.AppBarLayoutScope
 
 fun ViewScope.collapseMode(collapseMode: Int) = attr("collapseMode", collapseMode)
 fun ViewScope.scrollFlags(scrollFlags: Int) = attr("scrollFlags", scrollFlags)

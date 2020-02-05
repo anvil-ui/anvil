@@ -144,20 +144,8 @@ abstract class GenerateDslTask : DefaultTask() {
 
         var needsToBreak = false
         transformers.forEach { dslTransformer ->
-            when (dslTransformer) {
-                DslTransformer.FLoatPixelToDipSizeTransformer -> {
-                    if (attrModel.type.argType.toString() == "kotlin.Float"){
-                        builder.addParameter("arg", ClassName.bestGuess("dev.inkremental.dsl.android.Dip"))
-                        builder.returns(UNIT)
-                        builder.addCode(CodeBlock.of("return %M(%S, arg.value)", attr, attrModel.name))
-                        needsToBreak = true
-                    }
-                }
-                DslTransformer.RequiresApi21Transformer -> {
-                    builder.addAnnotation(AnnotationSpec.builder(androidx.annotation.RequiresApi::class)
-                            .addMember("api = android.os.Build.VERSION_CODES.LOLLIPOP")
-                            .build())
-                }
+            if (dslTransformer.handleTransformersForDsl(builder, attrModel, attr)){
+                needsToBreak = true
             }
         }
         return needsToBreak
@@ -284,7 +272,7 @@ abstract class GenerateDslTask : DefaultTask() {
             } else {
                 val v = owner.parametrizedType?.let { "(v as $it)" } ?: "v"
 
-                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam, type)) {
+                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam)) {
                     beginControlFlow(
                             "v is %T && arg is %T ->",
                             owner.starProjectedType,
@@ -303,22 +291,14 @@ abstract class GenerateDslTask : DefaultTask() {
                                                 owner: ViewModel,
                                                 v: String,
                                                 setterName: String,
-                                                argAsParam: String,
-                                                type: TypeModel): Boolean {
+                                                argAsParam: String): Boolean {
         val transformers = transformers ?: return false
         if (transformers.isEmpty()) return false
 
         var needsToBreak = false
         transformers.forEach { transformer ->
-            when (transformer) {
-                DslTransformer.FLoatPixelToDipSizeTransformer -> {
-                    builder.beginControlFlow(
-                            "v is %T && arg is Int ->",
-                            owner.starProjectedType
-                    )
-                    builder.addStatement("$v.$setterName(%M($argAsParam).toFloat())", MemberName(PACKAGE, "dip"))
-                    needsToBreak = true
-                }
+            if (transformer.handleTransformersForAttrSetter(builder, owner, v, setterName, argAsParam)){
+                needsToBreak = true
             }
         }
         return needsToBreak

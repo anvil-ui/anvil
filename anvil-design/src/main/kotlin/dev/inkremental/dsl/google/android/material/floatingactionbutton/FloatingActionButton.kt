@@ -24,7 +24,7 @@ import kotlin.Unit
 fun floatingActionButton(configure: FloatingActionButtonScope.() -> Unit = {}) =
     v<FloatingActionButton>(configure.bind(FloatingActionButtonScope))
 abstract class FloatingActionButtonScope : VisibilityAwareImageButtonScope() {
-  @RequiresApi(api = android.os.Build.VERSION_CODES.LOLLIPOP)
+  @RequiresApi(api = 21)
   fun compatElevation(arg: Dip): Unit = attr("compatElevation", arg.value)
   fun compatElevationResource(arg: Int): Unit = attr("compatElevationResource", arg)
   fun compatHoveredFocusedTranslationZ(arg: Float): Unit = attr("compatHoveredFocusedTranslationZ",

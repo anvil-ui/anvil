@@ -19,9 +19,9 @@ inkremental {
         modulePackage = "dev.inkremental.dsl.androidx.cardview"
 		transformers = mapOf(
 				"androidx.cardview.widget.CardView" to mapOf(
-						"setCardElevation" to listOf(FLoatPixelToDipSizeTransformer),
-						"setMaxCardElevation" to listOf(FLoatPixelToDipSizeTransformer),
-						"setRadius" to listOf(FLoatPixelToDipSizeTransformer)
+						"setCardElevation" to listOf(FloatPixelToDipSizeTransformer),
+						"setMaxCardElevation" to listOf(FloatPixelToDipSizeTransformer),
+						"setRadius" to listOf(FloatPixelToDipSizeTransformer)
 				)
 		)
 	}

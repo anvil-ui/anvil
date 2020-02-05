@@ -68,8 +68,8 @@ inkremental {
 		transformers = mapOf(
 				"com.google.android.material.floatingactionbutton.FloatingActionButton" to mapOf(
 						"setCompatElevation" to listOf(
-								FLoatPixelToDipSizeTransformer,
-								RequiresApi21Transformer))
+								FloatPixelToDipSizeTransformer,
+								RequiresApiTransformer(21)))
 		)
 	}
 }
