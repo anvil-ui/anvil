@@ -10,8 +10,10 @@ android {
 	}
 }
 
+val recyclerVersion = "1.1.0"
+
 inkremental {
-	androidLibrary("recyclerview-v7") {
+	androidLibrary("recyclerview-v7", recyclerVersion) {
 		camelCaseName = "RecyclerViewv7"
         srcPackage = "androidx.recyclerview"
         modulePackage = "dev.inkremental.dsl.androidx.recyclerview"
@@ -30,7 +32,7 @@ dependencies {
 	implementation(project(":anvil"))
 	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
-	inkrementalGen("androidx.recyclerview:recyclerview:1.1.0")
+	inkrementalGen("androidx.recyclerview:recyclerview:$recyclerVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

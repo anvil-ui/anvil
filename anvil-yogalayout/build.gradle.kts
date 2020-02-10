@@ -10,8 +10,10 @@ android {
     }
 }
 
+val yogaVersion = "1.16.0"
+
 inkremental {
-    androidLibrary("yogalayout") {
+    androidLibrary("yogalayout", yogaVersion) {
         camelCaseName = "Yoga"
         srcPackage = "com.facebook.yoga"
         modulePackage = "dev.inkremental.dsl.yoga"
@@ -25,7 +27,7 @@ dependencies {
 	implementation(project(":anvil"))
 	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
-    api("com.facebook.yoga.android:yoga-layout:1.16.0")
+    api("com.facebook.yoga.android:yoga-layout:$yogaVersion")
     api("com.facebook.soloader:soloader:0.6.1")
     api("androidx.constraintlayout:constraintlayout-solver:1.1.3")
 

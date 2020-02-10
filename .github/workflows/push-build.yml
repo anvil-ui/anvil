@@ -8,27 +8,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: gradle/wrapper-validation-action@v1
 
-    - name: Setup JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
 
-    - name: Cache Gradle wrapper dist
-      uses: actions/cache@v1
-      with:
-        path: ~/.gradle/wrapper/dists
-        key: ${{ runner.os }}-gradle-dists-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      - name: Cache Gradle wrapper dist
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/wrapper/dists
+          key: ${{ runner.os }}-gradle-dists-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
 
-    - name: Cache Gradle depdendencies
-      uses: actions/cache@v1
-      with:
-        path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+      - name: Cache Gradle depdendencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-    - name: Run build
-      run: ./gradlew generateAndCheck
+      - name: Run build
+        run: ./gradlew generateAndCheck

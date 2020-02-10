@@ -10,8 +10,10 @@ android {
 	}
 }
 
+val gridVersion = "1.0.0"
+
 inkremental {
-	androidLibrary("gridlayout-v7") {
+	androidLibrary("gridlayout-v7", gridVersion) {
 		camelCaseName = "GridLayoutv7"
         srcPackage = "androidx.gridlayout"
         modulePackage = "dev.inkremental.dsl.androidx.gridlayout"
@@ -25,7 +27,7 @@ dependencies {
 	implementation(project(":anvil"))
 	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
-	inkrementalGen("androidx.gridlayout:gridlayout:1.0.0")
+	inkrementalGen("androidx.gridlayout:gridlayout:$gridVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")
