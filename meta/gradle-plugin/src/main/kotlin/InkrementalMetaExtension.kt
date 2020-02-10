@@ -19,10 +19,12 @@ open class InkrementalMetaExtension @Inject constructor(objectFactory: ObjectFac
 
     fun androidLibrary(
         name: String,
+        version: String,
         action: InkrementalMetaModule.() -> Unit) =
         modules.register(name) {
             type = InkrementalType.LIBRARY
             platform = InkrementalPlatform.ANDROID
+            this.version = version
             action()
         }
 
@@ -38,6 +40,7 @@ open class InkrementalMetaExtension @Inject constructor(objectFactory: ObjectFac
 
 data class InkrementalMetaModule(
     var name: String = "",
+    var version: String = "",
     var type: InkrementalType = InkrementalType.LIBRARY,
     var platform: InkrementalPlatform? = null,
     var camelCaseName: String = "",

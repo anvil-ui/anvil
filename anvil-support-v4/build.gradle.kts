@@ -10,8 +10,10 @@ android {
 	}
 }
 
+val coreVersion = "1.1.0"
+
 inkremental {
-	androidLibrary("support-core-ui") {
+	androidLibrary("support-core-ui", coreVersion) {
 		camelCaseName = "SupportCoreUi"
         srcPackage = "androidx.core"
         modulePackage = "dev.inkremental.dsl.androidx.core"
@@ -35,7 +37,7 @@ dependencies {
 	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
 	inkrementalGen("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
-	inkrementalGen("androidx.core:core:1.1.0")
+	inkrementalGen("androidx.core:core:$coreVersion")
 	inkrementalGen("androidx.drawerlayout:drawerlayout:1.0.0")
 	inkrementalGen("androidx.legacy:legacy-support-core-ui:1.0.0")
 	inkrementalGen("androidx.slidingpanelayout:slidingpanelayout:1.0.0")

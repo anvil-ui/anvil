@@ -10,8 +10,10 @@ android {
 	}
 }
 
+val appcompatVersion = "1.1.0"
+
 inkremental {
-	androidLibrary("appcompat-v7") {
+	androidLibrary("appcompat-v7", appcompatVersion) {
 		camelCaseName = "AppCompatv7"
         srcPackage = "androidx.appcompat"
         modulePackage = "dev.inkremental.dsl.androidx.appcompat"
@@ -47,7 +49,7 @@ dependencies {
 	implementation(project(":anvil"))
 	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
-	inkrementalGen("androidx.appcompat:appcompat:1.1.0")
+	inkrementalGen("androidx.appcompat:appcompat:$appcompatVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

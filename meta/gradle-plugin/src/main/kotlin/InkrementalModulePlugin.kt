@@ -99,10 +99,11 @@ class InkrementalModulePlugin : Plugin<Project> {
             }
         }
 
-        fun registerAnvilPublication(name: String, bundleName: String, artifactId: String) =
+        fun registerPublication(name: String, bundleName: String, artifactId: String, verion: String) =
             registerAnvilPublication(
                 name,
                 artifactId,
+                verion,
                 tasks.getByName("bundle${bundleName}ReleaseAar"),
                 sourcesJar,
                 javadocJar,
@@ -111,14 +112,15 @@ class InkrementalModulePlugin : Plugin<Project> {
 
         afterEvaluate {
             extensions.getByType<InkrementalMetaExtension>().modules.forEach {
+                val version = project.version.toString() + if(it.version.isNotEmpty()) "-${it.version}" else ""
                 when(it.type) {
                     InkrementalType.SDK -> {
-                        registerAnvilPublication("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!)
-                        registerAnvilPublication("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!)
-                        registerAnvilPublication("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!)
+                        registerPublication("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!, version)
+                        registerPublication("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!, version)
+                        registerPublication("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!, version)
                     }
                     InkrementalType.LIBRARY ->
-                        registerAnvilPublication(it.camelCaseName, "", prop("POM_ARTIFACT_ID")!!)
+                        registerPublication(it.camelCaseName, "", prop("POM_ARTIFACT_ID")!!, version)
                 }
             }
         }
@@ -127,13 +129,14 @@ class InkrementalModulePlugin : Plugin<Project> {
     private fun Project.registerAnvilPublication(
         name: String,
         artifactId: String,
+        version: String,
         vararg artifacts: Any) =
         project.extensions.getByType<PublishingExtension>()
             .publications
             .register<MavenPublication>(name) {
                 this.groupId = project.group.toString()
                 this.artifactId = artifactId
-                this.version = project.version.toString()
+                this.version = version
                 artifacts.forEach { artifact(it) }
                 fixPom(this)
             }

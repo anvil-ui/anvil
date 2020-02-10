@@ -10,8 +10,10 @@ android {
 	}
 }
 
+val cardVersion = "1.0.0"
+
 inkremental {
-	androidLibrary("cardview-v7") {
+	androidLibrary("cardview-v7", cardVersion) {
 		camelCaseName = "CardViewv7"
         srcPackage = "androidx.cardview"
         modulePackage = "dev.inkremental.dsl.androidx.cardview"
@@ -33,7 +35,7 @@ dependencies {
 	implementation(project(":anvil"))
 	inkremental(project(":anvil", "inkrementalDefSdk17"))
 
-	inkrementalGen("androidx.cardview:cardview:1.0.0")
+	inkrementalGen("androidx.cardview:cardview:$cardVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

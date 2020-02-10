@@ -10,8 +10,10 @@ android {
 	}
 }
 
+val materialVersion = "1.0.0"
+
 inkremental {
-	androidLibrary("material") {
+	androidLibrary("material", materialVersion) {
 		camelCaseName = "Material"
         srcPackage = "com.google.android.material"
         modulePackage = "dev.inkremental.dsl.google.android.material"
@@ -85,7 +87,7 @@ dependencies {
 	implementation(project(":anvil-recyclerview-v7"))
 	inkremental(project(":anvil-recyclerview-v7", "inkrementalDefRecyclerViewv7"))
 
-	inkrementalGen("com.google.android.material:material:1.0.0")
+	inkrementalGen("com.google.android.material:material:$materialVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")
