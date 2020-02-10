@@ -4,11 +4,13 @@ package dev.inkremental.dsl.google.android.material.floatingactionbutton
 
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
+import androidx.annotation.RequiresApi
 import com.google.android.material.animation.MotionSpec
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
+import dev.inkremental.dsl.android.Dip
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
 import dev.inkremental.dsl.google.android.material.internal.VisibilityAwareImageButtonScope
@@ -22,6 +24,8 @@ import kotlin.Unit
 fun floatingActionButton(configure: FloatingActionButtonScope.() -> Unit = {}) =
     v<FloatingActionButton>(configure.bind(FloatingActionButtonScope))
 abstract class FloatingActionButtonScope : VisibilityAwareImageButtonScope() {
+  @RequiresApi(api = 21)
+  fun compatElevation(arg: Dip): Unit = attr("compatElevation", arg.value)
   fun compatElevationResource(arg: Int): Unit = attr("compatElevationResource", arg)
   fun compatHoveredFocusedTranslationZ(arg: Float): Unit = attr("compatHoveredFocusedTranslationZ",
       arg)

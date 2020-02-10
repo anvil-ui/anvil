@@ -1,3 +1,5 @@
+import dev.inkremental.meta.model.DslTransformer.*
+
 plugins {
 	id("com.android.library")
 	id("org.jetbrains.kotlin.android")
@@ -63,10 +65,13 @@ inkremental {
 				"setIconPadding:kotlin.Int" to false,
 				"setTextColor:android.content.res.ColorStateList" to false,
 				"setTitle:kotlin.CharSequence" to false
-			),
+			)
+		)
+		transformers = mapOf(
 				"com.google.android.material.floatingactionbutton.FloatingActionButton" to mapOf(
-						"setCompatElevation" to false
-				)
+						"setCompatElevation" to listOf(
+								FloatPixelToDipSizeTransformer,
+								RequiresApiTransformer(21)))
 		)
 	}
 }

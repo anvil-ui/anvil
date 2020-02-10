@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.view.View
 import androidx.cardview.widget.CardView
 import dev.inkremental.Inkremental
+import dev.inkremental.dip
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
@@ -37,9 +38,30 @@ object CardViewv7Setter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "cardElevation" -> when {
+      v is CardView && arg is Int -> {
+        v.setCardElevation(dip(arg).toFloat())
+        true
+      }
+      else -> false
+    }
+    "maxCardElevation" -> when {
+      v is CardView && arg is Int -> {
+        v.setMaxCardElevation(dip(arg).toFloat())
+        true
+      }
+      else -> false
+    }
     "preventCornerOverlap" -> when {
       v is CardView && arg is Boolean -> {
         v.setPreventCornerOverlap(arg)
+        true
+      }
+      else -> false
+    }
+    "radius" -> when {
+      v is CardView && arg is Int -> {
+        v.setRadius(dip(arg).toFloat())
         true
       }
       else -> false

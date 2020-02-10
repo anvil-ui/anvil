@@ -152,6 +152,7 @@ private inline fun <reified T: GenerateModelTask> Project.createDslTasks(
 
     val modelTask = tasks.register<T>("generate${dslName}Model") {
         quirks = module.quirks
+        transformers = module.transformers
         camelCaseName = module.camelCaseName
         srcPackage = module.srcPackage
         modulePackage = module.modulePackage

@@ -13,11 +13,12 @@ class AndroidIntrospector(
     val dependencies: Iterable<File>,
     val nullabilityHolder: NullabilityHolder
 ): Introspector {
-    override fun provideViewModels(quirks: InkrementalQuirks): List<ViewModel> =
-        viewsSequence().mapNotNull { it.createViewModel(quirks) }.toList()
+    override fun provideViewModels(quirks: InkrementalQuirks, transformers: InkrementalTransformers): List<ViewModel> =
+        viewsSequence().mapNotNull { it.createViewModel(quirks, transformers) }.toList()
 
-    private fun Class<*>.createViewModel(quirks: InkrementalQuirks): ViewModel? {
+    private fun Class<*>.createViewModel(quirks: InkrementalQuirks, transformers: InkrementalTransformers): ViewModel? {
         val quirk = quirks[canonicalName]
+        val transformersByClass = transformers[canonicalName]
 
         val name = when(val alias = quirk?.get("__viewAlias")) {
             null -> simpleName
@@ -27,7 +28,7 @@ class AndroidIntrospector(
 
         val attrs = attrsSequence().filter {
             quirk?.get("${it.setterName}:${it.type.plainType}") != false && quirk?.get(it.setterName) != false
-        }.toList()
+        }.map { it.copy(transformers = transformersByClass?.get(it.setterName) )  }.toList()
 
         val plainType = kotlin.asClassName()
 

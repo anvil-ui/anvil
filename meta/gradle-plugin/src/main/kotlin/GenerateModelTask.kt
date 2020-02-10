@@ -9,6 +9,7 @@ import java.io.File
 abstract class GenerateModelTask : DefaultTask() {
 
     @get:Input abstract var quirks: InkrementalQuirks
+    @get:Input abstract var transformers: InkrementalTransformers
     @get:Input abstract var camelCaseName: String
     @get:Input abstract var javadocContains: String
     @get:Input abstract var srcPackage: String
@@ -34,7 +35,7 @@ abstract class GenerateModelTask : DefaultTask() {
         srcPackage = srcPackage,
         modulePackage = modulePackage,
         manualSetter = manualSetterName?.let { MemberName(modulePackage, it) },
-        views = introspector.provideViewModels(quirks)
+        views = introspector.provideViewModels(quirks, transformers)
     )
 
     private fun dumpModel(model: ModuleModel) {

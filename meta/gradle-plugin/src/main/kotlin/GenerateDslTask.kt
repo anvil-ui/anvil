@@ -124,16 +124,31 @@ abstract class GenerateDslTask : DefaultTask() {
                         }
                     }
                     view.attrs
-                        .map {
-                            addFunction(it.name) {
-                                addParameter("arg", it.type.argType.copy(nullable = it.isNullable))
-                                returns(UNIT)
-                                addCode(CodeBlock.of("return %M(%S, arg)", attr, it.name))
+                        .map { attrModel ->
+                            addFunction(attrModel.name) {
+                                if (!handleTransformersForDsl(this, attrModel, attr)) {
+                                    addParameter("arg", attrModel.type.argType.copy(nullable = attrModel.isNullable))
+                                    returns(UNIT)
+                                    addCode(CodeBlock.of("return %M(%S, arg)", attr, attrModel.name))
+                                }
                             }
                         }
                 }
             }
         }
+    }
+
+    private fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
+        val transformers = attrModel.transformers ?: return false
+        if (transformers.isEmpty()) return false
+
+        var needsToBreak = false
+        transformers.forEach { dslTransformer ->
+            if (dslTransformer.handleTransformersForDsl(builder, attrModel, attr)){
+                needsToBreak = true
+            }
+        }
+        return needsToBreak
     }
 
     private fun FileSpec.Builder.addDefaultAnnotations() =
@@ -257,16 +272,36 @@ abstract class GenerateDslTask : DefaultTask() {
             } else {
                 val v = owner.parametrizedType?.let { "(v as $it)" } ?: "v"
 
-                beginControlFlow(
-                   "v is %T && arg is %T ->",
-                    owner.starProjectedType,
-                    type.starProjectedType.copy(nullable = isNullable)
-                )
-                addStatement("$v.$setterName($argAsParam)", type.parametrizedType)
+                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam)) {
+                    beginControlFlow(
+                            "v is %T && arg is %T ->",
+                            owner.starProjectedType,
+                            type.starProjectedType.copy(nullable = isNullable)
+                    )
+                    addStatement("$v.$setterName($argAsParam)", type.parametrizedType)
+                }
                 addStatement("true")
                 endControlFlow()
             }
         }
+    }
+
+    private fun handleTransformersForAttrSetter(transformers: List<DslTransformer>?,
+                                                builder: CodeBlock.Builder,
+                                                owner: ViewModel,
+                                                v: String,
+                                                setterName: String,
+                                                argAsParam: String): Boolean {
+        val transformers = transformers ?: return false
+        if (transformers.isEmpty()) return false
+
+        var needsToBreak = false
+        transformers.forEach { transformer ->
+            if (transformer.handleTransformersForAttrSetter(builder, owner, v, setterName, argAsParam)){
+                needsToBreak = true
+            }
+        }
+        return needsToBreak
     }
 }
 
