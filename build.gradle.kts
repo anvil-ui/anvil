@@ -1,6 +1,6 @@
 plugins {
-    id("org.jetbrains.kotlin.multiplatform") version "1.3.60" apply false
-    id("org.jetbrains.kotlin.android") version "1.3.60" apply false
+    id("org.jetbrains.kotlin.multiplatform") version "1.3.61" apply false
+    id("org.jetbrains.kotlin.android") version "1.3.61" apply false
     id("com.android.application") version "3.5.2" apply false
     id("com.android.library") version "3.5.2" apply false
     id("dev.inkremental.module") version "0.7.1" apply false
@@ -40,39 +40,19 @@ subprojects {
 }
 
 // TODO constraintlayout and yogalayout
-
-tasks.register("generateAndCheck") {
-    dependsOn(
-        ":anvil:check",
-        ":anvil-appcompat-v7:check",
-        ":anvil-gridlayout-v7:check",
-        ":anvil-recyclerview-v7:check",
-        ":anvil-cardview-v7:check",
-        ":anvil-design:check",
-        ":anvil-support-v4:check"
-    )
+val mainSubprojects = listOf(
+    "anvil",
+    "anvil-appcompat-v7",
+    "anvil-gridlayout-v7",
+    "anvil-recyclerview-v7",
+    "anvil-cardview-v7",
+    "anvil-design",
+    "anvil-support-v4"
+)
+fun registerGlobalTask(name: String, subprojectTask: String) = tasks.register<Task>(name) {
+    setDependsOn(mainSubprojects.map { ":$it:$subprojectTask" })
 }
 
-tasks.register("generateAndPublishLocally") {
-    dependsOn(
-        ":anvil:publishToMavenLocal",
-        ":anvil-appcompat-v7:publishToMavenLocal",
-        ":anvil-gridlayout-v7:publishToMavenLocal",
-        ":anvil-recyclerview-v7:publishToMavenLocal",
-        ":anvil-cardview-v7:publishToMavenLocal",
-        ":anvil-design:publishToMavenLocal",
-        ":anvil-support-v4:publishToMavenLocal"
-    )
-}
-
-tasks.register("generateAndPublish") {
-    dependsOn(
-        ":anvil:publish",
-        ":anvil-appcompat-v7:publish",
-        ":anvil-gridlayout-v7:publish",
-        ":anvil-recyclerview-v7:publish",
-        ":anvil-cardview-v7:publish",
-        ":anvil-design:publish",
-        ":anvil-support-v4:publish"
-    )
-}
+registerGlobalTask("generateAndCheck", "check")
+registerGlobalTask("generateAndPublishLocally", "publishToMavenLocal")
+registerGlobalTask("generateAndPublish", "publishAllPublicationsToBintrayRepository")

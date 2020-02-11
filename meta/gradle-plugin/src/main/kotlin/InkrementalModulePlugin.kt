@@ -44,26 +44,6 @@ class InkrementalModulePlugin : Plugin<Project> {
             "testImplementation"("org.jetbrains.kotlin:kotlin-test-junit")
         }
 
-        val sourcesJar by tasks.creating(Jar::class) {
-            from(android.sourceSets["main"].java.srcDirs)
-            archiveClassifier.set("sources")
-        }
-
-        val javadoc by tasks.creating(Javadoc::class) {
-            source(android.sourceSets["main"].java.srcDirs)
-            classpath += project.files(android.bootClasspath)
-        }
-
-        val javadocJar by tasks.creating(Jar::class) {
-            from(javadoc.destinationDir)
-            archiveClassifier.set("javadoc")
-        }
-
-        artifacts {
-            add("archives", sourcesJar)
-            add("archives", javadocJar)
-        }
-
         val bintrayUser = System.getenv("BINTRAY_USER") ?: prop("bintrayUser")
         val bintrayApiKey = System.getenv("BINTRAY_API_KEY") ?: prop("bintrayApiKey")
         val bintrayRepo = System.getenv("BINTRAY_REPO") ?: prop("BINTRAY_REPO")
@@ -76,7 +56,6 @@ class InkrementalModulePlugin : Plugin<Project> {
                             "${prop("BINTRAY_ORG")}/" +
                             bintrayRepo +
                             "/${prop("POM_PACKAGE_NAME")}/" +
-                            //"${project.version}/" +
                             ";publish=1")
                         credentials {
                             username = bintrayUser
@@ -87,32 +66,39 @@ class InkrementalModulePlugin : Plugin<Project> {
             }
         }
 
-        android.libraryVariants.configureEach {
+        // FIXME generate proper -javadoc (and -sources) JARs
+        /*android.libraryVariants.configureEach {
             val androidJar = android.sdkDirectory / "platforms" / compileSdk.toString() / "android.jar"
             val compileClasspath = getCompileClasspath(null)
 
-            tasks.register<Javadoc>("generate${name.capitalize()}Javadoc") {
+            val javadoc = tasks.register<Javadoc>("generate${name.capitalize()}Javadoc") {
                 description = "Generates Javadoc for $name."
                 source = compileClasspath.asFileTree
                 classpath = files(compileClasspath, androidJar)
                 extra["androidJar"] = androidJar
             }
-        }
 
-        fun registerPublication(name: String, bundleName: String, artifactId: String, verion: String) =
+            tasks.register<Jar>("generate${name.capitalize()}JavadocJar") {
+                dependsOn(javadoc)
+                from(javadoc.get().destinationDir)
+                archiveClassifier.set("javadoc")
+            }
+        }*/
+
+        fun registerPublication(name: String, bundleName: String, artifactId: String, verion: String) {
             registerAnvilPublication(
                 name,
                 artifactId,
                 verion,
                 tasks.getByName("bundle${bundleName}ReleaseAar"),
-                sourcesJar,
-                javadocJar,
+                //tasks.getByName("generate${bundleName}ReleaseJavadocJar"),
                 *configurations.getByName(CONFIGURATION_MODULE_DEF + name).artifacts.toTypedArray()
             )
+        }
 
         afterEvaluate {
             extensions.getByType<InkrementalMetaExtension>().modules.forEach {
-                val version = project.version.toString() + if(it.version.isNotEmpty()) "-${it.version}" else ""
+                val version = (if(it.version.isNotEmpty()) "${it.version}-" else "") + project.version.toString()
                 when(it.type) {
                     InkrementalType.SDK -> {
                         registerPublication("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!, version)
