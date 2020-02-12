@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.konan.file.File as KFile
 fun main() {
     // org.jetbrais.kotlin.gradle.utils.NativeCompilerDownloader
     val distRoot = File(System.getenv("HOME")!!)
-        .resolve(".konan/kotlin-native-macos-1.3.60")
+        .resolve(".konan/kotlin-native-macos-1.3.61")
 
     val distribution = buildDistribution(distRoot.absolutePath)
     println("Home: ${distribution.konanHome}")
