@@ -133,22 +133,21 @@ fun Project.prop(key: String): String? =
 private fun Project.envOrProp(key: String): String? =
     System.getenv(key).takeUnless(String::isNullOrEmpty) ?: prop(key)
 
-private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {
-    with(asNode()) {
-        appendNode("description", property("POM_DESCRIPTION"))
-        appendNode("name", property("POM_NAME"))
-        appendNode("url", property("POM_URL"))
-        with(appendNode("scm")) {
-            appendNode("url", property("POM_SCM_URL"))
-            appendNode("connection", property("POM_SCM_CONNECTION"))
-            appendNode("developerConnection", property("POM_SCM_DEV_CONNECTION"))
-        }
-        with(appendNode("licenses")) {
-            with(appendNode("license")) {
-                appendNode("name", property("POM_LICENCE_NAME"))
-                appendNode("url", property("POM_LICENCE_URL"))
-                appendNode("distribution", property("POM_LICENCE_DIST"))
-            }
+private fun Project.fixPom(publication: MavenPublication) = publication.pom.apply {
+    packaging = "aar"
+    description.set(prop("POM_DESCRIPTION"))
+    name.set(prop("POM_NAME"))
+    url.set(prop("POM_URL"))
+    scm {
+        url.set(prop("POM_SCM_URL"))
+        connection.set(prop("POM_SCM_CONNECTION"))
+        developerConnection.set(prop("POM_SCM_DEV_CONNECTION"))
+    }
+    licenses {
+        license {
+            name.set(prop("POM_LICENCE_NAME"))
+            url.set(prop("POM_LICENCE_URL"))
+            distribution.set(prop("POM_LICENCE_DIST"))
         }
     }
 }
