@@ -2,15 +2,13 @@ package dev.inkremental.meta.gradle
 
 import com.android.build.gradle.LibraryExtension
 import dev.inkremental.meta.model.InkrementalType
-import dev.inkremental.meta.model.div
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
-import org.gradle.api.tasks.javadoc.Javadoc
-import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.*
+import kotlin.text.isNullOrEmpty
 
 class InkrementalModulePlugin : Plugin<Project> {
 
@@ -44,9 +42,9 @@ class InkrementalModulePlugin : Plugin<Project> {
             "testImplementation"("org.jetbrains.kotlin:kotlin-test-junit")
         }
 
-        val bintrayUser = System.getenv("BINTRAY_USER") ?: prop("bintrayUser")
-        val bintrayApiKey = System.getenv("BINTRAY_API_KEY") ?: prop("bintrayApiKey")
-        val bintrayRepo = System.getenv("BINTRAY_REPO") ?: prop("BINTRAY_REPO")
+        val bintrayUser = envOrProp("BINTRAY_USER")
+        val bintrayApiKey = envOrProp("BINTRAY_API_KEY")
+        val bintrayRepo = envOrProp("BINTRAY_REPO")
         if(bintrayUser != null && bintrayApiKey != null) {
             extensions.configure<PublishingExtension> {
                 repositories {
@@ -131,6 +129,9 @@ class InkrementalModulePlugin : Plugin<Project> {
 
 fun Project.prop(key: String): String? =
     findProperty(key)?.let { it as String }
+
+private fun Project.envOrProp(key: String): String? =
+    System.getenv(key).takeUnless(String::isNullOrEmpty) ?: prop(key)
 
 private fun Project.fixPom(publication: MavenPublication) = publication.pom.withXml {
     with(asNode()) {
