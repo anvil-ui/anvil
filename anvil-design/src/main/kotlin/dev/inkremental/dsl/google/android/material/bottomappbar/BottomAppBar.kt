@@ -23,6 +23,7 @@ abstract class BottomAppBarScope : ToolbarScope() {
   fun backgroundTint(arg: ColorStateList?): Unit = attr("backgroundTint", arg)
   fun cradleVerticalOffset(arg: Float): Unit = attr("cradleVerticalOffset", arg)
   fun fabAlignmentMode(arg: Int): Unit = attr("fabAlignmentMode", arg)
+  fun fabAnimationMode(arg: Int): Unit = attr("fabAnimationMode", arg)
   fun fabCradleMargin(arg: Float): Unit = attr("fabCradleMargin", arg)
   fun fabCradleRoundedCornerRadius(arg: Float): Unit = attr("fabCradleRoundedCornerRadius", arg)
   fun hideOnScroll(arg: Boolean): Unit = attr("hideOnScroll", arg)

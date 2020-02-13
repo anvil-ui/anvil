@@ -12,7 +12,7 @@ android {
 	}
 }
 
-val materialVersion = "1.0.0"
+val materialVersion = "1.1.0"
 
 inkremental {
 	androidLibrary("material", materialVersion) {

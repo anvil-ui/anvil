@@ -28,6 +28,7 @@ abstract class BottomNavigationViewScope : FrameLayoutScope() {
   fun itemIconSize(arg: Int): Unit = attr("itemIconSize", arg)
   fun itemIconSizeRes(arg: Int): Unit = attr("itemIconSizeRes", arg)
   fun itemIconTintList(arg: ColorStateList?): Unit = attr("itemIconTintList", arg)
+  fun itemRippleColor(arg: ColorStateList): Unit = attr("itemRippleColor", arg)
   fun itemTextAppearanceActive(arg: Int): Unit = attr("itemTextAppearanceActive", arg)
   fun itemTextAppearanceInactive(arg: Int): Unit = attr("itemTextAppearanceInactive", arg)
   fun itemTextColor(arg: ColorStateList?): Unit = attr("itemTextColor", arg)
