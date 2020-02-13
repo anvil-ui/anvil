@@ -14,7 +14,9 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
@@ -24,11 +26,17 @@ import com.google.android.material.circularreveal.CircularRevealLinearLayout
 import com.google.android.material.circularreveal.CircularRevealRelativeLayout
 import com.google.android.material.circularreveal.CircularRevealWidget
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.internal.CheckableImageButton
 import com.google.android.material.internal.FlowLayout
 import com.google.android.material.internal.NavigationMenuItemView
+import com.google.android.material.internal.ScrimInsetsFrameLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.resources.TextAppearance
+import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 import dev.inkremental.Inkremental
@@ -76,6 +84,13 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "liftOnScrollTargetViewId" -> when {
+      v is AppBarLayout && arg is Int -> {
+        v.setLiftOnScrollTargetViewId(arg)
+        true
+      }
+      else -> false
+    }
     "liftable" -> when {
       v is AppBarLayout && arg is Boolean -> {
         v.setLiftable(arg)
@@ -86,6 +101,27 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     "lifted" -> when {
       v is AppBarLayout && arg is Boolean -> {
         v.setLifted(arg)
+        true
+      }
+      else -> false
+    }
+    "statusBarForeground" -> when {
+      v is AppBarLayout && arg is Drawable? -> {
+        v.setStatusBarForeground(arg)
+        true
+      }
+      else -> false
+    }
+    "statusBarForegroundColor" -> when {
+      v is AppBarLayout && arg is Int -> {
+        v.setStatusBarForegroundColor(arg)
+        true
+      }
+      else -> false
+    }
+    "statusBarForegroundResource" -> when {
+      v is AppBarLayout && arg is Int -> {
+        v.setStatusBarForegroundResource(arg)
         true
       }
       else -> false
@@ -283,6 +319,13 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "fabAnimationMode" -> when {
+      v is BottomAppBar && arg is Int -> {
+        v.setFabAnimationMode(arg)
+        true
+      }
+      else -> false
+    }
     "fabCradleMargin" -> when {
       v is BottomAppBar && arg is Float -> {
         v.setFabCradleMargin(arg)
@@ -338,6 +381,10 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
         v.setItemIconSize(arg)
         true
       }
+      v is NavigationView && arg is Int -> {
+        v.setItemIconSize(arg)
+        true
+      }
       else -> false
     }
     "itemIconSizeRes" -> when {
@@ -354,6 +401,13 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       v is NavigationView && arg is ColorStateList? -> {
         v.setItemIconTintList(arg)
+        true
+      }
+      else -> false
+    }
+    "itemRippleColor" -> when {
+      v is BottomNavigationView && arg is ColorStateList -> {
+        v.setItemRippleColor(arg)
         true
       }
       else -> false
@@ -433,6 +487,36 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "checkable" -> when {
+      v is MaterialButton && arg is Boolean -> {
+        v.setCheckable(arg)
+        true
+      }
+      v is MaterialCardView && arg is Boolean -> {
+        v.setCheckable(arg)
+        true
+      }
+      v is Chip && arg is Boolean -> {
+        v.setCheckable(arg)
+        true
+      }
+      v is CheckableImageButton && arg is Boolean -> {
+        v.setCheckable(arg)
+        true
+      }
+      else -> false
+    }
+    "checked" -> when {
+      v is MaterialButton && arg is Boolean -> {
+        v.setChecked(arg)
+        true
+      }
+      v is MaterialCardView && arg is Boolean -> {
+        v.setChecked(arg)
+        true
+      }
+      else -> false
+    }
     "cornerRadius" -> when {
       v is MaterialButton && arg is Int -> {
         v.setCornerRadius(arg)
@@ -448,7 +532,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "icon" -> when {
-      v is MaterialButton && arg is Drawable -> {
+      v is MaterialButton && arg is Drawable? -> {
         v.setIcon(arg)
         true
       }
@@ -480,6 +564,10 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
         v.setIconSize(arg)
         true
       }
+      v is NavigationMenuItemView && arg is Int -> {
+        v.setIconSize(arg)
+        true
+      }
       else -> false
     }
     "iconTint" -> when {
@@ -508,6 +596,10 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
         v.setRippleColor(arg)
         true
       }
+      v is MaterialCardView && arg is ColorStateList? -> {
+        v.setRippleColor(arg)
+        true
+      }
       v is Chip && arg is ColorStateList? -> {
         v.setRippleColor(arg)
         true
@@ -527,14 +619,41 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
         v.setRippleColorResource(arg)
         true
       }
+      v is MaterialCardView && arg is Int -> {
+        v.setRippleColorResource(arg)
+        true
+      }
       v is Chip && arg is Int -> {
         v.setRippleColorResource(arg)
         true
       }
       else -> false
     }
+    "shapeAppearanceModel" -> when {
+      v is MaterialButton && arg is ShapeAppearanceModel -> {
+        v.setShapeAppearanceModel(arg)
+        true
+      }
+      v is MaterialCardView && arg is ShapeAppearanceModel -> {
+        v.setShapeAppearanceModel(arg)
+        true
+      }
+      v is Chip && arg is ShapeAppearanceModel -> {
+        v.setShapeAppearanceModel(arg)
+        true
+      }
+      v is FloatingActionButton && arg is ShapeAppearanceModel -> {
+        v.setShapeAppearanceModel(arg)
+        true
+      }
+      else -> false
+    }
     "strokeColor" -> when {
       v is MaterialButton && arg is ColorStateList? -> {
+        v.setStrokeColor(arg)
+        true
+      }
+      v is MaterialCardView && arg is ColorStateList -> {
         v.setStrokeColor(arg)
         true
       }
@@ -569,21 +688,30 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "checkable" -> when {
-      v is Chip && arg is Boolean -> {
-        v.setCheckable(arg)
+    "singleSelection" -> when {
+      v is MaterialButtonToggleGroup && arg is Boolean -> {
+        v.setSingleSelection(arg)
         true
       }
-      else -> false
-    }
-    "checkableResource" -> when {
-      v is Chip && arg is Int -> {
-        v.setCheckableResource(arg)
+      v is ChipGroup && arg is Boolean -> {
+        v.setSingleSelection(arg)
+        true
+      }
+      v is MaterialButtonToggleGroup && arg is Int -> {
+        v.setSingleSelection(arg)
+        true
+      }
+      v is ChipGroup && arg is Int -> {
+        v.setSingleSelection(arg)
         true
       }
       else -> false
     }
     "checkedIcon" -> when {
+      v is MaterialCardView && arg is Drawable? -> {
+        v.setCheckedIcon(arg)
+        true
+      }
       v is Chip && arg is Drawable? -> {
         v.setCheckedIcon(arg)
         true
@@ -591,8 +719,86 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "checkedIconResource" -> when {
+      v is MaterialCardView && arg is Int -> {
+        v.setCheckedIconResource(arg)
+        true
+      }
       v is Chip && arg is Int -> {
         v.setCheckedIconResource(arg)
+        true
+      }
+      else -> false
+    }
+    "checkedIconTint" -> when {
+      v is MaterialCardView && arg is ColorStateList? -> {
+        v.setCheckedIconTint(arg)
+        true
+      }
+      else -> false
+    }
+    "dragged" -> when {
+      v is MaterialCardView && arg is Boolean -> {
+        v.setDragged(arg)
+        true
+      }
+      else -> false
+    }
+    "onCheckedChange" -> when {
+      v is MaterialCardView -> when {
+        arg == null -> {
+          v.setOnCheckedChangeListener(null as? MaterialCardView.OnCheckedChangeListener?)
+          true
+        }
+        arg is Function<*> -> {
+          arg as ((arg0: MaterialCardView, arg1: Boolean) -> Unit)?
+          v.setOnCheckedChangeListener { arg0, arg1 ->
+            arg(arg0, arg1).also { Inkremental.render() }
+          }
+          true
+        }
+        else -> false
+      }
+      v is ChipGroup -> when {
+        arg == null -> {
+          v.setOnCheckedChangeListener(null as? ChipGroup.OnCheckedChangeListener?)
+          true
+        }
+        arg is Function<*> -> {
+          arg as ((arg0: ChipGroup, arg1: Int) -> Unit)?
+          v.setOnCheckedChangeListener { arg0, arg1 ->
+            arg(arg0, arg1).also { Inkremental.render() }
+          }
+          true
+        }
+        else -> false
+      }
+      else -> false
+    }
+    "progress" -> when {
+      v is MaterialCardView && arg is Float -> {
+        v.setProgress(arg)
+        true
+      }
+      else -> false
+    }
+    "useMaterialThemeColors" -> when {
+      v is MaterialCheckBox && arg is Boolean -> {
+        v.setUseMaterialThemeColors(arg)
+        true
+      }
+      v is MaterialRadioButton && arg is Boolean -> {
+        v.setUseMaterialThemeColors(arg)
+        true
+      }
+      v is SwitchMaterial && arg is Boolean -> {
+        v.setUseMaterialThemeColors(arg)
+        true
+      }
+      else -> false
+    }
+    "checkableResource" -> when {
+      v is Chip && arg is Int -> {
+        v.setCheckableResource(arg)
         true
       }
       else -> false
@@ -618,20 +824,6 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     "chipBackgroundColorResource" -> when {
       v is Chip && arg is Int -> {
         v.setChipBackgroundColorResource(arg)
-        true
-      }
-      else -> false
-    }
-    "chipCornerRadius" -> when {
-      v is Chip && arg is Float -> {
-        v.setChipCornerRadius(arg)
-        true
-      }
-      else -> false
-    }
-    "chipCornerRadiusResource" -> when {
-      v is Chip && arg is Int -> {
-        v.setChipCornerRadiusResource(arg)
         true
       }
       else -> false
@@ -854,12 +1046,27 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "ensureMinTouchTargetSize" -> when {
+      v is Chip && arg is Boolean -> {
+        v.setEnsureMinTouchTargetSize(arg)
+        true
+      }
+      v is FloatingActionButton && arg is Boolean -> {
+        v.setEnsureMinTouchTargetSize(arg)
+        true
+      }
+      else -> false
+    }
     "hideMotionSpec" -> when {
       v is Chip && arg is MotionSpec? -> {
         v.setHideMotionSpec(arg)
         true
       }
-      v is FloatingActionButton && arg is MotionSpec -> {
+      v is ExtendedFloatingActionButton && arg is MotionSpec? -> {
+        v.setHideMotionSpec(arg)
+        true
+      }
+      v is FloatingActionButton && arg is MotionSpec? -> {
         v.setHideMotionSpec(arg)
         true
       }
@@ -867,6 +1074,10 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "hideMotionSpecResource" -> when {
       v is Chip && arg is Int -> {
+        v.setHideMotionSpecResource(arg)
+        true
+      }
+      v is ExtendedFloatingActionButton && arg is Int -> {
         v.setHideMotionSpecResource(arg)
         true
       }
@@ -926,7 +1137,11 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
         v.setShowMotionSpec(arg)
         true
       }
-      v is FloatingActionButton && arg is MotionSpec -> {
+      v is ExtendedFloatingActionButton && arg is MotionSpec? -> {
+        v.setShowMotionSpec(arg)
+        true
+      }
+      v is FloatingActionButton && arg is MotionSpec? -> {
         v.setShowMotionSpec(arg)
         true
       }
@@ -934,6 +1149,10 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "showMotionSpecResource" -> when {
       v is Chip && arg is Int -> {
+        v.setShowMotionSpecResource(arg)
+        true
+      }
+      v is ExtendedFloatingActionButton && arg is Int -> {
         v.setShowMotionSpecResource(arg)
         true
       }
@@ -1031,23 +1250,6 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "onCheckedChange" -> when {
-      v is ChipGroup -> when {
-        arg == null -> {
-          v.setOnCheckedChangeListener(null as? ChipGroup.OnCheckedChangeListener?)
-          true
-        }
-        arg is Function<*> -> {
-          arg as ((arg0: ChipGroup, arg1: Int) -> Unit)?
-          v.setOnCheckedChangeListener { arg0, arg1 ->
-            arg(arg0, arg1).also { Inkremental.render() }
-          }
-          true
-        }
-        else -> false
-      }
-      else -> false
-    }
     "singleLine" -> when {
       v is FlowLayout && arg is Boolean -> {
         v.setSingleLine(arg)
@@ -1055,17 +1257,6 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       v is ChipGroup && arg is Int -> {
         v.setSingleLine(arg)
-        true
-      }
-      else -> false
-    }
-    "singleSelection" -> when {
-      v is ChipGroup && arg is Boolean -> {
-        v.setSingleSelection(arg)
-        true
-      }
-      v is ChipGroup && arg is Int -> {
-        v.setSingleSelection(arg)
         true
       }
       else -> false
@@ -1139,6 +1330,41 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "extendMotionSpec" -> when {
+      v is ExtendedFloatingActionButton && arg is MotionSpec? -> {
+        v.setExtendMotionSpec(arg)
+        true
+      }
+      else -> false
+    }
+    "extendMotionSpecResource" -> when {
+      v is ExtendedFloatingActionButton && arg is Int -> {
+        v.setExtendMotionSpecResource(arg)
+        true
+      }
+      else -> false
+    }
+    "extended" -> when {
+      v is ExtendedFloatingActionButton && arg is Boolean -> {
+        v.setExtended(arg)
+        true
+      }
+      else -> false
+    }
+    "shrinkMotionSpec" -> when {
+      v is ExtendedFloatingActionButton && arg is MotionSpec? -> {
+        v.setShrinkMotionSpec(arg)
+        true
+      }
+      else -> false
+    }
+    "shrinkMotionSpecResource" -> when {
+      v is ExtendedFloatingActionButton && arg is Int -> {
+        v.setShrinkMotionSpecResource(arg)
+        true
+      }
+      else -> false
+    }
     "compatElevation" -> when {
       v is FloatingActionButton && arg is Int -> {
         v.setCompatElevation(dip(arg).toFloat())
@@ -1195,6 +1421,13 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "shadowPaddingEnabled" -> when {
+      v is FloatingActionButton && arg is Boolean -> {
+        v.setShadowPaddingEnabled(arg)
+        true
+      }
+      else -> false
+    }
     "size" -> when {
       v is FloatingActionButton && arg is Int -> {
         v.setSize(arg)
@@ -1237,6 +1470,13 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "pressable" -> when {
+      v is CheckableImageButton && arg is Boolean -> {
+        v.setPressable(arg)
+        true
+      }
+      else -> false
+    }
     "horizontalPadding" -> when {
       v is NavigationMenuItemView && arg is Int -> {
         v.setHorizontalPadding(arg)
@@ -1244,9 +1484,37 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "maxLines" -> when {
+      v is NavigationMenuItemView && arg is Int -> {
+        v.setMaxLines(arg)
+        true
+      }
+      else -> false
+    }
     "needsEmptyIcon" -> when {
       v is NavigationMenuItemView && arg is Boolean -> {
         v.setNeedsEmptyIcon(arg)
+        true
+      }
+      else -> false
+    }
+    "drawBottomInsetForeground" -> when {
+      v is ScrimInsetsFrameLayout && arg is Boolean -> {
+        v.setDrawBottomInsetForeground(arg)
+        true
+      }
+      else -> false
+    }
+    "drawTopInsetForeground" -> when {
+      v is ScrimInsetsFrameLayout && arg is Boolean -> {
+        v.setDrawTopInsetForeground(arg)
+        true
+      }
+      else -> false
+    }
+    "scrimInsetForeground" -> when {
+      v is ScrimInsetsFrameLayout && arg is Drawable? -> {
+        v.setScrimInsetForeground(arg)
         true
       }
       else -> false
@@ -1286,6 +1554,13 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     "itemIconPaddingResource" -> when {
       v is NavigationView && arg is Int -> {
         v.setItemIconPaddingResource(arg)
+        true
+      }
+      else -> false
+    }
+    "itemMaxLines" -> when {
+      v is NavigationView && arg is Int -> {
+        v.setItemMaxLines(arg)
         true
       }
       else -> false
@@ -1455,9 +1730,115 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
+    "counterOverflowTextAppearance" -> when {
+      v is TextInputLayout && arg is Int -> {
+        v.setCounterOverflowTextAppearance(arg)
+        true
+      }
+      else -> false
+    }
+    "counterOverflowTextColor" -> when {
+      v is TextInputLayout && arg is ColorStateList? -> {
+        v.setCounterOverflowTextColor(arg)
+        true
+      }
+      else -> false
+    }
+    "counterTextAppearance" -> when {
+      v is TextInputLayout && arg is Int -> {
+        v.setCounterTextAppearance(arg)
+        true
+      }
+      else -> false
+    }
+    "counterTextColor" -> when {
+      v is TextInputLayout && arg is ColorStateList? -> {
+        v.setCounterTextColor(arg)
+        true
+      }
+      else -> false
+    }
     "defaultHintTextColor" -> when {
       v is TextInputLayout && arg is ColorStateList? -> {
         v.setDefaultHintTextColor(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconActivated" -> when {
+      v is TextInputLayout && arg is Boolean -> {
+        v.setEndIconActivated(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconCheckable" -> when {
+      v is TextInputLayout && arg is Boolean -> {
+        v.setEndIconCheckable(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconContentDescription" -> when {
+      v is TextInputLayout && arg is CharSequence? -> {
+        v.setEndIconContentDescription(arg)
+        true
+      }
+      v is TextInputLayout && arg is Int -> {
+        v.setEndIconContentDescription(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconDrawable" -> when {
+      v is TextInputLayout && arg is Drawable? -> {
+        v.setEndIconDrawable(arg)
+        true
+      }
+      v is TextInputLayout && arg is Int -> {
+        v.setEndIconDrawable(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconMode" -> when {
+      v is TextInputLayout && arg is Int -> {
+        v.setEndIconMode(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconOnClickListener" -> when {
+      v is TextInputLayout && arg is View.OnClickListener? -> {
+        v.setEndIconOnClickListener(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconOnLongClickListener" -> when {
+      v is TextInputLayout && arg is View.OnLongClickListener? -> {
+        v.setEndIconOnLongClickListener(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconTintList" -> when {
+      v is TextInputLayout && arg is ColorStateList? -> {
+        v.setEndIconTintList(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconTintMode" -> when {
+      v is TextInputLayout && arg is PorterDuff.Mode? -> {
+        v.setEndIconTintMode(arg)
+        true
+      }
+      else -> false
+    }
+    "endIconVisible" -> when {
+      v is TextInputLayout && arg is Boolean -> {
+        v.setEndIconVisible(arg)
         true
       }
       else -> false
@@ -1472,6 +1853,31 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     "errorEnabled" -> when {
       v is TextInputLayout && arg is Boolean -> {
         v.setErrorEnabled(arg)
+        true
+      }
+      else -> false
+    }
+    "errorIconDrawable" -> when {
+      v is TextInputLayout && arg is Drawable? -> {
+        v.setErrorIconDrawable(arg)
+        true
+      }
+      v is TextInputLayout && arg is Int -> {
+        v.setErrorIconDrawable(arg)
+        true
+      }
+      else -> false
+    }
+    "errorIconTintList" -> when {
+      v is TextInputLayout && arg is ColorStateList -> {
+        v.setErrorIconTintList(arg)
+        true
+      }
+      else -> false
+    }
+    "errorIconTintMode" -> when {
+      v is TextInputLayout && arg is PorterDuff.Mode -> {
+        v.setErrorIconTintMode(arg)
         true
       }
       else -> false
@@ -1546,45 +1952,73 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       }
       else -> false
     }
-    "passwordVisibilityToggleContentDescription" -> when {
-      v is TextInputLayout && arg is CharSequence? -> {
-        v.setPasswordVisibilityToggleContentDescription(arg)
-        true
-      }
-      v is TextInputLayout && arg is Int -> {
-        v.setPasswordVisibilityToggleContentDescription(arg)
-        true
-      }
-      else -> false
-    }
-    "passwordVisibilityToggleDrawable" -> when {
-      v is TextInputLayout && arg is Drawable? -> {
-        v.setPasswordVisibilityToggleDrawable(arg)
-        true
-      }
-      v is TextInputLayout && arg is Int -> {
-        v.setPasswordVisibilityToggleDrawable(arg)
-        true
-      }
-      else -> false
-    }
-    "passwordVisibilityToggleEnabled" -> when {
-      v is TextInputLayout && arg is Boolean -> {
-        v.setPasswordVisibilityToggleEnabled(arg)
-        true
-      }
-      else -> false
-    }
-    "passwordVisibilityToggleTintList" -> when {
+    "hintTextColor" -> when {
       v is TextInputLayout && arg is ColorStateList? -> {
-        v.setPasswordVisibilityToggleTintList(arg)
+        v.setHintTextColor(arg)
         true
       }
       else -> false
     }
-    "passwordVisibilityToggleTintMode" -> when {
+    "startIconCheckable" -> when {
+      v is TextInputLayout && arg is Boolean -> {
+        v.setStartIconCheckable(arg)
+        true
+      }
+      else -> false
+    }
+    "startIconContentDescription" -> when {
+      v is TextInputLayout && arg is CharSequence? -> {
+        v.setStartIconContentDescription(arg)
+        true
+      }
+      v is TextInputLayout && arg is Int -> {
+        v.setStartIconContentDescription(arg)
+        true
+      }
+      else -> false
+    }
+    "startIconDrawable" -> when {
+      v is TextInputLayout && arg is Drawable? -> {
+        v.setStartIconDrawable(arg)
+        true
+      }
+      v is TextInputLayout && arg is Int -> {
+        v.setStartIconDrawable(arg)
+        true
+      }
+      else -> false
+    }
+    "startIconOnClickListener" -> when {
+      v is TextInputLayout && arg is View.OnClickListener? -> {
+        v.setStartIconOnClickListener(arg)
+        true
+      }
+      else -> false
+    }
+    "startIconOnLongClickListener" -> when {
+      v is TextInputLayout && arg is View.OnLongClickListener? -> {
+        v.setStartIconOnLongClickListener(arg)
+        true
+      }
+      else -> false
+    }
+    "startIconTintList" -> when {
+      v is TextInputLayout && arg is ColorStateList? -> {
+        v.setStartIconTintList(arg)
+        true
+      }
+      else -> false
+    }
+    "startIconTintMode" -> when {
       v is TextInputLayout && arg is PorterDuff.Mode? -> {
-        v.setPasswordVisibilityToggleTintMode(arg)
+        v.setStartIconTintMode(arg)
+        true
+      }
+      else -> false
+    }
+    "startIconVisible" -> when {
+      v is TextInputLayout && arg is Boolean -> {
+        v.setStartIconVisible(arg)
         true
       }
       else -> false

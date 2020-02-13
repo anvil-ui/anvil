@@ -9,6 +9,7 @@ import com.google.android.material.animation.MotionSpec
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.resources.TextAppearance
+import com.google.android.material.shape.ShapeAppearanceModel
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
@@ -33,8 +34,6 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun checkedIconVisible(arg: Int): Unit = attr("checkedIconVisible", arg)
   fun chipBackgroundColor(arg: ColorStateList?): Unit = attr("chipBackgroundColor", arg)
   fun chipBackgroundColorResource(arg: Int): Unit = attr("chipBackgroundColorResource", arg)
-  fun chipCornerRadius(arg: Float): Unit = attr("chipCornerRadius", arg)
-  fun chipCornerRadiusResource(arg: Int): Unit = attr("chipCornerRadiusResource", arg)
   fun chipDrawable(arg: ChipDrawable): Unit = attr("chipDrawable", arg)
   fun chipEndPadding(arg: Float): Unit = attr("chipEndPadding", arg)
   fun chipEndPaddingResource(arg: Int): Unit = attr("chipEndPaddingResource", arg)
@@ -68,6 +67,7 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun closeIconTintResource(arg: Int): Unit = attr("closeIconTintResource", arg)
   fun closeIconVisible(arg: Boolean): Unit = attr("closeIconVisible", arg)
   fun closeIconVisible(arg: Int): Unit = attr("closeIconVisible", arg)
+  fun ensureMinTouchTargetSize(arg: Boolean): Unit = attr("ensureMinTouchTargetSize", arg)
   fun hideMotionSpec(arg: MotionSpec?): Unit = attr("hideMotionSpec", arg)
   fun hideMotionSpecResource(arg: Int): Unit = attr("hideMotionSpecResource", arg)
   fun iconEndPadding(arg: Float): Unit = attr("iconEndPadding", arg)
@@ -77,6 +77,7 @@ abstract class ChipScope : AppCompatCheckBoxScope() {
   fun onCloseIconClick(arg: ((arg0: View) -> Unit)?): Unit = attr("onCloseIconClick", arg)
   fun rippleColor(arg: ColorStateList?): Unit = attr("rippleColor", arg)
   fun rippleColorResource(arg: Int): Unit = attr("rippleColorResource", arg)
+  fun shapeAppearanceModel(arg: ShapeAppearanceModel): Unit = attr("shapeAppearanceModel", arg)
   fun showMotionSpec(arg: MotionSpec?): Unit = attr("showMotionSpec", arg)
   fun showMotionSpecResource(arg: Int): Unit = attr("showMotionSpecResource", arg)
   fun textAppearance(arg: TextAppearance?): Unit = attr("textAppearance", arg)

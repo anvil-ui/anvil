@@ -28,7 +28,9 @@ abstract class NavigationViewScope : ScrimInsetsFrameLayoutScope() {
   fun itemHorizontalPaddingResource(arg: Int): Unit = attr("itemHorizontalPaddingResource", arg)
   fun itemIconPadding(arg: Int): Unit = attr("itemIconPadding", arg)
   fun itemIconPaddingResource(arg: Int): Unit = attr("itemIconPaddingResource", arg)
+  fun itemIconSize(arg: Int): Unit = attr("itemIconSize", arg)
   fun itemIconTintList(arg: ColorStateList?): Unit = attr("itemIconTintList", arg)
+  fun itemMaxLines(arg: Int): Unit = attr("itemMaxLines", arg)
   fun itemTextAppearance(arg: Int): Unit = attr("itemTextAppearance", arg)
   fun itemTextColor(arg: ColorStateList?): Unit = attr("itemTextColor", arg)
   fun navigationItemSelectedListener(arg: NavigationView.OnNavigationItemSelectedListener?): Unit =

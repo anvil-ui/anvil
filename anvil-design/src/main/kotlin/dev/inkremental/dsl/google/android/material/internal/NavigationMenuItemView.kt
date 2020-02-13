@@ -18,6 +18,8 @@ fun navigationMenuItemView(configure: NavigationMenuItemViewScope.() -> Unit = {
     v<NavigationMenuItemView>(configure.bind(NavigationMenuItemViewScope))
 abstract class NavigationMenuItemViewScope : ForegroundLinearLayoutScope() {
   fun horizontalPadding(arg: Int): Unit = attr("horizontalPadding", arg)
+  fun iconSize(arg: Int): Unit = attr("iconSize", arg)
+  fun maxLines(arg: Int): Unit = attr("maxLines", arg)
   fun needsEmptyIcon(arg: Boolean): Unit = attr("needsEmptyIcon", arg)
   fun textAppearance(arg: Int): Unit = attr("textAppearance", arg)
   companion object : NavigationMenuItemViewScope() {
