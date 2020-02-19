@@ -6,7 +6,7 @@ plugins {
 
 android {
     defaultConfig {
-        missingDimensionStrategy("api", "sdk17")
+        missingDimensionStrategy("dev.inkremental.variant.anvil", "sdk-17")
     }
 }
 
@@ -14,7 +14,6 @@ val constraintVersion = "1.1.3"
 
 inkremental {
     androidLibrary("constraintlayout", constraintVersion) {
-        camelCaseName = "Constraint"
         srcPackage = "androidx.constraintlayout"
         modulePackage = "dev.inkremental.dsl.androidx.constraintlayout"
     }
@@ -25,7 +24,7 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk17"))
+	"inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
     //inkrementalGen("androidx.constraintlayout:constraintlayout:$constraintVersion")
     api("androidx.constraintlayout:constraintlayout:$constraintVersion")

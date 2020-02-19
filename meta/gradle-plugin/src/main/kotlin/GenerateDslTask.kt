@@ -98,7 +98,7 @@ abstract class GenerateDslTask : DefaultTask() {
             val viewType = view.starProjectedType
 
             generateFile(scopeType.packageName, viewName) {
-                addFunction(viewName.lowerFirstChar()) {
+                addFunction(viewName.decapitalize()) {
                     addParameter(
                         "configure",
                         LambdaTypeName.get(receiver = scopeType, returnType = UNIT)
@@ -136,6 +136,7 @@ abstract class GenerateDslTask : DefaultTask() {
                 }
             }
         }
+        // TODO generate android manifest automatically
     }
 
     private fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
@@ -286,12 +287,13 @@ abstract class GenerateDslTask : DefaultTask() {
         }
     }
 
-    private fun handleTransformersForAttrSetter(transformers: List<DslTransformer>?,
-                                                builder: CodeBlock.Builder,
-                                                owner: ViewModel,
-                                                v: String,
-                                                setterName: String,
-                                                argAsParam: String): Boolean {
+    private fun handleTransformersForAttrSetter(
+        transformers: List<DslTransformer>?,
+        builder: CodeBlock.Builder,
+        owner: ViewModel,
+        v: String,
+        setterName: String,
+        argAsParam: String): Boolean {
         val transformers = transformers ?: return false
         if (transformers.isEmpty()) return false
 
@@ -304,5 +306,3 @@ abstract class GenerateDslTask : DefaultTask() {
         return needsToBreak
     }
 }
-
-fun String.lowerFirstChar() = get(0).toLowerCase() + substring(1)

@@ -6,7 +6,7 @@ plugins {
 
 android {
 	defaultConfig {
-		missingDimensionStrategy("api", "sdk17")
+		missingDimensionStrategy("dev.inkremental.variant.anvil", "sdk-17")
 	}
 }
 
@@ -14,7 +14,6 @@ val recyclerVersion = "1.1.0"
 
 inkremental {
 	androidLibrary("recyclerview-v7", recyclerVersion) {
-		camelCaseName = "RecyclerViewv7"
         srcPackage = "androidx.recyclerview"
         modulePackage = "dev.inkremental.dsl.androidx.recyclerview"
 		manualSetterName = "CustomRecyclerViewv7Setter"
@@ -30,9 +29,9 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk17"))
+	"inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
-	inkrementalGen("androidx.recyclerview:recyclerview:$recyclerVersion")
+	"inkrementalGen"("androidx.recyclerview:recyclerview:$recyclerVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

@@ -2,6 +2,7 @@ package dev.inkremental.meta.gradle
 
 import com.android.build.gradle.LibraryExtension
 import dev.inkremental.meta.model.InkrementalType
+import dev.inkremental.meta.model.buildCamelCaseString
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -83,28 +84,33 @@ class InkrementalModulePlugin : Plugin<Project> {
             }
         }*/
 
-        fun registerPublication(name: String, bundleName: String, artifactId: String, verion: String) {
+        fun registerPublication(name: String, artifactId: String, verion: String) {
+
+            logger.error("registerPublication: $name")
             registerAnvilPublication(
                 name,
                 artifactId,
                 verion,
-                tasks.getByName("bundle${bundleName}ReleaseAar"),
-                //tasks.getByName("generate${bundleName}ReleaseJavadocJar"),
-                *configurations.getByName(CONFIGURATION_MODULE_DEF + name).artifacts.toTypedArray()
+                tasks.getByName("bundle${name.capitalize()}ReleaseAar"),
+                //tasks.getByName("generate${name}ReleaseJavadocJar"),
+                *configurations.getByName(buildCamelCaseString(name, CONFIGURATION_MODULE_DEF)).artifacts.toTypedArray()
             )
         }
 
+        val extension = extensions.getByType<InkrementalMetaExtension>()
+
         afterEvaluate {
-            extensions.getByType<InkrementalMetaExtension>().modules.forEach {
-                val version = (if(it.version.isNotEmpty()) "${it.version}-" else "") + project.version.toString()
-                when(it.type) {
+            extension.modules.configureEach {
+                val it = this
+                val version = (if (it.version.isNotEmpty()) "${it.version}-" else "") + project.version.toString()
+                when (it.type) {
                     InkrementalType.SDK -> {
-                        registerPublication("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!, version)
-                        registerPublication("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!, version)
-                        registerPublication("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!, version)
+                        registerPublication("sdk-17", prop("POM_ARTIFACT_SDK17_ID")!!, version)
+                        registerPublication("sdk-19", prop("POM_ARTIFACT_SDK19_ID")!!, version)
+                        registerPublication("sdk-21", prop("POM_ARTIFACT_SDK21_ID")!!, version)
                     }
                     InkrementalType.LIBRARY ->
-                        registerPublication(it.camelCaseName, "", prop("POM_ARTIFACT_ID")!!, version)
+                        registerPublication(it.dslName, prop("POM_ARTIFACT_ID")!!, version)
                 }
             }
         }

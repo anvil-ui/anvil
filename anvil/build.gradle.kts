@@ -4,21 +4,6 @@ plugins {
 	id("dev.inkremental.module")
 }
 
-android {
-	flavorDimensions("api")
-	productFlavors {
-		create("sdk17") {
-			minSdkVersion(17)
-		}
-		create("sdk19") {
-			minSdkVersion(19)
-		}
-		create("sdk21") {
-			minSdkVersion(21)
-		}
-	}
-}
-
 inkremental {
 	androidSdk {
 		srcPackage = "android"
