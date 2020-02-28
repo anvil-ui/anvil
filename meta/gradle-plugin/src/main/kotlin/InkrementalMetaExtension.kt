@@ -1,18 +1,33 @@
 package dev.inkremental.meta.gradle
 
+import com.android.utils.usLocaleDecapitalize
 import dev.inkremental.meta.model.*
 import org.gradle.api.Named
+import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.model.ObjectFactory
+import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.named
 import javax.inject.Inject
 
 open class InkrementalMetaExtension @Inject constructor(objectFactory: ObjectFactory) {
+    internal lateinit var project: Project
+
     val modules = objectFactory.domainObjectContainer(InkrementalMetaModule::class.java) { name ->
-        InkrementalMetaModule(name)
+        InkrementalMetaModule(project, name)
     }
 
     val androidModules = objectFactory.domainObjectContainer(InkrementalNamedModule::class.java) {
         InkrementalNamedModule(it)
+    }
+
+    fun configureModule(name: String, versionPrefix: String? = null, action: InkrementalMetaModule.() -> Unit) {
+        modules.configureEach {
+            if(this.name != name && versionPrefix != null && !this.version.startsWith(versionPrefix)) {
+                return@configureEach
+            }
+            apply(action)
+        }
     }
 
     fun androidSdk(action: InkrementalMetaModule.() -> Unit) {
@@ -50,6 +65,7 @@ open class InkrementalMetaExtension @Inject constructor(objectFactory: ObjectFac
 }
 
 data class InkrementalMetaModule(
+    private val project: Project,
     var name: String,
     var version: String = "",
     var type: InkrementalType = InkrementalType.LIBRARY,
@@ -61,10 +77,30 @@ data class InkrementalMetaModule(
     var srcPackage: String = "",
     var modulePackage: String = "",
     var manualSetterName: String? = null
-)
+) {
+    fun dependencies(configure: InkrementalDependencyHandler.() -> Unit) =
+        InkrementalDependencyHandler(this, project).run(configure)
+}
+
+class InkrementalDependencyHandler(
+    val parent: InkrementalMetaModule,
+    val project: Project
+) {
+    fun inkremental(depedencyNotation: Any): Dependency? =
+        addDependencyByAnyNotation(moduleConfigurationName(parent.dslName), depedencyNotation)
+
+    fun inkrementalGen(depedencyNotation: Any): Dependency? =
+        addDependencyByAnyNotation(genConfigurationName(parent.dslName), depedencyNotation)
+
+    private fun addDependencyByAnyNotation(configurationName: String, dependencyNotation: Any): Dependency? =
+        project.dependencies.add(configurationName, dependencyNotation)
+}
+
+val InkrementalMetaModule.configurationPrefix: String
+    get() = camelCaseName.decapitalize()
 
 val InkrementalMetaModule.dslName: String
-    get() = "${camelCaseName.decapitalize()}-$version"
+    get() = "$configurationPrefix-$version"
 
 class InkrementalNamedModule(private val name: String) : Named {
     override fun getName(): String = name

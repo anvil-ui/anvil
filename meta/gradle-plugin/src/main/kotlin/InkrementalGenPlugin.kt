@@ -20,7 +20,7 @@ class InkrementalGenPlugin @Inject constructor(
 ) : Plugin<Project> {
 
     override fun apply(project: Project) = with(project) {
-        val extension = extensions.create<InkrementalMetaExtension>(EXTENSION)
+        val extension = extensions.create<InkrementalMetaExtension>(EXTENSION).also { it.project = project }
         val android = extensions.findByType<LibraryExtension>()
 
         android ?: TODO("Only android library modules are supported at the moment")
@@ -43,8 +43,8 @@ class InkrementalGenPlugin @Inject constructor(
             val allSourceSets = (allNames + "gen-$cfgName")
                 .map { "src/$it/kotlin" }
             (listOf<String?>(null) + allNames).windowed(2).forEach { (parent, current) ->
-                createGenInputsConfiguration(current)
-                    .extendsFrom(createGenInputsConfiguration(parent))
+                createGenInputsConfiguration(current, version)
+                    .extendsFrom(createGenInputsConfiguration(parent, version))
                 createModuleInputsConfiguration(current)
                     .extendsFrom(createModuleInputsConfiguration(parent))
             }
@@ -95,6 +95,10 @@ const val FLAVOR_DIMENSION = "dev.inkremental.variant"
 const val USAGE = "inkremental-meta"
 const val FORMAT_AAR = "aar"
 
+fun genConfigurationName(module: String?) = buildCamelCaseString(module, CONFIGURATION_GEN)
+fun moduleConfigurationName(module: String?) = buildCamelCaseString(module, CONFIGURATION_MODULE)
+fun moduleDefConfigurationName(module: String?) = buildCamelCaseString(module, CONFIGURATION_MODULE_DEF)
+
 fun loadPropertiesFromFile(file: File): Properties = Properties().apply {
     try {
         file.inputStream().use { load(it) }
@@ -131,10 +135,10 @@ fun Project.setupAndroidLibraryModule(
     componentFactory: SoftwareComponentFactory,
     module: InkrementalMetaModule
 ) {
-    val prefix = module.dslName//module.camelCaseName.decapitalize()
+    val prefix = module.dslName
 
-    val genInputs = configurations.getByName(buildCamelCaseString(prefix, CONFIGURATION_GEN))
-    val moduleInputs = configurations.getByName(buildCamelCaseString(prefix, CONFIGURATION_MODULE))
+    val genInputs = configurations.getByName(genConfigurationName(prefix))
+    val moduleInputs = configurations.getByName(moduleConfigurationName(prefix))
 
     configurations["${prefix}Api"].extendsFrom(genInputs)
 
@@ -158,7 +162,7 @@ private inline fun <reified T: GenerateModelTask> Project.setupAndroidModule(
     val dslName = module.dslName
     val outputDir = getOutputDir(dslName)
 
-    val outConfName = buildCamelCaseString(dslName, CONFIGURATION_MODULE_DEF)
+    val outConfName = moduleDefConfigurationName(dslName)
 
     logger.error("setupAndroidModule: $outConfName | ${outputDir.absolutePath}")
 
@@ -171,13 +175,13 @@ private inline fun <reified T: GenerateModelTask> Project.setupAndroidModule(
         }
     }
 
-    val component = componentFactory.adhoc("inkrementalModel$dslName")
+    val component = componentFactory.adhoc(buildCamelCaseString("inkrementalModel", dslName))
     components.add(component)
     component.addVariantsFromConfiguration(modelOutputs) {
         mapToMavenScope("inkremental")
     }
 
-    val modelTask = tasks.register<T>("generate${dslName}Model") {
+    val modelTask = tasks.register<T>(buildCamelCaseString("generate", dslName, "Model")) {
         quirks = module.quirks
         transformers = module.transformers
         camelCaseName = module.camelCaseName
@@ -193,7 +197,7 @@ private inline fun <reified T: GenerateModelTask> Project.setupAndroidModule(
         builtBy(modelTask)
     }
 
-    val dslTask = tasks.register<GenerateDslTask>("generate${dslName}Dsl") {
+    val dslTask = tasks.register<GenerateDslTask>(buildCamelCaseString("generate", dslName, "Dsl")) {
         dependsOn(modelTask)
         this.modelFile = modelFile
         this.configuration = modelInputs
@@ -208,8 +212,8 @@ private inline fun <reified T: GenerateModelTask> Project.setupAndroidModule(
     return modelTask to dslTask
 }
 
-private fun Project.createGenInputsConfiguration(prefix: String? = null): Configuration =
-    configurations.maybeCreate(buildCamelCaseString(prefix, CONFIGURATION_GEN)) {
+private fun Project.createGenInputsConfiguration(prefix: String?, defVersion: String): Configuration =
+    configurations.maybeCreate(genConfigurationName(prefix)) {
         description = "Input artifacts that should be processed by Inkremental code generator for module $name"
         isCanBeResolved = true
         isCanBeConsumed = false
@@ -217,10 +221,17 @@ private fun Project.createGenInputsConfiguration(prefix: String? = null): Config
             attribute(ARTIFACT_FORMAT, ArtifactTypeDefinition.JAR_TYPE) // JVM_CLASS_DIRECTORY
             //attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.CLASSES))
         }
+
+        resolutionStrategy.eachDependency {
+            if(requested.version.isNullOrEmpty()) {
+                useVersion(defVersion)
+                because("Using $prefix module version")
+            }
+        }
     }
 
 private fun Project.createModuleInputsConfiguration(prefix: String? = null): Configuration =
-    configurations.maybeCreate(buildCamelCaseString(prefix, CONFIGURATION_MODULE)) {
+    configurations.maybeCreate(moduleConfigurationName(prefix)) {
         description = "Input descriptors of Inkremental module $name"
         isCanBeResolved = true
         isCanBeConsumed = false

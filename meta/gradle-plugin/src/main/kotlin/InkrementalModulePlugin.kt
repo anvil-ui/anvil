@@ -93,7 +93,7 @@ class InkrementalModulePlugin : Plugin<Project> {
                 verion,
                 tasks.getByName("bundle${name.capitalize()}ReleaseAar"),
                 //tasks.getByName("generate${name}ReleaseJavadocJar"),
-                *configurations.getByName(buildCamelCaseString(name, CONFIGURATION_MODULE_DEF)).artifacts.toTypedArray()
+                *configurations.getByName(moduleDefConfigurationName(name)).artifacts.toTypedArray()
             )
         }
 

@@ -80,6 +80,9 @@ inkremental {
                 )
             )
 		)
+        dependencies {
+            inkrementalGen("com.google.android.material:material")
+        }
 	}
 }
 
@@ -98,9 +101,6 @@ dependencies {
 
 	implementation(project(":anvil-recyclerview-v7"))
 	"inkremental"(project(":anvil-recyclerview-v7", "recyclerviewV7-1.1.0InkrementalDef"))
-
-	"material-1.1.0InkrementalGen"("com.google.android.material:material:1.1.0")
-	"material-1.2.0-alpha04InkrementalGen"("com.google.android.material:material:1.2.0-alpha04")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")
