@@ -5,7 +5,7 @@ plugins {
 }
 
 inkremental {
-	androidSdk {
+	androidSdk(listOf(17, 19, 21)) {
 		srcPackage = "android"
 		modulePackage = "dev.inkremental.dsl.android"
 		manualSetterName = "CustomSdkSetter"

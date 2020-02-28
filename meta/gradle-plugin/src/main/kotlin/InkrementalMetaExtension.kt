@@ -5,8 +5,12 @@ import dev.inkremental.meta.model.*
 import org.gradle.api.Named
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.ExternalDependency
+import org.gradle.api.internal.artifacts.dependencies.AbstractExternalModuleDependency
+import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 import org.gradle.api.model.ObjectFactory
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
+import org.gradle.kotlin.dsl.closureOf
 import org.gradle.kotlin.dsl.named
 import javax.inject.Inject
 
@@ -30,14 +34,18 @@ open class InkrementalMetaExtension @Inject constructor(objectFactory: ObjectFac
         }
     }
 
-    fun androidSdk(action: InkrementalMetaModule.() -> Unit) {
-        androidModules.register("sdk#17")
-        androidModules.register("sdk#19")
-        androidModules.register("sdk#21")
-        modules.register("sdk") {
+    fun androidSdk(
+        apiLevels: List<Int>,
+        action: InkrementalMetaModule.() -> Unit) =
+        apiLevels.forEach { apiLevel -> androidSdk(apiLevel, action) }
+
+    fun androidSdk(apiLevel: Int, action: InkrementalMetaModule.() -> Unit) {
+        androidModules.register("sdk#$apiLevel")
+        modules.register("sdk-$apiLevel") {
             type = InkrementalType.SDK
             platform = InkrementalPlatform.ANDROID
             camelCaseName = "Sdk"
+            this.version = apiLevel.toString()
             action()
         }
     }
@@ -93,7 +101,13 @@ class InkrementalDependencyHandler(
         addDependencyByAnyNotation(genConfigurationName(parent.dslName), depedencyNotation)
 
     private fun addDependencyByAnyNotation(configurationName: String, dependencyNotation: Any): Dependency? =
-        project.dependencies.add(configurationName, dependencyNotation)
+        project.dependencies.add(configurationName, dependencyNotation, closureOf<Any?> {
+            if(this is ExternalDependency && version.isNullOrEmpty()) {
+                version {
+                    require(parent.version)
+                }
+            }
+        })
 }
 
 val InkrementalMetaModule.configurationPrefix: String

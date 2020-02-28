@@ -55,7 +55,8 @@ class InkrementalModulePlugin : Plugin<Project> {
                             "${prop("BINTRAY_ORG")}/" +
                             bintrayRepo +
                             "/${prop("POM_PACKAGE_NAME")}/" +
-                            ";publish=1")
+                            ";publish=1" // + ";override=1"
+                        )
                         credentials {
                             username = bintrayUser
                             password = bintrayApiKey
@@ -85,13 +86,12 @@ class InkrementalModulePlugin : Plugin<Project> {
         }*/
 
         fun registerPublication(name: String, artifactId: String, verion: String) {
-
-            logger.error("registerPublication: $name")
+            logger.debug("registerPublication: $name")
             registerAnvilPublication(
                 name,
                 artifactId,
                 verion,
-                tasks.getByName("bundle${name.capitalize()}ReleaseAar"),
+                tasks.getByName(androidAarTaskName(name)), // TODO named?
                 //tasks.getByName("generate${name}ReleaseJavadocJar"),
                 *configurations.getByName(moduleDefConfigurationName(name)).artifacts.toTypedArray()
             )
@@ -101,17 +101,8 @@ class InkrementalModulePlugin : Plugin<Project> {
 
         afterEvaluate {
             extension.modules.configureEach {
-                val it = this
-                val version = (if (it.version.isNotEmpty()) "${it.version}-" else "") + project.version.toString()
-                when (it.type) {
-                    InkrementalType.SDK -> {
-                        registerPublication("sdk-17", prop("POM_ARTIFACT_SDK17_ID")!!, version)
-                        registerPublication("sdk-19", prop("POM_ARTIFACT_SDK19_ID")!!, version)
-                        registerPublication("sdk-21", prop("POM_ARTIFACT_SDK21_ID")!!, version)
-                    }
-                    InkrementalType.LIBRARY ->
-                        registerPublication(it.dslName, prop("POM_ARTIFACT_ID")!!, version)
-                }
+                val pubVersion = (if (version.isNotEmpty()) "$version-" else "") + project.version.toString()
+                registerPublication(dslName, prop("POM_ARTIFACT_ID")!!, pubVersion)
             }
         }
     }
