@@ -43,11 +43,13 @@ const val CLIP_HORIZONTAL = Gravity.CLIP_HORIZONTAL
 const val START = Gravity.START
 const val END = Gravity.END
 
+const val INIT_LITERAL = "init"
+
 inline class Sp(val value: Float)
 inline class Dip(val value: Int)
 inline class Px(val value: Int)
 
-fun ViewScope.init(action: (View) -> Unit) = attr("init", action)
+fun ViewScope.init(action: (View) -> Unit) = attr(INIT_LITERAL, action)
 fun ViewScope.size(w: Size, h: Size) = attr("size", w to h)
 fun ViewScope.tag(key: Int, value: Any?) = attr("tag", key to value)
 
@@ -124,12 +126,9 @@ fun SwitchViewScope.switchMinWidth(arg: Dip): Unit = attr("switchMinWidth", arg.
 
 object CustomSdkSetter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
-        "init" -> when {
-            value is Function<*> -> {
-                if (Inkremental.get(v, "_initialized") == null) {
-                    Inkremental.set(v, "_initialized", true)
-                    (value as (View) -> Any?)(v)
-                }
+        INIT_LITERAL -> when (value) {
+            is Function<*> -> {
+                (value as (View) -> Any?)(v)
                 true
             }
             else -> false
