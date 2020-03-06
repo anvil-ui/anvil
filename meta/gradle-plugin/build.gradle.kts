@@ -24,6 +24,10 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("gen") {
+            id = "dev.inkremental.gen"
+            implementationClass = "dev.inkremental.meta.gradle.InkrementalGenPlugin"
+        }
         register("module") {
             id = "dev.inkremental.module"
             implementationClass = "dev.inkremental.meta.gradle.InkrementalModulePlugin"

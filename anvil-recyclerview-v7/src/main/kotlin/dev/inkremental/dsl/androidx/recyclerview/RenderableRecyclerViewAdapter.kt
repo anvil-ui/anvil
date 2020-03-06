@@ -7,7 +7,6 @@ import dev.inkremental.Inkremental.Mount
 import dev.inkremental.Inkremental.render
 import dev.inkremental.RenderableAdapter
 
-
 abstract class RenderableRecyclerViewAdapter : RecyclerView.Adapter<RenderableRecyclerViewAdapter.MountHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MountHolder {
         val root = FrameLayout(parent.context)

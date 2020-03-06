@@ -13,8 +13,8 @@ functionality.
 
 The project has two Gradle plugins in `buildSrc`.
 
-* `dev.inkremental.meta.gradle.InkrementalGenPlugin` is the plugin which
-does heavylifting of DSL generation for views. `AnvilGenPlugin` configures
+* `dev.inkremental.gen` (`dev.inkremental.meta.gradle.InkrementalGenPlugin`)
+is the plugin which does heavylifting of DSL generation for views. It configures
 generator tasks using parameters noted in corresponding extension,
 and `DSLGeneratorTask` is a task which manages the process.
 

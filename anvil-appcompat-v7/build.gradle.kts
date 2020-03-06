@@ -6,7 +6,7 @@ plugins {
 
 android {
 	defaultConfig {
-		missingDimensionStrategy("api", "sdk17")
+		missingDimensionStrategy("dev.inkremental.variant.anvil", "sdk-17")
 	}
 }
 
@@ -14,7 +14,6 @@ val appcompatVersion = "1.1.0"
 
 inkremental {
 	androidLibrary("appcompat-v7", appcompatVersion) {
-		camelCaseName = "AppCompatv7"
         srcPackage = "androidx.appcompat"
         modulePackage = "dev.inkremental.dsl.androidx.appcompat"
 		manualSetterName = "CustomAppCompatv7Setter"
@@ -47,9 +46,9 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk17"))
+	"appcompatV7Inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
-	inkrementalGen("androidx.appcompat:appcompat:$appcompatVersion")
+    "appcompatV7InkrementalGen"("androidx.appcompat:appcompat:$appcompatVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

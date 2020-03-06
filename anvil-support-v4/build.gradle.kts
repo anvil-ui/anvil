@@ -6,7 +6,7 @@ plugins {
 
 android {
 	defaultConfig {
-		missingDimensionStrategy("api", "sdk17")
+		missingDimensionStrategy("dev.inkremental.variant.anvil", "sdk-17")
 	}
 }
 
@@ -14,7 +14,6 @@ val coreVersion = "1.1.0"
 
 inkremental {
 	androidLibrary("support-core-ui", coreVersion) {
-		camelCaseName = "SupportCoreUi"
         srcPackage = "androidx.core"
         modulePackage = "dev.inkremental.dsl.androidx.core"
 		quirks = mutableMapOf(
@@ -34,15 +33,15 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk17"))
+	"inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
-	inkrementalGen("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
-	inkrementalGen("androidx.core:core:$coreVersion")
-	inkrementalGen("androidx.drawerlayout:drawerlayout:1.0.0")
-	inkrementalGen("androidx.legacy:legacy-support-core-ui:1.0.0")
-	inkrementalGen("androidx.slidingpanelayout:slidingpanelayout:1.0.0")
-	inkrementalGen("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
-	inkrementalGen("androidx.viewpager:viewpager:1.0.0")
+	"inkrementalGen"("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
+	"inkrementalGen"("androidx.core:core:$coreVersion")
+	"inkrementalGen"("androidx.drawerlayout:drawerlayout:1.0.0")
+	"inkrementalGen"("androidx.legacy:legacy-support-core-ui:1.0.0")
+	"inkrementalGen"("androidx.slidingpanelayout:slidingpanelayout:1.0.0")
+	"inkrementalGen"("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+	"inkrementalGen"("androidx.viewpager:viewpager:1.0.0")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")
