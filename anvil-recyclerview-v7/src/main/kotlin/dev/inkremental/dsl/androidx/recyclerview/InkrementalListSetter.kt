@@ -1,6 +1,7 @@
 package dev.inkremental.dsl.androidx.recyclerview
 
 import android.view.View
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,7 @@ inline fun grid(spanCount: Int, crossinline r : () -> Unit) {
 abstract class InkrementalListScope : RecyclerViewScope() {
 
     fun items(arg: List<Any>, r: (index: Int, item: Any) -> Unit): Unit = attr("items", HolderAttr(arg, r))
+    fun itemsDiffable(arg: List<Diffable>, r: (index: Int, item: Any) -> Unit): Unit = attr("itemsDiffable", HolderAttr(arg, r))
     fun layout(arg: RecyclerLayoutType): Unit = attr("layout", arg)
 
     companion object : InkrementalListScope() {
@@ -62,7 +64,27 @@ object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
                 if (v.localAdapter?.items !== value.items) {
                     v.items = value.items
                     v.localAdapter?.items = value.items
-                    v.adapter?.notifyDataSetChanged()
+                    v.localAdapter?.notifyDataSetChanged()
+                }
+                true
+            }
+            else -> false
+        }
+        "itemsDiffable" -> when {
+            v is InkrementalRecyclerView && value is HolderAttr && value.items.areDiffable() -> {
+                if (v.localAdapter == null) {
+                    v.items = value.items
+                    v.localAdapter = InkrementalRecyclerViewAdapter(value.items) { index, letter ->
+                        value.r(index, letter)
+                    }
+                    v.adapter = v.localAdapter
+                }
+                if (v.localAdapter?.items !== value.items) {
+                    val productDiffUtilCallback = DiffableCallback(v.localAdapter?.items as List<Diffable>, value.items as List<Diffable>)
+                    val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
+
+                    v.localAdapter?.items = value.items
+                    productDiffResult.dispatchUpdatesTo(v.localAdapter!!)
                 }
                 true
             }
@@ -86,6 +108,34 @@ object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
             else -> false
         }
         else -> false
+    }
+}
+
+private fun List<Any>.areDiffable(): Boolean {
+    if (this.isEmpty()) return true
+    return this.first() is Diffable
+}
+
+interface Diffable {
+    fun isSame(other : Diffable) : Boolean
+    fun areContentsSame(other : Diffable) : Boolean
+}
+
+class DiffableCallback(val oldList: List<Diffable>, val newList: List<Diffable>) : DiffUtil.Callback() {
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldProduct: Diffable = oldList[oldItemPosition]
+        val newProduct: Diffable = newList[newItemPosition]
+        return oldProduct.isSame(newProduct)
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldProduct: Diffable = oldList[oldItemPosition]
+        val newProduct: Diffable = newList[newItemPosition]
+        return oldProduct.areContentsSame(newProduct)
     }
 }
 

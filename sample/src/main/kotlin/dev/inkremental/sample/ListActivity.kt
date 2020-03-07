@@ -18,7 +18,7 @@ import dev.inkremental.renderableContentView
 
 class ListActivity : AppCompatActivity() {
 
-    var items = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+    var items = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20).map { it.toDiffable() }.toMutableList()
     var listStyle = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +57,8 @@ class ListActivity : AppCompatActivity() {
                         text("Add")
                         onClick {
                             val size = items.size + 1
-                            items = (items + (size..(size + 20))).toMutableList()
+                            //reverse positions of last two elements and add next twenty elements. This is done to show animation from diffutils
+                            items = (items.dropLast(2) + listOf(items[items.lastIndex], items[items.lastIndex - 1]) + (size..(size + 20)).map { it.toDiffable() }).toMutableList()
                         }
                     }
                 }
@@ -72,11 +73,11 @@ class ListActivity : AppCompatActivity() {
                     }
 
                     //uses Recycler underneath
-                    items(items) { index : Int, itemValue : Any ->
-                        size(if (listStyle == 3) MATCH else WRAP, WRAP)
+                    itemsDiffable(items) { index: Int, itemValue: Any ->
+                        size(if (listStyle != 2) MATCH else WRAP, WRAP)
                         //adapter item
                         frameLayout {
-                            size(if (listStyle == 3) MATCH else 100.sizeDp, if (listStyle == 3) 150.sizeDp else 50.sizeDp)
+                            size(if (listStyle != 2) MATCH else 100.sizeDp, if (listStyle == 3) 150.sizeDp else 50.sizeDp)
                             margin(value = 1.dp)
                             backgroundResource(R.color.children_stroke)
 
@@ -88,7 +89,9 @@ class ListActivity : AppCompatActivity() {
                                 textView {
                                     size(WRAP, WRAP)
                                     layoutGravity(CENTER)
-                                    text("item: $itemValue")
+                                    if (itemValue is IntDiffable) {
+                                        text("item: ${itemValue.value}")
+                                    }
                                 }
                             }
                         }
@@ -98,4 +101,18 @@ class ListActivity : AppCompatActivity() {
 
         }
     }
+}
+
+class IntDiffable(val value : Int) : Diffable {
+    override fun isSame(other: Diffable): Boolean {
+        return other is IntDiffable && other.value == value
+    }
+
+    override fun areContentsSame(other: Diffable): Boolean {
+        return other is IntDiffable && other.value == value
+    }
+}
+
+private fun Int.toDiffable(): Diffable {
+    return IntDiffable(this)
 }
