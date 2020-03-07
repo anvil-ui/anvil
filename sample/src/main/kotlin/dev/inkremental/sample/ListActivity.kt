@@ -77,12 +77,12 @@ class ListActivity : AppCompatActivity() {
                         //adapter item
                         frameLayout {
                             size(if (listStyle == 3) MATCH else 100.sizeDp, if (listStyle == 3) 150.sizeDp else 50.sizeDp)
-                            margin(m = 1.dp)
+                            margin(value = 1.dp)
                             backgroundResource(R.color.children_stroke)
 
                             frameLayout {
                                 size(MATCH, MATCH)
-                                margin(m = 2.dp)
+                                margin(value = 2.dp)
 
                                 backgroundResource(R.color.white)
                                 textView {
