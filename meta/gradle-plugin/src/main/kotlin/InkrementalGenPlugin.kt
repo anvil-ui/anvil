@@ -1,6 +1,6 @@
 package dev.inkremental.meta.gradle
 
-import com.android.build.gradle.internal.tasks.factory.dependsOn
+import com.android.build.gradle.LibraryExtension
 import dev.inkremental.meta.model.*
 import org.gradle.api.*
 import org.gradle.api.artifacts.Configuration
@@ -19,52 +19,92 @@ class InkrementalGenPlugin @Inject constructor(
 ) : Plugin<Project> {
 
     override fun apply(project: Project) = with(project) {
-        val extension = extensions.create<InkrementalMetaExtension>(EXTENSION)
+        val extension = extensions.create<InkrementalMetaExtension>(EXTENSION).also { it.project = project }
+        val android = extensions.findByType<LibraryExtension>()
 
-        val genConfiguration = configurations.create(CONFIGURATION_GEN) {
-            description = "Input artifacts that should be processed by Inkremental code generator"
-            isCanBeResolved = true
-            isCanBeConsumed = false
-            attributes {
-                attribute(ARTIFACT_FORMAT, ArtifactTypeDefinition.JAR_TYPE) // JVM_CLASS_DIRECTORY
-                //attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.CLASSES))
-            }
-        }
-
-        val moduleConfiguration = configurations.create(CONFIGURATION_MODULE) {
-            description = "Input descriptors of Inkremental modules"
-            isCanBeResolved = true
-            isCanBeConsumed = false
-            attributes {
-                attribute(USAGE_ATTRIBUTE, objects.named(USAGE))
-            }
-        }
+        android ?: TODO("Only android library modules are supported at the moment")
 
         dependencies.registerTransform(AarToJarTransform::class.java) {
             from.attribute(ARTIFACT_FORMAT, FORMAT_AAR)
             to.attribute(ARTIFACT_FORMAT, ArtifactTypeDefinition.JAR_TYPE)
         }
 
-        // "implementation" extends from "api", so it's also covered
-        configurations["api"].extendsFrom(genConfiguration)
+        val flavorDimension = "$FLAVOR_DIMENSION.$name"
+
+        android.flavorDimensions(flavorDimension)
+
+        extension.androidModules.all {
+            val (name, version) = this.name.split('#')
+            val allNames = version.split('.')
+                .scan("") { acc, it -> if (acc.isEmpty()) "-$it" else "$acc.$it" }
+                .map { "$name$it" }
+            val cfgName = allNames.last()
+            val allSourceSets = (allNames + "gen-$cfgName")
+                .map { "src/$it/kotlin" }
+            (listOf<String?>(null) + allNames).windowed(2).forEach { (parent, current) ->
+                createGenInputsConfiguration(current, version)
+                    .extendsFrom(createGenInputsConfiguration(parent, version))
+                createModuleInputsConfiguration(current)
+                    .extendsFrom(createModuleInputsConfiguration(parent))
+            }
+
+            logger.debug("Flavor: $flavorDimension => $cfgName")
+
+            with(android) {
+                productFlavors {
+                    register(cfgName) {
+                        dimension = flavorDimension
+                        // TODO move this hack out of here
+                        if(name == "sdk") {
+                            minSdkVersion(version)
+                        }
+                    }
+                }
+                sourceSets.named(cfgName) {
+                    java.srcDirs(*allSourceSets.toTypedArray())
+                }
+            }
+        }
+
+        tasks.register<DefaultTask>(TASK_ALL_MODELS)
+        tasks.register<DefaultTask>(TASK_ALL_DSLS)
 
         afterEvaluate {
-            extension.modules.forEach { module ->
-                when(module.platform) {
-                    InkrementalPlatform.ANDROID -> generateAndroidTasks(componentFactory, module, moduleConfiguration, genConfiguration)
-                    else -> TODO()
+            extension.modules.all {
+                val module = this
+                val name = module.name
+                val platform = module.platform ?: error("Module $name does not declare platform")
+                val type = module.type
+                when(platform to type) {
+                    InkrementalPlatform.ANDROID to InkrementalType.SDK ->
+                        setupAndroidSdkModule(componentFactory, module)
+
+                    InkrementalPlatform.ANDROID to InkrementalType.LIBRARY ->
+                        setupAndroidLibraryModule(componentFactory, module)
+
+                    else -> TODO("Module $name is unsupported (platform $platform, type $type)")
                 }
             }
         }
     }
 }
 
+private const val TASK_ALL_MODELS = "generateModels"
+private const val TASK_ALL_DSLS = "generateDsls"
+
 const val EXTENSION = "inkremental"
 const val CONFIGURATION_GEN = "inkrementalGen"
 const val CONFIGURATION_MODULE = "inkremental"
 const val CONFIGURATION_MODULE_DEF = "inkrementalDef"
+const val FLAVOR_DIMENSION = "dev.inkremental.variant"
 const val USAGE = "inkremental-meta"
 const val FORMAT_AAR = "aar"
+
+fun genConfigurationName(module: String?) = buildCamelCaseString(module, CONFIGURATION_GEN)
+fun moduleConfigurationName(module: String?) = buildCamelCaseString(module, CONFIGURATION_MODULE)
+fun moduleDefConfigurationName(module: String?) = buildCamelCaseString(module, CONFIGURATION_MODULE_DEF)
+
+fun androidAarTaskName(name: String) = buildCamelCaseString("bundle", name, "ReleaseAar")
 
 fun loadPropertiesFromFile(file: File): Properties = Properties().apply {
     try {
@@ -74,69 +114,59 @@ fun loadPropertiesFromFile(file: File): Properties = Properties().apply {
     }
 }
 
-fun Project.generateAndroidTasks(
+fun Project.setupAndroidSdkModule(
     componentFactory: SoftwareComponentFactory,
-    module: InkrementalMetaModule,
-    moduleConfiguration: Configuration,
-    configuration: Configuration
+    module: InkrementalMetaModule
 ) {
-    when(module.type) {
-        InkrementalType.SDK -> {
-            val allModelsTask = tasks.register<DefaultTask>("generateSdkModel")
-            val allDslsTask = tasks.register<DefaultTask>("generateSdkDsl")
-
-            for(apiLevel in listOf(17, 19, 21)) {
-                val (modelTask, dslTask) = createDslTasks<GenerateAndroidSdkModelTask>(
-                    module,
-                    "Sdk$apiLevel",
-                    "Sdk$apiLevel",
-                    getOutputDir("sdk$apiLevel"),
-                    componentFactory,
-                    null
-                ) {
-                    camelCaseName = "Sdk"
-                    javadocContains = "It contains views and their setters for Android SDK (API level $apiLevel)"
-                    outputFile = file(getModelOutputFile("${module.name}$apiLevel"))
-
-                    jarFiles = listOf(getAndroidJar(apiLevel))
-                    nullabilitySourceFiles = listOf(getAndroidJar(28))
-                }
-                allModelsTask.dependsOn(modelTask)
-                allDslsTask.dependsOn(dslTask)
-            }
-        }
-        InkrementalType.LIBRARY -> {
-            createDslTasks<GenerateAndroidLibraryModelTask>(
-                module,
-                module.camelCaseName,
-                "",
-                getOutputDir("main"),
-                componentFactory,
-                moduleConfiguration
-            ) {
-                javadocContains = "It contains views and their setters for the library ${module.name}"
-
-                this.configuration = configuration
-                sdkDependencies = listOf(getAndroidJar(28))
-            }
-        }
+    val apiLevel = module.version.toInt()
+    setupAndroidModule<GenerateAndroidSdkModelTask>(
+        module,
+        componentFactory,
+        null
+    ) {
+        javadocContains = "It contains views and their setters for Android SDK (API level $apiLevel)"
+        jarFiles = listOf(getAndroidJar(apiLevel))
+        nullabilitySourceFiles = listOf(getAndroidJar(28))
     }
 }
 
-private inline fun <reified T: GenerateModelTask> Project.createDslTasks(
-    module: InkrementalMetaModule,
-    dslName: String,
-    variantName: String,
-    outputDir: File,
+fun Project.setupAndroidLibraryModule(
     componentFactory: SoftwareComponentFactory,
-    //moduleDefConfiguration: Configuration,
-    moduleConfiguration: Configuration? = null,
-    noinline configuration: T.() -> Unit):
-        Pair<TaskProvider<T>, TaskProvider<GenerateDslTask>> {
-    val outConfName = CONFIGURATION_MODULE_DEF + dslName
+    module: InkrementalMetaModule
+) {
+    val prefix = module.dslName
 
-    val outConfiguration = configurations.create(outConfName) {
-        description = "Descriptors of Inkremental modules"
+    val genInputs = configurations.getByName(genConfigurationName(prefix))
+    val moduleInputs = configurations.getByName(moduleConfigurationName(prefix))
+
+    configurations["${prefix}Api"].extendsFrom(genInputs)
+
+    setupAndroidModule<GenerateAndroidLibraryModelTask>(
+        module,
+        componentFactory,
+        moduleInputs
+    ) {
+        javadocContains = "It contains views and their setters for the library ${module.name}"
+        configuration = genInputs
+        sdkDependencies = listOf(getAndroidJar(28))
+    }
+}
+
+private inline fun <reified T: GenerateModelTask> Project.setupAndroidModule(
+    module: InkrementalMetaModule,
+    componentFactory: SoftwareComponentFactory,
+    modelInputs: Configuration? = null,
+    noinline configuration: T.() -> Unit
+) {
+    val dslName = module.dslName
+    val outputDir = getOutputDir(dslName)
+
+    val outConfName = moduleDefConfigurationName(dslName)
+
+    logger.debug("setupAndroidModule: $outConfName | ${outputDir.absolutePath}")
+
+    val modelOutputs = configurations.create(outConfName) {
+        description = "Descriptors of Inkremental module ${module.name}"
         isCanBeResolved = false
         isCanBeConsumed = true
         attributes {
@@ -144,21 +174,24 @@ private inline fun <reified T: GenerateModelTask> Project.createDslTasks(
         }
     }
 
-    val component = componentFactory.adhoc("inkrementalModel$dslName")
+    val component = componentFactory.adhoc(buildCamelCaseString("inkrementalModel", dslName))
     components.add(component)
-    component.addVariantsFromConfiguration(outConfiguration) {
+    component.addVariantsFromConfiguration(modelOutputs) {
         mapToMavenScope("inkremental")
     }
 
-    val modelTask = tasks.register<T>("generate${dslName}Model") {
+    val modelTask = tasks.register<T>(buildCamelCaseString("generate", dslName, "Model")) {
         quirks = module.quirks
         transformers = module.transformers
         camelCaseName = module.camelCaseName
         srcPackage = module.srcPackage
         modulePackage = module.modulePackage
         manualSetterName = module.manualSetterName
-        outputFile = file(getModelOutputFile(module.name))
+        outputFile = file(getModelOutputFile(module.dslName))
         configuration()
+    }
+    tasks.named(TASK_ALL_MODELS) {
+        dependsOn(modelTask)
     }
 
     val modelFile = modelTask.get().outputFile
@@ -166,21 +199,53 @@ private inline fun <reified T: GenerateModelTask> Project.createDslTasks(
         builtBy(modelTask)
     }
 
-    val dslTask = tasks.register<GenerateDslTask>("generate${dslName}Dsl") {
+    val dslTask = tasks.register<GenerateDslTask>(buildCamelCaseString("generate", dslName, "Dsl")) {
         dependsOn(modelTask)
         this.modelFile = modelFile
-        this.configuration = moduleConfiguration
+        this.configuration = modelInputs
         this.outputDir = outputDir
+    }
+    tasks.named(TASK_ALL_DSLS) {
+        dependsOn(dslTask)
     }
 
     if(prop("dontGenerateCodeOnBuild") != "true") {
-        listOf("Debug", "Release").forEach { tasks.getByName("compile${variantName}${it}Kotlin").dependsOn(dslTask) }
+        listOf("Debug", "Release")
+            .map { "compile${dslName.capitalize()}${it}Kotlin" }
+            .forEach { tasks.named(it) { dependsOn(dslTask) } }
     }
-    return modelTask to dslTask
 }
 
+private fun Project.createGenInputsConfiguration(prefix: String?, defVersion: String): Configuration =
+    configurations.maybeCreate(genConfigurationName(prefix)) {
+        description = "Input artifacts that should be processed by Inkremental code generator for module $name"
+        isCanBeResolved = true
+        isCanBeConsumed = false
+        attributes {
+            attribute(ARTIFACT_FORMAT, ArtifactTypeDefinition.JAR_TYPE) // JVM_CLASS_DIRECTORY
+            //attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.CLASSES))
+        }
+
+        resolutionStrategy.eachDependency {
+            if(requested.version.isNullOrEmpty()) {
+                useVersion(defVersion)
+                because("Using $prefix module version")
+            }
+        }
+    }
+
+private fun Project.createModuleInputsConfiguration(prefix: String? = null): Configuration =
+    configurations.maybeCreate(moduleConfigurationName(prefix)) {
+        description = "Input descriptors of Inkremental module $name"
+        isCanBeResolved = true
+        isCanBeConsumed = false
+        attributes {
+            attribute(USAGE_ATTRIBUTE, objects.named(USAGE))
+        }
+    }
+
 private fun Project.getModelOutputFile(modelName: String) = buildDir / "inkremental" / "$modelName.json"
-private fun Project.getOutputDir(sourceSetName: String) = projectDir / "src" / sourceSetName / "kotlin"
+private fun Project.getOutputDir(sourceSetName: String) = projectDir / "src" / "gen-$sourceSetName" / "kotlin"
 
 private fun Project.getAndroidJar(api: Int): File {
     val localProperties = File(rootDir, "local.properties")

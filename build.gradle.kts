@@ -39,7 +39,6 @@ subprojects {
     version = VERSION_NAME
 }
 
-// TODO constraintlayout and yogalayout
 val mainSubprojects = listOf(
     "anvil",
     "anvil-appcompat-v7",
@@ -47,7 +46,9 @@ val mainSubprojects = listOf(
     "anvil-recyclerview-v7",
     "anvil-cardview-v7",
     "anvil-design",
-    "anvil-support-v4"
+    "anvil-support-v4",
+    "anvil-constraintlayout",
+    "anvil-yogalayout"
 )
 fun registerGlobalTask(name: String, subprojectTask: String) = tasks.register<Task>(name) {
     setDependsOn(mainSubprojects.map { ":$it:$subprojectTask" })

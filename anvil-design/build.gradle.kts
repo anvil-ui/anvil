@@ -8,15 +8,15 @@ plugins {
 
 android {
 	defaultConfig {
-		missingDimensionStrategy("api", "sdk17")
+		missingDimensionStrategy("dev.inkremental.variant.anvil", "sdk-17")
+		missingDimensionStrategy("dev.inkremental.variant.anvil-appcompat-v7", "appcompatV7-1.1.0")
+		missingDimensionStrategy("dev.inkremental.variant.anvil-cardview-v7", "cardviewV7-1.0.0")
+		missingDimensionStrategy("dev.inkremental.variant.anvil-recyclerview-v7", "recyclerviewV7-1.1.0")
 	}
 }
 
-val materialVersion = "1.1.0"
-
 inkremental {
-	androidLibrary("material", materialVersion) {
-		camelCaseName = "Material"
+	androidLibrary("material", listOf("1.1.0", "1.2.0-alpha04")) {
         srcPackage = "com.google.android.material"
         modulePackage = "dev.inkremental.dsl.google.android.material"
 		manualSetterName = "CustomMaterialSetter"
@@ -68,11 +68,21 @@ inkremental {
 			)
 		)
 		transformers = mapOf(
-				"com.google.android.material.floatingactionbutton.FloatingActionButton" to mapOf(
-						"setCompatElevation" to listOf(
-								FloatPixelToDipSizeTransformer,
-								RequiresApiTransformer(21)))
+            "com.google.android.material.floatingactionbutton.FloatingActionButton" to mapOf(
+                "setCompatElevation" to listOf(
+                    FloatPixelToDipSizeTransformer,
+                    RequiresApiTransformer(21)
+                )
+            ),
+            "com.google.android.material.slider.Slider" to mapOf(
+                "setThumbElevation" to listOf(
+                    FloatPixelToDipSizeTransformer
+                )
+            )
 		)
+        dependencies {
+            inkrementalGen("com.google.android.material:material")
+        }
 	}
 }
 
@@ -81,18 +91,16 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk17"))
+	"inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
 	implementation(project(":anvil-appcompat-v7"))
-	inkremental(project(":anvil-appcompat-v7", "inkrementalDefAppCompatv7"))
+	"inkremental"(project(":anvil-appcompat-v7", "appcompatV7-1.1.0InkrementalDef"))
 
 	implementation(project(":anvil-cardview-v7"))
-	inkremental(project(":anvil-cardview-v7", "inkrementalDefCardViewv7"))
+	"inkremental"(project(":anvil-cardview-v7", "cardviewV7-1.0.0InkrementalDef"))
 
 	implementation(project(":anvil-recyclerview-v7"))
-	inkremental(project(":anvil-recyclerview-v7", "inkrementalDefRecyclerViewv7"))
-
-	inkrementalGen("com.google.android.material:material:$materialVersion")
+	"inkremental"(project(":anvil-recyclerview-v7", "recyclerviewV7-1.1.0InkrementalDef"))
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")

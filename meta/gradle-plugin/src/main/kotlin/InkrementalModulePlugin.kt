@@ -2,6 +2,7 @@ package dev.inkremental.meta.gradle
 
 import com.android.build.gradle.LibraryExtension
 import dev.inkremental.meta.model.InkrementalType
+import dev.inkremental.meta.model.buildCamelCaseString
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -54,7 +55,8 @@ class InkrementalModulePlugin : Plugin<Project> {
                             "${prop("BINTRAY_ORG")}/" +
                             bintrayRepo +
                             "/${prop("POM_PACKAGE_NAME")}/" +
-                            ";publish=1")
+                            ";publish=1" // + ";override=1"
+                        )
                         credentials {
                             username = bintrayUser
                             password = bintrayApiKey
@@ -83,29 +85,24 @@ class InkrementalModulePlugin : Plugin<Project> {
             }
         }*/
 
-        fun registerPublication(name: String, bundleName: String, artifactId: String, verion: String) {
+        fun registerPublication(name: String, artifactId: String, verion: String) {
+            logger.debug("registerPublication: $name")
             registerAnvilPublication(
                 name,
                 artifactId,
                 verion,
-                tasks.getByName("bundle${bundleName}ReleaseAar"),
-                //tasks.getByName("generate${bundleName}ReleaseJavadocJar"),
-                *configurations.getByName(CONFIGURATION_MODULE_DEF + name).artifacts.toTypedArray()
+                tasks.getByName(androidAarTaskName(name)), // TODO named?
+                //tasks.getByName("generate${name}ReleaseJavadocJar"),
+                *configurations.getByName(moduleDefConfigurationName(name)).artifacts.toTypedArray()
             )
         }
 
+        val extension = extensions.getByType<InkrementalMetaExtension>()
+
         afterEvaluate {
-            extensions.getByType<InkrementalMetaExtension>().modules.forEach {
-                val version = (if(it.version.isNotEmpty()) "${it.version}-" else "") + project.version.toString()
-                when(it.type) {
-                    InkrementalType.SDK -> {
-                        registerPublication("Sdk17", "Sdk17", prop("POM_ARTIFACT_SDK17_ID")!!, version)
-                        registerPublication("Sdk19", "Sdk19", prop("POM_ARTIFACT_SDK19_ID")!!, version)
-                        registerPublication("Sdk21", "Sdk21", prop("POM_ARTIFACT_SDK21_ID")!!, version)
-                    }
-                    InkrementalType.LIBRARY ->
-                        registerPublication(it.camelCaseName, "", prop("POM_ARTIFACT_ID")!!, version)
-                }
+            extension.modules.configureEach {
+                val pubVersion = (if (version.isNotEmpty()) "$version-" else "") + project.version.toString()
+                registerPublication(dslName, prop("POM_ARTIFACT_ID")!!, pubVersion)
             }
         }
     }

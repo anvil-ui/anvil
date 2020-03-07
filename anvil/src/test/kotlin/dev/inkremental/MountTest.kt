@@ -35,10 +35,13 @@ class MountTest : Utils() {
     fun testMountReplacesViews() {
         Inkremental.mount(container, testLayout)
         assertEquals(1, container.childCount)
+        Inkremental.unmount(container)
         Inkremental.mount(container, empty)
         assertEquals(0, container.childCount)
+        Inkremental.unmount(container)
         Inkremental.mount(container, testLayout)
         assertEquals(1, container.childCount)
+        Inkremental.unmount(container)
     }
 
     @Test

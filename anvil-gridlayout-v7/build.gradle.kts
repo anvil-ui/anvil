@@ -6,7 +6,7 @@ plugins {
 
 android {
 	defaultConfig {
-		missingDimensionStrategy("api", "sdk17")
+		missingDimensionStrategy("dev.inkremental.variant.anvil", "sdk-17")
 	}
 }
 
@@ -14,7 +14,6 @@ val gridVersion = "1.0.0"
 
 inkremental {
 	androidLibrary("gridlayout-v7", gridVersion) {
-		camelCaseName = "GridLayoutv7"
         srcPackage = "androidx.gridlayout"
         modulePackage = "dev.inkremental.dsl.androidx.gridlayout"
 	}
@@ -25,9 +24,9 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
-	inkremental(project(":anvil", "inkrementalDefSdk17"))
+	"inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
-	inkrementalGen("androidx.gridlayout:gridlayout:$gridVersion")
+	"inkrementalGen"("androidx.gridlayout:gridlayout:$gridVersion")
 
 	testImplementation("junit:junit:$junit_version")
 	testImplementation("org.mockito:mockito-core:$mockito_version")
