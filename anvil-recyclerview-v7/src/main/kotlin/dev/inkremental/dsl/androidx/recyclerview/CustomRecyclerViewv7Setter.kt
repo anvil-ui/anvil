@@ -7,31 +7,29 @@ import androidx.recyclerview.widget.*
 import dev.inkremental.dsl.androidx.recyclerview.widget.RecyclerViewScope
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
-import dev.inkremental.bind
-import dev.inkremental.v
 
 fun RecyclerViewScope.linearLayoutManager(
-    orientation: Int = LinearLayoutManager.VERTICAL,
-    reverseLayout: Boolean = false) =
-    attr(
-        "linearLayoutManager",
-        LayoutManagerParams(orientation, reverseLayout)
-    )
+        orientation: Int = LinearLayoutManager.VERTICAL,
+        reverseLayout: Boolean = false) =
+        attr(
+                "linearLayoutManager",
+                LayoutManagerParams(orientation, reverseLayout)
+        )
 
 fun RecyclerViewScope.gridLayoutManager(
-    spanCount: Int,
-    orientation: Int = LinearLayoutManager.VERTICAL,
-    reverseLayout: Boolean = false,
-    spanSizeLookup: GridLayoutManager.SpanSizeLookup? = null) =
-    attr(
-        "gridLayoutManager",
-        LayoutManagerParams(orientation, reverseLayout, spanCount, spanSizeLookup)
-    )
+        spanCount: Int,
+        orientation: Int = LinearLayoutManager.VERTICAL,
+        reverseLayout: Boolean = false,
+        spanSizeLookup: GridLayoutManager.SpanSizeLookup? = null) =
+        attr(
+                "gridLayoutManager",
+                LayoutManagerParams(orientation, reverseLayout, spanCount, spanSizeLookup)
+        )
 
 fun RecyclerViewScope.adapter(arg: RecyclerView.Adapter<out RecyclerView.ViewHolder>?): Unit = attr("adapter", arg)
 
 object CustomRecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
-    override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
+    override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when(name) {
         "linearLayoutManager" -> when {
             v is RecyclerView && value is LayoutManagerParams -> {
                 v.layoutManager = LinearLayoutManager(v.context, value.orientation, value.reverseLayout)
@@ -42,10 +40,10 @@ object CustomRecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
         "gridLayoutManager" -> when {
             v is RecyclerView && value is LayoutManagerParams -> {
                 v.layoutManager = GridLayoutManager(
-                    v.context,
-                    value.spanCount,
-                    value.orientation,
-                    value.reverseLayout
+                        v.context,
+                        value.spanCount,
+                        value.orientation,
+                        value.reverseLayout
                 ).also {
                     value.spanSizeLookup?.let { spanSizeLookup ->
                         it.spanSizeLookup = spanSizeLookup
@@ -67,8 +65,8 @@ object CustomRecyclerViewv7Setter : Inkremental.AttributeSetter<Any> {
 }
 
 data class LayoutManagerParams(
-    val orientation: Int,
-    val reverseLayout: Boolean,
-    val spanCount: Int = 0,
-    val spanSizeLookup: GridLayoutManager.SpanSizeLookup? = null
+        val orientation: Int,
+        val reverseLayout: Boolean,
+        val spanCount: Int = 0,
+        val spanSizeLookup: GridLayoutManager.SpanSizeLookup? = null
 )

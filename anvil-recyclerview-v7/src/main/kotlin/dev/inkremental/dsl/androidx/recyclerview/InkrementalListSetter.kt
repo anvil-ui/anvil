@@ -80,11 +80,11 @@ object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
                     v.adapter = v.localAdapter
                 }
                 if (v.localAdapter?.items !== value.items) {
-                    val productDiffUtilCallback = DiffableCallback(v.localAdapter?.items as List<Diffable>, value.items as List<Diffable>)
-                    val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
+                    val diffableCallback = DiffableCallback(v.localAdapter?.items as List<Diffable>, value.items as List<Diffable>)
+                    val diffResult = DiffUtil.calculateDiff(diffableCallback)
 
                     v.localAdapter?.items = value.items
-                    productDiffResult.dispatchUpdatesTo(v.localAdapter!!)
+                    diffResult.dispatchUpdatesTo(v.localAdapter!!)
                 }
                 true
             }
@@ -126,16 +126,16 @@ class DiffableCallback(val oldList: List<Diffable>, val newList: List<Diffable>)
 
     override fun getNewListSize(): Int = newList.size
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldProduct: Diffable = oldList[oldItemPosition]
-        val newProduct: Diffable = newList[newItemPosition]
-        return oldProduct.isSame(newProduct)
+    override fun areItemsTheSame(oldPosition: Int, newPosition: Int): Boolean {
+        val old: Diffable = oldList[oldPosition]
+        val new: Diffable = newList[newPosition]
+        return old.isSame(new)
     }
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldProduct: Diffable = oldList[oldItemPosition]
-        val newProduct: Diffable = newList[newItemPosition]
-        return oldProduct.areContentsSame(newProduct)
+    override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean {
+        val old: Diffable = oldList[oldPosition]
+        val new: Diffable = newList[newPosition]
+        return old.areContentsSame(new)
     }
 }
 
@@ -145,4 +145,13 @@ sealed class RecyclerLayoutType {
     data class Grid(val spanCount: Int, val orientation: Int = RecyclerView.VERTICAL, val reversed: Boolean = false) : RecyclerLayoutType()
 }
 
-class HolderAttr(val items: List<Any>, val r: (index: Int, item: Any) -> Unit)
+class HolderAttr(val items: List<Any>, val r: (index: Int, item: Any) -> Unit) {
+    override fun equals(other: Any?): Boolean {
+        other ?: return false
+        return other === items
+    }
+
+    override fun hashCode(): Int {
+        return items.hashCode()
+    }
+}
