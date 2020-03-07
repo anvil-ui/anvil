@@ -63,7 +63,7 @@ class ListActivity : AppCompatActivity() {
                 }
                 list {
                     size(MATCH, MATCH)
-                    marginTop(50.dp)
+                    margin(top = 50.dp)
 
                     when (listStyle) {
                         1 -> layout(Vertical())
@@ -73,16 +73,23 @@ class ListActivity : AppCompatActivity() {
 
                     //uses Recycler underneath
                     items(items) { index : Int, itemValue : Any ->
-                        size(WRAP, WRAP)
+                        size(if (listStyle == 3) MATCH else WRAP, WRAP)
                         //adapter item
                         frameLayout {
-                            size(100.sizeDp, if (listStyle == 3) 150.sizeDp else 50.sizeDp)
+                            size(if (listStyle == 3) MATCH else 100.sizeDp, if (listStyle == 3) 150.sizeDp else 50.sizeDp)
+                            margin(m = 1.dp)
                             backgroundResource(R.color.children_stroke)
 
-                            textView {
-                                size(WRAP, WRAP)
-                                layoutGravity(CENTER)
-                                text("item: $itemValue")
+                            frameLayout {
+                                size(MATCH, MATCH)
+                                margin(m = 2.dp)
+
+                                backgroundResource(R.color.white)
+                                textView {
+                                    size(WRAP, WRAP)
+                                    layoutGravity(CENTER)
+                                    text("item: $itemValue")
+                                }
                             }
                         }
                     }
