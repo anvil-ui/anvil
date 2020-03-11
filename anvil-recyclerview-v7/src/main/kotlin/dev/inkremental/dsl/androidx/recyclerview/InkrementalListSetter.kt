@@ -12,23 +12,23 @@ import dev.inkremental.dsl.androidx.recyclerview.widget.RecyclerViewScope
 import dev.inkremental.v
 
 fun list(configure: InkrementalListScope.() -> Unit = {}) =
-        v<InkrementalRecyclerView>(configure.bind(InkrementalListScope))
+        v<RecyclerView>(configure.bind(InkrementalListScope))
 
-inline fun hList(crossinline r : () -> Unit) {
+inline fun hList(crossinline r: () -> Unit) {
     list {
         layout(RecyclerLayoutType.Horizontal())
         r.invoke()
     }
 }
 
-inline fun vList(crossinline r : () -> Unit) {
+inline fun vList(crossinline r: () -> Unit) {
     list {
         layout(RecyclerLayoutType.Vertical())
         r.invoke()
     }
 }
 
-inline fun grid(spanCount: Int, crossinline r : () -> Unit) {
+inline fun grid(spanCount: Int, crossinline r: () -> Unit) {
     list {
         layout(RecyclerLayoutType.Grid(spanCount))
         r.invoke()
@@ -37,8 +37,8 @@ inline fun grid(spanCount: Int, crossinline r : () -> Unit) {
 
 abstract class InkrementalListScope : RecyclerViewScope() {
 
-    fun items(arg: List<Any>, r: (index: Int, item: Any) -> Unit): Unit = attr("items", HolderAttr(arg, r))
-    fun itemsDiffable(arg: List<Diffable>, r: (index: Int, item: Any) -> Unit): Unit = attr("itemsDiffable", HolderAttr(arg, r))
+    fun <T> items(arg: List<T>, r: (index: Int, item: T) -> Unit): Unit = attr("items", HolderAttr(arg, r))
+    fun <T> itemsDiffable(arg: List<T>, diffableCallback: InkrementalDiffCallback<T>, r: (index: Int, item: T) -> Unit): Unit = attr("itemsDiffable", HolderAttrDiffable(arg, diffableCallback, r))
     fun layout(arg: RecyclerLayoutType): Unit = attr("layout", arg)
 
     companion object : InkrementalListScope() {
@@ -53,45 +53,49 @@ abstract class InkrementalListScope : RecyclerViewScope() {
 object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
         "items" -> when {
-            v is InkrementalRecyclerView && value is HolderAttr -> {
-                if (v.localAdapter == null) {
-                    v.items = value.items
-                    v.localAdapter = InkrementalRecyclerViewAdapter(value.items) { index, letter ->
+            v is RecyclerView && value is HolderAttr<*> -> {
+                val holder = value as HolderAttr<Any>
+                if (v.adapter == null) {
+                    v.adapter = RenderableRecyclerViewAdapter.withItems(holder.items) { index, letter ->
                         value.r(index, letter)
                     }
-                    v.adapter = v.localAdapter
                 }
-                if (v.localAdapter?.items !== value.items) {
-                    v.items = value.items
-                    v.localAdapter?.items = value.items
-                    v.localAdapter?.notifyDataSetChanged()
+                if (v.adapter is RenderableRecyclerViewAdapter<*>) {
+                    val adapter = v.adapter as RenderableRecyclerViewAdapter<Any>
+                    if (adapter.items !== holder.items) {
+                        adapter.items = holder.items
+                        adapter.notifyDataSetChanged()
+                    }
                 }
                 true
             }
             else -> false
         }
         "itemsDiffable" -> when {
-            v is InkrementalRecyclerView && value is HolderAttr && value.items.areDiffable() -> {
-                if (v.localAdapter == null) {
-                    v.items = value.items
-                    v.localAdapter = InkrementalRecyclerViewAdapter(value.items) { index, letter ->
-                        value.r(index, letter)
+            v is RecyclerView && value is HolderAttrDiffable<*> -> {
+                val holder = value as HolderAttrDiffable<Any>
+                if (v.adapter == null) {
+                    v.adapter = RenderableRecyclerViewAdapter.withItems(holder.items) { index, letter ->
+                        holder.r(index, letter)
                     }
-                    v.adapter = v.localAdapter
                 }
-                if (v.localAdapter?.items !== value.items) {
-                    val diffableCallback = DiffableCallback(v.localAdapter?.items as List<Diffable>, value.items as List<Diffable>)
-                    val diffResult = DiffUtil.calculateDiff(diffableCallback)
+                if (v.adapter is RenderableRecyclerViewAdapter<*>) {
+                    val adapter = v.adapter as RenderableRecyclerViewAdapter<Any>
+                    if (adapter.items !== holder.items) {
+                        holder.diffableCallback.newItems = holder.items
+                        holder.diffableCallback.oldItems = adapter.items
+                        val diffResult = DiffUtil.calculateDiff(holder.diffableCallback)
 
-                    v.localAdapter?.items = value.items
-                    diffResult.dispatchUpdatesTo(v.localAdapter!!)
+                        adapter.items = holder.items
+                        diffResult.dispatchUpdatesTo(adapter)
+                    }
                 }
                 true
             }
             else -> false
         }
         "layout" -> when {
-            v is InkrementalRecyclerView && value is RecyclerLayoutType -> {
+            v is RecyclerView && value is RecyclerLayoutType -> {
                 when (value) {
                     is RecyclerLayoutType.Horizontal -> {
                         v.layoutManager = LinearLayoutManager(v.context, LinearLayoutManager.HORIZONTAL, value.reversed)
@@ -111,41 +115,35 @@ object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
     }
 }
 
-private fun List<Any>.areDiffable(): Boolean {
-    if (this.isEmpty()) return true
-    return this.first() is Diffable
-}
-
-interface Diffable {
-    fun isSame(other : Diffable) : Boolean
-    fun areContentsSame(other : Diffable) : Boolean
-}
-
-class DiffableCallback(val oldList: List<Diffable>, val newList: List<Diffable>) : DiffUtil.Callback() {
-    override fun getOldListSize(): Int = oldList.size
-
-    override fun getNewListSize(): Int = newList.size
-
-    override fun areItemsTheSame(oldPosition: Int, newPosition: Int): Boolean {
-        val old: Diffable = oldList[oldPosition]
-        val new: Diffable = newList[newPosition]
-        return old.isSame(new)
-    }
-
-    override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean {
-        val old: Diffable = oldList[oldPosition]
-        val new: Diffable = newList[newPosition]
-        return old.areContentsSame(new)
-    }
-}
-
 sealed class RecyclerLayoutType {
     data class Horizontal(val reversed: Boolean = false) : RecyclerLayoutType()
     data class Vertical(val reversed: Boolean = false) : RecyclerLayoutType()
     data class Grid(val spanCount: Int, val orientation: Int = RecyclerView.VERTICAL, val reversed: Boolean = false) : RecyclerLayoutType()
 }
 
-class HolderAttr(val items: List<Any>, val r: (index: Int, item: Any) -> Unit) {
+class HolderAttr<T>(val items: List<T>, val r: (index: Int, item: T) -> Unit) {
+
+    override fun equals(other: Any?): Boolean {
+        other ?: return false
+        return other === items
+    }
+
+    override fun hashCode(): Int {
+        return items.hashCode()
+    }
+}
+
+abstract class InkrementalDiffCallback<T> : DiffUtil.Callback() {
+    lateinit var newItems: List<T>
+    lateinit var oldItems: List<T>
+
+    override fun getOldListSize(): Int = oldItems.size
+
+    override fun getNewListSize(): Int = newItems.size
+
+}
+
+class HolderAttrDiffable<T>(val items: List<T>, val diffableCallback: InkrementalDiffCallback<T>, val r: (index: Int, item: T) -> Unit) {
     override fun equals(other: Any?): Boolean {
         other ?: return false
         return other === items

@@ -18,8 +18,9 @@ import dev.inkremental.renderableContentView
 
 class ListActivity : AppCompatActivity() {
 
-    var items = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20).map { it.toDiffable() }.toMutableList()
+    var items = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20).toMutableList()
     var listStyle = 1
+    val intDiffCallback = IntDiffCallback()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,7 @@ class ListActivity : AppCompatActivity() {
                         onClick {
                             val size = items.size + 1
                             //reverse positions of last two elements and add next twenty elements. This is done to show animation from diffutils
-                            items = (items.dropLast(2) + listOf(items[items.lastIndex], items[items.lastIndex - 1]) + (size..(size + 20)).map { it.toDiffable() }).toMutableList()
+                            items = (items.dropLast(2) + listOf(items[items.lastIndex], items[items.lastIndex - 1]) + (size..(size + 20))).toMutableList()
                         }
                     }
                 }
@@ -73,7 +74,8 @@ class ListActivity : AppCompatActivity() {
                     }
 
                     //uses Recycler underneath
-                    itemsDiffable(items) { index: Int, itemValue: Any ->
+//                    items(items) { index: Int, itemValue: Int ->
+                    itemsDiffable(items, intDiffCallback) { index: Int, itemValue: Int ->
                         size(if (listStyle != 2) MATCH else WRAP, WRAP)
                         //adapter item
                         frameLayout {
@@ -89,9 +91,7 @@ class ListActivity : AppCompatActivity() {
                                 textView {
                                     size(WRAP, WRAP)
                                     layoutGravity(CENTER)
-                                    if (itemValue is IntDiffable) {
-                                        text("item: ${itemValue.value}")
-                                    }
+                                    text("item: $itemValue")
                                 }
                             }
                         }
@@ -103,16 +103,19 @@ class ListActivity : AppCompatActivity() {
     }
 }
 
-class IntDiffable(val value : Int) : Diffable {
-    override fun isSame(other: Diffable): Boolean {
-        return other is IntDiffable && other.value == value
+
+class IntDiffCallback : InkrementalDiffCallback<Int>() {
+
+    override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
+        val old: Int = oldItems[oldItem]
+        val new: Int = newItems[newItem]
+        return old == new
     }
 
-    override fun areContentsSame(other: Diffable): Boolean {
-        return other is IntDiffable && other.value == value
+    override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
+        val old: Int = oldItems[oldItem]
+        val new: Int = newItems[newItem]
+        return old == new
     }
-}
 
-private fun Int.toDiffable(): Diffable {
-    return IntDiffable(this)
 }
