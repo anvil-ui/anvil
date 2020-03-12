@@ -7,6 +7,7 @@ import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
+import dev.inkremental.dsl.androidx.core.CustomSupportV4Setter
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
 import dev.inkremental.v
 import kotlin.Boolean
@@ -21,6 +22,7 @@ abstract class NestedScrollViewScope : FrameLayoutScope() {
   companion object : NestedScrollViewScope() {
     init {
       Inkremental.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(CustomSupportV4Setter)
     }
   }
 }

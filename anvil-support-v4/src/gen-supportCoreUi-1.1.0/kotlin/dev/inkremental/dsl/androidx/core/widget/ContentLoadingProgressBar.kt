@@ -6,6 +6,7 @@ import androidx.core.widget.ContentLoadingProgressBar
 import dev.inkremental.Inkremental
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.widget.ProgressBarScope
+import dev.inkremental.dsl.androidx.core.CustomSupportV4Setter
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
 import dev.inkremental.v
 import kotlin.Suppress
@@ -17,6 +18,7 @@ abstract class ContentLoadingProgressBarScope : ProgressBarScope() {
   companion object : ContentLoadingProgressBarScope() {
     init {
       Inkremental.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(CustomSupportV4Setter)
     }
   }
 }

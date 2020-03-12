@@ -109,6 +109,10 @@ fun ViewScope.layoutGravity(gravity: Int) = attr("layoutGravity", gravity)
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 fun ViewScope.elevate(arg: Dip): Unit = attr("elevation", arg.value)
 
+fun ViewScope.rippleEffect(enable: Boolean) = attr("rippleEffect", enable)
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+fun ViewScope.rippleEffectBorderless(enable: Boolean) = attr("rippleEffectBorderless", enable)
+
 typealias SeekBarChangeListener = (seekBar: SeekBar, progress: Int, fromUser: Boolean) -> Unit
 fun SeekBarScope.onSeekBarChange(listener: SeekBarChangeListener) = attr("onSeekBarChange", listener)
 
@@ -423,6 +427,40 @@ object CustomSdkSetter : Inkremental.AttributeSetter<Any> {
         "elevation" -> when {
             value is Int -> {
                 v.elevation = dip(value).toFloat()
+                true
+            }
+            else -> false
+        }
+        "rippleEffect" -> when {
+            value is Boolean -> {
+                if (value) {
+                    val outValue = TypedValue()
+                    v.context.theme.resolveAttribute(
+                            android.R.attr.selectableItemBackground,
+                            outValue,
+                            true
+                    )
+                    v.setBackgroundResource(outValue.resourceId)
+                } else {
+                    v.background = null
+                }
+                true
+            }
+            else -> false
+        }
+        "rippleEffectBorderless" -> when {
+            value is Boolean -> {
+                if (value) {
+                    val outValue = TypedValue()
+                    v.context.theme.resolveAttribute(
+                            android.R.attr.selectableItemBackgroundBorderless,
+                            outValue,
+                            true
+                    )
+                    v.setBackgroundResource(outValue.resourceId)
+                } else {
+                    v.background = null
+                }
                 true
             }
             else -> false
