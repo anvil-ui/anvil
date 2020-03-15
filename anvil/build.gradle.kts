@@ -1,3 +1,5 @@
+import dev.inkremental.meta.model.DslTransformer.*
+
 plugins {
 	id("com.android.library")
 	id("org.jetbrains.kotlin.android")
@@ -66,6 +68,13 @@ inkremental {
 			"android.webkit.WebView" to mapOf(
 				"setWebContentsDebuggingEnabled" to false
 			)
+		)
+		transformers = mapOf(
+				"android.view.View" to mapOf(
+						"setMinimumHeight" to listOf(IntToDpTransformer),
+						"setMinimumWidth" to listOf(IntToDpTransformer),
+						"setBackground" to listOf(NullableForSureTransformer)
+				)
 		)
 	}
 }

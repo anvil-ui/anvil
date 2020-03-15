@@ -266,8 +266,11 @@ abstract class GenerateDslTask : DefaultTask() {
         // TODO check if getter is present and if so, use property assignment, else use setter call
         return buildCodeBlock {
             if (owner.isRoot) {
-                beginControlFlow("arg is %T ->", type.starProjectedType.copy(nullable = isNullable))
-                addStatement("v.$setterName($argAsParam)", type.parametrizedType)
+                val v = owner.parametrizedType?.let { "(v as $it)" } ?: "v"
+                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam)) {
+                    beginControlFlow("arg is %T ->", type.starProjectedType.copy(nullable = isNullable))
+                    addStatement("v.$setterName($argAsParam)", type.parametrizedType)
+                }
                 addStatement("true")
                 endControlFlow()
             } else {
