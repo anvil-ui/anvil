@@ -23,6 +23,7 @@ import dev.inkremental.RootViewScope
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.CustomSdkSetter
+import dev.inkremental.dsl.android.Dip
 import dev.inkremental.dsl.android.SdkSetter
 import dev.inkremental.v
 import kotlin.Any
@@ -42,7 +43,7 @@ abstract class ViewScope : RootViewScope() {
   fun activated(arg: Boolean): Unit = attr("activated", arg)
   fun alpha(arg: Float): Unit = attr("alpha", arg)
   fun animation(arg: Animation): Unit = attr("animation", arg)
-  fun background(arg: Drawable): Unit = attr("background", arg)
+  fun background(arg: Drawable?): Unit = attr("background", arg)
   fun backgroundColor(arg: Int): Unit = attr("backgroundColor", arg)
   fun backgroundResource(arg: Int): Unit = attr("backgroundResource", arg)
   fun backgroundTintList(arg: ColorStateList?): Unit = attr("backgroundTintList", arg)
@@ -77,8 +78,8 @@ abstract class ViewScope : RootViewScope() {
   fun layoutParams(arg: ViewGroup.LayoutParams): Unit = attr("layoutParams", arg)
   fun left(arg: Int): Unit = attr("left", arg)
   fun longClickable(arg: Boolean): Unit = attr("longClickable", arg)
-  fun minimumHeight(arg: Int): Unit = attr("minimumHeight", arg)
-  fun minimumWidth(arg: Int): Unit = attr("minimumWidth", arg)
+  fun minimumHeight(arg: Dip): Unit = attr("minimumHeight", arg.value)
+  fun minimumWidth(arg: Dip): Unit = attr("minimumWidth", arg.value)
   fun nestedScrollingEnabled(arg: Boolean): Unit = attr("nestedScrollingEnabled", arg)
   fun nextFocusDownId(arg: Int): Unit = attr("nextFocusDownId", arg)
   fun nextFocusForwardId(arg: Int): Unit = attr("nextFocusForwardId", arg)
