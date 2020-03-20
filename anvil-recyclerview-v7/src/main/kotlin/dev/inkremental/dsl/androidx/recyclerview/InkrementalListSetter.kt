@@ -104,7 +104,16 @@ object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
                         v.layoutManager = LinearLayoutManager(v.context, LinearLayoutManager.VERTICAL, value.reversed)
                     }
                     is RecyclerLayoutType.Grid -> {
-                        v.layoutManager = GridLayoutManager(v.context, value.spanCount, value.orientation, value.reversed)
+                        val lm = GridLayoutManager(v.context, value.spanCount, value.orientation, value.reversed)
+                        val adapter = v.adapter as RenderableRecyclerViewAdapter<Any>
+                        value.spanSizeLookUp?.let { spanSizeLookUp ->
+                            lm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                                override fun getSpanSize(position: Int): Int {
+                                    return spanSizeLookUp(adapter.items[position])
+                                }
+                            }
+                            v.layoutManager = lm
+                        }
                     }
                 }
                 true
@@ -118,7 +127,10 @@ object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
 sealed class RecyclerLayoutType {
     data class Horizontal(val reversed: Boolean = false) : RecyclerLayoutType()
     data class Vertical(val reversed: Boolean = false) : RecyclerLayoutType()
-    data class Grid(val spanCount: Int, val orientation: Int = RecyclerView.VERTICAL, val reversed: Boolean = false) : RecyclerLayoutType()
+    data class Grid(val spanCount: Int,
+                    val orientation: Int = RecyclerView.VERTICAL,
+                    val reversed: Boolean = false,
+                    val spanSizeLookUp: ((Any) -> Int)? = null) : RecyclerLayoutType()
 }
 
 class HolderAttr<T>(val items: List<T>, val r: (index: Int, item: T) -> Unit) {
