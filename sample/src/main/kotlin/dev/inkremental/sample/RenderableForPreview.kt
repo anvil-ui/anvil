@@ -9,13 +9,23 @@ import dev.inkremental.dsl.android.widget.textView
 
 class RenderableForPreview(context: Context) : RenderableView(context) {
 
+    var state = ""
+
+    init {
+        if (isInEditMode) {
+            state = "preview"
+        } else {
+            state = "live"
+        }
+    }
+
     override val renderable = {
         frameLayout {
             size(MATCH, MATCH)
             textView {
                 size(WRAP, WRAP)
                 layoutGravity(CENTER)
-                text("Hello Inkremental from preview")
+                text("Hello Inkremental from $state")
             }
         }
     }
