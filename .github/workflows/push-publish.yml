@@ -35,10 +35,10 @@ jobs:
       - name: Run build
         run: ./gradlew check
 
-      - name: Publish artifacts
-        run: ./gradlew generateAndPublish
-        env:
-          BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-          BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
-          BINTRAY_REPO: ${{ secrets.BINTRAY_REPO }}
-        continue-on-error: true
+#      - name: Publish artifacts
+#        run: ./gradlew generateAndPublish
+#        env:
+#          BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+#          BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
+#          BINTRAY_REPO: ${{ secrets.BINTRAY_REPO }}
+#        continue-on-error: true
