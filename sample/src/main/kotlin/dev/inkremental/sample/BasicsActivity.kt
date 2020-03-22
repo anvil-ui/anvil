@@ -13,6 +13,8 @@ import dev.inkremental.dsl.android.*
 import dev.inkremental.dsl.android.Size.MATCH
 import dev.inkremental.dsl.android.Size.WRAP
 import dev.inkremental.dsl.android.widget.*
+import dev.inkremental.dsl.androidx.core.CompatTextViewScope
+import dev.inkremental.dsl.androidx.core.CompatViewScope
 import dev.inkremental.r
 import dev.inkremental.renderableContentView
 
@@ -90,18 +92,16 @@ class BasicsActivity : AppCompatActivity() {
     }
 }
 
-fun color(@ColorRes color: Int) = ResourcesCompat.getColor(r, color, null)
-
 fun TextViewScope.standardStyle() {
     backgroundColor(Color.TRANSPARENT)
 }
 
-fun TextViewScope.accentStyle() {
-    textColor(color(R.color.white))
-    backgroundColor(color(R.color.colorAccent))
+fun accentStyle() {
+    CompatTextViewScope.textColorCompat(R.color.white)
+    CompatViewScope.backgroundColorCompat(R.color.colorAccent)
 }
 
-fun TextViewScope.primaryStyle() {
-    textColor(color(R.color.white))
-    backgroundColor(color(R.color.colorPrimary))
+fun primaryStyle() {
+    CompatTextViewScope.textColorCompat(R.color.white)
+    CompatViewScope.backgroundColorCompat(R.color.colorPrimary)
 }
