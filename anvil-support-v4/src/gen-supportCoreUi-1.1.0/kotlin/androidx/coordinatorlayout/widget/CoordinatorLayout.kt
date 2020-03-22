@@ -7,6 +7,7 @@ import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
 import dev.inkremental.dsl.android.view.ViewGroupScope
+import dev.inkremental.dsl.androidx.core.CustomSupportV4Setter
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
 import dev.inkremental.v
 import kotlin.Int
@@ -22,6 +23,7 @@ abstract class CoordinatorLayoutScope : ViewGroupScope() {
   companion object : CoordinatorLayoutScope() {
     init {
       Inkremental.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(CustomSupportV4Setter)
     }
   }
 }

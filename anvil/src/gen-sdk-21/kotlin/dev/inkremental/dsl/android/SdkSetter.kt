@@ -119,6 +119,7 @@ import android.widget.ViewSwitcher
 import android.widget.ZoomButton
 import android.widget.ZoomControls
 import dev.inkremental.Inkremental
+import dev.inkremental.dip
 import java.util.Locale
 import kotlin.Any
 import kotlin.Array
@@ -801,15 +802,15 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "minimumHeight" -> when {
-      arg is Int -> {
-        v.setMinimumHeight(arg)
+       arg is Int -> {
+        v.setMinimumHeight(dip(arg))
         true
       }
       else -> false
     }
     "minimumWidth" -> when {
-      arg is Int -> {
-        v.setMinimumWidth(arg)
+       arg is Int -> {
+        v.setMinimumWidth(dip(arg))
         true
       }
       else -> false

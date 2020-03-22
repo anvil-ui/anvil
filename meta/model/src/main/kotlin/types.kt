@@ -58,4 +58,38 @@ sealed class DslTransformer : JvmSerializable {
             return false
         }
     }
+
+    @Serializable
+    object IntToDpTransformer : DslTransformer() {
+
+        override fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
+            if (attrModel.type.argType.toString() == INT.canonicalName){
+                builder.addParameter("arg", ClassName.bestGuess("dev.inkremental.dsl.android.Dip"))
+                builder.returns(UNIT)
+                builder.addCode(CodeBlock.of("return %M(%S, arg.value)", attr, attrModel.name))
+                return true
+            }
+            return false
+        }
+
+        override fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String): Boolean {
+            builder.beginControlFlow(
+                    " arg is Int ->",
+                    owner.starProjectedType
+            )
+            builder.addStatement("$v.$setterName(%M($argAsParam))", MemberName(PACKAGE, "dip"))
+            return true
+        }
+    }
+
+    @Serializable
+    object NullableForSureTransformer : DslTransformer() {
+
+        override fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
+            builder.addParameter("arg", attrModel.type.argType.copy(nullable = true))
+            builder.returns(UNIT)
+            builder.addCode(CodeBlock.of("return %M(%S, arg)", attr, attrModel.name))
+            return true
+        }
+    }
 }

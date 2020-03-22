@@ -5,6 +5,7 @@ package androidx.viewpager.widget
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
+import dev.inkremental.dsl.androidx.core.CustomSupportV4Setter
 import dev.inkremental.dsl.androidx.core.SupportCoreUiSetter
 import dev.inkremental.v
 import kotlin.Boolean
@@ -21,6 +22,7 @@ abstract class PagerTabStripScope : PagerTitleStripScope() {
   companion object : PagerTabStripScope() {
     init {
       Inkremental.registerAttributeSetter(SupportCoreUiSetter)
+      Inkremental.registerAttributeSetter(CustomSupportV4Setter)
     }
   }
 }

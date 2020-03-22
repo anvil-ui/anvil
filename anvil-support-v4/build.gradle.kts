@@ -15,6 +15,7 @@ val coreVersion = "1.1.0"
 inkremental {
 	androidLibrary("support-core-ui", coreVersion) {
         srcPackage = "androidx.core"
+		manualSetterName = "CustomSupportV4Setter"
         modulePackage = "dev.inkremental.dsl.androidx.core"
 		quirks = mutableMapOf(
 			// Deprecated view; framework nas android.widget.Space since API 14
