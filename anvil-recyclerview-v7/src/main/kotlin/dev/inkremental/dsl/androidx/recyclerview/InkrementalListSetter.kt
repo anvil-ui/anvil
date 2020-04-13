@@ -14,24 +14,24 @@ import dev.inkremental.v
 fun list(configure: InkrementalListScope.() -> Unit = {}) =
         v<RecyclerView>(configure.bind(InkrementalListScope))
 
-inline fun hList(crossinline r: () -> Unit) {
+inline fun horizontalList(crossinline r: InkrementalListScope.() -> Unit) {
     list {
         layout(RecyclerLayoutType.Horizontal())
-        r.invoke()
+        r()
     }
 }
 
-inline fun vList(crossinline r: () -> Unit) {
+inline fun verticalList(crossinline r: InkrementalListScope.() -> Unit) {
     list {
         layout(RecyclerLayoutType.Vertical())
-        r.invoke()
+        r()
     }
 }
 
-inline fun grid(spanCount: Int, crossinline r: () -> Unit) {
+inline fun grid(spanCount: Int, crossinline r: InkrementalListScope.() -> Unit) {
     list {
         layout(RecyclerLayoutType.Grid(spanCount))
-        r.invoke()
+        r()
     }
 }
 
@@ -57,7 +57,7 @@ object InkrementalListSetter : Inkremental.AttributeSetter<Any> {
                 val holder = value as HolderAttr<Any>
                 if (v.adapter == null) {
                     v.adapter = RenderableRecyclerViewAdapter.withItems(holder.items) { index, letter ->
-                        value.r(index, letter)
+                        holder.r(index, letter)
                     }
                 }
                 if (v.adapter is RenderableRecyclerViewAdapter<*>) {
