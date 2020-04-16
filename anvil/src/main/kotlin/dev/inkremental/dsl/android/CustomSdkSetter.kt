@@ -128,6 +128,20 @@ fun TextViewScope.minWidth(arg: Dip): Unit = attr("minWidth", arg.value)
 
 fun SwitchViewScope.switchMinWidth(arg: Dip): Unit = attr("switchMinWidth", arg.value)
 
+inline fun horizontalLayout(crossinline r: LinearLayoutScope.() -> Unit) {
+    linearLayout {
+        orientation(LinearLayout.HORIZONTAL)
+        r()
+    }
+}
+
+inline fun verticalLayout(crossinline r: LinearLayoutScope.() -> Unit) {
+    linearLayout {
+        orientation(LinearLayout.VERTICAL)
+        r()
+    }
+}
+
 object CustomSdkSetter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
         INIT_LITERAL -> when (value) {
