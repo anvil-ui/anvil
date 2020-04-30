@@ -43,6 +43,19 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 textView {
+                    text("Fragment Sample")
+                    onClick {
+                        startActivity(Intent(context, FragmentActivity::class.java))
+                    }
+
+                    size(WRAP, WRAP)
+                    padding(16.dp)
+
+                    paintFlags(Paint.UNDERLINE_TEXT_FLAG)
+                    textColor(Color.BLUE)
+                }
+
+                textView {
                     text("Lists example")
                     onClick {
                         startActivity(Intent(context, ListActivity::class.java))
