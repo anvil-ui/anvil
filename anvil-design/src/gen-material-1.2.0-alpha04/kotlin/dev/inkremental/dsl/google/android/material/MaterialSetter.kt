@@ -418,7 +418,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "itemRippleColor" -> when {
        v is BottomNavigationView && arg is Int -> {
-        v.setItemRippleColor(ColorStateList.valueOf(v.resources.getColor(arg)))
+        v.setItemRippleColor(ResourcesCompat.getColorStateList(v.resources, arg, null))
         true
       }
       else -> false
@@ -1856,7 +1856,7 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
     }
     "tabRippleColor" -> when {
        v is TabLayout && arg is Int -> {
-        v.setTabRippleColor(ColorStateList.valueOf(v.resources.getColor(arg)))
+        v.setTabRippleColor(ResourcesCompat.getColorStateList(v.resources, arg, null))
         true
       }
       else -> false

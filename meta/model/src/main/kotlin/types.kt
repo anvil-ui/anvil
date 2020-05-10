@@ -153,7 +153,7 @@ sealed class DslTransformer : JvmSerializable {
                 builder.addStatement("  $v.$setterName(null)")
                 builder.addStatement("}")
             } else {
-                builder.addStatement("$v.$setterName(ColorStateList.valueOf(v.resources.getColor($argAsParam)))")
+                builder.addStatement("$v.$setterName(%M.getColorStateList(v.resources, $argAsParam, null))", MemberName("androidx.core.content.res", "ResourcesCompat"))
             }
             return true
         }
