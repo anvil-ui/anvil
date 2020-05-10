@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
+import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
@@ -48,6 +49,8 @@ const val INIT_LITERAL = "init"
 inline class Sp(val value: Float)
 inline class Dip(val value: Int)
 inline class Px(val value: Int)
+
+inline class ColorState(@ColorRes val value : Int)
 
 fun ViewScope.init(action: (View) -> Unit) = attr(INIT_LITERAL, action)
 fun ViewScope.size(w: Size, h: Size) = attr("size", w to h)

@@ -2,13 +2,13 @@
 
 package dev.inkremental.dsl.google.android.material.navigation
 
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
+import dev.inkremental.dsl.android.ColorState
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
 import dev.inkremental.dsl.google.android.material.internal.ScrimInsetsFrameLayoutScope
@@ -29,10 +29,10 @@ abstract class NavigationViewScope : ScrimInsetsFrameLayoutScope() {
   fun itemIconPadding(arg: Int): Unit = attr("itemIconPadding", arg)
   fun itemIconPaddingResource(arg: Int): Unit = attr("itemIconPaddingResource", arg)
   fun itemIconSize(arg: Int): Unit = attr("itemIconSize", arg)
-  fun itemIconTintList(arg: ColorStateList?): Unit = attr("itemIconTintList", arg)
+  fun itemIconTintList(arg: ColorState?): Unit = attr("itemIconTintList", arg?.value)
   fun itemMaxLines(arg: Int): Unit = attr("itemMaxLines", arg)
   fun itemTextAppearance(arg: Int): Unit = attr("itemTextAppearance", arg)
-  fun itemTextColor(arg: ColorStateList?): Unit = attr("itemTextColor", arg)
+  fun itemTextColor(arg: ColorState?): Unit = attr("itemTextColor", arg?.value)
   fun navigationItemSelectedListener(arg: NavigationView.OnNavigationItemSelectedListener?): Unit =
       attr("navigationItemSelectedListener", arg)
   companion object : NavigationViewScope() {

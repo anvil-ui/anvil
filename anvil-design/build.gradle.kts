@@ -75,10 +75,22 @@ inkremental {
                 )
             ),
             "com.google.android.material.slider.Slider" to mapOf(
-                "setThumbElevation" to listOf(
-                    FloatPixelToDipSizeTransformer
-                )
-            )
+                "setThumbElevation" to listOf(FloatPixelToDipSizeTransformer)
+            ),
+			"com.google.android.material.bottomnavigation.BottomNavigationView" to mapOf(
+                "setItemTextColor" to listOf(ColorStateCompatTransformer),
+                "setItemRippleColor" to listOf(ColorStateCompatTransformer),
+                "setItemIconTintList" to listOf(ColorStateCompatTransformer)
+			),
+			"com.google.android.material.navigation.NavigationView" to mapOf(
+				"setItemIconTintList" to listOf(ColorStateCompatTransformer),
+				"setItemTextColor" to listOf(ColorStateCompatTransformer)
+			),
+			"com.google.android.material.tabs.TabLayout" to mapOf(
+				"setTabIconTint" to listOf(ColorStateCompatTransformer),
+				"setTabRippleColor" to listOf(ColorStateCompatTransformer),
+				"setTabTextColors" to listOf(ColorStateCompatTransformer)
+			)
 		)
         dependencies {
             inkrementalGen("com.google.android.material:material")

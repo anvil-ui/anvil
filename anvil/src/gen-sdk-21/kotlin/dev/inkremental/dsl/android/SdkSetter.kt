@@ -3089,8 +3089,12 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "indeterminateTintList" -> when {
-      v is ProgressBar && arg is ColorStateList? -> {
-        v.setIndeterminateTintList(arg)
+       v is ProgressBar && arg is Int? -> {
+        if(arg != null) {
+          v.setIndeterminateTintList(ColorStateList.valueOf(v.resources.getColor(arg)))
+        } else { 
+          v.setIndeterminateTintList(null)
+        }
         true
       }
       else -> false
@@ -3124,8 +3128,12 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "progressBackgroundTintList" -> when {
-      v is ProgressBar && arg is ColorStateList? -> {
-        v.setProgressBackgroundTintList(arg)
+       v is ProgressBar && arg is Int? -> {
+        if(arg != null) {
+          v.setProgressBackgroundTintList(ColorStateList.valueOf(v.resources.getColor(arg)))
+        } else { 
+          v.setProgressBackgroundTintList(null)
+        }
         true
       }
       else -> false
@@ -3152,8 +3160,12 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "progressTintList" -> when {
-      v is ProgressBar && arg is ColorStateList? -> {
-        v.setProgressTintList(arg)
+       v is ProgressBar && arg is Int? -> {
+        if(arg != null) {
+          v.setProgressTintList(ColorStateList.valueOf(v.resources.getColor(arg)))
+        } else { 
+          v.setProgressTintList(null)
+        }
         true
       }
       else -> false
@@ -3173,8 +3185,12 @@ object SdkSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "secondaryProgressTintList" -> when {
-      v is ProgressBar && arg is ColorStateList? -> {
-        v.setSecondaryProgressTintList(arg)
+       v is ProgressBar && arg is Int? -> {
+        if(arg != null) {
+          v.setSecondaryProgressTintList(ColorStateList.valueOf(v.resources.getColor(arg)))
+        } else { 
+          v.setSecondaryProgressTintList(null)
+        }
         true
       }
       else -> false
