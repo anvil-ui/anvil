@@ -125,6 +125,8 @@ fun TextViewScope.onTextChanged(watcher: (CharSequence) -> Unit) = attr("onTextC
 fun TextViewScope.onTextChanged(watcher: TextWatcher) = attr("onTextChanged", watcher)
 fun TextViewScope.inputExtras(extras: Int) = attr("inputExtras", extras)
 fun TextViewScope.minWidth(arg: Dip): Unit = attr("minWidth", arg.value)
+fun TextViewScope.lineSpacingExtra(value: Sp): Unit = attr("lineSpacingExtra", value.value)
+fun TextViewScope.lineSpacingMultiplier(value : Sp): Unit = attr("lineSpacingMultiplier", value.value)
 
 fun SwitchViewScope.switchMinWidth(arg: Dip): Unit = attr("switchMinWidth", arg.value)
 
@@ -475,6 +477,20 @@ object CustomSdkSetter : Inkremental.AttributeSetter<Any> {
                 } else {
                     v.background = null
                 }
+                true
+            }
+            else -> false
+        }
+        "lineSpacingExtra" -> when {
+            value is Float && v is TextView -> {
+                v.setLineSpacing(value, v.lineSpacingMultiplier)
+                true
+            }
+            else -> false
+        }
+        "lineSpacingMultiplier" -> when {
+            value is Float && v is TextView -> {
+                v.setLineSpacing(v.lineSpacingExtra, value)
                 true
             }
             else -> false
