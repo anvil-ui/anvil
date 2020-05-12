@@ -1,0 +1,8 @@
+.gh-edit {
+  @include fs-2;
+  float: right;
+  padding-right: 0;
+  margin-right: $sp-2;
+  margin-bottom: $sp-3;
+  margin-top: -$sp-4;
+}

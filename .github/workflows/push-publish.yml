@@ -3,6 +3,7 @@ name: Publish on master push
 on:
   push:
     branches: master
+    paths-ignore: 'docs/**'
   repository_dispatch:
     types: publish
 

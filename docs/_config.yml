@@ -1,0 +1,24 @@
+title: Inkremental
+description: >-
+  Reactive library for Android UI using native components.
+baseurl: ""
+url: "https://inkremental.dev"
+
+theme: just-the-docs
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+logo: "/assets/images/logo.png"
+
+aux_links:
+  "Telegram":
+    - "https://t.me/inkremental"
+  "Slack":
+    - "https://kotlinlang.slack.com/messages/inkremental"
+  "GitHub":
+    - "//github.com/inkremental/inkremental"
+
+footer_content: "Copyright &copy; 2020 Inkremental contributors. Distributed by an <a href=\"https://github.com/inkremental/inkremental/tree/master/LICENSE\">Apache 2.0 license.</a>"
+
+edit_baseurl: "https://github.com/inkremental/inkremental/edit/master"

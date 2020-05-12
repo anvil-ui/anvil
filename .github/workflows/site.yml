@@ -1,0 +1,25 @@
+name: Update GitHub Pages static site
+
+on:
+  push:
+    branches: master
+    paths: 'docs/**'
+
+jobs:
+  site-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/cache@v1
+      with:
+        path: docs/vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - uses: helaili/jekyll-action@eb6eabe # v2.0.2
+      env:
+        JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+      with:
+        jekyll_src: docs

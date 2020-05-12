@@ -1,3 +1,9 @@
+---
+layout: page
+title: Contributing
+nav_order: 3
+---
+
 # Building
 
 1. You should have Android SDK installed.

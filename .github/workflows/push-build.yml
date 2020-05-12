@@ -3,6 +3,7 @@ name: Build on non-master push
 on:
   push:
     branches-ignore: master
+    paths-ignore: 'docs/**'
 
 jobs:
   build:
