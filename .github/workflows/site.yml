@@ -18,8 +18,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gems-
 
-    - uses: helaili/jekyll-action@eb6eabe # v2.0.2
+    #- uses: helaili/jekyll-action@eb6eabe # v2.0.2
+    - uses: r4zzz4k/jekyll-action@263712c
       env:
         JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
       with:
-        jekyll_src: docs
+        jekyll_root: docs
+
