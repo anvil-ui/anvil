@@ -25,11 +25,18 @@ inline fun <reified T: View> v(noinline r: () -> Unit = {}) = v(T::class, r)
 
 inline fun <reified T: View, reified S: ViewScope> v(s: S, noinline r: S.() -> Unit = {}) = v(T::class, r.bind(s))
 
+inline fun <reified S: ViewScope>xml(@LayoutRes layoutId: Int, s: S, noinline r: S.() -> Unit = {}) {
+    start(layoutId)
+    r.bind(s).invoke()
+    end()
+}
+
 fun xml(@LayoutRes layoutId: Int, r: () -> Unit = {}) {
-    Inkremental.currentMount()?.iterator?.start(null, layoutId)
+    start(layoutId)
     r()
     end()
 }
+fun start(@LayoutRes layoutId: Int) = Inkremental.currentMount()?.iterator?.start(null, layoutId)
 fun end() = Inkremental.currentMount()?.iterator?.end()
 fun skip() = Inkremental.currentMount()?.iterator?.skip()
 
