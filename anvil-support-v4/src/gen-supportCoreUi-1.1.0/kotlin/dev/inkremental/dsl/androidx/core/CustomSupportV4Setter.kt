@@ -5,6 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayoutScope
 import androidx.core.content.res.ResourcesCompat
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
@@ -45,6 +47,7 @@ abstract class CompatViewScope : ViewScope() {
     }
 }
 
+fun CoordinatorLayoutScope.coordinatorLayoutGravity(gravity: Int) = attr("coordinatorlayoutGravity", gravity )
 
 object CustomSupportV4Setter : Inkremental.AttributeSetter<Any> {
     override fun set(v: View, name: String, value: Any?, prevValue: Any?): Boolean = when (name) {
@@ -72,6 +75,13 @@ object CustomSupportV4Setter : Inkremental.AttributeSetter<Any> {
         "imageDrawableCompat" -> when {
             v is ImageView && value is Int -> {
                 v.setImageDrawable(ResourcesCompat.getDrawable(r, value, null))
+                true
+            }
+            else -> false
+        }
+        "coordinatorlayoutGravity" -> when {
+            v.layoutParams is CoordinatorLayout.LayoutParams && value is Int -> {
+                (v.layoutParams as CoordinatorLayout.LayoutParams).gravity = value
                 true
             }
             else -> false
