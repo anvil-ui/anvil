@@ -25,12 +25,7 @@ inline fun <reified T: View> v(noinline r: () -> Unit = {}) = v(T::class, r)
 
 inline fun <reified T: View, reified S: ViewScope> v(s: S, noinline r: S.() -> Unit = {}) = v(T::class, r.bind(s))
 
-inline fun <reified S: ViewScope>xml(@LayoutRes layoutId: Int, s: S, noinline r: S.() -> Unit = {}) {
-    start(layoutId)
-    r.bind(s).invoke()
-    end()
-}
-
+inline fun <reified S: ViewScope> xml(@LayoutRes layoutId: Int, s: S, noinline r: S.() -> Unit = {}) = xml(layoutId, r.bind(s))
 fun xml(@LayoutRes layoutId: Int, r: () -> Unit = {}) {
     start(layoutId)
     r()
