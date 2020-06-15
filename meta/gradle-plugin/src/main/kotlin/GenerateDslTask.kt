@@ -267,7 +267,7 @@ abstract class GenerateDslTask : DefaultTask() {
         return buildCodeBlock {
             if (owner.isRoot) {
                 val v = owner.parametrizedType?.let { "(v as $it)" } ?: "v"
-                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam)) {
+                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam, isNullable)) {
                     beginControlFlow("arg is %T ->", type.starProjectedType.copy(nullable = isNullable))
                     addStatement("v.$setterName($argAsParam)", type.parametrizedType)
                 }
@@ -276,7 +276,7 @@ abstract class GenerateDslTask : DefaultTask() {
             } else {
                 val v = owner.parametrizedType?.let { "(v as $it)" } ?: "v"
 
-                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam)) {
+                if (!handleTransformersForAttrSetter(transformers, this, owner, v, setterName, argAsParam, isNullable)) {
                     beginControlFlow(
                             "v is %T && arg is %T ->",
                             owner.starProjectedType,
@@ -296,13 +296,14 @@ abstract class GenerateDslTask : DefaultTask() {
         owner: ViewModel,
         v: String,
         setterName: String,
-        argAsParam: String): Boolean {
+        argAsParam: String,
+        nullable: Boolean): Boolean {
         val transformers = transformers ?: return false
         if (transformers.isEmpty()) return false
 
         var needsToBreak = false
         transformers.forEach { transformer ->
-            if (transformer.handleTransformersForAttrSetter(builder, owner, v, setterName, argAsParam)){
+            if (transformer.handleTransformersForAttrSetter(builder, owner, v, setterName, argAsParam, nullable)){
                 needsToBreak = true
             }
         }

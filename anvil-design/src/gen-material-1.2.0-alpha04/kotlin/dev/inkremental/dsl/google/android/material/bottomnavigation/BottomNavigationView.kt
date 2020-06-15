@@ -2,13 +2,13 @@
 
 package dev.inkremental.dsl.google.android.material.bottomnavigation
 
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dev.inkremental.Inkremental
 import dev.inkremental.attr
 import dev.inkremental.bind
+import dev.inkremental.dsl.android.ColorState
 import dev.inkremental.dsl.android.widget.FrameLayoutScope
 import dev.inkremental.dsl.google.android.material.CustomMaterialSetter
 import dev.inkremental.dsl.google.android.material.MaterialSetter
@@ -27,11 +27,11 @@ abstract class BottomNavigationViewScope : FrameLayoutScope() {
       attr("itemHorizontalTranslationEnabled", arg)
   fun itemIconSize(arg: Int): Unit = attr("itemIconSize", arg)
   fun itemIconSizeRes(arg: Int): Unit = attr("itemIconSizeRes", arg)
-  fun itemIconTintList(arg: ColorStateList?): Unit = attr("itemIconTintList", arg)
-  fun itemRippleColor(arg: ColorStateList): Unit = attr("itemRippleColor", arg)
+  fun itemIconTintList(arg: ColorState?): Unit = attr("itemIconTintList", arg?.value)
+  fun itemRippleColor(arg: ColorState): Unit = attr("itemRippleColor", arg.value)
   fun itemTextAppearanceActive(arg: Int): Unit = attr("itemTextAppearanceActive", arg)
   fun itemTextAppearanceInactive(arg: Int): Unit = attr("itemTextAppearanceInactive", arg)
-  fun itemTextColor(arg: ColorStateList?): Unit = attr("itemTextColor", arg)
+  fun itemTextColor(arg: ColorState?): Unit = attr("itemTextColor", arg?.value)
   fun labelVisibilityMode(arg: Int): Unit = attr("labelVisibilityMode", arg)
   fun onNavigationItemReselected(arg: ((arg0: MenuItem) -> Unit)?): Unit =
       attr("onNavigationItemReselected", arg)

@@ -74,6 +74,12 @@ inkremental {
 						"setMinimumHeight" to listOf(IntToDpTransformer),
 						"setMinimumWidth" to listOf(IntToDpTransformer),
 						"setBackground" to listOf(NullableForSureTransformer)
+				),
+				"android.widget.ProgressBar" to mapOf(
+						"setIndeterminateTintList" to listOf(ColorStateTransformer),
+						"setProgressBackgroundTintList" to listOf(ColorStateTransformer),
+						"setProgressTintList" to listOf(ColorStateTransformer),
+						"setSecondaryProgressTintList" to listOf(ColorStateTransformer)
 				)
 		)
 	}

@@ -22,7 +22,7 @@ sealed class DslTransformer : JvmSerializable {
     /**
      * @return True if you want this transformer to stop execution of regular dsl generator
      */
-    open fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String): Boolean {
+    open fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String, nullable : Boolean): Boolean {
         return false
     }
 
@@ -39,7 +39,7 @@ sealed class DslTransformer : JvmSerializable {
             return false
         }
 
-        override fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String): Boolean {
+        override fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String, nullable : Boolean): Boolean {
             builder.beginControlFlow(
                     "v is %T && arg is Int ->",
                     owner.starProjectedType
@@ -72,7 +72,7 @@ sealed class DslTransformer : JvmSerializable {
             return false
         }
 
-        override fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String): Boolean {
+        override fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String, nullable : Boolean): Boolean {
             builder.beginControlFlow(
                     " arg is Int ->",
                     owner.starProjectedType
@@ -92,4 +92,71 @@ sealed class DslTransformer : JvmSerializable {
             return true
         }
     }
+
+    @Serializable
+    object ColorStateTransformer : DslTransformer() {
+
+        override fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
+            if (attrModel.type.argType.toString() == "android.content.res.ColorStateList"){
+                val question = if (attrModel.isNullable) "?" else ""
+                builder.addParameter("arg", ClassName.bestGuess("dev.inkremental.dsl.android.ColorState").copy(nullable = attrModel.isNullable))
+                builder.returns(UNIT)
+                builder.addCode(CodeBlock.of("return %M(%S, arg$question.value)", attr, attrModel.name))
+                return true
+            }
+            return false
+        }
+
+        override fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String, nullable : Boolean): Boolean {
+            val question = if (nullable) "?" else ""
+            builder.beginControlFlow(
+                    " v is %T && arg is Int$question ->",
+                    owner.starProjectedType
+            )
+            if (nullable) {
+                builder.addStatement("if(arg != null) {")
+                builder.addStatement("  $v.$setterName(ColorStateList.valueOf(v.resources.getColor($argAsParam)))")
+                builder.addStatement("} else { ")
+                builder.addStatement("  $v.$setterName(null)")
+                builder.addStatement("}")
+            } else {
+                builder.addStatement("$v.$setterName(ColorStateList.valueOf(v.resources.getColor($argAsParam)))")
+            }
+            return true
+        }
+    }
+
+    @Serializable
+    object ColorStateCompatTransformer : DslTransformer() {
+
+        override fun handleTransformersForDsl(builder: FunSpec.Builder, attrModel: AttrModel, attr: MemberName): Boolean {
+            if (attrModel.type.argType.toString() == "android.content.res.ColorStateList"){
+                val question = if (attrModel.isNullable) "?" else ""
+                builder.addParameter("arg", ClassName.bestGuess("dev.inkremental.dsl.android.ColorState").copy(nullable = attrModel.isNullable))
+                builder.returns(UNIT)
+                builder.addCode(CodeBlock.of("return %M(%S, arg$question.value)", attr, attrModel.name))
+                return true
+            }
+            return false
+        }
+
+        override fun handleTransformersForAttrSetter(builder: CodeBlock.Builder, owner: ViewModel, v: String, setterName: String, argAsParam: String, nullable : Boolean): Boolean {
+            val question = if (nullable) "?" else ""
+            builder.beginControlFlow(
+                    " v is %T && arg is Int$question ->",
+                    owner.starProjectedType
+            )
+            if (nullable) {
+                builder.addStatement("if(arg != null) {")
+                builder.addStatement("  $v.$setterName(%M.getColorStateList(v.resources, $argAsParam, null))", MemberName("androidx.core.content.res", "ResourcesCompat"))
+                builder.addStatement("} else { ")
+                builder.addStatement("  $v.$setterName(null)")
+                builder.addStatement("}")
+            } else {
+                builder.addStatement("$v.$setterName(%M.getColorStateList(v.resources, $argAsParam, null))", MemberName("androidx.core.content.res", "ResourcesCompat"))
+            }
+            return true
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.animation.MotionSpec
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -395,19 +396,27 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "itemIconTintList" -> when {
-      v is BottomNavigationView && arg is ColorStateList? -> {
-        v.setItemIconTintList(arg)
+       v is BottomNavigationView && arg is Int? -> {
+        if(arg != null) {
+          v.setItemIconTintList(ResourcesCompat.getColorStateList(v.resources, arg, null))
+        } else { 
+          v.setItemIconTintList(null)
+        }
         true
       }
-      v is NavigationView && arg is ColorStateList? -> {
-        v.setItemIconTintList(arg)
+       v is NavigationView && arg is Int? -> {
+        if(arg != null) {
+          v.setItemIconTintList(ResourcesCompat.getColorStateList(v.resources, arg, null))
+        } else { 
+          v.setItemIconTintList(null)
+        }
         true
       }
       else -> false
     }
     "itemRippleColor" -> when {
-      v is BottomNavigationView && arg is ColorStateList -> {
-        v.setItemRippleColor(arg)
+       v is BottomNavigationView && arg is Int -> {
+        v.setItemRippleColor(ResourcesCompat.getColorStateList(v.resources, arg, null))
         true
       }
       else -> false
@@ -427,12 +436,20 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "itemTextColor" -> when {
-      v is BottomNavigationView && arg is ColorStateList? -> {
-        v.setItemTextColor(arg)
+       v is BottomNavigationView && arg is Int? -> {
+        if(arg != null) {
+          v.setItemTextColor(ResourcesCompat.getColorStateList(v.resources, arg, null))
+        } else { 
+          v.setItemTextColor(null)
+        }
         true
       }
-      v is NavigationView && arg is ColorStateList? -> {
-        v.setItemTextColor(arg)
+       v is NavigationView && arg is Int? -> {
+        if(arg != null) {
+          v.setItemTextColor(ResourcesCompat.getColorStateList(v.resources, arg, null))
+        } else { 
+          v.setItemTextColor(null)
+        }
         true
       }
       else -> false
@@ -1626,8 +1643,12 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "tabIconTint" -> when {
-      v is TabLayout && arg is ColorStateList? -> {
-        v.setTabIconTint(arg)
+       v is TabLayout && arg is Int? -> {
+        if(arg != null) {
+          v.setTabIconTint(ResourcesCompat.getColorStateList(v.resources, arg, null))
+        } else { 
+          v.setTabIconTint(null)
+        }
         true
       }
       else -> false
@@ -1654,8 +1675,8 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "tabRippleColor" -> when {
-      v is TabLayout && arg is ColorStateList -> {
-        v.setTabRippleColor(arg)
+       v is TabLayout && arg is Int -> {
+        v.setTabRippleColor(ResourcesCompat.getColorStateList(v.resources, arg, null))
         true
       }
       else -> false
@@ -1668,8 +1689,12 @@ object MaterialSetter : Inkremental.AttributeSetter<Any> {
       else -> false
     }
     "tabTextColors" -> when {
-      v is TabLayout && arg is ColorStateList? -> {
-        v.setTabTextColors(arg)
+       v is TabLayout && arg is Int? -> {
+        if(arg != null) {
+          v.setTabTextColors(ResourcesCompat.getColorStateList(v.resources, arg, null))
+        } else { 
+          v.setTabTextColors(null)
+        }
         true
       }
       else -> false
