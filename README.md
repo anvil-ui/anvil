@@ -1,5 +1,5 @@
 
-# Anvil - reactive views for Android
+# Inkremental - reactive views for Android
 
 [![Build Status](https://travis-ci.org/inkremental/anvil.svg?branch=master)](https://travis-ci.org/inkremental/anvil)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23193-brightgreen.svg)](http://androidweekly.net/issues/issue-193)
@@ -13,7 +13,8 @@
 <div>
 <img align="left" src="https://raw.githubusercontent.com/inkremental/anvil/master/logo/ic_launcher.png" alt="logo" width="96px" height="96px" />
 <p>
-Anvil is a small Java library for creating reactive user interfaces. Originally inspired by <a href="https://facebook.github.io/react/">React</a>, it suits well as a view layer for <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel">MVVM</a> or <a href="http://redux.js.org/">Redux</a> design patterns.
+Inkremental is a small library for creating reactive user interfaces. Originally inspired by <a href="https://facebook.github.io/react/">React</a>, it suits well as a view layer for <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel">MVVM</a> or <a href="http://redux.js.org/">Redux</a> design patterns.
+It is a fork of Java library Anvil, fully rewritten in Kotlin.
 </p>
 </div>
 
@@ -26,7 +27,7 @@ Anvil is a small Java library for creating reactive user interfaces. Originally 
 * Fast (uses no reflection¹)
 * Efficient (views are updated lazily, if the data change didn't affect the view - it remains untouched)
 * Easy to read declarative syntax
-* Java 8 and Kotlin-friendly, but supports Java 6 as well
+* Powerfull typesafe dsl
 * XML layouts are supported, too
 
 ¹Reflection is still used to inflate views once (standard XML inflater does the
@@ -34,20 +35,51 @@ same thing, so no performance loss here).
 
 ## Installation
 
+With Kotlin Gradle DSL
 ```kotlin
-// build.gradle.kts
 repositories {
     maven(url = "https://dl.bintray.com/inkremental/maven")
 }
 dependencies {
-    implementation("dev.inkremental:anvil-sdk17:0.8.0")
+    //For Lollipop as min SDK target 
+    implementation("dev.inkremental:anvil-sdk:21-$latestReleaseVersion")
+    //For Kitkat as min SDK target
+    //implementation("dev.inkremental:anvil-sdk:19-$latestReleaseVersion") 
+    //For ICS as min SDK target
+    //implementation("dev.inkremental:anvil-sdk:17-$latestReleaseVersion") 
+    implementation("dev.inkremental:anvil-support-v4:1.1.0-$latestReleaseVersion") 
+    implementation("dev.inkremental:anvil-appcompat-v7:1.1.0-$latestReleaseVersion")
+    implementation("dev.inkremental:anvil-recyclerview-v7:1.1.0-$latestReleaseVersion")
+    implementation("dev.inkremental:anvil-design:1.1.0-$latestReleaseVersion")
+    implementation("dev.inkremental:anvil-cardview-v7:1.0.0-$latestReleaseVersion")
+    implementation("dev.inkremental:anvil-constraintlayout:1.1.3-$latestReleaseVersion")
 }
 ```
-Anvil comes in multiple builds for different minimal SDK versions:
+ Or with Groovy Gradle DSL
+ ```groovy
+ repositories {
+     maven { url "https://dl.bintray.com/inkremental/maven" }
+ }
+ dependencies {
+     //For Lollipop as min SDK target
+     implementation "dev.inkremental:anvil-sdk:21-$latestReleaseVersion"
+     //For Kitkat as min SDK target
+     //implementation "dev.inkremental:anvil-sdk:19-$latestReleaseVersion"
+     //For ICS as min SDK target
+     //implementation "dev.inkremental:anvil-sdk:17-$latestReleaseVersion"
+     implementation "dev.inkremental:anvil-support-v4:1.1.0-$latestReleaseVersion" 
+     implementation "dev.inkremental:anvil-appcompat-v7:1.1.0-$latestReleaseVersion"
+     implementation "dev.inkremental:anvil-recyclerview-v7:1.1.0-$latestReleaseVersion"
+     implementation "dev.inkremental:anvil-design:1.1.0-$latestReleaseVersion"
+     implementation "dev.inkremental:anvil-cardview-v7:1.0.0-$latestReleaseVersion"
+     implementation "dev.inkremental:anvil-constraintlayout:1.1.3-$latestReleaseVersion"
+ }
+ ```
+Inkremental comes in multiple builds for different minimal SDK versions:
 
-* anvil-sdk17 (ICS, 98.1% of devices)
-* anvil-sdk19 (Kitkat, 95.3% of devices)
-* anvil-sdk21 (Lollipop, 80.2% of devices)
+* anvil-sdk17 (ICS)
+* anvil-sdk19 (Kitkat)
+* anvil-sdk21 (Lollipop)
 
 Other API levels are not added because they had very few UI-related methods added.
 
@@ -60,42 +92,36 @@ Normally you would write your layouts in XMLs, then get your views by their
 IDs and set their listeners, finally you would observe your data and modify
 view properties as your data changes.
 
-Anvil simplifies most of this boring routine.
+Inkremental simplifies most of this boring routine.
 
-First, add a static import that makes it much easier to write your view:
+Declare your layout, assign event listeners and bind data:
 
-``` java
-import static trikita.anvil.DSL.*;
-```
+```Kotlin
+var ticktock = 0
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        
+        renderableContentView {
+            linearLayout {
+                size(MATCH, MATCH)
+                padding(8.dp)
+                orientation(LinearLayout.VERTICAL)
 
-Next, declare your layout, assign event listeners and bind data:
+                textView {
+                    size(MATCH, WRAP)
+                    text("Tick-tock: $ticktock")
+                }
 
-``` Java
-public int ticktock = 0;
-public void onCreate(Bundle b) {
-    super.onCreate(b);
-    setContentView(new RenderableView(this) {
-        @Override
-        public void view() {
-            linearLayout(() -> {
-                size(MATCH, MATCH);
-                padding(dip(8));
-                orientation(LinearLayout.VERTICAL);
-
-                textView(() -> {
-                    size(MATCH, WRAP);
-                    text("Tick-tock: " + ticktock);
-                });
-
-                button(() -> {
-                    size(MATCH, WRAP);
-                    text("Close");
+                button {
+                    size(MATCH, WRAP)
+                    text("Close")
                     // Finish current activity when the button is clicked
-                    onClick(v -> finish());
-                });
-            });
+                    onClick { v -> 
+                        finish()
+                    }
+                }
+            }
         }
-    });
 }
 ```
 
@@ -106,51 +132,46 @@ the button. We've also bound a variable "ticktock" to the text property inside a
 
 Next, let's update your views as your data changes:
 
-``` java
-ticktock++;
-Anvil.render();
+```Kotlin
+ticktock++
+Inkrementak.render()
 ```
 
 At this point your layout will be updated and the TextView will contain text
 "Tick-Tock: 1" instead of "Tick-Tock: 0". However the only actual view method
 being called would be setText().
 
-You should know that there is no need to call Anvil.render() inside your event
+You should know that there is no need to call Inkremental.render() inside your event
 listeners, it's already triggered after each UI listener call:
 
-``` java
-public void view() {
-    linearLayout(() -> {
-        textView(() -> {
-            text("Clicks: " + numClicks);
-        });
-        button(() -> {
-            text("Click me");
-            onClick(v -> {
-                numClicks++; // text view will be updated automatically
-            });
-        });
-    });
+``` Kotlin
+fun view() {
+    linearLayout {
+        textView {
+            text("Clicks: $numClicks")
+        }
+        button {
+            text("Click me")
+            onClick {
+                numClicks++ // text view will be updated automatically
+            }
+        }
+    }
 }
 ```
 
-## Made with Anvil
+## Made with Inkremental/Anvil
 
+[![MacGeiz](https://lh3.googleusercontent.com/M6NheR2ztNUypiiu2tnUFQ0AAJTMKlUFyDhdNzFEYKzHjOIapcNySZlgF67pbDSxXOY=s96)](https://play.google.com/store/apps/details?id=com.macgeiz.app)
 [![Talalarmo](https://raw.githubusercontent.com/trikita/talalarmo/master/src/main/res/drawable-xhdpi/ic_launcher.png)](https://github.com/trikita/talalarmo)
 [![Slide](https://raw.githubusercontent.com/trikita/slide/master/src/main/res/mipmap-xxhdpi/ic_launcher.png)](https://github.com/trikita/slide)
-[![Spot](https://i.imgur.com/Al3sh3Q.png)](https://play.google.com/store/apps/details?id=trikita.spot)
-[![Quilt](https://i.imgur.com/rqI02l0.png)](https://play.google.com/store/apps/details?id=trikita.quilt)
-
-You may find more Anvil examples for Java 6, Java 8 and Kotlin at
-
-- [Anvil examples in Java or Kotlin](https://github.com/inkremental/anvil-examples)
 
 ## How it works
 
 No magic. When a renderable object is being constructed there are 3 types of
 operations: push view, modify some attribute of the current view, and 
 pop view. If you're familiar with
-[incremental DOM](http://google.github.io/incremental-dom/#about) - Anvil
+[incremental DOM](http://google.github.io/incremental-dom/#about) - Inkremental
 follows the same approach.
 
 Pushing a view adds it as a child to the parent view from the top of
@@ -159,12 +180,12 @@ the current view on top of the stack. Pop unwinds the stack.
 
 When you mount this layout (assuming the `name` is "John"):
 
-``` java
-linearLayout(() -> {
-    textView(() -> {
-        text("Hello " + name);
-    });
-});
+```Kotlin
+linearLayout {
+    textView {
+        text("Hello $name")
+    }
+}
 ```
 
 It does the following sequence of actions:
@@ -180,13 +201,13 @@ Pop
 The only trick is that these actions are cached into a so called "virtual layout" -
 a tree-like structure matching the actual layout of views and their properties.
 
-So when you call `Anvil.render()` next time it compares the sequence of
+So when you call `Inkremental.render()` next time it compares the sequence of
 actions with the cache and skips property values if they haven't change. Which means on the next
-`Anvil.render()` call _the views will remain untouched_. This caching technique
+`Inkremental.render()` call _the views will remain untouched. This caching technique
 makes render a very quick operation (having a layout of 100 views, 10
 attributes each you can do about 4000 render cycles per second!).
 
-Now, if you modify the `name` from "John" to "Jane" and call Anvil.render() it will do the following:
+Now, if you modify the `name` from "John" to "Jane" and call Inkremental.render() it will do the following:
 
 ```
 Push LinearLayout (noop)
@@ -201,96 +222,37 @@ So if you modify one of the variables "bound" to some of the attributes - the
 cache will be missed and attribute will be updated.
 
 For all event listeners a "proxy" is generated, which delegates its
-method calls to your actual event listener, but calls `Anvil.render()` after each
+method calls to your actual event listener, but calls `Inkremental.render()` after each
 method. This is useful, because most of your data models are modified when
 the user interacts with the UI, so you write less code without calling
-`Anvil.render()` from every listener. Remember, no-op renders are very fast.
+`Inkremental.render()` from every listener. Remember, no-op renders are very fast.
 
 ## Supported languages and API levels
 
-Anvil is written in Java 7, but its API is designed to use lambdas as well, so
-in modern times it's recommended to use Anvil with Java8/Retrolambda or Kotlin.
-
-Syntax is a bit different for each language, but it's very intuitive anyway.
-
-Java 6 without lambdas:
-
-``` java
-public void view() {
-    o (linearLayout(),
-      orientation(LinearLayout.VERTICAL),
-
-        o (textView(),
-          text("...")),
-        
-        o (button(),
-          text("..."),
-          onClick(myListener)));
-}
-```
-
-Java 8 + RetroLambda:
-
-``` java
-public void view() {
-    linearLayout(() -> {
-        orientation(LinearLayout.VERTICAL);
-        textView(() -> {
-            text("....");
-        });
-        button(() -> {
-            text(".....");
-            onClick(v -> {
-                ....
-            });
-        });
-    });
-}
-```
-
-Kotlin:
-
-``` kotlin
-public override fun view() {
-    linearLayout {
-        orientation(LinearLayout.VERTICAL)
-        textView {
-            text("....")
-        }
-        button {
-            text("....")
-            onClick { v ->
-                ...
-            }
-        }
-    }
-}
-```
-
-Anvil library contains only a few classes to work with the virtual layout, but most
+Inkremental library contains only a few classes to work with the virtual layout, but most
 of the DSL (domain-specific language describing how to create views/layouts and set
 their attributes) is generated from `android.jar`.
 
 ## API
 
-Here's a list of classes and methods you need to know to work with Anvil like a pro:
+Here's a list of classes and methods you need to know to work with Inkremental like a pro:
 
-* `Anvil.Renderable` - functional interface that one should implement to
+* `Inkremental.Renderable` - functional interface that one should implement to
     describe layout structure, style and data bindings.
 
-* `Anvil.mount(View, Anvil.Renderable)` - mounts renderable layout into a
+* `Inkremental.mount(View, () -> Unit)` - mounts renderable layout into a
     View or a ViewGroup
 
-* `Anvil.unmount(View)` - unmounts renderable layout from the View
+* `Inkremental.unmount(View)` - unmounts renderable layout from the View
     removing all its child views if it's a ViewGroup
 
-* `Anvil.render()` - starts a new render cycle updating all mounted views
+* `Inkremental.render()` - starts a new render cycle updating all mounted views
 
-* `Anvil.currentView(): View` - returns the view which is currently being
+* `Inkremental.currentView(): View` - returns the view which is currently being
     rendered. Useful in some very rare cases and only inside the Renderable's
     method `view()` to get access to the real view and modifying it manually.
 
-* `RenderableView` - a most typical implementation of Anvil.Renderable.
+* `RenderableView` - a most typical implementation of Inkremental.Renderable.
     Extending this class and overriding its method `view()` allows to create
     self-contained reactive components that are mounted and unmounted
     automatically.
@@ -305,12 +267,12 @@ Here's a list of classes and methods you need to know to work with Anvil like a 
 
 ## DSL
 
-The bottom part of the iceberg is Anvil DSL.
+The bottom part of the iceberg is Inkremental DSL.
 
 DSL consists of a few handwritten property setters, but most of it is
 generated from java classes in the android SDK.
 
-See a full list of the DSL methods for each API level [here](https://github.com/inkremental/anvil/blob/master/DSL.md).
+See a full list of the DSL methods for each API level [here](https://github.com/inkremental/inkremental/blob/master/DSL.md).
 
 ### Property setters
 
@@ -344,7 +306,7 @@ For LayoutParams the bindings can't be generated easily, so it was faster to wri
 
 A few bindings have been  written for other use cases which we find useful:
 
-* `init(Runnable)` - executes a runnable once, useful to initialize custom views (see also `Anvil.currentView()`).
+* `init(Runnable)` - executes a runnable once, useful to initialize custom views (see also `Inkremental.currentView()`).
 * `R()` - returns a `Resources` object associated with the current view. Useful for
   multiple screen support (sizes, dpi, orientation etc).
 * `isPortrait()` - returns true if a screen is portrait-oriented. Useful for
@@ -357,7 +319,7 @@ A few bindings have been  written for other use cases which we find useful:
     the `flag` boolean value
 * `shadowLayer(radius, dx, dy, color)` - sets shadow layer of a TextView
 * `onTextChanged(textWatcher)` - binds a text watcher to an `EditText`. No
-    `Anvil.render()` is called in this case, because you're likely to get an infinite
+    `Inkremental.render()` is called in this case, because you're likely to get an infinite
     recursion.
 * `text(StringBuilder)` - binds a string builder to the edit text, so when you
     change its contents - the edit text is changed, and if you type something
@@ -372,21 +334,21 @@ A special case for animations is added:
 
 * `anim(trigger, Animator)` - starts animation when `trigger` is true, cancels it
     when the `trigger` becomes false.
+* `anim(trigger, AnimatorIn, AnimatorOut)` - starts AnimatorIn when `trigger` is true, starts AnimatorOut 
+    when the `trigger` becomes false.    
 
 Finally, a few low-level DSL functions are there, which you would no need unless you want to write your own property setters or custom view builders:
 
 * `v(class, attrs...)` - pushes view, applies attributes, doesn't pop the view.
-* `o()`, `x()` - names that look like bullets, actually pop the view. These are used in Java 6 syntax.
 * `v(class, renderable)` - pushes the view, applies the renderable to fulfil
-    attributes and child views, pops the view. This is used in Java 8 and Kotlin
-    syntax.
+    attributes and child views, pops the view. 
 * `attr(func, value)` - checks the cache for the given value of the given
     property setter function. Often used to create your own property setter
     binding.
 
 ## XML layouts
 
-If you're migrating an existing project to Anvil or if you prefer to keep your
+If you're migrating an existing project to Inkremental or if you prefer to keep your
 view layouts declared in XML - you can do so:
 
 ``` kotlin
@@ -437,17 +399,17 @@ views automatically and assigns some IDs to them - you can still modify their
 properties using `withId()`. Also, if any views are created inside the
 `withId()` or `xml()` - they will be appeneded to the view group:
 
-``` java
-v(MyComponent.java, () -> {
-    withId(R.id.child_view, () -> {
+``` Kotlin
+v(MyComponent::class) {
+    withId(R.id.child_view) {
         // R.id.child_view was implicitely created in MyComponent's constructor
         // but we still can modify it here
-    });
+    }
 
-    textView(() -> {
+    textView {
         // This textView will be appeneded to MyComponent layout
-    });
-});
+    }
+}
 ```
 
 ## License
