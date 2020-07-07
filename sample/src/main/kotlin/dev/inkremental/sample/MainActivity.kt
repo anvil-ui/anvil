@@ -81,6 +81,20 @@ class MainActivity : AppCompatActivity() {
                     textColor(Color.BLUE)
                 }
 
+
+                textView {
+                    text("Xml example")
+                    onClick {
+                        startActivity(Intent(context, XmlActivity::class.java))
+                    }
+
+                    size(WRAP, WRAP)
+                    padding(16.dp)
+
+                    paintFlags(Paint.UNDERLINE_TEXT_FLAG)
+                    textColor(Color.BLUE)
+                }
+
                 textView {
                     text("YogaLayout example")
                     onClick {

@@ -58,6 +58,14 @@ fun sip(value: Float): Float = TypedValue.applyDimension(
 
 fun sip(value: Int): Int = sip(value.toFloat()).roundToInt()
 
+fun <S: ViewScope> withId(@IdRes id: Int, scope : S, r: S.() -> Unit): View {
+    var v = Inkremental.currentView<View>()
+    requireNotNull(v) { "Anvil.currentView() is null" }
+    v = v.findViewById(id)
+    requireNotNull(v) { "No view found for ID $id" } // TODO convert id to string
+    return Inkremental.mount(v, r.bind(scope))
+}
+
 fun withId(@IdRes id: Int, r: () -> Unit): View {
     var v = Inkremental.currentView<View>()
     requireNotNull(v) { "Anvil.currentView() is null" }

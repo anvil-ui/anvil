@@ -23,6 +23,7 @@
         <activity android:name="dev.inkremental.sample.BasicsActivity" android:label="Basics sample" />
         <activity android:name="dev.inkremental.sample.ConstraintActivity" android:label="Constraint sample" />
         <activity android:name="dev.inkremental.sample.YogaActivity" android:label="YogaLayout sample" />
+        <activity android:name="dev.inkremental.sample.XmlActivity" android:label="Xml sample" />
     </application>
 
 </manifest>
