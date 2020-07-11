@@ -14,7 +14,7 @@
 <img align="left" src="https://raw.githubusercontent.com/inkremental/anvil/master/logo/ic_launcher.png" alt="logo" width="96px" height="96px" />
 <p>
 Inkremental is a small library for creating reactive user interfaces. Originally inspired by <a href="https://facebook.github.io/react/">React</a>, it suits well as a view layer for <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel">MVVM</a> or <a href="http://redux.js.org/">Redux</a> design patterns.
-It is a fork of Java library Anvil, fully rewritten in Kotlin.
+Started as a fork of Java library Anvil, it is fully rewriten in Kotlin, with many improvements pulled in and more to come!
 </p>
 </div>
 
@@ -51,8 +51,10 @@ dependencies {
     implementation("dev.inkremental:anvil-appcompat-v7:1.1.0-$latestReleaseVersion")
     implementation("dev.inkremental:anvil-recyclerview-v7:1.1.0-$latestReleaseVersion")
     implementation("dev.inkremental:anvil-design:1.1.0-$latestReleaseVersion")
+    implementation("com.google.android.material:material:1.1.0") //at the moment you should also declare original dependency
     implementation("dev.inkremental:anvil-cardview-v7:1.0.0-$latestReleaseVersion")
-    implementation("dev.inkremental:anvil-constraintlayout:1.1.3-$latestReleaseVersion")
+    implementation("dev.inkremental:anvil-constraintlayout:1.1.3-$latestReleaseVersion")       
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3") //at the moment you should also declare original dependency
 }
 ```
  Or with Groovy Gradle DSL
@@ -71,8 +73,10 @@ dependencies {
      implementation "dev.inkremental:anvil-appcompat-v7:1.1.0-$latestReleaseVersion"
      implementation "dev.inkremental:anvil-recyclerview-v7:1.1.0-$latestReleaseVersion"
      implementation "dev.inkremental:anvil-design:1.1.0-$latestReleaseVersion"
+     implementation "com.google.android.material:material:1.1.0" //at the moment you should also declare original dependency
      implementation "dev.inkremental:anvil-cardview-v7:1.0.0-$latestReleaseVersion"
-     implementation "dev.inkremental:anvil-constraintlayout:1.1.3-$latestReleaseVersion"
+     implementation "dev.inkremental:anvil-constraintlayout:1.1.3-$latestReleaseVersion"       
+     implementation "androidx.constraintlayout:constraintlayout:1.1.3" //at the moment you should also declare original dependency
  }
  ```
 Inkremental comes in multiple builds for different minimal SDK versions:
@@ -134,7 +138,7 @@ Next, let's update your views as your data changes:
 
 ```Kotlin
 ticktock++
-Inkrementak.render()
+Inkremental.render()
 ```
 
 At this point your layout will be updated and the TextView will contain text
@@ -231,7 +235,7 @@ the user interacts with the UI, so you write less code without calling
 
 Inkremental library contains only a few classes to work with the virtual layout, but most
 of the DSL (domain-specific language describing how to create views/layouts and set
-their attributes) is generated from `android.jar`.
+their attributes) is generated from `android.jar`, Jetpack and third-party libraries.
 
 ## API
 
