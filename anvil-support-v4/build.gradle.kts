@@ -10,7 +10,7 @@ android {
 	}
 }
 
-val coreVersion = "1.1.0"
+val coreVersion = "1.2.0"
 
 inkremental {
 	androidLibrary("support-core-ui", coreVersion) {
@@ -36,12 +36,12 @@ dependencies {
 	implementation(project(":anvil"))
 	"inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
-	"inkrementalGen"("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
+	"inkrementalGen"("androidx.coordinatorlayout:coordinatorlayout:1.1.0")
 	"inkrementalGen"("androidx.core:core:$coreVersion")
-	"inkrementalGen"("androidx.drawerlayout:drawerlayout:1.0.0")
+	"inkrementalGen"("androidx.drawerlayout:drawerlayout:1.1.0")
 	"inkrementalGen"("androidx.legacy:legacy-support-core-ui:1.0.0")
-	"inkrementalGen"("androidx.slidingpanelayout:slidingpanelayout:1.0.0")
-	"inkrementalGen"("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+	"inkrementalGen"("androidx.slidingpanelayout:slidingpanelayout:1.1.0")
+	"inkrementalGen"("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 	"inkrementalGen"("androidx.viewpager:viewpager:1.0.0")
 
 	testImplementation("junit:junit:$junit_version")
