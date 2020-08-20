@@ -76,8 +76,11 @@ object Inkremental {
      * @param r a Renderable to mount into a View
      */
     fun <T : View> mount(v: T, r: () -> Unit): T {
-        val m = Mount(v, r)
-        mounts[v] = m
+        var m = mounts[v]
+        if (m == null) {
+            m = Mount(v, r)
+            mounts[v] = m
+        }
         render(v)
         return v
     }
