@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 textView {
                     text("Lists example")
                     onClick {
-                        startActivity(Intent(context, ListActivity::class.java))
+                        startActivity(Intent(context, ListActivityWithFragment::class.java))
                     }
 
                     size(WRAP, WRAP)
@@ -86,6 +86,19 @@ class MainActivity : AppCompatActivity() {
                     text("Xml example")
                     onClick {
                         startActivity(Intent(context, XmlActivity::class.java))
+                    }
+
+                    size(WRAP, WRAP)
+                    padding(16.dp)
+
+                    paintFlags(Paint.UNDERLINE_TEXT_FLAG)
+                    textColor(Color.BLUE)
+                }
+
+                textView {
+                    text("Complex example")
+                    onClick {
+                        startActivity(Intent(context, ComplexActivityWithFragment::class.java))
                     }
 
                     size(WRAP, WRAP)

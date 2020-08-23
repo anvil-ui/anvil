@@ -38,6 +38,7 @@ dependencies {
     implementation project(":anvil-constraintlayout")
     implementation project(":anvil-yogalayout")
     implementation project(":anvil-recyclerview-v7")
+    implementation project(":anvil-design")
 
 
     testImplementation 'junit:junit:4.12'

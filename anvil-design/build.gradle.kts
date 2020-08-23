@@ -16,7 +16,7 @@ android {
 }
 
 inkremental {
-	androidLibrary("material", listOf("1.1.0", "1.2.0-alpha04")) {
+	androidLibrary("material", "1.1.0") {
         srcPackage = "com.google.android.material"
         modulePackage = "dev.inkremental.dsl.google.android.material"
 		manualSetterName = "CustomMaterialSetter"
