@@ -7,7 +7,7 @@ import dev.inkremental.Inkremental.Mount
 import dev.inkremental.Inkremental.render
 import dev.inkremental.RenderableAdapter
 
-abstract class RenderableRecyclerViewAdapter<T> : RecyclerView.Adapter<RenderableRecyclerViewAdapter.MountHolder>() {
+abstract class RenderableRecyclerViewAdapter<T>(val fillHeight: Boolean = false) : RecyclerView.Adapter<RenderableRecyclerViewAdapter.MountHolder>() {
 
     open lateinit var items: List<T>
 
@@ -15,7 +15,7 @@ abstract class RenderableRecyclerViewAdapter<T> : RecyclerView.Adapter<Renderabl
         val root = FrameLayout(parent.context)
         root.layoutParams = FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
+                if (fillHeight) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT)
         return MountHolder(root)
     }
 
@@ -40,8 +40,9 @@ abstract class RenderableRecyclerViewAdapter<T> : RecyclerView.Adapter<Renderabl
 
     companion object {
         fun <T> withItems(i: List<T>,
+                          fillHeight: Boolean = false,
                           r: (index: Int, item: T) -> Unit): RenderableRecyclerViewAdapter<T> {
-            return object : RenderableRecyclerViewAdapter<T>() {
+            return object : RenderableRecyclerViewAdapter<T>(fillHeight) {
 
                 override var items = i
 

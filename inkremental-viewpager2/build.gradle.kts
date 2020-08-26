@@ -29,6 +29,7 @@ dependencies {
 	val mockito_version: String by project.extra
 
 	implementation(project(":anvil"))
+	implementation(project(":anvil-recyclerview-v7"))
 	"inkremental"(project(":anvil", "sdk-17InkrementalDef"))
 
 	"inkrementalGen"("androidx.viewpager2:viewpager2:$viewpager2Version")

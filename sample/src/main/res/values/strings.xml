@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Anvil Sample</string>
+    <string name="app_name">Inkremental Sample</string>
 
     <string
         name="child_1_text"
