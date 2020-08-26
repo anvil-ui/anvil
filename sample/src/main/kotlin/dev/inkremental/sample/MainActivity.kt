@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 textView {
                     text("Lists example")
                     onClick {
-                        startActivity(Intent(context, ListActivityWithFragment::class.java))
+                        startActivity(Intent(context, ListActivity::class.java))
                     }
 
                     size(WRAP, WRAP)
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
                 textView {
                     text("Complex example")
                     onClick {
-                        startActivity(Intent(context, ComplexActivityWithFragment::class.java))
+                        startActivity(Intent(context, ComplexActivity::class.java))
                     }
 
                     size(WRAP, WRAP)
