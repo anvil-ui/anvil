@@ -24,7 +24,7 @@
         <activity android:name="dev.inkremental.sample.ConstraintActivity" android:label="Constraint sample" />
         <activity android:name="dev.inkremental.sample.YogaActivity" android:label="YogaLayout sample" />
         <activity android:name="dev.inkremental.sample.XmlActivity" android:label="Xml sample" />
-        <activity android:name="dev.inkremental.sample.ComplexActivityWithFragment" android:label="Complex sample" />
+        <activity android:name="dev.inkremental.sample.ComplexActivity" android:label="Complex sample" />
     </application>
 
 </manifest>

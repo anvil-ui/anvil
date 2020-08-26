@@ -1,17 +1,20 @@
 package dev.inkremental.sample
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import dev.inkremental.dsl.android.*
-import dev.inkremental.dsl.android.Size.*
-import dev.inkremental.dsl.android.widget.*
-import dev.inkremental.dsl.androidx.core.viewPagerInkremental
+import dev.inkremental.dsl.android.Size.MATCH
+import dev.inkremental.dsl.android.Size.WRAP
+import dev.inkremental.dsl.android.size
+import dev.inkremental.dsl.android.view.ViewScope
+import dev.inkremental.dsl.android.widget.FrameLayoutScope
+import dev.inkremental.dsl.android.widget.linearLayout
+import dev.inkremental.dsl.android.widget.textView
 import dev.inkremental.dsl.androidx.core.widget.nestedScrollView
+import dev.inkremental.dsl.androidx.recyclerview.RenderableRecyclerViewAdapter
+import dev.inkremental.dsl.androidx.viewpager2.adapter
+import dev.inkremental.dsl.androidx.viewpager2.widget.viewPager2
 import dev.inkremental.dsl.google.android.material.tabs.tabLayout
 import dev.inkremental.renderableContentView
 
@@ -21,6 +24,25 @@ class ComplexActivity : AppCompatActivity() {
 
     private var tab: TabLayout? = null
 
+    val pagerAdapter : RenderableRecyclerViewAdapter<Int> = RenderableRecyclerViewAdapter.withItems(listOf(R.string.large_text, R.string.large_text, R.string.large_text)) { pos, item ->
+        FrameLayoutScope.size(MATCH, MATCH)
+
+        nestedScrollView {
+            id(R.id.scroll)
+
+            size(MATCH, MATCH)
+            linearLayout {
+                size(MATCH, MATCH)
+                orientation(LinearLayout.VERTICAL)
+
+                textView {
+                    size(MATCH, MATCH)
+                    text(item)
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,48 +51,15 @@ class ComplexActivity : AppCompatActivity() {
                 size(MATCH, MATCH)
                 orientation(LinearLayout.VERTICAL)
                 tabLayout {
-//                    id(R.id.tabs)
                     initWith<TabLayout> {
                         tab = this
                     }
                     size(MATCH, WRAP)
                 }
-                viewPagerInkremental {
-//                    id(R.id.view_pager)
+                viewPager2 {
+                    id(R.id.view_pager)
                     size(MATCH, MATCH)
-                    offscreenPageLimit(2)
-
-                    titles {
-                        when (it) {
-                            0 -> "Будущие"
-                            1 -> "Онлайн"
-                            2 -> "Прошедшие"
-                            else -> throw IllegalStateException("unknown tab index")
-                        }
-                    }
-                    initWith<ViewPager> {
-                        tab?.setupWithViewPager(this)
-                    }
-                    pagerItems(textIds) { pos, item ->
-                        nestedScrollView {
-                            size(MATCH, MATCH)
-                            linearLayout {
-                                size(MATCH, MATCH)
-                                orientation(LinearLayout.VERTICAL)
-
-                                textView {
-                                    size(MATCH, MATCH)
-                                    text(item)
-                                }
-                                button {
-                                    text("Forward!")
-                                    onClick {
-                                        startActivity(Intent(this@ComplexActivity, XmlActivity::class.java))
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    adapter(pagerAdapter)
                 }
             }
         }
