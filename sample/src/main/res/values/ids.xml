@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="view_pager" type="id" />
-    <item name="content1" type="id" />
-    <item name="content2" type="id" />
-    <item name="content3" type="id" />
-    <item name="roo1" type="id" />
-    <item name="roo2" type="id" />
-    <item name="roo3" type="id" />
-    <item name="text1" type="id" />
-    <item name="text2" type="id" />
-    <item name="text3" type="id" />
+
 </resources>

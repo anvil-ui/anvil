@@ -37,7 +37,6 @@ class ComplexActivity : AppCompatActivity() {
                     size(MATCH, WRAP)
                 }
                 viewPager2Inkremental {
-                    id(R.id.view_pager)
                     size(MATCH, MATCH)
                     pagerItemsDiffable(list, IntDiffCallback()) { index, item ->
 
