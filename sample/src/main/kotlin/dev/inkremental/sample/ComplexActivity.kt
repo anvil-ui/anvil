@@ -13,7 +13,6 @@ import dev.inkremental.dsl.android.layoutGravity
 import dev.inkremental.dsl.android.size
 import dev.inkremental.dsl.android.widget.linearLayout
 import dev.inkremental.dsl.android.widget.textView
-import dev.inkremental.dsl.androidx.core.widget.nestedScrollView
 import dev.inkremental.dsl.androidx.viewpager2.viewPager2Inkremental
 import dev.inkremental.dsl.google.android.material.tabs.tabLayout
 import dev.inkremental.renderableContentView
