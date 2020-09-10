@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dev.inkremental.dsl.android.CENTER
 import dev.inkremental.dsl.android.Size.MATCH
 import dev.inkremental.dsl.android.Size.WRAP
-import dev.inkremental.dsl.android.init
+import dev.inkremental.dsl.android.layoutGravity
 import dev.inkremental.dsl.android.size
-import dev.inkremental.dsl.android.widget.FrameLayoutScope
 import dev.inkremental.dsl.android.widget.linearLayout
 import dev.inkremental.dsl.android.widget.textView
 import dev.inkremental.dsl.androidx.core.widget.nestedScrollView
@@ -22,7 +22,7 @@ class ComplexActivity : AppCompatActivity() {
 
     private var tab: TabLayout? = null
 
-    val list = mutableListOf(R.string.large_text, R.string.large_text, R.string.large_text)
+    val list = mutableListOf(R.string.lorem1, R.string.lorem2, R.string.lorem3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,19 +42,10 @@ class ComplexActivity : AppCompatActivity() {
                     size(MATCH, MATCH)
                     pagerItemsDiffable(list, IntDiffCallback()) { index, item ->
 
-                        nestedScrollView {
-                            id(R.id.scroll)
-
-                            size(MATCH, MATCH)
-                            linearLayout {
-                                size(MATCH, MATCH)
-                                orientation(LinearLayout.VERTICAL)
-
-                                textView {
-                                    size(MATCH, MATCH)
-                                    text(item)
-                                }
-                            }
+                        textView {
+                            size(WRAP, WRAP)
+                            layoutGravity(CENTER)
+                            text(item)
                         }
                     }
                     initWith<ViewPager2> {
