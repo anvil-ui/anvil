@@ -13,7 +13,7 @@ import dev.inkremental.dsl.android.layoutGravity
 import dev.inkremental.dsl.android.size
 import dev.inkremental.dsl.android.widget.linearLayout
 import dev.inkremental.dsl.android.widget.textView
-import dev.inkremental.dsl.androidx.viewpager2.viewPager2Inkremental
+import dev.inkremental.dsl.androidx.viewpager2.pager
 import dev.inkremental.dsl.google.android.material.tabs.tabLayout
 import dev.inkremental.renderableContentView
 
@@ -36,7 +36,7 @@ class ComplexActivity : AppCompatActivity() {
                     }
                     size(MATCH, WRAP)
                 }
-                viewPager2Inkremental {
+                pager {
                     size(MATCH, MATCH)
                     pagerItemsDiffable(list, IntDiffCallback()) { index, item ->
 

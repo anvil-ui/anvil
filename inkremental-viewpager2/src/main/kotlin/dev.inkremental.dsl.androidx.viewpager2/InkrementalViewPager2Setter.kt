@@ -13,7 +13,7 @@ import dev.inkremental.dsl.androidx.recyclerview.RenderableRecyclerViewAdapter
 import dev.inkremental.dsl.androidx.viewpager2.widget.ViewPager2Scope
 import dev.inkremental.v
 
-fun viewPager2Inkremental(configure: InkrementalViewPager2Scope.() -> Unit = {}) =
+fun pager(configure: InkrementalViewPager2Scope.() -> Unit = {}) =
         v<ViewPager2>(configure.bind(InkrementalViewPager2Scope))
 
 abstract class InkrementalViewPager2Scope : ViewPager2Scope() {
