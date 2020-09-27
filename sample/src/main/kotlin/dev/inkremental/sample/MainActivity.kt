@@ -96,6 +96,19 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 textView {
+                    text("Complex example")
+                    onClick {
+                        startActivity(Intent(context, ComplexActivity::class.java))
+                    }
+
+                    size(WRAP, WRAP)
+                    padding(16.dp)
+
+                    paintFlags(Paint.UNDERLINE_TEXT_FLAG)
+                    textColor(Color.BLUE)
+                }
+
+                textView {
                     text("YogaLayout example")
                     onClick {
                         startActivity(Intent(context, YogaActivity::class.java))

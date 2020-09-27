@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Anvil Sample</string>
+    <string name="app_name">Inkremental Sample</string>
 
     <string
         name="child_1_text"
@@ -21,4 +21,7 @@
         name="child_5_text"
         description="Placeholder text for the fifth element in the layout"
         >Who are you?</string>
+    <string name="lorem1" >Lorem ipsum dolor sit amet,</string>
+    <string name="lorem2" >consectetur adipiscing elit,</string>
+    <string name="lorem3" >sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>

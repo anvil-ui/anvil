@@ -29,5 +29,6 @@ include(
     ":anvil-recyclerview-v7",
     ":anvil-constraintlayout",
     ":anvil-yogalayout",
+    ":inkremental-viewpager2",
     ":sample"
 )
