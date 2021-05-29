@@ -9,6 +9,8 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.kotlin.dsl.*
+import org.gradle.plugins.signing.SigningExtension
+import org.gradle.plugins.signing.SigningPlugin
 import kotlin.text.isNullOrEmpty
 
 class InkrementalModulePlugin : Plugin<Project> {
@@ -16,6 +18,7 @@ class InkrementalModulePlugin : Plugin<Project> {
     override fun apply(project: Project) = with(project) {
         apply<InkrementalGenPlugin>()
         apply<MavenPublishPlugin>()
+        apply<SigningPlugin>()
 
         val compileSdk = 28
         val minSdk = 17
@@ -43,26 +46,28 @@ class InkrementalModulePlugin : Plugin<Project> {
             "testImplementation"("org.jetbrains.kotlin:kotlin-test-junit")
         }
 
-        val bintrayUser = envOrProp("BINTRAY_USER")
-        val bintrayApiKey = envOrProp("BINTRAY_API_KEY")
-        val bintrayRepo = envOrProp("BINTRAY_REPO")
-        if(bintrayUser != null && bintrayApiKey != null) {
+        val sonatypeUser = envOrProp("ossrhUsername")
+        val sonatypePassword = envOrProp("ossrhPassword")
+
+        if(sonatypeUser != null && sonatypePassword != null) {
             extensions.configure<PublishingExtension> {
+
                 repositories {
                     maven {
-                        name = "Bintray"
-                        url = uri("https://api.bintray.com/maven/" +
-                            "${prop("BINTRAY_ORG")}/" +
-                            bintrayRepo +
-                            "/${prop("POM_PACKAGE_NAME")}/" +
-                            ";publish=1" // + ";override=1"
-                        )
+                        name = "sonatype"
+                        setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                         credentials {
-                            username = bintrayUser
-                            password = bintrayApiKey
+                            username = sonatypeUser ?: return@credentials
+                            password = sonatypePassword ?: return@credentials
                         }
                     }
                 }
+            }
+
+            extensions.configure<SigningExtension> {
+                val publishing: PublishingExtension by project
+
+                sign(publishing.publications)
             }
         }
 
@@ -145,6 +150,18 @@ private fun Project.fixPom(publication: MavenPublication) = publication.pom.appl
             name.set(prop("POM_LICENCE_NAME"))
             url.set(prop("POM_LICENCE_URL"))
             distribution.set(prop("POM_LICENCE_DIST"))
+        }
+    }
+    developers {
+        developer {
+            id.set("sgrekov")
+            name.set("Sergey Grekov")
+            email.set("sngrekov@gmail.com")
+        }
+        developer {
+            id.set("r4zzz4k")
+            name.set("Andrew Mikhaylov")
+            email.set("mail@r4zzz4k.me")
         }
     }
 }

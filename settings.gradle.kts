@@ -1,10 +1,9 @@
 pluginManagement {
     repositories {
         mavenLocal()
-        maven(url = "https://dl.bintray.com/inkremental/maven")
+        mavenCentral()
         gradlePluginPortal()
         google()
-        jcenter()
     }
     resolutionStrategy {
         eachPlugin {

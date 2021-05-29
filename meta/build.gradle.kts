@@ -24,9 +24,8 @@ loadProperties("local.properties")
 subprojects {
     repositories {
         mavenLocal()
-        maven(url = "https://dl.bintray.com/inkremental/maven")
+        mavenCentral()
         google()
-        jcenter()
     }
 
     val GROUP: String by project
